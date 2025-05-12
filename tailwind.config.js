@@ -4,7 +4,11 @@ import flowbitePlugin from "flowbite/plugin";
 export default {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'yellow-gradient': 'linear-gradient(325deg, #FFC61B 43.64%, #FFE38E 100%)',
+      },
+    },
   },
   plugins: [flowbitePlugin],
 };
