@@ -1,11 +1,9 @@
 import React from "react";
 
 export default function SocialTabs({ activeTab, setActiveTab, onUpload }) {
-  // Placeholder tab names
   const tabs = [
     { key: "newest", label: "Newest" },
-    { key: "popular", label: "Popular" },
-    { key: "following", label: "Following" },
+    { key: "recommended", label: "Recommended" }
   ];
 
   return (
@@ -14,8 +12,10 @@ export default function SocialTabs({ activeTab, setActiveTab, onUpload }) {
         {tabs.map(tab => (
           <button
             key={tab.key}
-            className={`px-3 py-1 rounded-full text-sm font-semibold ${
-              activeTab === tab.key ? "bg-yellow-400 text-black" : "bg-[#181818] text-gray-400"
+            className={`px-3 py-1 text-sm font-semibold ${
+              activeTab === tab.key 
+                ? "text-white border-b-2 border-yellow-400" 
+                : "text-gray-400"
             }`}
             onClick={() => setActiveTab(tab.key)}
           >
@@ -24,10 +24,13 @@ export default function SocialTabs({ activeTab, setActiveTab, onUpload }) {
         ))}
       </div>
       <button
-        className="bg-yellow-400 text-black px-3 py-1 rounded-full font-semibold"
+        className="flex items-center text-white"
         onClick={onUpload}
       >
-        Upload
+        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+        </svg>
+        <span className="ml-1">Upload</span>
       </button>
     </div>
   );

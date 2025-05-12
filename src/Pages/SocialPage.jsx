@@ -54,11 +54,16 @@ export default function SocialPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#181818]">
-      <div className="flex-1 overflow-y-auto">
-        <SocialTabs activeTab={activeTab} setActiveTab={setActiveTab} onUpload={() => setShowUpload(true)} />
-        {posts.map(post => (
-          <SocialPostCard key={post.id} post={post} />
-        ))}
+      <div className="flex-1 overflow-y-auto pb-16">
+        <div className="sticky top-0 z-10 bg-[#181818]">
+          <SocialTabs activeTab={activeTab} setActiveTab={setActiveTab} onUpload={() => setShowUpload(true)} />
+          <div className="h-[1px] bg-[#232323]"></div>
+        </div>
+        <div className="w-full">
+          {posts.map(post => (
+            <SocialPostCard key={post.id} post={post} />
+          ))}
+        </div>
       </div>
       <BottomNavBar active="social" />
       {showUpload && <UploadModal onClose={() => setShowUpload(false)} />}

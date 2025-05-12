@@ -60,7 +60,7 @@ export default function ChooseLocationPage() {
         disabled={!selected}
         onClick={() => {
           // TODO: Save selected region and proceed
-          navigate("/home"); // Go to Home tab after choosing location
+          navigate("/social"); // Go to Home tab after choosing location
         }}
       >
         Choose this region
