@@ -7,6 +7,9 @@ export default function OtpVerifyPage() {
   const [timer, setTimer] = useState(53);
   const inputRefs = useRef([]);
 
+  // Add this line to check if all OTP boxes are filled
+  const isOtpFilled = otp.every(char => char.trim() !== "");
+
   useEffect(() => {
     if (timer > 0) {
       const interval = setInterval(() => setTimer(t => t - 1), 1000);
@@ -75,8 +78,17 @@ export default function OtpVerifyPage() {
         </div>
         {/* Confirm Button */}
         <button
-          className="w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-black rounded-full py-3 text-lg font-semibold mb-4 shadow-lg"
-          disabled
+          type="button"
+          onClick={() => {
+            // TODO: Add login logic and success condition here
+            navigate("/location-access");
+          }}
+          className={`w-full rounded-full py-3 text-lg font-semibold mb-4 shadow-lg transition-colors duration-200 ${
+            isOtpFilled
+              ? "bg-yellow-gradient text-black"
+              : "bg-[#232323] text-white"
+          }`}
+          disabled={!isOtpFilled}
         >
           Confirm
         </button>
