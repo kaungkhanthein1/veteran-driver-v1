@@ -8,6 +8,10 @@ import { useNavigate } from "react-router-dom";
 export default function LoginPage() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [emailOrPhone, setEmailOrPhone] = useState("");
+  const [password, setPassword] = useState("");
+
+  const isFormFilled = emailOrPhone.trim() !== "" && password.trim() !== "";
 
   return (
     <div className="min-h-screen flex flex-col justify-between items-center bg-gradient-to-b from-[#281c12] via-black to-black px-4 py-8">
@@ -23,6 +27,8 @@ export default function LoginPage() {
               type="text"
               className="w-full bg-transparent border border-gray-500 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none"
               placeholder="Enter Your Email"
+              value={emailOrPhone}
+              onChange={e => setEmailOrPhone(e.target.value)}
             />
           </div>
           <div className="relative">
@@ -31,6 +37,8 @@ export default function LoginPage() {
               type={showPassword ? "text" : "password"}
               className="w-full bg-transparent border border-gray-500 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none"
               placeholder="Enter Your Password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
             />
             <button
               type="button"
@@ -55,13 +63,19 @@ export default function LoginPage() {
               <span className="text-gray-400 text-sm">I'm not a robot</span>
               <div className="ml-20 text-gray-500 text-md">Recaptcha</div>
             </div>
-            </div>
+          </div>
           <button
+            type="button"
             onClick={() => {
               // TODO: Add login logic and success condition here
               navigate("/location-access");
             }}
-            className="w-full bg-[#232323] text-white rounded-full py-3 text-lg font-semibold mt-2"
+            className={`w-full rounded-full py-3 text-lg font-semibold mt-2 transition-colors duration-200 ${
+              isFormFilled
+                ? "bg-yellow-gradient text-black"
+                : "bg-[#232323] text-white"
+            }`}
+            disabled={!isFormFilled}
           >
             Login
           </button>
