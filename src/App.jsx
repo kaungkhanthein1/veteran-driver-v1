@@ -14,7 +14,7 @@ import Profile from "./components/Profile"; // Add this import
 
 function App() {
   return (
-    <Router basename="/react-tailwind-starter">
+    <Router>
       <Routes>
         <Route path="/" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
