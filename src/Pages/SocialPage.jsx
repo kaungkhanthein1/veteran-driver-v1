@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import SocialTabs from "../Components/SocialTabs";
-import SocialPostCard from "../Components/SocialPostCard";
-import BottomNavBar from "../Components/BottomNavBar";
-import UploadModal from "../Components/UploadModal";
+import SocialTabs from "../components/SocialTabs";
+import SocialPostCard from "../components/SocialPostCard";
+import BottomNavBar from "../components/BottomNavBar";
+import UploadModal from "../components/UploadModal";
 
 // Mock posts data
 const posts = [
