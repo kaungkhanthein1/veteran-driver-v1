@@ -5,12 +5,12 @@ import LoginPage from "./Pages/LoginPage";
 import OtpVerifyPage from "./Pages/OtpVerifyPage";
 import LocationAccessPage from "./Pages/LocationAccessPage";
 import ChooseLocationPage from "./Pages/ChooseLocationPage";
-import Home from "./components/Home";
-import Explore from "./components/Explore";
+import Home from "./Components/Home";
+import Explore from "./Components/Explore";
 import SocialPage from "./Pages/SocialPage";
 import PhoneSignUpPage from "./Pages/PhoneSignUpPage";
 import ForgetPasswordPage from "./Pages/ForgetPasswordPage";
-import Profile from "./components/Profile"; // Add this import
+import Profile from "./Components/Profile"; // Add this import
 
 function App() {
   return (
