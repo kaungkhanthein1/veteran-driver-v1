@@ -84,7 +84,10 @@ export default function RegisterPage() {
             </span>
             <span>Continue With Google</span>
           </button>
-          <button className="w-full flex items-center justify-center bg-[#232323] rounded-full py-3 text-white font-medium text-base space-x-3">
+          <button 
+            className="w-full flex items-center justify-center bg-[#232323] rounded-full py-3 text-white font-medium text-base space-x-3"
+            onClick={() => navigate("/phone-signup")}
+          >
             {/* <PhoneIcon className="w-6 h-6" /> */}
             <span>
               <svg className="w-6 h-6 inline-block mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1.003 1.003 0 011.11-.21c1.21.48 2.53.73 3.88.73a1 1 0 011 1v3.5a1 1 0 01-1 1C10.07 22 2 13.93 2 4.5A1 1 0 013 3.5h3.5a1 1 0 011 1c0 1.35.25 2.67.73 3.88a1.003 1.003 0 01-.21 1.11l-2.2 2.2z"/></svg>

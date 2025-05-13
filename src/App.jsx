@@ -8,8 +8,9 @@ import ChooseLocationPage from "./Pages/ChooseLocationPage";
 import Home from "./components/Home";
 import Explore from "./components/Explore";
 import SocialPage from "./Pages/SocialPage";
-// You may need to create a Profile page if it doesn't exist
-import Profile from "./components/Profile"; // <-- create this if missing
+import PhoneSignUpPage from "./Pages/PhoneSignUpPage";
+import ForgetPasswordPage from "./Pages/ForgetPasswordPage";
+import Profile from "./components/Profile"; // Add this import
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
         <Route path="/explore" element={<Explore />} />
         <Route path="/social" element={<SocialPage />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/phone-signup" element={<PhoneSignUpPage />} />
+        <Route path="/forgot-password" element={<ForgetPasswordPage />} />
       </Routes>
     </Router>
   );

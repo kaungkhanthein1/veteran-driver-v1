@@ -46,7 +46,7 @@ export default function ChooseLocationPage() {
           <button
             key={region.name}
             className={`flex flex-col items-center justify-center rounded-lg p-4 border-2 ${
-              selected === region.name ? "border-yellow-400 bg-[#232323]" : "border-transparent bg-[#181818]"
+              selected === region.name ? "border-[#FFD75E] bg-[#232323]" : "border-transparent bg-[#181818]"
             }`}
             onClick={() => setSelected(region.name)}
           >

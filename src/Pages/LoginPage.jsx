@@ -81,7 +81,12 @@ export default function LoginPage() {
           </button>
         </form>
         <div className="w-full flex justify-center mt-4 mb-4">
-          <button className="text-white">Forgot Password?</button>
+          <button 
+            className="text-white"
+            onClick={() => navigate("/forgot-password")}
+          >
+            Forgot Password?
+          </button>
         </div>
         {/* Social Login */}
         <div className="w-full mt-2 space-y-4">
