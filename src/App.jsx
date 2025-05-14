@@ -11,6 +11,8 @@ import SocialPage from "./Pages/SocialPage";
 import PhoneSignUpPage from "./Pages/PhoneSignUpPage";
 import ForgetPasswordPage from "./Pages/ForgetPasswordPage";
 import ProfilePage from "./Pages/ProfilePage"; // Update this import
+import MapWithFilterUI from "./Pages/map/MapWithFilterUI";
+import "leaflet/dist/leaflet.css";
 
 function App() {
   return (
@@ -28,6 +30,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/phone-signup" element={<PhoneSignUpPage />} />
         <Route path="/forgot-password" element={<ForgetPasswordPage />} />
+        <Route path="/map" element={<MapWithFilterUI />} />
       </Routes>
     </Router>
   );
