@@ -6,20 +6,18 @@ import Topic from "./home/topic";
 import Filternav from "./home/Filternav";
 import Service from "./home/Service";
 import ServiceCard from "./home/ServiceCard";
+import TopNav from "./home/TopNav";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("Hotels");
 
   return (
     <div className=" pb-[100px]">
-      Home Page
+      <TopNav />
       <Carousel />
       <Near />
       <Topic />
-      <Filternav
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-      />
+      <Filternav activeTab={activeTab} setActiveTab={setActiveTab} />
       <Service />
       <BottomNavBar active="home" />
       <ServiceCard />
