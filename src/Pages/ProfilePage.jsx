@@ -10,6 +10,7 @@ import ShareAppIcon from "../icons/Profile/ShareApp.svg";
 import HelpCenterIcon from "../icons/Profile/HelpCenter.svg";
 import ContactUsIcon from "../icons/Profile/ContactUs.svg";
 import LogoutIcon from "../icons/Profile/Logout.svg";
+import ProfilePic from "../icons/Profile/ProfilePic.svg";
 
 export default function ProfilePage() {
   const userProfile = {
@@ -17,7 +18,7 @@ export default function ProfilePage() {
     uid: "5839234",
     location: "Phnom Penh, Cambodia",
     bio: "Passionate traveler 🌏 embracing the journey.",
-    avatar: "/path/to/avatar.jpg"
+    avatar: ProfilePic
   };
 
   const menuItems = [

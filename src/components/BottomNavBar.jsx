@@ -48,10 +48,16 @@ export default function BottomNavBar({ active }) {
               <img 
                 src={tab.icon} 
                 alt={tab.label}
-                className={`w-6 h-6 ${active === tab.key ? "[filter:invert(77%)_sepia(46%)_saturate(816%)_hue-rotate(359deg)_brightness(102%)_contrast(104%)]" : "text-gray-400"}`}
+                className={`w-6 h-6 ${
+                  active === tab.key 
+                    ? "[filter:brightness(0)_saturate(100%)_invert(89%)_sepia(61%)_saturate(1415%)_hue-rotate(319deg)_brightness(103%)_contrast(101%)]" 
+                    : "text-gray-400"
+                }`}
               />
             </div>
-            <span className="text-xs mt-1 text-gray-400">{tab.label}</span>
+            <span className="text-xs mt-1 text-gray-400">
+              {tab.label}
+            </span>
           </button>
         ))}
       </div>
