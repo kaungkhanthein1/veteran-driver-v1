@@ -24,5 +24,10 @@ html, body {
   background: linear-gradient(325deg, #FFC61B 43.64%, #FFE38E 100%);
 }
 
+::-webkit-scrollbar {
+  width: 0px; /* for vertical scroll */
+  height: 0px; /* for horizontal scroll */
+}
+
 
 
