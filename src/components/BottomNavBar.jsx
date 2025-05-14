@@ -36,7 +36,7 @@ export default function BottomNavBar({ active }) {
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-[#232323] border-t border-[#2C2C2C]">
+    <div className="fixed bottom-0 left-0 right-0 bg-[#232323] border-t z-[999] border-[#2C2C2C]">
       <div className="flex justify-around items-center px-4 py-2">
         {tabs.map(tab => (
           <button
