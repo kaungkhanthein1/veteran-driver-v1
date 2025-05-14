@@ -28,3 +28,15 @@
   border-radius: 16px 2px 2px 16px;
   background: rgba(255, 255, 255, 0.12);
 }
+
+.price_tags {
+  color: #fff;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "dlig" on;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.56px;
+}

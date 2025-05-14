@@ -58,11 +58,11 @@ const places = [
 ];
 
 const MapWithFilterUI = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [showFilter, setShowFilter] = useState(false);
   const [tempFilters, setTempFilters] = useState({
     priceRange: [600, 800],
-    distance: 500, // large to cover wide area
+    distance: 50, // large to cover wide area
     rating: 0,
     services: [],
   });
@@ -108,7 +108,7 @@ const MapWithFilterUI = () => {
       <div className="absolute w-full top-6 left-2 text-white rounded-full shadow-lg">
         <div className=" flex justify-center items-center gap-[12px]">
           <svg
-          onClick={() => navigate(-1)}
+            onClick={() => navigate(-1)}
             xmlns="http://www.w3.org/2000/svg"
             width="28"
             height="28"

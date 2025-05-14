@@ -58,9 +58,13 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
         </svg>
       </div>
 
+      {/* price */}
       <div className="mb-4">
-        <div className="text-sm mt-2 text-white">
-          Price: {filters.priceRange[0]} - {filters.priceRange[1]}
+        <div className="flex w-full price_tags justify-between items-center py-[10px]">
+          <span>Price:</span>
+          <span>
+            {filters.priceRange[0]}$- {filters.priceRange[1]}$
+          </span>
         </div>
         <Range
           step={1}
@@ -83,11 +87,31 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
       </div>
 
       <div className="mb-4">
-        <label>Distance (km):</label>
-        <input
-          type="number"
-          value={filters.distance}
-          onChange={(e) => handleChange("distance", Number(e.target.value))}
+        <div className="flex w-full price_tags justify-between items-center py-[10px]">
+          <span>Distance</span>
+          <span>0km - {filters.distance}km</span>
+        </div>{" "}
+        <Range
+          step={1}
+          min={0}
+          max={50}
+          values={[filters.distance]}
+          // onChange={(e) => handleChange("distance", Number(e.target.value))}
+          onChange={(values) => handleChange("distance", values[0])}
+          renderTrack={({ props, children }) => (
+            <div
+              {...props}
+              className="w-full h-[16px] range_input_c rounded"
+            >
+              {children}
+            </div>
+          )}
+          renderThumb={({ props, index }) => (
+            <div
+              {...props}
+              className="w-[4px] h-[44px] bg-[#FFC61B] rounded-full shadow"
+            />
+          )}
         />
       </div>
 
