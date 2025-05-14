@@ -6,11 +6,11 @@ import OtpVerifyPage from "./Pages/OtpVerifyPage";
 import LocationAccessPage from "./Pages/LocationAccessPage";
 import ChooseLocationPage from "./Pages/ChooseLocationPage";
 import Home from "./components/Home";
-import Explore from "./components/Explore";
+import ExplorePage from "./Pages/ExplorePage";
 import SocialPage from "./Pages/SocialPage";
 import PhoneSignUpPage from "./Pages/PhoneSignUpPage";
 import ForgetPasswordPage from "./Pages/ForgetPasswordPage";
-import Profile from "./components/Profile"; // Add this import
+import ProfilePage from "./Pages/ProfilePage"; // Update this import
 
 function App() {
   return (
@@ -23,9 +23,9 @@ function App() {
         <Route path="/choose-location" element={<ChooseLocationPage />} />
         {/* Main tab routes */}
         <Route path="/home" element={<Home />} />
-        <Route path="/explore" element={<Explore />} />
+        <Route path="/explore" element={<ExplorePage />} />
         <Route path="/social" element={<SocialPage />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" element={<ProfilePage />} /> {/* Update this line */}
         <Route path="/phone-signup" element={<PhoneSignUpPage />} />
         <Route path="/forgot-password" element={<ForgetPasswordPage />} />
       </Routes>
