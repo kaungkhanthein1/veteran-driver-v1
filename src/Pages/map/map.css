@@ -1,0 +1,94 @@
+.search_box {
+  border-radius: 100px;
+  background: #fff;
+  box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
+}
+
+.search_box span {
+  color: #999;
+  leading-trim: both;
+  text-edge: cap;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "dlig" on;
+  font-family: "Helvetica Neue";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 125% */
+  letter-spacing: 0.64px;
+}
+
+.filter_box {
+  border-radius: 16px;
+  border-top: 1px solid #444;
+  background: #161614;
+}
+
+.range_input_c {
+  border-radius: 16px 2px 2px 16px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.price_tags {
+  color: #fff;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "dlig" on;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.56px;
+}
+
+.filter_active {
+  border-radius: 8px;
+  background: linear-gradient(
+    325deg,
+    rgba(255, 198, 27, 0.12) 43.64%,
+    rgba(255, 227, 142, 0.12) 100%
+  );
+  color: #ffd75e;
+  leading-trim: both;
+  text-edge: cap;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "dlig" on;
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 166.667% */
+  letter-spacing: 0.24px;
+}
+
+.filter_UnActive {
+  border-radius: 8px;
+
+  color: #fff;
+  leading-trim: both;
+  text-edge: cap;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "dlig" on;
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 166.667% */
+  letter-spacing: 0.24px;
+}
+
+.filter_apply_button {
+  border-radius: 100px;
+  background: var(
+    --Yellow-Gradient,
+    linear-gradient(325deg, #ffc61b 43.64%, #ffe38e 100%)
+  );
+  color: #000;
+  text-align: center;
+  font-family: var(--Label-Large-Font, Roboto);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: var(--Label-Large-Line-Height, 20px); /* 125% */
+  letter-spacing: var(--Label-Large-Tracking, 0.1px);
+}

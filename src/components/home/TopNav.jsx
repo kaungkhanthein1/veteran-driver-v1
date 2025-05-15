@@ -2,8 +2,10 @@ import React from "react";
 import thai from "./thai.png";
 import search from "./search.svg";
 import map from "./map.svg";
+import { useNavigate } from "react-router-dom";
 
 const TopNav = () => {
+  const navigate = useNavigate()
   return (
     <div className=" px-[16px] py-[20px] flex justify-between w-full items-center">
       {/* location */}
@@ -27,7 +29,7 @@ const TopNav = () => {
       </div>
       {/* icons */}
       <div className=" flex gap-[12px]">
-        <div className="search_icons p-[12px]">
+        <div onClick={() => navigate("/map")} className="search_icons p-[12px]">
           <img src={search} alt="" />
         </div>
         <div className="search_icons p-[12px]">
