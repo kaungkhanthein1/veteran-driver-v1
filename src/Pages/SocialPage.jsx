@@ -3,6 +3,7 @@ import SocialTabs from "../components/SocialTabs";
 import SocialPostCard from "../components/SocialPostCard";
 import BottomNavBar from "../components/BottomNavBar";
 import UploadModal from "../components/UploadModal";
+import { useNavigate } from 'react-router-dom';
 
 // Mock posts data
 const posts = [
@@ -50,13 +51,18 @@ const posts = [
 
 export default function SocialPage() {
   const [activeTab, setActiveTab] = useState("newest");
-  const [showUpload, setShowUpload] = useState(false);
+  // Remove the showUpload state since we won't use the modal anymore
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen flex flex-col bg-[#181818]">
       <div className="flex-1 overflow-y-auto pb-16">
         <div className="sticky top-0 z-10 bg-[#181818]">
-          <SocialTabs activeTab={activeTab} setActiveTab={setActiveTab} onUpload={() => setShowUpload(true)} />
+          <SocialTabs 
+            activeTab={activeTab} 
+            setActiveTab={setActiveTab} 
+            onUpload={() => navigate('/social/upload')} // Change this to use navigation
+          />
           <div className="h-[1px] bg-[#232323]"></div>
         </div>
         <div className="w-full">
@@ -66,7 +72,7 @@ export default function SocialPage() {
         </div>
       </div>
       <BottomNavBar active="social" />
-      {showUpload && <UploadModal onClose={() => setShowUpload(false)} />}
+      {/* Remove the UploadModal component */}
     </div>
   );
 }
