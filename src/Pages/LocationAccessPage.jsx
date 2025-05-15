@@ -1,9 +1,21 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Place from "../icons/Place.svg?react";
+import useLocation from "../hooks/useLocation";
 
 export default function LocationAccessPage() {
   const navigate = useNavigate();
+  const { getCurrentLocation, loading } = useLocation();
+
+  const handleLocationAccess = async () => {
+    try {
+      await getCurrentLocation();
+      navigate("/choose-location");
+    } catch (error) {
+      // If user denies permission or any other error occurs
+      alert("Could not access location. Please try choosing location manually.");
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-black px-4">
@@ -17,12 +29,10 @@ export default function LocationAccessPage() {
         </p>
         <button
           className="w-full bg-[#FFC61B] text-black rounded-full py-3.5 text-lg font-semibold mb-6"
-          onClick={() => {
-            // TODO: Implement location access logic
-            navigate("/choose-location");
-          }}
+          onClick={handleLocationAccess}
+          disabled={loading}
         >
-          Allow Location Access
+          {loading ? "Getting Location..." : "Allow Location Access"}
         </button>
         <button
           className="w-full text-[#FFC61B] font-semibold text-base"
