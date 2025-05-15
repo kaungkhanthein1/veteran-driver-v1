@@ -1,85 +1,67 @@
-import { MapContainer, TileLayer, Marker, Circle } from "react-leaflet";
-import { useState } from "react";
+import { MapContainer, TileLayer, Marker, Circle, useMap } from "react-leaflet";
+import { useEffect, useState } from "react";
 import FilterPanel from "./FilterPanel";
 import FilteredMarkers from "./FilteredMarkers";
 import L from "leaflet";
 import "./map.css";
 import search from "../../components/home/search.svg";
 import { useNavigate } from "react-router-dom";
+import { location } from "./Place";
 
-const position = [11.5564, 104.9282]; // Phnom Penh
+const RecenterMap = ({ center }) => {
+  const map = useMap();
+  useEffect(() => {
+    if (center) {
+      map.setView(center, map.getZoom());
+    }
+  }, [center]);
+  return null;
+};
 
-const places = [
-  {
-    id: 1,
-    lat: 11.5564,
-    lng: 104.9282,
-    image: "https://via.placeholder.com/50",
-    price: 600,
-    rating: 4,
-    services: ["Service 1"],
-  },
-  {
-    id: 2,
-    lat: 13.3633,
-    lng: 103.8564,
-    image: "https://via.placeholder.com/50",
-    price: 750,
-    rating: 5,
-    services: ["Service 2"],
-  },
-  {
-    id: 3,
-    lat: 10.64,
-    lng: 103.5108,
-    image: "https://via.placeholder.com/50",
-    price: 700,
-    rating: 3,
-    services: ["Service 1", "Service 2"],
-  },
-  {
-    id: 4,
-    lat: 10.6101,
-    lng: 104.18,
-    image: "https://via.placeholder.com/50",
-    price: 670,
-    rating: 4,
-    services: ["Service 2"],
-  },
-  {
-    id: 5,
-    lat: 12.25,
-    lng: 104.6667,
-    image: "https://via.placeholder.com/50",
-    price: 630,
-    rating: 2,
-    services: ["Service 1"],
-  },
-];
+const position =
+  location.length > 0
+    ? [location[0].location.lat, location[0].location.lng]
+    : [11.5564, 104.9282]; // fallback
+
+const places = location.map((place) => ({
+  id: place.id,
+  lat: place.location.lat,
+  lng: place.location.lng,
+  image: place.image || "https://via.placeholder.com/50",
+  price: place.pricePerNight || 0,
+  rating: Math.round(place.rating || 0),
+  services: place.services || [],
+}));
+
+console.log(places);
 
 const MapWithFilterUI = () => {
   const navigate = useNavigate();
   const [showFilter, setShowFilter] = useState(false);
   const [tempFilters, setTempFilters] = useState({
-    priceRange: [600, 800],
-    distance: 50, // large to cover wide area
-    rating: 0,
-    services: [],
+    priceRange: [0, 1000],
+    distance: 10, // Enough for all visible markers
+    rating: 0, // No rating filter
+    services: [], // No services filter
   });
+
   const [activeFilters, setActiveFilters] = useState(tempFilters);
 
   const filterMarkers = () => {
     return places.filter((place) => {
       const distance =
         L.latLng(position).distanceTo([place.lat, place.lng]) / 1000;
-      return (
+      console.log(`Distance to ${place.id}: ${distance} km`);
+      const isMatch =
         place.price >= activeFilters.priceRange[0] &&
         place.price <= activeFilters.priceRange[1] &&
         distance <= activeFilters.distance &&
         (activeFilters.rating === 0 || place.rating >= activeFilters.rating) &&
         (activeFilters.services.length === 0 ||
-          activeFilters.services.some((s) => place.services.includes(s)))
-      );
+          activeFilters.services.some((s) => place.services.includes(s)));
+
+      console.log(`Place ${place.id} match: `, isMatch);
+      return isMatch;
     });
   };
 
@@ -90,6 +72,7 @@ const MapWithFilterUI = () => {
   };
 
   const filtered = filterMarkers();
+  console.log(" filter", filtered);
 
   return (
     <div className="relative max-w-[500px] h-screen">
@@ -101,7 +84,9 @@ const MapWithFilterUI = () => {
           radius={activeFilters.distance * 1000}
           pathOptions={{ color: "#facc15", fillOpacity: 0.3 }}
         />
-
+        {filtered.length > 0 && (
+          <RecenterMap center={[filtered[0].lat, filtered[0].lng]} />
+        )}
         <FilteredMarkers markers={filtered} />
       </MapContainer>
 
