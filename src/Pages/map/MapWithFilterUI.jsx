@@ -33,7 +33,7 @@ const places = location.map((place) => ({
   services: place.services || [],
 }));
 
-console.log(places);
+// console.log(places);
 
 const MapWithFilterUI = () => {
   const navigate = useNavigate();
@@ -43,41 +43,64 @@ const MapWithFilterUI = () => {
     distance: 10, // Enough for all visible markers
     rating: 0, // No rating filter
     services: [], // No services filter
+    sort: "Nearby", // if applicable
   });
 
   const [activeFilters, setActiveFilters] = useState(tempFilters);
 
   const filterMarkers = () => {
-    return places.filter((place) => {
+    let filtered = places.filter((place) => {
       const distance =
         L.latLng(position).distanceTo([place.lat, place.lng]) / 1000;
-      console.log(`Distance to ${place.id}: ${distance} km`);
-      const isMatch =
+      return (
         place.price >= activeFilters.priceRange[0] &&
         place.price <= activeFilters.priceRange[1] &&
         distance <= activeFilters.distance &&
         (activeFilters.rating === 0 || place.rating >= activeFilters.rating) &&
         (activeFilters.services.length === 0 ||
-          activeFilters.services.some((s) => place.services.includes(s)));
-
-      console.log(`Place ${place.id} match: `, isMatch);
-      return isMatch;
+          activeFilters.services.some((s) => place.services.includes(s)))
+      );
     });
+
+    // 🔽 Sort logic after filtering
+    switch (activeFilters.sort) {
+      case "Nearby":
+        filtered.sort((a, b) => {
+          const distA = L.latLng(position).distanceTo([a.lat, a.lng]);
+          const distB = L.latLng(position).distanceTo([b.lat, b.lng]);
+          return distA - distB;
+        });
+        break;
+      case "Price":
+        filtered.sort((a, b) => a.price - b.price);
+        break;
+      case "Rating":
+        filtered.sort((a, b) => b.rating - a.rating);
+        break;
+      // Add more sort cases as needed
+      default:
+        break;
+    }
+
+    return filtered;
   };
 
   const applyFilters = () => {
     setActiveFilters(tempFilters);
-    console.log(tempFilters);
     setShowFilter(false);
+    console.log(tempFilters);
   };
 
   const filtered = filterMarkers();
-  console.log(" filter", filtered);
+  // console.log(" filter", filtered);
 
   return (
     <div className="relative max-w-[500px] h-screen">
       <MapContainer center={position} zoom={7} className="h-full w-full z-0">
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        <TileLayer
+          zoomControl={false}
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
         <Marker position={position} />
         <Circle
           center={position}
