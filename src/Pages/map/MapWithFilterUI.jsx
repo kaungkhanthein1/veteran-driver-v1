@@ -24,6 +24,9 @@ const position =
     : [11.5564, 104.9282]; // fallback
 
 const places = location.map((place) => ({
+  address: place.address,
+  distanceKm: place.distanceKm,
+  name: place.name,
   id: place.id,
   lat: place.location.lat,
   lng: place.location.lng,
@@ -99,14 +102,12 @@ const MapWithFilterUI = () => {
 
   return (
     <div className="relative max-w-[500px] h-screen">
-      <MapContainer 
-        center={[mapCenter.lat, mapCenter.lng]} 
-        zoom={15} 
+      <MapContainer
+        center={[mapCenter.lat, mapCenter.lng]}
+        zoom={15}
         className="h-full w-full z-0"
       >
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <Marker position={[mapCenter.lat, mapCenter.lng]} />
         <RecenterMap center={[mapCenter.lat, mapCenter.lng]} />
         <FilteredMarkers markers={filtered} />

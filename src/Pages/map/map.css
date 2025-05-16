@@ -92,3 +92,27 @@
   line-height: var(--Label-Large-Line-Height, 20px); /* 125% */
   letter-spacing: var(--Label-Large-Tracking, 0.1px);
 }
+
+.marker_box {
+  border-radius: 8px 8px 0px 0px;
+  background: #32312f;
+}
+
+.marker_box h1 {
+  color: #fff;
+  leading-trim: both;
+  text-edge: cap;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "dlig" on;
+  font-family: "Helvetica Neue";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 21.5px; /* 119.444% */
+  letter-spacing: 0.72px;
+}
+
+.marker_box_icon {
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.12);
+}

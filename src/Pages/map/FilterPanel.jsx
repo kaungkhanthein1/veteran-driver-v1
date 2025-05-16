@@ -70,7 +70,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
 
   return (
     <div
-      className={`absolute bottom-0 left-0 w-full sm:w-96 h-[85%] filter_box p-4 z-50 shadow-lg rounded-t-2xl transition-transform duration-300 ease-out
+      className={`absolute bottom-0 left-0 w-full sm:w-96 h-[90%] filter_box p-4 z-50 shadow-lg rounded-t-2xl transition-transform duration-300 ease-out
       ${isVisible ? "translate-y-0" : "translate-y-full"}`}
     >
       <div className=" flex flex-col  gap-[20px]">
@@ -215,7 +215,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
           </div>
         </div>
 
-        <div className="flex gap-2 mt-6 w-full">
+        <div className="flex gap-2 my-6 w-full">
           <button
             className="filter_apply_button w-full  px-4 py-[10px]"
             onClick={applyFilters}
