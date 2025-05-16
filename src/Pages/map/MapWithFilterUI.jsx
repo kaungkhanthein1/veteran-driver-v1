@@ -1,11 +1,11 @@
 import { MapContainer, TileLayer, Marker, Circle, useMap } from "react-leaflet";
 import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import FilterPanel from "./FilterPanel";
 import FilteredMarkers from "./FilteredMarkers";
 import L from "leaflet";
 import "./map.css";
 import search from "../../components/home/search.svg";
-import { useNavigate } from "react-router-dom";
 import { location } from "./Place";
 
 const RecenterMap = ({ center }) => {
@@ -33,17 +33,24 @@ const places = location.map((place) => ({
   services: place.services || [],
 }));
 
-// console.log(places);
-
 const MapWithFilterUI = () => {
+  const routeLocation = useLocation();
   const navigate = useNavigate();
   const [showFilter, setShowFilter] = useState(false);
+  const selectedLocation = routeLocation.state?.selectedLocation;
+  const returnPath = routeLocation.state?.returnPath;
+
+  // Use selected location or default to Phnom Penh
+  const [mapCenter, setMapCenter] = useState(
+    selectedLocation || { lat: 11.5564, lng: 104.9282 }
+  );
+
   const [tempFilters, setTempFilters] = useState({
     priceRange: [0, 1000],
-    distance: 10, // Enough for all visible markers
-    rating: 0, // No rating filter
-    services: [], // No services filter
-    sort: "Nearby", // if applicable
+    distance: 10,
+    rating: 0,
+    services: [],
+    sort: "Nearby",
   });
 
   const [activeFilters, setActiveFilters] = useState(tempFilters);
@@ -62,7 +69,6 @@ const MapWithFilterUI = () => {
       );
     });
 
-    // 🔽 Sort logic after filtering
     switch (activeFilters.sort) {
       case "Nearby":
         filtered.sort((a, b) => {
@@ -77,7 +83,6 @@ const MapWithFilterUI = () => {
       case "Rating":
         filtered.sort((a, b) => b.rating - a.rating);
         break;
-      // Add more sort cases as needed
       default:
         break;
     }
@@ -88,28 +93,22 @@ const MapWithFilterUI = () => {
   const applyFilters = () => {
     setActiveFilters(tempFilters);
     setShowFilter(false);
-    console.log(tempFilters);
   };
 
   const filtered = filterMarkers();
-  // console.log(" filter", filtered);
 
   return (
     <div className="relative max-w-[500px] h-screen">
-      <MapContainer center={position} zoom={7} className="h-full w-full z-0">
+      <MapContainer 
+        center={[mapCenter.lat, mapCenter.lng]} 
+        zoom={15} 
+        className="h-full w-full z-0"
+      >
         <TileLayer
-          zoomControl={false}
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={position} />
-        <Circle
-          center={position}
-          radius={activeFilters.distance * 1000}
-          pathOptions={{ color: "#facc15", fillOpacity: 0.3 }}
-        />
-        {filtered.length > 0 && (
-          <RecenterMap center={[filtered[0].lat, filtered[0].lng]} />
-        )}
+        <Marker position={[mapCenter.lat, mapCenter.lng]} />
+        <RecenterMap center={[mapCenter.lat, mapCenter.lng]} />
         <FilteredMarkers markers={filtered} />
       </MapContainer>
 

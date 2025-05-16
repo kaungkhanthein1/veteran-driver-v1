@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import BottomNavBar from "./BottomNavBar";
 import Carousel from "./home/Carousel";
 import Near from "./home/Near";
-import Topic from "./home/topic";
+import Topic from "./home/Topic"; 
 import Filternav from "./home/Filternav";
 import Service from "./home/Service";
 import ServiceCard from "./home/ServiceCard";
