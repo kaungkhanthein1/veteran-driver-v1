@@ -130,3 +130,10 @@
   font-weight: 700;
   line-height: 20px; /* 125% */
 }
+
+.drag_btn {
+  border-radius: 100px;
+  background: #fff;
+  width: 32px;
+  height: 4px;
+}

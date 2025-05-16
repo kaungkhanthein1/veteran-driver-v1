@@ -2,6 +2,7 @@ import { Marker, useMap } from "react-leaflet";
 import { useEffect, useState } from "react";
 import L from "leaflet";
 import "./map.css";
+import { motion } from "framer-motion";
 
 const thumbnailIcon = (src) =>
   L.divIcon({
@@ -81,7 +82,7 @@ const FilteredMarkers = ({ markers }) => {
     setTimeout(() => setSelectedPlace(null), 200);
   };
 
-  console.log(selectedPlace);
+  // console.log(selectedPlace);
 
   return (
     <>
@@ -97,18 +98,30 @@ const FilteredMarkers = ({ markers }) => {
       ))}
 
       {/* Slide Up Popup */}
-      <div
-        className={`fixed bottom-0 left-0 w-full max-w-[500px] marker_box rounded-t-2xl shadow-xl p-4 z-[1000]
-          transform transition-transform duration-200 ease-in-out
-          ${selectedPlace && isSliding ? "translate-y-0" : "translate-y-full"}`}
+      <motion.div
+        // className={`fixed bottom-0 left-0 w-full max-w-[500px] marker_box rounded-t-2xl shadow-xl p-4 z-[1000]
+        //   transform transition-transform duration-200 ease-in-out
+        //   ${selectedPlace && isSliding ? "translate-y-0" : "translate-y-full"}`}
+        className="fixed bottom-0 left-0 w-full max-w-[500px] marker_box rounded-t-2xl shadow-xl p-4 z-[1000]"
+        initial={{ y: "100%" }}
+        animate={{ y: selectedPlace && isSliding ? 0 : "100%" }}
+        exit={{ y: "100%" }}
+        transition={{ duration: 0.25 }}
+        drag="y"
+        dragConstraints={{ top: 0, bottom: 0 }}
+        onDragEnd={(event, info) => {
+          if (info.offset.y > 100) {
+            handleClose();
+          }
+        }}
       >
         {selectedPlace && (
           <>
-            <div className="flex justify-between items-start mb-2">
-              <span></span>
-              <button onClick={handleClose} className="text-gray-500 text-2xl">
+            <div className="flex justify-center items-start mb-[40px]">
+              <span className=" drag_btn"></span>
+              {/* <button onClick={handleClose} className="text-gray-500 text-2xl">
                 &times;
-              </button>
+              </button> */}
             </div>
             <img
               src={selectedPlace.image}
@@ -155,7 +168,7 @@ const FilteredMarkers = ({ markers }) => {
               </span>
             </div>
             {/* btn */}
-            <div className=" w-full gap-[10px] my-[20px] flex justify-center items-center py-[12px] add_place_btn">
+            <div onClick={() => console.log('click')} className=" w-full gap-[10px] my-[20px] flex justify-center items-center py-[12px] add_place_btn">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -172,7 +185,7 @@ const FilteredMarkers = ({ markers }) => {
             </div>
           </>
         )}
-      </div>
+      </motion.div>
     </>
   );
 };
