@@ -106,14 +106,15 @@ const MapWithFilterUI = () => {
         center={[mapCenter.lat, mapCenter.lng]}
         zoom={15}
         className="h-full w-full z-0"
+        zoomControl={false} // <- disables zoom buttons
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <Marker position={[mapCenter.lat, mapCenter.lng]} />
         <RecenterMap center={[mapCenter.lat, mapCenter.lng]} />
-        <FilteredMarkers markers={filtered} />
+        <FilteredMarkers markers={filterMarkers(activeFilters)} />
       </MapContainer>
 
-      <div className="absolute w-full top-6 left-2 text-white rounded-full shadow-lg">
+      <div className="absolute w-full top-6 left-0 text-white rounded-full shadow-lg">
         <div className=" flex justify-center items-center gap-[12px]">
           <svg
             onClick={() => navigate(-1)}
@@ -130,7 +131,7 @@ const MapWithFilterUI = () => {
           </svg>
           <div
             onClick={() => setShowFilter(true)}
-            className="search_box p-[16px] flex justify-center items-center w-3/4"
+            className="search_box p-[16px] flex justify-center items-center w-4/5"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
