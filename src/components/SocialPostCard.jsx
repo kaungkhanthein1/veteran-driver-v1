@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import VideoPlayer from "./VideoPlayer";
 import ImageModal from "./ImageModal";
+import CommentModal from "./CommentModal";
 import BeachImg from "../assets/Beach.png";
 import RoomImg from "../assets/Room.png";
 import SampleVideo from "../assets/Sample.mp4";
@@ -8,6 +9,7 @@ import SampleVideo from "../assets/Sample.mp4";
 export default function SocialPostCard({ post }) {
   const [expanded, setExpanded] = useState(false);
   const [selectedMedia, setSelectedMedia] = useState(null);
+  const [showCommentModal, setShowCommentModal] = useState(false);
 
   // Sample post data to match the design
   const samplePost = {
@@ -39,6 +41,11 @@ export default function SocialPostCard({ post }) {
 
   const handleMediaClick = (media) => {
     setSelectedMedia(media);
+  };
+
+  const handleCommentSubmit = (comment) => {
+    // Here you would typically handle the comment submission
+    console.log('Comment submitted:', comment);
   };
 
   return (
@@ -144,12 +151,15 @@ export default function SocialPostCard({ post }) {
             </svg>
             {samplePost.likes}
           </span>
-          <span className="flex items-center text-[13px]">
+          <button 
+            onClick={() => setShowCommentModal(true)}
+            className="flex items-center text-[13px]"
+          >
             <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
             </svg>
             {samplePost.comments}
-          </span>
+          </button>
           <span className="flex items-center text-[13px]">
             <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
@@ -158,6 +168,13 @@ export default function SocialPostCard({ post }) {
           </span>
         </div>
       </div>
+
+      {/* Comment Modal */}
+      <CommentModal
+        isOpen={showCommentModal}
+        onClose={() => setShowCommentModal(false)}
+        onSubmit={handleCommentSubmit}
+      />
     </div>
   );
 }
