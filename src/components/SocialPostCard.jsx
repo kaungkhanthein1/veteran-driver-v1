@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import VideoPlayer from "./VideoPlayer";
 import ImageModal from "./ImageModal";
-import CommentModal from "./CommentModal";
+import CommentModal from "./CommentModal"; // This import will be removed if CommentModal is not used here.
 import BeachImg from "../assets/Beach.png";
 import RoomImg from "../assets/Room.png";
 import SampleVideo from "../assets/Sample.mp4";
 
-export default function SocialPostCard({ post }) {
+export default function SocialPostCard({ post, onOpenComments }) { // Add onOpenComments prop
   const [expanded, setExpanded] = useState(false);
   const [selectedMedia, setSelectedMedia] = useState(null);
-  const [showCommentModal, setShowCommentModal] = useState(false);
+  // const [showCommentModal, setShowCommentModal] = useState(false); // Remove this state
 
   // Sample post data to match the design
   const samplePost = {
@@ -43,10 +43,10 @@ export default function SocialPostCard({ post }) {
     setSelectedMedia(media);
   };
 
-  const handleCommentSubmit = (comment) => {
-    // Here you would typically handle the comment submission
-    console.log('Comment submitted:', comment);
-  };
+  // const handleCommentSubmit = (comment) => { // This function will be moved to SocialPage
+  //   // Here you would typically handle the comment submission
+  //   console.log('Comment submitted:', comment);
+  // };
 
   return (
     <div className="bg-[#232323] border-b border-[#181818]">
@@ -151,8 +151,8 @@ export default function SocialPostCard({ post }) {
             </svg>
             {samplePost.likes}
           </span>
-          <button 
-            onClick={() => setShowCommentModal(true)}
+          <button
+            onClick={() => onOpenComments(post.id)} // Use the new prop
             className="flex items-center text-[13px]"
           >
             <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -170,11 +170,14 @@ export default function SocialPostCard({ post }) {
       </div>
 
       {/* Comment Modal */}
+      {/* Remove CommentModal from here */}
+      {/* 
       <CommentModal
         isOpen={showCommentModal}
         onClose={() => setShowCommentModal(false)}
         onSubmit={handleCommentSubmit}
-      />
+      /> 
+      */}
     </div>
   );
 }
