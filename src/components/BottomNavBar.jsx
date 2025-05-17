@@ -41,18 +41,19 @@ export default function BottomNavBar({ active }) {
         {tabs.map(tab => (
           <button
             key={tab.key}
-            className="flex flex-col items-center"
+            className="flex flex-col items-center min-w-[64px]"
             onClick={() => navigate(tab.path)}
           >
-            <div className={`p-2 rounded-full ${active === tab.key ? "bg-[#FDC51B]/10" : ""}`}>
+            <div className={`p-2 rounded-full flex items-center justify-center ${active === tab.key ? "bg-[#FDC51B]/10" : ""}`}>
               <img 
                 src={tab.icon} 
                 alt={tab.label}
-                className={`w-6 h-6 ${
+                className={`w-[22px] h-[22px] object-contain ${
                   active === tab.key 
                     ? "[filter:brightness(0)_saturate(100%)_invert(89%)_sepia(61%)_saturate(1415%)_hue-rotate(319deg)_brightness(103%)_contrast(101%)]" 
                     : "text-gray-400"
                 }`}
+                style={{ display: 'block' }}
               />
             </div>
             <span className="text-xs mt-1 text-gray-400">
