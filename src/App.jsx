@@ -14,6 +14,7 @@ import ProfilePage from "./Pages/ProfilePage"; // Update this import
 import MapWithFilterUI from "./Pages/map/MapWithFilterUI";
 import "leaflet/dist/leaflet.css";
 import SocialUpload from "./Pages/SocialUpload";
+import AddLocationPage from "./Pages/AddLocation/AddLocationPage";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         {/* Main tab routes */}
         <Route path="/home" element={<Home />} />
         <Route path="/explore" element={<ExplorePage />} />
+        <Route path="/add-location" element={<AddLocationPage />} />
         <Route path="/social" element={<SocialPage />} />
         <Route path="/social/upload" element={<SocialUpload />} />
         <Route path="/profile" element={<ProfilePage />} />

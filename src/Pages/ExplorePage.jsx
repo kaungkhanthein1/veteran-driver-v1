@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import BottomNavBar from "../components/BottomNavBar";
 import ExploreTabs from "../components/ExploreTabs";
 import ExploreCard from "../components/ExploreCard";
@@ -30,6 +31,7 @@ const exploreItems = [
 
 export default function ExplorePage() {
   const [activeTab, setActiveTab] = useState("Hotel");
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen flex flex-col bg-[#181818]">
@@ -47,7 +49,10 @@ export default function ExplorePage() {
                 className="bg-transparent text-gray-400 w-full outline-none text-[14px] placeholder-gray-400 focus:outline-none focus:ring-0 border-none"
               />
             </div>
-            <button className="flex items-center justify-center">
+            <button 
+              className="flex items-center justify-center"
+              onClick={() => navigate('/add-location')}
+            >
               <img 
                 src={AddLocationIcon} 
                 alt="Add Location" 
