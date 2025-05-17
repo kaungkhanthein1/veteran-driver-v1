@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import VideoPlayer from "./VideoPlayer";
 import ImageModal from "./ImageModal";
+import ShareModal from "./ShareModal";
 import CommentModal from "./CommentModal"; // This import will be removed if CommentModal is not used here.
 import BeachImg from "../assets/Beach.png";
 import RoomImg from "../assets/Room.png";
@@ -9,6 +10,7 @@ import SampleVideo from "../assets/Sample.mp4";
 export default function SocialPostCard({ post, onOpenComments }) { // Add onOpenComments prop
   const [expanded, setExpanded] = useState(false);
   const [selectedMedia, setSelectedMedia] = useState(null);
+  const [showShareModal, setShowShareModal] = useState(false);
   // const [showCommentModal, setShowCommentModal] = useState(false); // Remove this state
 
   // Sample post data to match the design
@@ -160,24 +162,23 @@ export default function SocialPostCard({ post, onOpenComments }) { // Add onOpen
             </svg>
             {samplePost.comments}
           </button>
-          <span className="flex items-center text-[13px]">
+          <button
+            onClick={() => setShowShareModal(true)}
+            className="flex items-center text-[13px]"
+          >
             <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
             </svg>
             {samplePost.shares}
-          </span>
+          </button>
         </div>
       </div>
 
-      {/* Comment Modal */}
-      {/* Remove CommentModal from here */}
-      {/* 
-      <CommentModal
-        isOpen={showCommentModal}
-        onClose={() => setShowCommentModal(false)}
-        onSubmit={handleCommentSubmit}
-      /> 
-      */}
+      {/* Share Modal */}
+      <ShareModal
+        isOpen={showShareModal}
+        onClose={() => setShowShareModal(false)}
+      />
     </div>
   );
 }

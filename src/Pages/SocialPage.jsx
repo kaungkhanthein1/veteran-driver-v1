@@ -71,7 +71,7 @@ export default function SocialPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#181818]">
+    <div className="min-h-screen flex flex-col bg-[#181818] relative">
       <div className="flex-1 overflow-y-auto pb-16">
         <div className="sticky top-0 z-10 bg-[#181818]">
           <SocialTabs
@@ -92,14 +92,14 @@ export default function SocialPage() {
         </div>
       </div>
       <BottomNavBar active="social" />
-      {/* Render CommentModal here, outside the scrollable div */}
-      <CommentModal
-        isOpen={!!commentModalPostId}
-        onClose={closeCommentModal}
-        onSubmit={handleCommentSubmit}
-        // You might want to pass post-specific data to CommentModal if needed,
-        // e.g., existing comments for `commentModalPostId`
-      />
+      {/* Move modals outside the scrollable area and ensure they're above everything */}
+      <div className="relative z-[1000]">
+        <CommentModal
+          isOpen={!!commentModalPostId}
+          onClose={closeCommentModal}
+          onSubmit={handleCommentSubmit}
+        />
+      </div>
     </div>
   );
 }

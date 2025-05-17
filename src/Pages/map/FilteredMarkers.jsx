@@ -1,8 +1,8 @@
 import { Marker, useMap } from "react-leaflet";
 import { useEffect, useState } from "react";
 import L from "leaflet";
-import "./map.css";
 import { motion } from "framer-motion";
+import "./map.css";
 
 const thumbnailIcon = (src) =>
   L.divIcon({
@@ -97,11 +97,7 @@ const FilteredMarkers = ({ markers }) => {
         />
       ))}
 
-      {/* Slide Up Popup */}
       <motion.div
-        // className={`fixed bottom-0 left-0 w-full max-w-[500px] marker_box rounded-t-2xl shadow-xl p-4 z-[1000]
-        //   transform transition-transform duration-200 ease-in-out
-        //   ${selectedPlace && isSliding ? "translate-y-0" : "translate-y-full"}`}
         className="fixed bottom-0 left-0 w-full max-w-[500px] marker_box rounded-t-2xl shadow-xl p-4 z-[1000]"
         initial={{ y: "100%" }}
         animate={{ y: selectedPlace && isSliding ? 0 : "100%" }}
