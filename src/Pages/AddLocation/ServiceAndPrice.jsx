@@ -41,6 +41,7 @@ const ServiceAndPrice = ({ formData, setFormData }) => {
       <FormInput
         label="Best Price(USD)"
         name="price"
+        type="number"
         placeholder="Please enter the price"
         value={formData.price}
         onChange={handleInputChange}

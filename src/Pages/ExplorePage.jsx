@@ -56,7 +56,7 @@ export default function ExplorePage() {
               <img 
                 src={AddLocationIcon} 
                 alt="Add Location" 
-                className="w-[35px] h-[35px]"
+                className="w-[35px] h-[35px] [filter:var(--icon-filter)]"
               />
             </button>
           </div>

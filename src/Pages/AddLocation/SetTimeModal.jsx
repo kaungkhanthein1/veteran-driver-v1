@@ -15,8 +15,8 @@ const SetTimeModal = ({ isOpen, onClose, onSave, initialTime }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-theme-primary bg-opacity-50 flex items-center justify-center">
-      <div className="bg-theme-primary rounded-lg p-6 w-[300px]">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[1000]">
+      <div className="bg-theme-secondary rounded-lg p-6 w-[300px] relative z-[1001]">
         <div className="flex justify-between items-center mb-6">
           <div className="flex-1 text-center">
             <input
@@ -25,8 +25,8 @@ const SetTimeModal = ({ isOpen, onClose, onSave, initialTime }) => {
               onChange={(e) => setHour(Math.min(12, Math.max(1, parseInt(e.target.value) || 0)))}
               onFocus={() => setFocusedInput('hour')}
               onBlur={() => setFocusedInput(null)}
-              className={`w-20 text-center text-2xl p-2 rounded text-theme-primary ${
-                focusedInput === 'hour' ? 'bg-[#FFC61B52]' : 'bg-theme-secondary'
+              className={`w-20 text-center text-2xl p-2 rounded ${
+                focusedInput === 'hour' ? 'bg-[#FFC61B52] text-theme-primary' : 'bg-theme-primary text-theme-primary'
               }`}
             />
             <div className="text-sm text-theme-secondary mt-1">Hour</div>
@@ -38,8 +38,8 @@ const SetTimeModal = ({ isOpen, onClose, onSave, initialTime }) => {
               onChange={(e) => setMinute(Math.min(59, Math.max(0, parseInt(e.target.value) || 0)))}
               onFocus={() => setFocusedInput('minute')}
               onBlur={() => setFocusedInput(null)}
-              className={`w-20 text-center text-2xl p-2 rounded text-theme-primary ${
-                focusedInput === 'minute' ? 'bg-[#FFC61B52]' : 'bg-theme-secondary'
+              className={`w-20 text-center text-2xl p-2 rounded ${
+                focusedInput === 'minute' ? 'bg-[#FFC61B52] text-theme-primary' : 'bg-theme-primary text-theme-primary'
               }`}
             />
             <div className="text-sm text-theme-secondary mt-1">Minute</div>
@@ -47,13 +47,13 @@ const SetTimeModal = ({ isOpen, onClose, onSave, initialTime }) => {
           <div className="flex-1">
             <div className="flex flex-col gap-2">
               <button
-                className={`px-4 py-2 rounded ${period === 'AM' ? 'bg-[#FDC51B] text-black' : 'bg-theme-secondary text-theme-primary'}`}
+                className={`px-4 py-2 rounded ${period === 'AM' ? 'bg-[#FDC51B] text-black' : 'bg-theme-primary text-theme-primary'}`}
                 onClick={() => setPeriod('AM')}
               >
                 AM
               </button>
               <button
-                className={`px-4 py-2 rounded ${period === 'PM' ? 'bg-[#FDC51B] text-black' : 'bg-theme-secondary text-theme-primary'}`}
+                className={`px-4 py-2 rounded ${period === 'PM' ? 'bg-[#FDC51B] text-black' : 'bg-theme-primary text-theme-primary'}`}
                 onClick={() => setPeriod('PM')}
               >
                 PM
@@ -66,19 +66,19 @@ const SetTimeModal = ({ isOpen, onClose, onSave, initialTime }) => {
             <img
               src={ScheduleIcon}
               alt="Schedule"
-              className="w-5 h-5 mr-2"
+              className="w-5 h-5 mr-2 [filter:var(--icon-filter)]"
             />
           </div>
           <div className="flex gap-4">
             <button
               onClick={onClose}
-              className="px-6 py-2 text-theme-secondary"
+              className="px-6 py-2 text-theme-secondary hover:text-theme-primary"
             >
               Cancel
             </button>
             <button
               onClick={handleSave}
-              className="px-6 py-2 text-[#FDC51B]"
+              className="px-6 py-2 text-[#FDC51B] hover:text-[#FFD54F]"
             >
               OK
             </button>
