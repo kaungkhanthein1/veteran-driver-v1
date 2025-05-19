@@ -4,6 +4,7 @@ import SetLocationIcon from '../../icons/SetLocation.svg';
 import OpeningTime from './OpeningTime';
 import ServiceAndPrice from './ServiceAndPrice';
 import FormInput from '../../components/FormInput';
+import DocumentIcon from '../../icons/Document.svg';
 
 const AddLocationPage = () => {
   const navigate = useNavigate();
@@ -173,9 +174,9 @@ const AddLocationPage = () => {
         {/* Photo Upload */}
         <div>
           <label className="block text-sm mb-2">Share a picture of your location ({formData.photos.length}/10) *</label>
-          <div className="grid grid-cols-5 gap-2">
+          <div className="flex flex-wrap gap-2">
             {formData.photos.map((image, index) => (
-              <div key={index} className="relative aspect-square">
+              <div key={index} className="relative w-[100px] h-[100px]">
                 <img
                   src={image.url}
                   alt={`Upload ${index + 1}`}
@@ -192,7 +193,7 @@ const AddLocationPage = () => {
               </div>
             ))}
             {formData.photos.length < 10 && (
-              <label className="aspect-square bg-[#232323] rounded-lg flex items-center justify-center cursor-pointer">
+              <label className="w-[100px] h-[100px] bg-[#232323] rounded-lg flex items-center justify-center cursor-pointer">
                 <input
                   type="file"
                   accept="image/*"
@@ -219,18 +220,22 @@ const AddLocationPage = () => {
               onChange={handleDocumentSelect}
               className="hidden"
             />
-            <div className="w-full aspect-square max-h-[100px] bg-[#232323] rounded-lg flex items-center justify-center">
+            <div className="w-[100px] h-[100px] bg-[#232323] rounded-lg flex items-center justify-center">
               {formData.document ? (
                 <div className="text-center">
-                  <svg className="w-8 h-8 mx-auto mb-2 text-[#FDC51B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+                  <img 
+                    src={DocumentIcon} 
+                    alt="Document" 
+                    className="w-8 h-8 mx-auto mb-2"
+                  />
                   <span className="text-sm text-gray-400">Document uploaded</span>
                 </div>
               ) : (
-                <svg className="w-8 h-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                </svg>
+                <img 
+                  src={DocumentIcon} 
+                  alt="Document" 
+                  className="w-8 h-8"
+                />
               )}
             </div>
           </label>
