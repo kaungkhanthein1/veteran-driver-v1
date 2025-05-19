@@ -2,6 +2,7 @@ import { Marker, useMap } from "react-leaflet";
 import { useEffect, useState } from "react";
 import L from "leaflet";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import "./map.css";
 
 const thumbnailIcon = (src) =>
@@ -25,6 +26,7 @@ const renderStars = (rating) => {
 
 const FilteredMarkers = ({ markers }) => {
   const map = useMap();
+  const navigate = useNavigate();
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [isSliding, setIsSliding] = useState(false);
 
@@ -83,6 +85,19 @@ const FilteredMarkers = ({ markers }) => {
   };
 
   // console.log(selectedPlace);
+
+  const handleAddPlace = () => {
+    if (selectedPlace) {
+      navigate('/add-location', {
+        state: {
+          selectedLocation: {
+            lat: selectedPlace.lat,
+            lng: selectedPlace.lng
+          }
+        }
+      });
+    }
+  };
 
   return (
     <>
@@ -164,7 +179,10 @@ const FilteredMarkers = ({ markers }) => {
               </span>
             </div>
             {/* btn */}
-            <div onClick={() => console.log('click')} className=" w-full gap-[10px] my-[20px] flex justify-center items-center py-[12px] add_place_btn">
+            <div 
+              onClick={handleAddPlace} 
+              className="w-full gap-[10px] my-[20px] flex justify-center items-center py-[12px] add_place_btn"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"

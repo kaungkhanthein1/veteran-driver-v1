@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import SetLocationIcon from '../../icons/SetLocation.svg';
 import OpeningTime from './OpeningTime';
 import ServiceAndPrice from './ServiceAndPrice';
+import FormInput from '../../components/FormInput';
 
 const AddLocationPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -18,6 +20,7 @@ const AddLocationPage = () => {
       selectedDays: []
     },
     services: [],
+    price: '', 
     basicPrice: '',
     photos: [],
     document: null,
@@ -69,6 +72,18 @@ const AddLocationPage = () => {
     }
   };
 
+  React.useEffect(() => {
+    // Check if returning from map with location data
+    if (location.state?.selectedLocation) {
+      setFormData(prev => ({
+        ...prev,
+        locationSet: true,
+        latitude: location.state.selectedLocation.lat,
+        longitude: location.state.selectedLocation.lng
+      }));
+    }
+  }, [location]);
+
   return (
     <div className="min-h-screen bg-[#181818] text-white p-4">
       <div className="flex items-center mb-6">
@@ -85,56 +100,49 @@ const AddLocationPage = () => {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Basic Information */}
-        <div className="space-y-4">
-          <div>
-            <label className="block text-sm mb-1">Name *</label>
-            <input
-              type="text"
-              name="name"
-              placeholder="Please enter the name"
-              className="w-full bg-[#232323] rounded-lg px-4 py-3 text-sm"
-              value={formData.name}
-              onChange={handleInputChange}
-            />
-          </div>
+        <div className="space-y-8">
+          <FormInput
+            label="Name"
+            name="name"
+            placeholder="Please enter the name"
+            value={formData.name}
+            onChange={handleInputChange}
+            required
+          />
 
-          <div>
-            <label className="block text-sm mb-1">Description *</label>
-            <input
-              type="text"
-              name="description"
-              placeholder="Please enter the description"
-              className="w-full bg-[#232323] rounded-lg px-4 py-3 text-sm"
-              value={formData.description}
-              onChange={handleInputChange}
-            />
-          </div>
+          <FormInput
+            label="Description"
+            name="description"
+            placeholder="Please enter the description"
+            value={formData.description}
+            onChange={handleInputChange}
+            required
+          />
 
-          <div>
-            <label className="block text-sm mb-1">Address *</label>
-            <input
-              type="text"
-              name="address"
-              placeholder="Please enter the address"
-              className="w-full bg-[#232323] rounded-lg px-4 py-3 text-sm"
-              value={formData.address}
-              onChange={handleInputChange}
-            />
-          </div>
+          <FormInput
+            label="Address"
+            name="address"
+            placeholder="Please enter the address"
+            value={formData.address}
+            onChange={handleInputChange}
+            required
+          />
 
-          <div>
-            <label className="block text-sm mb-1">Mobile number *</label>
-            <input
-              type="tel"
-              name="mobileNumber"
-              placeholder="Please enter the address"
-              className="w-full bg-[#232323] rounded-lg px-4 py-3 text-sm"
-              value={formData.mobileNumber}
-              onChange={handleInputChange}
-            />
-          </div>
+          <FormInput
+            label="Mobile number"
+            name="mobileNumber"
+            type="tel"
+            placeholder="Please enter the mobile number"
+            value={formData.mobileNumber}
+            onChange={handleInputChange}
+            required
+          />
 
-          <button type="button" className="w-full bg-[#232323] rounded-lg px-4 py-3 flex justify-between items-center">
+          <button 
+            type="button" 
+            className="w-full bg-[#232323] rounded-lg px-4 py-3 flex justify-between items-center"
+            onClick={() => navigate('/map', { state: { from: 'addLocation', formData } })}
+          >
             <div className="flex items-center">
               <img 
                 src={SetLocationIcon} 
@@ -144,7 +152,9 @@ const AddLocationPage = () => {
               />
               <span>Set Location On Map</span>
             </div>
-            <span className="text-gray-400">Not Set</span>
+            <span className={`text-gray-400 ${formData.locationSet ? 'text-[#FDC51B]' : ''}`}>
+              {formData.locationSet ? 'Change' : 'Not Set'}
+            </span>
           </button>
         </div>
 

@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SetTimeIcon from '../../icons/SetTime.svg';
+import SetTimeModal from './SetTimeModal';
 
 const OpeningTime = ({ formData, setFormData }) => {
+  const [isTimeModalOpen, setIsTimeModalOpen] = useState(false);
   const days = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sun', 'Sat'];
 
   const handleDayToggle = (day) => {
@@ -12,6 +14,16 @@ const OpeningTime = ({ formData, setFormData }) => {
         selectedDays: prev.openingTime.selectedDays.includes(day)
           ? prev.openingTime.selectedDays.filter(d => d !== day)
           : [...prev.openingTime.selectedDays, day]
+      }
+    }));
+  };
+
+  const handleTimeSet = (timeData) => {
+    setFormData(prev => ({
+      ...prev,
+      openingTime: {
+        ...prev.openingTime,
+        time: timeData
       }
     }));
   };
@@ -38,7 +50,10 @@ const OpeningTime = ({ formData, setFormData }) => {
         </label>
       </div>
 
-      <button className="w-full bg-[#232323] rounded-lg px-4 py-3 flex justify-between items-center">
+      <button 
+        onClick={() => setIsTimeModalOpen(true)}
+        className="w-full bg-[#232323] rounded-lg px-4 py-3 flex justify-between items-center"
+      >
         <div className="flex items-center">
           <img 
             src={SetTimeIcon} 
@@ -48,7 +63,11 @@ const OpeningTime = ({ formData, setFormData }) => {
           />
           <span>Set Opening Time</span>
         </div>
-        <span className="text-gray-400">Not Set</span>
+        <span className="text-gray-400">
+          {formData.openingTime.time 
+            ? `${formData.openingTime.time.hour}:${String(formData.openingTime.time.minute).padStart(2, '0')} ${formData.openingTime.time.period}`
+            : 'Not Set'}
+        </span>
       </button>
 
       <div className="flex flex-wrap gap-2">
@@ -66,6 +85,13 @@ const OpeningTime = ({ formData, setFormData }) => {
           </button>
         ))}
       </div>
+
+      <SetTimeModal
+        isOpen={isTimeModalOpen}
+        onClose={() => setIsTimeModalOpen(false)}
+        onSave={handleTimeSet}
+        initialTime={formData.openingTime.time}
+      />
     </div>
   );
 };

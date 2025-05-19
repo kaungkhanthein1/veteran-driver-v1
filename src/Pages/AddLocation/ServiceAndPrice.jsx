@@ -1,4 +1,5 @@
 import React from 'react';
+import FormInput from '../../components/FormInput';
 
 const ServiceAndPrice = ({ formData, setFormData }) => {
   const addService = () => {
@@ -17,6 +18,15 @@ const ServiceAndPrice = ({ formData, setFormData }) => {
     }));
   };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+
   const removeService = (index) => {
     setFormData(prev => ({
       ...prev,
@@ -28,16 +38,14 @@ const ServiceAndPrice = ({ formData, setFormData }) => {
     <div className="space-y-4">
       <h2 className="text-lg font-semibold">Services & Prices *</h2>
       
-      <div>
-        <label className="block text-sm mb-1">Basic Price (USD)</label>
-        <input
-          type="number"
-          placeholder="Please enter the price"
-          className="w-full bg-[#232323] rounded-lg px-4 py-3 text-sm"
-          value={formData.basicPrice}
-          onChange={(e) => setFormData(prev => ({ ...prev, basicPrice: e.target.value }))}
-        />
-      </div>
+      <FormInput
+            label="Best Price(USD)"
+            name="price"
+            placeholder="Please enter the price"
+            value={formData.price}
+            onChange={handleInputChange}
+            required
+          />
 
       {formData.services.map((service, index) => (
         <div key={index} className="space-y-2">
