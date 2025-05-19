@@ -13,8 +13,10 @@ import LogoutIcon from "../icons/Profile/Logout.svg";
 import ProfilePic from "../icons/Profile/ProfilePic.svg";
 import NotificationIcon from "../icons/Notification.svg";
 import SettingIcon from "../icons/Setting.svg";
+import { useNavigate } from "react-router-dom";
 
 export default function ProfilePage() {
+  const navigate = useNavigate();
   const userProfile = {
     name: "Rachel Zane Noel",
     uid: "5839234",
@@ -130,7 +132,15 @@ export default function ProfilePage() {
       {/* Menu List */}
       <div className="px-4 space-y-2">
         {menuItems.filter(item => item.type === "list").map(item => (
-          <button key={item.id} className="w-full bg-[#232323] rounded-lg p-4 flex items-center justify-between">
+          <button 
+            key={item.id} 
+            className="w-full bg-[#232323] rounded-lg p-4 flex items-center justify-between"
+            onClick={() => {
+              if (item.title === "Change Application Theme") {
+                navigate("/theme");
+              }
+            }}
+          >
             <div className="flex items-center gap-3">
               <img src={item.icon} alt={item.title} className="w-6 h-6" />
               <span>{item.title}</span>

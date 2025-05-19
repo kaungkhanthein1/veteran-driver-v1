@@ -15,6 +15,7 @@ import MapWithFilterUI from "./Pages/map/MapWithFilterUI";
 import "leaflet/dist/leaflet.css";
 import SocialUpload from "./Pages/SocialUpload";
 import AddLocationPage from "./Pages/AddLocation/AddLocationPage";
+import ChangeThemePage from "./Pages/ChangeThemePage";
 
 function App() {
   return (
@@ -36,7 +37,7 @@ function App() {
         <Route path="/forgot-password" element={<ForgetPasswordPage />} />
         <Route path="/map" element={<MapWithFilterUI />} />
         <Route path="/social/upload" element={<SocialUpload />} />
-        
+        <Route path="/theme" element={<ChangeThemePage />} />
       </Routes>
     </Router>
   );
