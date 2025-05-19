@@ -39,13 +39,13 @@ const ServiceAndPrice = ({ formData, setFormData }) => {
       <h2 className="text-lg font-semibold">Services & Prices *</h2>
       
       <FormInput
-            label="Best Price(USD)"
-            name="price"
-            placeholder="Please enter the price"
-            value={formData.price}
-            onChange={handleInputChange}
-            required
-          />
+        label="Best Price(USD)"
+        name="price"
+        placeholder="Please enter the price"
+        value={formData.price}
+        onChange={handleInputChange}
+        required
+      />
 
       {formData.services.map((service, index) => (
         <div key={index} className="space-y-2">
@@ -53,14 +53,14 @@ const ServiceAndPrice = ({ formData, setFormData }) => {
             <input
               type="text"
               placeholder="Service name"
-              className="flex-1 bg-[#232323] rounded-lg px-4 py-3 text-sm"
+              className="flex-1 bg-theme-secondary rounded-lg px-4 py-3 text-sm text-theme-primary"
               value={service.name}
               onChange={(e) => updateService(index, 'name', e.target.value)}
             />
             <input
               type="number"
               placeholder="Price"
-              className="w-24 bg-[#232323] rounded-lg px-4 py-3 text-sm"
+              className="w-24 bg-theme-secondary rounded-lg px-4 py-3 text-sm text-theme-primary"
               value={service.price}
               onChange={(e) => updateService(index, 'price', e.target.value)}
             />
@@ -78,7 +78,7 @@ const ServiceAndPrice = ({ formData, setFormData }) => {
       <button
         type="button"
         onClick={addService}
-        className="w-full bg-[#232323] rounded-lg px-4 py-3 text-sm flex items-center justify-center gap-2"
+        className="w-full bg-theme-secondary rounded-lg px-4 py-3 text-sm flex items-center justify-center gap-2 text-theme-primary"
       >
         <span>+</span>
         Add services

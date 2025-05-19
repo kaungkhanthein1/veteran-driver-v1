@@ -32,7 +32,7 @@ const OpeningTime = ({ formData, setFormData }) => {
     <div className="space-y-4">
       <h2 className="text-lg font-semibold">Opening Time *</h2>
       
-      <div className="flex items-center justify-between bg-[#232323] rounded-lg px-4 py-3">
+      <div className="flex items-center justify-between bg-theme-secondary rounded-lg px-4 py-3">
         <div>
           <p>Our services are available 24/7.</p>
         </div>
@@ -46,13 +46,13 @@ const OpeningTime = ({ formData, setFormData }) => {
             }))}
             className="sr-only peer"
           />
-          <div className="w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#FDC51B]"></div>
+          <div className="w-11 h-6 bg-theme-secondary peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#FDC51B]"></div>
         </label>
       </div>
 
       <button 
         onClick={() => setIsTimeModalOpen(true)}
-        className="w-full bg-[#232323] rounded-lg px-4 py-3 flex justify-between items-center"
+        className="w-full bg-theme-secondary rounded-lg px-4 py-3 flex justify-between items-center"
       >
         <div className="flex items-center">
           <img 
@@ -63,7 +63,7 @@ const OpeningTime = ({ formData, setFormData }) => {
           />
           <span>Set Opening Time</span>
         </div>
-        <span className="text-gray-400">
+        <span className="text-theme-secondary">
           {formData.openingTime.time 
             ? `${formData.openingTime.time.hour}:${String(formData.openingTime.time.minute).padStart(2, '0')} ${formData.openingTime.time.period}`
             : 'Not Set'}
@@ -78,7 +78,7 @@ const OpeningTime = ({ formData, setFormData }) => {
             className={`px-4 py-2 rounded-full text-sm ${
               formData.openingTime.selectedDays.includes(day)
                 ? 'bg-[#FDC51B] text-black'
-                : 'bg-[#232323] text-white'
+                : 'bg-theme-secondary text-theme-primary'
             }`}
           >
             {day}

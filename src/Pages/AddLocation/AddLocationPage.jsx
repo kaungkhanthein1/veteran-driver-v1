@@ -86,7 +86,7 @@ const AddLocationPage = () => {
   }, [location]);
 
   return (
-    <div className="min-h-screen bg-[#181818] text-white p-4">
+    <div className="min-h-screen bg-theme-primary text-theme-primary p-4">
       <div className="flex items-center mb-6">
         <button 
           className="mr-4"
@@ -141,7 +141,7 @@ const AddLocationPage = () => {
 
           <button 
             type="button" 
-            className="w-full bg-[#232323] rounded-lg px-4 py-3 flex justify-between items-center"
+            className="w-full bg-theme-secondary rounded-lg px-4 py-3 flex justify-between items-center"
             onClick={() => navigate('/map', { state: { from: 'addLocation', formData } })}
           >
             <div className="flex items-center">
@@ -153,7 +153,7 @@ const AddLocationPage = () => {
               />
               <span>Set Location On Map</span>
             </div>
-            <span className={`text-gray-400 ${formData.locationSet ? 'text-[#FDC51B]' : ''}`}>
+            <span className={`text-theme-secondary ${formData.locationSet ? 'text-[#FDC51B]' : ''}`}>
               {formData.locationSet ? 'Change' : 'Not Set'}
             </span>
           </button>
@@ -184,16 +184,16 @@ const AddLocationPage = () => {
                 />
                 <button
                   onClick={() => handleRemoveImage(index)}
-                  className="absolute top-1 right-1 bg-black bg-opacity-50 rounded-full p-1"
+                  className="absolute top-1 right-1 bg-theme-primary bg-opacity-50 rounded-full p-1"
                 >
-                  <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-4 h-4 text-theme-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
               </div>
             ))}
             {formData.photos.length < 10 && (
-              <label className="w-[100px] h-[100px] bg-[#232323] rounded-lg flex items-center justify-center cursor-pointer">
+              <label className="w-[100px] h-[100px] bg-theme-secondary rounded-lg flex items-center justify-center cursor-pointer">
                 <input
                   type="file"
                   accept="image/*"
@@ -201,7 +201,7 @@ const AddLocationPage = () => {
                   onChange={handleImageSelect}
                   className="hidden"
                 />
-                <svg className="w-8 h-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-8 h-8 text-theme-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                 </svg>
               </label>
@@ -212,7 +212,7 @@ const AddLocationPage = () => {
         {/* Document Upload */}
         <div>
           <label className="block text-sm mb-2">Upload Document *</label>
-          <p className="text-gray-400 text-xs mb-2">Upload Valid Certification & Documents</p>
+          <p className="text-theme-secondary text-xs mb-2">Upload Valid Certification & Documents</p>
           <label className="cursor-pointer block">
             <input
               type="file"
@@ -220,7 +220,7 @@ const AddLocationPage = () => {
               onChange={handleDocumentSelect}
               className="hidden"
             />
-            <div className="w-[100px] h-[100px] bg-[#232323] rounded-lg flex items-center justify-center">
+            <div className="w-[100px] h-[100px] bg-theme-secondary rounded-lg flex items-center justify-center">
               {formData.document ? (
                 <div className="text-center">
                   <img 
@@ -228,7 +228,7 @@ const AddLocationPage = () => {
                     alt="Document" 
                     className="w-8 h-8 mx-auto mb-2"
                   />
-                  <span className="text-sm text-gray-400">Document uploaded</span>
+                  <span className="text-sm text-theme-secondary">Document uploaded</span>
                 </div>
               ) : (
                 <img 
@@ -243,7 +243,7 @@ const AddLocationPage = () => {
 
         {/* Agreement */}
         <div className="space-y-4">
-          <p className="text-gray-400 text-xs">Note : Guest accounts are limited to share only 3 locations per day.</p>
+          <p className="text-theme-secondary text-xs">Note : Guest accounts are limited to share only 3 locations per day.</p>
           <div className="flex items-center">
             <input
               type="checkbox"

@@ -89,10 +89,18 @@ export default function ProfilePage() {
           </button>
           <div className="flex gap-4">
             <button>
-              <img src={NotificationIcon} alt="Notification" className="w-6 h-6" />
+              <img 
+                src={NotificationIcon} 
+                alt="Notification" 
+                className="w-6 h-6 [filter:var(--icon-filter)]" 
+              />
             </button>
             <button>
-              <img src={SettingIcon} alt="Settings" className="w-6 h-6" />
+              <img 
+                src={SettingIcon} 
+                alt="Settings" 
+                className="w-6 h-6 [filter:var(--icon-filter)]" 
+              />
             </button>
           </div>
         </div>
@@ -123,7 +131,11 @@ export default function ProfilePage() {
       <div className="px-4 grid grid-cols-2 gap-3 mb-4">
         {menuItems.filter(item => item.type === "card").map(item => (
           <button key={item.id} className="bg-theme-secondary rounded-lg p-4 flex flex-col items-center justify-center gap-2">
-            <img src={item.icon} alt={item.title} className="w-8 h-8" />
+            <img 
+              src={item.icon} 
+              alt={item.title} 
+              className="w-8 h-8 [filter:var(--icon-filter)]" 
+            />
             <span className="text-sm">{item.title}</span>
           </button>
         ))}
@@ -142,7 +154,11 @@ export default function ProfilePage() {
             }}
           >
             <div className="flex items-center gap-3">
-              <img src={item.icon} alt={item.title} className="w-6 h-6" />
+              <img 
+                src={item.icon} 
+                alt={item.title} 
+                className="w-6 h-6 [filter:var(--icon-filter)]" 
+              />
               <span>{item.title}</span>
             </div>
             <svg className="w-5 h-5 text-theme-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -155,7 +171,11 @@ export default function ProfilePage() {
       {/* Logout Button */}
       <div className="px-4 py-6">
         <button className="w-full bg-theme-secondary rounded-lg py-4 flex items-center justify-center gap-2">
-          <img src={LogoutIcon} alt="Logout" className="w-5 h-5" />
+          <img 
+            src={LogoutIcon} 
+            alt="Logout" 
+            className="w-5 h-5 [filter:var(--icon-filter)]" 
+          />
           <span>Logout</span>
         </button>
       </div>

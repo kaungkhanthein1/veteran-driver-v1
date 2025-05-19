@@ -21,7 +21,7 @@ export default function LoginPage() {
             <label className="block text-sm text-theme-secondary mb-1 ml-1">Email or Phone Number</label>
             <input
               type="text"
-              className="w-full bg-transparent border border-theme rounded-lg px-4 py-3 text-theme-primary placeholder-theme-secondary focus:outline-none"
+              className="w-full bg-theme-secondary/30 border border-theme rounded-lg px-4 py-3 text-theme-primary placeholder-theme-secondary focus:outline-none focus:border-[#FDC51B]"
               placeholder="Enter Your Email"
               value={emailOrPhone}
               onChange={e => setEmailOrPhone(e.target.value)}
@@ -31,7 +31,7 @@ export default function LoginPage() {
             <label className="block text-sm text-theme-secondary mb-1 ml-1">Password</label>
             <input
               type={showPassword ? "text" : "password"}
-              className="w-full bg-transparent border border-theme rounded-lg px-4 py-3 text-theme-primary placeholder-theme-secondary focus:outline-none"
+              className="w-full bg-theme-secondary/30 border border-theme rounded-lg px-4 py-3 text-theme-primary placeholder-theme-secondary focus:outline-none focus:border-[#FDC51B]"
               placeholder="Enter Your Password"
               value={password}
               onChange={e => setPassword(e.target.value)}
@@ -54,7 +54,7 @@ export default function LoginPage() {
           </div>
           {/* Recaptcha Placeholder */}
           <div className="flex justify-center">
-            <div className="bg-theme-primary rounded-lg px-4 py-3 flex items-center gap-2 w-full max-w-xs">
+            <div className="bg-theme-secondary/30 rounded-lg px-4 py-3 flex items-center gap-2 w-full max-w-xs">
               <input type="checkbox" className="accent-blue-500" />
               <span className="text-theme-secondary text-sm">I'm not a robot</span>
               <div className="ml-20 text-theme-secondary text-md">Recaptcha</div>

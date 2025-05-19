@@ -15,8 +15,8 @@ const SetTimeModal = ({ isOpen, onClose, onSave, initialTime }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div className="bg-[#1A1A1A] rounded-lg p-6 w-[300px]">
+    <div className="fixed inset-0 bg-theme-primary bg-opacity-50 flex items-center justify-center">
+      <div className="bg-theme-primary rounded-lg p-6 w-[300px]">
         <div className="flex justify-between items-center mb-6">
           <div className="flex-1 text-center">
             <input
@@ -25,11 +25,11 @@ const SetTimeModal = ({ isOpen, onClose, onSave, initialTime }) => {
               onChange={(e) => setHour(Math.min(12, Math.max(1, parseInt(e.target.value) || 0)))}
               onFocus={() => setFocusedInput('hour')}
               onBlur={() => setFocusedInput(null)}
-              className={`w-20 text-center text-2xl p-2 rounded ${
-                focusedInput === 'hour' ? 'bg-[#FFC61B52]' : 'bg-[#232323]'
+              className={`w-20 text-center text-2xl p-2 rounded text-theme-primary ${
+                focusedInput === 'hour' ? 'bg-[#FFC61B52]' : 'bg-theme-secondary'
               }`}
             />
-            <div className="text-sm text-gray-400 mt-1">Hour</div>
+            <div className="text-sm text-theme-secondary mt-1">Hour</div>
           </div>
           <div className="flex-1 text-center">
             <input
@@ -38,22 +38,22 @@ const SetTimeModal = ({ isOpen, onClose, onSave, initialTime }) => {
               onChange={(e) => setMinute(Math.min(59, Math.max(0, parseInt(e.target.value) || 0)))}
               onFocus={() => setFocusedInput('minute')}
               onBlur={() => setFocusedInput(null)}
-              className={`w-20 text-center text-2xl p-2 rounded ${
-                focusedInput === 'minute' ? 'bg-[#FFC61B52]' : 'bg-[#232323]'
+              className={`w-20 text-center text-2xl p-2 rounded text-theme-primary ${
+                focusedInput === 'minute' ? 'bg-[#FFC61B52]' : 'bg-theme-secondary'
               }`}
             />
-            <div className="text-sm text-gray-400 mt-1">Minute</div>
+            <div className="text-sm text-theme-secondary mt-1">Minute</div>
           </div>
           <div className="flex-1">
             <div className="flex flex-col gap-2">
               <button
-                className={`px-4 py-2 rounded ${period === 'AM' ? 'bg-[#FDC51B] text-black' : 'bg-[#232323]'}`}
+                className={`px-4 py-2 rounded ${period === 'AM' ? 'bg-[#FDC51B] text-black' : 'bg-theme-secondary text-theme-primary'}`}
                 onClick={() => setPeriod('AM')}
               >
                 AM
               </button>
               <button
-                className={`px-4 py-2 rounded ${period === 'PM' ? 'bg-[#FDC51B] text-black' : 'bg-[#232323]'}`}
+                className={`px-4 py-2 rounded ${period === 'PM' ? 'bg-[#FDC51B] text-black' : 'bg-theme-secondary text-theme-primary'}`}
                 onClick={() => setPeriod('PM')}
               >
                 PM
@@ -72,7 +72,7 @@ const SetTimeModal = ({ isOpen, onClose, onSave, initialTime }) => {
           <div className="flex gap-4">
             <button
               onClick={onClose}
-              className="px-6 py-2 text-gray-400"
+              className="px-6 py-2 text-theme-secondary"
             >
               Cancel
             </button>

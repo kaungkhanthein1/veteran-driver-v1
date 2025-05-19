@@ -24,7 +24,7 @@ export default function RegisterPage() {
             <label className="block text-sm text-theme-secondary mb-1 ml-1">Email or Phone Number</label>
             <input
               type="text"
-              className="w-full bg-transparent border border-theme rounded-lg px-4 py-3 text-theme-primary placeholder-theme-secondary focus:outline-none"
+              className="w-full bg-theme-secondary/30 border border-theme rounded-lg px-4 py-3 text-theme-primary placeholder-theme-secondary focus:outline-none focus:border-[#FDC51B]"
               placeholder="Enter Your Email"
               value={emailOrPhone}
               onChange={e => setEmailOrPhone(e.target.value)}
@@ -34,7 +34,7 @@ export default function RegisterPage() {
             <label className="block text-sm text-theme-secondary mb-1 ml-1">Password</label>
             <input
               type={showPassword ? "text" : "password"}
-              className="w-full bg-transparent border border-theme rounded-lg px-4 py-3 text-theme-primary placeholder-theme-secondary focus:outline-none"
+              className="w-full bg-theme-secondary/30 border border-theme rounded-lg px-4 py-3 text-theme-primary placeholder-theme-secondary focus:outline-none focus:border-[#FDC51B]"
               placeholder="Enter Your Password"
               value={password}
               onChange={e => setPassword(e.target.value)}
@@ -57,7 +57,7 @@ export default function RegisterPage() {
           </div>
           {/* Recaptcha Placeholder */}
           <div className="flex justify-center">
-            <div className="bg-theme-primary rounded-lg px-4 py-3 flex items-center gap-2 w-full max-w-xs">
+            <div className="bg-theme-secondary/30 rounded-lg px-4 py-3 flex items-center gap-2 w-full max-w-xs">
               <input type="checkbox" className="accent-blue-500" />
               <span className="text-theme-secondary text-sm">I'm not a robot</span>
               <div className="ml-20 text-theme-secondary text-md">Recaptcha</div>
@@ -77,7 +77,7 @@ export default function RegisterPage() {
         </form>
         {/* Social Login */}
         <div className="w-full mt-20 space-y-4">
-          <button className="w-full flex items-center justify-center bg-[#232323] rounded-full py-3 text-white font-medium text-base space-x-3">
+          <button className="w-full flex items-center justify-center bg-theme-secondary rounded-full py-3 text-theme-primary font-medium text-base space-x-3">
             {/* <GoogleIcon className="w-6 h-6" /> */}
             <span>
               <svg className="w-6 h-6 inline-block mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M21.805 10.023h-9.765v3.954h5.617c-.242 1.242-1.484 3.648-5.617 3.648-3.375 0-6.133-2.789-6.133-6.25s2.758-6.25 6.133-6.25c1.922 0 3.211.82 3.953 1.523l2.703-2.633c-1.703-1.578-3.891-2.547-6.656-2.547-5.523 0-10 4.477-10 10s4.477 10 10 10c5.742 0 9.547-4.023 9.547-9.711 0-.656-.07-1.156-.156-1.633z"/></svg>
@@ -85,7 +85,7 @@ export default function RegisterPage() {
             <span>Continue With Google</span>
           </button>
           <button 
-            className="w-full flex items-center justify-center bg-[#232323] rounded-full py-3 text-white font-medium text-base space-x-3"
+            className="w-full flex items-center justify-center bg-theme-secondary rounded-full py-3 text-theme-primary font-medium text-base space-x-3"
             onClick={() => navigate("/phone-signup")}
           >
             {/* <PhoneIcon className="w-6 h-6" /> */}
@@ -94,7 +94,7 @@ export default function RegisterPage() {
             </span>
             <span>Continue With Phone Number</span>
           </button>
-          <button className="w-full flex items-center justify-center bg-[#232323] rounded-full py-3 text-white font-medium text-base space-x-3">
+          <button className="w-full flex items-center justify-center bg-theme-secondary rounded-full py-3 text-theme-primary font-medium text-base space-x-3">
             {/* <FacebookIcon className="w-6 h-6" /> */}
             <span>
               <svg className="w-6 h-6 inline-block mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 23.403.597 24 1.326 24H12.82v-9.294H9.692v-3.622h3.127V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.403 24 24 23.403 24 22.674V1.326C24 .597 23.403 0 22.675 0"/></svg>
@@ -104,7 +104,7 @@ export default function RegisterPage() {
         </div>
         {/* Login Link */}
         <div className="mt-8 text-center">
-          <span className="text-gray-400">Already have an account? </span>
+          <span className="text-theme-secondary">Already have an account? </span>
           <button
             className="text-[#FFC61B] font-semibold"
             onClick={() => navigate("/login")}
