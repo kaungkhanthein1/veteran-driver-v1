@@ -5,13 +5,3 @@
     linear-gradient(325deg, #ffc61b 43.64%, #ffe38e 100%)
   );
 }
-
-.service_box {
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.12);
-}
-
-.search_icons {
-  border-radius: 100px;
-  background: rgba(242, 244, 250, 0.08);
-}
