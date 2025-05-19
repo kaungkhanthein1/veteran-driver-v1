@@ -77,7 +77,7 @@ export default function ProfilePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#181818] text-white">
+    <div className="min-h-screen bg-theme-primary text-theme-primary">
       {/* Header */}
       <div className="px-4 pt-4 pb-6">
         <div className="flex justify-between items-center mb-6">
@@ -107,8 +107,8 @@ export default function ProfilePage() {
               <h1 className="text-xl font-semibold">{userProfile.name}</h1>
               <span className="text-pink-500">♀</span>
             </div>
-            <p className="text-gray-400 text-sm">(UID : {userProfile.uid})</p>
-            <div className="flex items-center gap-1 text-gray-400 mt-1">
+            <p className="text-theme-secondary text-sm">(UID : {userProfile.uid})</p>
+            <div className="flex items-center gap-1 text-theme-secondary mt-1">
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
               </svg>
@@ -122,7 +122,7 @@ export default function ProfilePage() {
       {/* Menu Grid */}
       <div className="px-4 grid grid-cols-2 gap-3 mb-4">
         {menuItems.filter(item => item.type === "card").map(item => (
-          <button key={item.id} className="bg-[#232323] rounded-lg p-4 flex flex-col items-center justify-center gap-2">
+          <button key={item.id} className="bg-theme-secondary rounded-lg p-4 flex flex-col items-center justify-center gap-2">
             <img src={item.icon} alt={item.title} className="w-8 h-8" />
             <span className="text-sm">{item.title}</span>
           </button>
@@ -134,7 +134,7 @@ export default function ProfilePage() {
         {menuItems.filter(item => item.type === "list").map(item => (
           <button 
             key={item.id} 
-            className="w-full bg-[#232323] rounded-lg p-4 flex items-center justify-between"
+            className="w-full bg-theme-secondary rounded-lg p-4 flex items-center justify-between"
             onClick={() => {
               if (item.title === "Change Application Theme") {
                 navigate("/theme");
@@ -145,7 +145,7 @@ export default function ProfilePage() {
               <img src={item.icon} alt={item.title} className="w-6 h-6" />
               <span>{item.title}</span>
             </div>
-            <svg className="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <svg className="w-5 h-5 text-theme-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>
@@ -154,7 +154,7 @@ export default function ProfilePage() {
 
       {/* Logout Button */}
       <div className="px-4 py-6">
-        <button className="w-full bg-[#232323] rounded-lg py-4 flex items-center justify-center gap-2">
+        <button className="w-full bg-theme-secondary rounded-lg py-4 flex items-center justify-center gap-2">
           <img src={LogoutIcon} alt="Logout" className="w-5 h-5" />
           <span>Logout</span>
         </button>

@@ -13,35 +13,35 @@ export default function RegisterPage() {
   const isFormFilled = emailOrPhone.trim() !== "" && password.trim() !== "";
 
   return (
-    <div className="min-h-screen flex flex-col justify-between items-center bg-gradient-to-b from-[#281c12] via-black to-black px-4 py-8">
+    <div className="min-h-screen flex flex-col justify-between items-center bg-theme-primary px-4 py-8">
       <div className="w-full max-w-md mx-auto flex flex-col items-center">
         <div className="mt-8 mb-2 text-center">
-          <h1 className="text-3xl font-bold text-white mb-2">Sign Up</h1>
-          <p className="text-gray-300 text-base">Welcome, let's get started on something great</p>
+          <h1 className="text-3xl font-bold text-theme-primary mb-2">Sign Up</h1>
+          <p className="text-theme-secondary text-base">Welcome, let's get started on something great</p>
         </div>
         <form className="w-full mt-8 space-y-6" onSubmit={e => { e.preventDefault(); navigate("/otp-verify"); }}>
           <div>
-            <label className="block text-sm text-gray-400 mb-1 ml-1">Email or Phone Number</label>
+            <label className="block text-sm text-theme-secondary mb-1 ml-1">Email or Phone Number</label>
             <input
               type="text"
-              className="w-full bg-transparent border border-gray-500 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none"
+              className="w-full bg-transparent border border-theme rounded-lg px-4 py-3 text-theme-primary placeholder-theme-secondary focus:outline-none"
               placeholder="Enter Your Email"
               value={emailOrPhone}
               onChange={e => setEmailOrPhone(e.target.value)}
             />
           </div>
           <div className="relative">
-            <label className="block text-sm text-gray-400 mb-1 ml-1">Password</label>
+            <label className="block text-sm text-theme-secondary mb-1 ml-1">Password</label>
             <input
               type={showPassword ? "text" : "password"}
-              className="w-full bg-transparent border border-gray-500 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none"
+              className="w-full bg-transparent border border-theme rounded-lg px-4 py-3 text-theme-primary placeholder-theme-secondary focus:outline-none"
               placeholder="Enter Your Password"
               value={password}
               onChange={e => setPassword(e.target.value)}
             />
             <button
               type="button"
-              className="absolute right-3 top-9 text-gray-400"
+              className="absolute right-3 top-9 text-theme-secondary"
               onClick={() => setShowPassword((v) => !v)}
               tabIndex={-1}
             >
@@ -57,10 +57,10 @@ export default function RegisterPage() {
           </div>
           {/* Recaptcha Placeholder */}
           <div className="flex justify-center">
-            <div className="bg-[#181818] rounded-lg px-4 py-3 flex items-center gap-2 w-full max-w-xs">
+            <div className="bg-theme-primary rounded-lg px-4 py-3 flex items-center gap-2 w-full max-w-xs">
               <input type="checkbox" className="accent-blue-500" />
-              <span className="text-gray-400 text-sm">I'm not a robot</span>
-              <div className="ml-20 text-gray-500 text-md">Recaptcha</div>
+              <span className="text-theme-secondary text-sm">I'm not a robot</span>
+              <div className="ml-20 text-theme-secondary text-md">Recaptcha</div>
             </div>
           </div>
           <button
@@ -68,7 +68,7 @@ export default function RegisterPage() {
             className={`w-full rounded-full py-3 text-lg font-semibold mt-2 transition-colors duration-200 ${
               isFormFilled
                 ? "bg-yellow-gradient text-black"
-                : "bg-[#232323] text-white"
+                : "bg-theme-secondary text-theme-primary"
             }`}
             disabled={!isFormFilled}
           >

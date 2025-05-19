@@ -71,28 +71,27 @@ export default function SocialPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#181818] relative">
+    <div className="min-h-screen flex flex-col bg-theme-primary relative">
       <div className="flex-1 overflow-y-auto pb-16">
-        <div className="sticky top-0 z-10 bg-[#181818]">
+        <div className="sticky top-0 z-10 bg-theme-primary">
           <SocialTabs
             activeTab={activeTab}
             setActiveTab={setActiveTab}
             onUpload={() => navigate('/social/upload')}
           />
-          <div className="h-[1px] bg-[#232323]"></div>
+          <div className="h-[1px] bg-theme-secondary"></div>
         </div>
         <div className="w-full">
           {posts.map(post => (
             <SocialPostCard
               key={post.id}
               post={post}
-              onOpenComments={openCommentModal} // Pass the callback here
+              onOpenComments={openCommentModal}
             />
           ))}
         </div>
       </div>
       <BottomNavBar active="social" />
-      {/* Move modals outside the scrollable area and ensure they're above everything */}
       <div className="relative z-[1000]">
         <CommentModal
           isOpen={!!commentModalPostId}

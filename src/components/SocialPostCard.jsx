@@ -7,7 +7,7 @@ import BeachImg from "../assets/Beach.png";
 import RoomImg from "../assets/Room.png";
 import SampleVideo from "../assets/Sample.mp4";
 
-export default function SocialPostCard({ post, onOpenComments }) { // Add onOpenComments prop
+export default function SocialPostCard({ post, onOpenComments }) {
   const [expanded, setExpanded] = useState(false);
   const [selectedMedia, setSelectedMedia] = useState(null);
   const [showShareModal, setShowShareModal] = useState(false);
@@ -51,21 +51,21 @@ export default function SocialPostCard({ post, onOpenComments }) { // Add onOpen
   // };
 
   return (
-    <div className="bg-[#232323] border-b border-[#181818]">
+    <div className="bg-theme-secondary border-b border-theme">
       {/* User Info Row */}
       <div className="flex items-center px-5 py-4">
         <div className="w-9 h-9 rounded-full bg-blue-500 flex items-center justify-center mr-3">
           <span className="text-base text-white">B</span>
         </div>
         <div className="flex items-center">
-          <span className="font-semibold text-[14px] text-white mr-1.5">{samplePost.user.name}</span>
+          <span className="font-semibold text-[14px] text-theme-primary mr-1.5">{samplePost.user.name}</span>
           {samplePost.user.verified && (
             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#3b82f6">
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
             </svg>
           )}
         </div>
-        <button className="ml-auto bg-[#3A3A3A] text-yellow-400 rounded-full px-3 py-1.5 text-[13px] font-medium flex items-center">
+        <button className="ml-auto bg-theme-secondary text-[#FFC61B] rounded-full px-3 py-1.5 text-[13px] font-medium flex items-center">
           <svg className="w-3.5 h-3.5 mr-1.5" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
           </svg>
@@ -74,11 +74,11 @@ export default function SocialPostCard({ post, onOpenComments }) { // Add onOpen
       </div>
 
       {/* Content */}
-      <div className="px-5 text-[14px] text-white leading-6">
+      <div className="px-5 text-[14px] text-theme-primary leading-6">
         {expanded ? samplePost.content : samplePost.content.slice(0, 100)}
         {samplePost.content.length > 100 && (
           <span
-            className="text-gray-400 cursor-pointer ml-1.5 text-[13px]"
+            className="text-theme-secondary cursor-pointer ml-1.5 text-[13px]"
             onClick={() => setExpanded(!expanded)}
           >
             {expanded ? "...see less" : "...see more"}
@@ -86,7 +86,7 @@ export default function SocialPostCard({ post, onOpenComments }) { // Add onOpen
         )}
         <div className="flex flex-wrap gap-1.5 mt-2.5 mb-4">
           {samplePost.tags?.map((tag, index) => (
-            <span key={index} className="text-[13px] text-white flex items-center">
+            <span key={index} className="text-[13px] text-theme-primary flex items-center">
               {tag.icon && <span className="mr-1.5">{tag.icon}</span>}
               {tag.text}
               {index < samplePost.tags.length - 1 && <span className="mx-1.5">•</span>}
@@ -100,7 +100,7 @@ export default function SocialPostCard({ post, onOpenComments }) { // Add onOpen
         {samplePost.media.map((media, idx) => (
           <div 
             key={idx} 
-            className="aspect-square bg-[#181818] cursor-pointer"
+            className="aspect-square bg-theme-primary cursor-pointer"
             onClick={() => handleMediaClick(media)}
           >
             {typeof media === 'string' ? (
@@ -144,7 +144,7 @@ export default function SocialPostCard({ post, onOpenComments }) { // Add onOpen
       )}
 
       {/* Actions Row */}
-      <div className="flex items-center px-5 py-4 text-gray-400">
+      <div className="flex items-center px-5 py-4 text-theme-secondary">
         <span className="text-[12px]">{samplePost.time}</span>
         <div className="ml-auto flex items-center space-x-7">
           <span className="flex items-center text-[13px]">

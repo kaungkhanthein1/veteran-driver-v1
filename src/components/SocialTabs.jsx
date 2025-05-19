@@ -7,15 +7,15 @@ export default function SocialTabs({ activeTab, setActiveTab, onUpload }) {
   ];
 
   return (
-    <div className="flex items-center justify-between px-4 py-2 bg-[#232323]">
+    <div className="flex items-center justify-between px-4 py-2 bg-theme-secondary">
       <div className="flex space-x-4">
         {tabs.map(tab => (
           <button
             key={tab.key}
             className={`px-3 py-1 text-sm font-semibold ${
               activeTab === tab.key 
-                ? "text-white border-b-2 border-yellow-400" 
-                : "text-gray-400"
+                ? "text-theme-primary border-b-2 border-[#FFC61B]" 
+                : "text-theme-secondary"
             }`}
             onClick={() => setActiveTab(tab.key)}
           >
@@ -24,7 +24,7 @@ export default function SocialTabs({ activeTab, setActiveTab, onUpload }) {
         ))}
       </div>
       <button
-        className="flex items-center text-white"
+        className="flex items-center text-theme-primary"
         onClick={onUpload}
       >
         <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">

@@ -25,22 +25,22 @@ const ServiceCard = () => {
   ];
 
   return (
-    <div className=" p-[14px] flex flex-col gap-[12px]">
+    <div className="p-[14px] flex flex-col gap-[12px]">
       {exploreItems.map((item) => (
-        <div className=" bg-[#201F1D] rounded-lg overflow-hidden">
+        <div className="bg-theme-secondary rounded-lg overflow-hidden">
           <div className="p-4 space-y-4">
             <div className="grid grid-cols-3 gap-2 relative">
               {[1, 2, 3].map((_, index) => (
                 <div
                   key={index}
-                  className={`aspect-square bg-[#181818] rounded-lg ${
+                  className={`aspect-square bg-theme-primary rounded-lg ${
                     index === 2 ? "relative" : ""
                   }`}
                 >
                   {index === 2 && (
-                    <div className="absolute inset-0 bg-black bg-opacity-50 rounded-lg flex items-center justify-center">
+                    <div className="absolute inset-0 bg-theme-primary bg-opacity-50 rounded-lg flex items-center justify-center">
                       <svg
-                        className="w-8 h-8 text-white"
+                        className="w-8 h-8 text-theme-primary"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -64,7 +64,7 @@ const ServiceCard = () => {
               ))}
               <button className="absolute -top-1 right-0">
                 <svg
-                  className="w-6 h-6 text-gray-400"
+                  className="w-6 h-6 text-theme-secondary"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -81,8 +81,8 @@ const ServiceCard = () => {
 
             <div>
               <div className="flex items-center justify-between">
-                <h3 className="text-white font-semibold">{item.name}</h3>
-                <span className="text-gray-400 text-sm">{item.distance}</span>
+                <h3 className="text-theme-primary font-semibold">{item.name}</h3>
+                <span className="text-theme-secondary text-sm">{item.distance}</span>
               </div>
               <div className="flex items-center space-x-1 mt-1">
                 <div className="flex items-center">
@@ -97,12 +97,12 @@ const ServiceCard = () => {
               </div>
             </div>
 
-            <div className="flex items-center space-x-2 text-sm text-gray-400">
+            <div className="flex items-center space-x-2 text-sm text-theme-secondary">
               {item.services.map((service, index) => (
                 <React.Fragment key={index}>
                   <span>{service}</span>
                   {index < item.services.length - 1 && (
-                    <span className="w-1 h-1 bg-gray-400 rounded-full"></span>
+                    <span className="w-1 h-1 bg-theme-secondary rounded-full"></span>
                   )}
                 </React.Fragment>
               ))}

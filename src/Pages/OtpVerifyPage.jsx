@@ -36,12 +36,11 @@ export default function OtpVerifyPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-[#281c12] via-black to-black px-4 py-8">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-theme-primary px-4 py-8">
       <div className="w-full max-w-md mx-auto flex flex-col items-center">
-        {/* Header */}
         <div className="w-full flex items-center mb-8">
           <button
-            className="text-white text-2xl mr-4"
+            className="text-theme-primary text-2xl mr-4"
             onClick={() => navigate(-1)}
             aria-label="Back"
           >
@@ -50,16 +49,14 @@ export default function OtpVerifyPage() {
               <path d="M15 19l-7-7 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </button>
-          <h1 className="text-xl font-bold text-white flex-1 text-center">Verify OTP</h1>
-          <div className="w-8" /> {/* Spacer for symmetry */}
+          <h1 className="text-xl font-bold text-theme-primary flex-1 text-center">Verify OTP</h1>
+          <div className="w-8" />
         </div>
-        {/* Info Text */}
         <div className="text-center mb-8">
-          <p className="text-gray-300 text-base">
-            Verification code sent to <span className="font-semibold text-white">DevelopX10@gmail.com</span> / <span className="font-semibold text-white">+868880818</span>. Please check your messages and be sure to check your spam folder
+          <p className="text-theme-secondary text-base">
+            Verification code sent to <span className="font-semibold text-theme-primary">DevelopX10@gmail.com</span> / <span className="font-semibold text-theme-primary">+868880818</span>. Please check your messages and be sure to check your spam folder
           </p>
         </div>
-        {/* OTP Inputs */}
         <div className="flex justify-center space-x-3 mb-8">
           {otp.map((char, idx) => (
             <input
@@ -68,7 +65,7 @@ export default function OtpVerifyPage() {
               type="text"
               inputMode="numeric"
               maxLength={1}
-              className="w-12 h-12 rounded-lg border border-gray-600 bg-[#181818] flex items-center justify-center text-2xl text-white text-center outline-none"
+              className="w-12 h-12 rounded-lg border border-theme bg-theme-primary flex items-center justify-center text-2xl text-theme-primary text-center outline-none"
               value={char}
               onChange={e => handleChange(e, idx)}
               onKeyDown={e => handleKeyDown(e, idx)}
@@ -76,27 +73,22 @@ export default function OtpVerifyPage() {
             />
           ))}
         </div>
-        {/* Confirm Button */}
         <button
           type="button"
-          onClick={() => {
-            // TODO: Add login logic and success condition here
-            navigate("/location-access");
-          }}
+          onClick={() => navigate("/location-access")}
           className={`w-full rounded-full py-3 text-lg font-semibold mb-4 shadow-lg transition-colors duration-200 ${
             isOtpFilled
               ? "bg-yellow-gradient text-black"
-              : "bg-[#232323] text-white"
+              : "bg-theme-secondary text-theme-primary"
           }`}
           disabled={!isOtpFilled}
         >
           Confirm
         </button>
-        {/* Resend OTP */}
         <div className="text-center">
-          <span className="text-gray-400">
-            Didn’t get the verification code?{" "}
-            <span className="text-yellow-400 font-semibold cursor-pointer">
+          <span className="text-theme-secondary">
+            Didn't get the verification code?{" "}
+            <span className="text-[#FFC61B] font-semibold cursor-pointer">
               {timer > 0 ? `${timer}s` : "Resend OTP"}
             </span>
           </span>

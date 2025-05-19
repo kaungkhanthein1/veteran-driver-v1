@@ -24,19 +24,19 @@ export default function ChooseLocationPage() {
   );
 
   return (
-    <div className="min-h-screen flex flex-col bg-black px-4 py-8">
+    <div className="min-h-screen flex flex-col bg-theme-primary px-4 py-8">
       <div className="flex items-center mb-6">
-        <button onClick={() => navigate(-1)} className="text-white mr-2">
+        <button onClick={() => navigate(-1)} className="text-theme-primary mr-2">
           {/* Back arrow */}
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
-        <h2 className="text-xl font-bold text-white">Select Region</h2>
+        <h2 className="text-xl font-bold text-theme-primary">Select Region</h2>
       </div>
       <input
         type="text"
-        className="w-full bg-[#232323] border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-400 mb-6"
+        className="w-full bg-theme-secondary border border-theme rounded-lg px-4 py-3 text-theme-primary placeholder-theme-secondary mb-6"
         placeholder="Search location..."
         value={search}
         onChange={e => setSearch(e.target.value)}
@@ -46,12 +46,12 @@ export default function ChooseLocationPage() {
           <button
             key={region.name}
             className={`flex flex-col items-center justify-center rounded-lg p-4 border-2 ${
-              selected === region.name ? "border-[#FFD75E] bg-[#232323]" : "border-transparent bg-[#181818]"
+              selected === region.name ? "border-[#FFD75E] bg-theme-secondary" : "border-transparent bg-theme-primary"
             }`}
             onClick={() => setSelected(region.name)}
           >
             <span className="text-3xl mb-2">{region.flag}</span>
-            <span className="text-white text-sm">{region.name}</span>
+            <span className="text-theme-primary text-sm">{region.name}</span>
           </button>
         ))}
       </div>

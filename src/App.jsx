@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "./context/ThemeContext";
 import RegisterPage from "./Pages/RegisterPage";
 import LoginPage from "./Pages/LoginPage";
 import OtpVerifyPage from "./Pages/OtpVerifyPage";
@@ -19,27 +20,29 @@ import ChangeThemePage from "./Pages/ChangeThemePage";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/otp-verify" element={<OtpVerifyPage />} />
-        <Route path="/location-access" element={<LocationAccessPage />} />
-        <Route path="/choose-location" element={<ChooseLocationPage />} />
-        {/* Main tab routes */}
-        <Route path="/home" element={<Home />} />
-        <Route path="/explore" element={<ExplorePage />} />
-        <Route path="/add-location" element={<AddLocationPage />} />
-        <Route path="/social" element={<SocialPage />} />
-        <Route path="/social/upload" element={<SocialUpload />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/phone-signup" element={<PhoneSignUpPage />} />
-        <Route path="/forgot-password" element={<ForgetPasswordPage />} />
-        <Route path="/map" element={<MapWithFilterUI />} />
-        <Route path="/social/upload" element={<SocialUpload />} />
-        <Route path="/theme" element={<ChangeThemePage />} />
-      </Routes>
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/otp-verify" element={<OtpVerifyPage />} />
+          <Route path="/location-access" element={<LocationAccessPage />} />
+          <Route path="/choose-location" element={<ChooseLocationPage />} />
+          {/* Main tab routes */}
+          <Route path="/home" element={<Home />} />
+          <Route path="/explore" element={<ExplorePage />} />
+          <Route path="/add-location" element={<AddLocationPage />} />
+          <Route path="/social" element={<SocialPage />} />
+          <Route path="/social/upload" element={<SocialUpload />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/phone-signup" element={<PhoneSignUpPage />} />
+          <Route path="/forgot-password" element={<ForgetPasswordPage />} />
+          <Route path="/map" element={<MapWithFilterUI />} />
+          <Route path="/social/upload" element={<SocialUpload />} />
+          <Route path="/theme" element={<ChangeThemePage />} />
+        </Routes>
+      </Router>
+    </ThemeProvider>
   );
 }
 

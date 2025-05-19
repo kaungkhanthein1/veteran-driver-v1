@@ -7,11 +7,10 @@ import { useNavigate } from "react-router-dom";
 const TopNav = () => {
   const navigate = useNavigate()
   return (
-    <div className=" px-[16px] py-[20px] flex justify-between w-full items-center">
-      {/* location */}
-      <div className=" flex justify-center items-center">
+    <div className="px-[16px] py-[20px] flex justify-between w-full items-center">
+      <div className="flex justify-center items-center">
         <img src={thai} alt="" />
-        <span className=" text-white text-[16px] font-[500] leading-[20px] pl-[8px] pr-[6px]">
+        <span className="text-theme-primary text-[16px] font-[500] leading-[20px] pl-[8px] pr-[6px]">
           Thailand
         </span>
         <svg
@@ -23,7 +22,8 @@ const TopNav = () => {
         >
           <path
             d="M8.825 0.912109L5 4.72878L1.175 0.912109L0 2.08711L5 7.08711L10 2.08711L8.825 0.912109Z"
-            fill="white"
+            fill="currentColor"
+            className="text-theme-primary"
           />
         </svg>
       </div>

@@ -10,11 +10,11 @@ export default function PhoneSignUpPage() {
   const isFormFilled = phoneNumber.trim() !== "+66" && password.trim() !== "";
 
   return (
-    <div className="min-h-screen flex flex-col justify-between items-center bg-gradient-to-b from-[#281c12] via-black to-black px-4 py-8">
+    <div className="min-h-screen flex flex-col justify-between items-center bg-theme-primary px-4 py-8">
       <div className="w-full max-w-md mx-auto flex flex-col items-center">
         <div className="w-full flex items-center mb-8">
           <button
-            className="text-white text-2xl mr-4"
+            className="text-theme-primary text-2xl mr-4"
             onClick={() => navigate(-1)}
             aria-label="Back"
           >
@@ -22,27 +22,27 @@ export default function PhoneSignUpPage() {
               <path d="M15 19l-7-7 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </button>
-          <h1 className="text-xl font-bold text-white flex-1 text-center">Sign Up With Phone Number</h1>
+          <h1 className="text-xl font-bold text-theme-primary flex-1 text-center">Sign Up With Phone Number</h1>
           <div className="w-8" />
         </div>
-        <p className="text-gray-300 text-base text-center mb-8">Complete registration with your phone number</p>
+        <p className="text-theme-secondary text-base text-center mb-8">Complete registration with your phone number</p>
         
         <form className="w-full mt-8 space-y-6" onSubmit={e => { e.preventDefault(); navigate("/otp-verify"); }}>
           <div>
-            <label className="block text-sm text-gray-400 mb-1 ml-1">Phone Number</label>
+            <label className="block text-sm text-theme-secondary mb-1 ml-1">Phone Number</label>
             <input
               type="text"
               inputMode="numeric"
-              className="w-full bg-transparent border border-gray-500 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none"
+              className="w-full bg-transparent border border-theme rounded-lg px-4 py-3 text-theme-primary placeholder-theme-secondary focus:outline-none"
               value={phoneNumber}
               onChange={e => setPhoneNumber(e.target.value)}
             />
           </div>
           <div className="relative">
-            <label className="block text-sm text-gray-400 mb-1 ml-1">Password</label>
+            <label className="block text-sm text-theme-secondary mb-1 ml-1">Password</label>
             <input
               type={showPassword ? "text" : "password"}
-              className="w-full bg-transparent border border-gray-500 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none"
+              className="w-full bg-transparent border border-theme rounded-lg px-4 py-3 text-theme-primary placeholder-theme-secondary focus:outline-none"
               placeholder="Enter Your Password"
               value={password}
               onChange={e => setPassword(e.target.value)}
@@ -63,10 +63,10 @@ export default function PhoneSignUpPage() {
             </button>
           </div>
           <div className="flex justify-center">
-            <div className="bg-[#181818] rounded-lg px-4 py-3 flex items-center gap-2 w-full max-w-xs">
+            <div className="bg-theme-primary rounded-lg px-4 py-3 flex items-center gap-2 w-full max-w-xs">
               <input type="checkbox" className="accent-blue-500" />
-              <span className="text-gray-400 text-sm">I'm not a robot</span>
-              <div className="ml-20 text-gray-500 text-md">Recaptcha</div>
+              <span className="text-theme-secondary text-sm">I'm not a robot</span>
+              <div className="ml-20 text-theme-secondary text-md">Recaptcha</div>
             </div>
           </div>
           <button
@@ -74,7 +74,7 @@ export default function PhoneSignUpPage() {
             className={`w-full rounded-full py-3 text-lg font-semibold mt-2 transition-colors duration-200 ${
               isFormFilled
                 ? "bg-yellow-gradient text-black"
-                : "bg-[#232323] text-white"
+                : "bg-theme-secondary text-theme-primary"
             }`}
             disabled={!isFormFilled}
           >

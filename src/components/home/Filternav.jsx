@@ -17,14 +17,14 @@ const Filternav = ({ activeTab, setActiveTab }) => {
             key={tab.key}
             className={`px-3 py-1 font-semibold justify-center items-center flex flex-col ${
               activeTab === tab.key
-                ? "text-white text-[18px]"
-                : "text-gray-400 text-[14px]"
+                ? "text-theme-primary text-[18px]"
+                : "text-theme-secondary text-[14px]"
             }`}
             onClick={() => setActiveTab(tab.key)}
           >
             {tab.label}
             {activeTab === tab.key && (
-              <span className=" w-[30px] h-[4px] filter_nav"></span>
+              <span className="w-[30px] h-[4px] filter_nav"></span>
             )}
           </button>
         ))}

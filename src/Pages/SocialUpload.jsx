@@ -21,9 +21,9 @@ const SocialUpload = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-theme-primary text-theme-primary">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-[#232323]">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-theme">
         <button onClick={() => navigate(-1)}>
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -34,7 +34,7 @@ const SocialUpload = () => {
           className={`px-4 py-1 rounded-full ${
             content.trim() || selectedImages.length > 0
               ? 'bg-[#FFC61B] text-black'
-              : 'bg-[#232323] text-gray-400'
+              : 'bg-theme-secondary text-theme-secondary'
           }`}
           disabled={!content.trim() && selectedImages.length === 0}
         >
@@ -48,7 +48,7 @@ const SocialUpload = () => {
           placeholder="Write Something ..."
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          className="w-full bg-transparent resize-none outline-none min-h-[100px] text-white placeholder-gray-500"
+          className="w-full bg-transparent resize-none outline-none min-h-[100px] text-theme-primary placeholder-theme-secondary"
         />
 
         {/* Image Grid */}
@@ -62,7 +62,7 @@ const SocialUpload = () => {
               />
               <button
                 onClick={() => handleRemoveImage(index)}
-                className="absolute top-1 right-1 bg-black bg-opacity-50 rounded-full p-1"
+                className="absolute top-1 right-1 bg-theme-primary bg-opacity-50 rounded-full p-1"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -71,7 +71,7 @@ const SocialUpload = () => {
             </div>
           ))}
           {selectedImages.length < 6 && (
-            <label className="aspect-square bg-[#232323] rounded-lg flex items-center justify-center cursor-pointer">
+            <label className="aspect-square bg-theme-secondary rounded-lg flex items-center justify-center cursor-pointer">
               <input
                 type="file"
                 accept="image/*"
@@ -79,7 +79,7 @@ const SocialUpload = () => {
                 onChange={handleImageSelect}
                 className="hidden"
               />
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-theme-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
               </svg>
             </label>
@@ -90,7 +90,7 @@ const SocialUpload = () => {
       {/* Location Button */}
       <div className="absolute bottom-0 left-0 right-0 p-4">
         <LocationPicker
-          buttonClassName="w-full bg-[#232323] text-gray-400 py-3 rounded-full"
+          buttonClassName="w-full bg-theme-secondary text-theme-secondary py-3 rounded-full"
           returnPath="/social/upload"
         />
       </div>

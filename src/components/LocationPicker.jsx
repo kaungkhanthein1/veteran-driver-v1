@@ -33,7 +33,7 @@ const LocationPicker = ({
     <button 
       onClick={handleLocationClick}
       disabled={loading}
-      className={`flex items-center justify-center gap-2 ${
+      className={`flex items-center justify-center gap-2 text-theme-primary ${
         loading ? 'opacity-50' : ''
       } ${buttonClassName}`}
     >

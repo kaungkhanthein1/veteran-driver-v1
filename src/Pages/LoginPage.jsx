@@ -1,9 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// Replace these with your actual SVG icon imports if available
-// import GoogleIcon from "../icons/Google.svg?react";
-// import PhoneIcon from "../icons/Phone.svg?react";
-// import FacebookIcon from "../icons/Facebook.svg?react";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -14,35 +10,35 @@ export default function LoginPage() {
   const isFormFilled = emailOrPhone.trim() !== "" && password.trim() !== "";
 
   return (
-    <div className="min-h-screen flex flex-col justify-between items-center bg-gradient-to-b from-[#281c12] via-black to-black px-4 py-8">
+    <div className="min-h-screen flex flex-col justify-between items-center bg-theme-primary px-4 py-8">
       <div className="w-full max-w-md mx-auto flex flex-col items-center">
         <div className="mt-8 mb-2 text-center">
-          <h1 className="text-3xl font-bold text-white mb-2">Log In</h1>
-          <p className="text-gray-300 text-base">Welcome, let's get started on something great</p>
+          <h1 className="text-3xl font-bold text-theme-primary mb-2">Log In</h1>
+          <p className="text-theme-secondary text-base">Welcome, let's get started on something great</p>
         </div>
         <form className="w-full mt-8 space-y-6">
           <div>
-            <label className="block text-sm text-gray-400 mb-1 ml-1">Email or Phone Number</label>
+            <label className="block text-sm text-theme-secondary mb-1 ml-1">Email or Phone Number</label>
             <input
               type="text"
-              className="w-full bg-transparent border border-gray-500 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none"
+              className="w-full bg-transparent border border-theme rounded-lg px-4 py-3 text-theme-primary placeholder-theme-secondary focus:outline-none"
               placeholder="Enter Your Email"
               value={emailOrPhone}
               onChange={e => setEmailOrPhone(e.target.value)}
             />
           </div>
           <div className="relative">
-            <label className="block text-sm text-gray-400 mb-1 ml-1">Password</label>
+            <label className="block text-sm text-theme-secondary mb-1 ml-1">Password</label>
             <input
               type={showPassword ? "text" : "password"}
-              className="w-full bg-transparent border border-gray-500 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none"
+              className="w-full bg-transparent border border-theme rounded-lg px-4 py-3 text-theme-primary placeholder-theme-secondary focus:outline-none"
               placeholder="Enter Your Password"
               value={password}
               onChange={e => setPassword(e.target.value)}
             />
             <button
               type="button"
-              className="absolute right-3 top-9 text-gray-400"
+              className="absolute right-3 top-9 text-theme-secondary"
               onClick={() => setShowPassword((v) => !v)}
               tabIndex={-1}
             >
@@ -58,22 +54,19 @@ export default function LoginPage() {
           </div>
           {/* Recaptcha Placeholder */}
           <div className="flex justify-center">
-            <div className="bg-[#181818] rounded-lg px-4 py-3 flex items-center gap-2 w-full max-w-xs">
+            <div className="bg-theme-primary rounded-lg px-4 py-3 flex items-center gap-2 w-full max-w-xs">
               <input type="checkbox" className="accent-blue-500" />
-              <span className="text-gray-400 text-sm">I'm not a robot</span>
-              <div className="ml-20 text-gray-500 text-md">Recaptcha</div>
+              <span className="text-theme-secondary text-sm">I'm not a robot</span>
+              <div className="ml-20 text-theme-secondary text-md">Recaptcha</div>
             </div>
           </div>
           <button
             type="button"
-            onClick={() => {
-              // TODO: Add login logic and success condition here
-              navigate("/location-access");
-            }}
+            onClick={() => navigate("/location-access")}
             className={`w-full rounded-full py-3 text-lg font-semibold mt-2 transition-colors duration-200 ${
               isFormFilled
                 ? "bg-yellow-gradient text-black"
-                : "bg-[#232323] text-white"
+                : "bg-theme-secondary text-theme-primary"
             }`}
             disabled={!isFormFilled}
           >
@@ -82,15 +75,14 @@ export default function LoginPage() {
         </form>
         <div className="w-full flex justify-center mt-4 mb-4">
           <button 
-            className="text-white"
+            className="text-theme-primary"
             onClick={() => navigate("/forgot-password")}
           >
             Forgot Password?
           </button>
         </div>
-        {/* Social Login */}
         <div className="w-full mt-2 space-y-4">
-          <button className="w-full flex items-center justify-center bg-[#232323] rounded-full py-3 text-white font-medium text-base space-x-3">
+          <button className="w-full flex items-center justify-center bg-theme-secondary rounded-full py-3 text-theme-primary font-medium text-base space-x-3">
             {/* <GoogleIcon className="w-6 h-6" /> */}
             <span>
               <svg className="w-6 h-6 inline-block mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M21.805 10.023h-9.765v3.954h5.617c-.242 1.242-1.484 3.648-5.617 3.648-3.375 0-6.133-2.789-6.133-6.25s2.758-6.25 6.133-6.25c1.922 0 3.211.82 3.953 1.523l2.703-2.633c-1.703-1.578-3.891-2.547-6.656-2.547-5.523 0-10 4.477-10 10s4.477 10 10 10c5.742 0 9.547-4.023 9.547-9.711 0-.656-.07-1.156-.156-1.633z"/></svg>
@@ -114,7 +106,7 @@ export default function LoginPage() {
         </div>
         {/* Register Link */}
         <div className="mt-8 text-center">
-          <span className="text-gray-400">Don&apos;t you have an account? </span>
+          <span className="text-theme-secondary">Don&apos;t you have an account? </span>
           <button
             className="text-[#FFC61B] font-semibold"
             onClick={() => navigate("/")}

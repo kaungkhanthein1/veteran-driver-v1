@@ -21,12 +21,12 @@ const ShareModal = ({ isOpen, onClose }) => {
 
   return (
     <>
-      <div className="fixed inset-0 bg-black bg-opacity-50 z-[1000]" onClick={onClose} />
-      <div className="fixed inset-x-0 bottom-0 z-[1001] bg-[#232323] rounded-t-2xl">
+      <div className="fixed inset-0 bg-theme-primary bg-opacity-50 z-[1000]" onClick={onClose} />
+      <div className="fixed inset-x-0 bottom-0 z-[1001] bg-theme-secondary rounded-t-2xl">
         <div className="p-4">
           <div className="flex justify-between items-center mb-6">
-            <h3 className="text-white text-lg font-medium">Share to</h3>
-            <button onClick={onClose} className="text-gray-400">
+            <h3 className="text-theme-primary text-lg font-medium">Share to</h3>
+            <button onClick={onClose} className="text-theme-secondary">
               <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
@@ -45,19 +45,19 @@ const ShareModal = ({ isOpen, onClose }) => {
                 <div className={`w-14 h-14 rounded-full ${option.color} flex items-center justify-center mb-2`}>
                   <img src={option.icon} alt={option.name} className="w-8 h-8" />
                 </div>
-                <span className="text-white text-xs">{option.name}</span>
+                <span className="text-theme-primary text-xs">{option.name}</span>
               </button>
             ))}
           </div>
 
-          <div className="bg-[#181818] rounded-xl p-4 mb-4">
+          <div className="bg-theme-primary rounded-xl p-4 mb-4">
             <div className="flex items-center justify-between">
-              <span className="text-gray-400 text-sm truncate flex-1">
+              <span className="text-theme-secondary text-sm truncate flex-1">
                 {window.location.href}
               </span>
               <button
                 onClick={handleCopyLink}
-                className="ml-4 bg-[#3A3A3A] text-white rounded-full px-4 py-1.5 text-sm"
+                className="ml-4 bg-theme-secondary text-theme-primary rounded-full px-4 py-1.5 text-sm"
               >
                 Copy
               </button>

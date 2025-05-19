@@ -1,12 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '../context/ThemeContext';
 
 const ChangeThemePage = () => {
-  const [selectedTheme, setSelectedTheme] = React.useState('white');
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-[#181818] text-white">
+    <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)]">
       {/* Header */}
       <div className="flex items-center px-4 pt-4 pb-6">
         <button 
@@ -31,16 +32,16 @@ const ChangeThemePage = () => {
         <div className="space-y-3">
           {/* White Theme */}
           <button 
-            className={`w-full bg-[#232323] rounded-lg p-4 flex items-center justify-between ${
-              selectedTheme === 'white' ? 'border border-[#FDC51B]' : ''
+            className={`w-full bg-[var(--bg-secondary)] rounded-lg p-4 flex items-center justify-between ${
+              theme === 'white' ? 'border border-[#FDC51B]' : ''
             }`}
-            onClick={() => setSelectedTheme('white')}
+            onClick={() => toggleTheme('white')}
           >
             <div>
               <h3 className="text-left font-medium mb-1">White Theme</h3>
               <p className="text-gray-400 text-sm text-left">A bright and clean look that's easy to read in daylight</p>
             </div>
-            {selectedTheme === 'white' && (
+            {theme === 'white' && (
               <svg className="w-6 h-6 text-[#FDC51B]" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
@@ -49,16 +50,16 @@ const ChangeThemePage = () => {
 
           {/* Dark Theme */}
           <button 
-            className={`w-full bg-[#232323] rounded-lg p-4 flex items-center justify-between ${
-              selectedTheme === 'dark' ? 'border border-[#FDC51B]' : ''
+            className={`w-full bg-[var(--bg-secondary)] rounded-lg p-4 flex items-center justify-between ${
+              theme === 'dark' ? 'border border-[#FDC51B]' : ''
             }`}
-            onClick={() => setSelectedTheme('dark')}
+            onClick={() => toggleTheme('dark')}
           >
             <div>
               <h3 className="text-left font-medium mb-1">Dark Theme</h3>
               <p className="text-gray-400 text-sm text-left">A sleek, dark interface that's easy on the eyes</p>
             </div>
-            {selectedTheme === 'dark' && (
+            {theme === 'dark' && (
               <svg className="w-6 h-6 text-[#FDC51B]" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
@@ -67,16 +68,16 @@ const ChangeThemePage = () => {
 
           {/* System Theme */}
           <button 
-            className={`w-full bg-[#232323] rounded-lg p-4 flex items-center justify-between ${
-              selectedTheme === 'system' ? 'border border-[#FDC51B]' : ''
+            className={`w-full bg-[var(--bg-secondary)] rounded-lg p-4 flex items-center justify-between ${
+              theme === 'system' ? 'border border-[#FDC51B]' : ''
             }`}
-            onClick={() => setSelectedTheme('system')}
+            onClick={() => toggleTheme('system')}
           >
             <div>
               <h3 className="text-left font-medium mb-1">Default (System)</h3>
               <p className="text-gray-400 text-sm text-left">We will adjust your theme based on your device's System Setting.</p>
             </div>
-            {selectedTheme === 'system' && (
+            {theme === 'system' && (
               <svg className="w-6 h-6 text-[#FDC51B]" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>

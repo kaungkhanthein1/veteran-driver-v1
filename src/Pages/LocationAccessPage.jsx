@@ -18,13 +18,13 @@ export default function LocationAccessPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-black px-4">
+    <div className="min-h-screen flex flex-col justify-center items-center bg-theme-primary px-4">
       <div className="flex flex-col items-center max-w-[320px] w-full">
-        <div className="bg-[#281C12] rounded-full p-8 mb-12">
+        <div className="bg-theme-secondary rounded-full p-8 mb-12">
           <Place className="w-16 h-16 text-[#FFC61B]" />
         </div>
-        <h2 className="text-[28px] font-bold text-white mb-3 text-center">What is Your Location?</h2>
-        <p className="text-gray-400 text-center mb-12 text-base">
+        <h2 className="text-[28px] font-bold text-theme-primary mb-3 text-center">What is Your Location?</h2>
+        <p className="text-theme-secondary text-center mb-12 text-base">
           We need to know your location to suggest you near by services.
         </p>
         <button

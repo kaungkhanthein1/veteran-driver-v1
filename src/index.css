@@ -4,13 +4,38 @@
 @tailwind components;
 @tailwind utilities;
 
+:root[data-theme="dark"] {
+  --bg-gradient: linear-gradient(to bottom, #281c12, black, black);
+  --bg-primary: #181818;
+  --bg-secondary: #232323;
+  --text-primary: #ffffff;
+  --text-secondary: #999999;
+  --border-color: #2C2C2C;
+  --card-bg: #232323;
+  --modal-bg: #232323;
+  --filter-box-bg: #161614;
+}
+
+:root[data-theme="white"] {
+  --bg-gradient: linear-gradient(to bottom, #ffffff, #f5f5f5);
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --text-primary: #000000;
+  --text-secondary: #666666;
+  --border-color: #e5e5e5;
+  --card-bg: #f5f5f5;
+  --modal-bg: #ffffff;
+  --filter-box-bg: #f5f5f5;
+}
+
 html, body {
-  background: linear-gradient(to bottom, #281c12, black, black) fixed;
+  background: var(--bg-gradient) fixed;
   margin: 0;
   padding: 0;
   min-height: 100vh;
   height: 100%;
   overflow: hidden;
+  color: var(--text-primary);
 }
 
 #root {
@@ -25,8 +50,41 @@ html, body {
 }
 
 ::-webkit-scrollbar {
-  width: 0px; /* for vertical scroll */
-  height: 0px; /* for horizontal scroll */
+  width: 0px;
+  height: 0px;
+}
+
+/* Theme-aware utility classes */
+.bg-theme-primary {
+  background-color: var(--bg-primary);
+}
+
+.bg-theme-secondary {
+  background-color: var(--bg-secondary);
+}
+
+.text-theme-primary {
+  color: var(--text-primary);
+}
+
+.text-theme-secondary {
+  color: var(--text-secondary);
+}
+
+.border-theme {
+  border-color: var(--border-color);
+}
+
+.card-bg {
+  background-color: var(--card-bg);
+}
+
+.modal-bg {
+  background-color: var(--modal-bg);
+}
+
+.filter-box-bg {
+  background-color: var(--filter-box-bg);
 }
 
 

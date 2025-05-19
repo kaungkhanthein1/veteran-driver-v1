@@ -26,16 +26,16 @@ const Near = () => {
   return (
     <div className="px-4 py-[20px]">
       <div className="flex items-center justify-between mb-3">
-        <h2 className="text-white text-lg font-semibold">Nearest Places</h2>
+        <h2 className="text-theme-primary text-lg font-semibold">Nearest Places</h2>
         <button className="text-[#FFC61B] text-sm">View All</button>
       </div>
       <div className="flex space-x-3 overflow-x-auto pb-2">
         {[1, 2].map((num) => (
           <div
             key={num}
-            className="relative min-w-[300px] h-[200px] bg-[#232323] rounded-lg overflow-hidden"
+            className="relative min-w-[300px] h-[200px] bg-theme-secondary rounded-lg overflow-hidden"
           >
-            <div className="absolute hidden top-0 left-0 w-12 h-12 bg-black bg-opacity-50 flex items-center justify-center rounded-br-lg">
+            <div className="absolute hidden top-0 left-0 w-12 h-12 bg-theme-primary bg-opacity-50 flex items-center justify-center rounded-br-lg">
               <span
                 className="text-transparent text-[32px] font-bold tracking-[1.28px]"
                 style={{
@@ -53,7 +53,7 @@ const Near = () => {
               </span>
             </div>
             <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent">
-              <div className="text-white font-semibold text-lg">
+              <div className="text-theme-primary font-semibold text-lg">
                 {exploreItems[num - 1].name}
               </div>
               <div className="text-[#FFC61B] font-medium">

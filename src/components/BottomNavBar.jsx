@@ -36,7 +36,7 @@ export default function BottomNavBar({ active }) {
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-[#232323] border-t z-[999] border-[#2C2C2C]">
+    <div className="fixed bottom-0 left-0 right-0 bg-theme-secondary border-t z-[999] border-theme">
       <div className="flex justify-around items-center px-4 py-2">
         {tabs.map(tab => (
           <button
@@ -51,12 +51,12 @@ export default function BottomNavBar({ active }) {
                 className={`w-[22px] h-[22px] object-contain ${
                   active === tab.key 
                     ? "[filter:brightness(0)_saturate(100%)_invert(89%)_sepia(61%)_saturate(1415%)_hue-rotate(319deg)_brightness(103%)_contrast(101%)]" 
-                    : "text-gray-400"
+                    : "text-theme-secondary"
                 }`}
                 style={{ display: 'block' }}
               />
             </div>
-            <span className="text-xs mt-1 text-gray-400">
+            <span className="text-xs mt-1 text-theme-secondary">
               {tab.label}
             </span>
           </button>
