@@ -60,7 +60,7 @@ const Topic = () => {
   return (
     <div className="w-full px-[14px] flex gap-[10px] overflow-x-auto">
       {posts.map((post) => (
-        <div className="bg-white min-w-[300px] border-b border-gray-100 shadow-sm">
+        <div className="bg-theme-secondary min-w-[300px] border-b border-theme shadow-sm">
           {/* User Info Row */}
           <div className="flex items-center px-5 py-4">
             {post.user.avatar ? (
@@ -70,14 +70,14 @@ const Topic = () => {
                 className="w-[20px] h-[20px] rounded-full mr-3"
               />
             ) : (
-              <div className="w-[20px] h-[20px] rounded-full bg-gray-200 flex items-center justify-center mr-3">
-                <span className="text-[9px] text-gray-600">
+              <div className="w-[20px] h-[20px] rounded-full bg-theme-primary flex items-center justify-center mr-3">
+                <span className="text-[9px] text-theme-primary">
                   {post.user.name[0]}
                 </span>
               </div>
             )}
             <div className="flex items-center">
-              <span className="font-semibold text-[9px] text-gray-800 mr-1.5">
+              <span className="font-semibold text-[9px] text-theme-primary mr-1.5">
                 {post.user.name}
               </span>
               {post.user.verified && (
@@ -99,7 +99,7 @@ const Topic = () => {
                 </svg>
               )}
             </div>
-            <button className="ml-auto bg-gray-100 text-[#FFC61B] rounded-full px-3 py-1.5 text-[7px] font-medium flex items-center">
+            <button className="ml-auto bg-theme-primary text-[#FFC61B] rounded-full px-3 py-1.5 text-[7px] font-medium flex items-center">
               <svg
                 className="w-3.5 h-3.5 mr-1.5"
                 fill="currentColor"
@@ -112,11 +112,11 @@ const Topic = () => {
           </div>
 
           {/* Content */}
-          <div className="px-5 text-[9px] text-gray-800 leading-[11px]">
+          <div className="px-5 text-[9px] text-theme-primary leading-[11px]">
             {expanded ? post.content : post.content.slice(0, 100)}
             {post.content.length > 100 && (
               <span
-                className="text-gray-500 cursor-pointer ml-1.5 text-[7px]"
+                className="text-theme-secondary cursor-pointer ml-1.5 text-[7px]"
                 onClick={() => setExpanded(!expanded)}
               >
                 {expanded ? "...see less" : "...see more"}
@@ -126,7 +126,7 @@ const Topic = () => {
               {post.tags?.map((tag, index) => (
                 <span
                   key={index}
-                  className="text-[7px] text-gray-700 flex items-center"
+                  className="text-[7px] text-theme-primary flex items-center"
                 >
                   {tag.icon && <span className="mr-1.5">{tag.icon}</span>}
                   {tag.text}
@@ -141,12 +141,12 @@ const Topic = () => {
           {/* Media Grid */}
           <div className="grid grid-cols-3 gap-[2px]">
             {[1, 2, 3].map((_, idx) => (
-              <div key={idx} className="aspect-square bg-gray-100" />
+              <div key={idx} className="aspect-square bg-theme-primary" />
             ))}
           </div>
 
           {/* Actions Row */}
-          <div className="flex w-full items-center px-5 py-4 text-gray-500">
+          <div className="flex w-full items-center px-5 py-4 text-theme-secondary">
             <span className="text-[7px]">{post.time}</span>
             <div className="ml-auto flex items-center space-x-7">
               <span className="flex items-center text-[9px]">

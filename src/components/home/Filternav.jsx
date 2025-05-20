@@ -10,15 +10,15 @@ const Filternav = ({ activeTab, setActiveTab }) => {
     { key: "Massage", label: "Massage" },
   ];
   return (
-    <div className="flex items-center justify-between px-4 py-4 overflow-x-auto bg-white">
+    <div className="flex items-center justify-between px-4 py-4 overflow-x-auto bg-theme-secondary">
       <div className="flex space-x-4">
         {tabs.map((tab) => (
           <button
             key={tab.key}
             className={`px-3 py-1 font-semibold justify-center items-center flex flex-col ${
               activeTab === tab.key
-                ? "text-gray-800 text-[18px]"
-                : "text-gray-400 text-[14px]"
+                ? "text-theme-primary text-[18px]"
+                : "text-theme-secondary text-[14px]"
             }`}
             onClick={() => setActiveTab(tab.key)}
           >

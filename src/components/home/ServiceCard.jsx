@@ -27,12 +27,12 @@ const ServiceCard = () => {
   return (
     <div className="p-[14px] flex flex-col gap-[12px]">
       {exploreItems.map((item) => (
-        <div className="bg-theme-secondary rounded-lg overflow-hidden">
+        <div key={item.id} className="bg-theme-secondary rounded-lg overflow-hidden">
           <div className="p-4 space-y-4">
             <div className="grid grid-cols-3 gap-2 relative">
               {[1, 2, 3].map((_, index) => (
                 <div
-                  key={index}
+                  key={`image-${index}-${item.id}`}
                   className={`aspect-square bg-theme-primary rounded-lg ${
                     index === 2 ? "relative" : ""
                   }`}
@@ -87,7 +87,7 @@ const ServiceCard = () => {
               <div className="flex items-center space-x-1 mt-1">
                 <div className="flex items-center">
                   {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-yellow-400 text-sm">
+                    <span key={`star-${i}-${item.id}`} className="text-yellow-400 text-sm">
                       ★
                     </span>
                   ))}
