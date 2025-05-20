@@ -5,6 +5,7 @@ import OpeningTime from './OpeningTime';
 import ServiceAndPrice from './ServiceAndPrice';
 import FormInput from '../../components/FormInput';
 import DocumentIcon from '../../icons/Document.svg';
+import SubmittedLocationModal from './SubmittedLocationModal';
 
 const AddLocationPage = () => {
   const navigate = useNavigate();
@@ -36,9 +37,14 @@ const AddLocationPage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Form validation and submission logic will be implemented here
+    
+    // Temporarily simulate successful submission
+    setIsSubmitted(true);
   };
 
   const handleImageSelect = (e) => {
@@ -65,25 +71,10 @@ const AddLocationPage = () => {
     if (file) {
       setFormData(prev => ({
         ...prev,
-        document: {
-          url: URL.createObjectURL(file),
-          file: file
-        }
+        document: file
       }));
     }
   };
-
-  React.useEffect(() => {
-    // Check if returning from map with location data
-    if (location.state?.selectedLocation) {
-      setFormData(prev => ({
-        ...prev,
-        locationSet: true,
-        latitude: location.state.selectedLocation.lat,
-        longitude: location.state.selectedLocation.lng
-      }));
-    }
-  }, [location]);
 
   return (
     <div className="min-h-screen bg-theme-primary text-theme-primary p-4">
@@ -265,6 +256,11 @@ const AddLocationPage = () => {
           Submit
         </button>
       </form>
+      
+      <SubmittedLocationModal 
+        isOpen={isSubmitted}
+        onClose={() => setIsSubmitted(false)}
+      />
     </div>
   );
 };

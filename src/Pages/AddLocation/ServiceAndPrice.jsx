@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FormInput from '../../components/FormInput';
+import AddServiceModal from '../../Pages/AddLocation/AddServiceModal';
 
 const ServiceAndPrice = ({ formData, setFormData }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const addService = () => {
     setFormData(prev => ({
       ...prev,
@@ -31,6 +34,13 @@ const ServiceAndPrice = ({ formData, setFormData }) => {
     setFormData(prev => ({
       ...prev,
       services: prev.services.filter((_, i) => i !== index)
+    }));
+  };
+
+  const handleAddService = (serviceData) => {
+    setFormData(prev => ({
+      ...prev,
+      services: [...prev.services, serviceData]
     }));
   };
 
@@ -78,12 +88,18 @@ const ServiceAndPrice = ({ formData, setFormData }) => {
 
       <button
         type="button"
-        onClick={addService}
+        onClick={() => setIsModalOpen(true)}
         className="w-full bg-theme-secondary rounded-lg px-4 py-3 text-sm flex items-center justify-center gap-2 text-theme-primary"
       >
         <span>+</span>
         Add services
       </button>
+
+      <AddServiceModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onAdd={handleAddService}
+      />
     </div>
   );
 };
