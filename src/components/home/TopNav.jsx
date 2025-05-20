@@ -1,4 +1,3 @@
-import React from "react";
 import thai from "./thai.png";
 import search from "./search.svg";
 import map from "./map.svg";
