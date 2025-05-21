@@ -10,6 +10,7 @@ import TopPicks from './TopPicks';
 const HomePage = () => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState('Hotels');
+  const [activeService, setActiveService] = useState('Service 1');
 
   // Mock data for feedbacks
   const feedbacks = [
@@ -98,6 +99,9 @@ const HomePage = () => {
     // ... more place items
   ];
 
+  // Services array
+  const services = ['Service 1', 'Service 2', 'Service 3', 'Service 4'];
+
   return (
     <div className="min-h-screen flex justify-center bg-theme-primary">
       <div className="w-full max-w-[480px] flex flex-col">
@@ -146,12 +150,25 @@ const HomePage = () => {
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`whitespace-nowrap px-4 py-2 rounded-full transition-all
+                  className={`whitespace-nowrap text-base font-medium transition-all
                     ${activeTab === tab 
-                      ? 'bg-[#FFC61B] text-black' 
-                      : 'bg-theme-secondary text-theme-primary'}`}
+                      ? 'text-theme-primary border-b-2 border-[#FFC61B]' 
+                      : 'text-[#666666]'}`}
                 >
                   {tab}
+                </button>
+              ))}
+            </div>
+
+            {/* Service Tabs */}
+            <div className="flex overflow-x-auto px-4 pb-3 gap-3">
+              {services.map(service => (
+                <button
+                  key={service}
+                  onClick={() => setActiveService(service)}
+                  className={`whitespace-nowrap px-4 py-2 rounded-lg text-sm font-medium bg-theme-secondary text-theme-primary`}
+                >
+                  {service}
                 </button>
               ))}
             </div>
