@@ -1,7 +1,0 @@
-.filter_nav {
-  border-radius: 5px;
-  background: var(
-    --Yellow-Gradient,
-    linear-gradient(325deg, #ffc61b 43.64%, #ffe38e 100%)
-  );
-}

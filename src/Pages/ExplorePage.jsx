@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import BottomNavBar from "../components/BottomNavBar";
 import ExploreTabs from "../components/ExploreTabs";
 import ExploreCard from "../components/ExploreCard";
+import TopPicks from "../components/TopPicks";
 import AddLocationIcon from "../icons/AddLocation.svg";
 
 // Mock data for explore items

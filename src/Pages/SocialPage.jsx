@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import SocialTabs from "../components/SocialTabs";
 import SocialPostCard from "../components/SocialPostCard";
 import BottomNavBar from "../components/BottomNavBar";
-// import UploadModal from "../components/UploadModal"; // This was already removed
-import CommentModal from "../components/CommentModal"; // Import CommentModal here
+import CommentModal from "../components/CommentModal";
 import { useNavigate } from 'react-router-dom';
 
 // Mock posts data
@@ -27,6 +26,12 @@ const posts = [
     comments: 20,
     shares: 6,
     isAnonymous: false,
+    tags: [
+      { icon: "🏨", text: "酒店亮点" },
+      { text: "视频无限观看" },
+      { text: "浏览不限次数" },
+      { text: "上传无广告" }
+    ]
   },
   {
     id: 2,
@@ -47,6 +52,35 @@ const posts = [
     comments: 8,
     shares: 2,
     isAnonymous: true,
+    tags: [
+      { icon: "🏨", text: "酒店亮点" },
+      { text: "豪华早餐" },
+      { text: "客房舒适" }
+    ]
+  },
+  {
+    id: 3,
+    user: {
+      name: "TRAVELER",
+      verified: true,
+    },
+    place: "View Place",
+    content: "酒店的设计很有特色，每个角落都很适合拍照。房间宽敞舒适，服务人员态度很好。",
+    media: [
+      "https://images.unsplash.com/photo-1504674900247-0877df9cc836",
+      "https://images.unsplash.com/photo-1465101178521-c1a9136a3b99",
+      { type: "video", thumbnail: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca" }
+    ],
+    time: "1h ago",
+    likes: 4521,
+    comments: 25,
+    shares: 8,
+    isAnonymous: false,
+    tags: [
+      { icon: "📸", text: "网红打卡" },
+      { text: "超值体验" },
+      { text: "推荐入住" }
+    ]
   }
 ];
 
