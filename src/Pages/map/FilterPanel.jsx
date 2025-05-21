@@ -75,19 +75,19 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
         onClick={handleClose}
       />
       <div
-        className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] h-[85vh] filter_box p-4 z-50 shadow-lg rounded-t-2xl transition-all duration-300 ease-out overflow-y-auto
+        className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] h-[85vh] bg-[var(--bg-primary)] p-4 z-50 shadow-lg rounded-t-2xl transition-all duration-300 ease-out overflow-y-auto
         ${isVisible ? "translate-y-0" : "translate-y-full"}`}
       >
         {/* Drag handle */}
-        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-gray-600 rounded-full" />
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-[var(--bg-secondary)] rounded-full" />
         
         <div className="mt-6 flex flex-col gap-[24px]">
           {/* Header */}
-          <div className="flex w-full justify-between items-center sticky top-0 bg-[#161614] py-2">
-            <h2 className="text-xl text-white font-bold">Filter</h2>
+          <div className="flex w-full justify-between items-center sticky top-0 bg-[var(--bg-primary)] py-2">
+            <h2 className="text-xl text-[var(--text-primary)] font-bold">Filter</h2>
             <button 
               onClick={handleClose}
-              className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-800"
+              className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[var(--bg-secondary)]"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +96,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                className="text-white"
+                className="text-[var(--text-primary)]"
               >
                 <path
                   strokeLinecap="round"
@@ -110,7 +110,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
 
           {/* Price */}
           <div className="space-y-4">
-            <div className="flex w-full price_tags justify-between items-center">
+            <div className="flex w-full price_tags justify-between items-center text-[var(--text-primary)]">
               <span>Price Range</span>
               <span className="text-[#FFC61B]">
                 ${filters.priceRange[0]} - ${filters.priceRange[1]}
@@ -138,7 +138,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
 
           {/* Distance */}
           <div className="space-y-4">
-            <div className="flex w-full price_tags justify-between items-center">
+            <div className="flex w-full price_tags justify-between items-center text-[var(--text-primary)]">
               <span>Distance</span>
               <span className="text-[#FFC61B]">{filters.distance}km</span>
             </div>
@@ -164,14 +164,14 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
 
           {/* Rating */}
           <div className="space-y-3">
-            <label className="block text-white font-medium">Rating</label>
+            <label className="block text-[var(--text-primary)] font-medium">Rating</label>
             <div className="flex flex-wrap gap-2">
               {ratingOptions.map((value) => (
                 <button
                   key={value}
                   onClick={() => handleChange("rating", value)}
                   className={`px-4 py-2 rounded-full text-sm transition-all duration-200
-                    ${filters.rating === value ? "filter_active" : "filter_UnActive"}`}
+                    ${filters.rating === value ? "filter_active" : "bg-[var(--bg-secondary)] text-[var(--text-primary)]"}`}
                 >
                   {ratingLabels[value]}
                 </button>
@@ -181,7 +181,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
 
           {/* Services */}
           <div className="space-y-3">
-            <label className="block text-white font-medium">Services</label>
+            <label className="block text-[var(--text-primary)] font-medium">Services</label>
             <div className="flex flex-wrap gap-2">
               {serviceOptions.map((service) => {
                 const isActive = service === "All" 
@@ -192,7 +192,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                     key={service}
                     onClick={() => toggleService(service)}
                     className={`px-4 py-2 rounded-full text-sm transition-all duration-200
-                      ${isActive ? "filter_active" : "filter_UnActive"}`}
+                      ${isActive ? "filter_active" : "bg-[var(--bg-secondary)] text-[var(--text-primary)]"}`}
                   >
                     {service}
                   </button>
@@ -203,14 +203,14 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
 
           {/* Sort */}
           <div className="space-y-3">
-            <label className="block text-white font-medium">Sort By</label>
+            <label className="block text-[var(--text-primary)] font-medium">Sort By</label>
             <div className="grid grid-cols-3 gap-2">
               {sortOptions.map((option) => (
                 <button
                   key={option}
                   onClick={() => handleChange("sort", option)}
                   className={`px-4 py-2 rounded-full text-sm transition-all duration-200
-                    ${filters.sort === option ? "filter_active" : "filter_UnActive"}`}
+                    ${filters.sort === option ? "filter_active" : "bg-[var(--bg-secondary)] text-[var(--text-primary)]"}`}
                 >
                   {option}
                 </button>
