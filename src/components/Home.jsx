@@ -12,15 +12,17 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState("Hotels");
 
   return (
-    <div className=" pb-[100px]">
-      <TopNav />
-      <Carousel />
-      <Near />
-      <Topic />
-      <Filternav activeTab={activeTab} setActiveTab={setActiveTab} />
-      <Service />
-      <BottomNavBar active="home" />
-      <ServiceCard />
+    <div className="min-h-screen flex justify-center bg-theme-primary">
+      <div className="w-full max-w-[480px] pb-[100px]">
+        <TopNav />
+        <Carousel />
+        <Near />
+        <Topic />
+        <Filternav activeTab={activeTab} setActiveTab={setActiveTab} />
+        <Service />
+        <BottomNavBar active="home" />
+        <ServiceCard />
+      </div>
     </div>
   );
 }

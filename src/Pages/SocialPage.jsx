@@ -71,33 +71,35 @@ export default function SocialPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-theme-primary relative">
-      <div className="flex-1 overflow-y-auto pb-16">
-        <div className="sticky top-0 z-10 bg-theme-primary">
-          <SocialTabs
-            activeTab={activeTab}
-            setActiveTab={setActiveTab}
-            onUpload={() => navigate('/social/upload')}
-          />
-          <div className="h-[1px] bg-theme-secondary"></div>
-        </div>
-        <div className="w-full">
-          {posts.map(post => (
-            <SocialPostCard
-              key={post.id}
-              post={post}
-              onOpenComments={openCommentModal}
+    <div className="min-h-screen flex justify-center bg-theme-primary">
+      <div className="w-full max-w-[480px] flex flex-col relative">
+        <div className="flex-1 overflow-y-auto pb-16">
+          <div className="sticky top-0 z-10 bg-theme-primary">
+            <SocialTabs
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+              onUpload={() => navigate('/social/upload')}
             />
-          ))}
+            <div className="h-[1px] bg-theme-secondary"></div>
+          </div>
+          <div className="w-full">
+            {posts.map(post => (
+              <SocialPostCard
+                key={post.id}
+                post={post}
+                onOpenComments={openCommentModal}
+              />
+            ))}
+          </div>
         </div>
-      </div>
-      <BottomNavBar active="social" />
-      <div className="relative z-[1000]">
-        <CommentModal
-          isOpen={!!commentModalPostId}
-          onClose={closeCommentModal}
-          onSubmit={handleCommentSubmit}
-        />
+        <BottomNavBar active="social" />
+        <div className="relative z-[1000]">
+          <CommentModal
+            isOpen={!!commentModalPostId}
+            onClose={closeCommentModal}
+            onSubmit={handleCommentSubmit}
+          />
+        </div>
       </div>
     </div>
   );

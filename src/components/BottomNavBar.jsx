@@ -36,8 +36,8 @@ export default function BottomNavBar({ active }) {
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-theme-secondary border-t z-[999] border-theme">
-      <div className="flex justify-around items-center px-4 py-2">
+    <div className="fixed bottom-0 left-0 right-0 bg-theme-secondary border-t z-[999] border-theme flex justify-center">
+      <div className="w-full max-w-[480px] flex justify-around items-center px-4 py-2">
         {tabs.map(tab => (
           <button
             key={tab.key}
