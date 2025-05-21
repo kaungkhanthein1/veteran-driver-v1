@@ -17,6 +17,7 @@ import "leaflet/dist/leaflet.css";
 import SocialUpload from "./Pages/SocialUpload";
 import AddLocationPage from "./Pages/AddLocation/AddLocationPage";
 import ChangeThemePage from "./Pages/ChangeThemePage";
+import SettingsPage from './Pages/SettingsPage';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
           <Route path="/map" element={<MapWithFilterUI />} />
           <Route path="/social/upload" element={<SocialUpload />} />
           <Route path="/theme" element={<ChangeThemePage />} />
+          <Route path="/settings" element={<SettingsPage />} />
         </Routes>
       </Router>
     </ThemeProvider>

@@ -107,7 +107,7 @@ export default function ProfilePage() {
                 className="w-6 h-6 [filter:var(--icon-filter)]" 
               />
             </button>
-            <button>
+            <button onClick={() => navigate('/settings')}>
               <img 
                 src={SettingIcon} 
                 alt={t('profile.settings')} 

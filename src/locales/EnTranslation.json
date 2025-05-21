@@ -33,7 +33,25 @@
     }
   },
   "profile": {
-    "settings": "Settings",
+    "settings": {
+      "title": "Settings",
+      "account": {
+        "title": "Account",
+        "mobileNumber": "Mobile Number",
+        "bindEmail": "Bind E-mail"
+      },
+      "thirdParty": {
+        "title": "Third Party",
+        "bindFacebook": "Bind with Facebook",
+        "bindWeChat": "Bind with WeChat",
+        "bindLine": "Bind with Line"
+      },
+      "security": {
+        "title": "Security",
+        "changePassword": "Change Password",
+        "setup2FA": "Setup Two-Factor Authentication (2FA)"
+      }
+    },
     "changeTheme": "Change Theme",
     "language": "Language",
     "notifications": "Notifications",
