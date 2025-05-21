@@ -13,15 +13,17 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex justify-center bg-theme-primary">
-      <div className="w-full max-w-[480px] pb-[100px]">
-        <TopNav />
-        <Carousel />
-        <Near />
-        <Topic />
-        <Filternav activeTab={activeTab} setActiveTab={setActiveTab} />
-        <Service />
+      <div className="w-full max-w-[480px] flex flex-col">
+        <div className="flex-1 overflow-y-auto pb-16">
+          <TopNav />
+          <Carousel />
+          <Near />
+          <Topic />
+          <Filternav activeTab={activeTab} setActiveTab={setActiveTab} />
+          <Service />
+          <ServiceCard />
+        </div>
         <BottomNavBar active="home" />
-        <ServiceCard />
       </div>
     </div>
   );
