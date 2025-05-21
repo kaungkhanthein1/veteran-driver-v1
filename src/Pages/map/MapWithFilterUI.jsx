@@ -101,63 +101,67 @@ const MapWithFilterUI = () => {
   const filtered = filterMarkers();
 
   return (
-    <div className="relative max-w-[500px] h-screen">
-      <MapContainer
-        center={[mapCenter.lat, mapCenter.lng]}
-        zoom={15}
-        className="h-full w-full z-0"
-        zoomControl={false} // <- disables zoom buttons
-      >
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        <Marker position={[mapCenter.lat, mapCenter.lng]} />
-        <RecenterMap center={[mapCenter.lat, mapCenter.lng]} />
-        <FilteredMarkers markers={filterMarkers(activeFilters)} />
-      </MapContainer>
+    <div className="min-h-screen flex justify-center bg-theme-primary">
+      <div className="w-full max-w-[480px] flex flex-col relative">
+        <div className="flex-1">
+          <MapContainer
+            center={[mapCenter.lat, mapCenter.lng]}
+            zoom={15}
+            className="h-screen w-full z-0"
+            zoomControl={false}
+          >
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+            <Marker position={[mapCenter.lat, mapCenter.lng]} />
+            <RecenterMap center={[mapCenter.lat, mapCenter.lng]} />
+            <FilteredMarkers markers={filterMarkers(activeFilters)} />
+          </MapContainer>
 
-      <div className="absolute w-full top-6 left-0 text-white rounded-full shadow-lg">
-        <div className=" flex justify-center items-center gap-[12px]">
-          <svg
-            onClick={() => navigate(-1)}
-            xmlns="http://www.w3.org/2000/svg"
-            width="28"
-            height="28"
-            viewBox="0 0 28 28"
-            fill="none"
-          >
-            <path
-              d="M23.3334 12.8327H9.13508L15.6567 6.31102L14.0001 4.66602L4.66675 13.9993L14.0001 23.3327L15.6451 21.6877L9.13508 15.166H23.3334V12.8327Z"
-              fill="#444444"
-            />
-          </svg>
-          <div
-            onClick={() => setShowFilter(true)}
-            className="search_box p-[16px] flex justify-center items-center w-4/5"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-            >
-              <path
-                d="M15.7549 14.2559H14.9649L14.6849 13.9859C15.6649 12.8459 16.2549 11.3659 16.2549 9.75586C16.2549 6.16586 13.3449 3.25586 9.75488 3.25586C6.16488 3.25586 3.25488 6.16586 3.25488 9.75586C3.25488 13.3459 6.16488 16.2559 9.75488 16.2559C11.3649 16.2559 12.8449 15.6659 13.9849 14.6859L14.2549 14.9659V15.7559L19.2549 20.7459L20.7449 19.2559L15.7549 14.2559ZM9.75488 14.2559C7.26488 14.2559 5.25488 12.2459 5.25488 9.75586C5.25488 7.26586 7.26488 5.25586 9.75488 5.25586C12.2449 5.25586 14.2549 7.26586 14.2549 9.75586C14.2549 12.2459 12.2449 14.2559 9.75488 14.2559Z"
-                fill="#999999"
-              />
-            </svg>
-            <span className="">Search location...</span>
+          <div className="absolute w-full top-6 left-0 text-white rounded-full shadow-lg">
+            <div className="flex justify-center items-center gap-[12px] px-4">
+              <svg
+                onClick={() => navigate(-1)}
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                viewBox="0 0 28 28"
+                fill="none"
+              >
+                <path
+                  d="M23.3334 12.8327H9.13508L15.6567 6.31102L14.0001 4.66602L4.66675 13.9993L14.0001 23.3327L15.6451 21.6877L9.13508 15.166H23.3334V12.8327Z"
+                  fill="#444444"
+                />
+              </svg>
+              <div
+                onClick={() => setShowFilter(true)}
+                className="search_box p-[16px] flex justify-center items-center w-4/5"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <path
+                    d="M15.7549 14.2559H14.9649L14.6849 13.9859C15.6649 12.8459 16.2549 11.3659 16.2549 9.75586C16.2549 6.16586 13.3449 3.25586 9.75488 3.25586C6.16488 3.25586 3.25488 6.16586 3.25488 9.75586C3.25488 13.3459 6.16488 16.2559 9.75488 16.2559C11.3649 16.2559 12.8449 15.6659 13.9849 14.6859L14.2549 14.9659V15.7559L19.2549 20.7459L20.7449 19.2559L15.7549 14.2559ZM9.75488 14.2559C7.26488 14.2559 5.25488 12.2459 5.25488 9.75586C5.25488 7.26586 7.26488 5.25586 9.75488 5.25586C12.2449 5.25586 14.2549 7.26586 14.2549 9.75586C14.2549 12.2459 12.2449 14.2559 9.75488 14.2559Z"
+                    fill="#999999"
+                  />
+                </svg>
+                <span className="">Search location...</span>
+              </div>
+            </div>
           </div>
+
+          {showFilter && (
+            <FilterPanel
+              filters={tempFilters}
+              setFilters={setTempFilters}
+              applyFilters={applyFilters}
+              onClose={() => setShowFilter(false)}
+            />
+          )}
         </div>
       </div>
-
-      {showFilter && (
-        <FilterPanel
-          filters={tempFilters}
-          setFilters={setTempFilters}
-          applyFilters={applyFilters}
-          onClose={() => setShowFilter(false)}
-        />
-      )}
     </div>
   );
 };

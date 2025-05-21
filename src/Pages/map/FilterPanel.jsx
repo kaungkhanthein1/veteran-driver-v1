@@ -69,162 +69,165 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
   ];
 
   return (
-    <div
-      className={`absolute bottom-0 left-0 w-full sm:w-96 h-[90%] filter_box p-4 z-50 shadow-lg rounded-t-2xl transition-transform duration-300 ease-out
-      ${isVisible ? "translate-y-0" : "translate-y-full"}`}
-    >
-      <div className=" flex flex-col  gap-[20px]">
-        {/* header */}
-        <div className=" flex w-full justify-between items-center">
-          <h2 className="text-xl text-white font-bold mb-4">Filter</h2>
-          <svg
-            onClick={handleClose}
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-          >
-            <path
-              d="M6.4 19L5 17.6L10.6 12L5 6.4L6.4 5L12 10.6L17.6 5L19 6.4L13.4 12L19 17.6L17.6 19L12 13.4L6.4 19Z"
-              fill="white"
+    <>
+      <div 
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
+        onClick={handleClose}
+      />
+      <div
+        className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] h-[85vh] filter_box p-4 z-50 shadow-lg rounded-t-2xl transition-all duration-300 ease-out overflow-y-auto
+        ${isVisible ? "translate-y-0" : "translate-y-full"}`}
+      >
+        {/* Drag handle */}
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-gray-600 rounded-full" />
+        
+        <div className="mt-6 flex flex-col gap-[24px]">
+          {/* Header */}
+          <div className="flex w-full justify-between items-center sticky top-0 bg-[#161614] py-2">
+            <h2 className="text-xl text-white font-bold">Filter</h2>
+            <button 
+              onClick={handleClose}
+              className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-800"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                className="text-white"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+
+          {/* Price */}
+          <div className="space-y-4">
+            <div className="flex w-full price_tags justify-between items-center">
+              <span>Price Range</span>
+              <span className="text-[#FFC61B]">
+                ${filters.priceRange[0]} - ${filters.priceRange[1]}
+              </span>
+            </div>
+            <Range
+              step={1}
+              min={MIN}
+              max={MAX}
+              values={filters.priceRange}
+              onChange={(values) => setFilters({ ...filters, priceRange: values })}
+              renderTrack={({ props, children }) => (
+                <div {...props} className="w-full h-[16px] range_input_c">
+                  {children}
+                </div>
+              )}
+              renderThumb={({ props }) => (
+                <div
+                  {...props}
+                  className="w-[4px] h-[44px] bg-[#FFC61B] rounded-full shadow"
+                />
+              )}
             />
-          </svg>
-        </div>
-
-        {/* price */}
-        <div className="mb-4">
-          <div className="flex w-full price_tags justify-between items-center py-[10px]">
-            <span>Price:</span>
-            <span>
-              {filters.priceRange[0]}$- {filters.priceRange[1]}$
-            </span>
           </div>
-          <Range
-            step={1}
-            min={MIN}
-            max={MAX}
-            values={filters.priceRange}
-            onChange={(values) =>
-              setFilters({ ...filters, priceRange: values })
-            }
-            renderTrack={({ props, children }) => (
-              <div {...props} className="w-full h-[16px] range_input_c">
-                {children}
-              </div>
-            )}
-            renderThumb={({ props, index }) => (
-              <div
-                {...props}
-                className="w-[4px] h-[44px] bg-[#FFC61B] rounded-full shadow"
-              />
-            )}
-          />
-        </div>
 
-        {/* distance */}
-        <div className="mb-4">
-          <div className="flex w-full price_tags justify-between items-center py-[10px]">
-            <span>Distance</span>
-            <span>0km - {filters.distance}km</span>
-          </div>{" "}
-          <Range
-            step={1}
-            min={0}
-            max={50}
-            values={[filters.distance]}
-            // onChange={(e) => handleChange("distance", Number(e.target.value))}
-            onChange={(values) => handleChange("distance", values[0])}
-            renderTrack={({ props, children }) => (
-              <div {...props} className="w-full h-[16px] range_input_c rounded">
-                {children}
-              </div>
-            )}
-            renderThumb={({ props, index }) => (
-              <div
-                {...props}
-                className="w-[4px] h-[44px] bg-[#FFC61B] rounded-full shadow"
-              />
-            )}
-          />
-        </div>
-
-        {/* rating */}
-        <div className="mb-4">
-          <label className="block mb-2 text-white">Rating</label>
-          <div className="flex flex-wrap gap-2">
-            {ratingOptions.map((value) => (
-              <button
-                key={value}
-                onClick={() => handleChange("rating", value)}
-                className={`px-3 py-1 rounded-full text-sm transition 
-          ${
-            filters.rating === value
-              ? "filter_active"
-              : "filter_UnActive bg-neutral-900"
-          }`}
-              >
-                {ratingLabels[value]}
-              </button>
-            ))}
+          {/* Distance */}
+          <div className="space-y-4">
+            <div className="flex w-full price_tags justify-between items-center">
+              <span>Distance</span>
+              <span className="text-[#FFC61B]">{filters.distance}km</span>
+            </div>
+            <Range
+              step={1}
+              min={0}
+              max={50}
+              values={[filters.distance]}
+              onChange={(values) => handleChange("distance", values[0])}
+              renderTrack={({ props, children }) => (
+                <div {...props} className="w-full h-[16px] range_input_c rounded">
+                  {children}
+                </div>
+              )}
+              renderThumb={({ props }) => (
+                <div
+                  {...props}
+                  className="w-[4px] h-[44px] bg-[#FFC61B] rounded-full shadow"
+                />
+              )}
+            />
           </div>
-        </div>
 
-        {/* services */}
-        <div className="mb-4">
-          <label className="block mb-2 text-white">Services</label>
-          <div className="flex flex-wrap gap-2">
-            {serviceOptions.map((service) => {
-              const isActive =
-                service === "All"
-                  ? filters.services.length === 0
-                  : filters.services.includes(service);
-
-              return (
+          {/* Rating */}
+          <div className="space-y-3">
+            <label className="block text-white font-medium">Rating</label>
+            <div className="flex flex-wrap gap-2">
+              {ratingOptions.map((value) => (
                 <button
-                  key={service}
-                  onClick={() => toggleService(service)}
-                  className={`px-3 py-1 rounded-full text-sm transition
-            ${isActive ? "filter_active" : "filter_UnActive bg-neutral-900"}`}
+                  key={value}
+                  onClick={() => handleChange("rating", value)}
+                  className={`px-4 py-2 rounded-full text-sm transition-all duration-200
+                    ${filters.rating === value ? "filter_active" : "filter_UnActive"}`}
                 >
-                  {service}
+                  {ratingLabels[value]}
                 </button>
-              );
-            })}
+              ))}
+            </div>
+          </div>
+
+          {/* Services */}
+          <div className="space-y-3">
+            <label className="block text-white font-medium">Services</label>
+            <div className="flex flex-wrap gap-2">
+              {serviceOptions.map((service) => {
+                const isActive = service === "All" 
+                  ? filters.services.length === 0 
+                  : filters.services.includes(service);
+                return (
+                  <button
+                    key={service}
+                    onClick={() => toggleService(service)}
+                    className={`px-4 py-2 rounded-full text-sm transition-all duration-200
+                      ${isActive ? "filter_active" : "filter_UnActive"}`}
+                  >
+                    {service}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Sort */}
+          <div className="space-y-3">
+            <label className="block text-white font-medium">Sort By</label>
+            <div className="grid grid-cols-3 gap-2">
+              {sortOptions.map((option) => (
+                <button
+                  key={option}
+                  onClick={() => handleChange("sort", option)}
+                  className={`px-4 py-2 rounded-full text-sm transition-all duration-200
+                    ${filters.sort === option ? "filter_active" : "filter_UnActive"}`}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* sort */}
-        <div className="mb-4">
-          <label className="block mb-2 text-white">Sort</label>
-          <div className="flex flex-wrap gap-2">
-            {sortOptions.map((option) => (
-              <button
-                key={option}
-                onClick={() => handleChange("sort", option)}
-                className={`px-3 py-1 rounded-full text-sm transition 
-          ${
-            filters.sort === option
-              ? "filter_active"
-              : "filter_UnActive bg-neutral-900"
-          }`}
-              >
-                {option}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="flex gap-2 my-6 w-full">
-          <button
-            className="filter_apply_button w-full  px-4 py-[10px]"
-            onClick={applyFilters}
-          >
-            Apply
-          </button>
-        </div>
+        {/* Apply Button */}
+        <button
+          onClick={applyFilters}
+          className="filter_apply_button w-full mt-8 py-4 text-base font-medium"
+        >
+          Apply
+        </button>
       </div>
-    </div>
+    </>
   );
 };
 

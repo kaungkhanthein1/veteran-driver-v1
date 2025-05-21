@@ -198,6 +198,10 @@ export default function ProfilePage() {
         </div>
         <BottomNavBar active="profile" />
       </div>
+      <LanguageModal 
+        isOpen={showLanguageModal} 
+        onClose={() => setShowLanguageModal(false)} 
+      />
     </div>
   );
 }
