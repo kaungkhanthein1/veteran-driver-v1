@@ -34,56 +34,56 @@ export default function ProfilePage() {
       id: 1,
       icon: WalletIcon,
       title: "My point wallet",
-      translationKey: "Point Wallet",
+      translationKey: "profile.pointwallet",
       type: "card"
     },
     {
       id: 2,
       icon: UploadedLocationIcon,
       title: "My uploaded location",
-      translationKey: "Uploaded Location",
+      translationKey: "profile.uploadedlocation",
       type: "card"
     },
     {
       id: 3,
       icon: BookMarkedLocationIcon,
       title: "Bookmark Location",
-      translationKey: "Bookmarked Location",
+      translationKey: "profile.bookmarklocation",
       type: "list"
     },
     {
       id: 4,
       icon: AppThemeIcon,
       title: "Change Application Theme",
-      translationKey: "Change Application Theme",
+      translationKey: "profile.changeapplicationtheme",
       type: "list"
     },
     {
       id: 5,
       icon: AppLanguageIcon,
       title: "Change Application Language",
-      translationKey: "Change Application Language",
+      translationKey: "profile.changeapplicationlanguage",
       type: "list"
     },
     {
       id: 6,
       icon: ShareAppIcon,
       title: "Share Our Application",
-      translationKey: "Share Our Application",
+      translationKey: "profile.shareourapplication",
       type: "list"
     },
     {
       id: 7,
       icon: HelpCenterIcon,
       title: "Help Center",
-      translationKey: "Help Center",
+      translationKey: "profile.helpcenter",
       type: "list"
     },
     {
       id: 8,
       icon: ContactUsIcon,
       title: "Contact Us",
-      translationKey: "Contact Us",
+      translationKey: "profile.contactus",
       type: "list"
     }
   ];
@@ -97,20 +97,20 @@ export default function ProfilePage() {
             <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
             </svg>
-            <span>{t('editprofile')}</span>
+            <span>{t('profile.editprofile')}</span>
           </button>
           <div className="flex gap-4">
             <button>
               <img 
                 src={NotificationIcon} 
-                alt={t('notification')} 
+                alt={t('profile.notification')} 
                 className="w-6 h-6 [filter:var(--icon-filter)]" 
               />
             </button>
             <button>
               <img 
                 src={SettingIcon} 
-                alt={t('settings')} 
+                alt={t('profile.settings')} 
                 className="w-6 h-6 [filter:var(--icon-filter)]" 
               />
             </button>
@@ -187,10 +187,10 @@ export default function ProfilePage() {
         <button className="w-full bg-theme-secondary rounded-lg py-4 flex items-center justify-center gap-2">
           <img 
             src={LogoutIcon} 
-            alt={t('logout')} 
+            alt={t('profile.logout')} 
             className="w-5 h-5 [filter:var(--icon-filter)]" 
           />
-          <span>{t('logout')}</span>
+          <span>{t('profile.logout')}</span>
         </button>
       </div>
 

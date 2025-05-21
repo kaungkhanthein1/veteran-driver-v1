@@ -40,7 +40,6 @@
     "schedule": "Schedule",
     "ranking": "Ranking",
     "documents": "Documents",
-    "profile": {
   "pointwallet": "My point wallet",
   "uploadedlocation": "My uploaded location",
   "bookmarklocation": "Bookmark Location",
@@ -53,9 +52,8 @@
   "settings": "Settings",
   "notification": "Notification",
   "logout": "Logout"
-}
-
   },
+  
   "location": {
     "addLocation": "Add Location",
     "chooseLocation": "Choose Location",
