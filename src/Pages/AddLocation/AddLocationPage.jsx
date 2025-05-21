@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import SetLocationIcon from '../../icons/SetLocation.svg';
 import OpeningTime from './OpeningTime';
 import ServiceAndPrice from './ServiceAndPrice';
@@ -10,6 +11,7 @@ import SubmittedLocationModal from './SubmittedLocationModal';
 const AddLocationPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -87,44 +89,43 @@ const AddLocationPage = () => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
-        <h1 className="text-xl font-semibold">Add Location</h1>
+        <h1 className="text-xl font-semibold">{t('location.addLocation')}</h1>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Basic Information */}
         <div className="space-y-8">
           <FormInput
-            label="Name"
+            label={t('common.name')}
             name="name"
-            placeholder="Please enter the name"
+            placeholder={t('location.enterName')}
             value={formData.name}
             onChange={handleInputChange}
             required
           />
 
           <FormInput
-            label="Description"
+            label={t('common.description')}
             name="description"
-            placeholder="Please enter the description"
+            placeholder={t('location.enterDescription')}
             value={formData.description}
             onChange={handleInputChange}
             required
           />
 
           <FormInput
-            label="Address"
+            label={t('common.address')}
             name="address"
-            placeholder="Please enter the address"
+            placeholder={t('location.enterAddress')}
             value={formData.address}
             onChange={handleInputChange}
             required
           />
 
           <FormInput
-            label="Mobile number"
+            label={t('common.mobileNumber')}
             name="mobileNumber"
             type="tel"
-            placeholder="Please enter the mobile number"
+            placeholder={t('location.enterMobileNumber')}
             value={formData.mobileNumber}
             onChange={handleInputChange}
             required
@@ -138,11 +139,11 @@ const AddLocationPage = () => {
             <div className="flex items-center">
               <img 
                 src={SetLocationIcon} 
-                alt="Set Location" 
+                alt={t('location.setLocation')} 
                 className="w-5 h-5 mr-2"
                 style={{ filter: 'invert(76%) sepia(41%) saturate(845%) hue-rotate(338deg) brightness(101%) contrast(103%)' }}
               />
-              <span>Set Location On Map</span>
+              <span>{t('location.setLocationOnMap')}</span>
             </div>
             <span className={`text-theme-secondary ${formData.locationSet ? 'text-[#FDC51B]' : ''}`}>
               {formData.locationSet ? 'Change' : 'Not Set'}
@@ -164,7 +165,9 @@ const AddLocationPage = () => {
 
         {/* Photo Upload */}
         <div>
-          <label className="block text-sm mb-2">Share a picture of your location ({formData.photos.length}/10) *</label>
+          <label className="block text-sm mb-2">
+            {t('location.shareLocationPicture')} ({formData.photos.length}/10) *
+          </label>
           <div className="flex flex-wrap gap-2">
             {formData.photos.map((image, index) => (
               <div key={index} className="relative w-[100px] h-[100px]">
@@ -202,8 +205,8 @@ const AddLocationPage = () => {
 
         {/* Document Upload */}
         <div>
-          <label className="block text-sm mb-2">Upload Document *</label>
-          <p className="text-theme-secondary text-xs mb-2">Upload Valid Certification & Documents</p>
+          <label className="block text-sm mb-2">{t('location.uploadDocument')} *</label>
+          <p className="text-theme-secondary text-xs mb-2">{t('location.uploadCertification')}</p>
           <label className="cursor-pointer block">
             <input
               type="file"
@@ -219,12 +222,12 @@ const AddLocationPage = () => {
                     alt="Document" 
                     className="w-8 h-8 mx-auto mb-2"
                   />
-                  <span className="text-sm text-theme-secondary">Document uploaded</span>
+                  <span className="text-sm text-theme-secondary">{t('location.documentUploaded')}</span>
                 </div>
               ) : (
                 <img 
                   src={DocumentIcon} 
-                  alt="Document" 
+                  alt={t('location.uploadDocument')} 
                   className="w-8 h-8"
                 />
               )}
@@ -234,7 +237,7 @@ const AddLocationPage = () => {
 
         {/* Agreement */}
         <div className="space-y-4">
-          <p className="text-theme-secondary text-xs">Note : Guest accounts are limited to share only 3 locations per day.</p>
+          <p className="text-theme-secondary text-xs">{t('location.guestAccountNote')}</p>
           <div className="flex items-center">
             <input
               type="checkbox"
@@ -243,7 +246,7 @@ const AddLocationPage = () => {
               onChange={(e) => setFormData(prev => ({ ...prev, agreementChecked: e.target.checked }))}
               className="mr-2"
             />
-            <label htmlFor="agreement" className="text-sm">I have read and agree to the upload guidelines.</label>
+            <label htmlFor="agreement" className="text-sm">{t('location.agreementText')}</label>
           </div>
         </div>
 
@@ -253,7 +256,7 @@ const AddLocationPage = () => {
           className="w-full bg-[#FDC51B] text-black rounded-lg py-3 font-medium"
           disabled={!formData.agreementChecked}
         >
-          Submit
+          {t('location.submit')}
         </button>
       </form>
       

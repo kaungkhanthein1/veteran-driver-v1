@@ -1,0 +1,112 @@
+{
+  "common": {
+    "ok": "OK",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "back": "Back",
+    "name": "Name",
+    "description": "Description",
+    "address": "Address",
+    "mobileNumber": "Mobile Number"
+  },
+  "navigation": {
+    "home": "Home",
+    "explore": "Explore",
+    "social": "Social",
+    "profile": "Profile"
+  },
+  "auth": {
+    "welcome": "Welcome",
+    "description": "Welcome to our application",
+    "login": "Login",
+    "signup": "Sign Up",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot Password?",
+    "profile": {
+      "title": "Profile",
+      "edit": "Edit Profile",
+      "settings": "Settings"
+    }
+  },
+  "profile": {
+    "settings": "Settings",
+    "changeTheme": "Change Theme",
+    "language": "Language",
+    "notifications": "Notifications",
+    "schedule": "Schedule",
+    "ranking": "Ranking",
+    "documents": "Documents",
+    "profile": {
+  "pointwallet": "My point wallet",
+  "uploadedlocation": "My uploaded location",
+  "bookmarklocation": "Bookmark Location",
+  "changeapplicationtheme": "Change Application Theme",
+  "changeapplicationlanguage": "Change Application Language",
+  "shareourapplication": "Share Our Application",
+  "helpcenter": "Help Center",
+  "contactus": "Contact Us",
+  "editprofile": "Edit Profile",
+  "settings": "Settings",
+  "notification": "Notification",
+  "logout": "Logout"
+}
+
+  },
+  "location": {
+    "addLocation": "Add Location",
+    "chooseLocation": "Choose Location",
+    "locationAccess": "Location Access",
+    "setLocation": "Set Location",
+    "setLocationOnMap": "Set Location On Map",
+    "locationSubmitted": "Location Submitted!",
+    "locationSubmitMessage": "Your location has been added successfully. It will be reviewed by an admin shortly. You'll be notified once it's approved.",
+    "enterName": "Please enter the name",
+    "enterDescription": "Please enter the description",
+    "enterAddress": "Please enter the address",
+    "enterMobileNumber": "Please enter the mobile number",
+    "shareLocationPicture": "Share a picture of your location",
+    "uploadDocument": "Upload Document",
+    "uploadCertification": "Upload Valid Certification & Documents",
+    "documentUploaded": "Document uploaded",
+    "guestAccountNote": "Note : Guest accounts are limited to share only 3 locations per day.",
+    "agreementText": "I have read and agree to the upload guidelines.",
+    "submit": "Submit",
+    "change": "Change",
+    "notSet": "Not Set"
+  },
+  "social": {
+    "post": "Post",
+    "comment": "Comment",
+    "share": "Share",
+    "bookmark": "Bookmark",
+    "upload": "Upload",
+    "addComment": "Add a comment...",
+    "shareVia": "Share via"
+  },
+  "explore": {
+    "searchPlaceholder": "Search locations...",
+    "categories": {
+      "all": "All",
+      "hotels": "Hotels",
+      "restaurants": "Restaurants",
+      "attractions": "Attractions",
+      "shopping": "Shopping"
+    },
+    "filters": {
+      "rating": "Rating",
+      "distance": "Distance",
+      "price": "Price"
+    }
+  },
+  "admin": {
+    "dashboard": "Admin Dashboard",
+    "manageLocations": "Manage Locations",
+    "manageUsers": "Manage Users",
+    "approvals": "Approvals",
+    "reports": "Reports"
+  }
+}

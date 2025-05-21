@@ -1,0 +1,47 @@
+{
+  "common": {
+    "ok": "确定",
+    "cancel": "取消",
+    "save": "保存",
+    "delete": "删除",
+    "edit": "编辑",
+    "close": "关闭",
+    "back": "返回",
+    "name": "名称",
+    "description": "描述",
+    "address": "地址",
+    "mobileNumber": "手机号码"
+  },
+  "navigation": {
+    "home": "首页",
+    "explore": "探索",
+    "social": "社交",
+    "profile": "个人"
+  },
+  "auth": {
+    "login": "登录",
+    "register": "注册",
+    "phoneSignUp": "手机号注册",
+    "forgotPassword": "忘记密码",
+    "otpVerify": "验证码验证",
+    "email": "邮箱",
+    "password": "密码",
+    "phone": "手机号",
+    "continueWith": "使用{{provider}}继续",
+    "verificationCode": "验证码"
+  },
+  "profile": {
+    "pointwallet": "我的积分钱包",
+    "uploadedlocation": "我的上传位置",
+    "bookmarklocation": "收藏位置",
+    "changeapplicationtheme": "更改应用主题",
+    "changeapplicationlanguage": "更改应用语言",
+    "shareourapplication": "分享我们的应用",
+    "helpcenter": "帮助中心",
+    "contactus": "联系我们",
+    "editprofile": "编辑资料",
+    "settings": "设置",
+    "notification": "通知",
+    "logout": "退出登录"
+  }
+}

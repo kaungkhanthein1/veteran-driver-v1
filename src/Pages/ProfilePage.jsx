@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useTranslation } from 'react-i18next';
 import BottomNavBar from "../components/BottomNavBar";
 // Import icons
 import WalletIcon from "../icons/Profile/Wallet.svg";
@@ -14,9 +15,12 @@ import ProfilePic from "../icons/Profile/ProfilePic.svg";
 import NotificationIcon from "../icons/Notification.svg";
 import SettingIcon from "../icons/Setting.svg";
 import { useNavigate } from "react-router-dom";
+import LanguageModal from "../components/LanguageModal";
 
 export default function ProfilePage() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const [showLanguageModal, setShowLanguageModal] = useState(false);
   const userProfile = {
     name: "Rachel Zane Noel",
     uid: "5839234",
@@ -30,48 +34,56 @@ export default function ProfilePage() {
       id: 1,
       icon: WalletIcon,
       title: "My point wallet",
+      translationKey: "Point Wallet",
       type: "card"
     },
     {
       id: 2,
       icon: UploadedLocationIcon,
       title: "My uploaded location",
+      translationKey: "Uploaded Location",
       type: "card"
     },
     {
       id: 3,
       icon: BookMarkedLocationIcon,
       title: "Bookmark Location",
+      translationKey: "Bookmarked Location",
       type: "list"
     },
     {
       id: 4,
       icon: AppThemeIcon,
       title: "Change Application Theme",
+      translationKey: "Change Application Theme",
       type: "list"
     },
     {
       id: 5,
       icon: AppLanguageIcon,
       title: "Change Application Language",
+      translationKey: "Change Application Language",
       type: "list"
     },
     {
       id: 6,
       icon: ShareAppIcon,
       title: "Share Our Application",
+      translationKey: "Share Our Application",
       type: "list"
     },
     {
       id: 7,
       icon: HelpCenterIcon,
       title: "Help Center",
+      translationKey: "Help Center",
       type: "list"
     },
     {
       id: 8,
       icon: ContactUsIcon,
       title: "Contact Us",
+      translationKey: "Contact Us",
       type: "list"
     }
   ];
@@ -85,20 +97,20 @@ export default function ProfilePage() {
             <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
             </svg>
-            <span>Edit Profile</span>
+            <span>{t('editprofile')}</span>
           </button>
           <div className="flex gap-4">
             <button>
               <img 
                 src={NotificationIcon} 
-                alt="Notification" 
+                alt={t('notification')} 
                 className="w-6 h-6 [filter:var(--icon-filter)]" 
               />
             </button>
             <button>
               <img 
                 src={SettingIcon} 
-                alt="Settings" 
+                alt={t('settings')} 
                 className="w-6 h-6 [filter:var(--icon-filter)]" 
               />
             </button>
@@ -133,10 +145,10 @@ export default function ProfilePage() {
           <button key={item.id} className="bg-theme-secondary rounded-lg p-4 flex flex-col items-center justify-center gap-2">
             <img 
               src={item.icon} 
-              alt={item.title} 
+              alt={t(item.translationKey)} 
               className="w-8 h-8 [filter:var(--icon-filter)]" 
             />
-            <span className="text-sm">{item.title}</span>
+            <span className="text-sm">{t(item.translationKey)}</span>
           </button>
         ))}
       </div>
@@ -150,16 +162,18 @@ export default function ProfilePage() {
             onClick={() => {
               if (item.title === "Change Application Theme") {
                 navigate("/theme");
+              } else if (item.title === "Change Application Language") {
+                setShowLanguageModal(true);
               }
             }}
           >
             <div className="flex items-center gap-3">
               <img 
                 src={item.icon} 
-                alt={item.title} 
+                alt={t(item.translationKey)} 
                 className="w-6 h-6 [filter:var(--icon-filter)]" 
               />
-              <span>{item.title}</span>
+              <span>{t(item.translationKey)}</span>
             </div>
             <svg className="w-5 h-5 text-theme-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -173,12 +187,17 @@ export default function ProfilePage() {
         <button className="w-full bg-theme-secondary rounded-lg py-4 flex items-center justify-center gap-2">
           <img 
             src={LogoutIcon} 
-            alt="Logout" 
+            alt={t('logout')} 
             className="w-5 h-5 [filter:var(--icon-filter)]" 
           />
-          <span>Logout</span>
+          <span>{t('logout')}</span>
         </button>
       </div>
+
+      <LanguageModal 
+        isOpen={showLanguageModal} 
+        onClose={() => setShowLanguageModal(false)} 
+      />
 
       <BottomNavBar active="profile" />
     </div>
