@@ -189,15 +189,15 @@ export default function EditProfilePage() {
           onApply={() => handleApply('location', formData.location)}
           type="bottom"
         >
-          <div className="flex flex-col">
+          <div className="flex flex-col space-y-2">
             {['Thailand', 'Cambodia', 'Phnom Penh', 'Krong'].map((option) => (
               <button
                 key={option}
                 onClick={() => setFormData({ ...formData, location: option })}
-                className={`w-full py-4 text-left ${
+                className={`w-full p-2 rounded-lg ${
                   formData.location === option 
-                    ? 'text-[#FDC51B]' 
-                    : 'text-white'
+                    ? 'bg-[#FDC51B] text-black' 
+                    : 'bg-theme-secondary text-theme-text'
                 }`}
               >
                 {option}
