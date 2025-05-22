@@ -143,7 +143,7 @@ export default function EditProfilePage() {
             type="text"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full bg-[#2C2C2E] text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDC51B]"
+            className="w-full bg-theme-secondary text-theme-primary px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDC51B]"
             placeholder="Enter your username"
           />
         </Modal>
@@ -157,7 +157,7 @@ export default function EditProfilePage() {
           <textarea
             value={formData.bio}
             onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
-            className="w-full bg-[#2C2C2E] text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDC51B] min-h-[100px] resize-none"
+            className="w-full bg-theme-secondary text-theme-primary px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDC51B] min-h-[100px] resize-none"
             placeholder="Write something about yourself"
           />
         </Modal>
