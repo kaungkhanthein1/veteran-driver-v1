@@ -166,7 +166,23 @@ export default function SocialPostCard({ post: providedPost, onOpenComments, com
         </div>
       </div>
 
-      {/* Share Modal */}
+      {/* Add this at the bottom of the component, before the closing div */}
+      {selectedMedia && (
+        typeof selectedMedia === 'string' ? (
+          <ImageModal
+            isOpen={!!selectedMedia}
+            imageUrl={selectedMedia}
+            onClose={() => setSelectedMedia(null)}
+          />
+        ) : selectedMedia.type === 'video' && (
+          <VideoPlayer
+            isOpen={!!selectedMedia}
+            videoUrl={selectedMedia.url}
+            onClose={() => setSelectedMedia(null)}
+          />
+        )
+      )}
+      
       <ShareModal
         isOpen={showShareModal}
         onClose={() => setShowShareModal(false)}

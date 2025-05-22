@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactPlayer from 'react-player';
 
-const VideoPlayer = ({ url, thumbnail, onClose }) => {
+const VideoPlayer = ({ isOpen, videoUrl, onClose }) => {
+  if (!isOpen) return null;
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-lg bg-theme-primary/50">
       <div className="relative w-full max-w-3xl mx-4">
@@ -15,12 +17,11 @@ const VideoPlayer = ({ url, thumbnail, onClose }) => {
         </button>
         <div className="relative pt-[56.25%]">
           <ReactPlayer
-            url={url}
+            url={videoUrl}
             width="100%"
             height="100%"
             controls
             playing
-            light={thumbnail}
             className="absolute top-0 left-0"
           />
         </div>
