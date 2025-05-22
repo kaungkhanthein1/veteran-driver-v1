@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
-import ProfilePic from '../icons/Profile/profilepic.svg';
+import ProfilePic from '../icons/Profile/ProfilePic.svg';
 import Modal from '../components/Modal';
 
 export default function EditProfilePage() {
