@@ -11,7 +11,7 @@ import ExplorePage from "./Pages/ExplorePage";
 import SocialPage from "./Pages/SocialPage";
 import PhoneSignUpPage from "./Pages/PhoneSignUpPage";
 import ForgetPasswordPage from "./Pages/ForgetPasswordPage";
-import ProfilePage from "./Pages/ProfilePage"; // Update this import
+import ProfilePage from "./Pages/ProfilePage";
 import MapWithFilterUI from "./Pages/map/MapWithFilterUI";
 import "leaflet/dist/leaflet.css";
 import SocialUpload from "./Pages/SocialUpload";
@@ -20,6 +20,8 @@ import ChangeThemePage from "./Pages/ChangeThemePage";
 import SettingsPage from './Pages/SettingsPage';
 import EditProfilePage from "./Pages/EditProfilePage";
 import WalletPage from './Pages/WalletPage';
+import PointHistoryPage from './Pages/PointHistoryPage';
+import WithdrawPage from './Pages/WithdrawPage';
 
 function App() {
   return (
@@ -46,6 +48,8 @@ function App() {
           <Route path="/theme" element={<ChangeThemePage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/wallet" element={<WalletPage />} />
+          <Route path="/point-history" element={<PointHistoryPage />} />
+          <Route path="/withdraw" element={<WithdrawPage />} />
         </Routes>
       </Router>
     </ThemeProvider>

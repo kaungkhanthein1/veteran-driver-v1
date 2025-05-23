@@ -79,7 +79,10 @@ export default function WalletPage() {
           <p className="text-theme-subtext text-center mb-2">Total Coins</p>
           <p className="text-4xl text-center font-medium mb-1">15,685.00</p>
           <p className="text-theme-subtext text-center">=23.3$</p>
-          <button className="w-full bg-[#FDC51B] text-black font-medium py-3 rounded-full mt-4">
+          <button 
+            className="w-full bg-[#FDC51B] text-black font-medium py-3 rounded-full mt-4"
+            onClick={() => navigate('/withdraw')}
+          >
             Withdraw
           </button>
         </div>
@@ -88,7 +91,10 @@ export default function WalletPage() {
         <div className="mx-4 mt-6">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-theme-text text-lg">Point History</h2>
-            <button className="text-theme-subtext flex items-center gap-1">
+            <button 
+              className="text-theme-subtext flex items-center gap-1"
+              onClick={() => navigate('/point-history')}
+            >
               View All
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
