@@ -12,12 +12,12 @@ export default function EditProfilePage() {
     bio: "Passionate traveler 🌏 embracing the journey.",
     gender: "Female",
     location: "Cambodia , Phnom Penh",
-    avatar: null,
+    avatar: ProfilePic,
     userId: "5839234"
   });
 
   const [modalState, setModalState] = useState({
-    username: false,
+    name: false,
     bio: false,
     gender: false,
     location: false
@@ -35,6 +35,25 @@ export default function EditProfilePage() {
     setFormData({ ...formData, [field]: value });
     localStorage.setItem('profileData', JSON.stringify({ ...formData, [field]: value }));
     handleCloseModal(field);
+  };
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData(prev => ({
+          ...prev,
+          avatar: reader.result
+        }));
+        // Save to localStorage
+        localStorage.setItem('profileData', JSON.stringify({
+          ...formData,
+          avatar: reader.result
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -59,23 +78,29 @@ export default function EditProfilePage() {
           <div className="relative">
             <div className="w-24 h-24 rounded-full overflow-hidden">
               <img 
-                src={ProfilePic} 
+                src={formData.avatar} 
                 alt="Profile" 
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="absolute bottom-0 right-0 w-6 h-6 bg-[#FDC51B] rounded-full flex items-center justify-center">
+            <label className="absolute bottom-0 right-0 w-6 h-6 bg-[#FDC51B] rounded-full flex items-center justify-center cursor-pointer">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                className="hidden"
+              />
               <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
               </svg>
-            </div>
+            </label>
           </div>
         </div>
 
         {/* Menu List Container */}
         <div className="mx-4 bg-theme-secondary rounded-xl overflow-hidden">
           <button 
-            onClick={() => handleOpenModal('username')}
+            onClick={() => handleOpenModal('name')}
             className="w-full px-4 py-4 flex items-center justify-between"
           >
             <span className="text-theme-text">Change Username</span>
@@ -135,8 +160,8 @@ export default function EditProfilePage() {
         {/* Modals */}
         <Modal
           title="Change Username"
-          isOpen={modalState.username}
-          onClose={() => handleCloseModal('username')}
+          isOpen={modalState.name}
+          onClose={() => handleCloseModal('name')}
           onApply={() => handleApply('name', formData.name)}
         >
           <input
