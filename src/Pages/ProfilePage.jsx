@@ -147,7 +147,15 @@ export default function ProfilePage() {
           {/* Menu Grid */}
           <div className="px-4 grid grid-cols-2 gap-3 mb-4">
             {menuItems.filter(item => item.type === "card").map(item => (
-              <button key={item.id} className="bg-theme-secondary rounded-lg p-4 flex flex-col items-center justify-center gap-2">
+              <button 
+                key={item.id} 
+                className="bg-theme-secondary rounded-lg p-4 flex flex-col items-center justify-center gap-2"
+                onClick={() => {
+                  if (item.title === "My point wallet") {
+                    navigate('/wallet');
+                  }
+                }}
+              >
                 <img 
                   src={item.icon} 
                   alt={t(item.translationKey)} 

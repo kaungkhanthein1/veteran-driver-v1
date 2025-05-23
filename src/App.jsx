@@ -19,6 +19,7 @@ import AddLocationPage from "./Pages/AddLocation/AddLocationPage";
 import ChangeThemePage from "./Pages/ChangeThemePage";
 import SettingsPage from './Pages/SettingsPage';
 import EditProfilePage from "./Pages/EditProfilePage";
+import WalletPage from './Pages/WalletPage';
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           <Route path="/social/upload" element={<SocialUpload />} />
           <Route path="/theme" element={<ChangeThemePage />} />
           <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/wallet" element={<WalletPage />} />
         </Routes>
       </Router>
     </ThemeProvider>
