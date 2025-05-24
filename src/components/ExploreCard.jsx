@@ -1,10 +1,10 @@
 import React from "react";
 import Bookmark from "../icons/Bookmark.svg";
 
-export default function ExploreCard({ item, status, onClick, showBookmark = true }) {
+export default function ExploreCard({ item, status, onClick, selected, isRecycleBin = false, onRestore }) {
   return (
     <div 
-      className="bg-theme-secondary rounded-lg overflow-hidden cursor-pointer" 
+      className={`bg-theme-secondary rounded-lg overflow-hidden cursor-pointer ${selected ? 'border-2 border-[#FDC51B]' : ''}`} 
       onClick={onClick}
     >
       <div className="p-4 space-y-4">
@@ -12,9 +12,7 @@ export default function ExploreCard({ item, status, onClick, showBookmark = true
           {[1, 2, 3].map((_, index) => (
             <div
               key={index}
-              className={`aspect-square bg-theme-primary rounded-lg ${
-                index === 2 ? "relative" : ""
-              }`}
+              className={`aspect-square bg-theme-primary rounded-lg ${index === 2 ? "relative" : ""}`}
             >
               {index === 2 && (
                 <div className="absolute inset-0 bg-theme-primary bg-opacity-50 rounded-lg flex items-center justify-center">
@@ -27,17 +25,13 @@ export default function ExploreCard({ item, status, onClick, showBookmark = true
             </div>
           ))}
           
-          {/* Conditional rendering for bookmark or status */}
-          {showBookmark ? (
+          {/* Bookmark or Status */}
+          {!isRecycleBin ? (
             <div className="absolute top-2 right-2">
               <img src={Bookmark} alt="bookmark" className="w-6 h-6" />
             </div>
           ) : status && (
-            <div className={`absolute -top-1 right-0 px-2 py-1 rounded-full text-xs font-medium ${
-              status.toLowerCase() === 'approved' ? 'bg-green-500 text-white' :
-              status.toLowerCase() === 'rejected' ? 'bg-red-500 text-white' :
-              'bg-yellow-500 text-white'
-            }`}>
+            <div className={`absolute -top-1 right-0 px-2 py-1 rounded-full text-xs font-medium ${status.toLowerCase() === 'approved' ? 'bg-green-500 text-white' : status.toLowerCase() === 'rejected' ? 'bg-red-500 text-white' : 'bg-yellow-500 text-white'}`}>
               {status}
             </div>
           )}
@@ -72,8 +66,16 @@ export default function ExploreCard({ item, status, onClick, showBookmark = true
 
         <div className="flex items-center justify-between">
           <span className="text-[#FFC61B] font-medium">{item.price}</span>
-          <button className="bg-[#FFC61B] text-black px-4 py-1.5 rounded-full text-sm font-medium">
-            View Place
+          <button 
+            className="bg-[#FFC61B] text-black px-4 py-1.5 rounded-full text-sm font-medium"
+            onClick={(e) => {
+              e.stopPropagation();
+              if (isRecycleBin && onRestore) {
+                onRestore(item);
+              }
+            }}
+          >
+            {isRecycleBin ? 'Restore' : 'View Place'}
           </button>
         </div>
       </div>
