@@ -153,6 +153,8 @@ export default function ProfilePage() {
                 onClick={() => {
                   if (item.title === "My point wallet") {
                     navigate('/wallet');
+                  } else if (item.title === "My uploaded location") {
+                    navigate('/uploaded-location');
                   }
                 }}
               >

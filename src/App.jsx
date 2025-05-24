@@ -22,6 +22,7 @@ import EditProfilePage from "./Pages/EditProfilePage";
 import WalletPage from './Pages/WalletPage';
 import PointHistoryPage from './Pages/PointHistoryPage';
 import WithdrawPage from './Pages/WithdrawPage';
+import UploadedLocationPage from './Pages/UploadedLocationPage';
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
           <Route path="/wallet" element={<WalletPage />} />
           <Route path="/point-history" element={<PointHistoryPage />} />
           <Route path="/withdraw" element={<WithdrawPage />} />
+          <Route path="/uploaded-location" element={<UploadedLocationPage />} />
         </Routes>
       </Router>
     </ThemeProvider>

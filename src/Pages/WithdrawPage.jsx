@@ -10,6 +10,25 @@ export default function WithdrawPage() {
   const [bankAccountName, setBankAccountName] = useState('');
   const [bankAccountNumber, setBankAccountNumber] = useState('');
   const [proofImage, setProofImage] = useState(null);
+  const [showPaymentMethods, setShowPaymentMethods] = useState(false);
+  const [selectedPayment, setSelectedPayment] = useState('Bank Account');
+
+  const paymentMethods = [
+    { name: 'Bank Account', default: true },
+    { 
+      name: 'Credit Card', 
+      icons: [
+        '/visa.png',
+        '/mastercard.png',
+        '/amex.png',
+        '/discover.png'
+      ]
+    },
+    { name: 'AliPay', icon: '/alipay.png' },
+    { name: 'Google Pay', icon: '/googlepay.png' },
+    { name: 'Apple Pay', icon: '/applepay.png' },
+    { name: 'WeChat', icon: '/wechat.png' }
+  ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -171,23 +190,3 @@ export default function WithdrawPage() {
     </div>
   );
 }
-
-  const [showPaymentMethods, setShowPaymentMethods] = useState(false);
-  const [selectedPayment, setSelectedPayment] = useState('Bank Account');
-
-  const paymentMethods = [
-    { name: 'Bank Account', default: true },
-    { 
-      name: 'Credit Card', 
-      icons: [
-        '/visa.png',
-        '/mastercard.png',
-        '/amex.png',
-        '/discover.png'
-      ]
-    },
-    { name: 'AliPay', icon: '/alipay.png' },
-    { name: 'Google Pay', icon: '/googlepay.png' },
-    { name: 'Apple Pay', icon: '/applepay.png' },
-    { name: 'WeChat', icon: '/wechat.png' }
-  ];
