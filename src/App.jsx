@@ -23,6 +23,7 @@ import WalletPage from './Pages/WalletPage';
 import PointHistoryPage from './Pages/PointHistoryPage';
 import WithdrawPage from './Pages/WithdrawPage';
 import UploadedLocationPage from './Pages/UploadedLocationPage';
+import RecycleBinPage from "./Pages/RecycleBinPage";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
           <Route path="/point-history" element={<PointHistoryPage />} />
           <Route path="/withdraw" element={<WithdrawPage />} />
           <Route path="/uploaded-location" element={<UploadedLocationPage />} />
+          <Route path="/recycle-bin" element={<RecycleBinPage />} />
         </Routes>
       </Router>
     </ThemeProvider>

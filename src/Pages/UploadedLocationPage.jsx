@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import ExploreCard from "../components/ExploreCard";
+import RecycleBinIcon from "../icons/RecycleBin.svg";
+import { useNavigate } from "react-router-dom";
 
 export default function UploadedLocationPage() {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("approved");
 
@@ -26,10 +29,12 @@ export default function UploadedLocationPage() {
           </svg>
         </button>
         <h1 className="text-lg font-semibold">Uploaded Location</h1>
-        <button className="ml-auto">
-          <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
-          </svg>
+        <button className="ml-auto" onClick={() => navigate('/recycle-bin')}>
+          <img
+            src={RecycleBinIcon}
+            alt="Recycle Bin"
+            className="w-6 h-6 [filter:var(--icon-filter)]"
+          />
         </button>
       </div>
 

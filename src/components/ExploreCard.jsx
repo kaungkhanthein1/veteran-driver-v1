@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ExploreCard({ item }) {
+export default function ExploreCard({ item, status }) {
   return (
     <div className="bg-theme-secondary rounded-lg overflow-hidden">
       <div className="p-4 space-y-4">
@@ -22,11 +22,15 @@ export default function ExploreCard({ item }) {
               )}
             </div>
           ))}
-          <button className="absolute -top-1 right-0">
-            <svg className="w-6 h-6 text-theme-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-            </svg>
-          </button>
+          {status && (
+            <div className={`absolute -top-1 right-0 px-2 py-1 rounded-full text-xs font-medium ${
+              status.toLowerCase() === 'approved' ? 'bg-green-500 text-white' :
+              status.toLowerCase() === 'rejected' ? 'bg-red-500 text-white' :
+              'bg-yellow-500 text-white'
+            }`}>
+              {status}
+            </div>
+          )}
         </div>
 
         <div>
