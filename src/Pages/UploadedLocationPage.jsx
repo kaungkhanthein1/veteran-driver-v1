@@ -16,7 +16,18 @@ export default function UploadedLocationPage() {
     rating: "5.0",
     reviews: "128",
     services: ["Service 1", "Service 2", "Service3"],
-    price: "50 USD"
+    price: "50 USD",
+    description: "Providing the ultimate relaxation you deserve. Our professional massage services are tailored to melt away your escape today",
+    address: "E88/4 ist eine Kleinstadt in Mittel-Navarra in Spanien. Estella hat 14 329",
+    mobileNumber: "+18554992035",
+    photos: [],
+    status: activeTab
+  };
+
+  const handleCardClick = (location) => {
+    navigate('/edit-location', { 
+      state: { locationData: location }
+    });
   };
 
   return (
@@ -53,8 +64,11 @@ export default function UploadedLocationPage() {
 
       {/* Content */}
       <div className="p-4 space-y-4">
-        {/* We'll add conditional rendering based on activeTab later */}
-        <ExploreCard item={sampleLocation} />
+        <ExploreCard 
+          item={sampleLocation} 
+          status={activeTab}
+          onClick={() => handleCardClick(sampleLocation)}
+        />
         <ExploreCard item={sampleLocation} />
         <ExploreCard item={sampleLocation} />
       </div>

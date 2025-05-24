@@ -1,8 +1,12 @@
 import React from "react";
+import Bookmark from "../icons/Bookmark.svg";
 
-export default function ExploreCard({ item, status }) {
+export default function ExploreCard({ item, status, onClick, showBookmark = true }) {
   return (
-    <div className="bg-theme-secondary rounded-lg overflow-hidden">
+    <div 
+      className="bg-theme-secondary rounded-lg overflow-hidden cursor-pointer" 
+      onClick={onClick}
+    >
       <div className="p-4 space-y-4">
         <div className="grid grid-cols-3 gap-2 relative">
           {[1, 2, 3].map((_, index) => (
@@ -22,7 +26,13 @@ export default function ExploreCard({ item, status }) {
               )}
             </div>
           ))}
-          {status && (
+          
+          {/* Conditional rendering for bookmark or status */}
+          {showBookmark ? (
+            <div className="absolute top-2 right-2">
+              <img src={Bookmark} alt="bookmark" className="w-6 h-6" />
+            </div>
+          ) : status && (
             <div className={`absolute -top-1 right-0 px-2 py-1 rounded-full text-xs font-medium ${
               status.toLowerCase() === 'approved' ? 'bg-green-500 text-white' :
               status.toLowerCase() === 'rejected' ? 'bg-red-500 text-white' :

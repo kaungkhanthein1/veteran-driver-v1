@@ -42,7 +42,12 @@ export default function RecycleBinPage() {
       {/* Content */}
       <div className="p-4 space-y-4">
         {deletedLocations.map((location, index) => (
-          <ExploreCard key={index} item={location} status={location.status} />
+          <ExploreCard 
+            key={index} 
+            item={location} 
+            status={location.status} 
+            showBookmark={false} 
+          />
         ))}
       </div>
     </div>
