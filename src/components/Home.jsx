@@ -123,12 +123,12 @@ const HomePage = () => {
             </div>
             <div className="relative">
               <div className="flex overflow-x-auto gap-3 pb-4 scrollbar-hide">
-                {feedbacks.map(feedback => (
+                {feedbacks.map((feedback, index) => (
                   <div 
                     key={feedback.id} 
-                    className="w-[280px] flex-none" // Increased width to show more content
+                    className="w-[280px] flex-none flex"
                   >
-                    <SocialPostCard post={feedback} compact />
+                    <SocialPostCard post={feedback} compact className="flex-1" />
                   </div>
                 ))}
               </div>

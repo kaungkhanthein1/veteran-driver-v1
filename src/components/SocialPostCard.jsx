@@ -100,7 +100,7 @@ export default function SocialPostCard({ post: providedPost, onOpenComments, com
       )}
 
       {/* Media Grid */}
-      <div className={`grid grid-cols-3 gap-[1px] ${compact ? 'h-[100px]' : ''}`}>
+      <div className={`grid grid-cols-3 gap-[1px] ${compact ? 'aspect-[3/1]' : ''}`}>
         {[
           BeachImg,
           RoomImg,
