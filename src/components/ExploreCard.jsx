@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import Bookmark from "../icons/Bookmark.svg";
-import BeachImg from "../assets/Beach.png";
-import RoomImg from "../assets/Room.png";
-import SampleVideo from "../assets/Sample.mp4";
+import GoldenGate from "../assets/GoldenGate.png";
+import GoldenGateRoom from "../assets/GoldenGateRoom.png";
+import Harrier from "../assets/Harrier.png";
+import HarrierRoom from "../assets/HarrierRoom.png";
+import ExploreVideo from "../assets/Explore.mp4";
+import ExploreVd from "../assets/Explore Vd.mp4";
 import VideoPlayer from "./VideoPlayer";
+import ImageModal from "./ImageModal";
 
 export default function ExploreCard({ 
   item, 
@@ -30,21 +34,21 @@ export default function ExploreCard({
         <div className="grid grid-cols-3 gap-2 relative">
           <div 
             className="aspect-square bg-theme-primary rounded-lg overflow-hidden cursor-pointer"
-            onClick={() => handleMediaClick(BeachImg)}
+            onClick={() => handleMediaClick(GoldenGate)}
           >
-            <img src={BeachImg} alt="Beach" className="w-full h-full object-cover" />
+            <img src={GoldenGate} alt="Golden Gate" className="w-full h-full object-cover" />
           </div>
           <div 
             className="aspect-square bg-theme-primary rounded-lg overflow-hidden cursor-pointer"
-            onClick={() => handleMediaClick(RoomImg)}
+            onClick={() => handleMediaClick(Harrier)}
           >
-            <img src={RoomImg} alt="Room" className="w-full h-full object-cover" />
+            <img src={Harrier} alt="Harrier" className="w-full h-full object-cover" />
           </div>
           <div 
             className="aspect-square bg-theme-primary rounded-lg relative overflow-hidden cursor-pointer"
-            onClick={() => handleMediaClick({ type: "video", url: SampleVideo, thumbnail: RoomImg })}
+            onClick={() => handleMediaClick({ type: "video", url: ExploreVideo, thumbnail: HarrierRoom })}
           >
-            <img src={RoomImg} alt="Video thumbnail" className="w-full h-full object-cover" />
+            <img src={HarrierRoom} alt="Video thumbnail" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-black bg-opacity-50 rounded-lg flex items-center justify-center">
               <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M8 5v14l11-7z" />
@@ -119,13 +123,21 @@ export default function ExploreCard({
         </div>
       </div>
 
-      {/* Video Player Modal */}
-      {selectedMedia && selectedMedia.type === "video" && (
-        <VideoPlayer
-          isOpen={!!selectedMedia}
-          videoUrl={selectedMedia.url}
-          onClose={() => setSelectedMedia(null)}
-        />
+      {/* Media Modals */}
+      {selectedMedia && (
+        typeof selectedMedia === 'string' ? (
+          <ImageModal
+            isOpen={!!selectedMedia}
+            imageUrl={selectedMedia}
+            onClose={() => setSelectedMedia(null)}
+          />
+        ) : selectedMedia.type === "video" && (
+          <VideoPlayer
+            isOpen={!!selectedMedia}
+            videoUrl={selectedMedia.url}
+            onClose={() => setSelectedMedia(null)}
+          />
+        )
       )}
     </div>
   );
