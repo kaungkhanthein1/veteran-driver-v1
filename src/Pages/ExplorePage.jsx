@@ -32,7 +32,19 @@ const exploreItems = [
 
 export default function ExplorePage() {
   const [activeTab, setActiveTab] = useState("Hotel");
+  const [bookmarkedItems, setBookmarkedItems] = useState([]);
   const navigate = useNavigate();
+
+  const handleBookmarkClick = (item) => {
+    setBookmarkedItems(prev => {
+      const isBookmarked = prev.some(bookmarked => bookmarked.id === item.id);
+      if (isBookmarked) {
+        return prev.filter(bookmarked => bookmarked.id !== item.id);
+      } else {
+        return [...prev, item];
+      }
+    });
+  };
 
   return (
     <div className="min-h-screen flex justify-center bg-theme-primary">
@@ -121,8 +133,14 @@ export default function ExplorePage() {
 
           {/* Cards Grid */}
           <div className="p-4 grid gap-4">
-            {exploreItems.map(item => (
-              <ExploreCard key={item.id} item={item} />
+            {exploreItems.map((item) => (
+              <ExploreCard
+                key={item.id}
+                item={item}
+                onClick={() => {}}
+                isBookmarked={bookmarkedItems.some(bookmarked => bookmarked.id === item.id)}
+                onBookmarkClick={handleBookmarkClick}
+              />
             ))}
           </div>
         </div>

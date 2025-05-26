@@ -6,11 +6,13 @@ import SocialPostCard from './SocialPostCard';
 import ExploreCard from './ExploreCard';
 import BottomNavBar from './BottomNavBar';
 import TopPicks from './TopPicks';
+import { useBookmarks } from '../hooks/useBookmarks';
 
 const HomePage = () => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState('Hotels');
   const [activeService, setActiveService] = useState('Service 1');
+  const { isBookmarked, toggleBookmark } = useBookmarks();
 
   // Mock data for feedbacks
   const feedbacks = [
@@ -177,7 +179,12 @@ const HomePage = () => {
           {/* Places Grid */}
           <div className="px-4 py-5 grid gap-4">
             {places.map(place => (
-              <ExploreCard key={place.id} item={place} />
+              <ExploreCard 
+                key={place.id} 
+                item={place} 
+                isBookmarked={isBookmarked(place.id)}
+                onBookmarkClick={() => toggleBookmark(place)}
+              />
             ))}
           </div>
         </div>

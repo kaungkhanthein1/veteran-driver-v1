@@ -179,6 +179,8 @@ export default function ProfilePage() {
                     navigate("/theme");
                   } else if (item.title === "Change Application Language") {
                     setShowLanguageModal(true);
+                  } else if (item.title === "Bookmark Location") {
+                    navigate("/bookmarks");
                   }
                 }}
               >

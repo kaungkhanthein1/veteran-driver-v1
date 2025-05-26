@@ -1,7 +1,16 @@
 import React from "react";
 import Bookmark from "../icons/Bookmark.svg";
 
-export default function ExploreCard({ item, status, onClick, selected, isRecycleBin = false, onRestore }) {
+export default function ExploreCard({ 
+  item, 
+  status, 
+  onClick, 
+  selected, 
+  isRecycleBin = false, 
+  onRestore, 
+  isBookmarked = false, 
+  onBookmarkClick 
+}) {
   return (
     <div 
       className={`bg-theme-secondary rounded-lg overflow-hidden cursor-pointer ${selected ? 'border-2 border-[#FDC51B]' : ''}`} 
@@ -27,9 +36,21 @@ export default function ExploreCard({ item, status, onClick, selected, isRecycle
           
           {/* Bookmark or Status */}
           {!isRecycleBin ? (
-            <div className="absolute top-2 right-2">
-              <img src={Bookmark} alt="bookmark" className="w-6 h-6" />
-            </div>
+            <button 
+              className="absolute top-2 right-2 p-1"
+              onClick={(e) => {
+                e.stopPropagation();
+                if (onBookmarkClick) {
+                  onBookmarkClick(item);
+                }
+              }}
+            >
+              <img 
+                src={Bookmark} 
+                alt="bookmark" 
+                className={`w-6 h-6 ${isBookmarked ? '[filter:invert(70%)_sepia(74%)_saturate(1115%)_hue-rotate(359deg)_brightness(103%)_contrast(106%)]' : '[filter:var(--icon-filter)]'}`} 
+              />
+            </button>
           ) : status && (
             <div className={`absolute -top-1 right-0 px-2 py-1 rounded-full text-xs font-medium ${status.toLowerCase() === 'approved' ? 'bg-green-500 text-white' : status.toLowerCase() === 'rejected' ? 'bg-red-500 text-white' : 'bg-yellow-500 text-white'}`}>
               {status}

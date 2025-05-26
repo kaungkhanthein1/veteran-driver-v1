@@ -25,6 +25,7 @@ import WithdrawPage from './Pages/WithdrawPage';
 import UploadedLocationPage from './Pages/UploadedLocationPage';
 import RecycleBinPage from "./Pages/RecycleBinPage";
 import EditLocationPage from "./Pages/EditLocationPage";
+import BookmarksPage from './Pages/BookmarksPage';
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
           <Route path="/uploaded-location" element={<UploadedLocationPage />} />
           <Route path="/recycle-bin" element={<RecycleBinPage />} />
           <Route path="/edit-location" element={<EditLocationPage />} />
+          <Route path="/bookmarks" element={<BookmarksPage />} />
         </Routes>
       </Router>
     </ThemeProvider>
