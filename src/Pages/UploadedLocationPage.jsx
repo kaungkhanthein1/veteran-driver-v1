@@ -3,14 +3,17 @@ import { useTranslation } from "react-i18next";
 import ExploreCard from "../components/ExploreCard";
 import RecycleBinIcon from "../icons/RecycleBin.svg";
 import { useNavigate } from "react-router-dom";
+import { useBookmarks } from '../hooks/useBookmarks';
 
 export default function UploadedLocationPage() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("approved");
+  const { isBookmarked, toggleBookmark } = useBookmarks();
 
   // Temporary data structure - will be replaced with actual data later
   const sampleLocation = {
+    id: 1, // Add this line to ensure bookmark functionality works
     name: "Golden Gate",
     distance: "Phenom Penh ( 12km away )",
     rating: "5.0",
@@ -68,9 +71,19 @@ export default function UploadedLocationPage() {
           item={sampleLocation} 
           status={activeTab}
           onClick={() => handleCardClick(sampleLocation)}
+          isBookmarked={isBookmarked(sampleLocation.id)}
+          onBookmarkClick={() => toggleBookmark(sampleLocation)}
         />
-        <ExploreCard item={sampleLocation} />
-        <ExploreCard item={sampleLocation} />
+        <ExploreCard 
+          item={sampleLocation} 
+          isBookmarked={isBookmarked(sampleLocation.id)}
+          onBookmarkClick={() => toggleBookmark(sampleLocation)}
+        />
+        <ExploreCard 
+          item={sampleLocation} 
+          isBookmarked={isBookmarked(sampleLocation.id)}
+          onBookmarkClick={() => toggleBookmark(sampleLocation)}
+        />
       </div>
     </div>
   );

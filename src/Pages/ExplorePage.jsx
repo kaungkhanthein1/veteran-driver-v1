@@ -5,6 +5,7 @@ import ExploreTabs from "../components/ExploreTabs";
 import ExploreCard from "../components/ExploreCard";
 import TopPicks from "../components/TopPicks";
 import AddLocationIcon from "../icons/AddLocation.svg";
+import { useBookmarks } from '../hooks/useBookmarks';
 
 // Mock data for explore items
 const exploreItems = [
@@ -32,19 +33,8 @@ const exploreItems = [
 
 export default function ExplorePage() {
   const [activeTab, setActiveTab] = useState("Hotel");
-  const [bookmarkedItems, setBookmarkedItems] = useState([]);
   const navigate = useNavigate();
-
-  const handleBookmarkClick = (item) => {
-    setBookmarkedItems(prev => {
-      const isBookmarked = prev.some(bookmarked => bookmarked.id === item.id);
-      if (isBookmarked) {
-        return prev.filter(bookmarked => bookmarked.id !== item.id);
-      } else {
-        return [...prev, item];
-      }
-    });
-  };
+  const { isBookmarked, toggleBookmark } = useBookmarks();
 
   return (
     <div className="min-h-screen flex justify-center bg-theme-primary">
@@ -138,8 +128,8 @@ export default function ExplorePage() {
                 key={item.id}
                 item={item}
                 onClick={() => {}}
-                isBookmarked={bookmarkedItems.some(bookmarked => bookmarked.id === item.id)}
-                onBookmarkClick={handleBookmarkClick}
+                isBookmarked={isBookmarked(item.id)}
+                onBookmarkClick={() => toggleBookmark(item)}
               />
             ))}
           </div>
