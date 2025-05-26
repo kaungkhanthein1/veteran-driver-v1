@@ -4,22 +4,20 @@ const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(() => {
-    // Try to get the saved theme from localStorage
     const savedTheme = localStorage.getItem('theme');
-    return savedTheme || 'dark'; // Default to dark if no theme is saved
+    return savedTheme || 'dark';
   });
 
   const toggleTheme = (newTheme) => {
     setTheme(newTheme);
-    // Save the theme choice to localStorage
     localStorage.setItem('theme', newTheme);
-    // Update the data-theme attribute
     document.documentElement.setAttribute('data-theme', newTheme);
+    document.documentElement.style.backgroundColor = newTheme === 'dark' ? '#181818' : '#ffffff';
   };
 
-  // Apply the theme when the component mounts
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.style.backgroundColor = theme === 'dark' ? '#181818' : '#ffffff';
   }, [theme]);
 
   return (

@@ -28,6 +28,7 @@ import EditLocationPage from "./Pages/EditLocationPage";
 
 function App() {
   return (
+    <div className="max-w-[480px] mx-auto min-h-screen bg-theme-primary">
     <ThemeProvider>
       <Router>
         <Routes>
@@ -55,11 +56,11 @@ function App() {
           <Route path="/withdraw" element={<WithdrawPage />} />
           <Route path="/uploaded-location" element={<UploadedLocationPage />} />
           <Route path="/recycle-bin" element={<RecycleBinPage />} />
-          // In your routes
           <Route path="/edit-location" element={<EditLocationPage />} />
         </Routes>
       </Router>
     </ThemeProvider>
+    </div>
   );
 }
 

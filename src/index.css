@@ -6,6 +6,7 @@
 
 :root[data-theme="dark"] {
   --bg-gradient: linear-gradient(to bottom, #281c12, black, black);
+  --bg-solid: #181818;
   --bg-primary: #181818;
   --bg-secondary: #232323;
   --text-primary: #ffffff;
@@ -19,6 +20,7 @@
 
 :root[data-theme="white"] {
   --bg-gradient: linear-gradient(to bottom, #ffffff, #f5f5f5);
+  --bg-solid: #ffffff;
   --bg-primary: #ffffff;
   --bg-secondary: #edeef1;
   --text-primary: #000000;
@@ -30,21 +32,41 @@
   --icon-filter: brightness(0) saturate(100%);
 }
 
+/* Reset default margins and ensure full height */
 html, body {
-  background: var(--bg-gradient) fixed;
   margin: 0;
   padding: 0;
-  min-height: 100vh;
   height: 100%;
-  overflow: hidden;
-  color: var(--text-primary);
+  width: 100%;
 }
 
+/* Set solid background color for browser */
+html {
+  background-color: var(--bg-solid);
+}
+
+/* Apply gradient to body */
+body {
+  background: var(--bg-gradient);
+  color: var(--text-primary);
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+/* Ensure root container covers entire viewport with gradient */
 #root {
   min-height: 100vh;
   height: 100%;
-  overflow: auto;
-  background-color: transparent;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--bg-gradient);
+  overflow-y: auto;
+  z-index: 2;
 }
 
 .yellow-gradient {
