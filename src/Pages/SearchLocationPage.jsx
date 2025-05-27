@@ -78,12 +78,7 @@ export default function SearchLocationPage() {
       <div className="max-w-[480px] mx-auto">
         {/* Search Header */}
         <div className="flex items-center gap-2 p-4 bg-theme-secondary">
-          <button
-            onClick={() => navigate(-1)}
-            className="p-2"
-          >
-            <img src="/src/icons/ArrowBack.svg" alt="back" className="w-6 h-6" />
-          </button>
+          <BackButton/>
           <div className="relative flex-1">
             <input
               type="text"
