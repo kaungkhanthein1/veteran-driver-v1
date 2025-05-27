@@ -27,6 +27,7 @@ import RecycleBinPage from "./Pages/RecycleBinPage";
 import EditLocationPage from "./Pages/EditLocationPage";
 import BookmarksPage from './Pages/BookmarksPage';
 import RankingPage from './Pages/RankingPage';
+import SearchLocationPage from "./Pages/SearchLocationPage";
 
 function App() {
   return (
@@ -61,6 +62,7 @@ function App() {
           <Route path="/edit-location" element={<EditLocationPage />} />
           <Route path="/bookmarks" element={<BookmarksPage />} />
           <Route path="/ranking" element={<RankingPage />} />
+          <Route path="/search" element={<SearchLocationPage />} />
         </Routes>
       </Router>
     </ThemeProvider>

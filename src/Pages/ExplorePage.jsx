@@ -51,6 +51,7 @@ export default function ExplorePage() {
                   type="text"
                   placeholder="Search location..."
                   className="bg-transparent text-theme-primary w-full outline-none text-[14px] placeholder-theme-secondary focus:outline-none focus:ring-0 border-none"
+                  onClick={() => navigate('/search')}
                 />
               </div>
               <button 
