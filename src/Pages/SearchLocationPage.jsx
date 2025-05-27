@@ -51,7 +51,11 @@ export default function SearchLocationPage() {
   const suggestions = searchQuery
     ? exploreItems.filter(item =>
         item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.type.toLowerCase().includes(searchQuery.toLowerCase())
+        item.type.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.services.some(service => 
+          service.toLowerCase().includes(searchQuery.toLowerCase())
+        ) ||
+        item.distance.toLowerCase().includes(searchQuery.toLowerCase())
       )
     : [];
 
@@ -85,10 +89,11 @@ export default function SearchLocationPage() {
               placeholder="Search Places ..."
               value={searchQuery}
               onChange={(e) => {
-                setSearchQuery(e.target.value);
-                setShowSuggestions(true);
+                const value = e.target.value;
+                setSearchQuery(value);
+                setShowSuggestions(value.length > 0);
               }}
-              onFocus={() => setShowSuggestions(true)}
+              onFocus={() => setShowSuggestions(searchQuery.length > 0)}
               className="bg-transparent text-theme-primary w-full outline-none text-[16px] focus:outline-none focus:ring-0 border-none"
             />
             {searchQuery && (
