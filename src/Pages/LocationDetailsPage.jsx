@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import BackButton from '../components/BackButton';
-
-// Add these imports at the top of the file
 import PlaceIcon from '../icons/Place.svg';
 import ScheduleIcon from '../icons/Schedule.svg';
 import ShareIcon from '../icons/Share.svg';
 import BookmarkIcon from '../icons/Bookmark.svg';
-import BeachImage from '../assets/Beach.png';
-import GoldenGateImage from '../assets/GoldenGate.png';
-import HarrierImage from '../assets/Harrier.png';
+import RoomImage from '../assets/Room.png';
+import GoldenGateRoomImage from '../assets/GoldenGateRoom.png';
+import HarrierRoomImage from '../assets/HarrierRoom.png';
 
 const LocationDetailsPage = () => {
   const { id } = useParams();
@@ -29,9 +27,7 @@ const LocationDetailsPage = () => {
     phone: '09428428533',
     openHours: '24 Hour Open',
     images: [
-      '/src/assets/Room.png',
-      '/src/assets/GoldenGateRoom.png',
-      '/src/assets/HarrierRoom.png'
+      RoomImage, GoldenGateRoomImage, HarrierRoomImage
     ],
     services: [
       { name: 'Service 1', price: '60 USD' },
@@ -74,7 +70,7 @@ const LocationDetailsPage = () => {
           <img src={BookmarkIcon} alt="Bookmark" className="w-6 h-6 [filter:brightness(0)_saturate(100%)_invert(100%)]" />
         </button>
         <div className="absolute bottom-4 right-4 px-3 py-1 rounded bg-[#FDC51B] text-black font-medium">
-          {location.price}
+          {locationData.price}
         </div>
       </div>
 
@@ -83,21 +79,21 @@ const LocationDetailsPage = () => {
         <div>
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-theme-primary text-xl font-semibold">{location.name}</h2>
-              <p className="text-theme-secondary text-sm">{location.distance}</p>
+              <h2 className="text-theme-primary text-xl font-semibold">{locationData.name}</h2>
+              <p className="text-theme-secondary text-sm">{locationData.distance}</p>
             </div>
             <div className="flex items-center space-x-1">
               {[...Array(5)].map((_, index) => (
                 <span 
                   key={index}
-                  className={`text-2xl ${index < location.rating ? 'text-[#FDC51B]' : 'text-gray-300'}`}
+                  className={`text-2xl ${index < locationData.rating ? 'text-[#FDC51B]' : 'text-gray-300'}`}
                 >
                   ★
                 </span>
               ))}
             </div>
           </div>
-          <p className="mt-2 text-theme-secondary line-clamp-3">{location.description}</p>
+          <p className="mt-2 text-theme-secondary line-clamp-3">{locationData.description}</p>
           <button className="text-[#FDC51B] text-sm mt-1">see more</button>
         </div>
 

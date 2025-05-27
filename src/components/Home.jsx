@@ -7,6 +7,23 @@ import ExploreCard from './ExploreCard';
 import BottomNavBar from './BottomNavBar';
 import TopPicks from './TopPicks';
 import { useBookmarks } from '../hooks/useBookmarks';
+import GoldenGateImage from '../assets/GoldenGate.png';
+import HarrierImage from '../assets/Harrier.png';
+
+const nearestPlaces = [
+  {
+    id: 1,
+    name: "Kuma",
+    price: "50 USD",
+    image: GoldenGateImage
+  },
+  {
+    id: 2,
+    name: "Sunny",
+    price: "45 USD",
+    image: HarrierImage
+  }
+];
 
 const HomePage = () => {
   const { t } = useTranslation();

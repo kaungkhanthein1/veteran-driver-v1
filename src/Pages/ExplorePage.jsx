@@ -5,6 +5,8 @@ import ExploreTabs from "../components/ExploreTabs";
 import ExploreCard from "../components/ExploreCard";
 import TopPicks from "../components/TopPicks";
 import AddLocationIcon from "../icons/AddLocation.svg";
+import GoldenGateImage from '../assets/GoldenGate.png';
+import HarrierImage from '../assets/Harrier.png';
 import { useBookmarks } from '../hooks/useBookmarks';
 
 // Mock data for explore items
@@ -17,7 +19,8 @@ const exploreItems = [
     reviews: 128,
     distance: "12km away",
     services: ["Service 1", "Service 2", "Service3"],
-    type: "Hotel"
+    type: "Hotel",
+    image: GoldenGateImage
   },
   {
     id: 2,
@@ -27,7 +30,8 @@ const exploreItems = [
     reviews: 128,
     distance: "12km away",
     services: ["Service 1", "Service 2", "Service3"],
-    type: "Hotel"
+    type: "Hotel",
+    image: HarrierImage
   }
 ];
 
@@ -96,7 +100,7 @@ export default function ExplorePage() {
                     className="relative min-w-[200px] h-32 bg-theme-secondary rounded-lg overflow-hidden cursor-pointer"
                     onClick={() => navigate(`/location/${exploreItems[num-1].id}`)}
                     style={{
-                      backgroundImage: `url(${num === 1 ? '/src/assets/GoldenGate.png' : '/src/assets/Harrier.png'})`,
+                      backgroundImage: `url(${num === 1 ? GoldenGateImage : HarrierImage})`,
                       backgroundSize: 'cover',
                       backgroundPosition: 'center'
                     }}
