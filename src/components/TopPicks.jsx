@@ -15,7 +15,7 @@ const TopPicks = ({ items }) => {
           <div 
             key={item.id} 
             className="relative min-w-[200px] h-32 bg-theme-secondary rounded-lg overflow-hidden cursor-pointer"
-            onClick={() => navigate(`/location/${item.id}`)}
+            onClick={() => navigate(`/location/${item.id}`, { state: { locationData: item } })}
             style={{
               backgroundImage: `url(${item.image})`,
               backgroundSize: 'cover',

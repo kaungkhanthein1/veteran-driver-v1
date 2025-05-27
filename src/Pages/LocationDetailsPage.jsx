@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import BackButton from '../components/BackButton';
+
+// Add these imports at the top of the file
+import PlaceIcon from '../icons/Place.svg';
+import ScheduleIcon from '../icons/Schedule.svg';
+import ShareIcon from '../icons/Share.svg';
+import BookmarkIcon from '../icons/Bookmark.svg';
 
 const LocationDetailsPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   
-  // Mock data structure for a location
-  const location = {
+  // Use the passed location data or fall back to mock data
+  const locationData = location.state?.locationData || {
     id: 1,
     name: 'Angela House',
     distance: '12km away',
@@ -37,9 +44,9 @@ const LocationDetailsPage = () => {
       <div className="fixed top-0 left-0 right-0 z-50 bg-theme">
         <div className="flex items-center justify-between p-4">
           <BackButton onClick={() => navigate(-1)} />
-          <h1 className="text-theme-primary text-lg font-semibold">{location.name}</h1>
+          <h1 className="text-theme-primary text-lg font-semibold">{locationData.name}</h1>
           <button className="p-2">
-            <img src="/src/icons/Share.svg" alt="Share" className="w-6 h-6 [filter:var(--icon-filter)]" />
+            <img src={ShareIcon} alt="Share" className="w-6 h-6 [filter:var(--icon-filter)]" />
           </button>
         </div>
       </div>
@@ -47,12 +54,12 @@ const LocationDetailsPage = () => {
       {/* Image Carousel */}
       <div className="relative w-full h-[300px] mt-14">
         <img 
-          src={location.images[activeImageIndex]} 
-          alt={`${location.name} view ${activeImageIndex + 1}`}
+          src={locationData.images[activeImageIndex]} 
+          alt={`${locationData.name} view ${activeImageIndex + 1}`}
           className="w-full h-full object-cover"
         />
         <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
-          {location.images.map((_, index) => (
+          {locationData.images.map((_, index) => (
             <button
               key={index}
               className={`w-2 h-2 rounded-full ${index === activeImageIndex ? 'bg-[#FDC51B]' : 'bg-white/50'}`}
@@ -61,7 +68,7 @@ const LocationDetailsPage = () => {
           ))}
         </div>
         <button className="absolute top-4 right-4 p-2 rounded-full bg-black/30">
-          <img src="/src/icons/Bookmark.svg" alt="Bookmark" className="w-6 h-6 [filter:brightness(0)_saturate(100%)_invert(100%)]" />
+          <img src={BookmarkIcon} alt="Bookmark" className="w-6 h-6 [filter:brightness(0)_saturate(100%)_invert(100%)]" />
         </button>
         <div className="absolute bottom-4 right-4 px-3 py-1 rounded bg-[#FDC51B] text-black font-medium">
           {location.price}
@@ -94,19 +101,15 @@ const LocationDetailsPage = () => {
         {/* Contact Info */}
         <div className="space-y-4">
           <div className="flex items-center space-x-3">
-            <img src="/src/icons/Place.svg" alt="Address" className="w-6 h-6 [filter:var(--icon-filter)]" />
-            <span className="text-theme-secondary flex-1">{location.address}</span>
+            <img src={PlaceIcon} alt="Address" className="w-6 h-6 [filter:var(--icon-filter)]" />
+            <span className="text-theme-secondary">{locationData.address}</span>
             <button className="px-3 py-1 rounded border border-[#FDC51B] text-[#FDC51B] text-sm">
               Check Map
             </button>
           </div>
           <div className="flex items-center space-x-3">
-            <img src="/src/icons/Phone.svg" alt="Phone" className="w-6 h-6 [filter:var(--icon-filter)]" />
-            <span className="text-theme-secondary">{location.phone}</span>
-          </div>
-          <div className="flex items-center space-x-3">
-            <img src="/src/icons/Schedule.svg" alt="Hours" className="w-6 h-6 [filter:var(--icon-filter)]" />
-            <span className="text-theme-secondary">{location.openHours}</span>
+            <img src={ScheduleIcon} alt="Hours" className="w-6 h-6 [filter:var(--icon-filter)]" />
+            <span className="text-theme-secondary">{locationData.openHours}</span>
           </div>
         </div>
 
@@ -114,7 +117,7 @@ const LocationDetailsPage = () => {
         <div>
           <h3 className="text-theme-primary text-lg font-semibold mb-3">Services</h3>
           <div className="space-y-3">
-            {location.services.map((service, index) => (
+            {locationData.services.map((service, index) => (
               <div 
                 key={index}
                 className="flex items-center justify-between p-3 rounded-lg bg-theme-secondary"
