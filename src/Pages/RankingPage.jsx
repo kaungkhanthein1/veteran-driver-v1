@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 import BottomNavBar from "../components/BottomNavBar";
 import { useBookmarks } from '../hooks/useBookmarks';
 import BackButton from "../components/BackButton";
+import GoldenGate from "../assets/GoldenGate.png";
+import GoldenGateRoom from "../assets/GoldenGateRoom.png";
+import Harrier from "../assets/Harrier.png";
+import HarrierRoom from "../assets/HarrierRoom.png";
 
 // Mock data for ranking items
 const rankingItems = [
@@ -15,7 +19,7 @@ const rankingItems = [
     distance: "12km away",
     services: ["Service 1", "Service 2", "Service3"],
     type: "Hotel",
-    image: "/src/assets/GoldenGate.png"
+    image: GoldenGate
   },
   {
     id: 2,
@@ -26,7 +30,7 @@ const rankingItems = [
     distance: "12km away",
     services: ["Service 1", "Service 2", "Service3"],
     type: "Hotel",
-    image: "/src/assets/GoldenGateRoom.png"
+    image: GoldenGateRoom
   },
   {
     id: 3,
@@ -37,7 +41,7 @@ const rankingItems = [
     distance: "12km away",
     services: ["Service 1", "Service 2", "Service3"],
     type: "Hotel",
-    image: "/src/assets/Harrier.png"
+    image: Harrier
   },
   {
     id: 4,
@@ -48,7 +52,7 @@ const rankingItems = [
     distance: "12km away",
     services: ["Service 1", "Service 2", "Service3"],
     type: "Hotel",
-    image: "/src/assets/HarrierRoom.png"
+    image: HarrierRoom
   },
   {
     id: 5,
@@ -59,7 +63,7 @@ const rankingItems = [
     distance: "12km away",
     services: ["Service 1", "Service 2", "Service3"],
     type: "Hotel",
-    image: "/src/assets/GoldenGate.png"
+    image: GoldenGate
   }
 ];
 
@@ -165,7 +169,7 @@ export default function RankingPage() {
             ))}
           </div>
         </div>
-        <BottomNavBar active="ranking" />
+        <BottomNavBar />
       </div>
     </div>
   );
