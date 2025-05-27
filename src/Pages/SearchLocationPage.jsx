@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import ExploreCard from '../components/ExploreCard';
 import { useBookmarks } from '../hooks/useBookmarks';
 import FilterPanel from './map/FilterPanel';
+import BackButton from '../components/BackButton';
 
 // Import explore items from ExplorePage
 const exploreItems = [
