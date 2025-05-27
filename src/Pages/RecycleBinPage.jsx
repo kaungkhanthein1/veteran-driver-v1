@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import ExploreCard from "../components/ExploreCard";
+import BackButton from "../components/BackButton";
 
 export default function RecycleBinPage() {
   const { t } = useTranslation();
@@ -61,11 +62,7 @@ export default function RecycleBinPage() {
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 bg-theme-secondary">
         <div className="flex items-center">
-          <button onClick={() => window.history.back()} className="mr-4">
-            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
+          <BackButton/>
           <h1 className="text-lg font-semibold">Recycle Bin</h1>
         </div>
         {selectedLocations.length > 0 && (

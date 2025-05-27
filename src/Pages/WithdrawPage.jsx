@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import FormInput from '../components/FormInput';
+import BackButton from '../components/BackButton';
 
 export default function WithdrawPage() {
   const navigate = useNavigate();
@@ -40,14 +41,7 @@ export default function WithdrawPage() {
       <div className="max-w-[480px] mx-auto">
         {/* Header */}
         <div className="flex items-center px-4 py-4">
-          <button 
-            onClick={() => navigate(-1)}
-            className="text-theme-text"
-          >
-            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
+         <BackButton/>
           <h1 className="flex-1 text-center text-xl font-normal">Withdraw</h1>
           <div className="w-6"></div>
         </div>

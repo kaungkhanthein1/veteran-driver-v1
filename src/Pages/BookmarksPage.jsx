@@ -2,6 +2,7 @@ import React from 'react';
 import ExploreCard from '../components/ExploreCard';
 import BottomNavBar from '../components/BottomNavBar';
 import { useBookmarks } from '../hooks/useBookmarks';
+import BackButton from '../components/BackButton';
 
 export default function BookmarksPage() {
   const { bookmarkedItems, toggleBookmark, isBookmarked } = useBookmarks();
@@ -12,11 +13,7 @@ export default function BookmarksPage() {
         <div className="flex-1 overflow-y-auto pb-16">
           {/* Header */}
           <div className="sticky top-0 z-10 bg-theme-primary px-4 py-4 flex items-center">
-            <button className="p-2" onClick={() => window.history.back()}>
-              <svg className="w-6 h-6 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
+           <BackButton/>
             <h1 className="text-xl font-semibold text-theme-primary ml-2">Bookmarks</h1>
           </div>
 

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import BottomNavBar from "../components/BottomNavBar";
+import BackButton from "../components/BackButton";
 
 const regions = [
   { name: "Cambodia", flag: "🇰🇭" },
@@ -26,12 +28,7 @@ export default function ChooseLocationPage() {
   return (
     <div className="min-h-screen flex flex-col bg-theme-primary px-4 py-8">
       <div className="flex items-center mb-6">
-        <button onClick={() => navigate(-1)} className="text-theme-primary mr-2">
-          {/* Back arrow */}
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
+        <BackButton/>
         <h2 className="text-xl font-bold text-theme-primary">Select Region</h2>
       </div>
       <input

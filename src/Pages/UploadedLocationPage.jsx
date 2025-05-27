@@ -4,6 +4,7 @@ import ExploreCard from "../components/ExploreCard";
 import RecycleBinIcon from "../icons/RecycleBin.svg";
 import { useNavigate } from "react-router-dom";
 import { useBookmarks } from '../hooks/useBookmarks';
+import BackButton from "../components/BackButton";
 
 export default function UploadedLocationPage() {
   const navigate = useNavigate();
@@ -37,11 +38,7 @@ export default function UploadedLocationPage() {
     <div className="min-h-screen bg-theme-primary">
       {/* Header */}
       <div className="flex items-center px-4 py-3 bg-theme-secondary">
-        <button onClick={() => window.history.back()} className="mr-4">
-          <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
+        <BackButton/>
         <h1 className="text-lg font-semibold">Uploaded Location</h1>
         <button className="ml-auto" onClick={() => navigate('/recycle-bin')}>
           <img

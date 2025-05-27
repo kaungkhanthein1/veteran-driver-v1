@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import BackButton from '../components/BackButton';
 
 export default function SettingsPage() {
   const navigate = useNavigate();
@@ -59,19 +60,13 @@ export default function SettingsPage() {
     }
   ];
 
+
   return (
     <div className="min-h-screen bg-theme-primary text-theme-primary">
       {/* Header */}
       <div className="px-4 py-4 flex items-center">
-        <button 
-          onClick={() => navigate(-1)}
-          className="mr-4"
-        >
-          <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-        <h1 className="text-xl font-semibold">Settings</h1>
+        <BackButton/>
+                <h1 className="text-xl font-semibold">Settings</h1>
       </div>
 
       {/* Settings Groups */}

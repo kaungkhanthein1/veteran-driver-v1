@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormInput from '../components/FormInput';
+import BackButton from "../components/BackButton";
 
 export default function ForgetPasswordPage() {
   const navigate = useNavigate();
@@ -14,15 +15,7 @@ export default function ForgetPasswordPage() {
     <div className="min-h-screen flex flex-col justify-between items-center bg-theme-primary px-4 py-8">
       <div className="w-full max-w-md mx-auto flex flex-col items-center">
         <div className="w-full flex items-center mb-8">
-          <button
-            className="text-theme-primary text-2xl mr-4"
-            onClick={() => navigate(-1)}
-            aria-label="Back"
-          >
-            <svg width="28" height="28" fill="none" viewBox="0 0 24 24">
-              <path d="M15 19l-7-7 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
+          <BackButton/>
           <h1 className="text-xl font-bold text-theme-primary flex-1 text-center">Forgot Password</h1>
           <div className="w-8" />
         </div>

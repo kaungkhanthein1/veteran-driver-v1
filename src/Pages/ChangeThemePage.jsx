@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
+import BackButton from '../components/BackButton';
 
 const ChangeThemePage = () => {
   const { theme, toggleTheme } = useTheme();
@@ -13,14 +14,7 @@ const ChangeThemePage = () => {
           <div className="px-4">
             {/* Header */}
             <div className="flex items-center pt-4 pb-6">
-              <button 
-                onClick={() => navigate(-1)}
-                className="mr-4"
-              >
-                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
+             <BackButton/>
               <h1 className="text-xl font-semibold">Theme</h1>
             </div>
 

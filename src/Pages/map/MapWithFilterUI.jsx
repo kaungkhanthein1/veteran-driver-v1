@@ -7,6 +7,7 @@ import L from "leaflet";
 import "./map.css";
 import search from "../../components/home/search.svg";
 import { location } from "./Place";
+import BackButton from "../../components/BackButton";
 
 const RecenterMap = ({ center }) => {
   const map = useMap();
@@ -118,19 +119,7 @@ const MapWithFilterUI = () => {
 
           <div className="absolute w-full top-6 left-0 text-white rounded-full shadow-lg">
             <div className="flex justify-center items-center gap-[12px] px-4">
-              <svg
-                onClick={() => navigate(-1)}
-                xmlns="http://www.w3.org/2000/svg"
-                width="28"
-                height="28"
-                viewBox="0 0 28 28"
-                fill="none"
-              >
-                <path
-                  d="M23.3334 12.8327H9.13508L15.6567 6.31102L14.0001 4.66602L4.66675 13.9993L14.0001 23.3327L15.6451 21.6877L9.13508 15.166H23.3334V12.8327Z"
-                  fill="#444444"
-                />
-              </svg>
+              <BackButton/>
               <div
                 onClick={() => setShowFilter(true)}
                 className="search_box p-[16px] flex justify-center items-center w-4/5"

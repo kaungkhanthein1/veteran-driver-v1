@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LocationPicker from '../components/LocationPicker';
+import BackButton from '../components/BackButton';
 
 const SocialUpload = () => {
   const navigate = useNavigate();
@@ -26,11 +27,7 @@ const SocialUpload = () => {
         <div className="flex-1 overflow-y-auto pb-16">
           {/* Header */}
           <div className="flex items-center justify-between px-4 py-3 border-b border-theme">
-            <button onClick={() => navigate(-1)}>
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
+            <BackButton/>
             <h1 className="text-lg font-medium">Upload Post</h1>
             <button 
               className={`px-4 py-1 rounded-full ${

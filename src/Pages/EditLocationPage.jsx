@@ -6,6 +6,7 @@ import OpeningTime from './AddLocation/OpeningTime';
 import ServiceAndPrice from './AddLocation/ServiceAndPrice';
 import FormInput from '../components/FormInput';
 import DocumentIcon from '../icons/Document.svg';
+import BackButton from '../components/BackButton';
 
 const EditLocationPage = () => {
   const navigate = useNavigate();
@@ -94,14 +95,7 @@ const EditLocationPage = () => {
           <div className="px-4">
             {/* Header with Status */}
             <div className="flex items-center mb-6">
-              <button 
-                className="mr-4"
-                onClick={() => navigate(-1)}
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
+              <BackButton/>
               <div>
                 <h1 className="text-xl font-semibold">Edit Details</h1>
                 {formData.status && (
