@@ -49,7 +49,7 @@ export default function BottomNavBar({ active }) {
                 <img 
                   src={tab.icon} 
                   alt={tab.label}
-                  className={`w-[22px] h-[22px] object-contain ${active === tab.key ? "[filter:brightness(0)_saturate(100%)_invert(89%)_sepia(61%)_saturate(1415%)_hue-rotate(319deg)_brightness(103%)_contrast(101%)]" : "[filter:var(--icon-filter)]"}`}
+                  className={`${tab.key === 'explore' ? 'w-[26px] h-[26px]' : 'w-[22px] h-[22px]'} object-contain ${active === tab.key ? "[filter:brightness(0)_saturate(100%)_invert(89%)_sepia(61%)_saturate(1415%)_hue-rotate(319deg)_brightness(103%)_contrast(101%)]" : "[filter:var(--icon-filter)]"}`}
                   style={{ display: 'block' }}
                 />
               </div>
