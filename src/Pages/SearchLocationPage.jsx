@@ -90,28 +90,31 @@ export default function SearchLocationPage() {
           </div>
         </div>
 
-        {/* Search Suggestions */}
+        {/* Search Results Count */}
         {showSuggestions && searchQuery && suggestions.length > 0 && (
-          <div className="bg-theme-secondary border-t border-theme-primary/10">
-            {suggestions.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => handleLocationSelect(item)}
-                className="w-full flex items-center px-4 py-3 hover:bg-theme-primary/5"
-              >
-                <img src="/src/icons/Place.svg" alt="search" className="w-5 h-5 mr-3" />
-                <div className="flex-1 text-left">
-                  <div className="text-theme-primary">{item.name}</div>
-                  <div className="text-theme-primary/60 text-sm">{item.type} • {item.distance}</div>
-                </div>
-                <img src="/src/icons/Right.svg" alt="navigate" className="w-5 h-5" />
-              </button>
-            ))}
+          <div className="flex justify-between items-center px-4 py-2 bg-theme-secondary border-t border-theme-primary/10">
+            <span className="text-theme-primary text-sm">{suggestions.length} Results found</span>
+            <button className="p-2">
+              <img src="/src/icons/Tune.svg" alt="filter" className="w-5 h-5 [filter:var(--icon-filter)]" />
+            </button>
           </div>
         )}
 
-        {/* Original content (show when no suggestions are displayed) */}
-        {(!showSuggestions || !searchQuery) && (
+        {/* Search Results */}
+        {showSuggestions && searchQuery && suggestions.length > 0 ? (
+          <div className="p-4 space-y-4">
+            {suggestions.map((item) => (
+              <ExploreCard
+                key={item.id}
+                item={item}
+                onClick={() => handleLocationSelect(item)}
+                isBookmarked={isBookmarked(item.id)}
+                onBookmarkClick={() => toggleBookmark(item)}
+              />
+            ))}
+          </div>
+        ) : (
+          // Original content (Hot Search, Recent Searches, Recent View)
           <div className="p-4 space-y-6">
             {/* Hot Search */}
             <div>
