@@ -122,17 +122,24 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
               max={MAX}
               values={filters.priceRange}
               onChange={(values) => setFilters({ ...filters, priceRange: values })}
-              renderTrack={({ props, children }) => (
-                <div {...props} className="w-full h-[16px] range_input_c">
-                  {children}
-                </div>
-              )}
-              renderThumb={({ props }) => (
-                <div
-                  {...props}
-                  className="w-[4px] h-[44px] bg-[#FFC61B] rounded-full shadow"
-                />
-              )}
+              renderTrack={({ props, children }) => {
+                const { key, ...otherProps } = props;
+                return (
+                  <div key={key} {...otherProps} className="w-full h-[16px] range_input_c">
+                    {children}
+                  </div>
+                );
+              }}
+              renderThumb={({ props }) => {
+                const { key, ...otherProps } = props;
+                return (
+                  <div
+                    key={key}
+                    {...otherProps}
+                    className="w-[4px] h-[44px] bg-[#FFC61B] rounded-full shadow"
+                  />
+                );
+              }}
             />
           </div>
 

@@ -47,6 +47,12 @@ export default function SearchLocationPage() {
     sort: 'Comprehensive'
   });
 
+  // Add the missing handleApplyFilters function
+  const handleApplyFilters = (newFilters) => {
+    setFilters(newFilters);
+    setShowFilter(false);
+  };
+
   // Filter locations based on search query
   const suggestions = searchQuery
     ? exploreItems.filter(item => {
