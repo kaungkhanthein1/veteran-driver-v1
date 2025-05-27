@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ExploreCard from '../components/ExploreCard';
 import { useBookmarks } from '../hooks/useBookmarks';
+import FilterPanel from './map/FilterPanel';
 
 // Import explore items from ExplorePage
 const exploreItems = [
@@ -37,6 +38,14 @@ export default function SearchLocationPage() {
   const { isBookmarked, toggleBookmark } = useBookmarks();
   const [searchQuery, setSearchQuery] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [showFilter, setShowFilter] = useState(false);
+  const [filters, setFilters] = useState({
+    priceRange: [0, 1000],
+    distance: 10,
+    rating: 0,
+    services: [],
+    sort: 'Comprehensive'
+  });
 
   // Filter locations based on search query
   const suggestions = searchQuery
@@ -51,6 +60,12 @@ export default function SearchLocationPage() {
     setSearchQuery(item.name);
     setShowSuggestions(false);
     navigate(`/location/${item.id}`);
+  };
+
+  const handleApplyFilters = (updatedFilters) => {
+    // Here you can implement the filter logic
+    setFilters(updatedFilters);
+    setShowFilter(false);
   };
 
   return (
@@ -94,7 +109,7 @@ export default function SearchLocationPage() {
         {showSuggestions && searchQuery && suggestions.length > 0 && (
           <div className="flex justify-between items-center px-4 py-2 bg-theme-secondary border-t border-theme-primary/10">
             <span className="text-theme-primary text-sm">{suggestions.length} Results found</span>
-            <button className="p-2">
+            <button className="p-2" onClick={() => setShowFilter(true)}>
               <img src="/src/icons/Tune.svg" alt="filter" className="w-5 h-5 [filter:var(--icon-filter)]" />
             </button>
           </div>
@@ -174,6 +189,15 @@ export default function SearchLocationPage() {
               </div>
             </div>
           </div>
+        )}
+        {/* Filter Panel */}
+        {showFilter && (
+          <FilterPanel
+            filters={filters}
+            setFilters={setFilters}
+            applyFilters={handleApplyFilters}
+            onClose={() => setShowFilter(false)}
+          />
         )}
       </div>
     </div>
