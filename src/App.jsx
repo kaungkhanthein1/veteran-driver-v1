@@ -28,6 +28,7 @@ import EditLocationPage from "./Pages/EditLocationPage";
 import BookmarksPage from './Pages/BookmarksPage';
 import RankingPage from './Pages/RankingPage';
 import SearchLocationPage from "./Pages/SearchLocationPage";
+import LocationDetailsPage from "./Pages/LocationDetailsPage";
 
 function App() {
   return (
@@ -63,6 +64,7 @@ function App() {
           <Route path="/bookmarks" element={<BookmarksPage />} />
           <Route path="/ranking" element={<RankingPage />} />
           <Route path="/search" element={<SearchLocationPage />} />
+          <Route path="/location/:id" element={<LocationDetailsPage />} />
         </Routes>
       </Router>
     </ThemeProvider>

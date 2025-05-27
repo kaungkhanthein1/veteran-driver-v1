@@ -99,7 +99,10 @@ export default function RankingPage() {
           {/* Ranking List */}
           <div className="px-4 space-y-4">
             {rankingItems.map((item, index) => (
-              <div key={item.id} className="bg-theme-secondary rounded-2xl overflow-hidden">
+              <div key={item.id} 
+                className="bg-theme-secondary rounded-2xl overflow-hidden cursor-pointer"
+                onClick={() => navigate(`/location/${item.id}`)}
+              >
                 <div className="flex items-center p-4">
                   <div className="relative min-w-[120px] h-[120px] bg-theme-primary rounded-lg overflow-hidden mr-4">
                     {/* Rank Number */}

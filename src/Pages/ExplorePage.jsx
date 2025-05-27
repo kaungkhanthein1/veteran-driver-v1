@@ -91,7 +91,16 @@ export default function ExplorePage() {
               </div>
               <div className="flex space-x-3 overflow-x-auto pb-2">
                 {[1, 2].map((num) => (
-                  <div key={num} className="relative min-w-[200px] h-32 bg-theme-secondary rounded-lg overflow-hidden">
+                  <div 
+                    key={num} 
+                    className="relative min-w-[200px] h-32 bg-theme-secondary rounded-lg overflow-hidden cursor-pointer"
+                    onClick={() => navigate(`/location/${exploreItems[num-1].id}`)}
+                    style={{
+                      backgroundImage: `url(${num === 1 ? '/src/assets/GoldenGate.png' : '/src/assets/Harrier.png'})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center'
+                    }}
+                  >
                     <div className="absolute top-0 left-0 w-12 h-12 bg-theme-primary bg-opacity-50 flex items-center justify-center rounded-br-lg">
                       <span 
                         className="text-transparent text-[32px] font-bold tracking-[1.28px]"

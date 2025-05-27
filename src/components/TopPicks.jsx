@@ -1,6 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const TopPicks = ({ items }) => {
+  const navigate = useNavigate();
+
   return (
     <div className="px-4 mb-4">
       <div className="flex items-center justify-between mb-3">
@@ -11,7 +14,13 @@ const TopPicks = ({ items }) => {
         {items.map((item, index) => (
           <div 
             key={item.id} 
-            className="relative min-w-[200px] h-32 bg-theme-secondary rounded-lg overflow-hidden"
+            className="relative min-w-[200px] h-32 bg-theme-secondary rounded-lg overflow-hidden cursor-pointer"
+            onClick={() => navigate(`/location/${item.id}`)}
+            style={{
+              backgroundImage: `url(${item.image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center'
+            }}
           >
             <div className="absolute top-0 left-0 w-12 h-12 bg-theme-primary bg-opacity-50 flex items-center justify-center rounded-br-lg">
               <span 

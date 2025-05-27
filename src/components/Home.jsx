@@ -76,13 +76,13 @@ const HomePage = () => {
       id: 1,
       name: "Kuma",
       price: "50 USD",
-      image: "/path/to/image1"
+      image: "/src/assets/GoldenGate.png"
     },
     {
       id: 2,
       name: "Sunny",
       price: "45 USD",
-      image: "/path/to/image2"
+      image: "/src/assets/Harrier.png"
     }
   ];
 
@@ -115,7 +115,12 @@ const HomePage = () => {
           <Carousel />
 
           {/* Nearest Places Section using TopPicks */}
-          <TopPicks items={nearestPlaces} />
+          <TopPicks 
+            items={nearestPlaces.map(item => ({
+              ...item,
+              onClick: () => navigate(`/location/${item.id}`)
+            }))} 
+          />
 
           {/* Feedbacks Section with horizontal scroll */}
           <div className="px-4 py-5">
