@@ -49,27 +49,21 @@ export default function SearchLocationPage() {
 
   // Filter locations based on search query
   const suggestions = searchQuery
-    ? exploreItems.filter(item =>
-        item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.type.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.services.some(service => 
-          service.toLowerCase().includes(searchQuery.toLowerCase())
-        ) ||
-        item.distance.toLowerCase().includes(searchQuery.toLowerCase())
-      )
+    ? exploreItems.filter(item => {
+        const query = searchQuery.toLowerCase();
+        return (
+          item.name.toLowerCase().includes(query) ||
+          item.type.toLowerCase().includes(query) ||
+          item.services.some(service => service.toLowerCase().includes(query)) ||
+          item.distance.toLowerCase().includes(query)
+        );
+      })
     : [];
 
-  // Handle location selection
   const handleLocationSelect = (item) => {
     setSearchQuery(item.name);
     setShowSuggestions(false);
     navigate(`/location/${item.id}`);
-  };
-
-  const handleApplyFilters = (updatedFilters) => {
-    // Here you can implement the filter logic
-    setFilters(updatedFilters);
-    setShowFilter(false);
   };
 
   return (
@@ -91,9 +85,15 @@ export default function SearchLocationPage() {
               onChange={(e) => {
                 const value = e.target.value;
                 setSearchQuery(value);
-                setShowSuggestions(value.length > 0);
+                // Show suggestions whenever there is input
+                setShowSuggestions(true);
               }}
-              onFocus={() => setShowSuggestions(searchQuery.length > 0)}
+              onFocus={() => {
+                // Show suggestions on focus if there is any input
+                if (searchQuery) {
+                  setShowSuggestions(true);
+                }
+              }}
               className="bg-transparent text-theme-primary w-full outline-none text-[16px] focus:outline-none focus:ring-0 border-none"
             />
             {searchQuery && (
@@ -131,7 +131,7 @@ export default function SearchLocationPage() {
                 isBookmarked={isBookmarked(item.id)}
                 onBookmarkClick={() => toggleBookmark(item)}
               />
-            ))}
+            ))}          
           </div>
         ) : (
           // Original content (Hot Search, Recent Searches, Recent View)
@@ -195,6 +195,7 @@ export default function SearchLocationPage() {
             </div>
           </div>
         )}
+
         {/* Filter Panel */}
         {showFilter && (
           <FilterPanel
