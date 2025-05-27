@@ -81,7 +81,12 @@ export default function ExplorePage() {
             <div className="px-4 mb-4">
               <div className="flex items-center justify-between mb-3">
                 <h2 className="text-theme-primary text-lg font-semibold">Top Picks</h2>
-                <button className="text-[#FFC61B] text-sm">View All</button>
+                <button 
+                  className="text-[#FFC61B] text-sm"
+                  onClick={() => navigate('/ranking')}
+                >
+                  View All
+                </button>
               </div>
               <div className="flex space-x-3 overflow-x-auto pb-2">
                 {[1, 2].map((num) => (
