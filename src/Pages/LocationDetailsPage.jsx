@@ -7,6 +7,9 @@ import PlaceIcon from '../icons/Place.svg';
 import ScheduleIcon from '../icons/Schedule.svg';
 import ShareIcon from '../icons/Share.svg';
 import BookmarkIcon from '../icons/Bookmark.svg';
+import BeachImage from '../assets/Beach.png';
+import GoldenGateImage from '../assets/GoldenGate.png';
+import HarrierImage from '../assets/Harrier.png';
 
 const LocationDetailsPage = () => {
   const { id } = useParams();
