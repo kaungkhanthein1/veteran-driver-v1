@@ -30,19 +30,21 @@ import RankingPage from './Pages/RankingPage';
 import SearchLocationPage from "./Pages/SearchLocationPage";
 import LocationDetailsPage from "./Pages/LocationDetailsPage";
 import NotificationsPage from "./Pages/NotificationsPage";
+import ChangePasswordPage from "./Pages/ChangePasswordPage";
+
 function App() {
   return (
     <div className="max-w-[480px] mx-auto min-h-screen bg-theme-primary">
     <ThemeProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<RegisterPage />} />
+          <Route path="/register" element={<RegisterPage/>} />
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/otp-verify" element={<OtpVerifyPage />} />
           <Route path="/location-access" element={<LocationAccessPage />} />
           <Route path="/choose-location" element={<ChooseLocationPage />} />
           {/* Main tab routes */}
-          <Route path="/home" element={<Home />} />
           <Route path="/explore" element={<ExplorePage />} />
           <Route path="/add-location" element={<AddLocationPage />} />
           <Route path="/social" element={<SocialPage />} />
@@ -66,6 +68,7 @@ function App() {
           <Route path="/search" element={<SearchLocationPage />} />
           <Route path="/location/:id" element={<LocationDetailsPage />} />
           <Route path="/notifications" element={<NotificationsPage/>} />
+          <Route path="/settings/password" element={<ChangePasswordPage />} />
         </Routes>
       </Router>
     </ThemeProvider>
