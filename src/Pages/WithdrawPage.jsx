@@ -22,8 +22,8 @@ export default function WithdrawPage() {
 
   const paymentMethods = [
     { name: 'Bank Account', default: true },
-    { 
-      name: 'Credit Card', 
+    {
+      name: 'Credit Card',
       icons: [CardsIcon]
     },
     { name: 'AliPay', icon: AlipayIcon },
@@ -31,6 +31,8 @@ export default function WithdrawPage() {
     { name: 'Apple Pay', icon: ApplePayIcon },
     { name: 'WeChat', icon: WeChatIcon }
   ];
+
+  const isFormFilled = withdrawAmount.trim() !== '' && bankAccountName.trim() !== '' && bankAccountNumber.trim() !== '';
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,9 +49,9 @@ export default function WithdrawPage() {
           <div className="w-6"></div>
         </div>
 
-        <form onSubmit={handleSubmit} className="px-4 space-y-6">
+        <form onSubmit={handleSubmit} className="px-4 space-y-6 pb-6">
           {/* Withdraw Amount */}
-          <FormInput
+          <FormInput 
             label="Withdraw Amount"
             type="number"
             placeholder="Please enter withdraw amount (min 800 coins )"
@@ -176,7 +178,8 @@ export default function WithdrawPage() {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-theme-secondary text-theme-text py-4 rounded-lg mt-8"
+            className={`w-full py-3 rounded-lg ${isFormFilled ? 'bg-yellow-gradient text-black' : 'bg-theme-secondary text-theme-text'}`}
+            disabled={!isFormFilled}
           >
             Submit
           </button>
