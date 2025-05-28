@@ -13,7 +13,7 @@ export default function BottomNavBar({ active }) {
       key: "home",
       label: "Home",
       icon: HomeIcon,
-      path: "/home"
+      path: "/"
     },
     {
       key: "explore",
