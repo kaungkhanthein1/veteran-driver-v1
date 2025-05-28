@@ -15,7 +15,7 @@ const LocationDetailsPage = () => {
   const location = useLocation();
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   
-  const locationData = location.state?.locationData || {
+  const defaultLocationData = {
     id: 1,
     name: 'Angela House',
     distance: '12km away',
@@ -36,6 +36,8 @@ const LocationDetailsPage = () => {
     ]
   };
 
+  const locationData = location.state?.locationData || defaultLocationData;
+
   return (
     <div className="min-h-screen bg-theme-primary">
       {/* Header */}
@@ -52,12 +54,12 @@ const LocationDetailsPage = () => {
       {/* Image Carousel */}
       <div className="relative w-full h-[300px] mt-14">
         <img 
-          src={locationData.images[activeImageIndex]} 
-          alt={`${locationData.name} view ${activeImageIndex + 1}`}
+          src={locationData.images && locationData.images.length > 0 ? locationData.images[activeImageIndex] : RoomImage} 
+          alt={`${locationData.name} view ${activeImageIndex + 1}`} 
           className="w-full h-full object-cover"
         />
         <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
-          {locationData.images.map((_, index) => (
+          {locationData.images && locationData.images.map((_, index) => (
             <button
               key={index}
               className={`w-2 h-2 rounded-full ${index === activeImageIndex ? 'bg-[#FDC51B]' : 'bg-white/50'}`}
@@ -115,7 +117,7 @@ const LocationDetailsPage = () => {
         <div>
           <h3 className="text-theme-text text-lg font-semibold mb-3">Services</h3>
           <div className="space-y-3">
-            {locationData.services.map((service, index) => (
+            {locationData?.services?.map((service, index) => (
               <div 
                 key={index}
                 className="flex items-center justify-between p-3 rounded-lg bg-theme-secondary"
