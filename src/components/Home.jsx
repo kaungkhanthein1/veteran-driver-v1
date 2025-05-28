@@ -93,13 +93,13 @@ const HomePage = () => {
       id: 1,
       name: "Kuma",
       price: "50 USD",
-      image: "/src/assets/GoldenGate.png"
+      image: GoldenGateImage
     },
     {
       id: 2,
       name: "Sunny",
       price: "45 USD",
-      image: "/src/assets/Harrier.png"
+      image: HarrierImage
     }
   ];
 
