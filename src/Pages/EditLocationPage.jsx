@@ -92,27 +92,12 @@ const EditLocationPage = () => {
     <div className="min-h-screen flex justify-center bg-theme-primary">
       <div className="w-full max-w-[480px] flex flex-col">
         <div className="flex-1 overflow-y-auto pb-16">
-          <div className="px-4">
-            {/* Header with Status */}
-            <div className="flex items-center mb-6">
-              <BackButton/>
-              <div>
-                <h1 className="text-xl font-semibold">Edit Details</h1>
-                {formData.status && (
-                  <div className="flex items-center mt-1">
-                    <div className={`w-2 h-2 rounded-full mr-2 ${
-                      formData.status.toLowerCase() === 'approved' ? 'bg-green-500' :
-                      formData.status.toLowerCase() === 'rejected' ? 'bg-red-500' :
-                      'bg-yellow-500'
-                    }`} />
-                    <span className="text-sm text-theme-secondary">
-                      {formData.status === 'approved' ? 'The location you submitted has been approved by an administrator.' :
-                       formData.status === 'rejected' ? 'The location you submitted has been rejected.' :
-                       'Your location is pending approval.'}
-                    </span>
-                  </div>
-                )}
+          <div className="px-4 pt-6"> {/* Added pt-6 for top margin */}
+            <div className="relative flex items-center mb-6">
+              <div className="absolute left-0">
+                <BackButton/>
               </div>
+              <h1 className="flex-grow text-center text-xl font-semibold">Edit Details</h1>
             </div>
 
             {/* Form */}
