@@ -11,6 +11,9 @@ export default function ChangePasswordPage() {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,30 +46,42 @@ export default function ChangePasswordPage() {
         <div className="mb-6">
           <FormInput
             label={t('Current Password')}
-            type="password"
+            type={showCurrentPassword ? 'text' : 'password'}
             value={currentPassword}
             onChange={(e) => setCurrentPassword(e.target.value)}
             placeholder={t('Enter your current password')}
+            rightIcon={
+              <button type="button" onClick={() => setShowCurrentPassword(!showCurrentPassword)}>
+              </button>
+            }
           />
         </div>
 
         <div className="mb-6">
           <FormInput
             label={t('New Password')}
-            type="password"
+            type={showNewPassword ? 'text' : 'password'}
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
             placeholder={t('Enter your new password')}
+            rightIcon={
+              <button type="button" onClick={() => setShowNewPassword(!showNewPassword)}>
+              </button>
+            }
           />
         </div>
 
         <div className="mb-6">
           <FormInput
             label={t('Confirm New Password')}
-            type="password"
+            type={showConfirmNewPassword ? 'text' : 'password'}
             value={confirmNewPassword}
             onChange={(e) => setConfirmNewPassword(e.target.value)}
             placeholder={t('Confirm your new password')}
+            rightIcon={
+              <button type="button" onClick={() => setShowConfirmNewPassword(!showConfirmNewPassword)}>
+              </button>
+            }
           />
         </div>
 
