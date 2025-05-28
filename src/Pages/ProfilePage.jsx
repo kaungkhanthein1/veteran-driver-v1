@@ -16,6 +16,7 @@ import NotificationIcon from "../icons/Notification.svg";
 import SettingIcon from "../icons/Setting.svg";
 import { useNavigate } from "react-router-dom";
 import LanguageModal from "../components/LanguageModal";
+import NotificationsPage from "./NotificationsPage";
 
 export default function ProfilePage() {
   const navigate = useNavigate();
@@ -110,6 +111,7 @@ export default function ProfilePage() {
                     src={NotificationIcon} 
                     alt={t('profile.notification')} 
                     className="w-6 h-6 [filter:var(--icon-filter)]" 
+                    onClick={() => navigate('/notifications')}
                   />
                 </button>
                 <button onClick={() => navigate('/settings')}>

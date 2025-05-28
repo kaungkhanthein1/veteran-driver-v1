@@ -15,7 +15,6 @@ const LocationDetailsPage = () => {
   const location = useLocation();
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   
-  // Use the passed location data or fall back to mock data
   const locationData = location.state?.locationData || {
     id: 1,
     name: 'Angela House',
@@ -38,12 +37,12 @@ const LocationDetailsPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-theme">
+    <div className="min-h-screen bg-black">
       {/* Header */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-theme">
+      <div className="fixed top-0 left-0 right-0 z-50 bg-transparent">
         <div className="flex items-center justify-between p-4">
           <BackButton onClick={() => navigate(-1)} />
-          <h1 className="text-theme-primary text-lg font-semibold">{locationData.name}</h1>
+          <h1 className="text-white text-lg font-semibold">{locationData.name}</h1>
           <button className="p-2">
             <img src={ShareIcon} alt="Share" className="w-6 h-6 [filter:var(--icon-filter)]" />
           </button>
@@ -79,8 +78,8 @@ const LocationDetailsPage = () => {
         <div>
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-theme-primary text-xl font-semibold">{locationData.name}</h2>
-              <p className="text-theme-secondary text-sm">{locationData.distance}</p>
+              <h2 className="text-white text-xl font-semibold">{locationData.name}</h2>
+              <p className="text-gray-400 text-sm">{locationData.distance}</p>
             </div>
             <div className="flex items-center space-x-1">
               {[...Array(5)].map((_, index) => (
@@ -93,7 +92,7 @@ const LocationDetailsPage = () => {
               ))}
             </div>
           </div>
-          <p className="mt-2 text-theme-secondary line-clamp-3">{locationData.description}</p>
+          <p className="mt-2 text-gray-400 line-clamp-3">{locationData.description}</p>
           <button className="text-[#FDC51B] text-sm mt-1">see more</button>
         </div>
 
@@ -101,27 +100,27 @@ const LocationDetailsPage = () => {
         <div className="space-y-4">
           <div className="flex items-center space-x-3">
             <img src={PlaceIcon} alt="Address" className="w-6 h-6 [filter:var(--icon-filter)]" />
-            <span className="text-theme-secondary">{locationData.address}</span>
+            <span className="text-gray-400">{locationData.address}</span>
             <button className="px-3 py-1 rounded border border-[#FDC51B] text-[#FDC51B] text-sm">
               Check Map
             </button>
           </div>
           <div className="flex items-center space-x-3">
             <img src={ScheduleIcon} alt="Hours" className="w-6 h-6 [filter:var(--icon-filter)]" />
-            <span className="text-theme-secondary">{locationData.openHours}</span>
+            <span className="text-gray-400">{locationData.openHours}</span>
           </div>
         </div>
 
         {/* Services */}
         <div>
-          <h3 className="text-theme-primary text-lg font-semibold mb-3">Services</h3>
+          <h3 className="text-white text-lg font-semibold mb-3">Services</h3>
           <div className="space-y-3">
             {locationData.services.map((service, index) => (
               <div 
                 key={index}
-                className="flex items-center justify-between p-3 rounded-lg bg-theme-secondary"
+                className="flex items-center justify-between p-3 rounded-lg bg-gray-800"
               >
-                <span className="text-theme-primary">{service.name}</span>
+                <span className="text-white">{service.name}</span>
                 <span className="text-[#FDC51B] font-medium">{service.price}</span>
               </div>
             ))}
@@ -131,10 +130,10 @@ const LocationDetailsPage = () => {
         {/* Reviews */}
         <div>
           <div className="flex items-center justify-between mb-3">
-            <h3 className="text-theme-primary text-lg font-semibold">Review (120)</h3>
+            <h3 className="text-white text-lg font-semibold">Review (120)</h3>
             <div className="flex space-x-2">
               <button className="px-3 py-1 rounded bg-[#FDC51B] text-black text-sm">Hottest</button>
-              <button className="px-3 py-1 rounded border border-theme-secondary text-theme-secondary text-sm">Latest</button>
+              <button className="px-3 py-1 rounded border border-gray-800 text-gray-400 text-sm">Latest</button>
             </div>
           </div>
           {/* Review list will be implemented later */}

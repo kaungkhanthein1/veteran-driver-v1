@@ -29,7 +29,7 @@ import BookmarksPage from './Pages/BookmarksPage';
 import RankingPage from './Pages/RankingPage';
 import SearchLocationPage from "./Pages/SearchLocationPage";
 import LocationDetailsPage from "./Pages/LocationDetailsPage";
-
+import NotificationsPage from "./Pages/NotificationsPage";
 function App() {
   return (
     <div className="max-w-[480px] mx-auto min-h-screen bg-theme-primary">
@@ -65,6 +65,7 @@ function App() {
           <Route path="/ranking" element={<RankingPage />} />
           <Route path="/search" element={<SearchLocationPage />} />
           <Route path="/location/:id" element={<LocationDetailsPage />} />
+          <Route path="/notifications" element={<NotificationsPage/>} />
         </Routes>
       </Router>
     </ThemeProvider>
