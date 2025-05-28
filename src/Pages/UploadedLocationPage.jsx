@@ -21,8 +21,8 @@ export default function UploadedLocationPage() {
     reviews: "128",
     services: ["Service 1", "Service 2", "Service3"],
     price: "50 USD",
-    description: "Providing the ultimate relaxation you deserve. Our professional massage services are tailored to melt away your escape today",
-    address: "E88/4 ist eine Kleinstadt in Mittel-Navarra in Spanien. Estella hat 14 329",
+    description: "Providing the ultimate relaxation",
+    address: "E88/4 ist eine",
     mobileNumber: "+18554992035",
     photos: [],
     status: activeTab

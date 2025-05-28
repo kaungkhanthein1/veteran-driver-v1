@@ -9,15 +9,15 @@ import ExploreVd from "../assets/Explore Vd.mp4";
 import VideoPlayer from "./VideoPlayer";
 import ImageModal from "./ImageModal";
 
-export default function ExploreCard({ 
-  item, 
-  status, 
-  onClick, 
-  selected, 
-  isRecycleBin = false, 
-  onRestore, 
-  isBookmarked = false, 
-  onBookmarkClick 
+export default function ExploreCard({
+  item,
+  status,
+  onClick,
+  selected,
+  isRecycleBin = false,
+  onRestore,
+  isBookmarked = false,
+  onBookmarkClick
 }) {
   const [selectedMedia, setSelectedMedia] = useState(null);
 
@@ -26,25 +26,25 @@ export default function ExploreCard({
   };
 
   return (
-    <div 
-      className={`bg-theme-secondary rounded-lg overflow-hidden cursor-pointer ${selected ? 'border-2 border-[#FDC51B]' : ''}`} 
+    <div
+      className={`bg-theme-secondary rounded-lg overflow-hidden cursor-pointer ${selected ? 'border-2 border-[#FDC51B]' : ''}`}
       onClick={onClick}
     >
-      <div className="p-4 space-y-4">
+      <div className="p-2 space-y-2">
         <div className="grid grid-cols-3 gap-2 relative">
-          <div 
+          <div
             className="aspect-square bg-theme-primary rounded-lg overflow-hidden cursor-pointer"
             onClick={() => handleMediaClick(GoldenGate)}
           >
             <img src={GoldenGate} alt="Golden Gate" className="w-full h-full object-cover" />
           </div>
-          <div 
+          <div
             className="aspect-square bg-theme-primary rounded-lg overflow-hidden cursor-pointer"
             onClick={() => handleMediaClick(Harrier)}
           >
             <img src={Harrier} alt="Harrier" className="w-full h-full object-cover" />
           </div>
-          <div 
+          <div
             className="aspect-square bg-theme-primary rounded-lg relative overflow-hidden cursor-pointer"
             onClick={() => handleMediaClick({ type: "video", url: ExploreVideo, thumbnail: HarrierRoom })}
           >
@@ -55,11 +55,40 @@ export default function ExploreCard({
               </svg>
             </div>
           </div>
-          
-          {/* Bookmark or Status */}
-          {!isRecycleBin ? (
-            <button 
-              className="absolute top-2 right-2 p-1"
+
+          {/* Status (Bookmark will be moved) */}
+          {status && (
+            <div className={`absolute -top-1 right-0 px-2 py-1 rounded-full text-xs font-medium ${status.toLowerCase() === 'approved' ? 'bg-green-500 text-white' : status.toLowerCase() === 'rejected' ? 'bg-red-500 text-white' : 'bg-yellow-500 text-white'}`}>
+              {status}
+            </div>
+          )}
+        </div>
+
+        <div className="flex justify-between items-start">
+          <div>
+            <div className="flex items-center justify-between">
+              <h3 className="text-theme-primary font-semibold">{item.name}</h3>
+            </div>
+            {/* Address and Distance */}
+            <div className="text-theme-secondary text-sm mt-1">
+              <span>{item.address}</span>
+              {item.address && item.distance && <span className="mx-1">•</span>}
+              <span>{item.distance}</span>
+            </div>
+            <div className="flex items-center space-x-1 mt-1">
+              <div className="flex items-center">
+                {[...Array(5)].map((_, i) => (
+                  <span key={i} className="text-[#FFC61B] text-sm">★</span>
+                ))}
+                <span className="text-theme-primary ml-1 text-sm">{item.rating}</span>
+              </div>
+              <span className="text-theme-secondary text-sm">({item.reviews})</span>
+            </div>
+          </div>
+          {/* Bookmark Icon */}
+          {!isRecycleBin && (
+            <button
+              className="p-1 ml-4"
               onClick={(e) => {
                 e.stopPropagation();
                 if (onBookmarkClick) {
@@ -67,33 +96,13 @@ export default function ExploreCard({
                 }
               }}
             >
-              <img 
-                src={Bookmark} 
-                alt="bookmark" 
-                className={`w-6 h-6 ${isBookmarked ? '[filter:invert(70%)_sepia(74%)_saturate(1115%)_hue-rotate(359deg)_brightness(103%)_contrast(106%)]' : '[filter:var(--icon-filter)]'}`} 
+              <img
+                src={Bookmark}
+                alt="bookmark"
+                className={`w-6 h-6 ${isBookmarked ? '[filter:invert(70%)_sepia(74%)_saturate(1115%)_hue-rotate(359deg)_brightness(103%)_contrast(106%)]' : '[filter:var(--icon-filter)]'}`}
               />
             </button>
-          ) : status && (
-            <div className={`absolute -top-1 right-0 px-2 py-1 rounded-full text-xs font-medium ${status.toLowerCase() === 'approved' ? 'bg-green-500 text-white' : status.toLowerCase() === 'rejected' ? 'bg-red-500 text-white' : 'bg-yellow-500 text-white'}`}>
-              {status}
-            </div>
           )}
-        </div>
-
-        <div>
-          <div className="flex items-center justify-between">
-            <h3 className="text-theme-primary font-semibold">{item.name}</h3>
-            <span className="text-theme-secondary text-sm">{item.distance}</span>
-          </div>
-          <div className="flex items-center space-x-1 mt-1">
-            <div className="flex items-center">
-              {[...Array(5)].map((_, i) => (
-                <span key={i} className="text-[#FFC61B] text-sm">★</span>
-              ))}
-              <span className="text-theme-primary ml-1 text-sm">{item.rating}</span>
-            </div>
-            <span className="text-theme-secondary text-sm">({item.reviews})</span>
-          </div>
         </div>
 
         <div className="flex items-center space-x-2 text-sm text-theme-secondary">
@@ -109,7 +118,7 @@ export default function ExploreCard({
 
         <div className="flex items-center justify-between">
           <span className="text-[#FFC61B] font-medium">{item.price}</span>
-          <button 
+          <button
             className="bg-[#FFC61B] text-black px-4 py-1.5 rounded-full text-sm font-medium"
             onClick={(e) => {
               e.stopPropagation();
