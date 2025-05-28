@@ -10,7 +10,7 @@ export default function EditProfilePage() {
   const { t } = useTranslation();
   const [formData, setFormData] = useState({
     name: "Rachel Zane Noel",
-    bio: "Passionate traveler 🌏 embracing the journey.",
+    bio: "Passionate traveller 🌍",
     gender: "Female",
     location: "Cambodia , Phnom Penh",
     avatar: ProfilePic,
