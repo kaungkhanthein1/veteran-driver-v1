@@ -12,9 +12,9 @@ const NotificationsPage = () => {
     <div className="min-h-screen bg-theme-primary text-theme-text">
       {/* Header */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-theme-primary">
-        <div className="flex items-center justify-between p-4">
-          <BackButton onClick={() => navigate(-1)} />
-          <h1 className="text-lg font-semibold">Notifications</h1>
+        <div className="relative flex items-center p-4">
+          <BackButton onClick={() => navigate(-1)} className="absolute left-4" />
+          <h1 className="text-lg font-semibold text-center flex-grow">Notifications</h1>
         </div>
       </div>
 

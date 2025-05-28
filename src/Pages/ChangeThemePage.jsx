@@ -11,11 +11,11 @@ const ChangeThemePage = () => {
     <div className="min-h-screen flex justify-center bg-[var(--bg-primary)]">
       <div className="w-full max-w-[480px] flex flex-col">
         <div className="flex-1 overflow-y-auto pb-16">
-          <div className="px-4">
+          <div className="px-4 pt-6 relative">
             {/* Header */}
-            <div className="flex items-center pt-4 pb-6">
-             <BackButton/>
-              <h1 className="text-xl font-semibold">Theme</h1>
+            <div className="flex items-center pb-6">
+             <BackButton className="absolute left-4"/>
+              <h1 className="text-xl font-semibold text-center flex-grow">Theme</h1>
             </div>
 
             {/* Main Content */}

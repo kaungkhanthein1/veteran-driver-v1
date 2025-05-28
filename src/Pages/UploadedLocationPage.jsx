@@ -37,9 +37,9 @@ export default function UploadedLocationPage() {
   return (
     <div className="min-h-screen bg-theme-primary">
       {/* Header */}
-      <div className="flex items-center px-4 py-3 bg-theme-secondary">
-        <BackButton/>
-        <h1 className="text-lg font-semibold">Uploaded Location</h1>
+      <div className="relative flex items-center px-4 py-3 bg-theme-secondary">
+        <BackButton className="absolute left-4"/>
+        <h1 className="text-lg font-semibold text-center flex-grow">Uploaded Location</h1>
         <button className="ml-auto" onClick={() => navigate('/recycle-bin')}>
           <img
             src={RecycleBinIcon}

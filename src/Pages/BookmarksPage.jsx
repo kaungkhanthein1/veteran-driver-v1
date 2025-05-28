@@ -12,9 +12,9 @@ export default function BookmarksPage() {
       <div className="w-full max-w-[480px] flex flex-col">
         <div className="flex-1 overflow-y-auto pb-16">
           {/* Header */}
-          <div className="sticky top-0 z-10 bg-theme-primary px-4 py-4 flex items-center">
-           <BackButton/>
-            <h1 className="text-xl font-semibold text-theme-primary ml-2">Bookmarks</h1>
+          <div className="sticky top-0 z-10 bg-theme-primary px-4 py-4 flex items-center relative pt-6">
+           <BackButton className="absolute left-4"/>
+            <h1 className="text-xl font-semibold text-theme-primary text-center flex-grow">Bookmarks</h1>
           </div>
 
           {/* Bookmarked Places Grid */}

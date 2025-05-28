@@ -60,11 +60,9 @@ export default function RecycleBinPage() {
   return (
     <div className="min-h-screen bg-theme-primary relative">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 bg-theme-secondary">
-        <div className="flex items-center">
-          <BackButton/>
-          <h1 className="text-lg font-semibold">Recycle Bin</h1>
-        </div>
+      <div className="relative flex items-center justify-between px-4 py-3 bg-theme-secondary pt-6">
+        <BackButton className="absolute left-4"/>
+        <h1 className="text-lg font-semibold text-center flex-grow">Recycle Bin</h1>
         {selectedLocations.length > 0 && (
           <button 
             onClick={() => setShowDeleteConfirm(true)}
