@@ -3,6 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import FormInput from '../components/FormInput';
 import BackButton from '../components/BackButton';
+// Import payment method icons
+import CardsIcon from '../assets/Cards.png';
+import AlipayIcon from '../assets/Alipay.png';
+import GooglePayIcon from '../assets/GooglePay.png';
+import ApplePayIcon from '../assets/ApplePay.svg';
+import WeChatIcon from '../assets/WeChat.svg';
 
 export default function WithdrawPage() {
   const navigate = useNavigate();
@@ -18,17 +24,12 @@ export default function WithdrawPage() {
     { name: 'Bank Account', default: true },
     { 
       name: 'Credit Card', 
-      icons: [
-        '/visa.png',
-        '/mastercard.png',
-        '/amex.png',
-        '/discover.png'
-      ]
+      icons: [CardsIcon]
     },
-    { name: 'AliPay', icon: '/alipay.png' },
-    { name: 'Google Pay', icon: '/googlepay.png' },
-    { name: 'Apple Pay', icon: '/applepay.png' },
-    { name: 'WeChat', icon: '/wechat.png' }
+    { name: 'AliPay', icon: AlipayIcon },
+    { name: 'Google Pay', icon: GooglePayIcon },
+    { name: 'Apple Pay', icon: ApplePayIcon },
+    { name: 'WeChat', icon: WeChatIcon }
   ];
 
   const handleSubmit = (e) => {
@@ -75,7 +76,7 @@ export default function WithdrawPage() {
             <label className="block text-theme-text/60">Payment Methods</label>
             <button
               type="button"
-              className="w-full bg-[#1C1C1E] border border-theme-text/20 rounded-lg px-4 py-3 flex justify-between items-center"
+              className="w-full bg-theme-secondary border border-theme-text/20 rounded-lg px-4 py-3 flex justify-between items-center"
               onClick={() => setShowPaymentMethods(!showPaymentMethods)}
             >
               <span>{selectedPayment}{selectedPayment === 'Bank Account' ? ' (default)' : ''}</span>
@@ -90,7 +91,7 @@ export default function WithdrawPage() {
             </button>
 
             {showPaymentMethods && (
-              <div className="absolute z-10 w-full mt-1 bg-[#1C1C1E] border border-theme-text/20 rounded-lg overflow-hidden shadow-lg">
+              <div className="absolute z-10 w-full mt-1 bg-theme-secondary border border-theme-text/20 rounded-lg overflow-hidden shadow-lg">
                 {paymentMethods.map((method) => (
                   <button
                     key={method.name}
