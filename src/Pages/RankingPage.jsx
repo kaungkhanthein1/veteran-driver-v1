@@ -108,7 +108,7 @@ export default function RankingPage() {
                 onClick={() => navigate(`/location/${item.id}`)}
               >
                 <div className="flex items-center p-4">
-                  <div className="relative min-w-[120px] h-[120px] bg-theme-primary rounded-lg overflow-hidden mr-4">
+                  <div className="relative w-[150px] h-[120px] bg-theme-primary rounded-lg overflow-hidden mr-4"> {/* Changed min-w to w for fixed width */}
                     {/* Rank Number */}
                     <div className="absolute top-0 left-0 w-10 h-10 bg-theme-primary bg-opacity-50 flex items-center justify-center rounded-br-lg">
                       <span 
@@ -125,7 +125,7 @@ export default function RankingPage() {
                     <img 
                       src={item.image} 
                       alt={item.name} 
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover" // Ensure image covers the container
                     />
                     {/* Rating Badge
                     <div className="absolute top-2 right-2 bg-black bg-opacity-50 rounded px-2 py-1 text-xs text-white">

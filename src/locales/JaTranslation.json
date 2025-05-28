@@ -1,100 +1,138 @@
 {
   "common": {
-    "ok": "OK",
-    "cancel": "キャンセル",
-    "save": "保存",
-    "delete": "削除",
+    "viewAll": "すべて表示",
+    "clear": "クリア",
+    "seeMore": "もっと見る",
+    "change": "変更",
     "edit": "編集",
-    "close": "閉じる",
-    "back": "戻る",
-    "name": "名前",
-    "description": "説明",
-    "address": "住所",
-    "mobileNumber": "電話番号"
-  },
-  "navigation": {
-    "home": "ホーム",
-    "explore": "探索",
-    "social": "ソーシャル",
-    "profile": "プロフィール"
+    "delete": "削除",
+    "restore": "復元",
+    "submit": "送信",
+    "cancel": "キャンセル",
+    "ok": "OK",
+    "search": "場所を検索..."
   },
   "auth": {
-    "login": "ログイン",
-    "register": "登録",
-    "phoneSignUp": "電話番号で登録",
-    "forgotPassword": "パスワードをお忘れですか",
-    "otpVerify": "OTP認証",
-    "email": "メールアドレス",
-    "password": "パスワード",
-    "phone": "電話番号",
-    "continueWith": "{{provider}}で続ける",
-    "verificationCode": "認証コード"
-  },
-  "profile": {
-    "pointwallet": "ポイントウォレット",
-    "uploadedlocation": "アップロードした場所",
-    "bookmarklocation": "ブックマークした場所",
-    "changeapplicationtheme": "アプリのテーマを変更",
-    "changeapplicationlanguage": "アプリの言語を変更",
-    "shareourapplication": "アプリを共有",
-    "helpcenter": "ヘルプセンター",
-    "contactus": "お問い合わせ",
-    "editprofile": "プロフィール編集",
-    "settings": "設定",
-    "notification": "通知",
-    "logout": "ログアウト"
-  },
-  "location": {
-    "addLocation": "場所を追加",
-    "chooseLocation": "場所を選択",
-    "locationAccess": "位置情報アクセス",
-    "setLocation": "位置を設定",
-    "setLocationOnMap": "地図で位置を設定",
-    "locationSubmitted": "場所が送信されました！",
-    "locationSubmitMessage": "場所が正常に追加されました。管理者による確認をお待ちください。承認されましたら通知いたします。",
-    "enterName": "名前を入力してください",
-    "enterDescription": "説明を入力してください",
-    "enterAddress": "住所を入力してください",
-    "enterMobileNumber": "電話番号を入力してください",
-    "shareLocationPicture": "場所の写真を共有",
-"uploadDocument": "書類をアップロード",
-"uploadCertification": "有効な証明書と書類をアップロード",
-"documentUploaded": "書類がアップロードされました",
-"guestAccountNote": "注意：ゲストアカウントは1日3箇所までの共有に制限されています。",
-"agreementText": "アップロードガイドラインを読み、同意します。",
-"submit": "送信",
-"change": "変更",
-"notSet": "未設定"
-  },
-  "social": {
-    "post": "投稿",
-    "comment": "コメント",
-    "share": "シェア",
-    "bookmark": "ブックマーク",
-    "upload": "アップロード",
-    "addComment": "コメントを追加...",
-    "shareVia": "共有方法"
-  },
-  "explore": {
-    "searchPlaceholder": "場所を検索...",
-    "categories": {
-      "all": "すべて",
-      "hotels": "ホテル",
-      "restaurants": "レストラン",
-      "attractions": "観光スポット",
-      "shopping": "ショッピング"
+    "login": {
+      "title": "ログイン",
+      "welcome": "ようこそ、素晴らしい体験を始めましょう",
+      "noAccount": "アカウントをお持ちでないですか？",
+      "recaptcha": "私はロボットではありません"
     },
-    "filters": {
-      "rating": "評価",
-      "distance": "距離",
-      "price": "価格"
+    "register": {
+      "title": "登録",
+      "welcome": "ようこそ、素晴らしい体験を始めましょう",
+      "hasAccount": "すでにアカウントをお持ちですか？",
+      "withPhone": {
+        "title": "電話番号で登録",
+        "description": "電話番号で登録を完了してください"
+      }
+    },
+    "forgotPassword": {
+      "title": "パスワードをお忘れですか",
+      "description": "電話番号で登録を完了してください"
+    },
+    "otp": {
+      "title": "OTP認証",
+      "message": "認証コードが {email} / {phone} に送信されました。メッセージをご確認ください。迷惑メールフォルダもご確認ください。"
     }
   },
-  "admin": {
-    "dashboard": "管理ダッシュボード",
-    "manageLocations": "場所管理",
-    "manageUsers": "ユーザー管理",
-    "approvals": "承認",
-    "reports": "レポート"
+  "location": {
+    "add": {
+      "title": "場所を追加",
+      "openingTime": "営業時間 *",
+      "services": "サービスと料金 *",
+      "addService": "サービスと料金を追加",
+      "uploadDocument": "書類をアップロード *",
+      "uploadCertification": "有効な証明書と書類をアップロード",
+      "documentUploaded": "書類がアップロードされました",
+      "guestAccountNote": "注意：ゲストアカウントは1日3箇所までの共有に制限されています。",
+      "agreementText": "アップロードガイドラインを読み、同意します。"
+    },
+    "details": {
+      "services": "サービス",
+      "reviews": "レビュー ({count})",
+      "filters": {
+        "hottest": "人気",
+        "latest": "最新"
+      }
+    },
+    "search": {
+      "resultsFound": "{count}件の結果が見つかりました",
+      "hotSearch": "人気検索",
+      "recents": "最近",
+      "recentView": "最近の閲覧"
+    },
+    "filter": {
+      "title": "フィルター",
+      "rating": "評価",
+      "services": "サービス",
+      "sortBy": "並び替え",
+      "distance": "{distance}km"
+    }
+  },
+  "profile": {
+    "edit": {
+      "title": "プロフィール編集",
+      "changeUsername": "ユーザー名を変更",
+      "changeBio": "自己紹介を変更",
+      "gender": "性別",
+      "location": "場所",
+      "userId": "ユーザーID"
+    },
+    "wallet": {
+      "title": "ウォレット",
+      "totalCoins": "合計コイン",
+      "pointHistory": "ポイント履歴"
+    },
+    "notifications": {
+      "title": "通知",
+      "system": {
+        "title": "システム通知",
+        "description": "システム通知はこちらで確認できます"
+      },
+      "balance": {
+        "title": "残高通知",
+        "description": "残高通知はこちらで確認できます"
+      },
+      "achievements": {
+        "title": "実績通知",
+        "description": "クリエイターとしての実績はこちらで確認できます"
+      }
+    }
+  },
+  "explore": {
+    "title": "夢の休暇を楽しもう",
+    "subtitle": "特別なプランで完璧な休暇を計画しましょう",
+    "ads": "広告",
+    "topPicks": "おすすめ",
+    "recommended": "おすすめ"
+  },
+  "theme": {
+    "title": "テーマ",
+    "changeTheme": "アプリのテーマを変更",
+    "light": {
+      "title": "ライトテーマ",
+      "description": "日中の読みやすい明るく清潔な外観"
+    },
+    "dark": {
+      "title": "ダークテーマ",
+      "description": "目に優しいスタイリッシュなダークインターフェース"
+    },
+    "system": {
+      "title": "デフォルト（システム）",
+      "description": "デバイスのシステム設定に基づいてテーマを調整します"
+    }
+  },
+  "social": {
+    "upload": {
+      "title": "投稿をアップロード"
+    },
+    "comments": {
+      "title": "コメントを書く"
+    },
+    "share": {
+      "title": "共有先"
+    }
   }
 }
