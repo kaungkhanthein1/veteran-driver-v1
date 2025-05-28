@@ -82,11 +82,13 @@ const AddLocationPage = () => {
   return (
     <div className="min-h-screen flex justify-center bg-theme-primary">
       <div className="w-full max-w-[480px] flex flex-col">
-        <div className="flex-1 overflow-y-auto pb-16">
-          <div className="px-4">
-            <div className="flex items-center mb-6">
-              <BackButton/>
-              <h1 className="text-xl font-semibold">{t('location.addLocation')}</h1>
+        <div>
+          <div className="px-4 pt-4">
+            <div className="relative flex items-center mb-6">
+              <div className="absolute left-0">
+                <BackButton/>
+              </div>
+              <h1 className="flex-grow text-center text-xl font-semibold">{t('location.addLocation')}</h1>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">

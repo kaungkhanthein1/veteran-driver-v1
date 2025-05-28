@@ -64,9 +64,11 @@ export default function SettingsPage() {
   return (
     <div className="min-h-screen bg-theme-primary text-theme-primary">
       {/* Header */}
-      <div className="px-4 py-4 flex items-center">
-        <BackButton/>
-                <h1 className="text-xl font-semibold">Settings</h1>
+      <div className="px-4 py-4 relative flex items-center">
+        <div className="absolute left-3">
+          <BackButton/>
+        </div>
+        <h1 className="flex-grow text-center text-xl font-semibold">Settings</h1>
       </div>
 
       {/* Settings Groups */}
