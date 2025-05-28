@@ -130,14 +130,9 @@ const HomePage = () => {
 
           {/* Carousel/Slider */}
           <Carousel />
-
-          {/* Nearest Places Section using TopPicks */}
-          <TopPicks 
-            items={nearestPlaces.map(item => ({
-              ...item,
-              onClick: () => navigate(`/location/${item.id}`)
-            }))} 
-          />
+          <div className="mt-6">
+            <TopPicks items={nearestPlaces} title="Nearest Places" />
+          </div>
 
           {/* Feedbacks Section with horizontal scroll */}
           <div className="px-4 py-5">

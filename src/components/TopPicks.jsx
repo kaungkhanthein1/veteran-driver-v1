@@ -1,13 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const TopPicks = ({ items }) => {
+const TopPicks = ({ items, title = "Top Picks" }) => {
   const navigate = useNavigate();
 
   return (
     <div className="px-4 mb-4">
       <div className="flex items-center justify-between mb-3">
-        <h2 className="text-theme-primary text-lg font-semibold">Top Picks</h2>
+        <h2 className="text-theme-primary text-lg font-semibold">{title}</h2>
         <button className="text-[#FFC61B] text-sm">View All</button>
       </div>
       <div className="flex space-x-3 overflow-x-auto pb-2">
