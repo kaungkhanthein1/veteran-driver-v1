@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import VideoPlayer from "./VideoPlayer";
 import ImageModal from "./ImageModal";
 import ShareModal from "./ShareModal";
-import CommentModal from "./CommentModal"; // This import will be removed if CommentModal is not used here.
+import PropTypes from 'prop-types';
 import BeachImg from "../assets/Beach.png";
 import RoomImg from "../assets/Room.png";
 import SampleVideo from "../assets/Sample.mp4";
@@ -15,8 +15,25 @@ export default function SocialPostCard({ post: providedPost, onOpenComments, com
   // Use provided post
   const post = providedPost;
 
-  const handleMediaClick = (media) => {
-    setSelectedMedia(media);
+  // Define all available media for this post
+  const allMedia = [
+    BeachImg,
+    RoomImg,
+    { type: "video", url: SampleVideo, thumbnail: RoomImg }
+  ];
+
+  const handleMediaClick = (media, index) => {
+    // If it's a video, just set the video
+    if (media.type === 'video') {
+      setSelectedMedia(media);
+    } else {
+      // If it's an image, set all images and the current index
+      setSelectedMedia({
+        type: 'images',
+        images: allMedia.filter(m => typeof m === 'string'),
+        currentIndex: index
+      });
+    }
   };
 
   // Add handlers for comments and share
@@ -101,15 +118,11 @@ export default function SocialPostCard({ post: providedPost, onOpenComments, com
 
       {/* Media Grid */}
       <div className={`grid grid-cols-3 gap-[1px] ${compact ? 'aspect-[3/1]' : ''}`}>
-        {[
-          BeachImg,
-          RoomImg,
-          { type: "video", url: SampleVideo, thumbnail: RoomImg }
-        ].map((media, idx) => (
+        {allMedia.map((media, idx) => (
           <div 
             key={idx} 
             className="aspect-square bg-theme-primary cursor-pointer overflow-hidden"
-            onClick={() => handleMediaClick(media)}
+            onClick={() => handleMediaClick(media, idx)}
           >
             {typeof media === 'string' ? (
               <img 
@@ -168,16 +181,17 @@ export default function SocialPostCard({ post: providedPost, onOpenComments, com
 
       {/* Add this at the bottom of the component, before the closing div */}
       {selectedMedia && (
-        typeof selectedMedia === 'string' ? (
-          <ImageModal
-            isOpen={!!selectedMedia}
-            imageUrl={selectedMedia}
-            onClose={() => setSelectedMedia(null)}
-          />
-        ) : selectedMedia.type === 'video' && (
+        selectedMedia.type === 'video' ? (
           <VideoPlayer
             isOpen={!!selectedMedia}
             videoUrl={selectedMedia.url}
+            onClose={() => setSelectedMedia(null)}
+          />
+        ) : selectedMedia.type === 'images' && (
+          <ImageModal
+            isOpen={!!selectedMedia}
+            images={selectedMedia.images}
+            initialIndex={selectedMedia.currentIndex}
             onClose={() => setSelectedMedia(null)}
           />
         )
@@ -190,3 +204,24 @@ export default function SocialPostCard({ post: providedPost, onOpenComments, com
     </div>
   );
 }
+
+SocialPostCard.propTypes = {
+  post: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    user: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      verified: PropTypes.bool
+    }).isRequired,
+    content: PropTypes.string.isRequired,
+    tags: PropTypes.arrayOf(PropTypes.shape({
+      icon: PropTypes.string,
+      text: PropTypes.string.isRequired
+    })),
+    time: PropTypes.string.isRequired,
+    likes: PropTypes.string.isRequired,
+    comments: PropTypes.string.isRequired,
+    shares: PropTypes.string.isRequired
+  }).isRequired,
+  onOpenComments: PropTypes.func,
+  compact: PropTypes.bool
+};

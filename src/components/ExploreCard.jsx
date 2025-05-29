@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from 'prop-types';
 import Bookmark from "../icons/Bookmark.svg";
 import GoldenGate from "../assets/GoldenGate.png";
 import GoldenGateRoom from "../assets/GoldenGateRoom.png";
@@ -21,8 +22,25 @@ export default function ExploreCard({
 }) {
   const [selectedMedia, setSelectedMedia] = useState(null);
 
-  const handleMediaClick = (media) => {
-    setSelectedMedia(media);
+  // Define all available media for this card
+  const allMedia = [
+    GoldenGate,
+    Harrier,
+    { type: "video", url: ExploreVideo, thumbnail: HarrierRoom }
+  ];
+
+  const handleMediaClick = (media, index) => {
+    // If it's a video, just set the video
+    if (media.type === 'video') {
+      setSelectedMedia(media);
+    } else {
+      // If it's an image, set all images and the current index
+      setSelectedMedia({
+        type: 'images',
+        images: allMedia.filter(m => typeof m === 'string'),
+        currentIndex: index
+      });
+    }
   };
 
   return (
@@ -34,19 +52,28 @@ export default function ExploreCard({
         <div className="grid grid-cols-3 gap-2 relative">
           <div
             className="aspect-square bg-theme-primary rounded-lg overflow-hidden cursor-pointer"
-            onClick={() => handleMediaClick(GoldenGate)}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleMediaClick(GoldenGate, 0);
+            }}
           >
             <img src={GoldenGate} alt="Golden Gate" className="w-full h-full object-cover" />
           </div>
           <div
             className="aspect-square bg-theme-primary rounded-lg overflow-hidden cursor-pointer"
-            onClick={() => handleMediaClick(Harrier)}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleMediaClick(Harrier, 1);
+            }}
           >
             <img src={Harrier} alt="Harrier" className="w-full h-full object-cover" />
           </div>
           <div
             className="aspect-square bg-theme-primary rounded-lg relative overflow-hidden cursor-pointer"
-            onClick={() => handleMediaClick({ type: "video", url: ExploreVideo, thumbnail: HarrierRoom })}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleMediaClick({ type: "video", url: ExploreVideo, thumbnail: HarrierRoom }, 2);
+            }}
           >
             <img src={HarrierRoom} alt="Video thumbnail" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-black bg-opacity-50 rounded-lg flex items-center justify-center">
@@ -134,16 +161,17 @@ export default function ExploreCard({
 
       {/* Media Modals */}
       {selectedMedia && (
-        typeof selectedMedia === 'string' ? (
-          <ImageModal
-            isOpen={!!selectedMedia}
-            imageUrl={selectedMedia}
-            onClose={() => setSelectedMedia(null)}
-          />
-        ) : selectedMedia.type === "video" && (
+        selectedMedia.type === 'video' ? (
           <VideoPlayer
             isOpen={!!selectedMedia}
             videoUrl={selectedMedia.url}
+            onClose={() => setSelectedMedia(null)}
+          />
+        ) : selectedMedia.type === 'images' && (
+          <ImageModal
+            isOpen={!!selectedMedia}
+            images={selectedMedia.images}
+            initialIndex={selectedMedia.currentIndex}
             onClose={() => setSelectedMedia(null)}
           />
         )
@@ -151,3 +179,23 @@ export default function ExploreCard({
     </div>
   );
 }
+
+ExploreCard.propTypes = {
+  item: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    address: PropTypes.string,
+    distance: PropTypes.string,
+    rating: PropTypes.number.isRequired,
+    reviews: PropTypes.number.isRequired,
+    price: PropTypes.string.isRequired,
+    services: PropTypes.arrayOf(PropTypes.string).isRequired
+  }).isRequired,
+  status: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
+  selected: PropTypes.bool,
+  isRecycleBin: PropTypes.bool,
+  onRestore: PropTypes.func,
+  isBookmarked: PropTypes.bool,
+  onBookmarkClick: PropTypes.func
+};
