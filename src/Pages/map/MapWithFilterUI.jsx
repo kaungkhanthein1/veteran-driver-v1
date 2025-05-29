@@ -7,7 +7,7 @@ import L from "leaflet";
 import "./map.css";
 import search from "../../components/home/search.svg";
 import { location } from "./Place";
-import BackButton from "../../components/BackButton";
+import BackButton from "../../components/common/BackButton";
 
 const RecenterMap = ({ center }) => {
   const map = useMap();

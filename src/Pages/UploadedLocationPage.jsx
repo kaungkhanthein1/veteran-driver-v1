@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import ExploreCard from "../components/ExploreCard";
-import RecycleBinIcon from "../icons/RecycleBin.svg";
+import ExploreCard from "../components/cards/ExploreCard";
+import RecycleBinIcon from "icons/RecycleBin.svg";
 import { useNavigate } from "react-router-dom";
 import { useBookmarks } from '../hooks/useBookmarks';
-import BackButton from "../components/BackButton";
+import BackButton from "../components/common/BackButton";
 
 export default function UploadedLocationPage() {
   const navigate = useNavigate();

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import BackButton from "../components/BackButton";
+import BackButton from "../components/common/BackButton";
 
 export default function OtpVerifyPage() {
   const navigate = useNavigate();

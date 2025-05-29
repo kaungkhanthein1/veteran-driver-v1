@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import HomeIcon from "../icons/Home.svg";
-import ExploreIcon from "../icons/Explore.svg";
-import SocialIcon from "../icons/Social.svg";
-import AvatorIcon from "../icons/Avator.svg";
+import HomeIcon from "icons/Home.svg";
+import ExploreIcon from "icons/Explore.svg";
+import SocialIcon from "icons/Social.svg";
+import AvatorIcon from "icons/Avator.svg";
 
 export default function BottomNavBar({ active }) {
   const navigate = useNavigate();

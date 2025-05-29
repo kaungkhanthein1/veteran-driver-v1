@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import VideoPlayer from "./VideoPlayer";
-import ImageModal from "./ImageModal";
-import ShareModal from "./ShareModal";
+import VideoPlayer from "../common/VideoPlayer";
+import ImageModal from "../common/ImageModal";
+import ShareModal from "../common/ShareModal";
 import PropTypes from 'prop-types';
-import BeachImg from "../assets/Beach.png";
-import RoomImg from "../assets/Room.png";
-import SampleVideo from "../assets/Sample.mp4";
+import BeachImg from "assets/Beach.png";
+import RoomImg from "assets/Room.png";
+import SampleVideo from "assets/Sample.mp4";
 
 export default function SocialPostCard({ post: providedPost, onOpenComments, compact = false }) {
   const [expanded, setExpanded] = useState(false);

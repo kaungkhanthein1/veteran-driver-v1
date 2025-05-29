@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
-import Bookmark from "../icons/Bookmark.svg";
-import GoldenGate from "../assets/GoldenGate.png";
-import GoldenGateRoom from "../assets/GoldenGateRoom.png";
-import Harrier from "../assets/Harrier.png";
-import HarrierRoom from "../assets/HarrierRoom.png";
-import ExploreVideo from "../assets/Explore.mp4";
-import ExploreVd from "../assets/Explore Vd.mp4";
-import VideoPlayer from "./VideoPlayer";
-import ImageModal from "./ImageModal";
+import Bookmark from "icons/Bookmark.svg";
+import GoldenGate from "assets/GoldenGate.png";
+import GoldenGateRoom from "assets/GoldenGateRoom.png";
+import Harrier from "assets/Harrier.png";
+import HarrierRoom from "assets/HarrierRoom.png";
+import ExploreVideo from "assets/Explore.mp4";
+import ExploreVd from "assets/Explore Vd.mp4";
+import VideoPlayer from "../common/VideoPlayer";
+import ImageModal from "../common/ImageModal";
 
 export default function ExploreCard({
   item,

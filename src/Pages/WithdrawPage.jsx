@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import FormInput from '../components/FormInput';
-import BackButton from '../components/BackButton';
+import FormInput from '../components/common/FormInput';
+import BackButton from '../components/common/BackButton';
 // Import payment method icons
-import CardsIcon from '../assets/Cards.png';
-import AlipayIcon from '../assets/Alipay.png';
-import GooglePayIcon from '../assets/GooglePay.png';
-import ApplePayIcon from '../assets/ApplePay.svg';
-import WeChatIcon from '../assets/WeChat.svg';
+import CardsIcon from 'assets/Cards.png';
+import AlipayIcon from 'assets/Alipay.png';
+import GooglePayIcon from 'assets/GooglePay.png';
+import ApplePayIcon from 'assets/ApplePay.svg';
+import WeChatIcon from 'assets/WeChat.svg';
 
 export default function WithdrawPage() {
   const navigate = useNavigate();

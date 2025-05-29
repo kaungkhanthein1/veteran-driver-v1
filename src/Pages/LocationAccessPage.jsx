@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Place from "../icons/Place.svg?react";
+import Place from "icons/Place.svg?react";
 import useLocation from "../hooks/useLocation";
 
 export default function LocationAccessPage() {

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import SocialTabs from "../components/SocialTabs";
-import SocialPostCard from "../components/SocialPostCard";
-import BottomNavBar from "../components/BottomNavBar";
-import CommentModal from "../components/CommentModal";
+import SocialPostCard from "../components/cards/SocialPostCard";
+import BottomNavBar from "../components/common/BottomNavBar";
+import CommentModal from "../components/common/CommentModal";
 import { useNavigate } from 'react-router-dom';
 
 // Mock posts data

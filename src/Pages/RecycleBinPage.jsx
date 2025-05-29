@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import ExploreCard from "../components/ExploreCard";
-import BackButton from "../components/BackButton";
+import ExploreCard from "../components/cards/ExploreCard";
+import BackButton from "../components/common/BackButton";
 
 export default function RecycleBinPage() {
   const { t } = useTranslation();

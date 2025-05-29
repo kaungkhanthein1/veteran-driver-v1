@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ExploreCard from '../components/ExploreCard';
+import ExploreCard from '../components/cards/ExploreCard';
 import { useBookmarks } from '../hooks/useBookmarks';
 import FilterPanel from './map/FilterPanel';
-import BackButton from '../components/BackButton';
-import FilterIcon from '../icons/Tune.svg'
+import BackButton from '../components/common/BackButton';
+import FilterIcon from 'icons/Tune.svg'
 
 // Import explore items from ExplorePage
 const exploreItems = [

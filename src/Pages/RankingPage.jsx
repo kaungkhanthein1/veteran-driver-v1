@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import BottomNavBar from "../components/BottomNavBar";
+import BottomNavBar from "../components/common/BottomNavBar";
 import { useBookmarks } from '../hooks/useBookmarks';
-import BackButton from "../components/BackButton";
-import GoldenGate from "../assets/GoldenGate.png";
-import GoldenGateRoom from "../assets/GoldenGateRoom.png";
-import Harrier from "../assets/Harrier.png";
-import HarrierRoom from "../assets/HarrierRoom.png";
+import BackButton from "../components/common/BackButton";
+import GoldenGate from "assets/GoldenGate.png";
+import GoldenGateRoom from "assets/GoldenGateRoom.png";
+import Harrier from "assets/Harrier.png";
+import HarrierRoom from "assets/HarrierRoom.png";
 
 // Mock data for ranking items
 const rankingItems = [

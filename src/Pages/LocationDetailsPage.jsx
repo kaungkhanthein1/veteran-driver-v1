@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import BackButton from '../components/BackButton';
-import PlaceIcon from '../icons/Place.svg';
-import ScheduleIcon from '../icons/Schedule.svg';
-import ShareIcon from '../icons/Share.svg';
-import BookmarkIcon from '../icons/Bookmark.svg';
-import RoomImage from '../assets/Room.png';
-import GoldenGateRoomImage from '../assets/GoldenGateRoom.png';
-import HarrierRoomImage from '../assets/HarrierRoom.png';
+import BackButton from '../components/common/BackButton';
+import PlaceIcon from 'icons/Place.svg';
+import ScheduleIcon from 'icons/Schedule.svg';
+import ShareIcon from 'icons/Share.svg';
+import BookmarkIcon from 'icons/Bookmark.svg';
+import RoomImage from 'assets/Room.png';
+import GoldenGateRoomImage from 'assets/GoldenGateRoom.png';
+import HarrierRoomImage from 'assets/HarrierRoom.png';
 
 const LocationDetailsPage = () => {
   const { id } = useParams();

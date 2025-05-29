@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ScheduleIcon from '../../icons/Schedule.svg';
+import ScheduleIcon from 'icons/Schedule.svg';
 
 const SetTimeModal = ({ isOpen, onClose, onSave, initialTime }) => {
   const [hour, setHour] = useState(initialTime?.hour || 12);

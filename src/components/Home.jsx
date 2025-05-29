@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import TopNav from './home/TopNav';
 import Carousel from './home/Carousel';
-import SocialPostCard from './SocialPostCard';
-import ExploreCard from './ExploreCard';
-import BottomNavBar from './BottomNavBar';
-import TopPicks from './TopPicks';
+import SocialPostCard from '../components/cards/SocialPostCard';
+import ExploreCard from '../components/cards/ExploreCard';
+import BottomNavBar from '../components/common/BottomNavBar';
+import TopPicks from '../components/common/TopPicks';
 import { useBookmarks } from '../hooks/useBookmarks';
-import GoldenGateImage from '../assets/GoldenGate.png';
-import HarrierImage from '../assets/Harrier.png';
+import GoldenGateImage from 'assets/GoldenGate.png';
+import HarrierImage from 'assets/Harrier.png';
 
 const nearestPlaces = [
   {

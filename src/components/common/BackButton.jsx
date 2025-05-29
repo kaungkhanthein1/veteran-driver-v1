@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import ArrowBackIcon from '../icons/ArrowBack.svg';
+import ArrowBackIcon from 'icons/ArrowBack.svg';
 
 export default function BackButton({ className = '' }) {
   const navigate = useNavigate();

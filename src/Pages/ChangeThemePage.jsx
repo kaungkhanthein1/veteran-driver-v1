@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
-import BackButton from '../components/BackButton';
+import BackButton from '../components/common/BackButton';
 
 const ChangeThemePage = () => {
   const { theme, toggleTheme } = useTheme();

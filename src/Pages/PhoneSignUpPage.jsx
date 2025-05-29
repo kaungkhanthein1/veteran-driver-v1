@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import FormInput from '../components/FormInput';
-import BackButton from "../components/BackButton";
+import FormInput from '../components/common/FormInput';
+import BackButton from "../components/common/BackButton";
 
 export default function PhoneSignUpPage() {
   const navigate = useNavigate();

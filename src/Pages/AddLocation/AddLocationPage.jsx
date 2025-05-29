@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import SetLocationIcon from '../../icons/SetLocation.svg';
+import SetLocationIcon from 'icons/SetLocation.svg';
 import OpeningTime from './OpeningTime';
 import ServiceAndPrice from './ServiceAndPrice';
-import FormInput from '../../components/FormInput';
-import DocumentIcon from '../../icons/Document.svg';
+import FormInput from '../../components/common/FormInput';
+import DocumentIcon from 'icons/Document.svg';
 import SubmittedLocationModal from './SubmittedLocationModal';
-import BackButton from '../../components/BackButton';
+import BackButton from '../../components/common/BackButton';
 
 const AddLocationPage = () => {
   const navigate = useNavigate();

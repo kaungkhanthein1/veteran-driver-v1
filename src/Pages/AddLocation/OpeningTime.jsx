@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import SetTimeIcon from '../../icons/SetTime.svg';
+import SetTimeIcon from 'icons/SetTime.svg';
 import SetTimeModal from './SetTimeModal';
 
 const OpeningTime = ({ formData, setFormData }) => {

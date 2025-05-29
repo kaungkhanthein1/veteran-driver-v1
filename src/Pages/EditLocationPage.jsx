@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import SetLocationIcon from '../icons/SetLocation.svg';
+import SetLocationIcon from 'icons/SetLocation.svg';
 import OpeningTime from './AddLocation/OpeningTime';
 import ServiceAndPrice from './AddLocation/ServiceAndPrice';
-import FormInput from '../components/FormInput';
-import DocumentIcon from '../icons/Document.svg';
-import BackButton from '../components/BackButton';
+import FormInput from '../components/common/FormInput';
+import DocumentIcon from 'icons/Document.svg';
+import BackButton from '../components/common/BackButton';
 
 const EditLocationPage = () => {
   const navigate = useNavigate();

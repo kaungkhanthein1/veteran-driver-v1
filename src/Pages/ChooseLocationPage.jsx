@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import BottomNavBar from "../components/BottomNavBar";
-import BackButton from "../components/BackButton";
+import BottomNavBar from "../components/common/BottomNavBar";
+import BackButton from "../components/common/BackButton";
 
 const regions = [
   { name: "Cambodia", flag: "🇰🇭" },

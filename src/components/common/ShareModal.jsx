@@ -1,8 +1,8 @@
 import React from 'react';
-import WechatIcon from '../icons/Wechat.svg';
-import WeiboIcon from '../icons/Weibo.svg';
-import QqIcon from '../icons/Qq.svg';
-import BaiduIcon from '../icons/Baidu.svg';
+import WechatIcon from 'icons/Wechat.svg';
+import WeiboIcon from 'icons/Weibo.svg';
+import QqIcon from 'icons/Qq.svg';
+import BaiduIcon from 'icons/Baidu.svg';
 
 const ShareModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;

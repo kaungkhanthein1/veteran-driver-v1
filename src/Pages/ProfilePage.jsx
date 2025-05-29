@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import { useTranslation } from 'react-i18next';
-import BottomNavBar from "../components/BottomNavBar";
+import BottomNavBar from "../components/common/BottomNavBar";
 // Import icons
-import WalletIcon from "../icons/Profile/Wallet.svg";
-import UploadedLocationIcon from "../icons/Profile/UploadedLocation.svg";
-import BookMarkedLocationIcon from "../icons/Profile/BookMarkedLocation.svg";
-import AppThemeIcon from "../icons/Profile/AppTheme.svg";
-import AppLanguageIcon from "../icons/Profile/AppLanguage.svg";
-import ShareAppIcon from "../icons/Profile/ShareApp.svg";
-import HelpCenterIcon from "../icons/Profile/HelpCenter.svg";
-import ContactUsIcon from "../icons/Profile/ContactUs.svg";
-import LogoutIcon from "../icons/Profile/Logout.svg";
-import ProfilePic from "../icons/Profile/ProfilePic.svg";
-import NotificationIcon from "../icons/Notification.svg";
-import SettingIcon from "../icons/Setting.svg";
+import WalletIcon from "icons/Profile/Wallet.svg";
+import UploadedLocationIcon from "icons/Profile/UploadedLocation.svg";
+import BookMarkedLocationIcon from "icons/Profile/BookMarkedLocation.svg";
+import AppThemeIcon from "icons/Profile/AppTheme.svg";
+import AppLanguageIcon from "icons/Profile/AppLanguage.svg";
+import ShareAppIcon from "icons/Profile/ShareApp.svg";
+import HelpCenterIcon from "icons/Profile/HelpCenter.svg";
+import ContactUsIcon from "icons/Profile/ContactUs.svg";
+import LogoutIcon from "icons/Profile/Logout.svg";
+import ProfilePic from "icons/Profile/ProfilePic.svg";
+import NotificationIcon from "icons/Notification.svg";
+import SettingIcon from "icons/Setting.svg";
 import { useNavigate } from "react-router-dom";
-import LanguageModal from "../components/LanguageModal";
+import LanguageModal from "../components/common/LanguageModal";
 import NotificationsPage from "./NotificationsPage";
 
 export default function ProfilePage() {

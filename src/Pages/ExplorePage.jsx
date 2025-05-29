@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import BottomNavBar from "../components/BottomNavBar";
+import BottomNavBar from "../components/common/BottomNavBar";
 import ExploreTabs from "../components/ExploreTabs";
-import ExploreCard from "../components/ExploreCard";
-import TopPicks from "../components/TopPicks";
-import AddLocationIcon from "../icons/AddLocation.svg";
-import GoldenGateImage from '../assets/GoldenGate.png';
-import HarrierImage from '../assets/Harrier.png';
+import ExploreCard from "../components/cards/ExploreCard";
+import TopPicks from "../components/common/TopPicks";
+import AddLocationIcon from "icons/AddLocation.svg";
+import GoldenGateImage from 'assets/GoldenGate.png';
+import HarrierImage from 'assets/Harrier.png';
 import { useBookmarks } from '../hooks/useBookmarks';
 
 // Mock data for explore items
