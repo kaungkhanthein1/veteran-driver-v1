@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import BackButton from '../components/common/BackButton';
+import BackButton from '../../components/common/BackButton';
 import NotificationIcon from 'icons/Bell.svg';
 import WalletIcon from 'icons/Wallet.svg';
 import TrophyIcon from 'icons/Trophy.svg';

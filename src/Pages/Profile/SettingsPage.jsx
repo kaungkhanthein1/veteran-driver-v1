@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import BackButton from '../components/common/BackButton';
+import BackButton from '../../components/common/BackButton';
 
 export default function SettingsPage() {
   const navigate = useNavigate();

@@ -17,20 +17,20 @@ import "leaflet/dist/leaflet.css";
 import SocialUpload from "./Pages/SocialUpload";
 import AddLocationPage from "./Pages/AddLocation/AddLocationPage";
 import ChangeThemePage from "./Pages/ChangeThemePage";
-import SettingsPage from './Pages/SettingsPage';
-import EditProfilePage from "./Pages/EditProfilePage";
-import WalletPage from './Pages/WalletPage';
+import SettingsPage from './Pages/Profile/SettingsPage';
+import EditProfilePage from "./Pages/Profile/EditProfilePage";
+import WalletPage from './Pages/Profile/WalletPage';
 import PointHistoryPage from './Pages/PointHistoryPage';
-import WithdrawPage from './Pages/WithdrawPage';
+import WithdrawPage from './Pages/Profile/WithdrawPage';
 import UploadedLocationPage from './Pages/UploadedLocationPage';
 import RecycleBinPage from "./Pages/RecycleBinPage";
 import EditLocationPage from "./Pages/EditLocationPage";
-import BookmarksPage from './Pages/BookmarksPage';
+import BookmarksPage from './Pages/Profile/BookmarksPage';
 import RankingPage from './Pages/RankingPage';
 import SearchLocationPage from "./Pages/SearchLocationPage";
 import LocationDetailsPage from "./Pages/LocationDetailsPage";
-import NotificationsPage from "./Pages/NotificationsPage";
-import ChangePasswordPage from "./Pages/ChangePasswordPage";
+import NotificationsPage from "./Pages/Profile/NotificationsPage";
+import ChangePasswordPage from "./Pages/Profile/ChangePasswordPage";
 
 function App() {
   return (

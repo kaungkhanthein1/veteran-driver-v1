@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import BackButton from '../components/common/BackButton';
-import FormInput from '../components/common/FormInput';
+import BackButton from '../../components/common/BackButton';
+import FormInput from '../../components/common/FormInput';
 
 export default function ChangePasswordPage() {
   const navigate = useNavigate();

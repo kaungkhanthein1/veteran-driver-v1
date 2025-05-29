@@ -16,7 +16,7 @@ import NotificationIcon from "icons/Notification.svg";
 import SettingIcon from "icons/Setting.svg";
 import { useNavigate } from "react-router-dom";
 import LanguageModal from "../components/common/LanguageModal";
-import NotificationsPage from "./NotificationsPage";
+import NotificationsPage from "../Pages/Profile/NotificationsPage";
 
 export default function ProfilePage() {
   const navigate = useNavigate();

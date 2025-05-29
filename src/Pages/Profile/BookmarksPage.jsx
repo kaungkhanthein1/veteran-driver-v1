@@ -1,8 +1,8 @@
 import React from 'react';
-import ExploreCard from '../components/cards/ExploreCard';
-import BottomNavBar from '../components/common/BottomNavBar';
-import { useBookmarks } from '../hooks/useBookmarks';
-import BackButton from '../components/common/BackButton';
+import ExploreCard from '../../components/cards/ExploreCard';
+import BottomNavBar from '../../components/common/BottomNavBar';
+import { useBookmarks } from '../../hooks/useBookmarks';
+import BackButton from '../../components/common/BackButton';
 
 export default function BookmarksPage() {
   const { bookmarkedItems, toggleBookmark, isBookmarked } = useBookmarks();
