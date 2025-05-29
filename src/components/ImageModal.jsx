@@ -3,15 +3,41 @@ import PropTypes from 'prop-types';
 
 const ImageModal = ({ images, initialIndex = 0, onClose }) => {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
+  const [touchStartX, setTouchStartX] = useState(null);
+  const [touchEndX, setTouchEndX] = useState(null);
 
   const handlePrevious = (e) => {
-    e.stopPropagation();
+    if (e) e.stopPropagation();
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   };
 
   const handleNext = (e) => {
-    e.stopPropagation();
+    if (e) e.stopPropagation();
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+  };
+
+  // Touch event handlers for swipe
+  const handleTouchStart = (e) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEndX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX !== null && touchEndX !== null) {
+      const distance = touchStartX - touchEndX;
+      if (distance > 50) {
+        // Swiped left
+        handleNext();
+      } else if (distance < -50) {
+        // Swiped right
+        handlePrevious();
+      }
+    }
+    setTouchStartX(null);
+    setTouchEndX(null);
   };
 
   useEffect(() => {
@@ -30,8 +56,13 @@ const ImageModal = ({ images, initialIndex = 0, onClose }) => {
   }, []);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-lg bg-theme-primary/50">
-      <div className="relative max-w-3xl mx-4">
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-lg bg-theme-primary/50"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
+      <div className="relative max-w-3xl mx-4 flex flex-col items-center justify-center">
         <button 
           onClick={onClose}
           className="absolute -top-10 right-0 text-theme-primary"
@@ -41,27 +72,37 @@ const ImageModal = ({ images, initialIndex = 0, onClose }) => {
           </svg>
         </button>
 
-        {/* Navigation Buttons */}
-        {images.length > 1 && (
-          <>
-            <button
-              onClick={handlePrevious}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 text-theme-primary hover:text-theme-secondary transition-colors"
-            >
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            <button
-              onClick={handleNext}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 text-theme-primary hover:text-theme-secondary transition-colors"
-            >
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          </>
-        )}
+        <div className="relative flex items-center justify-center px-6">
+          {/* Navigation Buttons */}
+          {images.length > 1 && (
+            <>
+              <button
+                onClick={handlePrevious}
+                className="absolute -left-5 top-1/2 -translate-y-1/2 z-10 bg-black/60 hover:bg-black/80 text-white rounded-full p-1 focus:outline-none focus:ring-2 focus:ring-white transition"
+                aria-label="Previous image"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button
+                onClick={handleNext}
+                className="absolute -right-5 top-1/2 -translate-y-1/2 z-10 bg-black/60 hover:bg-black/80 text-white rounded-full p-1 focus:outline-none focus:ring-2 focus:ring-white transition"
+                aria-label="Next image"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </>
+          )}
+
+          <img 
+            src={images[currentIndex]} 
+            alt={`Image ${currentIndex + 1}`} 
+            className="max-w-[76vw] max-h-[40vh] w-auto h-auto object-contain backdrop-blur-none rounded-lg shadow-lg"
+          />
+        </div>
 
         {/* Image Counter */}
         {images.length > 1 && (
@@ -69,12 +110,6 @@ const ImageModal = ({ images, initialIndex = 0, onClose }) => {
             {currentIndex + 1} / {images.length}
           </div>
         )}
-
-        <img 
-          src={images[currentIndex]} 
-          alt={`Image ${currentIndex + 1}`} 
-          className="max-h-[90vh] w-auto object-contain backdrop-blur-none"
-        />
       </div>
     </div>
   );
