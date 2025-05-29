@@ -34,7 +34,7 @@ const HomePage = () => {
   // Mock data for feedbacks
   const feedbacks = [
     {
-      id: 1,
+      id: "1",
       user: {
         name: "BLUVARI",
         verified: true
@@ -52,7 +52,7 @@ const HomePage = () => {
       shares: "6"
     },
     {
-      id: 2,
+      id: "2",
       user: {
         name: "SUNNY",
         verified: true
@@ -69,7 +69,7 @@ const HomePage = () => {
       shares: "4"
     },
     {
-      id: 3,
+      id: "3",
       user: {
         name: "TRAVELER",
         verified: true
@@ -90,13 +90,13 @@ const HomePage = () => {
   // Mock data for nearest places
   const nearestPlaces = [
     {
-      id: 1,
+      id: "1",
       name: "Kuma",
       price: "50 USD",
       image: GoldenGateImage
     },
     {
-      id: 2,
+      id: "2",
       name: "Sunny",
       price: "45 USD",
       image: HarrierImage
@@ -106,7 +106,7 @@ const HomePage = () => {
   // Mock data for places (can be moved to a separate file)
   const places = [
     {
-      id: 1,
+      id: "1",
       name: "Golden Gate",
       images: ["/path/to/image1", "/path/to/image2", "/path/to/image3"],
       rating: 5.0,
@@ -201,6 +201,7 @@ const HomePage = () => {
                 item={place} 
                 isBookmarked={isBookmarked(place.id)}
                 onBookmarkClick={() => toggleBookmark(place)}
+                onClick={() => {}}
               />
             ))}
           </div>

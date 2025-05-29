@@ -207,7 +207,7 @@ export default function SocialPostCard({ post: providedPost, onOpenComments, com
 
 SocialPostCard.propTypes = {
   post: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     user: PropTypes.shape({
       name: PropTypes.string.isRequired,
       verified: PropTypes.bool
@@ -218,9 +218,9 @@ SocialPostCard.propTypes = {
       text: PropTypes.string.isRequired
     })),
     time: PropTypes.string.isRequired,
-    likes: PropTypes.string.isRequired,
-    comments: PropTypes.string.isRequired,
-    shares: PropTypes.string.isRequired
+    likes: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    comments: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    shares: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
   }).isRequired,
   onOpenComments: PropTypes.func,
   compact: PropTypes.bool

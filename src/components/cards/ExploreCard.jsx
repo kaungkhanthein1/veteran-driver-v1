@@ -182,7 +182,7 @@ export default function ExploreCard({
 
 ExploreCard.propTypes = {
   item: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     name: PropTypes.string.isRequired,
     address: PropTypes.string,
     distance: PropTypes.string,
