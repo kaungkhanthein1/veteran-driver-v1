@@ -3,8 +3,12 @@ import WechatIcon from 'icons/Wechat.svg';
 import WeiboIcon from 'icons/Weibo.svg';
 import QqIcon from 'icons/Qq.svg';
 import BaiduIcon from 'icons/Baidu.svg';
+import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 
 const ShareModal = ({ isOpen, onClose }) => {
+  const { t } = useTranslation();
+
   if (!isOpen) return null;
 
   const handleCopyLink = () => {
@@ -26,7 +30,7 @@ const ShareModal = ({ isOpen, onClose }) => {
           <div className="p-4 pb-8">
             <div className="flex flex-col items-center">
               <div className="w-10 h-1 bg-theme-primary/20 rounded-full mb-6" />
-              <h3 className="text-theme-primary text-lg font-medium mb-6">Share to</h3>
+              <h3 className="text-theme-primary text-lg font-medium mb-6">{t('shareModal.title')}</h3>
             </div>
             
             <div className="flex justify-around items-center mb-8">
@@ -54,7 +58,7 @@ const ShareModal = ({ isOpen, onClose }) => {
                 onClick={handleCopyLink}
                 className="ml-4 bg-[#FDC51B] text-black rounded-lg px-4 py-1.5 text-sm font-medium"
               >
-                Copy
+                {t('shareModal.copyButton')}
               </button>
             </div>
           </div>
@@ -62,6 +66,11 @@ const ShareModal = ({ isOpen, onClose }) => {
       </div>
     </>
   );
+};
+
+ShareModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default ShareModal;

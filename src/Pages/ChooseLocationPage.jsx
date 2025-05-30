@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import BottomNavBar from "../components/common/BottomNavBar";
 import BackButton from "../components/common/BackButton";
+import { useTranslation } from "react-i18next";
 
 const regions = [
   { name: "Cambodia", flag: "🇰🇭" },
@@ -20,21 +20,22 @@ export default function ChooseLocationPage() {
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState(null);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const filteredRegions = regions.filter(region =>
-    region.name.toLowerCase().includes(search.toLowerCase())
+    t(`regions.${region.name.toLowerCase().replace(' ', '')}`).toLowerCase().includes(search.toLowerCase())
   );
 
   return (
     <div className="min-h-screen flex flex-col bg-theme-primary px-4 py-8">
       <div className="flex items-center mb-6">
         <BackButton/>
-        <h2 className="text-xl font-bold text-theme-primary">Select Region</h2>
+        <h2 className="text-xl font-bold text-theme-primary">{t('chooseLocation.selectRegionTitle')}</h2>
       </div>
       <input
         type="text"
         className="w-full bg-theme-secondary border border-theme rounded-lg px-4 py-3 text-theme-primary placeholder-theme-secondary mb-6"
-        placeholder="Search location..."
+        placeholder={t('chooseLocation.searchLocationPlaceholder')}
         value={search}
         onChange={e => setSearch(e.target.value)}
       />
@@ -48,7 +49,7 @@ export default function ChooseLocationPage() {
             onClick={() => setSelected(region.name)}
           >
             <span className="text-3xl mb-2">{region.flag}</span>
-            <span className="text-theme-primary text-sm">{region.name}</span>
+            <span className="text-theme-primary text-sm">{t(`regions.${region.name.toLowerCase().replace(' ', '')}`)}</span>
           </button>
         ))}
       </div>
@@ -60,7 +61,7 @@ export default function ChooseLocationPage() {
           navigate("/"); // Go to Home tab after choosing location
         }}
       >
-        Choose this region
+        {t('chooseLocation.chooseThisRegionButton')}
       </button>
     </div>
   );

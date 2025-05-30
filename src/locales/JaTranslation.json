@@ -1,127 +1,108 @@
 {
-  "common": {
-    "ok": "OK",
-    "cancel": "キャンセル",
-    "save": "保存",
-    "delete": "削除",
-    "edit": "編集",
-    "close": "閉じる",
-    "back": "戻る",
-    "name": "名前",
-    "description": "説明",
-    "address": "住所",
-    "mobileNumber": "携帯番号"
-  },
-  "navigation": {
-    "home": "ホーム",
-    "explore": "探す",
-    "social": "ソーシャル",
-    "profile": "プロフィール"
-  },
-  "auth": {
-    "welcome": "ようこそ",
-    "description": "私たちのアプリへようこそ",
-    "login": "ログイン",
-    "signup": "サインアップ",
-    "email": "メール",
-    "password": "パスワード",
-    "forgotPassword": "パスワードをお忘れですか？",
-    "profile": {
-      "title": "プロフィール",
-      "edit": "プロフィール編集",
-      "settings": "設定"
-    }
-  },
-  "profile": {
-    "settings": {
-      "title": "設定",
-      "account": {
-        "title": "アカウント",
-        "mobileNumber": "携帯番号",
-        "bindEmail": "メールを連携"
-      },
-      "thirdParty": {
-        "title": "サードパーティ",
-        "bindFacebook": "Facebookと連携",
-        "bindWeChat": "WeChatと連携",
-        "bindLine": "Lineと連携"
-      },
-      "security": {
-        "title": "セキュリティ",
-        "changePassword": "パスワード変更",
-        "setup2FA": "2段階認証を設定"
-      }
-    },
-    "changeTheme": "テーマ変更",
-    "language": "言語",
-    "notifications": "通知",
-    "schedule": "スケジュール",
-    "ranking": "ランキング",
-    "documents": "ドキュメント",
-    "pointwallet": "マイポイントウォレット",
-    "uploadedlocation": "アップロードした場所",
-    "bookmarklocation": "ブックマークした場所",
-    "changeapplicationtheme": "アプリのテーマを変更",
-    "changeapplicationlanguage": "アプリの言語を変更",
-    "shareourapplication": "アプリを共有",
-    "helpcenter": "ヘルプセンター",
-    "contactus": "お問い合わせ",
-    "editprofile": "プロフィール編集",
-    "settings": "設定",
-    "notification": "通知",
-    "logout": "ログアウト"
-  },
-  "location": {
-    "addLocation": "場所を追加",
-    "chooseLocation": "場所を選択",
-    "locationAccess": "位置情報アクセス",
-    "setLocation": "場所を設定",
-    "setLocationOnMap": "地図で場所を設定",
-    "locationSubmitted": "場所が送信されました！",
-    "locationSubmitMessage": "場所が正常に追加されました。管理者が審査します。承認されると通知されます。",
-    "enterName": "名前を入力してください",
-    "enterDescription": "説明を入力してください",
-    "enterAddress": "住所を入力してください",
-    "enterMobileNumber": "携帯番号を入力してください",
-    "shareLocationPicture": "場所の写真を共有",
-    "uploadDocument": "書類をアップロード",
-    "uploadCertification": "有効な証明書と書類をアップロード",
-    "documentUploaded": "書類がアップロードされました",
-    "guestAccountNote": "注意：ゲストアカウントは1日3件までしか場所を共有できません。",
-    "agreementText": "アップロードガイドラインを読み、同意します。",
-    "submit": "送信",
-    "change": "変更",
-    "notSet": "未設定"
-  },
-  "social": {
-    "post": "投稿",
-    "comment": "コメント",
-    "share": "共有",
-    "bookmark": "ブックマーク",
-    "upload": "アップロード",
-    "addComment": "コメントを追加...",
-    "shareVia": "共有方法"
-  },
-  "explore": {
-    "searchPlaceholder": "場所を検索...",
-    "categories": {
-      "all": "すべて",
-      "hotels": "ホテル",
-      "restaurants": "レストラン",
-      "attractions": "観光地",
-      "shopping": "ショッピング"
-    },
-    "filters": {
-      "rating": "評価",
-      "distance": "距離",
-      "price": "価格"
-    }
-  },
   "admin": {
+    "approvals": "承認",
     "dashboard": "管理ダッシュボード",
     "manageLocations": "場所を管理",
     "manageUsers": "ユーザーを管理",
-    "approvals": "承認",
     "reports": "レポート"
+  },
+  "auth": {
+    "description": "私たちのアプリへようこそ",
+    "email": "メール",
+    "forgotPassword": "パスワードをお忘れですか？",
+    "login": "ログイン",
+    "password": "パスワード",
+    "profile": {
+      "edit": "プロフィール編集",
+      "settings": "設定",
+      "title": "プロフィール"
+    },
+    "signup": "サインアップ",
+    "welcome": "ようこそ"
+  },
+  "common": {
+    "address": "住所",
+    "back": "戻る",
+    "cancel": "キャンセル",
+    "close": "閉じる",
+    "delete": "削除",
+    "description": "説明",
+    "edit": "編集",
+    "mobileNumber": "携帯番号",
+    "name": "名前",
+    "ok": "OK",
+    "save": "保存"
+  },
+  "explore": {
+    "categories": {
+      "all": "すべて",
+      "attractions": "観光地",
+      "hotels": "ホテル",
+      "restaurants": "レストラン",
+      "shopping": "ショッピング"
+    },
+    "filters": {
+      "distance": "距離",
+      "price": "価格",
+      "rating": "評価"
+    },
+    "searchPlaceholder": "場所を検索..."
+  },
+  "location": {
+    "addLocation": "場所を追加",
+    "agreementText": "アップロードガイドラインを読み、同意します。",
+    "change": "変更",
+    "chooseLocation": "場所を選択",
+    "documentUploaded": "書類がアップロードされました",
+    "enterAddress": "住所を入力してください",
+    "enterDescription": "説明を入力してください",
+    "enterMobileNumber": "携帯番号を入力してください",
+    "enterName": "名前を入力してください",
+    "guestAccountNote": "注意：ゲストアカウントは1日3件までしか場所を共有できません。",
+    "locationAccess": "位置情報アクセス",
+    "locationSubmitMessage": "場所が正常に追加されました。管理者が審査します。承認されると通知されます。",
+    "locationSubmitted": "場所が送信されました！",
+    "notSet": "未設定",
+    "setLocation": "場所を設定",
+    "setLocationOnMap": "地図で場所を設定",
+    "shareLocationPicture": "場所の写真を共有",
+    "submit": "送信",
+    "uploadCertification": "有効な証明書と書類をアップロード",
+    "uploadDocument": "書類をアップロード"
+  },
+  "navigation": {
+    "explore": "探す",
+    "home": "ホーム",
+    "profile": "プロフィール",
+    "social": "ソーシャル"
+  },
+  "profile": {
+    "bookmarklocation": "ブックマークした場所",
+    "changeTheme": "テーマ変更",
+    "changeapplicationlanguage": "アプリの言語を変更",
+    "changeapplicationtheme": "アプリのテーマを変更",
+    "contactus": "お問い合わせ",
+    "documents": "ドキュメント",
+    "editprofile": "プロフィール編集",
+    "helpcenter": "ヘルプセンター",
+    "language": "言語",
+    "logout": "ログアウト",
+    "notification": "通知",
+    "notifications": "通知",
+    "pointwallet": "マイポイントウォレット",
+    "ranking": "ランキング",
+    "schedule": "スケジュール",
+    "settings": "設定",
+    "shareourapplication": "アプリを共有",
+    "uploadedlocation": "アップロードした場所"
+  },
+  "social": {
+    "addComment": "コメントを追加...",
+    "bookmark": "ブックマーク",
+    "comment": "コメント",
+    "post": "投稿",
+    "share": "共有",
+    "shareVia": "共有方法",
+    "upload": "アップロード"
   }
 }

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import FormInput from '../../components/common/FormInput';
 import AddServiceModal from '../../Pages/AddLocation/AddServiceModal';
 
 const ServiceAndPrice = ({ formData, setFormData }) => {
+  const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const addService = () => {
@@ -46,13 +48,13 @@ const ServiceAndPrice = ({ formData, setFormData }) => {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-lg font-semibold">Services & Prices *</h2>
+      <h2 className="text-lg font-semibold">{t('addLocation.servicesAndPrices')}</h2>
       
       <FormInput
-        label="Best Price(USD)"
+        label={t('addLocation.bestPriceLabel')}
         name="price"
         type="number"
-        placeholder="Please enter the price"
+        placeholder={t('addLocation.pricePlaceholder')}
         value={formData.price}
         onChange={handleInputChange}
         required
@@ -63,14 +65,14 @@ const ServiceAndPrice = ({ formData, setFormData }) => {
           <div className="flex items-center gap-2">
             <input
               type="text"
-              placeholder="Service name"
+              placeholder={t('addLocation.serviceNamePlaceholder')}
               className="flex-1 bg-theme-secondary rounded-lg px-4 py-3 text-sm text-theme-primary"
               value={service.name}
               onChange={(e) => updateService(index, 'name', e.target.value)}
             />
             <input
               type="number"
-              placeholder="Price"
+              placeholder={t('addLocation.pricePlaceholder')}
               className="w-24 bg-theme-secondary rounded-lg px-4 py-3 text-sm text-theme-primary"
               value={service.price}
               onChange={(e) => updateService(index, 'price', e.target.value)}
@@ -92,7 +94,7 @@ const ServiceAndPrice = ({ formData, setFormData }) => {
         className="w-full bg-theme-secondary rounded-lg px-4 py-3 text-sm flex items-center justify-center gap-2 text-theme-primary"
       >
         <span>+</span>
-        Add services
+        {t('addLocation.addServicesLabel')}
       </button>
 
       <AddServiceModal

@@ -1,127 +1,108 @@
 {
-  "common": {
-    "ok": "确定",
-    "cancel": "取消",
-    "save": "保存",
-    "delete": "删除",
-    "edit": "编辑",
-    "close": "关闭",
-    "back": "返回",
-    "name": "名称",
-    "description": "描述",
-    "address": "地址",
-    "mobileNumber": "手机号"
-  },
-  "navigation": {
-    "home": "首页",
-    "explore": "探索",
-    "social": "社交",
-    "profile": "个人资料"
-  },
-  "auth": {
-    "welcome": "欢迎",
-    "description": "欢迎使用我们的应用",
-    "login": "登录",
-    "signup": "注册",
-    "email": "邮箱",
-    "password": "密码",
-    "forgotPassword": "忘记密码？",
-    "profile": {
-      "title": "个人资料",
-      "edit": "编辑个人资料",
-      "settings": "设置"
-    }
-  },
-  "profile": {
-    "settings": {
-      "title": "设置",
-      "account": {
-        "title": "账户",
-        "mobileNumber": "手机号",
-        "bindEmail": "绑定邮箱"
-      },
-      "thirdParty": {
-        "title": "第三方",
-        "bindFacebook": "绑定 Facebook",
-        "bindWeChat": "绑定微信",
-        "bindLine": "绑定 Line"
-      },
-      "security": {
-        "title": "安全",
-        "changePassword": "更改密码",
-        "setup2FA": "设置双重认证 (2FA)"
-      }
-    },
-    "changeTheme": "更改主题",
-    "language": "语言",
-    "notifications": "通知",
-    "schedule": "日程",
-    "ranking": "排名",
-    "documents": "文件",
-    "pointwallet": "我的积分钱包",
-    "uploadedlocation": "我上传的位置",
-    "bookmarklocation": "收藏位置",
-    "changeapplicationtheme": "更改应用主题",
-    "changeapplicationlanguage": "更改应用语言",
-    "shareourapplication": "分享我们的应用",
-    "helpcenter": "帮助中心",
-    "contactus": "联系我们",
-    "editprofile": "编辑个人资料",
-    "settings": "设置",
-    "notification": "通知",
-    "logout": "退出登录"
-  },
-  "location": {
-    "addLocation": "添加位置",
-    "chooseLocation": "选择位置",
-    "locationAccess": "位置访问",
-    "setLocation": "设置位置",
-    "setLocationOnMap": "在地图上设置位置",
-    "locationSubmitted": "位置已提交！",
-    "locationSubmitMessage": "您的位置已成功添加。管理员将尽快审核。审核通过后您会收到通知。",
-    "enterName": "请输入名称",
-    "enterDescription": "请输入描述",
-    "enterAddress": "请输入地址",
-    "enterMobileNumber": "请输入手机号",
-    "shareLocationPicture": "分享位置图片",
-    "uploadDocument": "上传文件",
-    "uploadCertification": "上传有效证书和文件",
-    "documentUploaded": "文件已上传",
-    "guestAccountNote": "注意：游客账号每天最多只能分享3个位置。",
-    "agreementText": "我已阅读并同意上传指南。",
-    "submit": "提交",
-    "change": "更改",
-    "notSet": "未设置"
-  },
-  "social": {
-    "post": "发布",
-    "comment": "评论",
-    "share": "分享",
-    "bookmark": "收藏",
-    "upload": "上传",
-    "addComment": "添加评论...",
-    "shareVia": "通过以下方式分享"
-  },
-  "explore": {
-    "searchPlaceholder": "搜索位置...",
-    "categories": {
-      "all": "全部",
-      "hotels": "酒店",
-      "restaurants": "餐厅",
-      "attractions": "景点",
-      "shopping": "购物"
-    },
-    "filters": {
-      "rating": "评分",
-      "distance": "距离",
-      "price": "价格"
-    }
-  },
   "admin": {
+    "approvals": "审批",
     "dashboard": "管理后台",
     "manageLocations": "管理位置",
     "manageUsers": "管理用户",
-    "approvals": "审批",
     "reports": "报告"
+  },
+  "auth": {
+    "description": "欢迎使用我们的应用",
+    "email": "邮箱",
+    "forgotPassword": "忘记密码？",
+    "login": "登录",
+    "password": "密码",
+    "profile": {
+      "edit": "编辑个人资料",
+      "settings": "设置",
+      "title": "个人资料"
+    },
+    "signup": "注册",
+    "welcome": "欢迎"
+  },
+  "common": {
+    "address": "地址",
+    "back": "返回",
+    "cancel": "取消",
+    "close": "关闭",
+    "delete": "删除",
+    "description": "描述",
+    "edit": "编辑",
+    "mobileNumber": "手机号",
+    "name": "名称",
+    "ok": "确定",
+    "save": "保存"
+  },
+  "explore": {
+    "categories": {
+      "all": "全部",
+      "attractions": "景点",
+      "hotels": "酒店",
+      "restaurants": "餐厅",
+      "shopping": "购物"
+    },
+    "filters": {
+      "distance": "距离",
+      "price": "价格",
+      "rating": "评分"
+    },
+    "searchPlaceholder": "搜索位置..."
+  },
+  "location": {
+    "addLocation": "添加位置",
+    "agreementText": "我已阅读并同意上传指南。",
+    "change": "更改",
+    "chooseLocation": "选择位置",
+    "documentUploaded": "文件已上传",
+    "enterAddress": "请输入地址",
+    "enterDescription": "请输入描述",
+    "enterMobileNumber": "请输入手机号",
+    "enterName": "请输入名称",
+    "guestAccountNote": "注意：游客账号每天最多只能分享3个位置。",
+    "locationAccess": "位置访问",
+    "locationSubmitMessage": "您的位置已成功添加。管理员将尽快审核。审核通过后您会收到通知。",
+    "locationSubmitted": "位置已提交！",
+    "notSet": "未设置",
+    "setLocation": "设置位置",
+    "setLocationOnMap": "在地图上设置位置",
+    "shareLocationPicture": "分享位置图片",
+    "submit": "提交",
+    "uploadCertification": "上传有效证书和文件",
+    "uploadDocument": "上传文件"
+  },
+  "navigation": {
+    "explore": "探索",
+    "home": "首页",
+    "profile": "个人资料",
+    "social": "社交"
+  },
+  "profile": {
+    "bookmarklocation": "收藏位置",
+    "changeTheme": "更改主题",
+    "changeapplicationlanguage": "更改应用语言",
+    "changeapplicationtheme": "更改应用主题",
+    "contactus": "联系我们",
+    "documents": "文件",
+    "editprofile": "编辑个人资料",
+    "helpcenter": "帮助中心",
+    "language": "语言",
+    "logout": "退出登录",
+    "notification": "通知",
+    "notifications": "通知",
+    "pointwallet": "我的积分钱包",
+    "ranking": "排名",
+    "schedule": "日程",
+    "settings": "设置",
+    "shareourapplication": "分享我们的应用",
+    "uploadedlocation": "我上传的位置"
+  },
+  "social": {
+    "addComment": "添加评论...",
+    "bookmark": "收藏",
+    "comment": "评论",
+    "post": "发布",
+    "share": "分享",
+    "shareVia": "通过以下方式分享",
+    "upload": "上传"
   }
 }

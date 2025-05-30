@@ -1,8 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const SubmittedLocationModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   if (!isOpen) return null;
 
@@ -18,9 +20,9 @@ const SubmittedLocationModal = ({ isOpen, onClose }) => {
       />
       <div className="fixed inset-x-4 top-1/2 -translate-y-1/2 z-[1001] bg-theme-primary rounded-2xl">
         <div className="p-6">
-          <h3 className="text-theme-primary text-xl font-medium mb-2">Location Submitted!</h3>
+          <h3 className="text-theme-primary text-xl font-medium mb-2">{t('location.locationSubmitted')}</h3>
           <p className="text-theme-secondary text-sm mb-6">
-            Your location has been added successfully. It will be reviewed by an admin shortly. You'll be notified once it's approved.
+            {t('location.locationSubmitMessage')}
           </p>
           
           <div className="flex justify-end">
@@ -28,7 +30,7 @@ const SubmittedLocationModal = ({ isOpen, onClose }) => {
               onClick={handleOk}
               className="bg-[#FDC51B] text-black rounded-lg px-8 py-3 text-base font-medium"
             >
-              OK
+              {t('common.ok')}
             </button>
           </div>
         </div>

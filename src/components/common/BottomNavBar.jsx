@@ -4,32 +4,35 @@ import HomeIcon from "icons/Home.svg";
 import ExploreIcon from "icons/Explore.svg";
 import SocialIcon from "icons/Social.svg";
 import AvatorIcon from "icons/Avator.svg";
+import { useTranslation } from "react-i18next";
+import PropTypes from "prop-types";
 
 export default function BottomNavBar({ active }) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const tabs = [
     {
       key: "home",
-      label: "Home",
+      label: t('bottomNavBar.home'),
       icon: HomeIcon,
       path: "/"
     },
     {
       key: "explore",
-      label: "Explore",
+      label: t('bottomNavBar.explore'),
       icon: ExploreIcon,
       path: "/explore"
     },
     {
       key: "social",
-      label: "Social",
+      label: t('bottomNavBar.social'),
       icon: SocialIcon,
       path: "/social"
     },
     {
       key: "profile",
-      label: "Profile",
+      label: t('bottomNavBar.profile'),
       icon: AvatorIcon,
       path: "/profile"
     }
@@ -63,3 +66,7 @@ export default function BottomNavBar({ active }) {
     </div>
   );
 }
+
+BottomNavBar.propTypes = {
+  active: PropTypes.string.isRequired,
+};

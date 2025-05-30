@@ -1,15 +1,16 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
+
+const languages = [
+  { code: 'en', name: 'English', label: 'Default' },
+  { code: 'zh', name: '简体中文', label: 'Chinese, Simplified' },
+  { code: 'ja', name: '日本語', label: 'Japanese' },
+  { code: 'ko', name: '한국어', label: 'Korean' }
+];
 
 const LanguageModal = ({ isOpen, onClose }) => {
   const { i18n } = useTranslation();
-
-  const languages = [
-    { code: 'en', name: 'English', label: 'Default' },
-    { code: 'zh', name: '简体中文', label: 'Chinese, Simplified' },
-    { code: 'ja', name: '日本語', label: 'Japanese' },
-    { code: 'ko', name: '한국어', label: 'Korean' }
-  ];
 
   const handleLanguageSelect = (languageCode) => {
     i18n.changeLanguage(languageCode);
@@ -46,6 +47,11 @@ const LanguageModal = ({ isOpen, onClose }) => {
       </div>
     </>
   );
+};
+
+LanguageModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default LanguageModal;

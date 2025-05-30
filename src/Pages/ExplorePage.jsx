@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import BottomNavBar from "../components/common/BottomNavBar";
 import ExploreTabs from "../components/ExploreTabs";
 import ExploreCard from "../components/cards/ExploreCard";
-import TopPicks from "../components/common/TopPicks";
 import AddLocationIcon from "icons/AddLocation.svg";
 import GoldenGateImage from 'assets/GoldenGate.png';
 import HarrierImage from 'assets/Harrier.png';
 import { useBookmarks } from '../hooks/useBookmarks';
+import { useTranslation } from 'react-i18next';
 
 // Mock data for explore items
 const exploreItems = [
@@ -39,6 +39,7 @@ export default function ExplorePage() {
   const [activeTab, setActiveTab] = useState("Hotel");
   const navigate = useNavigate();
   const { isBookmarked, toggleBookmark } = useBookmarks();
+  const { t } = useTranslation();
 
   return (
     <div className="min-h-screen flex justify-center bg-theme-primary">
@@ -53,7 +54,7 @@ export default function ExplorePage() {
                 </svg>
                 <input
                   type="text"
-                  placeholder="Search location..."
+                  placeholder={t('explorePage.searchPlaceholder')}
                   className="bg-transparent text-theme-primary w-full outline-none text-[14px] placeholder-theme-secondary focus:outline-none focus:ring-0 border-none"
                   onClick={() => navigate('/search')}
                 />
@@ -75,22 +76,22 @@ export default function ExplorePage() {
               <div className="relative w-full h-32 rounded-lg overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 opacity-50"></div>
                 <div className="absolute inset-0 flex flex-col justify-center px-6">
-                  <h3 className="text-theme-primary text-xl font-semibold mb-2">Enjoy your Dream Vacation</h3>
-                  <p className="text-theme-primary text-sm opacity-80">Plan your perfect getaway with our exclusive deals</p>
+                  <h3 className="text-theme-primary text-xl font-semibold mb-2">{t('explorePage.dreamVacationTitle')}</h3>
+                  <p className="text-theme-primary text-sm opacity-80">{t('explorePage.dreamVacationDescription')}</p>
                 </div>
-                <div className="absolute top-2 right-2 text-xs text-theme-primary bg-theme-primary bg-opacity-50 px-2 py-1 rounded">ADS</div>
+                <div className="absolute top-2 right-2 text-xs text-theme-primary bg-theme-primary bg-opacity-50 px-2 py-1 rounded">{t('explorePage.adsLabel')}</div>
               </div>
             </div>
 
             {/* Top Picks Section */}
             <div className="px-4 mb-4">
               <div className="flex items-center justify-between mb-3">
-                <h2 className="text-theme-primary text-lg font-semibold">Top Picks</h2>
+                <h2 className="text-theme-primary text-lg font-semibold">{t('explorePage.topPicksTitle')}</h2>
                 <button 
                   className="text-[#FFC61B] text-sm"
                   onClick={() => navigate('/ranking')}
                 >
-                  View All
+                  {t('explorePage.viewAllButton')}
                 </button>
               </div>
               <div className="flex space-x-3 overflow-x-auto pb-2">
@@ -133,7 +134,7 @@ export default function ExplorePage() {
 
             {/* Recommended Section */}
             <div className="px-4 mb-4">
-              <h2 className="text-theme-primary text-lg font-semibold mb-3">Recommended</h2>
+              <h2 className="text-theme-primary text-lg font-semibold mb-3">{t('explorePage.recommendedTitle')}</h2>
             </div>
 
             <ExploreTabs activeTab={activeTab} setActiveTab={setActiveTab} />

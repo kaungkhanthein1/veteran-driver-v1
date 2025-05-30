@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const AddServiceModal = ({ isOpen, onClose, onAdd }) => {
+  const { t } = useTranslation();
   const [serviceData, setServiceData] = useState({
     name: '',
     price: ''
@@ -24,19 +26,21 @@ const AddServiceModal = ({ isOpen, onClose, onAdd }) => {
       />
       <div className="fixed inset-x-4 top-1/2 -translate-y-1/2 z-[1001] bg-theme-primary rounded-2xl">
         <div className="p-6">
-          <h3 className="text-theme-primary text-xl font-medium mb-2">Add Service and price</h3>
+          <h3 className="text-theme-primary text-xl font-medium mb-2">
+            {t('addLocation.addServiceAndPrice')}
+          </h3>
           <p className="text-theme-secondary text-sm mb-6">
-            Please enter the service you want to offer and its price in USD.
+            {t('addLocation.addServiceDescription')}
           </p>
           
           <div className="space-y-4">
             <div>
               <label className="block text-theme-primary text-sm mb-1">
-                Service Type <span className="text-[#FDC51B]">*</span>
+                {t('addLocation.serviceType')} <span className="text-[#FDC51B]">*</span>
               </label>
               <input
                 type="text"
-                placeholder="Enter the name of the service"
+                placeholder={t('addLocation.serviceNamePlaceholder')}
                 className="w-full bg-theme-secondary border border-theme rounded-lg px-4 py-3 text-sm text-theme-primary placeholder-theme-secondary"
                 value={serviceData.name}
                 onChange={(e) => setServiceData(prev => ({ ...prev, name: e.target.value }))}
@@ -45,11 +49,11 @@ const AddServiceModal = ({ isOpen, onClose, onAdd }) => {
             
             <div>
               <label className="block text-theme-primary text-sm mb-1">
-                Service Price (USD)
+                {t('addLocation.servicePrice')}
               </label>
               <input
                 type="number"
-                placeholder="Enter the price of the service"
+                placeholder={t('addLocation.servicePricePlaceholder')}
                 className="w-full bg-theme-secondary border border-theme rounded-lg px-4 py-3 text-sm text-theme-primary placeholder-theme-secondary"
                 value={serviceData.price}
                 onChange={(e) => setServiceData(prev => ({ ...prev, price: e.target.value }))}
@@ -62,7 +66,7 @@ const AddServiceModal = ({ isOpen, onClose, onAdd }) => {
               onClick={onClose}
               className="flex-1 py-3 text-theme-primary text-base font-medium"
             >
-              Cancel
+              {t('common.cancel')}
             </button>
             <button
               onClick={handleSubmit}
@@ -73,7 +77,7 @@ const AddServiceModal = ({ isOpen, onClose, onAdd }) => {
               }`}
               disabled={!serviceData.name || !serviceData.price}
             >
-              OK
+              {t('common.ok')}
             </button>
           </div>
         </div>

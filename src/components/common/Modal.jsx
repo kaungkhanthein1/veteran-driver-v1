@@ -1,6 +1,9 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function Modal({ title, children, isOpen, onClose, onApply, type = 'default' }) {
+  const { t } = useTranslation();
+
   if (!isOpen) return null;
 
   if (type === 'bottom') {
@@ -24,13 +27,13 @@ export default function Modal({ title, children, isOpen, onClose, onApply, type 
               onClick={onClose}
               className="flex-1 py-3 bg-theme-secondary text-theme-primary font-medium rounded-lg"
             >
-              Cancel
+              {t('modal.cancelButton')}
             </button>
             <button 
               onClick={onApply} 
               className="flex-1 py-3 bg-[#FDC51B] text-black font-medium rounded-lg"
             >
-              Apply
+              {t('modal.applyButton')}
             </button>
           </div>
         </div>
@@ -58,13 +61,13 @@ export default function Modal({ title, children, isOpen, onClose, onApply, type 
             onClick={onClose}
             className="flex-1 py-3 bg-theme-secondary text-theme-text font-medium rounded-lg"
           >
-            Cancel
+            {t('modal.cancelButton')}
           </button>
           <button 
             onClick={onApply} 
             className="flex-1 py-3 bg-[#FDC51B] text-black font-medium rounded-lg"
           >
-            Apply
+            {t('modal.applyButton')}
           </button>
         </div>
       </div>

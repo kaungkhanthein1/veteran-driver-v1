@@ -1,11 +1,11 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 import BackButton from '../components/common/BackButton';
+import { useTranslation } from 'react-i18next';
 
 const ChangeThemePage = () => {
   const { theme, toggleTheme } = useTheme();
-  const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="min-h-screen flex justify-center bg-[var(--bg-primary)]">
@@ -15,14 +15,14 @@ const ChangeThemePage = () => {
             {/* Header */}
             <div className="flex items-center pb-6">
              <BackButton className="absolute left-4"/>
-              <h1 className="text-xl font-semibold text-center flex-grow">Theme</h1>
+              <h1 className="text-xl font-semibold text-center flex-grow">{t('changeTheme.title')}</h1>
             </div>
 
             {/* Main Content */}
             <div className="px-4">
-              <h2 className="text-2xl font-bold mb-2">Change Application Theme</h2>
+              <h2 className="text-2xl font-bold mb-2">{t('changeTheme.changeApplicationTheme')}</h2>
               <p className="text-gray-400 text-base mb-6">
-                Change the look and feel of the interface by selecting a different theme. You can switch between options like Light Mode and Dark Mode
+                {t('changeTheme.description')}
               </p>
 
               {/* Theme Options */}
@@ -35,8 +35,8 @@ const ChangeThemePage = () => {
                   onClick={() => toggleTheme('white')}
                 >
                   <div>
-                    <h3 className="text-left font-medium mb-1">White Theme</h3>
-                    <p className="text-gray-400 text-sm text-left">A bright and clean look that's easy to read in daylight</p>
+                    <h3 className="text-left font-medium mb-1">{t('changeTheme.whiteThemeTitle')}</h3>
+                    <p className="text-gray-400 text-sm text-left">{t('changeTheme.whiteThemeDescription')}</p>
                   </div>
                   {theme === 'white' && (
                     <svg className="w-6 h-6 text-[#FDC51B]" fill="currentColor" viewBox="0 0 20 20">
@@ -53,8 +53,8 @@ const ChangeThemePage = () => {
                   onClick={() => toggleTheme('dark')}
                 >
                   <div>
-                    <h3 className="text-left font-medium mb-1">Dark Theme</h3>
-                    <p className="text-gray-400 text-sm text-left">A sleek, dark interface that's easy on the eyes</p>
+                    <h3 className="text-left font-medium mb-1">{t('changeTheme.darkThemeTitle')}</h3>
+                    <p className="text-gray-400 text-sm text-left">{t('changeTheme.darkThemeDescription')}</p>
                   </div>
                   {theme === 'dark' && (
                     <svg className="w-6 h-6 text-[#FDC51B]" fill="currentColor" viewBox="0 0 20 20">
@@ -71,8 +71,8 @@ const ChangeThemePage = () => {
                   onClick={() => toggleTheme('system')}
                 >
                   <div>
-                    <h3 className="text-left font-medium mb-1">Default (System)</h3>
-                    <p className="text-gray-400 text-sm text-left">We will adjust your theme based on your device's System Setting.</p>
+                    <h3 className="text-left font-medium mb-1">{t('changeTheme.systemThemeTitle')}</h3>
+                    <p className="text-gray-400 text-sm text-left">{t('changeTheme.systemThemeDescription')}</p>
                   </div>
                   {theme === 'system' && (
                     <svg className="w-6 h-6 text-[#FDC51B]" fill="currentColor" viewBox="0 0 20 20">

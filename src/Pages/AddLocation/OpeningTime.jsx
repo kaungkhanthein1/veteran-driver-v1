@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import SetTimeIcon from 'icons/SetTime.svg';
 import SetTimeModal from './SetTimeModal';
 
 const OpeningTime = ({ formData, setFormData }) => {
+  const { t } = useTranslation();
   const [isTimeModalOpen, setIsTimeModalOpen] = useState(false);
   const days = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sun', 'Sat'];
 
@@ -30,11 +32,11 @@ const OpeningTime = ({ formData, setFormData }) => {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-lg font-semibold">Opening Time *</h2>
+      <h2 className="text-lg font-semibold">{t('addLocation.openingTime')}</h2>
       
       <div className="flex items-center justify-between bg-theme-secondary rounded-lg px-4 py-3">
         <div>
-          <p>Our services are available 24/7.</p>
+          <p>{t('addLocation.serviceAvailable247')}</p>
         </div>
         <label className="relative inline-flex items-center cursor-pointer">
           <input
@@ -57,16 +59,16 @@ const OpeningTime = ({ formData, setFormData }) => {
         <div className="flex items-center">
           <img 
             src={SetTimeIcon} 
-            alt="Set Time" 
+            alt={t('addLocation.setTimeAlt')}
             className="w-5 h-5 mr-2"
             style={{ filter: 'invert(76%) sepia(41%) saturate(845%) hue-rotate(338deg) brightness(101%) contrast(103%)' }}
           />
-          <span>Set Opening Time</span>
+          <span>{t('addLocation.setTimeLabel')}</span>
         </div>
         <span className="text-theme-secondary">
           {formData.openingTime.time 
             ? `${formData.openingTime.time.hour}:${String(formData.openingTime.time.minute).padStart(2, '0')} ${formData.openingTime.time.period}`
-            : 'Not Set'}
+            : t('location.notSet')}
         </span>
       </button>
 
