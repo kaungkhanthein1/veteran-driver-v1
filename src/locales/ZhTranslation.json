@@ -1,138 +1,127 @@
 {
   "common": {
-    "viewAll": "查看全部",
-    "clear": "清除",
-    "seeMore": "查看更多",
-    "change": "更改",
-    "edit": "编辑",
-    "delete": "删除",
-    "restore": "恢复",
-    "submit": "提交",
-    "cancel": "取消",
     "ok": "确定",
-    "search": "搜索位置..."
+    "cancel": "取消",
+    "save": "保存",
+    "delete": "删除",
+    "edit": "编辑",
+    "close": "关闭",
+    "back": "返回",
+    "name": "名称",
+    "description": "描述",
+    "address": "地址",
+    "mobileNumber": "手机号"
+  },
+  "navigation": {
+    "home": "首页",
+    "explore": "探索",
+    "social": "社交",
+    "profile": "个人资料"
   },
   "auth": {
-    "login": {
-      "title": "登录",
-      "welcome": "欢迎，让我们开始一段精彩旅程",
-      "noAccount": "还没有账号？",
-      "recaptcha": "我不是机器人"
-    },
-    "register": {
-      "title": "注册",
-      "welcome": "欢迎，让我们开始一段精彩旅程",
-      "hasAccount": "已有账号？",
-      "withPhone": {
-        "title": "手机号注册",
-        "description": "请使用手机号完成注册"
-      }
-    },
-    "forgotPassword": {
-      "title": "忘记密码",
-      "description": "请使用手机号完成注册"
-    },
-    "otp": {
-      "title": "验证码验证",
-      "message": "验证码已发送至 {email} / {phone}。请查收短信，同时也请检查垃圾邮件文件夹。"
-    }
-  },
-  "location": {
-    "add": {
-      "title": "添加位置",
-      "openingTime": "营业时间 *",
-      "services": "服务和价格 *",
-      "addService": "添加服务和价格",
-      "uploadDocument": "上传文件 *",
-      "uploadCertification": "上传有效证件和文件",
-      "documentUploaded": "文件已上传",
-      "guestAccountNote": "注意：游客账号每天限制分享3个位置。",
-      "agreementText": "我已阅读并同意上传指南。"
-    },
-    "details": {
-      "services": "服务",
-      "reviews": "评价 ({count})",
-      "filters": {
-        "hottest": "最热",
-        "latest": "最新"
-      }
-    },
-    "search": {
-      "resultsFound": "找到 {count} 个结果",
-      "hotSearch": "热门搜索",
-      "recents": "最近",
-      "recentView": "最近浏览"
-    },
-    "filter": {
-      "title": "筛选",
-      "rating": "评分",
-      "services": "服务",
-      "sortBy": "排序方式",
-      "distance": "{distance}公里"
+    "welcome": "欢迎",
+    "description": "欢迎使用我们的应用",
+    "login": "登录",
+    "signup": "注册",
+    "email": "邮箱",
+    "password": "密码",
+    "forgotPassword": "忘记密码？",
+    "profile": {
+      "title": "个人资料",
+      "edit": "编辑个人资料",
+      "settings": "设置"
     }
   },
   "profile": {
-    "edit": {
-      "title": "编辑资料",
-      "changeUsername": "更改用户名",
-      "changeBio": "更改简介",
-      "gender": "性别",
-      "location": "位置",
-      "userId": "用户ID"
-    },
-    "wallet": {
-      "title": "钱包",
-      "totalCoins": "总金币",
-      "pointHistory": "积分记录"
-    },
-    "notifications": {
-      "title": "通知",
-      "system": {
-        "title": "系统通知",
-        "description": "在这里查看您的系统通知"
+    "settings": {
+      "title": "设置",
+      "account": {
+        "title": "账户",
+        "mobileNumber": "手机号",
+        "bindEmail": "绑定邮箱"
       },
-      "balance": {
-        "title": "余额提醒",
-        "description": "在这里查看您的余额提醒"
+      "thirdParty": {
+        "title": "第三方",
+        "bindFacebook": "绑定 Facebook",
+        "bindWeChat": "绑定微信",
+        "bindLine": "绑定 Line"
       },
-      "achievements": {
-        "title": "成就提醒",
-        "description": "在这里查看您作为创作者的成就"
+      "security": {
+        "title": "安全",
+        "changePassword": "更改密码",
+        "setup2FA": "设置双重认证 (2FA)"
       }
-    }
-  },
-  "explore": {
-    "title": "享受梦想假期",
-    "subtitle": "使用我们的独家优惠计划完美假期",
-    "ads": "广告",
-    "topPicks": "精选",
-    "recommended": "推荐"
-  },
-  "theme": {
-    "title": "主题",
-    "changeTheme": "更改应用主题",
-    "light": {
-      "title": "白色主题",
-      "description": "明亮清爽的外观，适合日间阅读"
     },
-    "dark": {
-      "title": "深色主题",
-      "description": "时尚的深色界面，呵护您的眼睛"
-    },
-    "system": {
-      "title": "默认（跟随系统）",
-      "description": "我们将根据您的设备系统设置调整主题"
-    }
+    "changeTheme": "更改主题",
+    "language": "语言",
+    "notifications": "通知",
+    "schedule": "日程",
+    "ranking": "排名",
+    "documents": "文件",
+    "pointwallet": "我的积分钱包",
+    "uploadedlocation": "我上传的位置",
+    "bookmarklocation": "收藏位置",
+    "changeapplicationtheme": "更改应用主题",
+    "changeapplicationlanguage": "更改应用语言",
+    "shareourapplication": "分享我们的应用",
+    "helpcenter": "帮助中心",
+    "contactus": "联系我们",
+    "editprofile": "编辑个人资料",
+    "settings": "设置",
+    "notification": "通知",
+    "logout": "退出登录"
+  },
+  "location": {
+    "addLocation": "添加位置",
+    "chooseLocation": "选择位置",
+    "locationAccess": "位置访问",
+    "setLocation": "设置位置",
+    "setLocationOnMap": "在地图上设置位置",
+    "locationSubmitted": "位置已提交！",
+    "locationSubmitMessage": "您的位置已成功添加。管理员将尽快审核。审核通过后您会收到通知。",
+    "enterName": "请输入名称",
+    "enterDescription": "请输入描述",
+    "enterAddress": "请输入地址",
+    "enterMobileNumber": "请输入手机号",
+    "shareLocationPicture": "分享位置图片",
+    "uploadDocument": "上传文件",
+    "uploadCertification": "上传有效证书和文件",
+    "documentUploaded": "文件已上传",
+    "guestAccountNote": "注意：游客账号每天最多只能分享3个位置。",
+    "agreementText": "我已阅读并同意上传指南。",
+    "submit": "提交",
+    "change": "更改",
+    "notSet": "未设置"
   },
   "social": {
-    "upload": {
-      "title": "上传帖子"
+    "post": "发布",
+    "comment": "评论",
+    "share": "分享",
+    "bookmark": "收藏",
+    "upload": "上传",
+    "addComment": "添加评论...",
+    "shareVia": "通过以下方式分享"
+  },
+  "explore": {
+    "searchPlaceholder": "搜索位置...",
+    "categories": {
+      "all": "全部",
+      "hotels": "酒店",
+      "restaurants": "餐厅",
+      "attractions": "景点",
+      "shopping": "购物"
     },
-    "comments": {
-      "title": "写评论"
-    },
-    "share": {
-      "title": "分享到"
+    "filters": {
+      "rating": "评分",
+      "distance": "距离",
+      "price": "价格"
     }
+  },
+  "admin": {
+    "dashboard": "管理后台",
+    "manageLocations": "管理位置",
+    "manageUsers": "管理用户",
+    "approvals": "审批",
+    "reports": "报告"
   }
 }
