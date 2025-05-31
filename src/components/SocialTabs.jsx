@@ -1,9 +1,11 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export default function SocialTabs({ activeTab, setActiveTab, onUpload }) {
+  const { t } = useTranslation();
   const tabs = [
-    { key: "newest", label: "Newest" },
-    { key: "recommended", label: "Recommended" }
+    { key: "newest", label: t('socialTabs.newestTab') },
+    { key: "recommended", label: t('socialTabs.recommendedTab') }
   ];
 
   return (
@@ -30,7 +32,7 @@ export default function SocialTabs({ activeTab, setActiveTab, onUpload }) {
         <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
         </svg>
-        <span className="ml-1">Upload</span>
+        <span className="ml-1">{t('socialTabs.uploadButton')}</span>
       </button>
     </div>
   );

@@ -27,8 +27,8 @@ const nearestPlaces = [
 
 const HomePage = () => {
   const { t } = useTranslation();
-  const [activeTab, setActiveTab] = useState('Hotels');
-  const [activeService, setActiveService] = useState('Service 1');
+  const [activeTab, setActiveTab] = useState(t('homePage.categoryTabs.hotels'));
+  const [activeService, setActiveService] = useState(t('homePage.serviceTabs.service1'));
   const { isBookmarked, toggleBookmark } = useBookmarks();
 
   // Mock data for feedbacks
@@ -119,7 +119,7 @@ const HomePage = () => {
   ];
 
   // Services array
-  const services = ['Service 1', 'Service 2', 'Service 3', 'Service 4'];
+  const services = [t('homePage.serviceTabs.service1'), t('homePage.serviceTabs.service2'), t('homePage.serviceTabs.service3'), t('homePage.serviceTabs.service4')];
 
   return (
     <div className="min-h-screen flex justify-center bg-theme-primary">
@@ -131,14 +131,14 @@ const HomePage = () => {
           {/* Carousel/Slider */}
           <Carousel />
           <div className="mt-6">
-            <TopPicks items={nearestPlaces} title="Nearest Places" />
+            <TopPicks items={nearestPlaces} title={t('homePage.nearestPlacesTitle')} />
           </div>
 
           {/* Feedbacks Section with horizontal scroll */}
           <div className="px-4 py-5">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-semibold text-theme-primary">Feedbacks</h2>
-              <button className="text-[#FFC61B] text-sm">View All</button>
+              <h2 className="text-lg font-semibold text-theme-primary">{t('homePage.feedbacksTitle')}</h2>
+              <button className="text-[#FFC61B] text-sm">{t('homePage.viewAllButton')}</button>
             </div>
             <div className="relative">
               <div className="flex overflow-x-auto gap-3 pb-4 scrollbar-hide">
@@ -165,7 +165,7 @@ const HomePage = () => {
           {/* Category Tabs */}
           <div className="sticky top-0 z-10 bg-theme-primary">
             <div className="flex overflow-x-auto px-4 py-3 gap-4">
-              {['Hotels', 'Motels', 'Restaurants', 'Attractions', 'Shopping'].map(tab => (
+              {[t('homePage.categoryTabs.hotels'), t('homePage.categoryTabs.motels'), t('homePage.categoryTabs.restaurants'), t('homePage.categoryTabs.attractions'), t('homePage.categoryTabs.shopping')].map(tab => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}

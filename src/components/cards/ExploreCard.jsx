@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import PropTypes from 'prop-types';
 import Bookmark from "icons/Bookmark.svg";
 import GoldenGate from "assets/GoldenGate.png";
-import GoldenGateRoom from "assets/GoldenGateRoom.png";
 import Harrier from "assets/Harrier.png";
+import GoldenGateRoom from "assets/GoldenGateRoom.png";
 import HarrierRoom from "assets/HarrierRoom.png";
 import ExploreVideo from "assets/Explore.mp4";
-import ExploreVd from "assets/Explore Vd.mp4";
 import VideoPlayer from "../common/VideoPlayer";
 import ImageModal from "../common/ImageModal";
+import { useTranslation } from 'react-i18next';
 
 export default function ExploreCard({
   item,
@@ -20,6 +20,7 @@ export default function ExploreCard({
   isBookmarked = false,
   onBookmarkClick
 }) {
+  const { t } = useTranslation();
   const [selectedMedia, setSelectedMedia] = useState(null);
 
   // Define all available media for this card
@@ -57,7 +58,7 @@ export default function ExploreCard({
               handleMediaClick(GoldenGate, 0);
             }}
           >
-            <img src={GoldenGate} alt="Golden Gate" className="w-full h-full object-cover" />
+            <img src={GoldenGate} alt={t('exploreCard.goldenGateAlt')} className="w-full h-full object-cover" />
           </div>
           <div
             className="aspect-square bg-theme-primary rounded-lg overflow-hidden cursor-pointer"
@@ -66,7 +67,7 @@ export default function ExploreCard({
               handleMediaClick(Harrier, 1);
             }}
           >
-            <img src={Harrier} alt="Harrier" className="w-full h-full object-cover" />
+            <img src={Harrier} alt={t('exploreCard.harrierAlt')} className="w-full h-full object-cover" />
           </div>
           <div
             className="aspect-square bg-theme-primary rounded-lg relative overflow-hidden cursor-pointer"
@@ -75,7 +76,7 @@ export default function ExploreCard({
               handleMediaClick({ type: "video", url: ExploreVideo, thumbnail: HarrierRoom }, 2);
             }}
           >
-            <img src={HarrierRoom} alt="Video thumbnail" className="w-full h-full object-cover" />
+            <img src={HarrierRoom} alt={t('exploreCard.videoThumbnailAlt')} className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-black bg-opacity-50 rounded-lg flex items-center justify-center">
               <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M8 5v14l11-7z" />
@@ -109,7 +110,7 @@ export default function ExploreCard({
                 ))}
                 <span className="text-theme-primary ml-1 text-sm">{item.rating}</span>
               </div>
-              <span className="text-theme-secondary text-sm">({item.reviews})</span>
+              <span className="text-theme-secondary text-sm">({t('exploreCard.reviewsCount', { count: item.reviews })})</span>
             </div>
           </div>
           {/* Bookmark Icon */}
@@ -125,7 +126,7 @@ export default function ExploreCard({
             >
               <img
                 src={Bookmark}
-                alt="bookmark"
+                alt={t('exploreCard.bookmarkAlt')}
                 className={`w-6 h-6 ${isBookmarked ? '[filter:invert(70%)_sepia(74%)_saturate(1115%)_hue-rotate(359deg)_brightness(103%)_contrast(106%)]' : '[filter:var(--icon-filter)]'}`}
               />
             </button>
@@ -154,7 +155,7 @@ export default function ExploreCard({
               }
             }}
           >
-            {isRecycleBin ? 'Restore' : 'View Place'}
+            {isRecycleBin ? t('exploreCard.restoreButton') : t('exploreCard.viewPlaceButton')}
           </button>
         </div>
       </div>

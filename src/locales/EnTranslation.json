@@ -458,5 +458,37 @@
     "hotelTab": "Hotel",
     "restaurantTab": "Restaurant",
     "storesTab": "Stores"
+  },
+  "homePage": {
+    "nearestPlacesTitle": "Nearest Places",
+    "feedbacksTitle": "Feedbacks",
+    "viewAllButton": "View All",
+    "categoryTabs": {
+      "hotels": "Hotels",
+      "motels": "Motels",
+      "restaurants": "Restaurants",
+      "attractions": "Attractions",
+      "shopping": "Shopping"
+    },
+    "serviceTabs": {
+      "service1": "Service 1",
+      "service2": "Service 2",
+      "service3": "Service 3",
+      "service4": "Service 4"
+    }
+  },
+  "socialTabs": {
+    "newestTab": "Newest",
+    "recommendedTab": "Recommended",
+    "uploadButton": "Upload"
+  },
+  "exploreCard": {
+    "goldenGateAlt": "Golden Gate",
+    "harrierAlt": "Harrier",
+    "videoThumbnailAlt": "Video thumbnail",
+    "reviewsCount": "({{count}})",
+    "bookmarkAlt": "bookmark",
+    "restoreButton": "Restore",
+    "viewPlaceButton": "View Place"
   }
 }
