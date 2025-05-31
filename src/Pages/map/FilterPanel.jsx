@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./map.css";
 import { Range } from "react-range";
 import { useTranslation } from "react-i18next";
+import PropTypes from 'prop-types';
 
 const MIN = 0;
 const MAX = 1000;
@@ -121,21 +122,45 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
               onChange={(values) => setFilters({ ...filters, priceRange: values })}
               renderTrack={({ props, children }) => {
                 const { key, ...otherProps } = props;
-                return (
-                  <div key={key} {...otherProps} className="w-full h-[16px] range_input_c">
-                    {children}
-                  </div>
-                );
-              }}
-              renderThumb={({ props }) => {
-                const { key, ...otherProps } = props;
+                const value = filters.priceRange[0];
+                const percentage = (value - MIN) / (MAX - MIN) * 100;
                 return (
                   <div
                     key={key}
                     {...otherProps}
-                    className="w-[4px] h-[44px] bg-[#FFC61B] rounded-full shadow"
-                  />
+                    className="w-full h-[16px] range_input_c"
+                    style={{
+                      background: `linear-gradient(to right, var(--accent-yellow) ${percentage}%, var(--bg-secondary) ${percentage}%)`,
+                    }}
+                  >
+                    {children}
+                  </div>
                 );
+              }}
+              renderThumb={({ props, index }) => {
+                const { key, ...otherProps } = props;
+                if (index === 0) {
+                  return (
+                    <div
+                      key={key}
+                      {...otherProps}
+                      className="w-[4px] h-[44px] rounded-full shadow"
+                      style={{ backgroundColor: 'var(--accent-yellow)' }}
+                    />
+                  );
+                } else {
+                  return (
+                    <div
+                      key={key}
+                      {...otherProps}
+                      style={{
+                        width: '0px',
+                        height: '0px',
+                        backgroundColor: 'transparent',
+                      }}
+                    />
+                  );
+                }
               }}
             />
           </div>
@@ -144,7 +169,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
           <div className="space-y-4">
             <div className="flex w-full price_tags justify-between items-center text-[var(--text-primary)]">
               <span>{t('filterPanel.distanceLabel')}</span>
-              <span className="text-[#FFC61B]">{filters.distance}km</span>
+              <span style={{ color: 'var(--accent-yellow)' }}>{filters.distance}km</span>
             </div>
             <Range
               step={1}
@@ -152,15 +177,28 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
               max={50}
               values={[filters.distance]}
               onChange={(values) => handleChange("distance", values[0])}
-              renderTrack={({ props, children }) => (
-                <div {...props} className="w-full h-[16px] range_input_c rounded">
-                  {children}
-                </div>
-              )}
+              renderTrack={({ props, children }) => {
+                const distance = filters.distance;
+                const percentage = (distance - 0) / (50 - 0) * 100;
+                const { key, ...otherProps } = props;
+                return (
+                  <div
+                    key={key}
+                    {...otherProps}
+                    className="w-full h-[16px] range_input_c rounded"
+                    style={{
+                      background: `linear-gradient(to right, var(--accent-yellow) ${percentage}%, var(--bg-secondary) ${percentage}%)`,
+                    }}
+                  >
+                    {children}
+                  </div>
+                );
+              }}
               renderThumb={({ props }) => (
                 <div
                   {...props}
-                  className="w-[4px] h-[44px] bg-[#FFC61B] rounded-full shadow"
+                  className="w-[4px] h-[44px] rounded-full shadow"
+                  style={{ backgroundColor: 'var(--accent-yellow)' }}
                 />
               )}
             />
@@ -233,6 +271,19 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
       </div>
     </>
   );
+};
+
+FilterPanel.propTypes = {
+  filters: PropTypes.shape({
+    priceRange: PropTypes.arrayOf(PropTypes.number).isRequired,
+    distance: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    services: PropTypes.arrayOf(PropTypes.string).isRequired,
+    sort: PropTypes.string.isRequired,
+  }).isRequired,
+  setFilters: PropTypes.func.isRequired,
+  applyFilters: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default FilterPanel;

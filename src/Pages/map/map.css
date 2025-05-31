@@ -26,7 +26,8 @@
 
 .range_input_c {
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.12);
+  /* Background handled by renderTrack in component */
+  background: transparent;
 }
 
 .filter_active {
