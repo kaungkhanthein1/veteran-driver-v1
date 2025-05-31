@@ -210,5 +210,51 @@
     "continueWithFacebookButton": "Continue With Facebook",
     "noAccountText": "Don't you have an account? ",
     "signUpLink": "Sign Up"
+  },
+  "otpVerifyPage": {
+    "title": "Verify OTP",
+    "description": "Verification code sent to <span className=\"font-semibold text-theme-primary\">{{email}}</span> / <span className=\"font-semibold text-theme-primary\">{{phone}}</span>",
+    "checkSpam": "Please check your messages and be sure to check your spam folder",
+    "confirmButton": "Confirm",
+    "didntGetCode": "Didn't get the verification code?",
+    "timer": "{{timer}}s",
+    "resendButton": "Resend OTP"
+  },
+  "phoneSignUpPage": {
+    "title": "Sign Up With Phone Number",
+    "description": "Complete registration with your phone number",
+    "phoneNumberLabel": "Phone Number",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter Your Password",
+    "notRobotCheckbox": "I'm not a robot",
+    "recaptchaLabel": "Recaptcha",
+    "continueButton": "Continue"
+  },
+  "pointHistory": {
+    "title": "Point History",
+    "incomeTab": "Income",
+    "withdrawTab": "Withdraw",
+    "otherIncomeTab": "Other Income",
+    "locationVerifiedTitle": "Your Location Has Been Verified",
+    "locationVerifiedDescription": "Congratulations! The location you shared got verified and gained massive attention.",
+    "dailySharingTitle": "Daily Sharing Complete",
+    "dailySharingDescription": "You've successfully shared 3 locations today. Come back tomorrow to share more!",
+    "videoViralTitle": "Your Video Went Viral!",
+    "videoViralDescription": "Congratulations! Your video has gone viral and gained massive attention.",
+    "confirmButton": "Confirm"
+  },
+  "months": {
+    "january": "January",
+    "february": "February",
+    "march": "March",
+    "april": "April",
+    "may": "May",
+    "june": "June",
+    "july": "July",
+    "august": "August",
+    "september": "September",
+    "october": "October",
+    "november": "November",
+    "december": "December"
   }
 }

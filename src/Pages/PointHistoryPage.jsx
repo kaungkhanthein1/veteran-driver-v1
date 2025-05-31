@@ -1,57 +1,55 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import BackButton from '../components/common/BackButton';
 
 export default function PointHistoryPage() {
-  const navigate = useNavigate();
   const { t } = useTranslation();
-  const [activeTab, setActiveTab] = useState('Income');
+  const [activeTab, setActiveTab] = useState(t('pointHistory.incomeTab'));
   const [selectedMonth, setSelectedMonth] = useState('2024 January');
   const [isMonthSelectorOpen, setIsMonthSelectorOpen] = useState(false);
 
   // Generate years and months data
   const years = [2024, 2023];
-  const months = ['January', 'February', 'March', 'April', 'May', 'June', 
-                 'July', 'August', 'September', 'October', 'November', 'December'];
+  const months = [t('months.january'), t('months.february'), t('months.march'), t('months.april'), t('months.may'), t('months.june'), 
+                 t('months.july'), t('months.august'), t('months.september'), t('months.october'), t('months.november'), t('months.december')];
 
   // Sample data structure for point history
   const [pointHistory] = useState([
     {
       id: 1,
-      title: 'Your Location Has Been Verified',
-      description: 'Congratulations! The location you shared got verified and gained massive attention.',
+      title: t('pointHistory.locationVerifiedTitle'),
+      description: t('pointHistory.locationVerifiedDescription'),
       amount: 20,
       type: 'income',
       timestamp: '2023-10-8 / 9: 00 : 00'
     },
     {
       id: 2,
-      title: 'Daily Sharing Complete',
-      description: "You've successfully shared 3 locations today. Come back tomorrow to share more!",
+      title: t('pointHistory.dailySharingTitle'),
+      description: t('pointHistory.dailySharingDescription'),
       amount: 2,
       type: 'income',
       timestamp: '2023-10-8, 9: 00 : 00'
     },
     {
       id: 3,
-      title: 'Your Video Went Viral!',
-      description: 'Congratulations! Your video has gone viral and gained massive attention.',
+      title: t('pointHistory.videoViralTitle'),
+      description: t('pointHistory.videoViralDescription'),
       amount: 20.00,
       type: 'income',
       timestamp: '2023-10-8, 9: 00 : 00'
     },
     {
       id: 4,
-      title: 'Your Video Went Viral!',
-      description: 'Congratulations! Your video has gone viral and gained massive attention.',
+      title: t('pointHistory.videoViralTitle'),
+      description: t('pointHistory.videoViralDescription'),
       amount: 20.00,
       type: 'income',
       timestamp: '2023-10-8, 9: 00 : 00'
     }
   ]);
 
-  const tabs = ['Income', 'Withdraw', 'Other Income'];
+  const tabs = [t('pointHistory.incomeTab'), t('pointHistory.withdrawTab'), t('pointHistory.otherIncomeTab')];
 
   const handleMonthSelect = (month, year) => {
     setSelectedMonth(`${year} ${month}`);
@@ -64,7 +62,7 @@ export default function PointHistoryPage() {
         {/* Header */}
         <div className="flex items-center px-4 py-4">
           <BackButton/>
-          <h1 className="flex-1 text-center text-xl font-normal text-theme-text">Point History</h1>
+          <h1 className="flex-1 text-center text-xl font-normal text-theme-text">{t('pointHistory.title')}</h1>
           <div className="w-6"></div>
         </div>
 
@@ -110,13 +108,13 @@ export default function PointHistoryPage() {
                     className="flex-1 py-3 rounded-lg bg-theme-primary text-theme-text"
                     onClick={() => setIsMonthSelectorOpen(false)}
                   >
-                    Cancel
+                    {t('common.cancel')}
                   </button>
                   <button 
                     className="flex-1 py-3 rounded-lg bg-[#FDC51B] text-black font-medium"
                     onClick={() => setIsMonthSelectorOpen(false)}
                   >
-                    Confirm
+                    {t('pointHistory.confirmButton')}
                   </button>
                 </div>
               </div>

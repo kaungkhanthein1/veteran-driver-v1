@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormInput from '../components/common/FormInput';
 import BackButton from "../components/common/BackButton";
+import { useTranslation } from 'react-i18next';
 
 export default function PhoneSignUpPage() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("+66");
   const [password, setPassword] = useState("");
+  const { t } = useTranslation();
 
   const isFormFilled = phoneNumber.trim() !== "+66" && password.trim() !== "";
 
@@ -16,14 +18,14 @@ export default function PhoneSignUpPage() {
       <div className="w-full max-w-md mx-auto flex flex-col items-center">
         <div className="w-full flex items-center mb-8">
           <BackButton/>
-          <h1 className="text-xl font-bold text-theme-primary flex-1 text-center">Sign Up With Phone Number</h1>
+          <h1 className="text-xl font-bold text-theme-primary flex-1 text-center">{t('phoneSignUpPage.title')}</h1>
           <div className="w-8" />
         </div>
-        <p className="text-theme-secondary text-base text-center mb-8">Complete registration with your phone number</p>
+        <p className="text-theme-secondary text-base text-center mb-8">{t('phoneSignUpPage.description')}</p>
         
         <form className="w-full mt-8 space-y-6" onSubmit={e => { e.preventDefault(); navigate("/otp-verify"); }}>
           <FormInput
-            label="Phone Number"
+            label={t('phoneSignUpPage.phoneNumberLabel')}
             name="phoneNumber"
             type="text"
             inputMode="numeric"
@@ -33,10 +35,10 @@ export default function PhoneSignUpPage() {
           
           <div className="relative">
             <FormInput
-              label="Password"
+              label={t('phoneSignUpPage.passwordLabel')}
               name="password"
               type={showPassword ? "text" : "password"}
-              placeholder="Enter Your Password"
+              placeholder={t('phoneSignUpPage.passwordPlaceholder')}
               value={password}
               onChange={e => setPassword(e.target.value)}
               rightIcon={
@@ -60,8 +62,8 @@ export default function PhoneSignUpPage() {
           <div className="flex justify-center">
             <div className="bg-theme-primary rounded-lg px-4 py-3 flex items-center gap-2 w-full max-w-xs">
               <input type="checkbox" className="accent-blue-500" />
-              <span className="text-theme-secondary text-sm">I'm not a robot</span>
-              <div className="ml-20 text-theme-secondary text-md">Recaptcha</div>
+              <span className="text-theme-secondary text-sm">{t('phoneSignUpPage.notRobotCheckbox')}</span>
+              <div className="ml-20 text-theme-secondary text-md">{t('phoneSignUpPage.recaptchaLabel')}</div>
             </div>
           </div>
           <button
@@ -73,7 +75,7 @@ export default function PhoneSignUpPage() {
             }`}
             disabled={!isFormFilled}
           >
-            Continue
+            {t('phoneSignUpPage.continueButton')}
           </button>
         </form>
       </div>
