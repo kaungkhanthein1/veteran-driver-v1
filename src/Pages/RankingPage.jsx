@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import BottomNavBar from "../components/common/BottomNavBar";
 import { useBookmarks } from '../hooks/useBookmarks';
 import BackButton from "../components/common/BackButton";
 import GoldenGate from "assets/GoldenGate.png";
@@ -171,7 +170,6 @@ export default function RankingPage() {
             ))}
           </div>
         </div>
-        <BottomNavBar />
       </div>
     </div>
   );

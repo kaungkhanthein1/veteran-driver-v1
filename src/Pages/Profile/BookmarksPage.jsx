@@ -1,13 +1,13 @@
-import React from 'react';
 import ExploreCard from '../../components/cards/ExploreCard';
-import BottomNavBar from '../../components/common/BottomNavBar';
 import { useBookmarks } from '../../hooks/useBookmarks';
 import BackButton from '../../components/common/BackButton';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 export default function BookmarksPage() {
   const { bookmarkedItems, toggleBookmark, isBookmarked } = useBookmarks();
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen flex justify-center bg-theme-primary">
@@ -26,8 +26,9 @@ export default function BookmarksPage() {
                 <ExploreCard 
                   key={place.id} 
                   item={place} 
-                  isBookmarked={true}
+                  isBookmarked={isBookmarked(place.id)}
                   onBookmarkClick={() => toggleBookmark(place)}
+                  onClick={() => navigate(`/location/${place.id}`)}
                 />
               ))
             ) : (
@@ -37,8 +38,6 @@ export default function BookmarksPage() {
             )}
           </div>
         </div>
-
-        <BottomNavBar />
       </div>
     </div>
   );

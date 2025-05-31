@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Bookmark from "icons/Bookmark.svg";
 import GoldenGate from "assets/GoldenGate.png";
 import Harrier from "assets/Harrier.png";
-import GoldenGateRoom from "assets/GoldenGateRoom.png";
 import HarrierRoom from "assets/HarrierRoom.png";
 import ExploreVideo from "assets/Explore.mp4";
 import VideoPlayer from "../common/VideoPlayer";
