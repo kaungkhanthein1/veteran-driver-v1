@@ -3,9 +3,11 @@ import ExploreCard from '../../components/cards/ExploreCard';
 import BottomNavBar from '../../components/common/BottomNavBar';
 import { useBookmarks } from '../../hooks/useBookmarks';
 import BackButton from '../../components/common/BackButton';
+import { useTranslation } from 'react-i18next';
 
 export default function BookmarksPage() {
   const { bookmarkedItems, toggleBookmark, isBookmarked } = useBookmarks();
+  const { t } = useTranslation();
 
   return (
     <div className="min-h-screen flex justify-center bg-theme-primary">
@@ -14,7 +16,7 @@ export default function BookmarksPage() {
           {/* Header */}
           <div className="sticky top-0 z-10 bg-theme-primary px-4 py-4 flex items-center relative pt-6">
            <BackButton className="absolute left-4"/>
-            <h1 className="text-xl font-semibold text-theme-primary text-center flex-grow">Bookmarks</h1>
+            <h1 className="text-xl font-semibold text-theme-primary text-center flex-grow">{t('bookmarksPage.title')}</h1>
           </div>
 
           {/* Bookmarked Places Grid */}
@@ -30,7 +32,7 @@ export default function BookmarksPage() {
               ))
             ) : (
               <div className="text-center text-theme-primary py-8">
-                No bookmarked locations yet
+                {t('bookmarksPage.noBookmarksText')}
               </div>
             )}
           </div>

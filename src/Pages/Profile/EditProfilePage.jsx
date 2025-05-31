@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import ProfilePic from 'icons/Profile/ProfilePic.svg';
 import Modal from '../../components/common/Modal';
 import BackButton from "../../components/common/BackButton";
 
 export default function EditProfilePage() {
-  const navigate = useNavigate();
   const { t } = useTranslation();
   const [formData, setFormData] = useState({
     name: "Rachel Zane Noel",
@@ -63,7 +61,7 @@ export default function EditProfilePage() {
         {/* Header */}
         <div className="flex items-center px-4 py-4">
           <BackButton/>
-          <h1 className="flex-1 text-center text-xl font-normal text-theme-text">Edit Profile</h1>
+          <h1 className="flex-1 text-center text-xl font-normal text-theme-text">{t('editProfilePage.title')}</h1>
           <div className="w-6"></div>
         </div>
 
@@ -73,7 +71,7 @@ export default function EditProfilePage() {
             <div className="w-24 h-24 rounded-full overflow-hidden">
               <img 
                 src={formData.avatar} 
-                alt="Profile" 
+                alt={t('editProfilePage.profileAltText')}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -97,7 +95,7 @@ export default function EditProfilePage() {
             onClick={() => handleOpenModal('name')}
             className="w-full px-4 py-4 flex items-center justify-between"
           >
-            <span className="text-theme-text">Change Username</span>
+            <span className="text-theme-text">{t('editProfilePage.changeUsernameLabel')}</span>
             <div className="flex items-center gap-2">
               <span className="text-theme-subtext">{formData.name}</span>
               <svg className="w-5 h-5 text-theme-subtext" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -110,7 +108,7 @@ export default function EditProfilePage() {
             onClick={() => handleOpenModal('bio')}
             className="w-full px-4 py-4 flex items-center justify-between"
           >
-            <span className="text-theme-text">Change Bio</span>
+            <span className="text-theme-text">{t('editProfilePage.changeBioLabel')}</span>
             <div className="flex items-center gap-2">
               <span className="text-theme-subtext">{formData.bio}</span>
               <svg className="w-5 h-5 text-theme-subtext" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -123,7 +121,7 @@ export default function EditProfilePage() {
             onClick={() => handleOpenModal('gender')}
             className="w-full px-4 py-4 flex items-center justify-between"
           >
-            <span className="text-theme-text">Gender</span>
+            <span className="text-theme-text">{t('editProfilePage.genderLabel')}</span>
             <div className="flex items-center gap-2">
               <span className="text-theme-subtext">{formData.gender}</span>
               <svg className="w-5 h-5 text-theme-subtext" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -136,7 +134,7 @@ export default function EditProfilePage() {
             onClick={() => handleOpenModal('location')}
             className="w-full px-4 py-4 flex items-center justify-between"
           >
-            <span className="text-theme-text">Location</span>
+            <span className="text-theme-text">{t('editProfilePage.locationLabel')}</span>
             <div className="flex items-center gap-2">
               <span className="text-theme-subtext">{formData.location}</span>
               <svg className="w-5 h-5 text-theme-subtext" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -146,14 +144,14 @@ export default function EditProfilePage() {
           </button>
 
           <div className="w-full px-4 py-4 flex items-center justify-between">
-            <span className="text-theme-text">User ID</span>
+            <span className="text-theme-text">{t('editProfilePage.userIdLabel')}</span>
             <span className="text-theme-subtext">{formData.userId}</span>
           </div>
         </div>
 
         {/* Modals */}
         <Modal
-          title="Change Username"
+          title={t('editProfilePage.changeUsernameModalTitle')}
           isOpen={modalState.name}
           onClose={() => handleCloseModal('name')}
           onApply={() => handleApply('name', formData.name)}
@@ -163,12 +161,12 @@ export default function EditProfilePage() {
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             className="w-full bg-theme-secondary text-theme-primary px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDC51B]"
-            placeholder="Enter your username"
+            placeholder={t('editProfilePage.usernamePlaceholder')}
           />
         </Modal>
 
         <Modal
-          title="Change Bio"
+          title={t('editProfilePage.changeBioModalTitle')}
           isOpen={modalState.bio}
           onClose={() => handleCloseModal('bio')}
           onApply={() => handleApply('bio', formData.bio)}
@@ -177,23 +175,23 @@ export default function EditProfilePage() {
             value={formData.bio}
             onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
             className="w-full bg-theme-secondary text-theme-primary px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDC51B] min-h-[100px] resize-none"
-            placeholder="Write something about yourself"
+            placeholder={t('editProfilePage.bioPlaceholder')}
           />
         </Modal>
 
         <Modal
-          title="Gender"
+          title={t('editProfilePage.genderModalTitle')}
           isOpen={modalState.gender}
           onClose={() => handleCloseModal('gender')}
           onApply={() => handleApply('gender', formData.gender)}
           type="bottom"
         >
           <div className="flex flex-col space-y-2">
-            {['Male', 'Female', 'Other'].map((option) => (
+            {[t('editProfilePage.maleOption'), t('editProfilePage.femaleOption'), t('editProfilePage.otherOption')].map((option) => (
               <button
                 key={option}
                 onClick={() => setFormData({ ...formData, gender: option })}
-                className={`w-full p-2 rounded-lg ${formData.gender === option ? 'bg-[#FDC51B] text-black' : 'bg-theme-secondary text-theme-text'}`}
+                className={`w-full p-2 rounded-lg ${formData.gender === option ? 'bg-[#FDC51B]' : 'bg-theme-secondary text-theme-text'}`}
               >
                 {option}
               </button>
@@ -202,20 +200,20 @@ export default function EditProfilePage() {
         </Modal>
 
         <Modal
-          title="Location"
+          title={t('editProfilePage.locationModalTitle')}
           isOpen={modalState.location}
           onClose={() => handleCloseModal('location')}
           onApply={() => handleApply('location', formData.location)}
           type="bottom"
         >
           <div className="flex flex-col space-y-2">
-            {['Thailand', 'Cambodia', 'Phnom Penh', 'Krong'].map((option) => (
+            {[t('editProfilePage.thailandOption'), t('editProfilePage.cambodiaOption'), t('editProfilePage.phnomPenhOption'), t('editProfilePage.krongOption')].map((option) => (
               <button
                 key={option}
                 onClick={() => setFormData({ ...formData, location: option })}
                 className={`w-full p-2 rounded-lg ${
                   formData.location === option 
-                    ? 'bg-[#FDC51B] text-black' 
+                    ? 'bg-[#FDC51B]' 
                     : 'bg-theme-secondary text-theme-text'
                 }`}
               >

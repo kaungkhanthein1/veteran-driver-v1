@@ -256,5 +256,43 @@
     "october": "October",
     "november": "November",
     "december": "December"
+  },
+  "bookmarksPage": {
+    "title": "Bookmarks",
+    "noBookmarksText": "No bookmarked locations yet"
+  },
+  "editProfilePage": {
+    "title": "Edit Profile",
+    "profileAltText": "Profile",
+    "changeUsernameLabel": "Change Username",
+    "changeBioLabel": "Change Bio",
+    "genderLabel": "Gender",
+    "locationLabel": "Location",
+    "userIdLabel": "User ID",
+    "changeUsernameModalTitle": "Change Username",
+    "usernamePlaceholder": "Enter your username",
+    "changeBioModalTitle": "Change Bio",
+    "bioPlaceholder": "Write something about yourself",
+    "genderModalTitle": "Gender",
+    "maleOption": "Male",
+    "femaleOption": "Female",
+    "otherOption": "Other",
+    "locationModalTitle": "Location",
+    "thailandOption": "Thailand",
+    "cambodiaOption": "Cambodia",
+    "phnomPenhOption": "Phnom Penh",
+    "krongOption": "Krong"
+  },
+  "notificationsPage": {
+    "title": "Notifications",
+    "systemNotificationAltText": "System Notification",
+    "systemNotificationTitle": "System Notification",
+    "systemNotificationDescription": "See your system notifications here",
+    "balanceAlertAltText": "Balance Alert",
+    "balanceAlertTitle": "Balance Alert",
+    "balanceAlertDescription": "See your balance alert here",
+    "achievementsAlertAltText": "Achievements Alert",
+    "achievementsAlertTitle": "Achievements Alert",
+    "achievementsAlertDescription": "See your achievements as creator here"
   }
 }
