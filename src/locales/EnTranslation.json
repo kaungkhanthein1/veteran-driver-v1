@@ -4,7 +4,8 @@
     "dashboard": "Admin Dashboard",
     "manageLocations": "Manage Locations",
     "manageUsers": "Manage Users",
-    "reports": "Reports"
+    "reports": "Reports",
+    "welcome": "Welcome"
   },
   "auth": {
     "description": "Welcome to our application",
@@ -490,5 +491,12 @@
     "bookmarkAlt": "bookmark",
     "restoreButton": "Restore",
     "viewPlaceButton": "View Place"
+  },
+  "socialPostCard": {
+    "viewPlace": "View Place",
+    "seeLess": "...see less",
+    "seeMore": "...see more",
+    "mediaAlt": "Media {{number}}",
+    "videoAlt": "Video {{number}}"
   }
 }

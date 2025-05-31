@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import BeachImg from "assets/Beach.png";
 import RoomImg from "assets/Room.png";
 import SampleVideo from "assets/Sample.mp4";
+import { useTranslation } from 'react-i18next';
 
 export default function SocialPostCard({ post: providedPost, onOpenComments, compact = false }) {
   const [expanded, setExpanded] = useState(false);
@@ -21,6 +22,8 @@ export default function SocialPostCard({ post: providedPost, onOpenComments, com
     RoomImg,
     { type: "video", url: SampleVideo, thumbnail: RoomImg }
   ];
+
+  const { t } = useTranslation();
 
   const handleMediaClick = (media, index) => {
     // If it's a video, just set the video
@@ -67,14 +70,14 @@ export default function SocialPostCard({ post: providedPost, onOpenComments, com
             <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
             </svg>
-            View Place
+            {t('socialPostCard.viewPlace')}
           </button>
         ) : (
           <button className="ml-auto bg-theme-secondary text-[#FFC61B] rounded-full px-3 py-1.5 text-[13px] font-medium flex items-center">
             <svg className="w-3.5 h-3.5 mr-1.5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
             </svg>
-            View Place
+            {t('socialPostCard.viewPlace')}
           </button>
         )}
       </div>
@@ -101,7 +104,7 @@ export default function SocialPostCard({ post: providedPost, onOpenComments, com
               className="text-theme-secondary cursor-pointer ml-1.5 text-[13px]"
               onClick={() => setExpanded(!expanded)}
             >
-              {expanded ? "...see less" : "...see more"}
+              {expanded ? t('socialPostCard.seeLess') : t('socialPostCard.seeMore')}
             </span>
           )}
           <div className="flex flex-wrap gap-1.5 mt-2.5 mb-4">
@@ -127,14 +130,14 @@ export default function SocialPostCard({ post: providedPost, onOpenComments, com
             {typeof media === 'string' ? (
               <img 
                 src={media} 
-                alt={`Media ${idx + 1}`}
+                alt={t('socialPostCard.mediaAlt', { number: idx + 1 })}
                 className="w-full h-full object-cover"
               />
             ) : media.type === 'video' && (
               <div className="relative w-full h-full">
                 <img 
                   src={media.thumbnail} 
-                  alt={`Video ${idx + 1}`}
+                  alt={t('socialPostCard.videoAlt', { number: idx + 1 })}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
