@@ -9,11 +9,11 @@ export default function SettingsPage() {
 
   const settingGroups = [
     {
-      title: 'Account',
+      title: t('settingsPage.accountGroupTitle'),
       items: [
         {
           id: 'mobile',
-          title: 'Mobile Number',
+          title: t('settingsPage.mobileNumberItem'),
           route: '/settings/mobile'
         },
         {

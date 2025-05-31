@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import FormInput from '../../components/common/FormInput';
 import BackButton from '../../components/common/BackButton';
@@ -11,25 +10,24 @@ import ApplePayIcon from 'assets/ApplePay.svg';
 import WeChatIcon from 'assets/WeChat.svg';
 
 export default function WithdrawPage() {
-  const navigate = useNavigate();
   const { t } = useTranslation();
   const [withdrawAmount, setWithdrawAmount] = useState('');
   const [bankAccountName, setBankAccountName] = useState('');
   const [bankAccountNumber, setBankAccountNumber] = useState('');
   const [proofImage, setProofImage] = useState(null);
   const [showPaymentMethods, setShowPaymentMethods] = useState(false);
-  const [selectedPayment, setSelectedPayment] = useState('Bank Account');
+  const [selectedPayment, setSelectedPayment] = useState(t('withdrawPage.bankAccountOption'));
 
   const paymentMethods = [
-    { name: 'Bank Account', default: true },
+    { name: t('withdrawPage.bankAccountOption'), default: true },
     {
-      name: 'Credit Card',
+      name: t('withdrawPage.creditCardOption'),
       icons: [CardsIcon]
     },
-    { name: 'AliPay', icon: AlipayIcon },
-    { name: 'Google Pay', icon: GooglePayIcon },
-    { name: 'Apple Pay', icon: ApplePayIcon },
-    { name: 'WeChat', icon: WeChatIcon }
+    { name: t('withdrawPage.alipayOption'), icon: AlipayIcon },
+    { name: t('withdrawPage.googlePayOption'), icon: GooglePayIcon },
+    { name: t('withdrawPage.applePayOption'), icon: ApplePayIcon },
+    { name: t('withdrawPage.wechatOption'), icon: WeChatIcon }
   ];
 
   const isFormFilled = withdrawAmount.trim() !== '' && bankAccountName.trim() !== '' && bankAccountNumber.trim() !== '';
@@ -45,16 +43,16 @@ export default function WithdrawPage() {
         {/* Header */}
         <div className="flex items-center px-4 py-4">
          <BackButton/>
-          <h1 className="flex-1 text-center text-xl font-normal">Withdraw</h1>
+          <h1 className="flex-1 text-center text-xl font-normal">{t('withdrawPage.title')}</h1>
           <div className="w-6"></div>
         </div>
 
         <form onSubmit={handleSubmit} className="px-4 space-y-6 pb-6">
           {/* Withdraw Amount */}
           <FormInput 
-            label="Withdraw Amount"
+            label={t('withdrawPage.withdrawAmountLabel')}
             type="number"
-            placeholder="Please enter withdraw amount (min 800 coins )"
+            placeholder={t('withdrawPage.withdrawAmountPlaceholder')}
             value={withdrawAmount}
             onChange={(e) => setWithdrawAmount(e.target.value)}
             required
@@ -63,25 +61,25 @@ export default function WithdrawPage() {
           {/* Available Amount */}
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
-              Available Amount
+              {t('withdrawPage.availableAmountLabel')}
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <span>****** coins</span>
+            <span>{t('withdrawPage.availableCoins')}</span>
           </div>
 
-          <div>You Receive 0.00 USD</div>   
+          <div>{t('withdrawPage.youReceiveLabel', { amount: '0.00' })}</div>   
 
           {/* Payment Methods */}
           <div className="space-y-2 relative">
-            <label className="block text-theme-text/60">Payment Methods</label>
+            <label className="block text-theme-text/60">{t('withdrawPage.paymentMethodsLabel')}</label>
             <button
               type="button"
               className="w-full bg-theme-secondary border border-theme-text/20 rounded-lg px-4 py-3 flex justify-between items-center"
               onClick={() => setShowPaymentMethods(!showPaymentMethods)}
             >
-              <span>{selectedPayment}{selectedPayment === 'Bank Account' ? ' (default)' : ''}</span>
+              <span>{selectedPayment}{selectedPayment === t('withdrawPage.bankAccountOption') ? t('withdrawPage.defaultLabel') : ''}</span>
               <svg
                 className={`w-5 h-5 transition-transform ${showPaymentMethods ? 'rotate-180' : ''}`}
                 viewBox="0 0 24 24"
@@ -104,7 +102,7 @@ export default function WithdrawPage() {
                       setShowPaymentMethods(false);
                     }}
                   >
-                    <span>{method.name}{method.default ? ' (default)' : ''}</span>
+                    <span>{method.name}{method.default ? t('withdrawPage.defaultLabel') : ''}</span>
                     <div className="flex items-center gap-1">
                       {method.icons ? (
                         method.icons.map((icon, index) => (
@@ -122,8 +120,8 @@ export default function WithdrawPage() {
 
           {/* Bank Account Name */}
           <FormInput
-            label="Bank Account Name"
-            placeholder="Please enter bank account name"
+            label={t('withdrawPage.bankAccountNameLabel')}
+            placeholder={t('withdrawPage.bankAccountNamePlaceholder')}
             value={bankAccountName}
             onChange={(e) => setBankAccountName(e.target.value)}
             required
@@ -131,8 +129,8 @@ export default function WithdrawPage() {
 
           {/* Bank Account Number */}
           <FormInput
-            label="Bank Account Number"
-            placeholder="Please enter bank account number"
+            label={t('withdrawPage.bankAccountNumberLabel')}
+            placeholder={t('withdrawPage.bankAccountNumberPlaceholder')}
             value={bankAccountNumber}
             onChange={(e) => setBankAccountNumber(e.target.value)}
             required
@@ -140,7 +138,7 @@ export default function WithdrawPage() {
 
           {/* Upload Photo Proof */}
           <div className="space-y-2">
-            <label className="block">Upload Photo Proof</label>
+            <label className="block">{t('withdrawPage.uploadPhotoProofLabel')}</label>
             <div className="flex gap-4">
               <label className="w-24 h-24 bg-theme-secondary rounded-lg flex items-center justify-center cursor-pointer">
                 <input
@@ -157,7 +155,7 @@ export default function WithdrawPage() {
                 <div className="w-24 h-24 bg-theme-secondary rounded-lg overflow-hidden">
                   <img
                     src={URL.createObjectURL(proofImage)}
-                    alt="Proof"
+                    alt={t('withdrawPage.proofAltText')}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -167,11 +165,11 @@ export default function WithdrawPage() {
 
           {/* Withdraw Rule */}
           <div className="space-y-4">
-            <h2>Withdraw Rule</h2>
+            <h2>{t('withdrawPage.withdrawRuleTitle')}</h2>
             <ol className="list-decimal list-inside space-y-2 text-theme-text/60">
-              <li>Withdraw amount must be at least 800 coins.</li>
-              <li>User need to upload proof of income to pass the review from admin</li>
-              <li>Review process will begin after you submitted the withdraw form and it will take 24 Hours to process.</li>
+              <li>{t('withdrawPage.withdrawRule1')}</li>
+              <li>{t('withdrawPage.withdrawRule2')}</li>
+              <li>{t('withdrawPage.withdrawRule3')}</li>
             </ol>
           </div>
 
@@ -181,7 +179,7 @@ export default function WithdrawPage() {
             className={`w-full py-3 rounded-lg ${isFormFilled ? 'bg-yellow-gradient text-black' : 'bg-theme-secondary text-theme-text'}`}
             disabled={!isFormFilled}
           >
-            Submit
+            {t('withdrawPage.submitButton')}
           </button>
         </form>
       </div>

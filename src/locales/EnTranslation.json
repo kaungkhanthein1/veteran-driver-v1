@@ -294,5 +294,63 @@
     "achievementsAlertAltText": "Achievements Alert",
     "achievementsAlertTitle": "Achievements Alert",
     "achievementsAlertDescription": "See your achievements as creator here"
+  },
+  "settingsPage": {
+    "title": "Settings",
+    "accountGroupTitle": "Account",
+    "mobileNumberItem": "Mobile Number",
+    "bindEmailItem": "Bind E-mail",
+    "thirdPartyGroupTitle": "Third Party",
+    "bindFacebookItem": "Bind with Facebook",
+    "bindWeChatItem": "Bind with WeChat",
+    "bindLineItem": "Bind with Line",
+    "securityGroupTitle": "Security",
+    "changePasswordItem": "Change Password",
+    "setupTwoFactorItem": "Setup Two-Factor Authentication (2FA)"
+  },
+  "walletPage": {
+    "title": "Wallet",
+    "totalCoinsLabel": "Total Coins",
+    "withdrawButton": "Withdraw",
+    "pointHistoryTitle": "Point History",
+    "viewAllButton": "View All",
+    "locationVerifiedTitle": "Your Location Has Been Verified",
+    "locationVerifiedDescription": "Congratulations! The location you shared got verified and gained massive attention.",
+    "rewardWithdrawTitle": "Reward Withdraw!",
+    "rewardWithdrawDescription": "30 coins reward has been withdrawn. wait for the pending time to complete, and you will receive your funds.",
+    "dailySharingCompleteTitle": "Daily Sharing Complete",
+    "dailySharingCompleteDescription": "You've successfully shared 3 locations today. Come back tomorrow to share more!",
+    "status": {
+      "approved": "Approved",
+      "pending": "Pending",
+      "completed": "Completed"
+    }
+  },
+  "withdrawPage": {
+    "title": "Withdraw",
+    "withdrawAmountLabel": "Withdraw Amount",
+    "withdrawAmountPlaceholder": "Please enter withdraw amount (min 800 coins )",
+    "availableAmountLabel": "Available Amount",
+    "availableCoins": "****** coins",
+    "youReceiveLabel": "You Receive {{amount}} USD",
+    "paymentMethodsLabel": "Payment Methods",
+    "bankAccountOption": "Bank Account",
+    "defaultLabel": " (default)",
+    "creditCardOption": "Credit Card",
+    "alipayOption": "AliPay",
+    "googlePayOption": "Google Pay",
+    "applePayOption": "Apple Pay",
+    "wechatOption": "WeChat",
+    "bankAccountNameLabel": "Bank Account Name",
+    "bankAccountNamePlaceholder": "Please enter bank account name",
+    "bankAccountNumberLabel": "Bank Account Number",
+    "bankAccountNumberPlaceholder": "Please enter bank account number",
+    "uploadPhotoProofLabel": "Upload Photo Proof",
+    "proofAltText": "Proof",
+    "withdrawRuleTitle": "Withdraw Rule",
+    "withdrawRule1": "Withdraw amount must be at least 800 coins.",
+    "withdrawRule2": "User need to upload proof of income to pass the review from admin",
+    "withdrawRule3": "Review process will begin after you submitted the withdraw form and it will take 24 Hours to process.",
+    "submitButton": "Submit"
   }
 }
