@@ -16,10 +16,10 @@ const ShareModal = ({ isOpen, onClose }) => {
   };
 
   const shareOptions = [
-    { name: 'Wechat', icon: WechatIcon, bgColor: 'bg-[#07C160]' },
-    { name: 'Weibo', icon: WeiboIcon, bgColor: 'bg-[#E6162D]' },
-    { name: 'QQ', icon: QqIcon, bgColor: 'bg-[#12B7F5]' },
-    { name: 'Baidu', icon: BaiduIcon, bgColor: 'bg-[#2932E1]' }
+    { name: t('shareModal.wechat'), icon: WechatIcon, bgColor: 'bg-[#07C160]' },
+    { name: t('shareModal.weibo'), icon: WeiboIcon, bgColor: 'bg-[#E6162D]' },
+    { name: t('shareModal.qq'), icon: QqIcon, bgColor: 'bg-[#12B7F5]' },
+    { name: t('shareModal.baidu'), icon: BaiduIcon, bgColor: 'bg-[#2932E1]' }
   ];
 
   return (

@@ -4,7 +4,8 @@
     "dashboard": "管理后台",
     "manageLocations": "管理位置",
     "manageUsers": "管理用户",
-    "reports": "报告"
+    "reports": "报告",
+    "welcome": "欢迎"
   },
   "auth": {
     "description": "欢迎使用我们的应用",
@@ -31,7 +32,8 @@
     "mobileNumber": "手机号",
     "name": "名称",
     "ok": "确定",
-    "save": "保存"
+    "save": "保存",
+    "backButtonAltText": "返回按钮"
   },
   "explore": {
     "categories": {
@@ -104,5 +106,413 @@
     "share": "分享",
     "shareVia": "通过以下方式分享",
     "upload": "上传"
+  },
+  "addLocation": {
+    "addServiceAndPrice": "添加服务和价格",
+    "addServiceDescription": "请输入您想提供的服务及其美元价格。",
+    "serviceType": "服务类型",
+    "serviceNamePlaceholder": "输入服务名称",
+    "servicePrice": "服务价格 (USD)",
+    "servicePricePlaceholder": "输入服务价格",
+    "openingTime": "营业时间 *",
+    "serviceAvailable247": "我们的服务24/7可用。",
+    "setTimeAlt": "设置时间",
+    "setTimeLabel": "设置营业时间",
+    "servicesAndPrices": "服务与价格 *",
+    "bestPriceLabel": "最优价格 (USD)",
+    "pricePlaceholder": "请输入价格",
+    "addServicesLabel": "添加服务"
+  },
+  "changeTheme": {
+    "title": "主题",
+    "changeApplicationTheme": "更改应用主题",
+    "description": "通过选择不同的主题来改变界面的外观和感受。您可以在浅色模式和深色模式等选项之间切换",
+    "whiteThemeTitle": "浅色主题",
+    "whiteThemeDescription": "明亮干净的外观，在白天易于阅读",
+    "darkThemeTitle": "深色主题",
+    "darkThemeDescription": "时尚的深色界面，对眼睛友好",
+    "systemThemeTitle": "默认 (系统)",
+    "systemThemeDescription": "我们将根据您设备的系统设置调整您的主题。"
+  },
+  "chooseLocation": {
+    "selectRegionTitle": "选择区域",
+    "searchLocationPlaceholder": "搜索位置...",
+    "chooseThisRegionButton": "选择此区域"
+  },
+  "explorePage": {
+    "searchPlaceholder": "搜索位置...",
+    "adsLabel": "广告",
+    "dreamVacationTitle": "享受您的梦想假期",
+    "dreamVacationDescription": "通过我们的独家优惠规划您的完美度假",
+    "topPicksTitle": "精选",
+    "viewAllButton": "查看全部",
+    "recommendedTitle": "推荐"
+  },
+  "languageModal": {
+    "selectLanguageTitle": "选择语言",
+    "en": "英语",
+    "ja": "日语",
+    "zh": "简体中文",
+    "ko": "韩语",
+    "saveButton": "保存"
+  },
+  "modal": {
+    "cancelButton": "取消",
+    "applyButton": "应用"
+  },
+  "bottomNavBar": {
+    "home": "首页",
+    "explore": "探索",
+    "social": "社交",
+    "profile": "个人资料"
+  },
+  "shareModal": {
+    "title": "分享至",
+    "copyButton": "复制",
+    "wechat": "微信",
+    "weibo": "微博",
+    "qq": "QQ",
+    "baidu": "百度"
+  },
+  "forgotPasswordPage": {
+    "title": "忘记密码",
+    "description": "使用您的手机号完成注册",
+    "emailOrPhoneLabel": "邮箱或手机号",
+    "newPasswordLabel": "新密码",
+    "newPasswordPlaceholder": "输入新密码",
+    "notRobotCheckbox": "我不是机器人",
+    "recaptchaLabel": "验证码",
+    "continueButton": "继续"
+  },
+  "locationDetails": {
+    "shareAltText": "分享",
+    "bookmarkAltText": "收藏",
+    "distance": "距离{{distance}}",
+    "description": "{{description}}",
+    "seeMoreButton": "查看更多",
+    "addressAltText": "地址",
+    "checkMapButton": "查看地图",
+    "hoursAltText": "营业时间",
+    "openHours": "{{openHours}} 营业中",
+    "servicesTitle": "服务",
+    "reviewsTitle": "评论 ({{count}})",
+    "hottestReviewButton": "最热门",
+    "latestReviewButton": "最新"
+  },
+  "loginPage": {
+    "title": "登录",
+    "description": "欢迎回来，让我们开始一些伟大的事情",
+    "emailOrPhoneLabel": "邮箱或手机号",
+    "emailOrPhonePlaceholder": "输入您的邮箱",
+    "passwordLabel": "密码",
+    "passwordPlaceholder": "输入您的密码",
+    "notRobotCheckbox": "我不是机器人",
+    "recaptchaLabel": "验证码",
+    "loginButton": "登录",
+    "forgotPasswordLink": "忘记密码？",
+    "continueWithGoogleButton": "使用Google继续",
+    "continueWithPhoneButton": "使用手机号继续",
+    "continueWithFacebookButton": "使用Facebook继续",
+    "noAccountText": "还没有账户？ ",
+    "signUpLink": "注册"
+  },
+  "otpVerifyPage": {
+    "title": "验证OTP",
+    "description": "验证码已发送至 <span className=\"font-semibold text-theme-primary\">{{email}}</span> / <span className=\"font-semibold text-theme-primary\">{{phone}}</span>",
+    "checkSpam": "请检查您的消息并务必检查垃圾邮件文件夹",
+    "confirmButton": "确认",
+    "didntGetCode": "没有收到验证码？",
+    "timer": "{{timer}}秒",
+    "resendButton": "重新发送OTP"
+  },
+  "phoneSignUpPage": {
+    "title": "使用手机号注册",
+    "description": "使用您的手机号完成注册",
+    "phoneNumberLabel": "手机号",
+    "passwordLabel": "密码",
+    "passwordPlaceholder": "输入您的密码",
+    "notRobotCheckbox": "我不是机器人",
+    "recaptchaLabel": "验证码",
+    "continueButton": "继续"
+  },
+  "pointHistory": {
+    "title": "积分历史",
+    "incomeTab": "收入",
+    "withdrawTab": "提现",
+    "otherIncomeTab": "其他收入",
+    "locationVerifiedTitle": "您的位置已通过验证",
+    "locationVerifiedDescription": "恭喜！您分享的位置已通过验证并获得了大量关注。",
+    "dailySharingTitle": "每日分享完成",
+    "dailySharingDescription": "您今天已成功分享3个位置。明天再来分享吧！",
+    "videoViralTitle": "您的视频火了！",
+    "videoViralDescription": "恭喜！您的视频火了并获得了大量关注。",
+    "confirmButton": "确认"
+  },
+  "months": {
+    "january": "一月",
+    "february": "二月",
+    "march": "三月",
+    "april": "四月",
+    "may": "五月",
+    "june": "六月",
+    "july": "七月",
+    "august": "八月",
+    "september": "九月",
+    "october": "十月",
+    "november": "十一月",
+    "december": "十二月"
+  },
+  "bookmarksPage": {
+    "title": "收藏",
+    "noBookmarksText": "还没有收藏的位置"
+  },
+  "editProfilePage": {
+    "title": "编辑个人资料",
+    "profileAltText": "个人资料",
+    "changeUsernameLabel": "更改用户名",
+    "changeBioLabel": "更改简介",
+    "genderLabel": "性别",
+    "locationLabel": "位置",
+    "userIdLabel": "用户ID",
+    "changeUsernameModalTitle": "更改用户名",
+    "usernamePlaceholder": "输入您的用户名",
+    "changeBioModalTitle": "更改简介",
+    "bioPlaceholder": "写一些关于您自己的",
+    "genderModalTitle": "性别",
+    "maleOption": "男",
+    "femaleOption": "女",
+    "otherOption": "其他",
+    "locationModalTitle": "位置",
+    "thailandOption": "泰国",
+    "cambodiaOption": "柬埔寨",
+    "phnomPenhOption": "金边",
+    "krongOption": "Krong"
+  },
+  "notificationsPage": {
+    "title": "通知",
+    "systemNotificationAltText": "系统通知",
+    "systemNotificationTitle": "系统通知",
+    "systemNotificationDescription": "在此查看您的系统通知",
+    "balanceAlertAltText": "余额提醒",
+    "balanceAlertTitle": "余额提醒",
+    "balanceAlertDescription": "在此查看您的余额提醒",
+    "achievementsAlertAltText": "成就提醒",
+    "achievementsAlertTitle": "成就提醒",
+    "achievementsAlertDescription": "在此查看您作为创作者的成就"
+  },
+  "settingsPage": {
+    "title": "设置",
+    "accountGroupTitle": "账户",
+    "mobileNumberItem": "手机号",
+    "bindEmailItem": "绑定邮箱",
+    "thirdPartyGroupTitle": "第三方",
+    "bindFacebookItem": "绑定Facebook",
+    "bindWeChatItem": "绑定微信",
+    "bindLineItem": "绑定Line",
+    "securityGroupTitle": "安全",
+    "changePasswordItem": "更改密码",
+    "setupTwoFactorItem": "设置双重身份验证 (2FA)"
+  },
+  "walletPage": {
+    "title": "钱包",
+    "totalCoinsLabel": "总硬币",
+    "withdrawButton": "提现",
+    "pointHistoryTitle": "积分历史",
+    "viewAllButton": "查看全部",
+    "locationVerifiedTitle": "您的位置已通过验证",
+    "locationVerifiedDescription": "恭喜！您分享的位置已通过验证并获得了大量关注。",
+    "rewardWithdrawTitle": "奖励提现！",
+    "rewardWithdrawDescription": "30硬币奖励已提现。等待处理时间完成，您将收到资金。",
+    "dailySharingCompleteTitle": "每日分享完成",
+    "dailySharingCompleteDescription": "您今天已成功分享3个位置。明天再来分享吧！",
+    "status": {
+      "approved": "已批准",
+      "pending": "待处理",
+      "completed": "已完成"
+    }
+  },
+  "withdrawPage": {
+    "title": "提现",
+    "withdrawAmountLabel": "提现金额",
+    "withdrawAmountPlaceholder": "请输入提现金额 (最低800硬币)",
+    "availableAmountLabel": "可用金额",
+    "availableCoins": "****** 硬币",
+    "youReceiveLabel": "您将收到 {{amount}} USD",
+    "paymentMethodsLabel": "支付方式",
+    "bankAccountOption": "银行账户",
+    "defaultLabel": " (默认)",
+    "creditCardOption": "信用卡",
+    "alipayOption": "支付宝",
+    "googlePayOption": "Google Pay",
+    "applePayOption": "Apple Pay",
+    "wechatOption": "微信",
+    "bankAccountNameLabel": "银行账户名称",
+    "bankAccountNamePlaceholder": "请输入银行账户名称",
+    "bankAccountNumberLabel": "银行账号",
+    "bankAccountNumberPlaceholder": "请输入银行账号",
+    "uploadPhotoProofLabel": "上传照片证明",
+    "proofAltText": "证明",
+    "withdrawRuleTitle": "提现规则",
+    "withdrawRule1": "提现金额最低为800硬币。",
+    "withdrawRule2": "用户需要上传收入证明以通过管理员审核",
+    "withdrawRule3": "提交提现申请后，审核流程将开始，处理需要24小时。",
+    "submitButton": "提交"
+  },
+  "rankingPage": {
+    "title": "排名",
+    "popularTab": "热门",
+    "mostViewTab": "最多查看",
+    "trendingTab": "趋势",
+    "distance": "距离{{distance}}公里",
+    "reviews": "({{count}})",
+    "bookNowButton": "立即预订"
+  },
+  "recycleBinPage": {
+    "title": "回收站",
+    "selectAllButton": "全选",
+    "locationsSelectedText": "已选择{{count}}个位置",
+    "deleteConfirmationText": "确定要永久删除选定的位置吗？此操作无法撤销。",
+    "yesDeleteButton": "是的，删除",
+    "restoreLocationTitle": "恢复位置",
+    "restoreConfirmationText": "您要恢复此位置吗？恢复后将提交给管理员审核。",
+    "restoreButton": "恢复"
+  },
+  "registerPage": {
+    "title": "注册",
+    "description": "欢迎，让我们开始做一些伟大的事情",
+    "emailOrPhoneLabel": "邮箱或手机号",
+    "emailOrPhonePlaceholder": "输入您的邮箱",
+    "passwordLabel": "密码",
+    "passwordPlaceholder": "输入您的密码",
+    "notRobotCheckbox": "我不是机器人",
+    "recaptchaLabel": "验证码",
+    "signUpButton": "注册",
+    "continueWithGoogleButton": "使用Google继续",
+    "continueWithPhoneButton": "使用手机号继续",
+    "continueWithFacebookButton": "使用Facebook继续",
+    "alreadyAccountText": "已经有账户？ ",
+    "loginLink": "登录"
+  },
+  "searchLocationPage": {
+    "searchPlaceholder": "搜索地点...",
+    "resultsFound": "找到{{count}}个结果",
+    "hotSearch": "热门搜索",
+    "recents": "最近",
+    "recentView": "最近查看",
+    "clear": "清除"
+  },
+  "socialUpload": {
+    "title": "上传帖子",
+    "postButton": "发布",
+    "writePlaceholder": "写点什么...",
+    "uploadImage": "上传 {{number}}",
+    "addLocation": "添加位置"
+  },
+  "uploadedLocationPage": {
+    "title": "已上传位置",
+    "recycleBinAlt": "回收站",
+    "tabs": {
+      "approved": "已批准",
+      "pending": "待处理",
+      "rejected": "已拒绝"
+    }
+  },
+  "filterPanel": {
+    "title": "筛选",
+    "priceRangeLabel": "价格范围",
+    "distanceLabel": "距离",
+    "ratingLabel": "评分",
+    "servicesLabel": "服务",
+    "sortByLabel": "排序方式",
+    "applyButton": "应用",
+    "ratingOptions": {
+      "all": "全部",
+      "5stars": "5星",
+      "4starsAbove": "4星以上",
+      "3starsAbove": "3星以上",
+      "2starsAbove": "2星以上",
+      "1star": "1星"
+    },
+    "serviceOptions": {
+      "all": "全部",
+      "service1": "服务 1",
+      "service2": "服务 2",
+      "service3": "服务 3",
+      "service4": "服务 4",
+      "service5": "服务 5",
+      "service6": "服务 6"
+    },
+    "sortOptions": {
+      "comprehensive": "综合",
+      "openNow": "现在营业",
+      "247": "24/7",
+      "nearby": "附近",
+      "rating": "评分",
+      "price": "价格"
+    }
+  },
+  "filteredMarkers": {
+    "distanceAway": "距离{{distance}}公里",
+    "usdUnit": "美元",
+    "addThisPlaceButton": "添加此地点"
+  },
+  "mapWithFilter": {
+    "searchPlaceholder": "搜索位置..."
+  },
+  "exploreTabs": {
+    "hotelTab": "酒店",
+    "restaurantTab": "餐厅",
+    "storesTab": "商店"
+  },
+  "homePage": {
+    "nearestPlacesTitle": "最近的地点",
+    "feedbacksTitle": "反馈",
+    "viewAllButton": "查看全部",
+    "categoryTabs": {
+      "hotels": "酒店",
+      "motels": "汽车旅馆",
+      "restaurants": "餐厅",
+      "attractions": "景点",
+      "shopping": "购物"
+    },
+    "serviceTabs": {
+      "service1": "服务 1",
+      "service2": "服务 2",
+      "service3": "服务 3",
+      "service4": "服务 4"
+    }
+  },
+  "socialTabs": {
+    "newestTab": "最新",
+    "recommendedTab": "推荐",
+    "uploadButton": "上传"
+  },
+  "exploreCard": {
+    "goldenGateAlt": "金门",
+    "harrierAlt": "鹞式",
+    "videoThumbnailAlt": "视频缩略图",
+    "reviewsCount": "({{count}})",
+    "bookmarkAlt": "收藏",
+    "restoreButton": "恢复",
+    "viewPlaceButton": "查看地点"
+  },
+  "socialPostCard": {
+    "viewPlace": "查看地点",
+    "seeLess": "...查看更少",
+    "seeMore": "...查看更多",
+    "mediaAlt": "媒体 {{number}}",
+    "videoAlt": "视频 {{number}}"
+  },
+  "regions": {
+    "cambodia": "柬埔寨",
+    "china": "中国",
+    "india": "印度",
+    "indonesia": "印度尼西亚",
+    "japan": "日本",
+    "laos": "老挝",
+    "myanmar": "缅甸",
+    "southkorea": "韩国",
+    "thailand": "泰国",
+    "vietnam": "越南"
   }
 }

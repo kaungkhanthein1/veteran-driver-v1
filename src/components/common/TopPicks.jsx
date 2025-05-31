@@ -1,14 +1,17 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 
 const TopPicks = ({ items, title = "Top Picks" }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="px-4 mb-4">
       <div className="flex items-center justify-between mb-3">
         <h2 className="text-theme-primary text-lg font-semibold">{title}</h2>
-        <button className="text-[#FFC61B] text-sm">View All</button>
+        <button className="text-[#FFC61B] text-sm">{t('explorePage.viewAllButton')}</button>
       </div>
       <div className="flex space-x-3 overflow-x-auto pb-2">
         {items.map((item, index) => (
@@ -48,6 +51,18 @@ const TopPicks = ({ items, title = "Top Picks" }) => {
       </div>
     </div>
   );
+};
+
+TopPicks.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      name: PropTypes.string.isRequired,
+      image: PropTypes.string.isRequired,
+      price: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  title: PropTypes.string
 };
 
 export default TopPicks;

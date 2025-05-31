@@ -4,7 +4,8 @@
     "dashboard": "관리자 대시보드",
     "manageLocations": "위치 관리",
     "manageUsers": "사용자 관리",
-    "reports": "보고서"
+    "reports": "보고서",
+    "welcome": "환영합니다"
   },
   "auth": {
     "description": "저희 앱에 오신 것을 환영합니다",
@@ -31,7 +32,8 @@
     "mobileNumber": "휴대폰 번호",
     "name": "이름",
     "ok": "확인",
-    "save": "저장"
+    "save": "저장",
+    "backButtonAltText": "뒤로가기 버튼 대체 텍스트"
   },
   "explore": {
     "categories": {
@@ -104,5 +106,413 @@
     "share": "공유",
     "shareVia": "공유 방법",
     "upload": "업로드"
+  },
+  "addLocation": {
+    "addServiceAndPrice": "서비스 및 가격 추가",
+    "addServiceDescription": "제공하고자 하는 서비스와 가격(USD)을 입력하세요.",
+    "serviceType": "서비스 유형",
+    "serviceNamePlaceholder": "서비스 이름 입력",
+    "servicePrice": "서비스 가격 (USD)",
+    "servicePricePlaceholder": "서비스 가격 입력",
+    "openingTime": "영업 시간 *",
+    "serviceAvailable247": "24시간 연중무휴 서비스",
+    "setTimeAlt": "시간 설정",
+    "setTimeLabel": "영업 시간 설정",
+    "servicesAndPrices": "서비스 및 가격 *",
+    "bestPriceLabel": "최적 가격 (USD)",
+    "pricePlaceholder": "가격 입력",
+    "addServicesLabel": "서비스 추가"
+  },
+  "changeTheme": {
+    "title": "테마",
+    "changeApplicationTheme": "앱 테마 변경",
+    "description": "다른 테마를 선택하여 인터페이스의 모양과 느낌을 변경하세요. 밝은 모드 및 어두운 모드와 같은 옵션 간에 전환할 수 있습니다.",
+    "whiteThemeTitle": "화이트 테마",
+    "whiteThemeDescription": "대낮에도 읽기 쉬운 밝고 깨끗한 모습",
+    "darkThemeTitle": "다크 테마",
+    "darkThemeDescription": "눈이 편안한 세련된 어두운 인터페이스",
+    "systemThemeTitle": "기본값 (시스템)",
+    "systemThemeDescription": "기기 시스템 설정에 따라 테마를 조정합니다."
+  },
+  "chooseLocation": {
+    "selectRegionTitle": "지역 선택",
+    "searchLocationPlaceholder": "위치 검색...",
+    "chooseThisRegionButton": "이 지역 선택"
+  },
+  "explorePage": {
+    "searchPlaceholder": "위치 검색...",
+    "adsLabel": "광고",
+    "dreamVacationTitle": "꿈의 휴가 즐기기",
+    "dreamVacationDescription": "독점적인 거래로 완벽한 휴가 계획",
+    "topPicksTitle": "인기 추천",
+    "viewAllButton": "모두 보기",
+    "recommendedTitle": "추천"
+  },
+  "languageModal": {
+    "selectLanguageTitle": "언어 선택",
+    "en": "영어",
+    "ja": "일본어",
+    "zh": "중국어 간체",
+    "ko": "한국어",
+    "saveButton": "저장"
+  },
+  "modal": {
+    "cancelButton": "취소",
+    "applyButton": "적용"
+  },
+  "bottomNavBar": {
+    "home": "홈",
+    "explore": "탐색",
+    "social": "소셜",
+    "profile": "프로필"
+  },
+  "shareModal": {
+    "title": "공유 대상",
+    "copyButton": "복사",
+    "wechat": "위챗",
+    "weibo": "웨이보",
+    "qq": "QQ",
+    "baidu": "바이두"
+  },
+  "forgotPasswordPage": {
+    "title": "비밀번호 찾기",
+    "description": "휴대폰 번호로 등록 완료",
+    "emailOrPhoneLabel": "이메일 또는 휴대폰 번호",
+    "newPasswordLabel": "새 비밀번호",
+    "newPasswordPlaceholder": "새 비밀번호 입력",
+    "notRobotCheckbox": "로봇이 아닙니다",
+    "recaptchaLabel": "로봇 인증",
+    "continueButton": "계속"
+  },
+  "locationDetails": {
+    "shareAltText": "공유",
+    "bookmarkAltText": "북마크",
+    "distance": "{{distance}} 떨어짐",
+    "description": "{{description}}",
+    "seeMoreButton": "더 보기",
+    "addressAltText": "주소",
+    "checkMapButton": "지도 확인",
+    "hoursAltText": "영업 시간",
+    "openHours": "{{openHours}} 영업 중",
+    "servicesTitle": "서비스",
+    "reviewsTitle": "리뷰 ({{count}})",
+    "hottestReviewButton": "가장 인기 있는",
+    "latestReviewButton": "최신"
+  },
+  "loginPage": {
+    "title": "로그인",
+    "description": "환영합니다. 멋진 것을 시작해봅시다.",
+    "emailOrPhoneLabel": "이메일 또는 휴대폰 번호",
+    "emailOrPhonePlaceholder": "이메일 입력",
+    "passwordLabel": "비밀번호",
+    "passwordPlaceholder": "비밀번호 입력",
+    "notRobotCheckbox": "로봇이 아닙니다",
+    "recaptchaLabel": "로봇 인증",
+    "loginButton": "로그인",
+    "forgotPasswordLink": "비밀번호를 잊으셨나요?",
+    "continueWithGoogleButton": "Google로 계속하기",
+    "continueWithPhoneButton": "휴대폰 번호로 계속하기",
+    "continueWithFacebookButton": "Facebook으로 계속하기",
+    "noAccountText": "계정이 없으신가요? ",
+    "signUpLink": "가입하기"
+  },
+  "otpVerifyPage": {
+    "title": "OTP 인증",
+    "description": "인증 코드가 <span className=\"font-semibold text-theme-primary\">{{email}}</span> / <span className=\"font-semibold text-theme-primary\">{{phone}}</span>으로 전송되었습니다",
+    "checkSpam": "메시지를 확인하고 스팸 폴더를 확인하세요.",
+    "confirmButton": "확인",
+    "didntGetCode": "인증 코드를 받지 못하셨나요?",
+    "timer": "{{timer}}초",
+    "resendButton": "OTP 재전송"
+  },
+  "phoneSignUpPage": {
+    "title": "휴대폰 번호로 가입",
+    "description": "휴대폰 번호로 등록 완료",
+    "phoneNumberLabel": "휴대폰 번호",
+    "passwordLabel": "비밀번호",
+    "passwordPlaceholder": "비밀번호 입력",
+    "notRobotCheckbox": "로봇이 아닙니다",
+    "recaptchaLabel": "로봇 인증",
+    "continueButton": "계속"
+  },
+  "pointHistory": {
+    "title": "포인트 내역",
+    "incomeTab": "수입",
+    "withdrawTab": "출금",
+    "otherIncomeTab": "기타 수입",
+    "locationVerifiedTitle": "위치가 확인되었습니다",
+    "locationVerifiedDescription": "축하합니다! 공유한 위치가 확인되어 많은 주목을 받았습니다.",
+    "dailySharingTitle": "일일 공유 완료",
+    "dailySharingDescription": "오늘 3개의 위치를 성공적으로 공유했습니다. 내일 다시 공유하세요!",
+    "videoViralTitle": "동영상이 바이러스성으로 퍼졌습니다!",
+    "videoViralDescription": "축하합니다! 동영상이 바이러스성으로 퍼져 많은 주목을 받았습니다.",
+    "confirmButton": "확인"
+  },
+  "months": {
+    "january": "1월",
+    "february": "2월",
+    "march": "3월",
+    "april": "4월",
+    "may": "5월",
+    "june": "6월",
+    "july": "7월",
+    "august": "8월",
+    "september": "9월",
+    "october": "10월",
+    "november": "11월",
+    "december": "12월"
+  },
+  "bookmarksPage": {
+    "title": "북마크",
+    "noBookmarksText": "북마크한 위치가 아직 없습니다"
+  },
+  "editProfilePage": {
+    "title": "프로필 편집",
+    "profileAltText": "프로필",
+    "changeUsernameLabel": "사용자 이름 변경",
+    "changeBioLabel": "소개 변경",
+    "genderLabel": "성별",
+    "locationLabel": "위치",
+    "userIdLabel": "사용자 ID",
+    "changeUsernameModalTitle": "사용자 이름 변경",
+    "usernamePlaceholder": "사용자 이름 입력",
+    "changeBioModalTitle": "소개 변경",
+    "bioPlaceholder": "자신에 대해 뭔가 작성하세요",
+    "genderModalTitle": "성별",
+    "maleOption": "남성",
+    "femaleOption": "여성",
+    "otherOption": "기타",
+    "locationModalTitle": "위치",
+    "thailandOption": "태국",
+    "cambodiaOption": "캄보디아",
+    "phnomPenhOption": "프놈펜",
+    "krongOption": "끄롱"
+  },
+  "notificationsPage": {
+    "title": "알림",
+    "systemNotificationAltText": "시스템 알림",
+    "systemNotificationTitle": "시스템 알림",
+    "systemNotificationDescription": "시스템 알림을 여기서 확인",
+    "balanceAlertAltText": "잔액 알림",
+    "balanceAlertTitle": "잔액 알림",
+    "balanceAlertDescription": "잔액 알림을 여기서 확인",
+    "achievementsAlertAltText": "업적 알림",
+    "achievementsAlertTitle": "업적 알림",
+    "achievementsAlertDescription": "크리에이터로서의 업적을 여기서 확인"
+  },
+  "settingsPage": {
+    "title": "설정",
+    "accountGroupTitle": "계정",
+    "mobileNumberItem": "휴대폰 번호",
+    "bindEmailItem": "이메일 연동",
+    "thirdPartyGroupTitle": "타사",
+    "bindFacebookItem": "Facebook 연동",
+    "bindWeChatItem": "WeChat 연동",
+    "bindLineItem": "Line 연동",
+    "securityGroupTitle": "보안",
+    "changePasswordItem": "비밀번호 변경",
+    "setupTwoFactorItem": "2단계 인증 (2FA) 설정"
+  },
+  "walletPage": {
+    "title": "지갑",
+    "totalCoinsLabel": "총 코인",
+    "withdrawButton": "출금",
+    "pointHistoryTitle": "포인트 내역",
+    "viewAllButton": "모두 보기",
+    "locationVerifiedTitle": "위치가 확인되었습니다",
+    "locationVerifiedDescription": "축하합니다! 공유한 위치가 확인되어 많은 주목을 받았습니다.",
+    "rewardWithdrawTitle": "보상 출금!",
+    "rewardWithdrawDescription": "30 코인 보상이 출금되었습니다. 완료될 때까지 기다리시면 자금을 받게 됩니다.",
+    "dailySharingCompleteTitle": "일일 공유 완료",
+    "dailySharingCompleteDescription": "오늘 3개의 위치를 성공적으로 공유했습니다. 내일 다시 공유하세요!",
+    "status": {
+      "approved": "승인됨",
+      "pending": "대기 중",
+      "completed": "완료됨"
+    }
+  },
+  "withdrawPage": {
+    "title": "출금",
+    "withdrawAmountLabel": "출금 금액",
+    "withdrawAmountPlaceholder": "출금 금액 입력 (최소 800 코인)",
+    "availableAmountLabel": "사용 가능 금액",
+    "availableCoins": "****** 코인",
+    "youReceiveLabel": "{{amount}} USD 받게 됩니다",
+    "paymentMethodsLabel": "결제 수단",
+    "bankAccountOption": "은행 계좌",
+    "defaultLabel": " (기본)",
+    "creditCardOption": "신용카드",
+    "alipayOption": "알리페이",
+    "googlePayOption": "구글 페이",
+    "applePayOption": "애플 페이",
+    "wechatOption": "위챗",
+    "bankAccountNameLabel": "은행 계좌 명의",
+    "bankAccountNamePlaceholder": "은행 계좌 명의 입력",
+    "bankAccountNumberLabel": "은행 계좌 번호",
+    "bankAccountNumberPlaceholder": "은행 계좌 번호 입력",
+    "uploadPhotoProofLabel": "사진 증명 업로드",
+    "proofAltText": "증명",
+    "withdrawRuleTitle": "출금 규정",
+    "withdrawRule1": "출금 금액은 최소 800 코인이어야 합니다.",
+    "withdrawRule2": "관리자 검토를 통과하려면 수입 증명을 업로드해야 합니다.",
+    "withdrawRule3": "출금 양식을 제출한 후 검토 프로세스가 시작되며 처리하는 데 24시간이 소요됩니다.",
+    "submitButton": "제출"
+  },
+  "rankingPage": {
+    "title": "랭킹",
+    "popularTab": "인기",
+    "mostViewTab": "가장 많이 본",
+    "trendingTab": "트렌딩",
+    "distance": "{{distance}}km 떨어짐",
+    "reviews": "({{count}})",
+    "bookNowButton": "지금 예약"
+  },
+  "recycleBinPage": {
+    "title": "휴지통",
+    "selectAllButton": "모두 선택",
+    "locationsSelectedText": "{{count}}개 위치 선택됨",
+    "deleteConfirmationText": "선택한 위치를 영구적으로 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
+    "yesDeleteButton": "예, 삭제합니다",
+    "restoreLocationTitle": "위치 복원",
+    "restoreConfirmationText": "이 위치를 복원하시겠습니까? 복원 후 관리자 검토를 위해 제출됩니다.",
+    "restoreButton": "복원"
+  },
+  "registerPage": {
+    "title": "가입",
+    "description": "환영합니다. 멋진 것을 시작해봅시다.",
+    "emailOrPhoneLabel": "이메일 또는 휴대폰 번호",
+    "emailOrPhonePlaceholder": "이메일 입력",
+    "passwordLabel": "비밀번호",
+    "passwordPlaceholder": "비밀번호 입력",
+    "notRobotCheckbox": "로봇이 아닙니다",
+    "recaptchaLabel": "로봇 인증",
+    "signUpButton": "가입하기",
+    "continueWithGoogleButton": "Google로 계속하기",
+    "continueWithPhoneButton": "휴대폰 번호로 계속하기",
+    "continueWithFacebookButton": "Facebook으로 계속하기",
+    "alreadyAccountText": "이미 계정이 있으신가요? ",
+    "loginLink": "로그인"
+  },
+  "searchLocationPage": {
+    "searchPlaceholder": "장소 검색 ...",
+    "resultsFound": "{{count}}개 결과 찾음",
+    "hotSearch": "인기 검색어",
+    "recents": "최근",
+    "recentView": "최근 본",
+    "clear": "지우기"
+  },
+  "socialUpload": {
+    "title": "게시물 업로드",
+    "postButton": "게시",
+    "writePlaceholder": "무언가 작성하세요 ...",
+    "uploadImage": "{{number}} 업로드",
+    "addLocation": "위치 추가"
+  },
+  "uploadedLocationPage": {
+    "title": "업로드된 위치",
+    "recycleBinAlt": "휴지통",
+    "tabs": {
+      "approved": "승인됨",
+      "pending": "대기 중",
+      "rejected": "거부됨"
+    }
+  },
+  "filterPanel": {
+    "title": "필터",
+    "priceRangeLabel": "가격 범위",
+    "distanceLabel": "거리",
+    "ratingLabel": "평점",
+    "servicesLabel": "서비스",
+    "sortByLabel": "정렬 기준",
+    "applyButton": "적용",
+    "ratingOptions": {
+      "all": "전체",
+      "5stars": "별 5개",
+      "4starsAbove": "별 4개 이상",
+      "3starsAbove": "별 3개 이상",
+      "2starsAbove": "별 2개 이상",
+      "1star": "별 1개"
+    },
+    "serviceOptions": {
+      "all": "전체",
+      "service1": "서비스 1",
+      "service2": "서비스 2",
+      "service3": "서비스 3",
+      "service4": "서비스 4",
+      "service5": "서비스 5",
+      "service6": "서비스 6"
+    },
+    "sortOptions": {
+      "comprehensive": "종합",
+      "openNow": "지금 영업 중",
+      "247": "24/7",
+      "nearby": "가까운 순",
+      "rating": "평점 순",
+      "price": "가격 순"
+    }
+  },
+  "filteredMarkers": {
+    "distanceAway": "{{distance}}km 떨어짐",
+    "usdUnit": "USD",
+    "addThisPlaceButton": "이 장소 추가"
+  },
+  "mapWithFilter": {
+    "searchPlaceholder": "위치 검색..."
+  },
+  "exploreTabs": {
+    "hotelTab": "호텔",
+    "restaurantTab": "레스토랑",
+    "storesTab": "상점"
+  },
+  "homePage": {
+    "nearestPlacesTitle": "가장 가까운 장소",
+    "feedbacksTitle": "피드백",
+    "viewAllButton": "모두 보기",
+    "categoryTabs": {
+      "hotels": "호텔",
+      "motels": "모텔",
+      "restaurants": "레스토랑",
+      "attractions": "관광지",
+      "shopping": "쇼핑"
+    },
+    "serviceTabs": {
+      "service1": "서비스 1",
+      "service2": "서비스 2",
+      "service3": "서비스 3",
+      "service4": "서비스 4"
+    }
+  },
+  "socialTabs": {
+    "newestTab": "최신",
+    "recommendedTab": "추천",
+    "uploadButton": "업로드"
+  },
+  "exploreCard": {
+    "goldenGateAlt": "골든 게이트",
+    "harrierAlt": "해리어",
+    "videoThumbnailAlt": "동영상 썸네일",
+    "reviewsCount": "({{count}})",
+    "bookmarkAlt": "북마크",
+    "restoreButton": "복원",
+    "viewPlaceButton": "장소 보기"
+  },
+  "socialPostCard": {
+    "viewPlace": "장소 보기",
+    "seeLess": "...줄이기",
+    "seeMore": "...더 보기",
+    "mediaAlt": "미디어 {{number}}",
+    "videoAlt": "동영상 {{number}}"
+  },
+  "regions": {
+    "cambodia": "캄보디아",
+    "china": "중국",
+    "india": "인도",
+    "indonesia": "인도네시아",
+    "japan": "일본",
+    "laos": "라오스",
+    "myanmar": "미얀마",
+    "southkorea": "대한민국",
+    "thailand": "태국",
+    "vietnam": "베트남"
   }
 }

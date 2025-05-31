@@ -168,7 +168,11 @@
   },
   "shareModal": {
     "title": "Share to",
-    "copyButton": "Copy"
+    "copyButton": "Copy",
+    "wechat": "Wechat",
+    "weibo": "Weibo",
+    "qq": "QQ",
+    "baidu": "Baidu"
   },
   "forgotPasswordPage": {
     "title": "Forgot Password",
@@ -498,5 +502,17 @@
     "seeMore": "...see more",
     "mediaAlt": "Media {{number}}",
     "videoAlt": "Video {{number}}"
+  },
+  "regions": {
+    "cambodia": "Cambodia",
+    "china": "China",
+    "india": "India",
+    "indonesia": "Indonesia",
+    "japan": "Japan",
+    "laos": "Laos",
+    "myanmar": "Myanmar",
+    "southkorea": "South Korea",
+    "thailand": "Thailand",
+    "vietnam": "Vietnam"
   }
 }

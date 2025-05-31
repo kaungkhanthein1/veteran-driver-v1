@@ -4,7 +4,8 @@
     "dashboard": "管理ダッシュボード",
     "manageLocations": "場所を管理",
     "manageUsers": "ユーザーを管理",
-    "reports": "レポート"
+    "reports": "レポート",
+    "welcome": "ようこそ"
   },
   "auth": {
     "description": "私たちのアプリへようこそ",
@@ -31,7 +32,8 @@
     "mobileNumber": "携帯番号",
     "name": "名前",
     "ok": "OK",
-    "save": "保存"
+    "save": "保存",
+    "backButtonAltText": "戻る"
   },
   "explore": {
     "categories": {
@@ -104,5 +106,413 @@
     "share": "共有",
     "shareVia": "共有方法",
     "upload": "アップロード"
+  },
+  "addLocation": {
+    "addServiceAndPrice": "サービスと価格を追加",
+    "addServiceDescription": "提供したいサービスとその価格（USD）を入力してください。",
+    "serviceType": "サービスタイプ",
+    "serviceNamePlaceholder": "サービス名を入力",
+    "servicePrice": "サービス価格（USD）",
+    "servicePricePlaceholder": "価格を入力",
+    "openingTime": "営業時間 *",
+    "serviceAvailable247": "24時間営業",
+    "setTimeAlt": "時間設定",
+    "setTimeLabel": "営業時間を設定",
+    "servicesAndPrices": "サービスと価格 *",
+    "bestPriceLabel": "最適価格（USD）",
+    "pricePlaceholder": "価格を入力してください",
+    "addServicesLabel": "サービスを追加"
+  },
+  "changeTheme": {
+    "title": "テーマ",
+    "changeApplicationTheme": "アプリのテーマを変更",
+    "description": "異なるテーマを選択してインターフェースの外観を変更できます。ライトモードやダークモードなどのオプションを切り替えることができます",
+    "whiteThemeTitle": "ライトテーマ",
+    "whiteThemeDescription": "明るく清潔感のあるデザインで、日中でも読みやすい",
+    "darkThemeTitle": "ダークテーマ",
+    "darkThemeDescription": "目に優しい、スタイリッシュなダークインターフェース",
+    "systemThemeTitle": "デフォルト（システム）",
+    "systemThemeDescription": "デバイスのシステム設定に基づいてテーマを調整します。"
+  },
+  "chooseLocation": {
+    "selectRegionTitle": "地域を選択",
+    "searchLocationPlaceholder": "場所を検索...",
+    "chooseThisRegionButton": "この地域を選択"
+  },
+  "explorePage": {
+    "searchPlaceholder": "場所を検索...",
+    "adsLabel": "広告",
+    "dreamVacationTitle": "夢の休暇を楽しむ",
+    "dreamVacationDescription": "特別なオファーで完璧な旅行を計画",
+    "topPicksTitle": "おすすめ",
+    "viewAllButton": "すべて表示",
+    "recommendedTitle": "おすすめ"
+  },
+  "languageModal": {
+    "selectLanguageTitle": "言語を選択",
+    "en": "英語",
+    "ja": "日本語",
+    "zh": "簡体字中国語",
+    "ko": "韓国語",
+    "saveButton": "保存"
+  },
+  "modal": {
+    "cancelButton": "キャンセル",
+    "applyButton": "適用"
+  },
+  "bottomNavBar": {
+    "home": "ホーム",
+    "explore": "探す",
+    "social": "ソーシャル",
+    "profile": "プロフィール"
+  },
+  "shareModal": {
+    "title": "共有先",
+    "copyButton": "コピー",
+    "wechat": "WeChat",
+    "weibo": "微博",
+    "qq": "QQ",
+    "baidu": "百度"
+  },
+  "forgotPasswordPage": {
+    "title": "パスワードをお忘れですか",
+    "description": "電話番号で登録を完了",
+    "emailOrPhoneLabel": "メールまたは電話番号",
+    "newPasswordLabel": "新しいパスワード",
+    "newPasswordPlaceholder": "新しいパスワードを入力",
+    "notRobotCheckbox": "私はロボットではありません",
+    "recaptchaLabel": "reCAPTCHA",
+    "continueButton": "続ける"
+  },
+  "locationDetails": {
+    "shareAltText": "共有",
+    "bookmarkAltText": "ブックマーク",
+    "distance": "{{distance}}離れた場所",
+    "description": "{{description}}",
+    "seeMoreButton": "もっと見る",
+    "addressAltText": "住所",
+    "checkMapButton": "地図を確認",
+    "hoursAltText": "営業時間",
+    "openHours": "{{openHours}}営業中",
+    "servicesTitle": "サービス",
+    "reviewsTitle": "レビュー（{{count}}）",
+    "hottestReviewButton": "人気",
+    "latestReviewButton": "最新"
+  },
+  "loginPage": {
+    "title": "ログイン",
+    "description": "ようこそ、素晴らしいことを始めましょう",
+    "emailOrPhoneLabel": "メールまたは電話番号",
+    "emailOrPhonePlaceholder": "メールアドレスを入力",
+    "passwordLabel": "パスワード",
+    "passwordPlaceholder": "パスワードを入力",
+    "notRobotCheckbox": "私はロボットではありません",
+    "recaptchaLabel": "reCAPTCHA",
+    "loginButton": "ログイン",
+    "forgotPasswordLink": "パスワードをお忘れですか？",
+    "continueWithGoogleButton": "Googleで続ける",
+    "continueWithPhoneButton": "電話番号で続ける",
+    "continueWithFacebookButton": "Facebookで続ける",
+    "noAccountText": "アカウントをお持ちでない方は",
+    "signUpLink": "サインアップ"
+  },
+  "otpVerifyPage": {
+    "title": "OTP認証",
+    "description": "認証コードが<span className=\"font-semibold text-theme-primary\">{{email}}</span> / <span className=\"font-semibold text-theme-primary\">{{phone}}</span>に送信されました",
+    "checkSpam": "メッセージを確認し、迷惑メールフォルダも確認してください",
+    "confirmButton": "確認",
+    "didntGetCode": "認証コードが届きませんか？",
+    "timer": "{{timer}}秒",
+    "resendButton": "OTPを再送信"
+  },
+  "phoneSignUpPage": {
+    "title": "電話番号でサインアップ",
+    "description": "電話番号で登録を完了",
+    "phoneNumberLabel": "電話番号",
+    "passwordLabel": "パスワード",
+    "passwordPlaceholder": "パスワードを入力",
+    "notRobotCheckbox": "私はロボットではありません",
+    "recaptchaLabel": "reCAPTCHA",
+    "continueButton": "続ける"
+  },
+  "pointHistory": {
+    "title": "ポイント履歴",
+    "incomeTab": "収入",
+    "withdrawTab": "出金",
+    "otherIncomeTab": "その他の収入",
+    "locationVerifiedTitle": "場所が認証されました",
+    "locationVerifiedDescription": "おめでとうございます！共有した場所が認証され、多くの注目を集めました。",
+    "dailySharingTitle": "本日の共有完了",
+    "dailySharingDescription": "本日3件の場所を共有しました。明日また共有してください！",
+    "videoViralTitle": "動画がバズりました！",
+    "videoViralDescription": "おめでとうございます！動画がバズり、多くの注目を集めました。",
+    "confirmButton": "確認"
+  },
+  "months": {
+    "january": "1月",
+    "february": "2月",
+    "march": "3月",
+    "april": "4月",
+    "may": "5月",
+    "june": "6月",
+    "july": "7月",
+    "august": "8月",
+    "september": "9月",
+    "october": "10月",
+    "november": "11月",
+    "december": "12月"
+  },
+  "bookmarksPage": {
+    "title": "ブックマーク",
+    "noBookmarksText": "ブックマークした場所はまだありません"
+  },
+  "editProfilePage": {
+    "title": "プロフィール編集",
+    "profileAltText": "プロフィール",
+    "changeUsernameLabel": "ユーザー名を変更",
+    "changeBioLabel": "自己紹介を変更",
+    "genderLabel": "性別",
+    "locationLabel": "場所",
+    "userIdLabel": "ユーザーID",
+    "changeUsernameModalTitle": "ユーザー名を変更",
+    "usernamePlaceholder": "ユーザー名を入力",
+    "changeBioModalTitle": "自己紹介を変更",
+    "bioPlaceholder": "自己紹介を入力",
+    "genderModalTitle": "性別",
+    "maleOption": "男性",
+    "femaleOption": "女性",
+    "otherOption": "その他",
+    "locationModalTitle": "場所",
+    "thailandOption": "タイ",
+    "cambodiaOption": "カンボジア",
+    "phnomPenhOption": "プノンペン",
+    "krongOption": "クロン"
+  },
+  "notificationsPage": {
+    "title": "通知",
+    "systemNotificationAltText": "システム通知",
+    "systemNotificationTitle": "システム通知",
+    "systemNotificationDescription": "システム通知をここで確認",
+    "balanceAlertAltText": "残高アラート",
+    "balanceAlertTitle": "残高アラート",
+    "balanceAlertDescription": "残高アラートをここで確認",
+    "achievementsAlertAltText": "実績アラート",
+    "achievementsAlertTitle": "実績アラート",
+    "achievementsAlertDescription": "クリエイターとしての実績をここで確認"
+  },
+  "settingsPage": {
+    "title": "設定",
+    "accountGroupTitle": "アカウント",
+    "mobileNumberItem": "携帯番号",
+    "bindEmailItem": "メールを連携",
+    "thirdPartyGroupTitle": "サードパーティ",
+    "bindFacebookItem": "Facebookと連携",
+    "bindWeChatItem": "WeChatと連携",
+    "bindLineItem": "LINEと連携",
+    "securityGroupTitle": "セキュリティ",
+    "changePasswordItem": "パスワードを変更",
+    "setupTwoFactorItem": "二要素認証（2FA）を設定"
+  },
+  "walletPage": {
+    "title": "ウォレット",
+    "totalCoinsLabel": "総コイン",
+    "withdrawButton": "出金",
+    "pointHistoryTitle": "ポイント履歴",
+    "viewAllButton": "すべて表示",
+    "locationVerifiedTitle": "場所が認証されました",
+    "locationVerifiedDescription": "おめでとうございます！共有した場所が認証され、多くの注目を集めました。",
+    "rewardWithdrawTitle": "報酬出金！",
+    "rewardWithdrawDescription": "30コインの報酬が出金されました。保留時間が完了するまでお待ちください。その後、資金を受け取ることができます。",
+    "dailySharingCompleteTitle": "本日の共有完了",
+    "dailySharingCompleteDescription": "本日3件の場所を共有しました。明日また共有してください！",
+    "status": {
+      "approved": "承認済み",
+      "pending": "保留中",
+      "completed": "完了"
+    }
+  },
+  "withdrawPage": {
+    "title": "出金",
+    "withdrawAmountLabel": "出金額",
+    "withdrawAmountPlaceholder": "出金額を入力（最低800コイン）",
+    "availableAmountLabel": "利用可能額",
+    "availableCoins": "******コイン",
+    "youReceiveLabel": "受け取る金額：{{amount}} USD",
+    "paymentMethodsLabel": "支払い方法",
+    "bankAccountOption": "銀行口座",
+    "defaultLabel": "（デフォルト）",
+    "creditCardOption": "クレジットカード",
+    "alipayOption": "Alipay",
+    "googlePayOption": "Google Pay",
+    "applePayOption": "Apple Pay",
+    "wechatOption": "WeChat",
+    "bankAccountNameLabel": "口座名義",
+    "bankAccountNamePlaceholder": "口座名義を入力",
+    "bankAccountNumberLabel": "口座番号",
+    "bankAccountNumberPlaceholder": "口座番号を入力",
+    "uploadPhotoProofLabel": "証明写真をアップロード",
+    "proofAltText": "証明",
+    "withdrawRuleTitle": "出金ルール",
+    "withdrawRule1": "出金額は最低800コイン必要です。",
+    "withdrawRule2": "管理者の審査を通過するために収入証明をアップロードする必要があります",
+    "withdrawRule3": "出金フォームを送信後、審査プロセスが開始され、処理に24時間かかります。",
+    "submitButton": "送信"
+  },
+  "rankingPage": {
+    "title": "ランキング",
+    "popularTab": "人気",
+    "mostViewTab": "最多閲覧",
+    "trendingTab": "トレンド",
+    "distance": "{{distance}}離れた場所",
+    "reviews": "（{{count}}）",
+    "bookNowButton": "今すぐ予約"
+  },
+  "recycleBinPage": {
+    "title": "ゴミ箱",
+    "selectAllButton": "すべて選択",
+    "locationsSelectedText": "{{count}}件の場所を選択",
+    "deleteConfirmationText": "選択した場所を完全に削除してもよろしいですか？この操作は元に戻せません。",
+    "yesDeleteButton": "はい、削除します",
+    "restoreLocationTitle": "場所を復元",
+    "restoreConfirmationText": "この場所を復元しますか？復元後、管理者の審査に提出されます。",
+    "restoreButton": "復元"
+  },
+  "registerPage": {
+    "title": "サインアップ",
+    "description": "ようこそ、素晴らしいことを始めましょう",
+    "emailOrPhoneLabel": "メールまたは電話番号",
+    "emailOrPhonePlaceholder": "メールアドレスを入力",
+    "passwordLabel": "パスワード",
+    "passwordPlaceholder": "パスワードを入力",
+    "notRobotCheckbox": "私はロボットではありません",
+    "recaptchaLabel": "reCAPTCHA",
+    "signUpButton": "サインアップ",
+    "continueWithGoogleButton": "Googleで続ける",
+    "continueWithPhoneButton": "電話番号で続ける",
+    "continueWithFacebookButton": "Facebookで続ける",
+    "alreadyAccountText": "すでにアカウントをお持ちの方は",
+    "loginLink": "ログイン"
+  },
+  "searchLocationPage": {
+    "searchPlaceholder": "場所を検索...",
+    "resultsFound": "{{count}}件の結果",
+    "hotSearch": "人気検索",
+    "recents": "最近",
+    "recentView": "最近閲覧",
+    "clear": "クリア"
+  },
+  "socialUpload": {
+    "title": "投稿をアップロード",
+    "postButton": "投稿",
+    "writePlaceholder": "何か書く...",
+    "uploadImage": "{{number}}をアップロード",
+    "addLocation": "場所を追加"
+  },
+  "uploadedLocationPage": {
+    "title": "アップロードした場所",
+    "recycleBinAlt": "ゴミ箱",
+    "tabs": {
+      "approved": "承認済み",
+      "pending": "保留中",
+      "rejected": "拒否"
+    }
+  },
+  "filterPanel": {
+    "title": "フィルター",
+    "priceRangeLabel": "価格帯",
+    "distanceLabel": "距離",
+    "ratingLabel": "評価",
+    "servicesLabel": "サービス",
+    "sortByLabel": "並び替え",
+    "applyButton": "適用",
+    "ratingOptions": {
+      "all": "すべて",
+      "5stars": "5つ星",
+      "4starsAbove": "4つ星以上",
+      "3starsAbove": "3つ星以上",
+      "2starsAbove": "2つ星以上",
+      "1star": "1つ星"
+    },
+    "serviceOptions": {
+      "all": "すべて",
+      "service1": "サービス1",
+      "service2": "サービス2",
+      "service3": "サービス3",
+      "service4": "サービス4",
+      "service5": "サービス5",
+      "service6": "サービス6"
+    },
+    "sortOptions": {
+      "comprehensive": "総合",
+      "openNow": "営業中",
+      "247": "24時間営業",
+      "nearby": "近い順",
+      "rating": "評価順",
+      "price": "価格順"
+    }
+  },
+  "filteredMarkers": {
+    "distanceAway": "{{distance}}km離れた場所",
+    "usdUnit": "USD",
+    "addThisPlaceButton": "この場所を追加"
+  },
+  "mapWithFilter": {
+    "searchPlaceholder": "場所を検索..."
+  },
+  "exploreTabs": {
+    "hotelTab": "ホテル",
+    "restaurantTab": "レストラン",
+    "storesTab": "店舗"
+  },
+  "homePage": {
+    "nearestPlacesTitle": "近くの場所",
+    "feedbacksTitle": "フィードバック",
+    "viewAllButton": "すべて表示",
+    "categoryTabs": {
+      "hotels": "ホテル",
+      "motels": "モーテル",
+      "restaurants": "レストラン",
+      "attractions": "観光地",
+      "shopping": "ショッピング"
+    },
+    "serviceTabs": {
+      "service1": "サービス1",
+      "service2": "サービス2",
+      "service3": "サービス3",
+      "service4": "サービス4"
+    }
+  },
+  "socialTabs": {
+    "newestTab": "最新",
+    "recommendedTab": "おすすめ",
+    "uploadButton": "アップロード"
+  },
+  "exploreCard": {
+    "goldenGateAlt": "ゴールデンゲート",
+    "harrierAlt": "ハリアー",
+    "videoThumbnailAlt": "動画サムネイル",
+    "reviewsCount": "（{{count}}）",
+    "bookmarkAlt": "ブックマーク",
+    "restoreButton": "復元",
+    "viewPlaceButton": "場所を見る"
+  },
+  "socialPostCard": {
+    "viewPlace": "場所を見る",
+    "seeLess": "...閉じる",
+    "seeMore": "...もっと見る",
+    "mediaAlt": "メディア{{number}}",
+    "videoAlt": "動画{{number}}"
+  },
+  "regions": {
+    "cambodia": "カンボジア",
+    "china": "中国",
+    "india": "インド",
+    "indonesia": "インドネシア",
+    "japan": "日本",
+    "laos": "ラオス",
+    "myanmar": "ミャンマー",
+    "southkorea": "韓国",
+    "thailand": "タイ",
+    "vietnam": "ベトナム"
   }
 }

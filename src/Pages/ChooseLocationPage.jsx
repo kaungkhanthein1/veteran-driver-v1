@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BackButton from "../components/common/BackButton";
 import { useTranslation } from "react-i18next";
