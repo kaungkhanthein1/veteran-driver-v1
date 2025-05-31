@@ -4,6 +4,7 @@ import L from "leaflet";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import "./map.css";
+import { useTranslation } from "react-i18next";
 
 const thumbnailIcon = (src) =>
   L.divIcon({
@@ -27,6 +28,7 @@ const renderStars = (rating) => {
 const FilteredMarkers = ({ markers }) => {
   const map = useMap();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [isSliding, setIsSliding] = useState(false);
 
@@ -157,9 +159,7 @@ const FilteredMarkers = ({ markers }) => {
               </div>
             </div>
             <div className="">
-              <span className=" text-[#aaa] text-[12px] font-[400]">
-                {selectedPlace.address} ( {selectedPlace.distanceKm}km away){" "}
-              </span>
+              <span className=" text-[#aaa] text-[12px] font-[400]">{selectedPlace.address} ({t('filteredMarkers.distanceAway', { distance: selectedPlace.distanceKm })})</span>
             </div>
             <div className=" flex gap-[5px] py-[10px]">
               {" "}
@@ -170,13 +170,11 @@ const FilteredMarkers = ({ markers }) => {
             </div>
             <div className=" flex gap-[8px] text-[#aaa] text-[14px] font-[400]">
               {selectedPlace.services?.map((ss) => (
-                <span>{ss},</span>
+                <span key={ss}>{ss},</span>
               ))}
             </div>
             <div className=" text-white font-[700]">
-              <span className=" text-[18px]">
-                {selectedPlace.price} <span className=" text-[10px]">usd</span>{" "}
-              </span>
+              <span className=" text-[18px]">{selectedPlace.price} <span className=" text-[10px]">{t('filteredMarkers.usdUnit')}</span>{" "}</span>
             </div>
             {/* btn */}
             <div 
@@ -195,7 +193,7 @@ const FilteredMarkers = ({ markers }) => {
                   fill="black"
                 />
               </svg>
-              <span>Add This Place</span>
+              <span>{t('filteredMarkers.addThisPlaceButton')}</span>
             </div>
           </>
         )}

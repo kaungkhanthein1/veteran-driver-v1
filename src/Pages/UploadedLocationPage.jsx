@@ -9,7 +9,7 @@ import BackButton from "../components/common/BackButton";
 export default function UploadedLocationPage() {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const [activeTab, setActiveTab] = useState("approved");
+  const [activeTab, setActiveTab] = useState(t('uploadedLocationPage.tabs.approved'));
   const { isBookmarked, toggleBookmark } = useBookmarks();
 
   // Temporary data structure - will be replaced with actual data later
@@ -39,11 +39,11 @@ export default function UploadedLocationPage() {
       {/* Header */}
       <div className="relative flex items-center px-4 py-3 bg-theme-secondary">
         <BackButton className="absolute left-4"/>
-        <h1 className="text-lg font-semibold text-center flex-grow">Uploaded Location</h1>
+        <h1 className="text-lg font-semibold text-center flex-grow">{t('uploadedLocationPage.title')}</h1>
         <button className="ml-auto" onClick={() => navigate('/recycle-bin')}>
           <img
             src={RecycleBinIcon}
-            alt="Recycle Bin"
+            alt={t('uploadedLocationPage.recycleBinAlt')}
             className="w-6 h-6 [filter:var(--icon-filter)]"
           />
         </button>
@@ -51,7 +51,7 @@ export default function UploadedLocationPage() {
 
       {/* Tabs */}
       <div className="flex px-4 py-2 space-x-4 bg-theme-secondary">
-        {["Approved", "Pending", "Rejected"].map((tab) => (
+        {[t('uploadedLocationPage.tabs.approved'), t('uploadedLocationPage.tabs.pending'), t('uploadedLocationPage.tabs.rejected')].map((tab) => (
           <button
             key={tab}
             className={`pb-2 px-1 ${activeTab === tab.toLowerCase() ? "border-b-2 border-[#FDC51B] text-[#FDC51B]" : "text-theme-secondary"}`}

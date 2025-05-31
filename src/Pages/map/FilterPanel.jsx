@@ -1,42 +1,39 @@
 import React, { useEffect, useState } from "react";
 import "./map.css";
 import { Range } from "react-range";
+import { useTranslation } from "react-i18next";
 
 const MIN = 0;
 const MAX = 1000;
 
 const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
+  // TODO: Add PropTypes for prop validation
   const [isVisible, setIsVisible] = useState(false);
+  const { t } = useTranslation();
   const ratingOptions = [0, 5, 4, 3, 2, 1];
   const ratingLabels = {
-    0: "All",
-    5: "5 Stars",
-    4: "4 Stars & Above",
-    3: "3 Stars & above",
-    2: "2 Stars & above",
-    1: "1 Star",
+    0: t('filterPanel.ratingOptions.all'),
+    5: t('filterPanel.ratingOptions.5stars'),
+    4: t('filterPanel.ratingOptions.4starsAbove'),
+    3: t('filterPanel.ratingOptions.3starsAbove'),
+    2: t('filterPanel.ratingOptions.2starsAbove'),
+    1: t('filterPanel.ratingOptions.1star'),
   };
 
   const serviceOptions = [
-    "All",
-    "Service 1",
-    "Service 2",
-    "Service 3",
-    "Service 4",
-    "Service 5",
-    "Service 6",
+    t('filterPanel.serviceOptions.all'),
+    t('filterPanel.serviceOptions.service1'),
+    t('filterPanel.serviceOptions.service2'),
+    t('filterPanel.serviceOptions.service3'),
+    t('filterPanel.serviceOptions.service4'),
+    t('filterPanel.serviceOptions.service5'),
+    t('filterPanel.serviceOptions.service6'),
   ];
 
   useEffect(() => {
     // trigger the slide-in after mount
     setTimeout(() => setIsVisible(true), 10);
   }, []);
-
-  const handlePrice = (e, index) => {
-    const newRange = [...filters.priceRange];
-    newRange[index] = Number(e.target.value);
-    setFilters({ ...filters, priceRange: newRange });
-  };
 
   const handleChange = (key, value) => {
     setFilters({ ...filters, [key]: value });
@@ -60,12 +57,12 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
   };
 
   const sortOptions = [
-    "Comprehensive",
-    "Open Now",
-    "24/7",
-    "Nearby",
-    "Rating",
-    "Price",
+    t('filterPanel.sortOptions.comprehensive'),
+    t('filterPanel.sortOptions.openNow'),
+    t('filterPanel.sortOptions.247'),
+    t('filterPanel.sortOptions.nearby'),
+    t('filterPanel.sortOptions.rating'),
+    t('filterPanel.sortOptions.price'),
   ];
 
   return (
@@ -84,7 +81,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
         <div className="mt-6 flex flex-col gap-[24px]">
           {/* Header */}
           <div className="flex w-full justify-between items-center sticky top-0 bg-[var(--bg-primary)] py-2">
-            <h2 className="text-xl text-[var(--text-primary)] font-bold">Filter</h2>
+            <h2 className="text-xl text-[var(--text-primary)] font-bold">{t('filterPanel.title')}</h2>
             <button 
               onClick={handleClose}
               className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[var(--bg-secondary)]"
@@ -111,7 +108,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
           {/* Price */}
           <div className="space-y-4">
             <div className="flex w-full price_tags justify-between items-center text-[var(--text-primary)]">
-              <span>Price Range</span>
+              <span>{t('filterPanel.priceRangeLabel')}</span>
               <span className="text-[#FFC61B]">
                 ${filters.priceRange[0]} - ${filters.priceRange[1]}
               </span>
@@ -146,7 +143,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
           {/* Distance */}
           <div className="space-y-4">
             <div className="flex w-full price_tags justify-between items-center text-[var(--text-primary)]">
-              <span>Distance</span>
+              <span>{t('filterPanel.distanceLabel')}</span>
               <span className="text-[#FFC61B]">{filters.distance}km</span>
             </div>
             <Range
@@ -171,7 +168,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
 
           {/* Rating */}
           <div className="space-y-3">
-            <label className="block text-[var(--text-primary)] font-medium">Rating</label>
+            <label className="block text-[var(--text-primary)] font-medium">{t('filterPanel.ratingLabel')}</label>
             <div className="flex flex-wrap gap-2">
               {ratingOptions.map((value) => (
                 <button
@@ -188,7 +185,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
 
           {/* Services */}
           <div className="space-y-3">
-            <label className="block text-[var(--text-primary)] font-medium">Services</label>
+            <label className="block text-[var(--text-primary)] font-medium">{t('filterPanel.servicesLabel')}</label>
             <div className="flex flex-wrap gap-2">
               {serviceOptions.map((service) => {
                 const isActive = service === "All" 
@@ -210,7 +207,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
 
           {/* Sort */}
           <div className="space-y-3">
-            <label className="block text-[var(--text-primary)] font-medium">Sort By</label>
+            <label className="block text-[var(--text-primary)] font-medium">{t('filterPanel.sortByLabel')}</label>
             <div className="grid grid-cols-3 gap-2">
               {sortOptions.map((option) => (
                 <button
@@ -231,7 +228,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
           onClick={applyFilters}
           className="filter_apply_button w-full mt-8 py-4 text-base font-medium"
         >
-          Apply
+          {t('filterPanel.applyButton')}
         </button>
       </div>
     </>

@@ -402,5 +402,53 @@
     "writePlaceholder": "Write Something ...",
     "uploadImage": "Upload {{number}}",
     "addLocation": "Add Location"
+  },
+  "uploadedLocationPage": {
+    "title": "Uploaded Location",
+    "recycleBinAlt": "Recycle Bin",
+    "tabs": {
+      "approved": "Approved",
+      "pending": "Pending",
+      "rejected": "Rejected"
+    }
+  },
+  "filterPanel": {
+    "title": "Filter",
+    "priceRangeLabel": "Price Range",
+    "distanceLabel": "Distance",
+    "ratingLabel": "Rating",
+    "servicesLabel": "Services",
+    "sortByLabel": "Sort By",
+    "applyButton": "Apply",
+    "ratingOptions": {
+      "all": "All",
+      "5stars": "5 Stars",
+      "4starsAbove": "4 Stars & Above",
+      "3starsAbove": "3 Stars & above",
+      "2starsAbove": "2 Stars & above",
+      "1star": "1 Star"
+    },
+    "serviceOptions": {
+      "all": "All",
+      "service1": "Service 1",
+      "service2": "Service 2",
+      "service3": "Service 3",
+      "service4": "Service 4",
+      "service5": "Service 5",
+      "service6": "Service 6"
+    },
+    "sortOptions": {
+      "comprehensive": "Comprehensive",
+      "openNow": "Open Now",
+      "247": "24/7",
+      "nearby": "Nearby",
+      "rating": "Rating",
+      "price": "Price"
+    }
+  },
+  "filteredMarkers": {
+    "distanceAway": "{{distance}}km away",
+    "usdUnit": "usd",
+    "addThisPlaceButton": "Add This Place"
   }
 }
