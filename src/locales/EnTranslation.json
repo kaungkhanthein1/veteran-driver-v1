@@ -352,5 +352,40 @@
     "withdrawRule2": "User need to upload proof of income to pass the review from admin",
     "withdrawRule3": "Review process will begin after you submitted the withdraw form and it will take 24 Hours to process.",
     "submitButton": "Submit"
+  },
+  "rankingPage": {
+    "title": "Ranking",
+    "popularTab": "Popular",
+    "mostViewTab": "Most View",
+    "trendingTab": "Trending",
+    "distance": "{{distance}} away",
+    "reviews": "({{count}})",
+    "bookNowButton": "Book Now"
+  },
+  "recycleBinPage": {
+    "title": "Recycle Bin",
+    "selectAllButton": "Select All",
+    "locationsSelectedText": "{{count}} location selected",
+    "deleteConfirmationText": "Are you sure you want to delete selected locations permanently? This action cannot be undone.",
+    "yesDeleteButton": "Yes, delete",
+    "restoreLocationTitle": "Restore Location",
+    "restoreConfirmationText": "Do you want to restore this location? It will be submitted to admin for review after restore.",
+    "restoreButton": "Restore"
+  },
+  "registerPage": {
+    "title": "Sign Up",
+    "description": "Welcome, let's get started on something great",
+    "emailOrPhoneLabel": "Email or Phone Number",
+    "emailOrPhonePlaceholder": "Enter Your Email",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter Your Password",
+    "notRobotCheckbox": "I'm not a robot",
+    "recaptchaLabel": "Recaptcha",
+    "signUpButton": "Sign Up",
+    "continueWithGoogleButton": "Continue With Google",
+    "continueWithPhoneButton": "Continue With Phone Number",
+    "continueWithFacebookButton": "Continue With Facebook",
+    "alreadyAccountText": "Already have an account? ",
+    "loginLink": "Login"
   }
 }
