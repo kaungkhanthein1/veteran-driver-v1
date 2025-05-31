@@ -387,5 +387,20 @@
     "continueWithFacebookButton": "Continue With Facebook",
     "alreadyAccountText": "Already have an account? ",
     "loginLink": "Login"
+  },
+  "searchLocationPage": {
+    "searchPlaceholder": "Search Places ...",
+    "resultsFound": "{{count}} Results found",
+    "hotSearch": "Hot Search",
+    "recents": "Recents",
+    "recentView": "Recent View",
+    "clear": "Clear"
+  },
+  "socialUpload": {
+    "title": "Upload Post",
+    "postButton": "Post",
+    "writePlaceholder": "Write Something ...",
+    "uploadImage": "Upload {{number}}",
+    "addLocation": "Add Location"
   }
 }

@@ -5,6 +5,7 @@ import { useBookmarks } from '../hooks/useBookmarks';
 import FilterPanel from './map/FilterPanel';
 import BackButton from '../components/common/BackButton';
 import FilterIcon from 'icons/Tune.svg'
+import { useTranslation } from 'react-i18next';
 
 // Import explore items from ExplorePage
 const exploreItems = [
@@ -38,6 +39,7 @@ const recentViews = exploreItems; // Using exploreItems as mock data for recent 
 export default function SearchLocationPage() {
   const navigate = useNavigate();
   const { isBookmarked, toggleBookmark } = useBookmarks();
+  const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
@@ -83,16 +85,14 @@ export default function SearchLocationPage() {
           <div className="relative flex-1">
             <input
               type="text"
-              placeholder="Search Places ..."
+              placeholder={t('searchLocationPage.searchPlaceholder')}
               value={searchQuery}
               onChange={(e) => {
                 const value = e.target.value;
                 setSearchQuery(value);
-                // Show suggestions whenever there is input
                 setShowSuggestions(true);
               }}
               onFocus={() => {
-                // Show suggestions on focus if there is any input
                 if (searchQuery) {
                   setShowSuggestions(true);
                 }
@@ -116,7 +116,7 @@ export default function SearchLocationPage() {
         {/* Search Results Count */}
         {showSuggestions && searchQuery && suggestions.length > 0 && (
           <div className="flex justify-between items-center px-4 py-2 bg-theme-secondary border-t border-theme-primary/10">
-            <span className="text-theme-primary text-sm">{suggestions.length} Results found</span>
+            <span className="text-theme-primary text-sm">{t('searchLocationPage.resultsFound', { count: suggestions.length })}</span>
             <button className="p-2" onClick={() => setShowFilter(true)}>
               <img src={FilterIcon} alt="filter" className="w-5 h-5 [filter:var(--icon-filter)]" />
             </button>
@@ -141,7 +141,7 @@ export default function SearchLocationPage() {
           <div className="p-4 space-y-6">
             {/* Hot Search */}
             <div>
-              <h2 className="text-theme-primary text-lg font-medium mb-3">Hot Search</h2>
+              <h2 className="text-theme-primary text-lg font-medium mb-3">{t('searchLocationPage.hotSearch')}</h2>
               <div className="flex flex-wrap gap-2">
                 {hotSearches.map((tag) => (
                   <button
@@ -158,8 +158,8 @@ export default function SearchLocationPage() {
             {/* Recent Searches */}
             <div>
               <div className="flex justify-between items-center mb-3">
-                <h2 className="text-theme-primary text-lg font-medium">Recents</h2>
-                <button className="text-theme-primary text-sm">Clear</button>
+                <h2 className="text-theme-primary text-lg font-medium">{t('searchLocationPage.recents')}</h2>
+                <button className="text-theme-primary text-sm">{t('searchLocationPage.clear')}</button>
               </div>
               <div className="space-y-2">
                 {recentSearches.map((search) => (
@@ -181,8 +181,8 @@ export default function SearchLocationPage() {
             {/* Recent View */}
             <div>
               <div className="flex justify-between items-center mb-3">
-                <h2 className="text-theme-primary text-lg font-medium">Recent View</h2>
-                <button className="text-theme-primary text-sm">Clear</button>
+                <h2 className="text-theme-primary text-lg font-medium">{t('searchLocationPage.recentView')}</h2>
+                <button className="text-theme-primary text-sm">{t('searchLocationPage.clear')}</button>
               </div>
               <div className="space-y-4">
                 {recentViews.map((item) => (

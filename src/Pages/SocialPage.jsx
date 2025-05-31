@@ -4,6 +4,7 @@ import SocialPostCard from "../components/cards/SocialPostCard";
 import BottomNavBar from "../components/common/BottomNavBar";
 import CommentModal from "../components/common/CommentModal";
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 // Mock posts data
 const posts = [
@@ -87,6 +88,7 @@ const posts = [
 export default function SocialPage() {
   const [activeTab, setActiveTab] = useState("newest");
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [commentModalPostId, setCommentModalPostId] = useState(null); // State for modal visibility and context
 
   const openCommentModal = (postId) => {

@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LocationPicker from '../components/LocationPicker';
 import BackButton from '../components/common/BackButton';
+import { useTranslation } from 'react-i18next';
 
 const SocialUpload = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [content, setContent] = useState('');
   const [selectedImages, setSelectedImages] = useState([]);
 
@@ -28,7 +30,7 @@ const SocialUpload = () => {
           {/* Header */}
           <div className="flex items-center justify-between px-4 py-3 border-b border-theme">
             <BackButton/>
-            <h1 className="text-lg font-medium">Upload Post</h1>
+            <h1 className="text-lg font-medium">{t('socialUpload.title')}</h1>
             <button 
               className={`px-4 py-1 rounded-full ${
                 content.trim() || selectedImages.length > 0
@@ -37,14 +39,14 @@ const SocialUpload = () => {
               }`}
               disabled={!content.trim() && selectedImages.length === 0}
             >
-              Post
+              {t('socialUpload.postButton')}
             </button>
           </div>
 
           {/* Content Area */}
           <div className="p-4">
             <textarea
-              placeholder="Write Something ..."
+              placeholder={t('socialUpload.writePlaceholder')}
               value={content}
               onChange={(e) => setContent(e.target.value)}
               className="w-full bg-transparent resize-none outline-none min-h-[100px] text-theme-primary placeholder-theme-secondary"
@@ -56,7 +58,7 @@ const SocialUpload = () => {
                 <div key={index} className="relative aspect-square">
                   <img
                     src={image.url}
-                    alt={`Upload ${index + 1}`}
+                    alt={t('socialUpload.uploadImage', { number: index + 1 })}
                     className="w-full h-full object-cover rounded-lg"
                   />
                   <button
@@ -101,7 +103,7 @@ const SocialUpload = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
-              Add Location
+              {t('socialUpload.addLocation')}
             </button>
           </div>
           <div className="absolute bottom-0 left-0 right-0 p-4">
