@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import BackButton from '../components/common/BackButton';
 import PlaceIcon from 'icons/Place.svg';
 import ScheduleIcon from 'icons/Schedule.svg';
@@ -8,12 +8,13 @@ import BookmarkIcon from 'icons/Bookmark.svg';
 import RoomImage from 'assets/Room.png';
 import GoldenGateRoomImage from 'assets/GoldenGateRoom.png';
 import HarrierRoomImage from 'assets/HarrierRoom.png';
+import { useTranslation } from 'react-i18next';
 
 const LocationDetailsPage = () => {
-  const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const { t } = useTranslation();
   
   const defaultLocationData = {
     id: 1,
@@ -46,7 +47,7 @@ const LocationDetailsPage = () => {
           <BackButton onClick={() => navigate(-1)} />
           <h1 className="text-theme-text text-lg font-semibold">{locationData.name}</h1>
           <button className="p-2">
-            <img src={ShareIcon} alt="Share" className="w-6 h-6 [filter:var(--icon-filter)]" />
+            <img src={ShareIcon} alt={t('locationDetails.shareAltText')} className="w-6 h-6 [filter:var(--icon-filter)]" />
           </button>
         </div>
       </div>
@@ -68,7 +69,7 @@ const LocationDetailsPage = () => {
           ))}
         </div>
         <button className="absolute top-4 right-4 p-2 rounded-full bg-black/30">
-          <img src={BookmarkIcon} alt="Bookmark" className="w-6 h-6 [filter:brightness(0)_saturate(100%)_invert(100%)]" />
+          <img src={BookmarkIcon} alt={t('locationDetails.bookmarkAltText')} className="w-6 h-6 [filter:brightness(0)_saturate(100%)_invert(100%)]" />
         </button>
         <div className="absolute bottom-4 right-4 px-3 py-1 rounded bg-[#FDC51B] text-black font-medium">
           {locationData.price}
@@ -81,7 +82,7 @@ const LocationDetailsPage = () => {
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-theme-text text-xl font-semibold">{locationData.name}</h2>
-              <p className="text-theme-secondary text-sm">{locationData.distance}</p>
+              <p className="text-theme-secondary text-sm">{t('locationDetails.distance', { distance: locationData.distance })}</p>
             </div>
             <div className="flex items-center space-x-1">
               {[...Array(5)].map((_, index) => (
@@ -94,28 +95,28 @@ const LocationDetailsPage = () => {
               ))}
             </div>
           </div>
-          <p className="mt-2 text-theme-secondary line-clamp-3">{locationData.description}</p>
-          <button className="text-[#FDC51B] text-sm mt-1">see more</button>
+          <p className="mt-2 text-theme-secondary line-clamp-3">{t('locationDetails.description', { description: locationData.description })}</p>
+          <button className="text-[#FDC51B] text-sm mt-1">{t('locationDetails.seeMoreButton')}</button>
         </div>
 
         {/* Contact Info */}
         <div className="space-y-4">
           <div className="flex items-center space-x-3">
-            <img src={PlaceIcon} alt="Address" className="w-6 h-6 [filter:var(--icon-filter)]" />
+            <img src={PlaceIcon} alt={t('locationDetails.addressAltText')} className="w-6 h-6 [filter:var(--icon-filter)]" />
             <span className="text-theme-secondary">{locationData.address}</span>
             <button className="px-3 py-1 rounded border border-[#FDC51B] text-[#FDC51B] text-sm">
-              Check Map
+              {t('locationDetails.checkMapButton')}
             </button>
           </div>
           <div className="flex items-center space-x-3">
-            <img src={ScheduleIcon} alt="Hours" className="w-6 h-6 [filter:var(--icon-filter)]" />
-            <span className="text-theme-secondary">{locationData.openHours}</span>
+            <img src={ScheduleIcon} alt={t('locationDetails.hoursAltText')} className="w-6 h-6 [filter:var(--icon-filter)]" />
+            <span className="text-theme-secondary">{t('locationDetails.openHours', { openHours: locationData.openHours })}</span>
           </div>
         </div>
 
         {/* Services */}
         <div>
-          <h3 className="text-theme-text text-lg font-semibold mb-3">Services</h3>
+          <h3 className="text-theme-text text-lg font-semibold mb-3">{t('locationDetails.servicesTitle')}</h3>
           <div className="space-y-3">
             {locationData?.services?.map((service, index) => (
               <div 
@@ -132,10 +133,10 @@ const LocationDetailsPage = () => {
         {/* Reviews */}
         <div>
           <div className="flex items-center justify-between mb-3">
-            <h3 className="text-theme-text text-lg font-semibold">Review (120)</h3>
+            <h3 className="text-theme-text text-lg font-semibold">{t('locationDetails.reviewsTitle', { count: 120 })}</h3>
             <div className="flex space-x-2">
-              <button className="px-3 py-1 rounded bg-[#FDC51B] text-black text-sm">Hottest</button>
-              <button className="px-3 py-1 rounded border border-theme-secondary text-theme-secondary text-sm">Latest</button>
+              <button className="px-3 py-1 rounded bg-[#FDC51B] text-black text-sm">{t('locationDetails.hottestReviewButton')}</button>
+              <button className="px-3 py-1 rounded border border-theme-secondary text-theme-secondary text-sm">{t('locationDetails.latestReviewButton')}</button>
             </div>
           </div>
           {/* Review list will be implemented later */}

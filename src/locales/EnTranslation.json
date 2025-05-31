@@ -168,5 +168,47 @@
   "shareModal": {
     "title": "Share to",
     "copyButton": "Copy"
+  },
+  "forgotPasswordPage": {
+    "title": "Forgot Password",
+    "description": "Complete registration with your phone number",
+    "emailOrPhoneLabel": "Email or Phone Number",
+    "newPasswordLabel": "New Password",
+    "newPasswordPlaceholder": "Enter New Password",
+    "notRobotCheckbox": "I'm not a robot",
+    "recaptchaLabel": "Recaptcha",
+    "continueButton": "Continue"
+  },
+  "locationDetails": {
+    "shareAltText": "Share",
+    "bookmarkAltText": "Bookmark",
+    "distance": "{{distance}} away",
+    "description": "{{description}}",
+    "seeMoreButton": "see more",
+    "addressAltText": "Address",
+    "checkMapButton": "Check Map",
+    "hoursAltText": "Hours",
+    "openHours": "{{openHours}} Open",
+    "servicesTitle": "Services",
+    "reviewsTitle": "Review ({{count}})",
+    "hottestReviewButton": "Hottest",
+    "latestReviewButton": "Latest"
+  },
+  "loginPage": {
+    "title": "Log In",
+    "description": "Welcome, let's get started on something great",
+    "emailOrPhoneLabel": "Email or Phone Number",
+    "emailOrPhonePlaceholder": "Enter Your Email",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter Your Password",
+    "notRobotCheckbox": "I'm not a robot",
+    "recaptchaLabel": "Recaptcha",
+    "loginButton": "Login",
+    "forgotPasswordLink": "Forgot Password?",
+    "continueWithGoogleButton": "Continue With Google",
+    "continueWithPhoneButton": "Continue With Phone Number",
+    "continueWithFacebookButton": "Continue With Facebook",
+    "noAccountText": "Don't you have an account? ",
+    "signUpLink": "Sign Up"
   }
 }

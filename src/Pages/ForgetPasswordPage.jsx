@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormInput from '../components/common/FormInput';
 import BackButton from "../components/common/BackButton";
+import { useTranslation } from 'react-i18next';
 
 export default function ForgetPasswordPage() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [emailOrPhone, setEmailOrPhone] = useState("+66");
   const [newPassword, setNewPassword] = useState("");
+  const { t } = useTranslation();
 
   const isFormFilled = emailOrPhone.trim() !== "+66" && newPassword.trim() !== "";
 
@@ -16,14 +18,14 @@ export default function ForgetPasswordPage() {
       <div className="w-full max-w-md mx-auto flex flex-col items-center">
         <div className="w-full flex items-center mb-8">
           <BackButton/>
-          <h1 className="text-xl font-bold text-theme-primary flex-1 text-center">Forgot Password</h1>
+          <h1 className="text-xl font-bold text-theme-primary flex-1 text-center">{t('forgotPasswordPage.title')}</h1>
           <div className="w-8" />
         </div>
-        <p className="text-theme-secondary text-base text-center mb-8">Complete registration with your phone number</p>
+        <p className="text-theme-secondary text-base text-center mb-8">{t('forgotPasswordPage.description')}</p>
         
         <form className="w-full mt-8 space-y-6" onSubmit={e => { e.preventDefault(); navigate("/otp-verify"); }}>
           <FormInput
-            label="Email or Phone Number"
+            label={t('forgotPasswordPage.emailOrPhoneLabel')}
             name="emailOrPhone"
             value={emailOrPhone}
             onChange={e => setEmailOrPhone(e.target.value)}
@@ -31,10 +33,10 @@ export default function ForgetPasswordPage() {
           
           <div className="relative">
             <FormInput
-              label="New Password"
+              label={t('forgotPasswordPage.newPasswordLabel')}
               name="newPassword"
               type={showPassword ? "text" : "password"}
-              placeholder="Enter New Password"
+              placeholder={t('forgotPasswordPage.newPasswordPlaceholder')}
               value={newPassword}
               onChange={e => setNewPassword(e.target.value)}
               rightIcon={
@@ -58,8 +60,8 @@ export default function ForgetPasswordPage() {
           <div className="flex justify-center">
             <div className="bg-theme-primary rounded-lg px-4 py-3 flex items-center gap-2 w-full max-w-xs">
               <input type="checkbox" className="accent-blue-500" />
-              <span className="text-theme-secondary text-sm">I'm not a robot</span>
-              <div className="ml-20 text-theme-secondary text-md">Recaptcha</div>
+              <span className="text-theme-secondary text-sm">{t('forgotPasswordPage.notRobotCheckbox')}</span>
+              <div className="ml-20 text-theme-secondary text-md">{t('forgotPasswordPage.recaptchaLabel')}</div>
             </div>
           </div>
           <button
@@ -71,7 +73,7 @@ export default function ForgetPasswordPage() {
             }`}
             disabled={!isFormFilled}
           >
-            Continue
+            {t('forgotPasswordPage.continueButton')}
           </button>
         </form>
       </div>
