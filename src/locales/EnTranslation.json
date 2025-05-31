@@ -491,7 +491,7 @@
     "goldenGateAlt": "Golden Gate",
     "harrierAlt": "Harrier",
     "videoThumbnailAlt": "Video thumbnail",
-    "reviewsCount": "({{count}})",
+    "reviewsCount": "{{count}}",
     "bookmarkAlt": "bookmark",
     "restoreButton": "Restore",
     "viewPlaceButton": "View Place"
