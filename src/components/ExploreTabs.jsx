@@ -1,10 +1,13 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export default function ExploreTabs({ activeTab, setActiveTab }) {
+  // TODO: Add PropTypes for prop validation
+  const { t } = useTranslation();
   const tabs = [
-    { key: "Hotel", label: "Hotel" },
-    { key: "Restaurant", label: "Restaurant" },
-    { key: "Stores", label: "Stores" }
+    { key: "Hotel", label: t('exploreTabs.hotelTab') },
+    { key: "Restaurant", label: t('exploreTabs.restaurantTab') },
+    { key: "Stores", label: t('exploreTabs.storesTab') }
   ];
 
   return (

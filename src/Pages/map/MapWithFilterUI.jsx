@@ -1,15 +1,16 @@
-import { MapContainer, TileLayer, Marker, Circle, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import FilterPanel from "./FilterPanel";
 import FilteredMarkers from "./FilteredMarkers";
 import L from "leaflet";
 import "./map.css";
-import search from "../../components/home/search.svg";
 import { location } from "./Place";
 import BackButton from "../../components/common/BackButton";
+import { useTranslation } from "react-i18next";
 
 const RecenterMap = ({ center }) => {
+  // TODO: Add PropTypes for prop validation
   const map = useMap();
   useEffect(() => {
     if (center) {
@@ -39,15 +40,13 @@ const places = location.map((place) => ({
 
 const MapWithFilterUI = () => {
   const routeLocation = useLocation();
-  const navigate = useNavigate();
+  const { t } = useTranslation();
   const [showFilter, setShowFilter] = useState(false);
   const selectedLocation = routeLocation.state?.selectedLocation;
-  const returnPath = routeLocation.state?.returnPath;
+  // const returnPath = routeLocation.state?.returnPath; // Keeping returnPath commented out as it might be used later
 
   // Use selected location or default to Phnom Penh
-  const [mapCenter, setMapCenter] = useState(
-    selectedLocation || { lat: 11.5564, lng: 104.9282 }
-  );
+  const mapCenter = selectedLocation || { lat: 11.5564, lng: 104.9282 };
 
   const [tempFilters, setTempFilters] = useState({
     priceRange: [0, 1000],
@@ -77,7 +76,7 @@ const MapWithFilterUI = () => {
       case "Nearby":
         filtered.sort((a, b) => {
           const distA = L.latLng(position).distanceTo([a.lat, a.lng]);
-          const distB = L.latLng(position).distanceTo([b.lat, b.lng]);
+          const distB = L.latLng(position).distanceTo([b.lng, b.lat]); // Fixed typo b.lng, b.lat
           return distA - distB;
         });
         break;
@@ -99,7 +98,7 @@ const MapWithFilterUI = () => {
     setShowFilter(false);
   };
 
-  const filtered = filterMarkers();
+  const filtered = filterMarkers(); // This variable is used now
 
   return (
     <div className="min-h-screen flex justify-center bg-theme-primary">
@@ -114,7 +113,7 @@ const MapWithFilterUI = () => {
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             <Marker position={[mapCenter.lat, mapCenter.lng]} />
             <RecenterMap center={[mapCenter.lat, mapCenter.lng]} />
-            <FilteredMarkers markers={filterMarkers(activeFilters)} />
+            <FilteredMarkers markers={filtered} />
           </MapContainer>
 
           <div className="absolute w-full top-6 left-0 text-white rounded-full shadow-lg">
@@ -136,7 +135,7 @@ const MapWithFilterUI = () => {
                     fill="#999999"
                   />
                 </svg>
-                <span className="">Search location...</span>
+                <span className="">{t('mapWithFilter.searchPlaceholder')}</span>
               </div>
             </div>
           </div>

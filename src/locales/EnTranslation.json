@@ -450,5 +450,13 @@
     "distanceAway": "{{distance}}km away",
     "usdUnit": "usd",
     "addThisPlaceButton": "Add This Place"
+  },
+  "mapWithFilter": {
+    "searchPlaceholder": "Search location..."
+  },
+  "exploreTabs": {
+    "hotelTab": "Hotel",
+    "restaurantTab": "Restaurant",
+    "storesTab": "Stores"
   }
 }
