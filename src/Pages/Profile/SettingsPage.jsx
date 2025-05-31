@@ -18,42 +18,42 @@ export default function SettingsPage() {
         },
         {
           id: 'email',
-          title: 'Bind E-mail',
+          title: t('settingsPage.bindEmailItem'),
           route: '/settings/email'
         }
       ]
     },
     {
-      title: 'Third Party',
+      title: t('settingsPage.thirdPartyGroupTitle'),
       items: [
         {
           id: 'facebook',
-          title: 'Bind with Facebook',
+          title: t('settingsPage.bindFacebookItem'),
           route: '/settings/facebook'
         },
         {
           id: 'wechat',
-          title: 'Bind with WeChat',
+          title: t('settingsPage.bindWeChatItem'),
           route: '/settings/wechat'
         },
         {
           id: 'line',
-          title: 'Bind with Line',
+          title: t('settingsPage.bindLineItem'),
           route: '/settings/line'
         }
       ]
     },
     {
-      title: 'Security',
+      title: t('settingsPage.securityGroupTitle'),
       items: [
         {
           id: 'password',
-          title: 'Change Password',
+          title: t('settingsPage.changePasswordItem'),
           route: '/settings/password'
         },
         {
           id: '2fa',
-          title: 'Setup Two-Factor Authentication (2FA)',
+          title: t('settingsPage.setupTwoFactorItem'),
           route: '/settings/2fa'
         }
       ]
@@ -68,7 +68,7 @@ export default function SettingsPage() {
         <div className="absolute left-3">
           <BackButton/>
         </div>
-        <h1 className="flex-grow text-center text-xl font-semibold">Settings</h1>
+        <h1 className="flex-grow text-center text-xl font-semibold">{t('settingsPage.title')}</h1>
       </div>
 
       {/* Settings Groups */}
@@ -77,7 +77,7 @@ export default function SettingsPage() {
           <div key={index} className="mb-6">
             <h2 className="text-theme-secondary text-sm mb-2">{group.title}</h2>
             <div className="bg-theme-secondary rounded-lg overflow-hidden">
-              {group.items.map((item, itemIndex) => (
+              {group.items.map((item) => (
                 <button
                   key={item.id}
                   className="w-full px-4 py-4 flex items-center justify-between hover:bg-opacity-50"
