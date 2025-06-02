@@ -5,7 +5,6 @@ import GoldenGate from "assets/GoldenGate.png";
 import Harrier from "assets/Harrier.png";
 import HarrierRoom from "assets/HarrierRoom.png";
 import ExploreVideo from "assets/Explore.mp4";
-import VideoPlayer from "../common/VideoPlayer";
 import ImageModal from "../common/ImageModal";
 import { useTranslation } from 'react-i18next';
 
@@ -17,29 +16,32 @@ export default function ExploreCard({
   isRecycleBin = false,
   onRestore,
   isBookmarked = false,
-  onBookmarkClick
+  onBookmarkClick,
+  setIsModalOpen
 }) {
   const { t } = useTranslation();
   const [selectedMedia, setSelectedMedia] = useState(null);
 
   // Define all available media for this card
   const allMedia = [
-    GoldenGate,
-    Harrier,
-    { type: "video", url: ExploreVideo, thumbnail: HarrierRoom }
+    { type: 'image', url: GoldenGate },
+    { type: 'image', url: Harrier },
+    { type: 'video', url: ExploreVideo, thumbnailUrl: HarrierRoom }
   ];
 
   const handleMediaClick = (media, index) => {
-    // If it's a video, just set the video
-    if (media.type === 'video') {
-      setSelectedMedia(media);
-    } else {
-      // If it's an image, set all images and the current index
-      setSelectedMedia({
-        type: 'images',
-        images: allMedia.filter(m => typeof m === 'string'),
-        currentIndex: index
-      });
+    setSelectedMedia({
+      type: 'modal',
+      media: allMedia,
+      initialIndex: index,
+    });
+    if (setIsModalOpen) setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedMedia(null);
+    if (setIsModalOpen) {
+      setIsModalOpen(false);
     }
   };
 
@@ -54,7 +56,7 @@ export default function ExploreCard({
             className="aspect-square bg-theme-primary rounded-lg overflow-hidden cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
-              handleMediaClick(GoldenGate, 0);
+              handleMediaClick(allMedia[0], 0);
             }}
           >
             <img src={GoldenGate} alt={t('exploreCard.goldenGateAlt')} className="w-full h-full object-cover" />
@@ -63,7 +65,7 @@ export default function ExploreCard({
             className="aspect-square bg-theme-primary rounded-lg overflow-hidden cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
-              handleMediaClick(Harrier, 1);
+              handleMediaClick(allMedia[1], 1);
             }}
           >
             <img src={Harrier} alt={t('exploreCard.harrierAlt')} className="w-full h-full object-cover" />
@@ -72,7 +74,7 @@ export default function ExploreCard({
             className="aspect-square bg-theme-primary rounded-lg relative overflow-hidden cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
-              handleMediaClick({ type: "video", url: ExploreVideo, thumbnail: HarrierRoom }, 2);
+              handleMediaClick(allMedia[2], 2);
             }}
           >
             <img src={HarrierRoom} alt={t('exploreCard.videoThumbnailAlt')} className="w-full h-full object-cover" />
@@ -161,20 +163,12 @@ export default function ExploreCard({
 
       {/* Media Modals */}
       {selectedMedia && (
-        selectedMedia.type === 'video' ? (
-          <VideoPlayer
-            isOpen={!!selectedMedia}
-            videoUrl={selectedMedia.url}
-            onClose={() => setSelectedMedia(null)}
-          />
-        ) : selectedMedia.type === 'images' && (
-          <ImageModal
-            isOpen={!!selectedMedia}
-            images={selectedMedia.images}
-            initialIndex={selectedMedia.currentIndex}
-            onClose={() => setSelectedMedia(null)}
-          />
-        )
+        <ImageModal
+          isOpen={!!selectedMedia}
+          images={selectedMedia.media}
+          initialIndex={selectedMedia.initialIndex}
+          onClose={handleCloseModal}
+        />
       )}
     </div>
   );
@@ -197,5 +191,6 @@ ExploreCard.propTypes = {
   isRecycleBin: PropTypes.bool,
   onRestore: PropTypes.func,
   isBookmarked: PropTypes.bool,
-  onBookmarkClick: PropTypes.func
+  onBookmarkClick: PropTypes.func,
+  setIsModalOpen: PropTypes.func
 };

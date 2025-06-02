@@ -30,6 +30,7 @@ const HomePage = () => {
   const [activeTab, setActiveTab] = useState(t('homePage.categoryTabs.hotels'));
   const [activeService, setActiveService] = useState(t('homePage.serviceTabs.service1'));
   const { isBookmarked, toggleBookmark } = useBookmarks();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Mock data for feedbacks
   const feedbacks = [
@@ -147,7 +148,12 @@ const HomePage = () => {
                     key={feedback.id} 
                     className="w-[280px] flex-none flex"
                   >
-                    <SocialPostCard post={feedback} compact className="flex-1" />
+                    <SocialPostCard 
+                      post={feedback} 
+                      compact 
+                      setIsModalOpen={setIsModalOpen}
+                      className="flex-1"
+                    />
                   </div>
                 ))}
               </div>
@@ -202,12 +208,13 @@ const HomePage = () => {
                 isBookmarked={isBookmarked(place.id)}
                 onBookmarkClick={() => toggleBookmark(place)}
                 onClick={() => {}}
+                setIsModalOpen={setIsModalOpen}
               />
             ))}
           </div>
         </div>
 
-        <BottomNavBar active="home" />
+        {!isModalOpen && <BottomNavBar active="home" />}
       </div>
     </div>
   );

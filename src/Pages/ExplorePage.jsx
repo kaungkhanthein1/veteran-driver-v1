@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BottomNavBar from "../components/common/BottomNavBar";
 import ExploreTabs from "../components/ExploreTabs";
@@ -40,6 +40,7 @@ export default function ExplorePage() {
   const navigate = useNavigate();
   const { isBookmarked, toggleBookmark } = useBookmarks();
   const { t } = useTranslation();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div className="min-h-screen flex justify-center bg-theme-primary">
@@ -148,13 +149,14 @@ export default function ExplorePage() {
                 key={item.id}
                 item={item}
                 onClick={() => {}}
+                setIsModalOpen={setIsModalOpen}
                 isBookmarked={isBookmarked(item.id)}
                 onBookmarkClick={() => toggleBookmark(item)}
               />
             ))}
           </div>
         </div>
-        <BottomNavBar active="explore" />
+        {!isModalOpen && <BottomNavBar active="explore" />}
       </div>
     </div>
   );

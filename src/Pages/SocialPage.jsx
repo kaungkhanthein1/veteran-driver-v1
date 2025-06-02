@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import SocialTabs from "../components/SocialTabs";
 import SocialPostCard from "../components/cards/SocialPostCard";
 import BottomNavBar from "../components/common/BottomNavBar";
@@ -90,6 +90,7 @@ export default function SocialPage() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [commentModalPostId, setCommentModalPostId] = useState(null); // State for modal visibility and context
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openCommentModal = (postId) => {
     setCommentModalPostId(postId);
@@ -124,11 +125,12 @@ export default function SocialPage() {
                 key={post.id}
                 post={post}
                 onOpenComments={openCommentModal}
+                setIsModalOpen={setIsModalOpen}
               />
             ))}
           </div>
         </div>
-        <BottomNavBar active="social" />
+        {!isModalOpen && <BottomNavBar active="social" />}
         <div className="relative z-[1000]">
           <CommentModal
             isOpen={!!commentModalPostId}

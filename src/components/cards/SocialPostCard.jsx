@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import VideoPlayer from "../common/VideoPlayer";
+import { useState } from "react";
 import ImageModal from "../common/ImageModal";
 import ShareModal from "../common/ShareModal";
 import PropTypes from 'prop-types';
@@ -8,7 +7,7 @@ import RoomImg from "assets/Room.png";
 import SampleVideo from "assets/Sample.mp4";
 import { useTranslation } from 'react-i18next';
 
-export default function SocialPostCard({ post: providedPost, onOpenComments, compact = false }) {
+export default function SocialPostCard({ post: providedPost, onOpenComments, compact = false, setIsModalOpen }) {
   const [expanded, setExpanded] = useState(false);
   const [selectedMedia, setSelectedMedia] = useState(null);
   const [showShareModal, setShowShareModal] = useState(false);
@@ -18,24 +17,26 @@ export default function SocialPostCard({ post: providedPost, onOpenComments, com
 
   // Define all available media for this post
   const allMedia = [
-    BeachImg,
-    RoomImg,
-    { type: "video", url: SampleVideo, thumbnail: RoomImg }
+    { type: 'image', url: BeachImg },
+    { type: 'image', url: RoomImg },
+    { type: 'video', url: SampleVideo, thumbnailUrl: RoomImg }
   ];
 
   const { t } = useTranslation();
 
   const handleMediaClick = (media, index) => {
-    // If it's a video, just set the video
-    if (media.type === 'video') {
-      setSelectedMedia(media);
-    } else {
-      // If it's an image, set all images and the current index
-      setSelectedMedia({
-        type: 'images',
-        images: allMedia.filter(m => typeof m === 'string'),
-        currentIndex: index
-      });
+    setSelectedMedia({
+      type: 'modal',
+      media: allMedia,
+      initialIndex: index,
+    });
+    if (setIsModalOpen) setIsModalOpen(true);
+  };
+
+  const handleCloseMediaModal = () => {
+    setSelectedMedia(null);
+    if (setIsModalOpen) {
+      setIsModalOpen(false);
     }
   };
 
@@ -127,16 +128,17 @@ export default function SocialPostCard({ post: providedPost, onOpenComments, com
             className="aspect-square bg-theme-primary cursor-pointer overflow-hidden"
             onClick={() => handleMediaClick(media, idx)}
           >
-            {typeof media === 'string' ? (
+            {media.type === 'image' && (
               <img 
-                src={media} 
+                src={media.url} 
                 alt={t('socialPostCard.mediaAlt', { number: idx + 1 })}
                 className="w-full h-full object-cover"
               />
-            ) : media.type === 'video' && (
+            )}
+            {media.type === 'video' && (
               <div className="relative w-full h-full">
                 <img 
-                  src={media.thumbnail} 
+                  src={media.thumbnailUrl} 
                   alt={t('socialPostCard.videoAlt', { number: idx + 1 })}
                   className="w-full h-full object-cover"
                 />
@@ -182,22 +184,14 @@ export default function SocialPostCard({ post: providedPost, onOpenComments, com
         </div>
       </div>
 
-      {/* Add this at the bottom of the component, before the closing div */}
+      {/* Media Modals */}
       {selectedMedia && (
-        selectedMedia.type === 'video' ? (
-          <VideoPlayer
-            isOpen={!!selectedMedia}
-            videoUrl={selectedMedia.url}
-            onClose={() => setSelectedMedia(null)}
-          />
-        ) : selectedMedia.type === 'images' && (
-          <ImageModal
-            isOpen={!!selectedMedia}
-            images={selectedMedia.images}
-            initialIndex={selectedMedia.currentIndex}
-            onClose={() => setSelectedMedia(null)}
-          />
-        )
+        <ImageModal
+          isOpen={!!selectedMedia}
+          images={selectedMedia.media}
+          initialIndex={selectedMedia.initialIndex}
+          onClose={handleCloseMediaModal}
+        />
       )}
       
       <ShareModal
@@ -226,5 +220,6 @@ SocialPostCard.propTypes = {
     shares: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
   }).isRequired,
   onOpenComments: PropTypes.func,
-  compact: PropTypes.bool
+  compact: PropTypes.bool,
+  setIsModalOpen: PropTypes.func,
 };
