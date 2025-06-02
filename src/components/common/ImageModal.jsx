@@ -128,7 +128,7 @@ const ImageModal = ({ images, initialIndex = 0, onClose }) => {
                 key={index}
                 src={media.type === 'video' && media.thumbnailUrl ? media.thumbnailUrl : media.url} // Use thumbnailUrl for video if available
                 alt={`${media.type === 'video' ? 'Video' : 'Image'} Thumbnail ${index + 1}`}
-                className={`w-16 h-16 flex-shrink-0 object-cover rounded-md cursor-pointer ${currentIndex === index ? 'border-2 border-white' : 'border-2 border-transparent hover:border-gray-400'}`}
+                className={`w-16 h-16 flex-shrink-0 object-cover rounded-md cursor-pointer ${currentIndex === index ? 'border-2 border-[#FFC61B]' : 'border-2 border-transparent hover:border-gray-400'}`}
                 onClick={() => setCurrentIndex(index)}
               />
             ))}

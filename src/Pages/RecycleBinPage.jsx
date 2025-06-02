@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import ExploreCard from "../components/cards/ExploreCard";
 import BackButton from "../components/common/BackButton";
@@ -13,19 +13,21 @@ export default function RecycleBinPage() {
   // Temporary data structure - will be replaced with actual data later
   const deletedLocations = [
     {
+      id: 1,
       name: "Golden Sovo",
       distance: "Phenom Penh ( 12km away )",
-      rating: "5.0",
-      reviews: "128",
+      rating: 5.0,
+      reviews: 128,
       services: ["Service 1", "Service 2", "Service3"],
       price: "50 USD",
       status: "Approved"
     },
     {
+      id: 2,
       name: "Soveila",
       distance: "Phenom Penh ( 12km away )",
-      rating: "5.0",
-      reviews: "128",
+      rating: 5.0,
+      reviews: 128,
       services: ["Service 1", "Service 2", "Service3"],
       price: "50 USD",
       status: "Rejected"
