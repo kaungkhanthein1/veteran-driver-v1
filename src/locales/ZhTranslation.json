@@ -33,7 +33,12 @@
     "name": "名称",
     "ok": "确定",
     "save": "保存",
-    "backButtonAltText": "返回按钮"
+    "backButtonAltText": "返回",
+    "anonymous": "匿名",
+    "reply": "回复",
+    "expandReplies": "展开{{count}}条回复",
+    "yes": "是",
+    "no": "否"
   },
   "explore": {
     "categories": {
@@ -48,7 +53,16 @@
       "price": "价格",
       "rating": "评分"
     },
-    "searchPlaceholder": "搜索位置..."
+    "searchPlaceholder": "搜索位置...",
+    "reviewsTitle": "评论 ({{count}})",
+    "hottestReviewButton": "最热门",
+    "latestReviewButton": "最新",
+    "writeReviewPlaceholder": "分享您的想法或建议...",
+    "sampleReview1": "这是一次令人惊叹的按摩体验！工作人员专业友好，氛围平静放松。力度刚刚好，我感觉所有的紧张都融化了。",
+    "sampleReply1": "感谢您的分享。",
+    "sampleReview2": "真是一次恢复活力的体验！从我走进来的那一刻起，我就感到受到欢迎和自在。治疗师细心且技艺娴熟，完全按照我的需求定制了疗程。",
+    "showMoreReviewsButton": "显示更多",
+    "recommendedTitle": "推荐"
   },
   "location": {
     "addLocation": "添加位置",
@@ -514,5 +528,14 @@
     "southkorea": "韩国",
     "thailand": "泰国",
     "vietnam": "越南"
+  },
+  "reviewPage": {
+    "title": "评价",
+    "accurateQuestion": "位置准确吗？",
+    "writeReviewPlaceholder": "分享您的想法或建议...",
+    "howWasExperienceQuestion": "您的体验如何？",
+    "addPhotoLabel": "添加照片 (最多{{max}}张)",
+    "postAsAnonymousLabel": "以匿名身份发布此评价",
+    "postButton": "发布"
   }
 }

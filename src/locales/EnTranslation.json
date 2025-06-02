@@ -33,7 +33,12 @@
     "name": "Name",
     "ok": "OK",
     "save": "Save",
-    "backButtonAltText": "Back"
+    "backButtonAltText": "Back",
+    "anonymous": "Anonymous",
+    "reply": "Reply",
+    "expandReplies": "Expand {{count}} replies",
+    "yes": "Yes",
+    "no": "No"
   },
   "explore": {
     "categories": {
@@ -187,7 +192,7 @@
   "locationDetails": {
     "shareAltText": "Share",
     "bookmarkAltText": "Bookmark",
-    "distance": "{{distance}} away",
+    "distance": "{{distance}}",
     "description": "{{description}}",
     "seeMoreButton": "see more",
     "addressAltText": "Address",
@@ -197,7 +202,12 @@
     "servicesTitle": "Services",
     "reviewsTitle": "Review ({{count}})",
     "hottestReviewButton": "Hottest",
-    "latestReviewButton": "Latest"
+    "latestReviewButton": "Latest",
+    "sampleReview1": "I had an amazing massage experience! The staff was professional and friendly, and the atmosphere was calm and relaxing. The pressure was just right, and I felt all my tension melt away.",
+    "sampleReply1": "Thanks For Sharing.",
+    "sampleReview2": "Truly a rejuvenating experience! From the moment I walked in, I felt welcomed and at ease. The therapist was attentive and skilled, customizing the session to exactly what I needed.",
+    "showMoreReviewsButton": "Show More",
+    "recommendedTitle": "Recommended"
   },
   "loginPage": {
     "title": "Log In",
@@ -363,7 +373,7 @@
     "popularTab": "Popular",
     "mostViewTab": "Most View",
     "trendingTab": "Trending",
-    "distance": "{{distance}} away",
+    "distance": "{{distance}}",
     "reviews": "({{count}})",
     "bookNowButton": "Book Now"
   },
@@ -514,5 +524,14 @@
     "southkorea": "South Korea",
     "thailand": "Thailand",
     "vietnam": "Vietnam"
+  },
+  "reviewPage": {
+    "title": "Review",
+    "accurateQuestion": "Was the location accurate?",
+    "writeReviewPlaceholder": "Share your thoughts or suggestions...",
+    "howWasExperienceQuestion": "How Was Your Experience?",
+    "addPhotoLabel": "Add a photo (max/{{max}})",
+    "postAsAnonymousLabel": "Post this review as an anonymous profile",
+    "postButton": "Post"
   }
 }

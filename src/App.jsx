@@ -31,6 +31,7 @@ import SearchLocationPage from "./Pages/SearchLocationPage";
 import LocationDetailsPage from "./Pages/LocationDetailsPage";
 import NotificationsPage from "./Pages/Profile/NotificationsPage";
 import ChangePasswordPage from "./Pages/Profile/ChangePasswordPage";
+import ReviewPage from "./Pages/ReviewPage";
 
 function App() {
   return (
@@ -69,6 +70,7 @@ function App() {
           <Route path="/location/:id" element={<LocationDetailsPage />} />
           <Route path="/notifications" element={<NotificationsPage/>} />
           <Route path="/settings/password" element={<ChangePasswordPage />} />
+          <Route path="/review" element={<ReviewPage />} />
         </Routes>
       </Router>
     </ThemeProvider>

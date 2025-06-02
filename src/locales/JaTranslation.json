@@ -29,11 +29,15 @@
     "delete": "削除",
     "description": "説明",
     "edit": "編集",
-    "mobileNumber": "携帯番号",
     "name": "名前",
     "ok": "OK",
     "save": "保存",
-    "backButtonAltText": "戻る"
+    "backButtonAltText": "戻る",
+    "anonymous": "匿名",
+    "reply": "返信",
+    "expandReplies": "{{count}}件の返信を展開",
+    "yes": "はい",
+    "no": "いいえ"
   },
   "explore": {
     "categories": {
@@ -48,7 +52,16 @@
       "price": "価格",
       "rating": "評価"
     },
-    "searchPlaceholder": "場所を検索..."
+    "searchPlaceholder": "場所を検索...",
+    "reviewsTitle": "レビュー（{{count}}）",
+    "hottestReviewButton": "人気",
+    "latestReviewButton": "最新",
+    "writeReviewPlaceholder": "感想や提案を共有しましょう...",
+    "sampleReview1": "素晴らしいマッサージ体験でした！スタッフはプロフェッショナルで親切で、雰囲気は落ち着いてリラックスできました。圧力もちょうど良く、全ての緊張が溶けていくのを感じました。",
+    "sampleReply1": "共有ありがとうございます。",
+    "sampleReview2": "本当に若返るような体験でした！入った瞬間から歓迎され、安心できました。セラピストは丁寧で熟練しており、私が必要とするものに正確に合わせてセッションをカスタマイズしてくれました。",
+    "showMoreReviewsButton": "もっと見る",
+    "recommendedTitle": "おすすめ"
   },
   "location": {
     "addLocation": "場所を追加",
@@ -514,5 +527,14 @@
     "southkorea": "韓国",
     "thailand": "タイ",
     "vietnam": "ベトナム"
+  },
+  "reviewPage": {
+    "title": "レビュー",
+    "accurateQuestion": "場所は正確でしたか？",
+    "writeReviewPlaceholder": "感想や提案を共有しましょう...",
+    "howWasExperienceQuestion": "体験はいかがでしたか？",
+    "addPhotoLabel": "写真を{{max}}枚まで追加",
+    "postAsAnonymousLabel": "匿名プロフィールとして投稿",
+    "postButton": "投稿"
   }
 }

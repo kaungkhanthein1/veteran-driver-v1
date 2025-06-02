@@ -31,9 +31,14 @@
     "edit": "수정",
     "mobileNumber": "휴대폰 번호",
     "name": "이름",
-    "ok": "확인",
+    "ok": "OK",
     "save": "저장",
-    "backButtonAltText": "뒤로가기 버튼 대체 텍스트"
+    "backButtonAltText": "뒤로",
+    "anonymous": "익명",
+    "reply": "답글",
+    "expandReplies": "답글 {{count}}개 확장",
+    "yes": "예",
+    "no": "아니요"
   },
   "explore": {
     "categories": {
@@ -48,7 +53,16 @@
       "price": "가격",
       "rating": "평점"
     },
-    "searchPlaceholder": "위치 검색..."
+    "searchPlaceholder": "위치 검색...",
+    "reviewsTitle": "리뷰 ({{count}})",
+    "hottestReviewButton": "가장 인기 있는",
+    "latestReviewButton": "최신",
+    "writeReviewPlaceholder": "생각이나 제안을 공유하세요...",
+    "sampleReview1": "놀라운 마사지 경험이었습니다! 직원들은 프로페셔널하고 친절했으며, 분위기는 차분하고 편안했습니다. 압력도 딱 좋았고, 모든 긴장이 풀리는 것을 느꼈습니다.",
+    "sampleReply1": "공유해 주셔서 감사합니다.",
+    "sampleReview2": "정말 활력을 되찾는 경험이었습니다! 들어서는 순간부터 환영받고 편안함을 느꼈습니다. 치료사는 세심하고 숙련되어 제가 필요한 것을 정확하게 맞춤 제공해 주었습니다.",
+    "showMoreReviewsButton": "더 보기",
+    "recommendedTitle": "추천"
   },
   "location": {
     "addLocation": "위치 추가",
@@ -514,5 +528,14 @@
     "southkorea": "대한민국",
     "thailand": "태국",
     "vietnam": "베트남"
+  },
+  "reviewPage": {
+    "title": "리뷰",
+    "accurateQuestion": "장소는 정확했습니까?",
+    "writeReviewPlaceholder": "생각이나 제안을 공유하세요...",
+    "howWasExperienceQuestion": "경험은 어떠셨습니까?",
+    "addPhotoLabel": "사진 추가 (최대 {{max}}장)",
+    "postAsAnonymousLabel": "익명 프로필로 게시",
+    "postButton": "게시"
   }
 }
