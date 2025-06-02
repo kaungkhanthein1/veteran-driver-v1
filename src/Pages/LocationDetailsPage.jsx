@@ -8,16 +8,37 @@ import RoomImage from 'assets/Room.png';
 import GoldenGateRoomImage from 'assets/GoldenGateRoom.png';
 import HarrierRoomImage from 'assets/HarrierRoom.png';
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ReviewCard from '../components/cards/ReviewCard';
 import ExploreCard from '../components/cards/ExploreCard';
 
 const LocationDetailsPage = () => {
+  console.log('LocationDetailsPage component is rendering');
   const navigate = useNavigate();
   const location = useLocation();
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [showHeaderBg, setShowHeaderBg] = useState(false);
   const { t } = useTranslation();
   
+  useEffect(() => {
+    const rootElement = document.getElementById('root');
+    if (!rootElement) return; // Exit if root element is not found
+
+    const handleScroll = () => {
+      const scrollPosition = rootElement.scrollTop;
+      // Show background when scrolled past the image carousel height (approx 300px)
+      const shouldShow = scrollPosition > 300;
+      setShowHeaderBg(shouldShow);
+      console.log('Scroll Position:', scrollPosition);
+      console.log('Show Header Background:', shouldShow);
+    };
+
+    rootElement.addEventListener('scroll', handleScroll);
+    // Check initial scroll position
+    handleScroll();
+    return () => rootElement.removeEventListener('scroll', handleScroll);
+  }, []); // Empty dependency array means this effect runs once on mount and cleans up on unmount
+
   const defaultLocationData = {
     id: 1,
     name: 'Angela House',
@@ -44,20 +65,24 @@ const LocationDetailsPage = () => {
   return (
     <div className="min-h-screen bg-theme-primary">
       {/* Header */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-theme-primary" style={{ top: '0' }}>
-        <div className="flex items-center justify-between p-2">
+      <div className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${showHeaderBg ? 'bg-theme-primary' : 'bg-transparent'}`} style={{ top: '0' }}>
+        <div className="flex items-center justify-between p-4">
           <BackButton onClick={() => navigate(-1)} />
           <div className="flex items-center flex-grow justify-center">
-            <h1 className="text-theme-text text-lg font-semibold">{locationData.name}</h1>
+            <h1 className={`text-lg font-semibold transition-colors duration-300 ${showHeaderBg ? 'text-theme-text' : 'text-white'}`}>{locationData.name}</h1>
           </div>
           <button className="p-2 z-10">
-            <img src={ShareIcon} alt={t('locationDetails.shareAltText')} className="w-6 h-6 [filter:var(--icon-filter)]" />
+            <img 
+              src={ShareIcon} 
+              alt={t('locationDetails.shareAltText')} 
+              className={`w-6 h-6 transition-all duration-300 ${showHeaderBg ? '[filter:var(--icon-filter)]' : '[filter:brightness(0)_invert(1)]'}`}
+            />
           </button>
         </div>
       </div>
 
       {/* Image Carousel */}
-      <div className="relative w-full h-[300px] mt-2">
+      <div className="relative w-full h-[300px] image-carousel">
         <img 
           src={locationData.images && locationData.images.length > 0 ? locationData.images[activeImageIndex] : RoomImage} 
           alt={`${locationData.name} view ${activeImageIndex + 1}`} 
