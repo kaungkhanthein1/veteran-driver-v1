@@ -216,7 +216,7 @@ const EditLocationPage = () => {
               <div>
                 <label className="block text-sm mb-2">{t('location.uploadDocument')} *</label>
                 <p className="text-theme-secondary text-xs mb-2">{t('location.uploadCertification')}</p>
-                <label className="cursor-pointer block">
+                <label className="cursor-pointer block w-[100px]">
                   <input
                     type="file"
                     accept=".pdf,.doc,.docx"

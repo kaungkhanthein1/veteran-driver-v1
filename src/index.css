@@ -118,5 +118,14 @@ body {
   color: black;
 }
 
+/* fallback: apply h-[100vh] by default */
+.dvh-fallback {
+  height: calc(100vh - 80px);
+}
 
-
+/* override with dvh if supported */
+/* @supports (height: 100dvh) {
+  .dvh-fallback {
+    height: 80dvh;
+  }
+} */

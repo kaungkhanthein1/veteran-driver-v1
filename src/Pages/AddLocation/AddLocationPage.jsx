@@ -83,7 +83,7 @@ const AddLocationPage = () => {
     <div className="min-h-screen flex justify-center bg-theme-primary">
       <div className="w-full max-w-[480px] flex flex-col">
         <div>
-          <div className="px-4 pt-4">
+          <div className="px-4 pt-4 pb-6">
             <div className="relative flex items-center mb-6">
               <div className="absolute left-0">
                 <BackButton/>
@@ -206,7 +206,7 @@ const AddLocationPage = () => {
               <div>
                 <label className="block text-sm mb-2">{t('location.uploadDocument')} *</label>
                 <p className="text-theme-secondary text-xs mb-2">{t('location.uploadCertification')}</p>
-                <label className="cursor-pointer block">
+                <label className="cursor-pointer block w-[100px]">
                   <input
                     type="file"
                     accept=".pdf,.doc,.docx"
