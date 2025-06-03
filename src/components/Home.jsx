@@ -16,6 +16,7 @@ import EVisaIcon from 'icons/HomeUpdate/Evisa.svg';
 import MoreIcon from 'icons/HomeUpdate/More.svg';
 import TuneIcon from '../icons/Tune.svg';
 import { useNavigate } from 'react-router-dom';
+import AuthModal from './AuthModal';
 
 const HomePage = () => {
   const { t } = useTranslation();
@@ -23,6 +24,7 @@ const HomePage = () => {
   const [activeThemeTab, setActiveThemeTab] = useState(t('homePage.serviceTabs.service1'));
   const { isBookmarked, toggleBookmark } = useBookmarks();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
   const navigate = useNavigate();
   // Mock data for feedbacks
   const feedbacks = [
@@ -128,13 +130,15 @@ const HomePage = () => {
   const themeTabs = ["All", "Nature", "Mountain", "Island", "Beach"];
 
   return (
-    <div className="dvh-fallback flex justify-center bg-theme-primary">
-      <div className="w-full max-w-[480px] flex flex-col">
-        <div className="flex-1 overflow-y-auto pb-16">
+    <div className="min-h-screen flex justify-center bg-theme-primary">
+      <div className="w-full max-w-[480px] flex flex-col h-full">
+        <div className="flex-1 overflow-y-auto pb-16"> {/* Main scrollable content area */}
           {/* New Header */}
           <div className="px-4 py-5 bg-theme-primary">
             <div className="flex justify-between items-center mb-4">
-              <div className="text-xl font-bold text-theme-text">{t('loginPage.title')} Or {t('registerPage.title')}</div>
+              <button onClick={() => setShowAuthModal(true)} className="text-xl font-bold text-theme-text focus:outline-none">
+                {t('loginPage.title')} Or {t('registerPage.title')}
+              </button>
               {/* Icons */}
               <div className="flex gap-3">
                 <button className="p-2">
@@ -345,6 +349,13 @@ const HomePage = () => {
         </div>
 
         {!isModalOpen && <BottomNavBar active="home" />}
+
+        {showAuthModal && (
+          <AuthModal
+            isOpen={showAuthModal}
+            onClose={() => setShowAuthModal(false)}
+          />
+        )}
       </div>
     </div>
   );
