@@ -532,6 +532,14 @@
     "howWasExperienceQuestion": "How Was Your Experience?",
     "addPhotoLabel": "Add a photo (max/{{max}})",
     "postAsAnonymousLabel": "Post this review as an anonymous profile",
-    "postButton": "Post"
+    "postButton": "Post",
+    "suggestionTags": {
+      "greatService": "Great Service",
+      "notBad": "Not Bad",
+      "wrongLocation": "Wrong location",
+      "poorService": "Poor Service",
+      "businessClosed": "Business Closed",
+      "notAsDescribed": "Not as described"
+    }
   }
 }

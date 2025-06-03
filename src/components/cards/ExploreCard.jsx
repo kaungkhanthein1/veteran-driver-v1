@@ -74,7 +74,7 @@ export default function ExploreCard({
             className="aspect-square bg-theme-primary rounded-lg relative overflow-hidden cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
-              handleMediaClick(allMedia[2], 2);
+              handleMediaClick({ type: "video", url: ExploreVideo, thumbnail: HarrierRoom }, 2);
             }}
           >
             <img src={HarrierRoom} alt={t('exploreCard.videoThumbnailAlt')} className="w-full h-full object-cover" />
