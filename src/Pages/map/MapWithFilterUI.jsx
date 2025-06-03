@@ -111,7 +111,12 @@ const MapWithFilterUI = () => {
             className="h-screen w-full z-0"
             zoomControl={false}
           >
-            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+            {/* <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" /> */}
+            <TileLayer
+              url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+              attribution='&copy; <a href="https://carto.com/">CARTO</a>'
+            />
+
             <Marker position={[mapCenter.lat, mapCenter.lng]} />
             <RecenterMap center={[mapCenter.lat, mapCenter.lng]} />
             <FilteredMarkers markers={filtered} />
@@ -137,7 +142,7 @@ const MapWithFilterUI = () => {
                     fill="#999999"
                   />
                 </svg>
-                <span className="">{t('mapWithFilter.searchPlaceholder')}</span>
+                <span className="">{t("mapWithFilter.searchPlaceholder")}</span>
               </div>
             </div>
           </div>
