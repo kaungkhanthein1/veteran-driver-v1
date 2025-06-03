@@ -30,7 +30,7 @@
   background: transparent;
 }
 
-.filter_active {
+/* .filter_active {
   border-radius: 100px;
   background: linear-gradient(
     325deg,
@@ -43,7 +43,7 @@
   font-weight: 500;
   line-height: 20px;
   letter-spacing: 0.24px;
-}
+} */
 
 .filter_UnActive {
   border-radius: 100px;
@@ -86,7 +86,7 @@
   letter-spacing: 0.56px;
 }
 
-.filter_active {
+.filter_active_map {
   border-radius: 8px;
   background: linear-gradient(
     325deg,

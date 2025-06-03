@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import FilterPanel from "./FilterPanel";
 import FilteredMarkers from "./FilteredMarkers";
@@ -41,6 +41,8 @@ const places = location.map((place) => ({
 
 const MapWithFilterUI = () => {
   const routeLocation = useLocation();
+  const mapRef = useRef(); // <== Add this ref
+
   const { t } = useTranslation();
   const [showFilter, setShowFilter] = useState(false);
   const selectedLocation = routeLocation.state?.selectedLocation;
@@ -147,13 +149,15 @@ const MapWithFilterUI = () => {
             </div>
           </div>
 
-          {showFilter && (
+          {showFilter ? (
             <FilterPanel
               filters={tempFilters}
               setFilters={setTempFilters}
               applyFilters={applyFilters}
               onClose={() => setShowFilter(false)}
             />
+          ) : (
+            ""
           )}
         </div>
       </div>
