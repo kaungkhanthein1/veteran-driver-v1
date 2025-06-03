@@ -67,7 +67,7 @@ export const location = [
       lat: 11.548921,
       lng: 104.927318,
     },
-    pricePerNight: 180,
+    pricePerNight: 120,
     rating: 3.4,
     distanceKm: 5.5,
     services: ["Service 6", "Service 5"],
