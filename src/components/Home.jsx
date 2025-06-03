@@ -215,11 +215,27 @@ const HomePage = () => {
                      style={{ backgroundImage: `url(${item.image})` }}
                    >
                      {/* Overlay Gradient/Darkening */}
-                     <div className="absolute inset-0 bg-black opacity-40"></div>
-                     {/* Overlay Text */}
+                     <div className="absolute inset-0 bg-black opacity-10"></div>
+                     {/* Overlay Text at bottom */}
                      <div className="absolute inset-0 flex flex-col justify-end p-4 text-white">
-                       <h3 className="text-lg font-bold leading-tight mb-1">{item.overlayText1}</h3>
+                       <h2 className="text-md font-bold leading-tight mb-1">{item.overlayText1}</h2>
                        <p className="text-sm leading-tight">{item.overlayText2}</p>
+                     </div>
+                     {/* Place name with special styling in upper center-left */}
+                     <div
+                       className="absolute right-4 top-1/3 transform -translate-y-1/2 text-white text-right"
+                       style={{
+                         color: '#FFF',
+                         fontVariantNumeric: 'lining-nums proportional-nums',
+                         fontFeatureSettings: '\'dlig\' on',
+                         fontFamily: '\'Herr Von Muellerhoff\', cursive',
+                         fontSize: '70px',
+                         fontStyle: 'normal',
+                         fontWeight: '400',
+                         lineHeight: 'normal',
+                       }}
+                     >
+                       {item.name}
                      </div>
                    </div>
                  ))}
