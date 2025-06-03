@@ -293,7 +293,7 @@ const HomePage = () => {
           {/* Category Tabs */}
           <div className="sticky top-0 z-10 bg-theme-primary">
             {/* Category Tabs (e.g., Hotels, Motels) - with underline indicator */}
-            <div className="flex overflow-x-auto px-4 py-3 gap-4 border-b border-theme-secondary">
+            <div className="flex overflow-x-auto px-4 py-3 gap-4">
               {categoryTabs.map(tab => (
                 <button
                   key={tab}
