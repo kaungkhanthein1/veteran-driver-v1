@@ -490,6 +490,12 @@
       "service2": "Service 2",
       "service3": "Service 3",
       "service4": "Service 4"
+    },
+    "iconLabels": {
+      "bar": "Bar",
+      "eVisa": "E-Visa",
+      "more": "More",
+      "massage": "Massage"
     }
   },
   "socialTabs": {

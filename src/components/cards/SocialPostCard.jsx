@@ -7,7 +7,7 @@ import RoomImg from "assets/Room.png";
 import SampleVideo from "assets/Sample.mp4";
 import { useTranslation } from 'react-i18next';
 
-export default function SocialPostCard({ post: providedPost, onOpenComments, compact = false, setIsModalOpen }) {
+export default function SocialPostCard({ post: providedPost, onOpenComments, compact = false, setIsModalOpen, className }) {
   const [expanded, setExpanded] = useState(false);
   const [selectedMedia, setSelectedMedia] = useState(null);
   const [showShareModal, setShowShareModal] = useState(false);
@@ -52,19 +52,21 @@ export default function SocialPostCard({ post: providedPost, onOpenComments, com
   };
 
   return (
-    <div className={`bg-theme-secondary border-b border-theme ${compact ? 'text-sm' : ''}`}>
+    <div className={`bg-theme-secondary border-b border-theme ${compact ? 'text-sm' : ''} ${className}`}>
       {/* User Info Row */}
-      <div className={`flex items-center ${compact ? 'px-3 py-2' : 'px-5 py-4'}`}>
-        <div className={`${compact ? 'w-7 h-7' : 'w-9 h-9'} rounded-full bg-blue-500 flex items-center justify-center mr-3`}>
-          <span className={`${compact ? 'text-sm' : 'text-base'} text-white`}>{post.user.name[0]}</span>
-        </div>
+      <div className={`flex items-center justify-between ${compact ? 'px-3 py-2' : 'px-5 py-4'}`}>
         <div className="flex items-center">
-          <span className={`font-semibold ${compact ? 'text-xs' : 'text-[14px]'} text-theme-primary mr-1.5`}>{post.user.name}</span>
-          {post.user.verified && (
-            <svg className={`${compact ? 'w-3 h-3' : 'w-4 h-4'}`} viewBox="0 0 24 24" fill="#3b82f6">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-            </svg>
-          )}
+          <div className={`${compact ? 'w-7 h-7' : 'w-9 h-9'} rounded-full bg-blue-500 flex items-center justify-center mr-3`}>
+            <span className={`${compact ? 'text-sm' : 'text-base'} text-white`}>{post.user.name[0]}</span>
+          </div>
+          <div className="flex items-center">
+            <span className={`font-semibold ${compact ? 'text-xs' : 'text-[14px]'} text-theme-primary mr-1.5`}>{post.user.name}</span>
+            {post.user.verified && (
+              <svg className={`${compact ? 'w-3 h-3' : 'w-4 h-4'}`} viewBox="0 0 24 24" fill="#3b82f6">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+            )}
+          </div>
         </div>
         {compact ? (
           <button className="ml-auto text-[#FFC61B] text-xs flex items-center">
@@ -98,7 +100,7 @@ export default function SocialPostCard({ post: providedPost, onOpenComments, com
           </div>
         </div>
       ) : (
-        <div className="px-5 text-[14px] text-theme-primary leading-6">
+        <div className="text-[14px] text-theme-primary leading-6 px-5">
           {expanded ? post.content : post.content.slice(0, 100)}
           {post.content.length > 100 && (
             <span
@@ -121,11 +123,11 @@ export default function SocialPostCard({ post: providedPost, onOpenComments, com
       )}
 
       {/* Media Grid */}
-      <div className={`grid grid-cols-3 gap-[1px] ${compact ? 'aspect-[3/1]' : ''}`}>
+      <div className={`grid grid-cols-3 gap-2 mt-4 ${compact ? 'aspect-[3/1]' : ''} px-5`}>
         {allMedia.map((media, idx) => (
           <div 
             key={idx} 
-            className="aspect-square bg-theme-primary cursor-pointer overflow-hidden"
+            className="aspect-square bg-theme-primary cursor-pointer overflow-hidden rounded-lg"
             onClick={() => handleMediaClick(media, idx)}
           >
             {media.type === 'image' && (
@@ -154,7 +156,7 @@ export default function SocialPostCard({ post: providedPost, onOpenComments, com
       </div>
 
       {/* Actions Row */}
-      <div className={`flex items-center ${compact ? 'px-3 py-2' : 'px-5 py-4'} text-theme-secondary`}>
+      <div className={`flex items-center ${compact ? 'px-3 py-2' : 'py-4'} text-theme-secondary px-5`}>
         <span className={`${compact ? 'text-[10px]' : 'text-[12px]'}`}>{post.time}</span>
         <div className="ml-auto flex items-center space-x-4">
           <button className={`flex items-center ${compact ? 'text-[11px]' : 'text-[13px]'}`}>
@@ -222,4 +224,5 @@ SocialPostCard.propTypes = {
   onOpenComments: PropTypes.func,
   compact: PropTypes.bool,
   setIsModalOpen: PropTypes.func,
+  className: PropTypes.string,
 };
