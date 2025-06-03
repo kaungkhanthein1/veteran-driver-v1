@@ -17,6 +17,7 @@ import MoreIcon from 'icons/HomeUpdate/More.svg';
 import TuneIcon from '../icons/Tune.svg';
 import { useNavigate } from 'react-router-dom';
 import AuthModal from './AuthModal';
+import FilterPanel from '../Pages/map/FilterPanel';
 
 const HomePage = () => {
   const { t } = useTranslation();
@@ -26,6 +27,21 @@ const HomePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const navigate = useNavigate();
+  const [showFilterPanel, setShowFilterPanel] = useState(false);
+  const [filters, setFilters] = useState({
+    priceRange: [0, 1000],
+    distance: 50,
+    rating: 0,
+    services: [],
+    sort: t('filterPanel.sortOptions.comprehensive'),
+  });
+
+  const applyFilters = () => {
+    // TODO: Implement actual filter application logic
+    console.log('Applying filters:', filters);
+    setShowFilterPanel(false);
+  };
+
   // Mock data for feedbacks
   const feedbacks = [
     {
@@ -165,7 +181,10 @@ const HomePage = () => {
                 />
               </div>
               {/* Filter Button */}
-              <button className="w-13 h-13 bg-theme-secondary rounded-full flex items-center justify-center p-2">
+              <button
+                className="w-13 h-13 bg-theme-secondary rounded-full flex items-center justify-center p-2"
+                onClick={() => setShowFilterPanel(true)}
+              >
                 <img src={TuneIcon} alt="Filter" className="w-9 h-9 [filter:var(--icon-filter)]" />
               </button>
             </div>
@@ -354,6 +373,16 @@ const HomePage = () => {
           <AuthModal
             isOpen={showAuthModal}
             onClose={() => setShowAuthModal(false)}
+          />
+        )}
+        {/* Filter Panel Modal */}
+        {showFilterPanel && (
+          <FilterPanel
+            isOpen={showFilterPanel}
+            onClose={() => setShowFilterPanel(false)}
+            filters={filters}
+            setFilters={setFilters}
+            applyFilters={applyFilters}
           />
         )}
       </div>

@@ -120,13 +120,13 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
               values={filters.priceRange}
               onChange={(values) => setFilters({ ...filters, priceRange: values })}
               renderTrack={({ props, children }) => {
-                const { key, ...otherProps } = props;
+                const { key, ...restProps } = props;
                 const value = filters.priceRange[0];
                 const percentage = (value - MIN) / (MAX - MIN) * 100;
                 return (
                   <div
                     key={key}
-                    {...otherProps}
+                    {...restProps}
                     className="w-full h-[16px] range_input_c"
                     style={{
                       background: `linear-gradient(to right, var(--accent-yellow) ${percentage}%, var(--bg-secondary) ${percentage}%)`,
@@ -137,12 +137,12 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                 );
               }}
               renderThumb={({ props, index }) => {
-                const { key, ...otherProps } = props;
+                const { key, ...restProps } = props;
                 if (index === 0) {
                   return (
                     <div
                       key={key}
-                      {...otherProps}
+                      {...restProps}
                       className="w-[4px] h-[44px] rounded-full shadow"
                       style={{ backgroundColor: 'var(--accent-yellow)' }}
                     />
@@ -151,7 +151,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                   return (
                     <div
                       key={key}
-                      {...otherProps}
+                      {...restProps}
                       style={{
                         width: '0px',
                         height: '0px',
@@ -226,12 +226,12 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
               onChange={(values) => handleChange("distance", values[0])}
               renderTrack={({ props, children }) => {
                 const distance = filters.distance;
-                const percentage = ((distance - 0) / (50 - 0)) * 100;
-                const { key, ...otherProps } = props;
+                const percentage = (distance - 0) / (50 - 0) * 100;
+                const { key, ...restProps } = props;
                 return (
                   <div
                     key={key}
-                    {...otherProps}
+                    {...restProps}
                     className="w-full h-[16px] range_input_c rounded"
                     style={{
                       background: `linear-gradient(to right, var(--accent-yellow) ${percentage}%, var(--bg-secondary) ${percentage}%)`,
@@ -242,11 +242,17 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                 );
               }}
               renderThumb={({ props }) => (
-                <div
-                  {...props}
-                  className="w-[4px] h-[44px] rounded-full shadow"
-                  style={{ backgroundColor: "var(--accent-yellow)" }}
-                />
+                (() => {
+                  const { key, ...restProps } = props;
+                  return (
+                    <div
+                      key={key}
+                      {...restProps}
+                      className="w-[4px] h-[44px] rounded-full shadow"
+                      style={{ backgroundColor: 'var(--accent-yellow)' }}
+                    />
+                  );
+                })()
               )}
             />
           </div>
