@@ -9,11 +9,11 @@ import HarrierImage from 'assets/Harrier.png';
 import MapIcon from 'icons/HomeUpdate/map.svg';
 import DropdownArrow from 'icons/HomeUpdate/Dropdown.svg';
 import CountryFlag from 'icons/HomeUpdate/thai.png';
-import HotelIcon from 'icons/HomeUpdate/hotel.svg';
-import MassageIcon from 'icons/HomeUpdate/massage.svg';
-import BarIcon from 'icons/HomeUpdate/bar.svg';
-import EVisaIcon from 'icons/HomeUpdate/evisa.svg';
-import MoreIcon from 'icons/HomeUpdate/more.svg';
+import HotelIcon from 'icons/HomeUpdate/Hotel.svg';
+import MassageIcon from 'icons/HomeUpdate/Massage.svg';
+import BarIcon from 'icons/HomeUpdate/Bar.svg';
+import EVisaIcon from 'icons/HomeUpdate/Evisa.svg';
+import MoreIcon from 'icons/HomeUpdate/More.svg';
 import TuneIcon from '../icons/Tune.svg';
 
 const HomePage = () => {
