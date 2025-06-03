@@ -122,7 +122,7 @@ const MapWithFilterUI = () => {
             <FilteredMarkers markers={filtered} />
           </MapContainer>
 
-          <div className="absolute w-full top-6 left-0 text-white rounded-full shadow-lg">
+          <div className="absolute w-full top-6 left-0 text-white rounded-full shadow-">
             <div className="flex justify-center items-center gap-[4px] px-4">
               {/* <BackButton/> */}
               <BackButtonDark />
