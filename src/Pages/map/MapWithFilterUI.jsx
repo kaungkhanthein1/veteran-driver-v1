@@ -8,6 +8,7 @@ import "./map.css";
 import { location } from "./Place";
 import BackButton from "../../components/common/BackButton";
 import { useTranslation } from "react-i18next";
+import BackButtonDark from "components/common/BackButtonDark";
 
 const RecenterMap = ({ center }) => {
   // TODO: Add PropTypes for prop validation
@@ -110,18 +111,24 @@ const MapWithFilterUI = () => {
             className="h-screen w-full z-0"
             zoomControl={false}
           >
-            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+            {/* <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" /> */}
+            <TileLayer
+              url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+              attribution='&copy; <a href="https://carto.com/">CARTO</a>'
+            />
+
             <Marker position={[mapCenter.lat, mapCenter.lng]} />
             <RecenterMap center={[mapCenter.lat, mapCenter.lng]} />
             <FilteredMarkers markers={filtered} />
           </MapContainer>
 
           <div className="absolute w-full top-6 left-0 text-white rounded-full shadow-lg">
-            <div className="flex justify-center items-center gap-[12px] px-4">
-              <BackButton/>
+            <div className="flex justify-center items-center gap-[4px] px-4">
+              {/* <BackButton/> */}
+              <BackButtonDark />
               <div
                 onClick={() => setShowFilter(true)}
-                className="search_box p-[16px] flex justify-center items-center w-4/5"
+                className="search_box p-[16px] gap-3 flex justify- items-center w-full"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -135,7 +142,7 @@ const MapWithFilterUI = () => {
                     fill="#999999"
                   />
                 </svg>
-                <span className="">{t('mapWithFilter.searchPlaceholder')}</span>
+                <span className="">{t("mapWithFilter.searchPlaceholder")}</span>
               </div>
             </div>
           </div>
