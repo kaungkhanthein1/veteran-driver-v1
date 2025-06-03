@@ -134,7 +134,17 @@ const LocationDetailsPage = () => {
           <div className="flex items-center space-x-3">
             <img src={PlaceIcon} alt={t('locationDetails.addressAltText')} className="w-6 h-6 [filter:var(--icon-filter)]" />
             <span className="text-theme-secondary flex-1">{locationData.address}</span>
-            <button className="px-3 py-1 rounded-full border border-[#FDC51B] text-[#FDC51B] text-sm">
+            <button 
+              className="px-3 py-1 rounded-full border border-[#FDC51B] text-[#FDC51B] text-sm"
+              onClick={() => {
+                if (locationData && locationData.lat && locationData.lng) {
+                  navigate('/map', { state: { selectedLocation: { lat: locationData.lat, lng: locationData.lng } } });
+                } else {
+                  console.warn('Location data or coordinates not available for map navigation. Navigating to general map view.');
+                  navigate('/map'); // Navigate to the general map view
+                }
+              }}
+            >
               {t('locationDetails.checkMapButton')}
             </button>
           </div>
@@ -195,7 +205,7 @@ const LocationDetailsPage = () => {
             <textarea 
               type="text" 
               placeholder={t('reviewPage.writeReviewPlaceholder')} 
-              className="bg-transparent text-theme-text w-full outline-none resize-none focus:outline-none focus:ring-0 focus:border-transparent"
+              className="bg-transparent text-theme-text w-full outline-none resize-none focus:outline-none focus:ring-0 focus:border-transparent border-none"
             />
           </div>
 
