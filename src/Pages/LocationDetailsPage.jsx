@@ -18,6 +18,7 @@ const LocationDetailsPage = () => {
   const location = useLocation();
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [showHeaderBg, setShowHeaderBg] = useState(false);
+  const [activeReviewFilter, setActiveReviewFilter] = useState('Hottest');
   const { t } = useTranslation();
   
   useEffect(() => {
@@ -165,7 +166,27 @@ const LocationDetailsPage = () => {
 
         {/* Reviews */}
         <div className="p-4 space-y-4">
-          <h3 className="text-theme-text text-lg font-semibold">{t('locationDetails.reviewsTitle', { count: 120 })}</h3>
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="text-theme-text text-lg font-semibold">{t('locationDetails.reviewsTitle', { count: 120 })}</h3>
+            <div className="flex bg-theme-secondary rounded-full p-1">
+              <button
+                className={`px-4 py-1 rounded-full text-sm font-medium 
+                  ${activeReviewFilter === 'Hottest' ? 'bg-[#FFC61B] text-black' : 'text-theme-text'}
+                `}
+                onClick={() => setActiveReviewFilter('Hottest')}
+              >
+                {t('locationDetails.hottestReviewButton')}
+              </button>
+              <button
+                className={`px-4 py-1 rounded-full text-sm font-medium 
+                  ${activeReviewFilter === 'Latest' ? 'bg-[#FFC61B] text-black' : 'text-theme-text'}
+                `}
+                onClick={() => setActiveReviewFilter('Latest')}
+              >
+                {t('locationDetails.latestReviewButton')}
+              </button>
+            </div>
+          </div>
           {/* Write a Review Input */}
           <div 
             className="bg-theme-secondary rounded-lg p-3 flex h-[100px] cursor-pointer"
