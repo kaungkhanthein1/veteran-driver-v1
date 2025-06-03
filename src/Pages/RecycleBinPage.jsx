@@ -60,7 +60,7 @@ export default function RecycleBinPage() {
   };
 
   return (
-    <div className="min-h-screen bg-theme-primary relative">
+    <div className="dvh-fallback bg-theme-primary relative">
       {/* Header */}
       <div className="relative flex items-center justify-between px-4 py-3 bg-theme-secondary pt-6">
         <BackButton className="absolute left-4"/>

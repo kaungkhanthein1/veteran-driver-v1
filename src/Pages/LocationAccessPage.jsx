@@ -18,7 +18,7 @@ export default function LocationAccessPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-theme-primary px-4">
+    <div className="dvh-fallback flex flex-col justify-center items-center bg-theme-primary px-4">
       <div className="flex flex-col items-center max-w-[320px] w-full">
         <div className="bg-theme-secondary rounded-full p-8 mb-12">
           <Place className="w-16 h-16 text-[#FFC61B]" />

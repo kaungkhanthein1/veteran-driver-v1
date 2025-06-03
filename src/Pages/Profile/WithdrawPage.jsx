@@ -38,7 +38,7 @@ export default function WithdrawPage() {
   };
 
   return (
-    <div className="min-h-screen bg-theme-primary text-theme-text">
+    <div className="dvh-fallback bg-theme-primary text-theme-text">
       <div className="max-w-[480px] mx-auto">
         {/* Header */}
         <div className="flex items-center px-4 py-4">

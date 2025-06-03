@@ -104,7 +104,7 @@ const MapWithFilterUI = () => {
   const filtered = filterMarkers(); // This variable is used now
 
   return (
-    <div className="min-h-screen flex justify-center bg-theme-primary">
+    <div className="dvh-fallback flex justify-center bg-theme-primary">
       <div className="w-full max-w-[480px] flex flex-col relative">
         <div className="flex-1">
           <MapContainer

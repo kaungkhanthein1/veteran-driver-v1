@@ -130,7 +130,7 @@ const HomePage = () => {
   const themeTabs = ["All", "Nature", "Mountain", "Island", "Beach"];
 
   return (
-    <div className="min-h-screen flex justify-center bg-theme-primary">
+    <div className="dvh-fallback flex justify-center bg-theme-primary">
       <div className="w-full max-w-[480px] flex flex-col h-full">
         <div className="flex-1 overflow-y-auto pb-16"> {/* Main scrollable content area */}
           {/* New Header */}

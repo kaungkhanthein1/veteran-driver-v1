@@ -28,7 +28,7 @@ export default function ChangePasswordPage() {
   };
 
   return (
-    <div className="min-h-screen bg-theme-primary text-theme-primary">
+    <div className="dvh-fallback bg-theme-primary text-theme-primary">
       {/* Header */}
       <div className="px-4 py-4 relative flex items-center">
         <div className="absolute left-3">

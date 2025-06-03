@@ -64,7 +64,7 @@ const LocationDetailsPage = () => {
   const locationData = location.state?.locationData || defaultLocationData;
 
   return (
-    <div className="min-h-screen bg-theme-primary">
+    <div className="dvh-fallback bg-theme-primary">
       {/* Header */}
       <div className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${showHeaderBg ? 'bg-theme-primary' : 'bg-transparent'}`} style={{ top: '0' }}>
         <div className="flex items-center justify-between p-4">

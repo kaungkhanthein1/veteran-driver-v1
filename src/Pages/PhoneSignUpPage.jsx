@@ -14,7 +14,7 @@ export default function PhoneSignUpPage() {
   const isFormFilled = phoneNumber.trim() !== "+66" && password.trim() !== "";
 
   return (
-    <div className="min-h-screen flex flex-col justify-between items-center bg-theme-primary px-4 py-8">
+    <div className="dvh-fallback flex flex-col justify-between items-center bg-theme-primary px-4 py-8">
       <div className="w-full max-w-md mx-auto flex flex-col items-center">
         <div className="w-full flex items-center mb-8">
           <BackButton/>

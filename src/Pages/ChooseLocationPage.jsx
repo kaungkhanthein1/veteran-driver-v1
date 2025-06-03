@@ -27,7 +27,7 @@ export default function ChooseLocationPage() {
   );
 
   return (
-    <div className="min-h-screen flex flex-col bg-theme-primary px-4 py-8">
+    <div className="dvh-fallback flex flex-col bg-theme-primary px-4 py-8">
       <div className="flex items-center mb-6">
         <BackButton/>
         <h2 className="text-xl font-bold text-theme-primary">{t('chooseLocation.selectRegionTitle')}</h2>

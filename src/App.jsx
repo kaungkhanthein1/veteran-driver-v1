@@ -35,7 +35,7 @@ import ReviewPage from "./Pages/ReviewPage";
 
 function App() {
   return (
-    <div className="max-w-[480px] mx-auto min-h-screen bg-theme-primary">
+    <div className="max-w-[480px] mx-auto dvh-fallback bg-theme-primary">
     <ThemeProvider>
       <Router>
         <Routes>
