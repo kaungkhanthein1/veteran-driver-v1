@@ -125,8 +125,12 @@ body {
 }
 
 /* override with dvh if supported */
-/* @supports (height: 100dvh) {
+@supports (height: 100dvh) {
   .dvh-fallback {
     height: 80dvh;
   }
-} */
+}
+
+.leaflet-touch .leaflet-control-attribution, .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
+  display: none !important;
+}
