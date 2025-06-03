@@ -112,7 +112,7 @@ const HomePage = () => {
       id: "1",
       name: "Golden Gate",
       images: ["/path/to/image1", "/path/to/image2", "/path/to/image3"],
-      rating: 5.0,
+      rating: 4,
       reviews: 128,
       price: "50 USD",
       services: ["Service 1", "Service 2", "Service 3"],
