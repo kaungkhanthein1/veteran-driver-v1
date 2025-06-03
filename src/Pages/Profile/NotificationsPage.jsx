@@ -10,7 +10,7 @@ const NotificationsPage = () => {
   const { t } = useTranslation();
   
   return (
-    <div className="min-h-screen bg-theme-primary text-theme-text">
+    <div className="dvh-fallback bg-theme-primary text-theme-text">
       {/* Header */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-theme-primary">
         <div className="relative flex items-center p-4">

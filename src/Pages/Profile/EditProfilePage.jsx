@@ -56,7 +56,7 @@ export default function EditProfilePage() {
   };
 
   return (
-    <div className="min-h-screen bg-theme-background">
+    <div className="dvh-fallback bg-theme-background">
       <div className="max-w-[480px] mx-auto">
         {/* Header */}
         <div className="flex items-center px-4 py-4">

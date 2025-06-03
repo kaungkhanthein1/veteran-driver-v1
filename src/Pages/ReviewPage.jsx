@@ -56,7 +56,7 @@ export default function ReviewPage() {
   };
 
   return (
-    <div className="min-h-screen bg-theme-primary text-theme-text">
+    <div className="dvh-fallback bg-theme-primary text-theme-text">
       {/* Header */}
       <div className="px-4 py-4 relative flex items-center justify-between">
         <BackButton onClick={() => navigate(-1)} />

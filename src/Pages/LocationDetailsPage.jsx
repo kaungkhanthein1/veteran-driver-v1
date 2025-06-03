@@ -18,6 +18,7 @@ const LocationDetailsPage = () => {
   const location = useLocation();
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [showHeaderBg, setShowHeaderBg] = useState(false);
+  const [activeReviewFilter, setActiveReviewFilter] = useState('Hottest');
   const { t } = useTranslation();
   
   useEffect(() => {
@@ -63,7 +64,7 @@ const LocationDetailsPage = () => {
   const locationData = location.state?.locationData || defaultLocationData;
 
   return (
-    <div className="min-h-screen bg-theme-primary">
+    <div className="dvh-fallback bg-theme-primary">
       {/* Header */}
       <div className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${showHeaderBg ? 'bg-theme-primary' : 'bg-transparent'}`} style={{ top: '0' }}>
         <div className="flex items-center justify-between p-4">
@@ -133,7 +134,17 @@ const LocationDetailsPage = () => {
           <div className="flex items-center space-x-3">
             <img src={PlaceIcon} alt={t('locationDetails.addressAltText')} className="w-6 h-6 [filter:var(--icon-filter)]" />
             <span className="text-theme-secondary flex-1">{locationData.address}</span>
-            <button className="px-3 py-1 rounded-full border border-[#FDC51B] text-[#FDC51B] text-sm">
+            <button 
+              className="px-3 py-1 rounded-full border border-[#FDC51B] text-[#FDC51B] text-sm"
+              onClick={() => {
+                if (locationData && locationData.lat && locationData.lng) {
+                  navigate('/map', { state: { selectedLocation: { lat: locationData.lat, lng: locationData.lng } } });
+                } else {
+                  console.warn('Location data or coordinates not available for map navigation. Navigating to general map view.');
+                  navigate('/map'); // Navigate to the general map view
+                }
+              }}
+            >
               {t('locationDetails.checkMapButton')}
             </button>
           </div>
@@ -165,7 +176,27 @@ const LocationDetailsPage = () => {
 
         {/* Reviews */}
         <div className="p-4 space-y-4">
-          <h3 className="text-theme-text text-lg font-semibold">{t('locationDetails.reviewsTitle', { count: 120 })}</h3>
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="text-theme-text text-lg font-semibold">{t('locationDetails.reviewsTitle', { count: 120 })}</h3>
+            <div className="flex bg-theme-secondary rounded-full p-1">
+              <button
+                className={`px-4 py-1 rounded-full text-sm font-medium 
+                  ${activeReviewFilter === 'Hottest' ? 'bg-[#FFC61B] text-black' : 'text-theme-text'}
+                `}
+                onClick={() => setActiveReviewFilter('Hottest')}
+              >
+                {t('locationDetails.hottestReviewButton')}
+              </button>
+              <button
+                className={`px-4 py-1 rounded-full text-sm font-medium 
+                  ${activeReviewFilter === 'Latest' ? 'bg-[#FFC61B] text-black' : 'text-theme-text'}
+                `}
+                onClick={() => setActiveReviewFilter('Latest')}
+              >
+                {t('locationDetails.latestReviewButton')}
+              </button>
+            </div>
+          </div>
           {/* Write a Review Input */}
           <div 
             className="bg-theme-secondary rounded-lg p-3 flex h-[100px] cursor-pointer"
@@ -174,7 +205,7 @@ const LocationDetailsPage = () => {
             <textarea 
               type="text" 
               placeholder={t('reviewPage.writeReviewPlaceholder')} 
-              className="bg-transparent text-theme-text w-full outline-none resize-none focus:outline-none focus:ring-0 focus:border-transparent"
+              className="bg-transparent text-theme-text w-full outline-none resize-none focus:outline-none focus:ring-0 focus:border-transparent border-none"
             />
           </div>
 

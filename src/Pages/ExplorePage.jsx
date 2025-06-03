@@ -32,7 +32,18 @@ const exploreItems = [
     services: ["Service 1", "Service 2", "Service3"],
     type: "Hotel",
     image: HarrierImage
-  }
+  },
+  {
+    id: 3,
+    name: "BUGARIA",
+    price: "50 USD",
+    rating: 5.0,
+    reviews: 128,
+    distance: "12km away",
+    services: ["Service 1", "Service 2", "Service3"],
+    type: "Hotel",
+    image: GoldenGateImage
+  },
 ];
 
 export default function ExplorePage() {
@@ -43,11 +54,12 @@ export default function ExplorePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="min-h-screen flex justify-center bg-theme-primary">
+    <div className="dvh-fallback flex justify-center bg-theme-primary">
       <div className="w-full max-w-[480px] flex flex-col">
-        <div className="flex-1 overflow-y-auto pb-16">
-          {/* Search Bar */}
-          <div className="sticky top-0 z-10 bg-theme-primary">
+        <div className="flex-1 overflow-y-auto pb-24">
+          {/* Scrollable Content - Search Bar, Ads, Top Picks, Recommended */}
+          <div className="bg-theme-primary">
+            {/* Search Bar */}
             <div className="px-4 py-3 flex items-center gap-3">
               <div className="flex-1 flex items-center gap-2 bg-theme-secondary rounded-[14px] px-3 py-[8px]">
                 <svg className="w-[18px] h-[18px] text-theme-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -137,7 +149,10 @@ export default function ExplorePage() {
             <div className="px-4 mb-4">
               <h2 className="text-theme-primary text-lg font-semibold mb-3">{t('explorePage.recommendedTitle')}</h2>
             </div>
+          </div>
 
+          {/* Sticky Tabs */}
+          <div className="sticky top-0 z-10 bg-theme-primary">
             <ExploreTabs activeTab={activeTab} setActiveTab={setActiveTab} />
             <div className="h-[1px] bg-theme-secondary"></div>
           </div>

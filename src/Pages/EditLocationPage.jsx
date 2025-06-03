@@ -89,7 +89,7 @@ const EditLocationPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center bg-theme-primary">
+    <div className="dvh-fallback flex justify-center bg-theme-primary">
       <div className="w-full max-w-[480px] flex flex-col">
         <div className="flex-1 overflow-y-auto pb-16">
           <div className="px-4 pt-6"> {/* Added pt-6 for top margin */}
@@ -216,7 +216,7 @@ const EditLocationPage = () => {
               <div>
                 <label className="block text-sm mb-2">{t('location.uploadDocument')} *</label>
                 <p className="text-theme-secondary text-xs mb-2">{t('location.uploadCertification')}</p>
-                <label className="cursor-pointer block">
+                <label className="cursor-pointer block w-[100px]">
                   <input
                     type="file"
                     accept=".pdf,.doc,.docx"

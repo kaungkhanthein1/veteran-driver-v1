@@ -35,7 +35,7 @@ export default function UploadedLocationPage() {
   };
 
   return (
-    <div className="min-h-screen bg-theme-primary">
+    <div className="dvh-fallback bg-theme-primary">
       {/* Header */}
       <div className="relative flex items-center px-4 py-3 bg-theme-secondary">
         <BackButton className="absolute left-4"/>

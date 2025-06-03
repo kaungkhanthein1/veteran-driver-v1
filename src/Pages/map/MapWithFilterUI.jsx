@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import FilterPanel from "./FilterPanel";
 import FilteredMarkers from "./FilteredMarkers";
@@ -41,6 +41,8 @@ const places = location.map((place) => ({
 
 const MapWithFilterUI = () => {
   const routeLocation = useLocation();
+  const mapRef = useRef(); // <== Add this ref
+
   const { t } = useTranslation();
   const [showFilter, setShowFilter] = useState(false);
   const selectedLocation = routeLocation.state?.selectedLocation;
@@ -102,7 +104,7 @@ const MapWithFilterUI = () => {
   const filtered = filterMarkers(); // This variable is used now
 
   return (
-    <div className="min-h-screen flex justify-center bg-theme-primary">
+    <div className="dvh-fallback flex justify-center bg-theme-primary">
       <div className="w-full max-w-[480px] flex flex-col relative">
         <div className="flex-1">
           <MapContainer
@@ -122,7 +124,7 @@ const MapWithFilterUI = () => {
             <FilteredMarkers markers={filtered} />
           </MapContainer>
 
-          <div className="absolute w-full top-6 left-0 text-white rounded-full shadow-lg">
+          <div className="absolute w-full top-6 left-0 text-white rounded-full shadow-">
             <div className="flex justify-center items-center gap-[4px] px-4">
               {/* <BackButton/> */}
               <BackButtonDark />
@@ -147,13 +149,15 @@ const MapWithFilterUI = () => {
             </div>
           </div>
 
-          {showFilter && (
+          {showFilter ? (
             <FilterPanel
               filters={tempFilters}
               setFilters={setTempFilters}
               applyFilters={applyFilters}
               onClose={() => setShowFilter(false)}
             />
+          ) : (
+            ""
           )}
         </div>
       </div>

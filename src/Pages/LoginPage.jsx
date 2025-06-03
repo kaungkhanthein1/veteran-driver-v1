@@ -13,7 +13,7 @@ export default function LoginPage() {
   const isFormFilled = emailOrPhone.trim() !== "" && password.trim() !== "";
 
   return (
-    <div className="min-h-screen flex flex-col justify-between items-center bg-theme-primary px-4 py-8">
+    <div className="dvh-fallback flex flex-col justify-between items-center bg-theme-primary px-4 py-8">
       <div className="w-full max-w-md mx-auto flex flex-col items-center">
         <div className="mt-8 mb-2 text-center">
           <h1 className="text-3xl font-bold text-theme-primary mb-2">{t('loginPage.title')}</h1>

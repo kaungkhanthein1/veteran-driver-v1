@@ -77,7 +77,7 @@ export default function SearchLocationPage() {
   };
 
   return (
-    <div className="min-h-screen bg-theme-primary">
+    <div className="dvh-fallback bg-theme-primary">
       <div className="max-w-[480px] mx-auto">
         {/* Search Header */}
         <div className="flex items-center gap-2 p-4 bg-theme-secondary">
