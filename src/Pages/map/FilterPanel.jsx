@@ -31,6 +31,9 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
     t("filterPanel.serviceOptions.service6"),
   ];
 
+  const categoryOptions = ["All", "Hotel", "Massage", "Club", "Bar"];
+  const [activeCategory, setActiveCategory] = useState("All");
+
   useEffect(() => {
     // trigger the slide-in after mount
     setTimeout(() => setIsVisible(true), 10);
@@ -70,7 +73,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
     <>
       <div className="fixed inset-0 bg-black/50 z-40" onClick={handleClose} />
       <div
-        className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] h-[85vh] bg-[var(--bg-primary)] p-4 z-50 shadow-lg rounded-t-2xl transition-all duration-300 ease-out overflow-y-auto
+        className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] h-[95vh] bg-[var(--bg-primary)] p-4 z-50 shadow-lg rounded-t-2xl transition-all duration-300 ease-out overflow-y-auto
         ${isVisible ? "translate-y-0" : "translate-y-full"}`}
       >
         {/* Drag handle */}
@@ -226,7 +229,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
               onChange={(values) => handleChange("distance", values[0])}
               renderTrack={({ props, children }) => {
                 const distance = filters.distance;
-                const percentage = (distance - 0) / (50 - 0) * 100;
+                const percentage = ((distance - 0) / (50 - 0)) * 100;
                 const { key, ...restProps } = props;
                 return (
                   <div
@@ -241,7 +244,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                   </div>
                 );
               }}
-              renderThumb={({ props }) => (
+              renderThumb={({ props }) =>
                 (() => {
                   const { key, ...restProps } = props;
                   return (
@@ -249,11 +252,11 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                       key={key}
                       {...restProps}
                       className="w-[4px] h-[44px] rounded-full shadow"
-                      style={{ backgroundColor: 'var(--accent-yellow)' }}
+                      style={{ backgroundColor: "var(--accent-yellow)" }}
                     />
                   );
                 })()
-              )}
+              }
             />
           </div>
 
@@ -277,6 +280,33 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                   {ratingLabels[value]}
                 </button>
               ))}
+            </div>
+          </div>
+
+          {/* category */}
+          <div className="space-y-3">
+            <label className="block text-[var(--text-primary)] font-medium">
+              {/* {t("filterPanel.servicesLabel")} */}
+              Categories
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {categoryOptions.map((category) => {
+                const isActive = activeCategory === category;
+                return (
+                  <button
+                    key={category}
+                    onClick={() => setActiveCategory(category)}
+                    className={`px-4 py-2 rounded-full text-sm transition-all duration-200
+        ${
+          isActive
+            ? "filter_active_map"
+            : "bg-[var(--bg-secondary)] text-[var(--text-primary)]"
+        }`}
+                  >
+                    {category}
+                  </button>
+                );
+              })}
             </div>
           </div>
 
