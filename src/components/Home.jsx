@@ -137,9 +137,19 @@ const HomePage = () => {
 
   // Mock data for nearest places - Updated structure for banner design
   const nearestPlaces = [
-
     {
-      id: 1,
+      id: "np1",
+      name: "Kuma",
+      price: "50 USD",
+      rating: 4.5,
+      reviews: 80,
+      distance: "1.2km away",
+      image: GoldenGateImage,
+      overlayText1: "Escape to Bali this Summer",
+      overlayText2: "Over 100 travelers booked this week!"
+    },
+    {
+      id: "np2",
       name: "Sunny",
       price: "45 USD",
       rating: 4.0,
@@ -151,7 +161,7 @@ const HomePage = () => {
     },
 
     {
-      id: 2,
+      id: "np3",
       name: "New Place",
       price: "60 USD",
       rating: 4.8,
@@ -163,7 +173,7 @@ const HomePage = () => {
     },
 
     {
-      id: 3,
+      id: "np4",
       name: "Kuma",
       price: "50 USD",
       rating: 4.5,
@@ -180,7 +190,7 @@ const HomePage = () => {
   // Mock data for places (can be moved to a separate file)
   const places = [
     {
-      id: "1",
+      id: "p1",
       name: "Golden Gate",
       images: ["/path/to/image1", "/path/to/image2", "/path/to/image3"],
       rating: 4,
@@ -190,7 +200,7 @@ const HomePage = () => {
       distance: "1.2km away"
     },
     {
-      id: "2",
+      id: "p2",
       name: "Golden Gate",
       images: ["/path/to/image1", "/path/to/image2", "/path/to/image3"],
       rating: 4,
@@ -200,7 +210,7 @@ const HomePage = () => {
       distance: "1.2km away"
     },
     {
-      id: "3",
+      id: "p3",
       name: "Golden Gate",
       images: ["/path/to/image1", "/path/to/image2", "/path/to/image3"],
       rating: 4,
