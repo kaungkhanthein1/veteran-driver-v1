@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const MapSideBar = ({onRecenterClick,setShowFilter}) => {
+  const navigate = useNavigate()
   return (
     <div className=" absolute bottom-6 right-2 shadow-xl z-[1] p-4">
       <div className=" flex flex-col gap-[11px]">
@@ -20,7 +22,7 @@ const MapSideBar = ({onRecenterClick,setShowFilter}) => {
           </svg>
         </div>
         {/* add_location */}
-        <div className="map_sidebar_btn p-[11px]">
+        <div onClick={() => navigate("/add-location")} className="map_sidebar_btn p-[11px]">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="26"
