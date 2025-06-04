@@ -177,10 +177,12 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                 const [minVal, maxVal] = filters.priceRange;
                 const minPercent = ((minVal - MIN) / (MAX - MIN)) * 100;
                 const maxPercent = ((maxVal - MIN) / (MAX - MIN)) * 100;
+                const { key, ...restProps } = props;
 
                 return (
                   <div
-                    {...props}
+                    key={key}
+                    {...restProps}
                     className="w-full h-[16px] rounded-full relative"
                     style={{
                       background: `linear-gradient(
@@ -198,18 +200,21 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                   </div>
                 );
               }}
-              renderThumb={({ props }) => (
-                <div
-                  {...props}
-                  className="w-[4px] h-[44px] rounded-full shadow"
-                  style={{
-                    ...props.style,
-                    backgroundColor: "var(--accent-yellow)",
-                    // top: "50%",
-                    transform: "translateY(-50%)",
-                  }}
-                />
-              )}
+              renderThumb={({ props }) => {
+                const { key, ...restProps } = props;
+                return (
+                  <div
+                    key={key}
+                    {...restProps}
+                    className="w-[4px] h-[44px] rounded-full shadow"
+                    style={{
+                      ...restProps.style,
+                      backgroundColor: "var(--accent-yellow)",
+                      transform: "translateY(-50%)",
+                    }}
+                  />
+                );
+              }}
             />
           </div>
 
@@ -244,19 +249,21 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                   </div>
                 );
               }}
-              renderThumb={({ props }) =>
-                (() => {
-                  const { key, ...restProps } = props;
-                  return (
-                    <div
-                      key={key}
-                      {...restProps}
-                      className="w-[4px] h-[44px] rounded-full shadow"
-                      style={{ backgroundColor: "var(--accent-yellow)" }}
-                    />
-                  );
-                })()
-              }
+              renderThumb={({ props }) => {
+                const { key, ...restProps } = props;
+                return (
+                  <div
+                    key={key}
+                    {...restProps}
+                    className="w-[4px] h-[44px] rounded-full shadow"
+                    style={{
+                      ...restProps.style,
+                      backgroundColor: "var(--accent-yellow)",
+                      transform: "translateY(-50%)",
+                    }}
+                  />
+                );
+              }}
             />
           </div>
 
