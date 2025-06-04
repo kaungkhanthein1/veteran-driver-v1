@@ -13,7 +13,7 @@ export default function ExploreCard({
   status,
   onClick,
   selected,
-  isRecycleBin = false,
+  context,
   onRestore,
   isBookmarked = false,
   onBookmarkClick,
@@ -45,13 +45,68 @@ export default function ExploreCard({
     }
   };
 
+  // Determine button text based on context
+  const renderButton = () => {
+    if (context === 'uploaded') {
+      return (
+        <button
+          className="bg-[#FFC61B] text-black px-4 py-1.5 rounded-full text-sm font-medium"
+          onClick={(e) => {
+            e.stopPropagation();
+            onClick(); // assuming onClick handles the edit details navigation
+          }}
+        >
+          {t('exploreCard.editDetailsButton') || 'Edit Details'}
+        </button>
+      );
+    } else if (context === 'recycleBin' && onRestore) {
+      return (
+         <button
+            className="bg-[#FFC61B] text-black px-4 py-1.5 rounded-full text-sm font-medium"
+            onClick={(e) => {
+              e.stopPropagation();
+              onRestore(item);
+            }}
+          >
+            {t('exploreCard.restoreButton') || 'Restore'}
+          </button>
+      );
+    } else {
+      return (
+        <button
+          className="bg-[#FFC61B] text-black px-4 py-1.5 rounded-full text-sm font-medium"
+          onClick={(e) => {
+            e.stopPropagation();
+            onClick(); // assuming onClick handles the view place navigation
+          }}
+        >
+          {t('exploreCard.viewPlaceButton') || 'View Details'}
+        </button>
+      );
+    }
+  };
+
+  // Determine status label color and background using inline styles
+  const getStatusColor = (status) => {
+    switch (status?.toLowerCase()) {
+      case 'approved':
+        return { backgroundColor: '#00B96E1F', color: '#00B96E' };
+      case 'pending':
+        return { backgroundColor: '#FF9D001F', color: '#FF9D00' };
+      case 'rejected':
+        return { backgroundColor: '#FF3F3F33', color: '#FF3F3F' };
+      default:
+        return { backgroundColor: '#8080801F', color: '#808080' }; 
+    }
+  };
+
   return (
     <div
       className={`bg-theme-secondary rounded-lg overflow-hidden cursor-pointer ${selected ? 'border-2 border-[#FDC51B]' : ''}`}
       onClick={onClick}
     >
-      <div className="p-2 space-y-2">
-        <div className="grid grid-cols-3 gap-2 relative">
+      <div className="p-2 space-y-2 relative">
+        <div className="grid grid-cols-3 gap-2">
           <div
             className="aspect-square bg-theme-primary rounded-lg overflow-hidden cursor-pointer"
             onClick={(e) => {
@@ -84,54 +139,51 @@ export default function ExploreCard({
               </svg>
             </div>
           </div>
-
-          {/* Status (Bookmark will be moved) */}
-          {status && (
-            <div className={`absolute -top-1 right-0 px-2 py-1 rounded-full text-xs font-medium ${status.toLowerCase() === 'approved' ? 'bg-green-500 text-white' : status.toLowerCase() === 'rejected' ? 'bg-red-500 text-white' : 'bg-yellow-500 text-white'}`}>
-              {status}
-            </div>
-          )}
         </div>
 
-        <div className="flex justify-between items-start">
-          <div>
-            <div className="flex items-center justify-between">
-              <h3 className="text-theme-primary font-semibold">{item.name}</h3>
-            </div>
-            {/* Address and Distance */}
-            <div className="text-theme-secondary text-sm mt-1">
-              <span>{item.address}</span>
-              {item.address && item.distance && <span className="mx-1">•</span>}
-              <span>{item.distance}</span>
-            </div>
-            <div className="flex items-center space-x-1 mt-1">
-              <div className="flex items-center">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-[#FFC61B] text-sm">★</span>
-                ))}
-                <span className="text-theme-primary ml-1 text-sm">{item.rating}</span>
-              </div>
-              <span className="text-theme-secondary text-sm">({t('exploreCard.reviewsCount', { count: item.reviews })})</span>
-            </div>
+        {(context === 'uploaded' || context === 'recycleBin') && status ? (
+          <div
+            className="absolute right-3 p-1.5 rounded-xl text-xs font-medium"
+            style={getStatusColor(status)}
+          >
+            {status}
           </div>
-          {/* Bookmark Icon */}
-          {!isRecycleBin && (
-            <button
-              className="p-1 ml-4"
-              onClick={(e) => {
-                e.stopPropagation();
-                if (onBookmarkClick) {
-                  onBookmarkClick(item);
-                }
-              }}
-            >
-              <img
-                src={Bookmark}
-                alt={t('exploreCard.bookmarkAlt')}
-                className={`w-6 h-6 ${isBookmarked ? '[filter:invert(70%)_sepia(74%)_saturate(1115%)_hue-rotate(359deg)_brightness(103%)_contrast(106%)]' : '[filter:var(--icon-filter)]'}`}
-              />
-            </button>
-          )}
+        ) : null}
+
+        {(context !== 'uploaded' && context !== 'recycleBin') && (
+          <button
+            className="absolute right-4 p-1"
+            onClick={(e) => {
+              e.stopPropagation();
+              if (onBookmarkClick) {
+                onBookmarkClick(item);
+              }
+            }}
+          >
+            <img
+              src={Bookmark}
+              alt={t('exploreCard.bookmarkAlt')}
+              className={`w-6 h-6 ${isBookmarked ? '[filter:invert(70%)_sepia(74%)_saturate(1115%)_hue-rotate(359deg)_brightness(103%)_contrast(106%)]' : '[filter:var(--icon-filter)]'}`}
+            />
+          </button>
+        )}
+
+        <div>
+          <h3 className="text-theme-primary font-semibold">{item.name}</h3>
+          <div className="text-theme-secondary text-sm mt-1">
+            <span>{item.address}</span>
+            {item.address && item.distance && <span className="mx-1">•</span>}
+            <span>{item.distance}</span>
+          </div>
+          <div className="flex items-center space-x-1 mt-1">
+            <div className="flex items-center">
+              {[...Array(5)].map((_, i) => (
+                <span key={i} className="text-[#FFC61B] text-sm">★</span>
+              ))}
+              <span className="text-theme-primary ml-1 text-sm">{item.rating}</span>
+            </div>
+            <span className="text-theme-secondary text-sm">({t('exploreCard.reviewsCount', { count: item.reviews })})</span>
+          </div>
         </div>
 
         <div className="flex items-center space-x-2 text-sm text-theme-secondary">
@@ -147,21 +199,10 @@ export default function ExploreCard({
 
         <div className="flex items-center justify-between">
           <span className="text-[#FFC61B] font-medium">{item.price}</span>
-          <button
-            className="bg-[#FFC61B] text-black px-4 py-1.5 rounded-full text-sm font-medium"
-            onClick={(e) => {
-              e.stopPropagation();
-              if (isRecycleBin && onRestore) {
-                onRestore(item);
-              }
-            }}
-          >
-            {isRecycleBin ? t('exploreCard.restoreButton') : t('exploreCard.viewPlaceButton')}
-          </button>
+          {renderButton()}
         </div>
       </div>
 
-      {/* Media Modals */}
       {selectedMedia && (
         <ImageModal
           isOpen={!!selectedMedia}
@@ -183,12 +224,13 @@ ExploreCard.propTypes = {
     rating: PropTypes.number.isRequired,
     reviews: PropTypes.number.isRequired,
     price: PropTypes.string.isRequired,
-    services: PropTypes.arrayOf(PropTypes.string).isRequired
+    services: PropTypes.arrayOf(PropTypes.string).isRequired,
+    status: PropTypes.string, // Ensure status is in item shape if it's part of item
   }).isRequired,
-  status: PropTypes.string,
+  status: PropTypes.string, // Added status to PropTypes if passed separately
   onClick: PropTypes.func.isRequired,
   selected: PropTypes.bool,
-  isRecycleBin: PropTypes.bool,
+  context: PropTypes.oneOf(['uploaded', 'recycleBin', 'explore']), // Added context to PropTypes
   onRestore: PropTypes.func,
   isBookmarked: PropTypes.bool,
   onBookmarkClick: PropTypes.func,

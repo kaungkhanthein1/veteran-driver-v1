@@ -3,30 +3,58 @@ import { useTranslation } from "react-i18next";
 import ExploreCard from "../components/cards/ExploreCard";
 import RecycleBinIcon from "icons/RecycleBin.svg";
 import { useNavigate } from "react-router-dom";
-import { useBookmarks } from '../hooks/useBookmarks';
 import BackButton from "../components/common/BackButton";
 
 export default function UploadedLocationPage() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState(t('uploadedLocationPage.tabs.approved'));
-  const { isBookmarked, toggleBookmark } = useBookmarks();
 
-  // Temporary data structure - will be replaced with actual data later
-  const sampleLocation = {
-    id: 1, // Add this line to ensure bookmark functionality works
-    name: "Golden Gate",
-    distance: "Phenom Penh ( 12km away )",
-    rating: 5.0,
-    reviews: 128,
-    services: ["Service 1", "Service 2", "Service3"],
-    price: "50 USD",
-    description: "Providing the ultimate relaxation",
-    address: "E88/4 ist eine",
-    mobileNumber: "+18554992035",
-    photos: [],
-    status: activeTab
-  };
+  // Mock data for uploaded locations (replace with actual data source)
+  const uploadedLocations = [
+    {
+      id: 1,
+      name: "Golden Sovo",
+      distance: "Phenom Penh ( 12km away )",
+      rating: 5.0,
+      reviews: 128,
+      services: ["Service 1", "Service 2", "Service3"],
+      price: "50 USD",
+      description: "Providing the ultimate relaxation",
+      address: "E88/4 ist eine",
+      mobileNumber: "+18554992035",
+      photos: [],
+      status: "Approved"
+    },
+    {
+      id: 2,
+      name: "Soveila",
+      distance: "Phenom Penh ( 12km away )",
+      rating: 5.0,
+      reviews: 128,
+      services: ["Service 1", "Service 2", "Service3"],
+      price: "50 USD",
+      description: "Providing the ultimate relaxation",
+      address: "E88/4 ist eine",
+      mobileNumber: "+18554992035",
+      photos: [],
+      status: "Pending"
+    },
+    {
+      id: 3,
+      name: "Soveila",
+      distance: "Phenom Penh ( 12km away )",
+      rating: 5.0,
+      reviews: 128,
+      services: ["Service 1", "Service 2", "Service3"],
+      price: "50 USD",
+      description: "Providing the ultimate relaxation",
+      address: "E88/4 ist eine",
+      mobileNumber: "+18554992035",
+      photos: [],
+      status: "Rejected"
+    }
+  ];
 
   const handleCardClick = (location) => {
     navigate('/edit-location', { 
@@ -64,25 +92,16 @@ export default function UploadedLocationPage() {
 
       {/* Content */}
       <div className="p-4 space-y-4">
-        <ExploreCard 
-          item={sampleLocation} 
-          status={activeTab}
-          onClick={() => handleCardClick(sampleLocation)}
-          isBookmarked={isBookmarked(sampleLocation.id)}
-          onBookmarkClick={() => toggleBookmark(sampleLocation)}
-        />
-        <ExploreCard 
-          item={sampleLocation} 
-          onClick={() => {}}
-          isBookmarked={isBookmarked(sampleLocation.id)}
-          onBookmarkClick={() => toggleBookmark(sampleLocation)}
-        />
-        <ExploreCard 
-          item={sampleLocation} 
-          onClick={() => {}}
-          isBookmarked={isBookmarked(sampleLocation.id)}
-          onBookmarkClick={() => toggleBookmark(sampleLocation)}
-        />
+        {/* Render cards for each status tab */}
+        {uploadedLocations.filter(location => location.status.toLowerCase() === activeTab.toLowerCase()).map((location) => (
+          <ExploreCard
+            key={location.id} // Use location.id for a stable key
+            item={location}
+            status={location.status} // Pass the status
+            onClick={() => handleCardClick(location)} // Assuming handleCardClick is used for edit
+            context="uploaded" // Indicate the context is uploaded locations
+          />
+        ))}
       </div>
     </div>
   );

@@ -8,7 +8,6 @@ export default function RecycleBinPage() {
   const [selectedLocations, setSelectedLocations] = useState([]);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [showRestoreConfirm, setShowRestoreConfirm] = useState(false);
-  const [locationToRestore, setLocationToRestore] = useState(null);
 
   // Temporary data structure - will be replaced with actual data later
   const deletedLocations = [
@@ -48,15 +47,14 @@ export default function RecycleBinPage() {
     setSelectedLocations([]);
   };
 
-  const handleRestore = (location) => {
-    setLocationToRestore(location);
+  const handleRestore = () => {
+    // TODO: Implement actual restore logic here
     setShowRestoreConfirm(true);
   };
 
   const confirmRestore = () => {
     // TODO: Implement actual restore logic here
     setShowRestoreConfirm(false);
-    setLocationToRestore(null);
   };
 
   return (
@@ -77,14 +75,14 @@ export default function RecycleBinPage() {
 
       {/* Content */}
       <div className="p-4 space-y-4">
-        {deletedLocations.map((location, index) => (
-          <ExploreCard 
-            key={index} 
-            item={location} 
-            status={location.status} 
-            selected={selectedLocations.some(loc => loc.name === location.name)}
+        {deletedLocations.map((location) => (
+          <ExploreCard
+            key={location.id}
+            item={location}
+            status={location.status}
+            selected={selectedLocations.some(loc => loc.id === location.id)}
             onClick={() => handleCardClick(location)}
-            isRecycleBin={true}
+            context="recycleBin"
             onRestore={() => handleRestore(location)}
           />
         ))}
@@ -147,7 +145,6 @@ export default function RecycleBinPage() {
               <button
                 onClick={() => {
                   setShowRestoreConfirm(false);
-                  setLocationToRestore(null);
                 }}
                 className="px-4 py-2 rounded-lg text-theme-secondary"
               >

@@ -503,6 +503,7 @@
     "uploadButton": "Upload"
   },
   "exploreCard": {
+    "editDetailsButton": "Edit Details",
     "goldenGateAlt": "Golden Gate",
     "harrierAlt": "Harrier",
     "videoThumbnailAlt": "Video thumbnail",
