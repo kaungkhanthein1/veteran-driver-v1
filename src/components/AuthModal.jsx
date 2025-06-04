@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import LoginPage from '../Pages/LoginPage'; // Import LoginPage
-import RegisterPage from '../Pages/RegisterPage'; // Import RegisterPage
+import LoginPage from '../Pages/LoginPage'; 
+import RegisterPage from '../Pages/RegisterPage'; 
 
 export default function AuthModal({ isOpen, onClose }) {
   const { t } = useTranslation();
-  const [isLogin, setIsLogin] = useState(true); // State to toggle between Login and Sign Up
+  const [isLogin, setIsLogin] = useState(true); 
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-black bg-opacity-50" onClick={onClose}>{/* Background Overlay */}
+    <div className="fixed inset-0 z-50 bg-black bg-opacity-50" onClick={onClose}>
       {/* Modal Content Container */}
       <div
         className="fixed top-32 bottom-16 left-0 right-0 bg-theme-primary rounded-t-2xl p-6 max-w-[480px] w-full mx-auto overflow-y-auto"
