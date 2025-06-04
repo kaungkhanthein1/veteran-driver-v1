@@ -7,6 +7,7 @@ import HarrierRoom from "assets/HarrierRoom.png";
 import ExploreVideo from "assets/Explore.mp4";
 import ImageModal from "../common/ImageModal";
 import { useTranslation } from 'react-i18next';
+import { useTheme } from '../../context/ThemeContext';
 
 export default function ExploreCard({
   item,
@@ -20,6 +21,7 @@ export default function ExploreCard({
   setIsModalOpen
 }) {
   const { t } = useTranslation();
+  const { theme } = useTheme();
   const [selectedMedia, setSelectedMedia] = useState(null);
 
   // Define all available media for this card
@@ -96,13 +98,16 @@ export default function ExploreCard({
       case 'rejected':
         return { backgroundColor: '#FF3F3F33', color: '#FF3F3F' };
       default:
-        return { backgroundColor: '#8080801F', color: '#808080' }; 
+        return { backgroundColor: '#8080801F', color: '#808080' };
     }
   };
 
+  // Determine background and shadow classes based on theme
+  const cardClasses = `rounded-xl overflow-hidden cursor-pointer ${selected ? 'border-2 border-[#FDC51B]' : ''} ${theme === 'dark' ? 'bg-theme-secondary' : 'bg-theme-primary shadow-lg'}`;
+
   return (
     <div
-      className={`bg-theme-primary rounded-xl overflow-hidden cursor-pointer shadow-lg ${selected ? 'border-2 border-[#FDC51B]' : ''}`}
+      className={cardClasses}
       onClick={onClick}
     >
       <div className="p-2 space-y-2 relative">
@@ -197,8 +202,15 @@ export default function ExploreCard({
           ))}
         </div>
 
-        <div className="flex items-center justify-between">
-          <span className="text-[#FFC61B] font-medium">{item.price}</span>
+        <div className="flex justify-between">
+          <div>
+          <span style={{ color: '#444', fontFamily: 'Helvetica Neue', fontSize: '18px', fontStyle: 'normal', fontWeight: '700', lineHeight: 'normal' }}>
+            {item.price.split(' ')[0]}
+          </span>
+          <span style={{ color: '#444', fontFamily: 'Helvetica Neue', fontSize: '10.75px', fontStyle: 'normal', fontWeight: '700', lineHeight: 'normal', marginLeft: '4px' }}>
+            {item.price.split(' ')[1]}
+          </span>
+          </div>
           {renderButton()}
         </div>
       </div>

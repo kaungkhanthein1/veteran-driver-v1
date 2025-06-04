@@ -27,6 +27,34 @@ export default function UploadedLocationPage() {
       status: "Approved"
     },
     {
+      id: 4,
+      name: "Luxury Suite",
+      distance: "Phnom Penh ( 5km away )",
+      rating: 4.5,
+      reviews: 90,
+      services: ["Service 1", "Service 4"],
+      price: "120 USD",
+      description: "A high-end suite",
+      address: "Street 123",
+      mobileNumber: "+1234567890",
+      photos: [],
+      status: "Approved"
+    },
+    {
+      id: 5,
+      name: "Riverside Hotel",
+      distance: "Phnom Penh ( 8km away )",
+      rating: 4.8,
+      reviews: 150,
+      services: ["Service 2", "Service 5"],
+      price: "80 USD",
+      description: "Hotel by the river",
+      address: "Riverside Blvd",
+      mobileNumber: "+0987654321",
+      photos: [],
+      status: "Approved"
+    },
+    {
       id: 2,
       name: "Soveila",
       distance: "Phenom Penh ( 12km away )",
