@@ -77,7 +77,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
         ${isVisible ? "translate-y-0" : "translate-y-full"}`}
       >
         {/* Drag handle */}
-        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-[var(--bg-secondary)] rounded-full" />
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-[var(--bg-secondary)] rounded-[8px]" />
 
         <div className="mt-6 flex flex-col gap-[24px]">
           {/* Header */}
@@ -87,7 +87,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
             </h2>
             <button
               onClick={handleClose}
-              className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[var(--bg-secondary)]"
+              className="w-8 h-8 flex items-center justify-center rounded-[8px] hover:bg-[var(--bg-secondary)]"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -146,7 +146,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                     <div
                       key={key}
                       {...restProps}
-                      className="w-[4px] h-[44px] rounded-full shadow"
+                      className="w-[4px] h-[44px] rounded-[8px] shadow"
                       style={{ backgroundColor: 'var(--accent-yellow)' }}
                     />
                   );
@@ -181,7 +181,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                 return (
                   <div
                     {...props}
-                    className="w-full h-[16px] rounded-full relative"
+                    className="w-full h-[16px] rounded-[8px] relative"
                     style={{
                       background: `linear-gradient(
                   to right,
@@ -201,7 +201,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
               renderThumb={({ props }) => (
                 <div
                   {...props}
-                  className="w-[4px] h-[44px] rounded-full shadow"
+                  className="w-[4px] h-[44px] rounded-[8px] shadow"
                   style={{
                     ...props.style,
                     backgroundColor: "var(--accent-yellow)",
@@ -251,7 +251,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                     <div
                       key={key}
                       {...restProps}
-                      className="w-[4px] h-[44px] rounded-full shadow"
+                      className="w-[4px] h-[44px] rounded-[8px] shadow"
                       style={{ backgroundColor: "var(--accent-yellow)" }}
                     />
                   );
@@ -270,7 +270,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                 <button
                   key={value}
                   onClick={() => handleChange("rating", value)}
-                  className={`px-4 py-2 rounded-full text-sm transition-all duration-200
+                  className={`px-4 py-2 rounded-[8px] text-sm transition-all duration-200
                     ${
                       filters.rating === value
                         ? "filter_active_map"
@@ -296,7 +296,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                   <button
                     key={category}
                     onClick={() => setActiveCategory(category)}
-                    className={`px-4 py-2 rounded-full text-sm transition-all duration-200
+                    className={`px-4 py-2 rounded-[8px] text-sm transition-all duration-200
         ${
           isActive
             ? "filter_active_map"
@@ -325,7 +325,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                   <button
                     key={service}
                     onClick={() => toggleService(service)}
-                    className={`px-4 py-2 rounded-full text-sm transition-all duration-200
+                    className={`px-4 py-2 rounded-[8px] text-sm transition-all duration-200
                       ${
                         isActive
                           ? "filter_active_map"
@@ -349,7 +349,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                 <button
                   key={option}
                   onClick={() => handleChange("sort", option)}
-                  className={`px-4 py-2 rounded-full text-sm transition-all duration-200
+                  className={`px-4 py-2 rounded-[8px] text-sm transition-all duration-200
                     ${
                       filters.sort === option
                         ? "filter_active_map"
