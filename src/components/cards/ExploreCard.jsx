@@ -110,7 +110,7 @@ export default function ExploreCard({
       className={cardClasses}
       onClick={onClick}
     >
-      <div className="p-2 space-y-2 relative">
+      <div className="p-3 space-y-2 relative">
         <div className="grid grid-cols-3 gap-2">
           <div
             className="aspect-square bg-theme-primary rounded-lg overflow-hidden cursor-pointer"
@@ -204,10 +204,25 @@ export default function ExploreCard({
 
         <div className="flex justify-between">
           <div>
-          <span style={{ color: '#444', fontFamily: 'Helvetica Neue', fontSize: '18px', fontStyle: 'normal', fontWeight: '700', lineHeight: 'normal' }}>
+          <span style={{
+            color: theme === 'dark' ? '#FFF' : '#444',
+            fontFamily: 'Helvetica Neue',
+            fontSize: '18px',
+            fontStyle: 'normal',
+            fontWeight: '700',
+            lineHeight: 'normal'
+          }}>
             {item.price.split(' ')[0]}
           </span>
-          <span style={{ color: '#444', fontFamily: 'Helvetica Neue', fontSize: '10.75px', fontStyle: 'normal', fontWeight: '700', lineHeight: 'normal', marginLeft: '4px' }}>
+          <span style={{
+            color: theme === 'dark' ? '#FFF' : '#444',
+            fontFamily: 'Helvetica Neue',
+            fontSize: '10.75px',
+            fontStyle: 'normal',
+            fontWeight: '700',
+            lineHeight: 'normal',
+            marginLeft: '4px'
+          }}>
             {item.price.split(' ')[1]}
           </span>
           </div>
