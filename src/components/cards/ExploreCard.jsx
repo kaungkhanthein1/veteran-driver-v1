@@ -102,7 +102,7 @@ export default function ExploreCard({
 
   return (
     <div
-      className={`bg-theme-secondary rounded-lg overflow-hidden cursor-pointer ${selected ? 'border-2 border-[#FDC51B]' : ''}`}
+      className={`bg-theme-primary rounded-xl overflow-hidden cursor-pointer shadow-lg ${selected ? 'border-2 border-[#FDC51B]' : ''}`}
       onClick={onClick}
     >
       <div className="p-2 space-y-2 relative">
