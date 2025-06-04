@@ -475,9 +475,6 @@
     "storesTab": "Stores"
   },
   "homePage": {
-    "nearestPlacesTitle": "Nearest Places",
-    "feedbacksTitle": "Feedbacks",
-    "viewAllButton": "View All",
     "categoryTabs": {
       "hotels": "Hotels",
       "motels": "Motels",
@@ -486,17 +483,19 @@
       "shopping": "Shopping"
     },
     "serviceTabs": {
-      "service1": "Service 1",
-      "service2": "Service 2",
-      "service3": "Service 3",
-      "service4": "Service 4"
+      "service1": "Service 1"
     },
     "iconLabels": {
+      "massage": "Massage",
       "bar": "Bar",
       "eVisa": "E-Visa",
-      "more": "More",
-      "massage": "Massage"
-    }
+      "more": "More"
+    },
+    "nearestPlacesTitle": "Nearest Places",
+    "viewAllButton": "View All",
+    "feedbacksTitle": "Feedbacks",
+    "viewMoreFeedbackText": "View more authentic feedback from real visitors.",
+    "viewMoreButton": "View More"
   },
   "socialTabs": {
     "newestTab": "Newest",

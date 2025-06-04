@@ -6,6 +6,7 @@ import BottomNavBar from '../components/common/BottomNavBar';
 import { useBookmarks } from '../hooks/useBookmarks';
 import GoldenGateImage from 'assets/GoldenGate.png';
 import HarrierImage from 'assets/Harrier.png';
+import RoomImage from 'assets/Room.png'
 import MapIcon from 'icons/HomeUpdate/map.svg';
 import DropdownArrow from 'icons/HomeUpdate/Dropdown.svg';
 import CountryFlag from 'icons/HomeUpdate/thai.png';
@@ -18,9 +19,11 @@ import TuneIcon from '../icons/Tune.svg';
 import { useNavigate } from 'react-router-dom';
 import AuthModal from './AuthModal';
 import FilterPanel from '../Pages/map/FilterPanel';
+import { useTheme } from '../context/ThemeContext';
 
 const HomePage = () => {
   const { t } = useTranslation();
+  const { theme } = useTheme();
   const [activeCategoryTab, setActiveCategoryTab] = useState(t('homePage.categoryTabs.hotels'));
   const [activeThemeTab, setActiveThemeTab] = useState(t('homePage.serviceTabs.service1'));
   const { isBookmarked, toggleBookmark } = useBookmarks();
@@ -134,8 +137,33 @@ const HomePage = () => {
 
   // Mock data for nearest places - Updated structure for banner design
   const nearestPlaces = [
+
     {
       id: 1,
+      name: "Sunny",
+      price: "45 USD",
+      rating: 4.0,
+      reviews: 60,
+      distance: "2.5km away",
+      image: HarrierImage,
+      overlayText1: "Enjoy your Dream Vacation",
+      overlayText2: "Plan your perfect getaway with our exclusive deals"
+    },
+
+    {
+      id: 2,
+      name: "New Place",
+      price: "60 USD",
+      rating: 4.8,
+      reviews: 120,
+      distance: "0.5km away",
+      image: RoomImage, // Using existing image for now
+      overlayText1: "Discover a Hidden Gem",
+      overlayText2: "Highly rated by recent visitors!"
+    },
+
+    {
+      id: 3,
       name: "Kuma",
       price: "50 USD",
       rating: 4.5,
@@ -145,17 +173,8 @@ const HomePage = () => {
       overlayText1: "Escape to Bali this Summer",
       overlayText2: "Over 100 travelers booked this week!"
     },
-    {
-      id: 2,
-      name: "Sunny",
-      price: "45 USD",
-      rating: 4.0,
-      reviews: 60,
-      distance: "2.5km away",
-      image: HarrierImage,
-      overlayText1: "Enjoy your Dream Vacation",
-      overlayText2: "Plan your perfect getaway with our exclusive deals"
-    }
+   
+   
   ];
 
   // Mock data for places (can be moved to a separate file)
@@ -334,7 +353,7 @@ const HomePage = () => {
             </div>
 
             {/* Feedbacks Section with horizontal scroll */}
-            <div className="py-5 mx-0 bg-black">
+            <div className={`py-5 mx-0 ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
               <div className="bg-theme-primary p-4">
                 <div className="flex justify-between items-center mb-4">
                   <h2 className="text-lg font-semibold text-theme-primary">{t('homePage.feedbacksTitle')}</h2>
@@ -355,6 +374,15 @@ const HomePage = () => {
                         />
                       </div>
                     ))}
+                    {/* "View More Feedback" Card */}
+                    <div className="w-[280px] flex-none flex items-center justify-center bg-theme-secondary rounded-lg mt-6 mb-6 px-6">
+                      <div className="text-center">
+                        <p className="text-theme-text text-base mb-4">{t('homePage.viewMoreFeedbackText') || 'View more authentic feedback from real visitors.'}</p>
+                        <button className="bg-[#FFC61B0A] text-[#FFD75E] px-6 py-2 rounded-full text-sm font-medium">
+                          {t('homePage.viewMoreButton') || 'View More'}
+                        </button>
+                      </div>
+                    </div>
                   </div>
                   {/* Pagination dots */}
                   <div className="flex justify-center gap-1 mt-2">
