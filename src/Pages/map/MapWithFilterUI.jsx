@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import FilterPanel from "./FilterPanel";
 import FilteredMarkers from "./FilteredMarkers";
@@ -9,6 +9,20 @@ import { location } from "./Place";
 import BackButton from "../../components/common/BackButton";
 import { useTranslation } from "react-i18next";
 import BackButtonDark from "components/common/BackButtonDark";
+import MapSideBar from "./MapSideBar";
+
+const AttachMapRef = ({ mapRef, onReady }) => {
+  const map = useMap();
+
+  useEffect(() => {
+    if (map && mapRef) {
+      mapRef.current = map;
+      onReady?.(); // optional callback to set state
+    }
+  }, [map]);
+
+  return null;
+};
 
 const RecenterMap = ({ center }) => {
   // TODO: Add PropTypes for prop validation
@@ -42,7 +56,8 @@ const places = location.map((place) => ({
 const MapWithFilterUI = () => {
   const routeLocation = useLocation();
   const mapRef = useRef(); // <== Add this ref
-
+  const [showSidebar, setShowSidebar] = useState(true);
+  const [isMapReady, setIsMapReady] = useState(false);
   const { t } = useTranslation();
   const [showFilter, setShowFilter] = useState(false);
   const selectedLocation = routeLocation.state?.selectedLocation;
@@ -101,7 +116,62 @@ const MapWithFilterUI = () => {
     setShowFilter(false);
   };
 
-  const filtered = filterMarkers(); // This variable is used now
+  // const filtered = filterMarkers(); // This variable is used now
+
+  const filtered = useMemo(() => {
+    let filtered = places.filter((place) => {
+      const distance =
+        L.latLng(position).distanceTo([place.lat, place.lng]) / 1000;
+      return (
+        place.price >= activeFilters.priceRange[0] &&
+        place.price <= activeFilters.priceRange[1] &&
+        distance <= activeFilters.distance &&
+        (activeFilters.rating === 0 || place.rating >= activeFilters.rating) &&
+        (activeFilters.services.length === 0 ||
+          activeFilters.services.some((s) => place.services.includes(s)))
+      );
+    });
+
+    switch (activeFilters.sort) {
+      case "Nearby":
+        filtered.sort((a, b) => {
+          const distA = L.latLng(position).distanceTo([a.lat, a.lng]);
+          const distB = L.latLng(position).distanceTo([b.lat, b.lng]);
+          return distA - distB;
+        });
+        break;
+      case "Price":
+        filtered.sort((a, b) => a.price - b.price);
+        break;
+      case "Rating":
+        filtered.sort((a, b) => b.rating - a.rating);
+        break;
+      default:
+        break;
+    }
+
+    return filtered;
+  }, [activeFilters]);
+
+  const stableCenter = useMemo(
+    () => [mapCenter.lat, mapCenter.lng],
+    [mapCenter.lat, mapCenter.lng]
+  );
+
+  const handleRecenter = () => {
+    console.log(mapRef);
+    if (!mapRef.current) return;
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        mapRef.current.setView([latitude, longitude], 15); // or map.flyTo(...)
+      },
+      (error) => {
+        console.error("Geolocation error:", error);
+        alert("Unable to access your location");
+      }
+    );
+  };
 
   return (
     <div className="dvh-fallback flex justify-center bg-theme-primary">
@@ -112,7 +182,14 @@ const MapWithFilterUI = () => {
             zoom={15}
             className="h-screen w-full z-0"
             zoomControl={false}
+            // whenCreated={(mapInstance) => {
+            //   console.log("Map instance created", mapInstance);
+            //   mapRef.current = mapInstance;
+            //   setIsMapReady(true);
+            // }}
           >
+            <AttachMapRef mapRef={mapRef} onReady={() => setIsMapReady(true)} />
+
             {/* <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" /> */}
             <TileLayer
               url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
@@ -120,8 +197,12 @@ const MapWithFilterUI = () => {
             />
 
             <Marker position={[mapCenter.lat, mapCenter.lng]} />
-            <RecenterMap center={[mapCenter.lat, mapCenter.lng]} />
-            <FilteredMarkers markers={filtered} />
+            {/* <RecenterMap center={[mapCenter.lat, mapCenter.lng]} /> */}
+            <RecenterMap center={stableCenter} />
+            <FilteredMarkers
+              onToggleSidebar={setShowSidebar}
+              markers={filtered}
+            />
           </MapContainer>
 
           <div className="absolute w-full top-6 left-0 text-white rounded-full shadow-">
@@ -148,6 +229,11 @@ const MapWithFilterUI = () => {
               </div>
             </div>
           </div>
+
+          {/* {showSidebar && <MapSideBar onRecenterClick={handleRecenter} />} */}
+          {showSidebar && mapRef.current && (
+            <MapSideBar setShowFilter={setShowFilter} onRecenterClick={handleRecenter} />
+          )}
 
           {showFilter ? (
             <FilterPanel
