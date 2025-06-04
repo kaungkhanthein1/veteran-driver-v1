@@ -182,6 +182,12 @@ const MapWithFilterUI = () => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
+        
+        // Log the coordinates
+        console.log('Current Location:', {
+          latitude,
+          longitude
+        });
 
         // Recenter the map
         mapRef.current.setView([latitude, longitude], 15);

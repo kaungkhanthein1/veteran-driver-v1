@@ -230,9 +230,9 @@ const HomePage = () => {
 
   return (
     <div className="dvh-fallback flex justify-center bg-theme-primary">
-      <div className="w-full max-w-[480px] flex flex-col h-full">
-        <div className="flex-1 overflow-y-auto pb-16"> {/* Main scrollable content area */}
-          {/* Scrollable Content - Header, Icons, Nearest Places, Feedbacks */}
+      <div className="w-full max-w-[480px] flex flex-col relative">
+        <div className="flex-1 overflow-y-auto pb-16">
+          {/* Main scrollable content area */}
           <div className="bg-theme-primary">
             {/* New Header */}
             <div className="px-4 py-5 bg-theme-primary">
@@ -470,15 +470,17 @@ const HomePage = () => {
             onClose={() => setShowAuthModal(false)}
           />
         )}
+
         {/* Filter Panel Modal */}
-        {showFilterPanel && (
+        {showFilterPanel ? (
           <FilterPanel
-            isOpen={showFilterPanel}
-            onClose={() => setShowFilterPanel(false)}
             filters={filters}
             setFilters={setFilters}
             applyFilters={applyFilters}
+            onClose={() => setShowFilterPanel(false)}
           />
+        ) : (
+          ""
         )}
       </div>
     </div>
