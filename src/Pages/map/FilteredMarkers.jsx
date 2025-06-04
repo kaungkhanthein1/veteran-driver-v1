@@ -25,12 +25,16 @@ const renderStars = (rating) => {
   );
 };
 
-const FilteredMarkers = ({ markers }) => {
+const FilteredMarkers = ({ markers,onToggleSidebar }) => {
   const map = useMap();
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [isSliding, setIsSliding] = useState(false);
+
+  useEffect(() => {
+    onToggleSidebar?.(!selectedPlace);
+  }, [selectedPlace]);
 
   // Fit map to bounds
   useEffect(() => {
