@@ -26,7 +26,7 @@ export default function ProfilePage() {
     name: "Rachel Zane Noel",
     uid: "5839234",
     location: "Phnom Penh, Cambodia",
-    bio: "Passionate traveler 🌏 embracing the journey.",
+    bio: "Passionate traveller 🌍",
     avatar: ProfilePic
   };
 
