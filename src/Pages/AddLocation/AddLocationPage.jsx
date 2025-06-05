@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import SetLocationIcon from 'icons/SetLocation.svg';
 import OpeningTime from './OpeningTime';
@@ -11,7 +11,6 @@ import BackButton from '../../components/common/BackButton';
 
 const AddLocationPage = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const { t } = useTranslation();
   const [formData, setFormData] = useState({
     name: '',
@@ -22,7 +21,9 @@ const AddLocationPage = () => {
     openingTime: {
       is24Hours: false,
       timeSet: false,
-      selectedDays: []
+      selectedDays: [],
+      fromTime: null,
+      toTime: null,
     },
     services: [],
     price: '', 
@@ -136,15 +137,18 @@ const AddLocationPage = () => {
                   onClick={() => navigate('/map', { state: { from: 'addLocation', formData } })}
                 >
                   <div className="flex items-center">
-                    <img 
-                      src={SetLocationIcon} 
-                      alt={t('location.setLocation')} 
+                    <img
+                      src={SetLocationIcon}
+                      alt={t('location.setLocation')}
                       className="w-5 h-5 mr-2"
-                      style={{ filter: 'invert(76%) sepia(41%) saturate(845%) hue-rotate(338deg) brightness(101%) contrast(103%)' }}
+                      style={{ 
+                        filter: 'brightness(0) saturate(100%) invert(85%) sepia(30%) saturate(1000%) hue-rotate(359deg) brightness(103%) contrast(106%)',
+                        WebkitFilter: 'brightness(0) saturate(100%) invert(85%) sepia(30%) saturate(1000%) hue-rotate(359deg) brightness(103%) contrast(106%)'
+                      }}
                     />
                     <span>{t('location.setLocationOnMap')}</span>
                   </div>
-                  <span className={`text-theme-secondary ${formData.locationSet ? 'text-[#FDC51B]' : ''}`}>
+                  <span className={`text-theme-secondary ${formData.locationSet ? 'text-[#FFD75E]' : ''}`}>
                     {formData.locationSet ? 'Change' : 'Not Set'}
                   </span>
                 </button>
