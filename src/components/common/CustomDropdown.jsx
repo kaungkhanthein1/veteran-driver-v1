@@ -75,13 +75,13 @@ CustomDropdown.propTypes = {
   options: PropTypes.arrayOf(PropTypes.shape({
     value: PropTypes.any.isRequired,
     label: PropTypes.node.isRequired,
-    flag: PropTypes.node, // Add flag prop type
+    flag: PropTypes.node, 
   })).isRequired,
   value: PropTypes.any,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   className: PropTypes.string,
-  name: PropTypes.string.isRequired, // Add name prop type
+  name: PropTypes.string.isRequired, 
   disabled: PropTypes.bool,
 };
 

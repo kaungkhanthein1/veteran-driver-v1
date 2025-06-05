@@ -261,7 +261,7 @@ const AddLocationPage = () => {
                   </div>
                 ))}
                 {formData.photos.length < 10 && (
-                  <label className="w-[100px] h-[100px] rounded-lg flex items-center justify-center cursor-pointer">
+                  <label className="w-[100px] h-[100px] bg-theme-secondary rounded-lg flex items-center justify-center cursor-pointer">
                     <input
                       type="file"
                       accept="image/*"
@@ -288,7 +288,7 @@ const AddLocationPage = () => {
                   onChange={handleDocumentSelect}
                   className="hidden"
                 />
-                <div className="w-[100px] h-[100px] rounded-lg flex items-center justify-center">
+                <div className="w-[100px] h-[100px] bg-theme-secondary rounded-lg flex items-center justify-center">
                   {formData.document ? (
                     <div className="text-center">
                       <img 
