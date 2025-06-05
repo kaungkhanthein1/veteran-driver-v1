@@ -77,17 +77,17 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
         ${isVisible ? "translate-y-0" : "translate-y-full"}`}
       >
         {/* Drag handle */}
-        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-[var(--bg-secondary)] rounded-full" />
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-[var(--bg-secondary)] rounded-[8px]" />
 
         <div className="mt-6 flex flex-col gap-[24px]">
           {/* Header */}
-          <div className="flex w-full justify-between items-center sticky top-0 bg-[var(--bg-primary)] py-2">
+          <div className="flex w-full justify-between items-center top-0 bg-[var(--bg-primary)] py-2">
             <h2 className="text-xl text-[var(--text-primary)] font-bold">
               {t("filterPanel.title")}
             </h2>
             <button
               onClick={handleClose}
-              className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[var(--bg-secondary)]"
+              className="w-8 h-8 flex items-center justify-center rounded-[8px] hover:bg-[var(--bg-secondary)]"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -111,8 +111,8 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
           {/* Price */}
           <div className="space-y-4">
             <div className="flex w-full price_tags justify-between items-center text-[var(--text-primary)]">
-              <span>{t("filterPanel.priceRangeLabel")}</span>
-              <span className="text-[#FFC61B]">
+              <span className="filter_title">{t("filterPanel.priceRangeLabel")}</span>
+              <span className="price_num">
                 ${filters.priceRange[0]} - ${filters.priceRange[1]}
               </span>
             </div>
@@ -146,7 +146,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                     <div
                       key={key}
                       {...restProps}
-                      className="w-[4px] h-[44px] rounded-full shadow"
+                      className="w-[4px] h-[44px] rounded-[8px] shadow"
                       style={{ backgroundColor: 'var(--accent-yellow)' }}
                     />
                   );
@@ -183,7 +183,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                   <div
                     key={key}
                     {...restProps}
-                    className="w-full h-[16px] rounded-full relative"
+                    className="w-full h-[16px] rounded-[8px] relative"
                     style={{
                       background: `linear-gradient(
                   to right,
@@ -206,7 +206,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                   <div
                     key={key}
                     {...restProps}
-                    className="w-[4px] h-[44px] rounded-full shadow"
+                    className="w-[8px] h-[44px] border-black border-[3px] rounded-[8px] shadow"
                     style={{
                       ...restProps.style,
                       backgroundColor: "var(--accent-yellow)",
@@ -222,8 +222,10 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
           <div className="space-y-4">
             <div className="flex w-full price_tags justify-between items-center text-[var(--text-primary)]">
               <span>{t("filterPanel.distanceLabel")}</span>
-              <span style={{ color: "var(--accent-yellow)" }}>
-                {filters.distance}km
+              <span
+              //  style={{ color: "var(--accent-yellow)" }}
+               >
+               0km - {filters.distance}km
               </span>
             </div>
             <Range
@@ -255,7 +257,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                   <div
                     key={key}
                     {...restProps}
-                    className="w-[4px] h-[44px] rounded-full shadow"
+                    className="w-[8px] border-[3px] border-black h-[44px] rounded-[8px] shadow"
                     style={{
                       ...restProps.style,
                       backgroundColor: "var(--accent-yellow)",
@@ -277,7 +279,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                 <button
                   key={value}
                   onClick={() => handleChange("rating", value)}
-                  className={`px-4 py-2 rounded-full text-sm transition-all duration-200
+                  className={`px-4 py-2 rounded-[8px] text-[12px] font-[500]
                     ${
                       filters.rating === value
                         ? "filter_active_map"
@@ -303,7 +305,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                   <button
                     key={category}
                     onClick={() => setActiveCategory(category)}
-                    className={`px-4 py-2 rounded-full text-sm transition-all duration-200
+                    className={`px-4 py-2 rounded-[8px] text-[12px] font-[500]
         ${
           isActive
             ? "filter_active_map"
@@ -332,7 +334,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                   <button
                     key={service}
                     onClick={() => toggleService(service)}
-                    className={`px-4 py-2 rounded-full text-sm transition-all duration-200
+                    className={`px-4 py-2 rounded-[8px] text-[12px] font-[500]
                       ${
                         isActive
                           ? "filter_active_map"
@@ -351,12 +353,12 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
             <label className="block text-[var(--text-primary)] font-medium">
               {t("filterPanel.sortByLabel")}
             </label>
-            <div className="grid grid-cols-3 gap-2">
+            <div className=" flex flex-wrap gap-2">
               {sortOptions.map((option) => (
                 <button
                   key={option}
                   onClick={() => handleChange("sort", option)}
-                  className={`px-4 py-2 rounded-full text-sm transition-all duration-200
+                  className={`px-4 py-2 rounded-[8px] text-[12px] font-[500]
                     ${
                       filters.sort === option
                         ? "filter_active_map"
@@ -373,7 +375,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
         {/* Apply Button */}
         <button
           onClick={applyFilters}
-          className="filter_apply_button w-full mt-8 py-4 text-base font-medium"
+          className="filter_apply_button sticky bottom-0 w-full mt-8 py-[10px] font-medium"
         >
           {t("filterPanel.applyButton")}
         </button>

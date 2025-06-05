@@ -61,7 +61,7 @@
   background: linear-gradient(325deg, #ffc61b 43.64%, #ffe38e 100%);
   color: #000;
   text-align: center;
-  font-family: "Helvetica Neue";
+  /* font-family: "Helvetica Neue"; */
   font-size: 16px;
   font-weight: 500;
   line-height: 20px;
@@ -78,7 +78,6 @@
   color: #fff;
   font-variant-numeric: lining-nums proportional-nums;
   font-feature-settings: "dlig" on;
-  font-family: Roboto;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -102,8 +101,8 @@
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
-  line-height: 20px; /* 166.667% */
-  letter-spacing: 0.24px;
+  /* line-height: 20px; 166.667% */
+  /* letter-spacing: 0.24px; */
 }
 
 .filter_UnActive {
@@ -130,7 +129,7 @@
   );
   color: #000;
   text-align: center;
-  font-family: var(--Label-Large-Font, Roboto);
+  /* font-family: var(--Label-Large-Font, Roboto); */
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -192,4 +191,27 @@
 .re-center_icon {
   border-radius: 120px;
   background: rgba(255, 215, 94, 0.32);
+}
+
+.filter_title {
+  color: #fff;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "dlig" on;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.56px;
+}
+
+.price_num {
+  color: #fff;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "dlig" on;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 166.667% */
+  letter-spacing: 0.48px;
 }

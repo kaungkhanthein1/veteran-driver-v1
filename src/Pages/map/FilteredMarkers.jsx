@@ -1,5 +1,5 @@
 import { Marker, useMap } from "react-leaflet";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import L from "leaflet";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -25,12 +25,25 @@ const renderStars = (rating) => {
   );
 };
 
-const FilteredMarkers = ({ markers,onToggleSidebar }) => {
+const FilteredMarkers = ({ markers, onToggleSidebar }) => {
   const map = useMap();
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [isSliding, setIsSliding] = useState(false);
+
+  const markerIcons = useMemo(() => {
+    const icons = {};
+    markers.forEach((marker) => {
+      icons[marker.id] = L.divIcon({
+        html: `<div class='w-12 h-12 rounded-full overflow-hidden border-2 border-yellow-500 shadow-md'>
+                <img src='${marker.image}' class='w-full h-full object-cover'/>
+              </div>`,
+        className: "",
+      });
+    });
+    return icons;
+  }, [markers]);
 
   useEffect(() => {
     onToggleSidebar?.(!selectedPlace);
@@ -94,13 +107,13 @@ const FilteredMarkers = ({ markers,onToggleSidebar }) => {
 
   const handleAddPlace = () => {
     if (selectedPlace) {
-      navigate('/add-location', {
+      navigate("/add-location", {
         state: {
           selectedLocation: {
             lat: selectedPlace.lat,
-            lng: selectedPlace.lng
-          }
-        }
+            lng: selectedPlace.lng,
+          },
+        },
       });
     }
   };
@@ -111,7 +124,8 @@ const FilteredMarkers = ({ markers,onToggleSidebar }) => {
         <Marker
           key={place.id}
           position={[place.lat, place.lng]}
-          icon={thumbnailIcon(place.image)}
+          // icon={thumbnailIcon(place.image)}
+          icon={markerIcons[place.id]}
           eventHandlers={{
             click: () => handleMarkerClick(place),
           }}
@@ -163,7 +177,13 @@ const FilteredMarkers = ({ markers,onToggleSidebar }) => {
               </div>
             </div>
             <div className="">
-              <span className=" text-[#aaa] text-[12px] font-[400]">{selectedPlace.address} ({t('filteredMarkers.distanceAway', { distance: selectedPlace.distanceKm })})</span>
+              <span className=" text-[#aaa] text-[12px] font-[400]">
+                {selectedPlace.address} (
+                {t("filteredMarkers.distanceAway", {
+                  distance: selectedPlace.distanceKm,
+                })}
+                )
+              </span>
             </div>
             <div className=" flex gap-[5px] py-[10px]">
               {" "}
@@ -178,11 +198,16 @@ const FilteredMarkers = ({ markers,onToggleSidebar }) => {
               ))}
             </div>
             <div className=" text-white font-[700]">
-              <span className=" text-[18px]">{selectedPlace.price} <span className=" text-[10px]">{t('filteredMarkers.usdUnit')}</span>{" "}</span>
+              <span className=" text-[18px]">
+                {selectedPlace.price}{" "}
+                <span className=" text-[10px]">
+                  {t("filteredMarkers.usdUnit")}
+                </span>{" "}
+              </span>
             </div>
             {/* btn */}
-            <div 
-              onClick={handleAddPlace} 
+            <div
+              onClick={handleAddPlace}
               className="w-full gap-[10px] my-[20px] flex justify-center items-center py-[12px] add_place_btn"
             >
               <svg
@@ -197,7 +222,7 @@ const FilteredMarkers = ({ markers,onToggleSidebar }) => {
                   fill="black"
                 />
               </svg>
-              <span>{t('filteredMarkers.addThisPlaceButton')}</span>
+              <span>{t("filteredMarkers.addThisPlaceButton")}</span>
             </div>
           </>
         )}
