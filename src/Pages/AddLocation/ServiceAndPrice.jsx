@@ -66,14 +66,14 @@ const ServiceAndPrice = ({ formData, setFormData }) => {
             <input
               type="text"
               placeholder={t('addLocation.serviceNamePlaceholder')}
-              className="flex-1 bg-theme-secondary rounded-lg px-4 py-3 text-sm text-theme-primary"
+              className="flex-1 rounded-lg px-4 py-3 text-sm text-theme-primary"
               value={service.name}
               onChange={(e) => updateService(index, 'name', e.target.value)}
             />
             <input
               type="number"
               placeholder={t('addLocation.pricePlaceholder')}
-              className="w-24 bg-theme-secondary rounded-lg px-4 py-3 text-sm text-theme-primary"
+              className="w-24 rounded-lg px-4 py-3 text-sm text-theme-primary"
               value={service.price}
               onChange={(e) => updateService(index, 'price', e.target.value)}
             />
@@ -91,7 +91,7 @@ const ServiceAndPrice = ({ formData, setFormData }) => {
       <button
         type="button"
         onClick={() => setIsModalOpen(true)}
-        className="w-full bg-theme-secondary rounded-lg px-4 py-3 text-sm flex items-center justify-center gap-2 text-theme-primary"
+        className="w-full rounded-lg px-4 py-3 text-sm flex items-center justify-center gap-2 text-theme-primary"
       >
         <span>+</span>
         {t('addLocation.addServicesLabel')}

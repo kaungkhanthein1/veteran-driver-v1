@@ -123,6 +123,8 @@
     "serviceAvailable247": "Our services are available 24/7.",
     "setTimeAlt": "Set Time",
     "setTimeLabel": "Set Opening Time",
+    "fromTimeLabel": "From",
+    "toTimeLabel": "To",
     "servicesAndPrices": "Services & Prices *",
     "bestPriceLabel": "Best Price(USD)",
     "pricePlaceholder": "Please enter the price",
