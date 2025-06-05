@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import SetTimeIcon from 'icons/SetTime.svg';
 import RightIcon from 'icons/Right.svg';
 import SetTimeModal from './SetTimeModal';
+import PropTypes from 'prop-types';
 
 const OpeningTime = ({ formData, setFormData }) => {
   const { t } = useTranslation();
@@ -36,6 +37,9 @@ const OpeningTime = ({ formData, setFormData }) => {
     if (!time) return t('location.notSet');
     return `${time.hour}:${String(time.minute).padStart(2, '0')} ${time.period}`;
   };
+
+  // Filter for #FFC61B
+  const iconFilter = 'brightness(0) saturate(100%) invert(85%) sepia(30%) saturate(1000%) hue-rotate(359deg) brightness(103%) contrast(106%)';
 
   return (
     <div className="space-y-4">
@@ -75,8 +79,8 @@ const OpeningTime = ({ formData, setFormData }) => {
               alt={t('addLocation.setTimeAlt')}
               className="w-5 h-5 mr-1.5"
               style={{
-                filter: 'brightness(0) saturate(100%) invert(85%) sepia(30%) saturate(1000%) hue-rotate(359deg) brightness(103%) contrast(106%)',
-                WebkitFilter: 'brightness(0) saturate(100%) invert(85%) sepia(30%) saturate(1000%) hue-rotate(359deg) brightness(103%) contrast(106%)'
+                filter: iconFilter,
+                WebkitFilter: iconFilter,
               }}
             />
             <span>{t('addLocation.fromTimeLabel') || 'From'}</span>
@@ -104,8 +108,8 @@ const OpeningTime = ({ formData, setFormData }) => {
               alt={t('addLocation.setTimeAlt')}
               className="w-5 h-5 mr-2"
               style={{
-                filter: 'brightness(0) saturate(100%) invert(85%) sepia(30%) saturate(1000%) hue-rotate(359deg) brightness(103%) contrast(106%)',
-                WebkitFilter: 'brightness(0) saturate(100%) invert(85%) sepia(30%) saturate(1000%) hue-rotate(359deg) brightness(103%) contrast(106%)'
+                filter: iconFilter,
+                WebkitFilter: iconFilter,
               }}
             />
             <span>{t('addLocation.toTimeLabel') || 'To'}</span>
@@ -147,6 +151,18 @@ const OpeningTime = ({ formData, setFormData }) => {
       />
     </div>
   );
+};
+
+OpeningTime.propTypes = {
+  formData: PropTypes.shape({
+    openingTime: PropTypes.shape({
+      is24Hours: PropTypes.bool.isRequired,
+      selectedDays: PropTypes.arrayOf(PropTypes.string).isRequired,
+      fromTime: PropTypes.object,
+      toTime: PropTypes.object,
+    }).isRequired,
+  }).isRequired,
+  setFormData: PropTypes.func.isRequired,
 };
 
 export default OpeningTime;

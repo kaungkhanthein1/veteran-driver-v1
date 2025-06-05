@@ -29,7 +29,7 @@ const CustomDropdown = ({ options, value, onChange, placeholder, className, name
     <div className={`relative ${className}`} ref={dropdownRef}>
       <button
         type="button"
-        className="w-full bg-theme-secondary rounded-lg px-3 py-4 text-sm text-theme-primary placeholder-theme-secondary flex items-center justify-between disabled:opacity-50 disabled:cursor-not-allowed h-[48px]"
+        className="w-full bg-theme-secondary rounded-lg px-3 py-4 text-md text-theme-primary placeholder-theme-secondary flex items-center justify-between disabled:opacity-50 disabled:cursor-not-allowed h-[48px]"
         onClick={() => setIsOpen(!isOpen)}
         disabled={disabled}
       >
@@ -55,7 +55,7 @@ const CustomDropdown = ({ options, value, onChange, placeholder, className, name
             {options.map(option => (
               <li
                 key={option.value}
-                className={`px-4 py-2 cursor-pointer hover:bg-theme-primary-light ${selectedOption?.value === option.value ? 'bg-theme-primary-light' : ''}`}
+                className={`px-4 py-2 cursor-pointer hover:bg-theme-primary-light ${selectedOption?.value === option.value ? 'bg-theme-primary-light' : ''} text-lg`}
                 onClick={() => handleOptionClick(option.value)}
               >
                 <span className="flex items-center">

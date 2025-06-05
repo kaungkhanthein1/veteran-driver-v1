@@ -15,6 +15,7 @@ import { mockCities } from '../../data/mockCities'; // Import mockCities data
 const AddLocationPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -112,6 +113,9 @@ const AddLocationPage = () => {
   }));
 
   const stateOptions = formData.country ? mockCities[formData.country]?.map(city => ({ value: city, label: city })) : [];
+
+  // Determine icon filter based on theme - REMOVED THEME LOGIC
+  const setLocationIconFilter = 'brightness(0) saturate(100%) invert(85%) sepia(30%) saturate(1000%) hue-rotate(359deg) brightness(103%) contrast(106%)'; // Filter for #FFC61B always
 
   return (
     <div className="min-h-screen flex justify-center bg-theme-primary">
@@ -213,9 +217,9 @@ const AddLocationPage = () => {
                   src={SetLocationIcon}
                   alt={t('location.setLocation')}
                   className="w-5 h-5 mr-2"
-                  style={{ 
-                    filter: 'brightness(0) saturate(100%) invert(85%) sepia(30%) saturate(1000%) hue-rotate(359deg) brightness(103%) contrast(106%)',
-                    WebkitFilter: 'brightness(0) saturate(100%) invert(85%) sepia(30%) saturate(1000%) hue-rotate(359deg) brightness(103%) contrast(106%)'
+                  style={{
+                    filter: setLocationIconFilter,
+                    WebkitFilter: setLocationIconFilter,
                   }}
                 />
                 <span>{t('location.setLocationOnMap')}</span>
