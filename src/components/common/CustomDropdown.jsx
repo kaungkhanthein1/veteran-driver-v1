@@ -29,17 +29,17 @@ const CustomDropdown = ({ options, value, onChange, placeholder, className, name
     <div className={`relative ${className}`} ref={dropdownRef}>
       <button
         type="button"
-        className="w-full bg-theme-secondary rounded-lg px-3 py-4 text-sm text-theme-primary placeholder-theme-secondary flex justify-between items-center disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full bg-theme-secondary rounded-lg px-3 py-4 text-sm text-theme-primary placeholder-theme-secondary flex items-center justify-between disabled:opacity-50 disabled:cursor-not-allowed h-[48px]"
         onClick={() => setIsOpen(!isOpen)}
         disabled={disabled}
       >
         <span className="flex items-center">
-          {selectedOption?.flag && <span className="mr-2 text-lg">{selectedOption.flag}</span>}
-          {selectedOption ? selectedOption.label : placeholder}
+          {selectedOption?.flag && <span className="mr-2 text-lg flex-shrink-0">{selectedOption.flag}</span>}
+          <span className="truncate">{selectedOption ? selectedOption.label : placeholder}</span>
         </span>
         {/* Dropdown arrow icon */}
         <svg
-          className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+          className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''} flex-shrink-0`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -59,8 +59,8 @@ const CustomDropdown = ({ options, value, onChange, placeholder, className, name
                 onClick={() => handleOptionClick(option.value)}
               >
                 <span className="flex items-center">
-                  {option.flag && <span className="mr-2 text-lg">{option.flag}</span>}
-                  {option.label}
+                  {option.flag && <span className="mr-2 text-lg flex-shrink-0">{option.flag}</span>}
+                  <span className="truncate">{option.label}</span>
                 </span>
               </li>
             ))}
@@ -75,13 +75,13 @@ CustomDropdown.propTypes = {
   options: PropTypes.arrayOf(PropTypes.shape({
     value: PropTypes.any.isRequired,
     label: PropTypes.node.isRequired,
-    flag: PropTypes.node, 
+    flag: PropTypes.node,
   })).isRequired,
   value: PropTypes.any,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   className: PropTypes.string,
-  name: PropTypes.string.isRequired, 
+  name: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
 };
 
