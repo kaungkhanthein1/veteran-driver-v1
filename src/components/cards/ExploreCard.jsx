@@ -8,6 +8,7 @@ import ExploreVideo from "assets/Explore.mp4";
 import ImageModal from "../common/ImageModal";
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
+import { useNavigate } from "react-router-dom";
 
 export default function ExploreCard({
   item,
@@ -22,6 +23,7 @@ export default function ExploreCard({
 }) {
   const { t } = useTranslation();
   const { theme } = useTheme();
+  const navigate = useNavigate();
   const [selectedMedia, setSelectedMedia] = useState(null);
 
   // Define all available media for this card
@@ -79,7 +81,7 @@ export default function ExploreCard({
           className="bg-[#FFC61B] text-black px-4 py-1.5 rounded-full text-sm font-medium"
           onClick={(e) => {
             e.stopPropagation();
-            onClick(); // assuming onClick handles the view place navigation
+            navigate(`/location/${item.id}`);
           }}
         >
           {t('exploreCard.viewPlaceButton') || 'View Details'}
