@@ -34,7 +34,7 @@ const OpeningTime = ({ formData, setFormData }) => {
     <div className="space-y-4">
       <h2 className="text-lg font-semibold">{t('addLocation.openingTime')}</h2>
       
-      <div className="flex items-center justify-between bg-theme-secondary rounded-lg px-4 py-3">
+      <div className="flex items-center justify-between px-4 py-3">
         <div>
           <p>{t('addLocation.serviceAvailable247')}</p>
         </div>
@@ -53,7 +53,12 @@ const OpeningTime = ({ formData, setFormData }) => {
       </div>
 
       <button 
-        onClick={() => setIsTimeModalOpen(true)}
+        type="button"
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setIsTimeModalOpen(true);
+        }}
         className="w-full bg-theme-secondary rounded-lg px-4 py-3 flex justify-between items-center"
       >
         <div className="flex items-center">

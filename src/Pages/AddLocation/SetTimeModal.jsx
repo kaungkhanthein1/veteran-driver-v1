@@ -47,14 +47,24 @@ const SetTimeModal = ({ isOpen, onClose, onSave, initialTime }) => {
           <div className="flex-1">
             <div className="flex flex-col gap-2">
               <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setPeriod('AM');
+                }}
                 className={`px-4 py-2 rounded ${period === 'AM' ? 'bg-[#FDC51B] text-black' : 'bg-theme-primary text-theme-primary'}`}
-                onClick={() => setPeriod('AM')}
               >
                 AM
               </button>
               <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setPeriod('PM');
+                }}
                 className={`px-4 py-2 rounded ${period === 'PM' ? 'bg-[#FDC51B] text-black' : 'bg-theme-primary text-theme-primary'}`}
-                onClick={() => setPeriod('PM')}
               >
                 PM
               </button>
