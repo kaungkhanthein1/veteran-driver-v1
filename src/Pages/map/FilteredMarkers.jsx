@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import "./map.css";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../context/ThemeContext";
 
 const thumbnailIcon = (src) =>
   L.divIcon({
@@ -26,6 +27,8 @@ const renderStars = (rating) => {
 };
 
 const FilteredMarkers = ({ markers, onToggleSidebar }) => {
+  const { theme } = useTheme();
+
   const map = useMap();
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -120,6 +123,17 @@ const FilteredMarkers = ({ markers, onToggleSidebar }) => {
 
   return (
     <>
+      {/* {selectedPlace && (
+        <motion.div
+          className="fixed w-screen h-[100vh] inset-0 bg-black/60 z-[1000]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          onClick={handleClose} // Optional: click background to close
+        />
+      )} */}
+
       {markers.map((place) => (
         <Marker
           key={place.id}
@@ -133,7 +147,9 @@ const FilteredMarkers = ({ markers, onToggleSidebar }) => {
       ))}
 
       <motion.div
-        className="fixed bottom-0 left-0 w-full max-w-[500px] marker_box rounded-t-2xl shadow-xl p-4 z-[1000]"
+        className={`fixed bottom-0 left-0 w-full max-w-[500px] ${
+          theme === "white" ? "marker_box" : "marker_box_dark"
+        }  rounded-t-2xl shadow-xl p-4 z-[10000]`}
         initial={{ y: "100%" }}
         animate={{ y: selectedPlace && isSliding ? 0 : "100%" }}
         exit={{ y: "100%" }}
@@ -149,7 +165,11 @@ const FilteredMarkers = ({ markers, onToggleSidebar }) => {
         {selectedPlace && (
           <>
             <div className="flex justify-center items-start mb-[40px]">
-              <span className=" drag_btn"></span>
+              <span
+                className={`${
+                  theme === "white" ? "drag_btn" : "drag_btn_dark"
+                }`}
+              ></span>
               {/* <button onClick={handleClose} className="text-gray-500 text-2xl">
                 &times;
               </button> */}
@@ -160,8 +180,16 @@ const FilteredMarkers = ({ markers, onToggleSidebar }) => {
               className="w-full h-32 object-cover rounded-lg  my-[16px]"
             />
             <div className=" flex w-full justify-between items-center">
-              <h1 className=" text-white">{selectedPlace.name}</h1>
-              <div className="marker_box_icon px-2 py-2 flex justify-center items-center">
+              <h1
+                className={`${theme === "white" ? "text-black" : "text-white"}`}
+              >
+                {selectedPlace.name}
+              </h1>
+              <div
+                className={`${
+                  theme === "white" ? "marker_box_icon" : "marker_box_icon_dark"
+                } px-2 py-2 flex justify-center items-center`}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -187,7 +215,11 @@ const FilteredMarkers = ({ markers, onToggleSidebar }) => {
             </div>
             <div className=" flex gap-[5px] py-[10px]">
               {" "}
-              <span className=" text-white text-[12px] font-[400]">
+              <span
+                className={` text-[12px] font-[400] ${
+                  theme === "white" ? " text-[#444444]" : "text-white"
+                }`}
+              >
                 {selectedPlace.rating}
               </span>{" "}
               {renderStars(selectedPlace.rating)}
@@ -197,7 +229,11 @@ const FilteredMarkers = ({ markers, onToggleSidebar }) => {
                 <span key={ss}>{ss},</span>
               ))}
             </div>
-            <div className=" text-white font-[700]">
+            <div
+              className={`${
+                theme === "white" ? "text-[#444]" : " text-white"
+              } font-[700]`}
+            >
               <span className=" text-[18px]">
                 {selectedPlace.price}{" "}
                 <span className=" text-[10px]">

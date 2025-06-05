@@ -3,11 +3,13 @@ import "./map.css";
 import { Range } from "react-range";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
+import { useTheme } from "../../context/ThemeContext";
 
 const MIN = 0;
 const MAX = 1000;
 
 const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
+  const { theme } = useTheme();
   // TODO: Add PropTypes for prop validation
   const [isVisible, setIsVisible] = useState(false);
   const { t } = useTranslation();
@@ -111,60 +113,18 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
           {/* Price */}
           <div className="space-y-4">
             <div className="flex w-full price_tags justify-between items-center text-[var(--text-primary)]">
-              <span className="filter_title">{t("filterPanel.priceRangeLabel")}</span>
+              <span
+                className={`${
+                  theme === "white" ? "filter_title" : "filter_title_dark"
+                }`}
+              >
+                {t("filterPanel.priceRangeLabel")}
+              </span>
               <span className="price_num">
                 ${filters.priceRange[0]} - ${filters.priceRange[1]}
               </span>
             </div>
-            {/* <Range
-              step={1}
-              min={MIN}
-              max={MAX}
-              values={filters.priceRange}
-              onChange={(values) => setFilters({ ...filters, priceRange: values })}
-              renderTrack={({ props, children }) => {
-                const { key, ...restProps } = props;
-                const value = filters.priceRange[0];
-                const percentage = (value - MIN) / (MAX - MIN) * 100;
-                return (
-                  <div
-                    key={key}
-                    {...restProps}
-                    className="w-full h-[16px] range_input_c"
-                    style={{
-                      background: `linear-gradient(to right, var(--accent-yellow) ${percentage}%, var(--bg-secondary) ${percentage}%)`,
-                    }}
-                  >
-                    {children}
-                  </div>
-                );
-              }}
-              renderThumb={({ props, index }) => {
-                const { key, ...restProps } = props;
-                if (index === 0) {
-                  return (
-                    <div
-                      key={key}
-                      {...restProps}
-                      className="w-[4px] h-[44px] rounded-[8px] shadow"
-                      style={{ backgroundColor: 'var(--accent-yellow)' }}
-                    />
-                  );
-                } else {
-                  return (
-                    <div
-                      key={key}
-                      {...restProps}
-                      style={{
-                        width: '0px',
-                        height: '0px',
-                        backgroundColor: 'transparent',
-                      }}
-                    />
-                  );
-                }
-              }}
-            /> */}
+
             <Range
               step={1}
               min={MIN}
@@ -206,7 +166,9 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                   <div
                     key={key}
                     {...restProps}
-                    className="w-[8px] h-[44px] border-black border-[3px] rounded-[8px] shadow"
+                    className={`w-[8px] h-[44px] ${
+                      theme === "white" ? "border-white" : "border-black"
+                    } border-[3px] rounded-[8px] shadow`}
                     style={{
                       ...restProps.style,
                       backgroundColor: "var(--accent-yellow)",
@@ -221,11 +183,17 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
           {/* Distance */}
           <div className="space-y-4">
             <div className="flex w-full price_tags justify-between items-center text-[var(--text-primary)]">
-              <span>{t("filterPanel.distanceLabel")}</span>
+              <span
+                className={`${
+                  theme === "white" ? "filter_title" : "filter_title_dark"
+                }`}
+              >
+                {t("filterPanel.distanceLabel")}
+              </span>
               <span
               //  style={{ color: "var(--accent-yellow)" }}
-               >
-               0km - {filters.distance}km
+              >
+                0km - {filters.distance}km
               </span>
             </div>
             <Range
@@ -257,7 +225,9 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                   <div
                     key={key}
                     {...restProps}
-                    className="w-[8px] border-[3px] border-black h-[44px] rounded-[8px] shadow"
+                    className={`w-[8px] border-[3px] ${
+                      theme === "white" ? "border-white" : "border-black"
+                    } h-[44px] rounded-[8px] shadow`}
                     style={{
                       ...restProps.style,
                       backgroundColor: "var(--accent-yellow)",
@@ -282,7 +252,11 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                   className={`px-4 py-2 rounded-[8px] text-[12px] font-[500]
                     ${
                       filters.rating === value
-                        ? "filter_active_map"
+                        ? `${
+                            theme === "white"
+                              ? "filter_active_map"
+                              : "filter_active_map_dark"
+                          }`
                         : "bg-[var(--bg-secondary)] text-[var(--text-primary)]"
                     }`}
                 >
@@ -308,7 +282,11 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                     className={`px-4 py-2 rounded-[8px] text-[12px] font-[500]
         ${
           isActive
-            ? "filter_active_map"
+            ? `${
+                theme === "white"
+                  ? "filter_active_map"
+                  : "filter_active_map_dark"
+              }`
             : "bg-[var(--bg-secondary)] text-[var(--text-primary)]"
         }`}
                   >
@@ -337,7 +315,11 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                     className={`px-4 py-2 rounded-[8px] text-[12px] font-[500]
                       ${
                         isActive
-                          ? "filter_active_map"
+                          ? `${
+                              theme === "white"
+                                ? "filter_active_map"
+                                : "filter_active_map_dark"
+                            }`
                           : "bg-[var(--bg-secondary)] text-[var(--text-primary)]"
                       }`}
                   >
@@ -361,7 +343,11 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                   className={`px-4 py-2 rounded-[8px] text-[12px] font-[500]
                     ${
                       filters.sort === option
-                        ? "filter_active_map"
+                        ? `${
+                            theme === "white"
+                              ? "filter_active_map"
+                              : "filter_active_map_dark"
+                          }`
                         : "bg-[var(--bg-secondary)] text-[var(--text-primary)]"
                     }`}
                 >
@@ -375,7 +361,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
         {/* Apply Button */}
         <button
           onClick={applyFilters}
-          className="filter_apply_button sticky bottom-0 w-full mt-8 py-[10px] font-medium"
+          className="filter_apply_button sticky bottom-0 w-full mt-8 py-[16px] font-medium"
         >
           {t("filterPanel.applyButton")}
         </button>

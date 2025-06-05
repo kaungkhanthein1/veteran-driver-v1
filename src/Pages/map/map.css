@@ -85,7 +85,7 @@
   letter-spacing: 0.56px;
 }
 
-.filter_active_map {
+.filter_active_map_dark {
   border-radius: 8px;
   background: linear-gradient(
     325deg,
@@ -95,6 +95,23 @@
   color: #ffd75e;
   leading-trim: both;
   text-edge: cap;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "dlig" on;
+  /* font-family: Roboto; */
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  /* line-height: 20px; 166.667% */
+  /* letter-spacing: 0.24px; */
+}
+
+.filter_active_map {
+  border-radius: 8px;
+  background: var(
+    --Yellow-Gradient,
+    linear-gradient(325deg, #ffc61b 43.64%, #ffe38e 100%)
+  );
+  color: #000;
   font-variant-numeric: lining-nums proportional-nums;
   font-feature-settings: "dlig" on;
   /* font-family: Roboto; */
@@ -137,13 +154,16 @@
   letter-spacing: var(--Label-Large-Tracking, 0.1px);
 }
 
-.marker_box {
+.marker_box_dark {
   border-radius: 8px 8px 0px 0px;
   background: #32312f;
 }
+.marker_box {
+  border-radius: 8px 8px 0px 0px;
+  background: #fff;
+}
 
 .marker_box h1 {
-  color: #fff;
   leading-trim: both;
   text-edge: cap;
   font-variant-numeric: lining-nums proportional-nums;
@@ -156,9 +176,14 @@
   letter-spacing: 0.72px;
 }
 
-.marker_box_icon {
+.marker_box_icon_dark {
   border-radius: 100px;
   background: rgba(255, 255, 255, 0.12);
+}
+
+.marker_box_icon {
+  border-radius: 100px;
+  background: rgba(25, 23, 33, 0.64);
 }
 
 .add_place_btn {
@@ -175,9 +200,16 @@
   line-height: 20px; /* 125% */
 }
 
-.drag_btn {
+.drag_btn_dark {
   border-radius: 100px;
   background: #fff;
+  width: 32px;
+  height: 4px;
+}
+
+.drag_btn {
+  border-radius: 100px;
+  background: #000;
   width: 32px;
   height: 4px;
 }
@@ -194,6 +226,17 @@
 }
 
 .filter_title {
+  color: #000;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "dlig" on;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.56px;
+}
+
+.filter_title_dark {
   color: #fff;
   font-variant-numeric: lining-nums proportional-nums;
   font-feature-settings: "dlig" on;
