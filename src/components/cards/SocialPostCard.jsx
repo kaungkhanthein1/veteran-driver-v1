@@ -6,11 +6,13 @@ import BeachImg from "assets/Beach.png";
 import RoomImg from "assets/Room.png";
 import SampleVideo from "assets/Sample.mp4";
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 export default function SocialPostCard({ post: providedPost, onOpenComments, compact = false, setIsModalOpen, className }) {
   const [expanded, setExpanded] = useState(false);
   const [selectedMedia, setSelectedMedia] = useState(null);
   const [showShareModal, setShowShareModal] = useState(false);
+  const navigate = useNavigate();
 
   // Use provided post
   const post = providedPost;
@@ -69,14 +71,30 @@ export default function SocialPostCard({ post: providedPost, onOpenComments, com
           </div>
         </div>
         {compact ? (
-          <button className="ml-auto text-[#FFC61B] text-xs flex items-center">
+          <button 
+            className="ml-auto text-[#FFC61B] text-xs flex items-center"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              console.log('Navigating to location:', post.locationId);
+              navigate(`/location/${post.locationId}`);
+            }}
+          >
             <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
             </svg>
             {t('socialPostCard.viewPlace')}
           </button>
         ) : (
-          <button className="ml-auto bg-theme-secondary text-[#FFC61B] rounded-full px-3 py-1.5 text-[13px] font-medium flex items-center">
+          <button 
+            className="ml-auto bg-theme-secondary text-[#FFC61B] rounded-full px-3 py-1.5 text-[13px] font-medium flex items-center"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              console.log('Navigating to location:', post.locationId);
+              navigate(`/location/${post.locationId}`);
+            }}
+          >
             <svg className="w-3.5 h-3.5 mr-1.5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
             </svg>
@@ -207,6 +225,7 @@ export default function SocialPostCard({ post: providedPost, onOpenComments, com
 SocialPostCard.propTypes = {
   post: PropTypes.shape({
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    locationId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     user: PropTypes.shape({
       name: PropTypes.string.isRequired,
       verified: PropTypes.bool
