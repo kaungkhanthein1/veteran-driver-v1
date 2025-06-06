@@ -143,7 +143,7 @@ const EditLocationPage = () => {
                 <button 
                   type="button" 
                   className="w-full bg-theme-secondary rounded-lg px-4 py-3 flex justify-between items-center"
-                  onClick={() => navigate('/map', { state: { from: 'editLocation', formData } })}
+                  onClick={() => navigate('/addMap', { state: { from: 'editLocation', formData } })}
                 >
                   <div className="flex items-center">
                     <img 
