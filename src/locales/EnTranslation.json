@@ -149,6 +149,7 @@
   },
   "chooseLocation": {
     "selectRegionTitle": "Select Region",
+    "selectCityTitle": "Select City",
     "searchLocationPlaceholder": "Search location...",
     "chooseThisRegionButton": "Choose this region"
   },

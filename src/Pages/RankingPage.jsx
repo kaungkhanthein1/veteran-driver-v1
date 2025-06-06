@@ -7,10 +7,8 @@ import Harrier from "assets/Harrier.png";
 import HarrierRoom from "assets/HarrierRoom.png";
 import { useTranslation } from 'react-i18next';
 import RankingHeader from "assets/RankingHeader.png";
-import CustomDropdown from '../components/common/CustomDropdown';
-import { regions } from '../Pages/ChooseLocationPage';
-import { mockCities } from '../data/mockCities';
 import RegionSelectModal from '../components/RegionSelectModal';
+import CitySelectModal from '../components/CitySelectModal';
 
 // Mock data for ranking items
 const rankingItems = [
@@ -78,10 +76,8 @@ export default function RankingPage() {
   const [country, setCountry] = useState('');
   const [state, setState] = useState('');
   const [showRegionModal, setShowRegionModal] = useState(false);
-
-  const handleStateChange = (e) => {
-    setState(e.target.value);
-  };
+  const [showCityModal, setShowCityModal] = useState(false);
+  const [selectedService, setSelectedService] = useState(null);
 
   const openRegionModal = () => {
     setShowRegionModal(true);
@@ -94,10 +90,23 @@ export default function RankingPage() {
   const handleRegionSelect = (region) => {
     setCountry(region.name.toLowerCase().replace(' ', ''));
     setState('');
+    setShowRegionModal(false);
   };
 
+  const openCityModal = () => {
+    if (country) {
+      setShowCityModal(true);
+    }
+  };
 
-  const stateOptions = country ? mockCities[country]?.map(city => ({ value: city, label: city })) : [];
+  const closeCityModal = () => {
+    setShowCityModal(false);
+  };
+
+  const handleCitySelect = (city) => {
+    setState(city);
+    setShowCityModal(false);
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-theme-primary">
@@ -135,14 +144,15 @@ export default function RankingPage() {
               </div>
             </div>
             <div className="flex-1">
-              <CustomDropdown
-                name="state"
-                placeholder={t('addLocation.selectStatePlaceholder')}
-                options={stateOptions}
-                value={state}
-                onChange={handleStateChange}
-                disabled={!country}
-              />
+              <div
+                className={`relative w-full bg-theme-secondary text-theme-primary py-3 px-4 rounded-xl flex justify-between items-center cursor-pointer ${!country ? 'opacity-50 cursor-not-allowed' : ''}`}
+                onClick={openCityModal}
+              >
+                 <span>{state ? state : t('addLocation.selectStatePlaceholder')}</span>
+                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                 </svg>
+              </div>
             </div>
           </div>
 
@@ -150,7 +160,7 @@ export default function RankingPage() {
             {[t('rankingPage.popularTab'), t('rankingPage.mostViewTab'), t('rankingPage.trendingTab')].map((tab) => (
               <button
                 key={tab}
-                className={`px-4 py-2 rounded-full text-sm ${activeTab === tab ? 'bg-[#FFC61B] text-theme-primary' : 'bg-theme-secondary text-theme-primary'}`}
+                className={`px-4 py-2 rounded-xl text-sm text-theme-primary ${activeTab === tab ? 'bg-[#5D4702]' : 'bg-theme-secondary'}`}
                 onClick={() => setActiveTab(tab)}
               >
                 {tab}
@@ -162,7 +172,8 @@ export default function RankingPage() {
             {['Massage', 'Visa', 'Bar', 'Club'].map((service) => (
               <button
                 key={service}
-                className="px-5 py-2.5 rounded-xl text-sm bg-theme-secondary text-theme-primary flex-shrink-0"
+                className={`px-5 py-2.5 rounded-xl text-sm flex-shrink-0 ${selectedService === service ? 'border border-[#886600] text-[#A27A00]' : 'text-theme-primary'}`}
+                onClick={() => setSelectedService(service)}
               >
                 {service}
               </button>
@@ -227,6 +238,7 @@ export default function RankingPage() {
         </div>
       </div>
       {showRegionModal && <RegionSelectModal onSelectRegion={handleRegionSelect} onClose={closeRegionModal} />}
+      {showCityModal && <CitySelectModal country={country} onSelectCity={handleCitySelect} onClose={closeCityModal} />}
     </div>
   );
 }
