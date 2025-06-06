@@ -138,10 +138,10 @@ const LocationDetailsPage = () => {
               className="px-3 py-1 rounded-full border border-[#FDC51B] text-[#FDC51B] text-sm"
               onClick={() => {
                 if (locationData && locationData.lat && locationData.lng) {
-                  navigate('/map', { state: { selectedLocation: { lat: locationData.lat, lng: locationData.lng } } });
+                  navigate(`/CheckMap/${1}`, { state: { selectedLocation: { lat: locationData.lat, lng: locationData.lng } } });
                 } else {
                   console.warn('Location data or coordinates not available for map navigation. Navigating to general map view.');
-                  navigate('/map'); // Navigate to the general map view
+                  navigate(`/CheckMap/${1}`); // Navigate to the general map view
                 }
               }}
             >
