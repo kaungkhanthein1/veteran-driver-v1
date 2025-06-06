@@ -16,7 +16,7 @@ import "./map.css";
 
 // Custom marker icon
 const customIcon = L.icon({
-  iconUrl: "./Loc.svg", // Put your image in the public folder
+  iconUrl: "https://picsum.photos/seed/0/400/300", // Put your image in the public folder
   iconSize: [50, 50],
   iconAnchor: [25, 50],
   popupAnchor: [0, -50],
@@ -55,6 +55,17 @@ const RecenterMap = ({ center }) => {
 const CheckMap = () => {
   const routeLocation = useLocation();
   const { t } = useTranslation();
+
+  const markerIcons = useMemo(() => {
+    const icons = L.divIcon({
+      html: `<div class='w-12 h-12 rounded-full overflow-hidden border-2 border-yellow-500 shadow-md'>
+            <img src='https://picsum.photos/seed/0/400/300' class='w-full h-full object-cover'/>
+          </div>`,
+      className: "",
+    });
+
+    return icons;
+  }, []);
 
   const mapRef = useRef();
   const [isMapReady, setIsMapReady] = useState(false);
@@ -168,7 +179,7 @@ const CheckMap = () => {
             {/* Destination Marker (Custom Icon) */}
             <Marker
               position={[selectedLocation.lat, selectedLocation.lng]}
-              icon={customIcon}
+              icon={markerIcons}
             >
               <Popup>Destination</Popup>
             </Marker>
@@ -235,8 +246,8 @@ const CheckMap = () => {
                 fill="none"
               >
                 <path
-                  d="M12.9997 8.66732C10.6055 8.66732 8.66634 10.6065 8.66634 13.0007C8.66634 15.3948 10.6055 17.334 12.9997 17.334C15.3938 17.334 17.333 15.3948 17.333 13.0007C17.333 10.6065 15.3938 8.66732 12.9997 8.66732ZM22.6847 11.9173C22.1863 7.39982 18.6005 3.81398 14.083 3.31565V1.08398H11.9163V3.31565C7.39884 3.81398 3.81301 7.39982 3.31467 11.9173H1.08301V14.084H3.31467C3.81301 18.6015 7.39884 22.1873 11.9163 22.6857V24.9173H14.083V22.6857C18.6005 22.1873 22.1863 18.6015 22.6847 14.084H24.9163V11.9173H22.6847ZM12.9997 20.584C8.80717 20.584 5.41634 17.1932 5.41634 13.0007C5.41634 8.80815 8.80717 5.41732 12.9997 5.41732C17.1922 5.41732 20.583 8.80815 20.583 13.0007C20.583 17.1932 17.1922 20.584 12.9997 20.584Z"
-                  fill="#444444"
+                  d="M13.0002 8.66683C10.606 8.66683 8.66683 10.606 8.66683 13.0002C8.66683 15.3943 10.606 17.3335 13.0002 17.3335C15.3943 17.3335 17.3335 15.3943 17.3335 13.0002C17.3335 10.606 15.3943 8.66683 13.0002 8.66683ZM22.6852 11.9168C22.1868 7.39933 18.601 3.8135 14.0835 3.31516V1.0835H11.9168V3.31516C7.39933 3.8135 3.8135 7.39933 3.31516 11.9168H1.0835V14.0835H3.31516C3.8135 18.601 7.39933 22.1868 11.9168 22.6852V24.9168H14.0835V22.6852C18.601 22.1868 22.1868 18.601 22.6852 14.0835H24.9168V11.9168H22.6852ZM13.0002 20.5835C8.80766 20.5835 5.41683 17.1927 5.41683 13.0002C5.41683 8.80766 8.80766 5.41683 13.0002 5.41683C17.1927 5.41683 20.5835 8.80766 20.5835 13.0002C20.5835 17.1927 17.1927 20.5835 13.0002 20.5835Z"
+                  fill="#FFC61B"
                 />
               </svg>
             </div>

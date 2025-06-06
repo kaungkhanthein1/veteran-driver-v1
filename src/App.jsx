@@ -33,6 +33,7 @@ import NotificationsPage from "./Pages/Profile/NotificationsPage";
 import ChangePasswordPage from "./Pages/Profile/ChangePasswordPage";
 import ReviewPage from "./Pages/ReviewPage";
 import CheckMap from "./Pages/map/CheckMap";
+import AddMap from "./Pages/map/AddMap";
 
 function App() {
   return (
@@ -77,6 +78,7 @@ function App() {
             <Route path="/review" element={<ReviewPage />} />
             {/* newMap */}
             <Route path="/CheckMap/:id" element={<CheckMap />} />
+            <Route path="/addMap" element={<AddMap />} />
           </Routes>
         </Router>
       </ThemeProvider>
