@@ -158,24 +158,30 @@ export default function RankingPage() {
           <div className="px-5 mb-4 flex space-x-4">
             <div className="flex-1">
               <div 
-                className="relative w-full bg-theme-secondary text-theme-primary py-3 px-4 rounded-xl flex justify-between items-center cursor-pointer"
+                className="relative w-full py-3 px-4 rounded-xl flex justify-between items-center cursor-pointer"
                 onClick={openRegionModal}
+                style={{ background: 'linear-gradient(#FFE3D4, #FEA269)' }}
               >
-                <span>{country ? t(`regions.${country}`) : t('addLocation.selectCountryPlaceholder')}</span>
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
+                <span style={{ color: '#581E00' }}>{country ? t(`regions.${country}`) : t('addLocation.selectCountryPlaceholder')}</span>
+                <span className="w-6 h-6 flex items-center justify-center rounded-full" style={{ backgroundColor: '#B15200' }}>
+                  <svg className="w-4 h-4 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </span>
               </div>
             </div>
             <div className="flex-1">
               <div
-                className={`relative w-full bg-theme-secondary text-theme-primary py-3 px-4 rounded-xl flex justify-between items-center cursor-pointer ${!country ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`relative w-full py-3 px-4 rounded-xl flex justify-between items-center cursor-pointer ${!country ? 'opacity-50 cursor-not-allowed' : ''}`}
                 onClick={openCityModal}
+                style={{ background: 'linear-gradient(268deg, #FFDF7D 5.8%, #FFF7DF 85.51%)' }}
               >
-                 <span>{state ? state : t('addLocation.selectStatePlaceholder')}</span>
-                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-                 </svg>
+                 <span style={{ color: '#1A1300' }}>{state ? state : t('addLocation.selectStatePlaceholder')}</span>
+                 <span className="w-6 h-6 flex items-center justify-center rounded-full" style={{ backgroundColor: '#DAA400' }}>
+                   <svg className="w-4 h-4 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                   </svg>
+                 </span>
               </div>
             </div>
           </div>
