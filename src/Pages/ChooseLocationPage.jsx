@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import BackButton from "../components/common/BackButton";
 import { useTranslation } from "react-i18next";
 
-const regions = [
+export const regions = [
   { name: "Cambodia", flag: "🇰🇭" },
   { name: "China", flag: "🇨🇳" },
   { name: "India", flag: "🇮🇳" },

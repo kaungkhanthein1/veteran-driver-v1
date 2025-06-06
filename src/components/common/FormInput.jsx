@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
@@ -19,7 +18,7 @@ const FormInput = ({
         type={type}
         name={name}
         placeholder={placeholder ? t(placeholder) : ''}
-        className="w-full bg-transparent border border-theme rounded-lg px-4 h-[56px] text-base focus:border-[#FDC51B] focus:outline-none placeholder:text-theme-secondary/50 flex items-center"
+        className="w-full bg-transparent border border-theme rounded-lg px-4 h-[56px] text-base focus:outline-none focus:ring-0 placeholder:text-theme-secondary/50 flex items-center"
         value={value}
         onChange={onChange}
       />

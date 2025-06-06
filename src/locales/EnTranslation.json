@@ -128,7 +128,13 @@
     "servicesAndPrices": "Services & Prices *",
     "bestPriceLabel": "Best Price(USD)",
     "pricePlaceholder": "Please enter the price",
-    "addServicesLabel": "Add services"
+    "addServicesLabel": "Add services",
+    "selectServiceType": "Select Service Type",
+    "selectServiceTypePlaceholder": "Select Service Type",
+    "country": "Country",
+    "selectCountryPlaceholder": "Select Country",
+    "state": "State",
+    "selectStatePlaceholder": "Select State"
   },
   "changeTheme": {
     "title": "Theme",
