@@ -43,8 +43,8 @@ export default function ChooseLocationPage() {
         {filteredRegions.map(region => (
           <button
             key={region.name}
-            className={`flex flex-col items-center justify-center rounded-lg p-4 border-2 ${
-              selected === region.name ? "border-[#FFD75E] bg-theme-secondary" : "border-transparent bg-theme-primary"
+            className={`flex flex-col items-center justify-center rounded-lg p-4 border-2 bg-theme-secondary ${
+              selected === region.name ? "border-[#FFD75E]" : "border-transparent"
             }`}
             onClick={() => setSelected(region.name)}
           >
