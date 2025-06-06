@@ -10,6 +10,7 @@ import RankingHeader from "assets/RankingHeader.png";
 import CustomDropdown from '../components/common/CustomDropdown';
 import { regions } from '../Pages/ChooseLocationPage';
 import { mockCities } from '../data/mockCities';
+import RegionSelectModal from '../components/RegionSelectModal';
 
 // Mock data for ranking items
 const rankingItems = [
@@ -76,21 +77,25 @@ export default function RankingPage() {
   const navigate = useNavigate();
   const [country, setCountry] = useState('');
   const [state, setState] = useState('');
-
-  const handleCountryChange = (e) => {
-    setCountry(e.target.value);
-    setState('');
-  };
+  const [showRegionModal, setShowRegionModal] = useState(false);
 
   const handleStateChange = (e) => {
     setState(e.target.value);
   };
 
-  const countryOptions = regions.map(region => ({
-    value: region.name.toLowerCase().replace(' ', ''),
-    label: t(`regions.${region.name.toLowerCase().replace(' ', '')}`),
-    flag: region.flag,
-  }));
+  const openRegionModal = () => {
+    setShowRegionModal(true);
+  };
+
+  const closeRegionModal = () => {
+    setShowRegionModal(false);
+  };
+
+  const handleRegionSelect = (region) => {
+    setCountry(region.name.toLowerCase().replace(' ', ''));
+    setState('');
+  };
+
 
   const stateOptions = country ? mockCities[country]?.map(city => ({ value: city, label: city })) : [];
 
@@ -119,13 +124,15 @@ export default function RankingPage() {
         <div className="sticky top-0 bg-theme-primary z-30">
           <div className="px-5 mb-4 flex space-x-4">
             <div className="flex-1">
-              <CustomDropdown
-                name="country"
-                placeholder={t('addLocation.selectCountryPlaceholder')}
-                options={countryOptions}
-                value={country}
-                onChange={handleCountryChange}
-              />
+              <div 
+                className="relative w-full bg-theme-secondary text-theme-primary py-3 px-4 rounded-xl flex justify-between items-center cursor-pointer"
+                onClick={openRegionModal}
+              >
+                <span>{country ? t(`regions.${country}`) : t('addLocation.selectCountryPlaceholder')}</span>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </div>
             </div>
             <div className="flex-1">
               <CustomDropdown
@@ -219,6 +226,7 @@ export default function RankingPage() {
           ))}
         </div>
       </div>
+      {showRegionModal && <RegionSelectModal onSelectRegion={handleRegionSelect} onClose={closeRegionModal} />}
     </div>
   );
 }
