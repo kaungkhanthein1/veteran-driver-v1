@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import { mockCities } from "../data/mockCities"; // Import mockCities
 
 // Import new generic city images
-import cityImage0 from "assets/cities/city.png";
-import cityImage1 from "assets/cities/city1.png";
-import cityImage2 from "assets/cities/city2.png";
+import cityImage0 from "assets/cities/City.png";
+import cityImage1 from "assets/cities/City1.png";
+import cityImage2 from "assets/cities/City2.png";
 
 // Array of generic city images for the first three cities
 const genericCityImages = [cityImage0, cityImage1, cityImage2];
