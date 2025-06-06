@@ -263,3 +263,15 @@
   border-radius: 100px;
   background: rgba(0, 0, 0, 0.08);
 }
+
+.confirm_loc_btn {
+  border-radius: 100px;
+  background: linear-gradient(325deg, #ffc61b 43.64%, #ffe38e 100%);
+  color: #000;
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: var(--Label-Large-Line-Height, 20px); /* 125% */
+  letter-spacing: var(--Label-Large-Tracking, 0.1px);
+}
