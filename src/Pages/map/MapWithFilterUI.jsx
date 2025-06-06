@@ -24,6 +24,11 @@ const AttachMapRef = ({ mapRef, onReady }) => {
   return null;
 };
 
+// locationPicker
+// editLocation
+// locationDetail
+// addLocation
+
 const RecenterMap = ({ center }) => {
   // TODO: Add PropTypes for prop validation
   const map = useMap();
@@ -61,6 +66,7 @@ const MapWithFilterUI = () => {
   const { t } = useTranslation();
   const [showFilter, setShowFilter] = useState(false);
   const selectedLocation = routeLocation.state?.selectedLocation;
+  // console.log(routeLocation)
   // const returnPath = routeLocation.state?.returnPath; // Keeping returnPath commented out as it might be used later
 
   // Use selected location or default to Phnom Penh

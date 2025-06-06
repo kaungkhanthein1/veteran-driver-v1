@@ -258,3 +258,8 @@
   line-height: 20px; /* 166.667% */
   letter-spacing: 0.48px;
 }
+
+.share_botton {
+  border-radius: 100px;
+  background: rgba(0, 0, 0, 0.08);
+}
