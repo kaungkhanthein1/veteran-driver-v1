@@ -9,6 +9,8 @@ import { useTranslation } from 'react-i18next';
 import RankingHeader from "assets/RankingHeader.png";
 import RegionSelectModal from '../components/RegionSelectModal';
 import CitySelectModal from '../components/CitySelectModal';
+import TuneIcon from '../icons/Tune.svg';
+import FilterPanel from '../Pages/map/FilterPanel';
 
 // Mock data for ranking items
 const rankingItems = [
@@ -78,6 +80,7 @@ export default function RankingPage() {
   const [showRegionModal, setShowRegionModal] = useState(false);
   const [showCityModal, setShowCityModal] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
+  const [showFilterPanel, setShowFilterPanel] = useState(false);
 
   const openRegionModal = () => {
     setShowRegionModal(true);
@@ -106,6 +109,27 @@ export default function RankingPage() {
   const handleCitySelect = (city) => {
     setState(city);
     setShowCityModal(false);
+  };
+
+  const openFilterPanel = () => {
+    setShowFilterPanel(true);
+  };
+
+  const closeFilterPanel = () => {
+    setShowFilterPanel(false);
+  };
+
+  const [filters, setFilters] = useState({
+    priceRange: [0, 1000],
+    distance: 50,
+    rating: 0,
+    services: [],
+    sort: 'Comprehensive',
+  });
+
+  const applyFilters = () => {
+    console.log('Applying filters:', filters);
+    closeFilterPanel();
   };
 
   return (
@@ -178,10 +202,8 @@ export default function RankingPage() {
                 {service}
               </button>
             ))}
-            <button className="p-2 flex-shrink-0">
-              <svg className="w-6 h-6 text-theme-primary" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M3 10v11c0 .55.45 1 1 1h16c.55 0 1-.45 1-1V10H3zm1-7v4h16V3H4z"/>
-              </svg>
+            <button className="p-2 flex-shrink-0" onClick={openFilterPanel}>
+              <img src={TuneIcon} alt="Tune Icon" />
             </button>
           </div>
         </div>
@@ -239,6 +261,14 @@ export default function RankingPage() {
       </div>
       {showRegionModal && <RegionSelectModal onSelectRegion={handleRegionSelect} onClose={closeRegionModal} />}
       {showCityModal && <CitySelectModal country={country} onSelectCity={handleCitySelect} onClose={closeCityModal} />}
+      {showFilterPanel && (
+        <FilterPanel
+          filters={filters}
+          setFilters={setFilters}
+          applyFilters={applyFilters}
+          onClose={closeFilterPanel}
+        />
+      )}
     </div>
   );
 }
