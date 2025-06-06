@@ -105,7 +105,7 @@ export default function ExploreCard({
   };
 
   // Determine background and shadow classes based on theme
-  const cardClasses = `rounded-xl overflow-hidden cursor-pointer ${selected ? 'border-2 border-[#FDC51B]' : ''} ${theme === 'dark' ? 'bg-theme-secondary' : 'bg-theme-primary shadow-lg'}`;
+  const cardClasses = `rounded-xl overflow-hidden cursor-pointer ${selected ? 'border-2 border-[#FDC51B]' : ''} ${theme === 'dark' ? 'bg-theme-secondary' : 'bg-theme-secondary shadow-lg'}`;
 
   return (
     <div

@@ -381,6 +381,13 @@
     "popularTab": "Popular",
     "mostViewTab": "Most View",
     "trendingTab": "Trending",
+    "subtitle": "Top Picks In {{city}}",
+    "nearbyTab": "Nearby",
+    "massageFilter": "Massage",
+    "visaFilter": "Visa",
+    "barFilter": "Bar",
+    "clubFilter": "Club",
+    "serviceFilter": "Service",
     "distance": "{{distance}}",
     "reviews": "({{count}})",
     "bookNowButton": "Book Now"
