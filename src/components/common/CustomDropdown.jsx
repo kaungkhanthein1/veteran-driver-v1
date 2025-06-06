@@ -29,7 +29,7 @@ const CustomDropdown = ({ options, value, onChange, placeholder, className, name
     <div className={`relative ${className}`} ref={dropdownRef}>
       <button
         type="button"
-        className="w-full bg-theme-secondary rounded-lg px-3 py-4 text-md text-theme-primary placeholder-theme-secondary flex items-center justify-between disabled:opacity-50 disabled:cursor-not-allowed h-[48px]"
+        className="relative z-20 w-full bg-theme-secondary rounded-lg px-3 py-4 text-md text-theme-primary placeholder-theme-secondary flex items-center justify-between disabled:opacity-50 disabled:cursor-not-allowed h-[48px]"
         onClick={() => setIsOpen(!isOpen)}
         disabled={disabled}
       >
@@ -50,7 +50,7 @@ const CustomDropdown = ({ options, value, onChange, placeholder, className, name
       </button>
 
       {isOpen && (
-        <div className="absolute z-10 mt-1 w-full bg-theme-secondary rounded-md shadow-lg max-h-[200px] overflow-y-auto">
+        <div className="absolute z-30 mt-1 w-full bg-theme-secondary rounded-md shadow-lg max-h-[200px] overflow-y-auto">
           <ul className="py-1">
             {options.map(option => (
               <li
