@@ -228,7 +228,8 @@
     "continueWithPhoneButton": "휴대폰 번호로 계속하기",
     "continueWithFacebookButton": "Facebook으로 계속하기",
     "noAccountText": "계정이 없으신가요? ",
-    "signUpLink": "가입하기"
+    "signUpLink": "가입하기",
+    "orText": "또는"
   },
   "otpVerifyPage": {
     "title": "OTP 인증",
@@ -377,6 +378,14 @@
     "popularTab": "인기",
     "mostViewTab": "가장 많이 본",
     "trendingTab": "트렌딩",
+    "subtitle": "{{city}}의 인기 추천",
+    "nearbyTab": "가까운 순",
+    "serviceFilters": {
+      "massage": "마사지",
+      "visa": "비자",
+      "bar": "바",
+      "club": "클럽"
+    },
     "distance": "{{distance}}km 떨어짐",
     "reviews": "({{count}})",
     "bookNowButton": "지금 예약"
@@ -439,6 +448,14 @@
     "servicesLabel": "서비스",
     "sortByLabel": "정렬 기준",
     "applyButton": "적용",
+    "categoryLabel": "카테고리",
+    "categoryOptions": {
+      "all": "전체",
+      "hotel": "호텔",
+      "massage": "마사지",
+      "club": "클럽",
+      "bar": "바"
+    },
     "ratingOptions": {
       "all": "전체",
       "5stars": "별 5개",
@@ -479,9 +496,6 @@
     "storesTab": "상점"
   },
   "homePage": {
-    "nearestPlacesTitle": "가장 가까운 장소",
-    "feedbacksTitle": "피드백",
-    "viewAllButton": "모두 보기",
     "categoryTabs": {
       "hotels": "호텔",
       "motels": "모텔",
@@ -490,11 +504,19 @@
       "shopping": "쇼핑"
     },
     "serviceTabs": {
-      "service1": "서비스 1",
-      "service2": "서비스 2",
-      "service3": "서비스 3",
-      "service4": "서비스 4"
-    }
+      "service1": "서비스 1"
+    },
+    "iconLabels": {
+      "massage": "마사지",
+      "bar": "바",
+      "eVisa": "전자 비자",
+      "more": "더보기"
+    },
+    "nearestPlacesTitle": "가장 가까운 장소",
+    "viewAllButton": "모두 보기",
+    "feedbacksTitle": "피드백",
+    "viewMoreFeedbackText": "실제 방문객의 진정한 피드백을 더 보세요",
+    "viewMoreButton": "더 보기"
   },
   "socialTabs": {
     "newestTab": "최신",
@@ -502,6 +524,7 @@
     "uploadButton": "업로드"
   },
   "exploreCard": {
+    "editDetailsButton": "상세 정보 수정",
     "goldenGateAlt": "골든 게이트",
     "harrierAlt": "해리어",
     "videoThumbnailAlt": "동영상 썸네일",
@@ -536,6 +559,14 @@
     "howWasExperienceQuestion": "경험은 어떠셨습니까?",
     "addPhotoLabel": "사진 추가 (최대 {{max}}장)",
     "postAsAnonymousLabel": "익명 프로필로 게시",
-    "postButton": "게시"
+    "postButton": "게시",
+    "suggestionTags": {
+      "greatService": "서비스가 좋음",
+      "notBad": "나쁘지 않음",
+      "wrongLocation": "위치가 잘못됨",
+      "poorService": "서비스가 좋지 않음",
+      "businessClosed": "영업 종료",
+      "notAsDescribed": "설명과 다름"
+    }
   }
 }

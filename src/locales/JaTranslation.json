@@ -233,7 +233,8 @@
     "continueWithPhoneButton": "電話番号で続ける",
     "continueWithFacebookButton": "Facebookで続ける",
     "noAccountText": "アカウントをお持ちでない方は",
-    "signUpLink": "サインアップ"
+    "signUpLink": "サインアップ",
+    "orText": "または"
   },
   "otpVerifyPage": {
     "title": "OTP認証",
@@ -384,11 +385,12 @@
     "trendingTab": "トレンド",
     "subtitle": "{{city}}のおすすめ",
     "nearbyTab": "近く",
-    "massageFilter": "マッサージ",
-    "visaFilter": "ビザ",
-    "barFilter": "バー",
-    "clubFilter": "クラブ",
-    "serviceFilter": "サービス",
+    "serviceFilters": {
+      "massage": "マッサージ",
+      "visa": "ビザ",
+      "bar": "バー",
+      "club": "クラブ"
+    },
     "distance": "{{distance}}離れた場所",
     "reviews": "（{{count}}）",
     "bookNowButton": "今すぐ予約"
@@ -451,6 +453,14 @@
     "servicesLabel": "サービス",
     "sortByLabel": "並び替え",
     "applyButton": "適用",
+    "categoryLabel": "カテゴリー",
+    "categoryOptions": {
+      "all": "すべて",
+      "hotel": "ホテル",
+      "massage": "マッサージ",
+      "club": "クラブ",
+      "bar": "バー"
+    },
     "ratingOptions": {
       "all": "すべて",
       "5stars": "5つ星",
