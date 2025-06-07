@@ -64,11 +64,14 @@ const FilteredMarkers = React.memo(({ markers, onToggleSidebar }) => {
   }, [selectedPlace]);
 
   // Fit map to bounds
+  const [hasFitBounds, setHasFitBounds] = useState(false);
+
   useEffect(() => {
-    if (markers.length === 0) return;
+    if (markers.length === 0 || hasFitBounds) return;
     const bounds = L.latLngBounds(markers.map((m) => [m.lat, m.lng]));
     map.flyToBounds(bounds, { padding: [50, 50], duration: 1.2 });
-  }, [markers, map]);
+    setHasFitBounds(true);
+  }, [markers, map, hasFitBounds]);
 
   // Lock map when popup is shown
   useEffect(() => {
