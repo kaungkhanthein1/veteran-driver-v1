@@ -20,8 +20,13 @@ import { useNavigate } from 'react-router-dom';
 import AuthModal from './AuthModal';
 import FilterPanel from '../Pages/map/FilterPanel';
 import { useTheme } from '../context/ThemeContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeCountry } from '../app/countrySlice';
 
 const HomePage = () => {
+  const {name} = useSelector((state) => state.country)
+  const dispatch = useDispatch()
+  console.log(" test",name)
   const { t } = useTranslation();
   const { theme } = useTheme();
   const [activeCategoryTab, setActiveCategoryTab] = useState(t('homePage.categoryTabs.hotels'));
@@ -248,7 +253,7 @@ const HomePage = () => {
                 </div>
               </div>
               {/* Country Selector */}
-              <div className="flex items-center text-theme-text text-sm mb-6">
+              <div onClick={() => dispatch(changeCountry("thailand"))} className="flex items-center text-theme-text text-sm mb-6">
                 <img src={CountryFlag} alt="Thailand Flag" className="w-5 h-5 mr-2" />
                 <span>Thailand</span>
                 <img src={DropdownArrow} alt="Dropdown" className="w-3 h-3 ml-1 [filter:var(--icon-filter)]" />
