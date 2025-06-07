@@ -1,5 +1,5 @@
 import { Marker, useMap } from "react-leaflet";
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import L from "leaflet";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -26,7 +26,7 @@ const renderStars = (rating) => {
   );
 };
 
-const FilteredMarkers = ({ markers, onToggleSidebar }) => {
+const FilteredMarkers = React.memo(({ markers, onToggleSidebar }) => {
   const { theme } = useTheme();
 
   const map = useMap();
@@ -35,17 +35,28 @@ const FilteredMarkers = ({ markers, onToggleSidebar }) => {
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [isSliding, setIsSliding] = useState(false);
 
+  const markerIconsRef = useRef({});
+
   const markerIcons = useMemo(() => {
-    const icons = {};
+    const newIcons = {};
+
     markers.forEach((marker) => {
-      icons[marker.id] = L.divIcon({
-        html: `<div class='w-12 h-12 rounded-full overflow-hidden border-2 border-yellow-500 shadow-md'>
-                <img src='${marker.image}' class='w-full h-full object-cover'/>
-              </div>`,
-        className: "",
-      });
+      const existing = markerIconsRef.current[marker.id];
+      if (!existing || existing.src !== marker.image) {
+        markerIconsRef.current[marker.id] = {
+          src: marker.image,
+          icon: L.divIcon({
+            html: `<div class='w-12 h-12 rounded-full overflow-hidden border-2 border-yellow-500 shadow-md'>
+                    <img src='${marker.image}' class='w-full h-full object-cover'/>
+                  </div>`,
+            className: "",
+          }),
+        };
+      }
+      newIcons[marker.id] = markerIconsRef.current[marker.id].icon;
     });
-    return icons;
+
+    return newIcons;
   }, [markers]);
 
   useEffect(() => {
@@ -136,7 +147,7 @@ const FilteredMarkers = ({ markers, onToggleSidebar }) => {
 
       {markers.map((place) => (
         <Marker
-          key={place.id}
+          key={place._id}
           position={[place.lat, place.lng]}
           // icon={thumbnailIcon(place.image)}
           icon={markerIcons[place.id]}
@@ -265,6 +276,6 @@ const FilteredMarkers = ({ markers, onToggleSidebar }) => {
       </motion.div>
     </>
   );
-};
+});
 
 export default FilteredMarkers;

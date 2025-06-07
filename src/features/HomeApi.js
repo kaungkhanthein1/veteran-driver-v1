@@ -7,7 +7,12 @@ export const HomeApi = createApi({
     getCountries: build.query({
       query: (name) => `/countries`,
     }),
+    getLocationNearby: build.query({
+      query: ({ lat, lng, distance, country_id }) => {
+        return `/locations/nearby?lat=${lat}&lng=${lng}&distance=${distance}&country_id=${country_id}`;
+      },
+    }),
   }),
 });
 
-export const { useGetCountriesQuery } = HomeApi;
+export const { useGetCountriesQuery, useGetLocationNearbyQuery } = HomeApi;
