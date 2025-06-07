@@ -29,6 +29,7 @@
     "delete": "削除",
     "description": "説明",
     "edit": "編集",
+    "mobileNumber": "携帯番号",
     "name": "名前",
     "ok": "OK",
     "save": "保存",
@@ -52,16 +53,7 @@
       "price": "価格",
       "rating": "評価"
     },
-    "searchPlaceholder": "場所を検索...",
-    "reviewsTitle": "レビュー（{{count}}）",
-    "hottestReviewButton": "人気",
-    "latestReviewButton": "最新",
-    "writeReviewPlaceholder": "感想や提案を共有しましょう...",
-    "sampleReview1": "素晴らしいマッサージ体験でした！スタッフはプロフェッショナルで親切で、雰囲気は落ち着いてリラックスできました。圧力もちょうど良く、全ての緊張が溶けていくのを感じました。",
-    "sampleReply1": "共有ありがとうございます。",
-    "sampleReview2": "本当に若返るような体験でした！入った瞬間から歓迎され、安心できました。セラピストは丁寧で熟練しており、私が必要とするものに正確に合わせてセッションをカスタマイズしてくれました。",
-    "showMoreReviewsButton": "もっと見る",
-    "recommendedTitle": "おすすめ"
+    "searchPlaceholder": "場所を検索..."
   },
   "location": {
     "addLocation": "場所を追加",
@@ -131,10 +123,18 @@
     "serviceAvailable247": "24時間営業",
     "setTimeAlt": "時間設定",
     "setTimeLabel": "営業時間を設定",
+    "fromTimeLabel": "開始時間",
+    "toTimeLabel": "終了時間",
     "servicesAndPrices": "サービスと価格 *",
     "bestPriceLabel": "最適価格（USD）",
     "pricePlaceholder": "価格を入力してください",
-    "addServicesLabel": "サービスを追加"
+    "addServicesLabel": "サービスを追加",
+    "selectServiceType": "サービスタイプを選択",
+    "selectServiceTypePlaceholder": "サービスタイプを選択",
+    "country": "国",
+    "selectCountryPlaceholder": "国を選択",
+    "state": "都道府県",
+    "selectStatePlaceholder": "都道府県を選択"
   },
   "changeTheme": {
     "title": "テーマ",
@@ -149,6 +149,7 @@
   },
   "chooseLocation": {
     "selectRegionTitle": "地域を選択",
+    "selectCityTitle": "都市を選択",
     "searchLocationPlaceholder": "場所を検索...",
     "chooseThisRegionButton": "この地域を選択"
   },
@@ -210,7 +211,12 @@
     "servicesTitle": "サービス",
     "reviewsTitle": "レビュー（{{count}}）",
     "hottestReviewButton": "人気",
-    "latestReviewButton": "最新"
+    "latestReviewButton": "最新",
+    "sampleReview1": "素晴らしいマッサージ体験でした！スタッフはプロフェッショナルで親切で、雰囲気は落ち着いてリラックスできました。圧力もちょうど良く、全ての緊張が溶けていくのを感じました。",
+    "sampleReply1": "共有ありがとうございます。",
+    "sampleReview2": "本当に若返るような体験でした！入った瞬間から歓迎され、安心できました。セラピストは丁寧で熟練しており、私が必要とするものに正確に合わせてセッションをカスタマイズしてくれました。",
+    "showMoreReviewsButton": "もっと見る",
+    "recommendedTitle": "おすすめ"
   },
   "loginPage": {
     "title": "ログイン",
@@ -376,6 +382,13 @@
     "popularTab": "人気",
     "mostViewTab": "最多閲覧",
     "trendingTab": "トレンド",
+    "subtitle": "{{city}}のおすすめ",
+    "nearbyTab": "近く",
+    "massageFilter": "マッサージ",
+    "visaFilter": "ビザ",
+    "barFilter": "バー",
+    "clubFilter": "クラブ",
+    "serviceFilter": "サービス",
     "distance": "{{distance}}離れた場所",
     "reviews": "（{{count}}）",
     "bookNowButton": "今すぐ予約"
@@ -478,9 +491,6 @@
     "storesTab": "店舗"
   },
   "homePage": {
-    "nearestPlacesTitle": "近くの場所",
-    "feedbacksTitle": "フィードバック",
-    "viewAllButton": "すべて表示",
     "categoryTabs": {
       "hotels": "ホテル",
       "motels": "モーテル",
@@ -489,11 +499,19 @@
       "shopping": "ショッピング"
     },
     "serviceTabs": {
-      "service1": "サービス1",
-      "service2": "サービス2",
-      "service3": "サービス3",
-      "service4": "サービス4"
-    }
+      "service1": "サービス1"
+    },
+    "iconLabels": {
+      "massage": "マッサージ",
+      "bar": "バー",
+      "eVisa": "E-ビザ",
+      "more": "その他"
+    },
+    "nearestPlacesTitle": "近くの場所",
+    "viewAllButton": "すべて表示",
+    "feedbacksTitle": "フィードバック",
+    "viewMoreFeedbackText": "実際の訪問者からの本物のフィードバックをもっと見る",
+    "viewMoreButton": "もっと見る"
   },
   "socialTabs": {
     "newestTab": "最新",
@@ -501,6 +519,7 @@
     "uploadButton": "アップロード"
   },
   "exploreCard": {
+    "editDetailsButton": "詳細を編集",
     "goldenGateAlt": "ゴールデンゲート",
     "harrierAlt": "ハリアー",
     "videoThumbnailAlt": "動画サムネイル",
@@ -535,6 +554,14 @@
     "howWasExperienceQuestion": "体験はいかがでしたか？",
     "addPhotoLabel": "写真を{{max}}枚まで追加",
     "postAsAnonymousLabel": "匿名プロフィールとして投稿",
-    "postButton": "投稿"
+    "postButton": "投稿",
+    "suggestionTags": {
+      "greatService": "素晴らしいサービス",
+      "notBad": "悪くない",
+      "wrongLocation": "場所が間違っている",
+      "poorService": "サービスが悪い",
+      "businessClosed": "営業終了",
+      "notAsDescribed": "説明と異なる"
+    }
   }
 }

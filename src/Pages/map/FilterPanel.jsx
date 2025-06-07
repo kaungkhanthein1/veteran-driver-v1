@@ -33,7 +33,13 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
     t("filterPanel.serviceOptions.service6"),
   ];
 
-  const categoryOptions = ["All", "Hotel", "Massage", "Club", "Bar"];
+  const categoryOptions = [
+    t("filterPanel.categoryOptions.all"),
+    t("filterPanel.categoryOptions.hotel"),
+    t("filterPanel.categoryOptions.massage"),
+    t("filterPanel.categoryOptions.club"),
+    t("filterPanel.categoryOptions.bar")
+  ];
   const [activeCategory, setActiveCategory] = useState("All");
 
   useEffect(() => {

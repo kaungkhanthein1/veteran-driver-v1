@@ -53,16 +53,7 @@
       "price": "价格",
       "rating": "评分"
     },
-    "searchPlaceholder": "搜索位置...",
-    "reviewsTitle": "评论 ({{count}})",
-    "hottestReviewButton": "最热门",
-    "latestReviewButton": "最新",
-    "writeReviewPlaceholder": "分享您的想法或建议...",
-    "sampleReview1": "这是一次令人惊叹的按摩体验！工作人员专业友好，氛围平静放松。力度刚刚好，我感觉所有的紧张都融化了。",
-    "sampleReply1": "感谢您的分享。",
-    "sampleReview2": "真是一次恢复活力的体验！从我走进来的那一刻起，我就感到受到欢迎和自在。治疗师细心且技艺娴熟，完全按照我的需求定制了疗程。",
-    "showMoreReviewsButton": "显示更多",
-    "recommendedTitle": "推荐"
+    "searchPlaceholder": "搜索位置..."
   },
   "location": {
     "addLocation": "添加位置",
@@ -132,10 +123,17 @@
     "serviceAvailable247": "我们的服务24/7可用。",
     "setTimeAlt": "设置时间",
     "setTimeLabel": "设置营业时间",
+    "fromTimeLabel": "开始时间",
+    "toTimeLabel": "结束时间",
     "servicesAndPrices": "服务与价格 *",
     "bestPriceLabel": "最优价格 (USD)",
     "pricePlaceholder": "请输入价格",
-    "addServicesLabel": "添加服务"
+    "addServicesLabel": "添加服务",
+    "selectServiceType": "选择服务类型",
+    "country": "国家",
+    "selectCountryPlaceholder": "选择国家",
+    "state": "省份",
+    "selectStatePlaceholder": "选择省份"
   },
   "changeTheme": {
     "title": "主题",
@@ -150,6 +148,7 @@
   },
   "chooseLocation": {
     "selectRegionTitle": "选择区域",
+    "selectCityTitle": "选择城市",
     "searchLocationPlaceholder": "搜索位置...",
     "chooseThisRegionButton": "选择此区域"
   },
@@ -211,7 +210,12 @@
     "servicesTitle": "服务",
     "reviewsTitle": "评论 ({{count}})",
     "hottestReviewButton": "最热门",
-    "latestReviewButton": "最新"
+    "latestReviewButton": "最新",
+    "sampleReview1": "这是一次令人惊叹的按摩体验！工作人员专业友好，氛围平静放松。力度刚刚好，我感觉所有的紧张都融化了。",
+    "sampleReply1": "感谢您的分享。",
+    "sampleReview2": "真是一次恢复活力的体验！从我走进来的那一刻起，我就感到受到欢迎和自在。治疗师细心且技艺娴熟，完全按照我的需求定制了疗程。",
+    "showMoreReviewsButton": "显示更多",
+    "recommendedTitle": "推荐"
   },
   "loginPage": {
     "title": "登录",
@@ -228,7 +232,8 @@
     "continueWithPhoneButton": "使用手机号继续",
     "continueWithFacebookButton": "使用Facebook继续",
     "noAccountText": "还没有账户？ ",
-    "signUpLink": "注册"
+    "signUpLink": "注册",
+    "orText": "或"
   },
   "otpVerifyPage": {
     "title": "验证OTP",
@@ -273,7 +278,7 @@
     "august": "八月",
     "september": "九月",
     "october": "十月",
-    "november": "十一月",
+    "novober": "十一月",
     "december": "十二月"
   },
   "bookmarksPage": {
@@ -377,6 +382,14 @@
     "popularTab": "热门",
     "mostViewTab": "最多查看",
     "trendingTab": "趋势",
+    "subtitle": "{{city}}的精选",
+    "nearbyTab": "附近",
+    "serviceFilters": {
+      "massage": "按摩",
+      "visa": "签证",
+      "bar": "酒吧",
+      "club": "俱乐部"
+    },
     "distance": "距离{{distance}}公里",
     "reviews": "({{count}})",
     "bookNowButton": "立即预订"
@@ -439,6 +452,14 @@
     "servicesLabel": "服务",
     "sortByLabel": "排序方式",
     "applyButton": "应用",
+    "categoryLabel": "分类",
+    "categoryOptions": {
+      "all": "全部",
+      "hotel": "酒店",
+      "massage": "按摩",
+      "club": "俱乐部",
+      "bar": "酒吧"
+    },
     "ratingOptions": {
       "all": "全部",
       "5stars": "5星",
@@ -479,9 +500,6 @@
     "storesTab": "商店"
   },
   "homePage": {
-    "nearestPlacesTitle": "最近的地点",
-    "feedbacksTitle": "反馈",
-    "viewAllButton": "查看全部",
     "categoryTabs": {
       "hotels": "酒店",
       "motels": "汽车旅馆",
@@ -490,11 +508,19 @@
       "shopping": "购物"
     },
     "serviceTabs": {
-      "service1": "服务 1",
-      "service2": "服务 2",
-      "service3": "服务 3",
-      "service4": "服务 4"
-    }
+      "service1": "服务 1"
+    },
+    "iconLabels": {
+      "massage": "按摩",
+      "bar": "酒吧",
+      "eVisa": "电子签证",
+      "more": "更多"
+    },
+    "nearestPlacesTitle": "最近的地点",
+    "viewAllButton": "查看全部",
+    "feedbacksTitle": "反馈",
+    "viewMoreFeedbackText": "查看更多来自真实访客的真实反馈",
+    "viewMoreButton": "查看更多"
   },
   "socialTabs": {
     "newestTab": "最新",
@@ -502,6 +528,7 @@
     "uploadButton": "上传"
   },
   "exploreCard": {
+    "editDetailsButton": "编辑详情",
     "goldenGateAlt": "金门",
     "harrierAlt": "鹞式",
     "videoThumbnailAlt": "视频缩略图",
@@ -512,8 +539,8 @@
   },
   "socialPostCard": {
     "viewPlace": "查看地点",
-    "seeLess": "...查看更少",
-    "seeMore": "...查看更多",
+    "seeLess": "...收起",
+    "seeMore": "...展开",
     "mediaAlt": "媒体 {{number}}",
     "videoAlt": "视频 {{number}}"
   },
@@ -536,6 +563,14 @@
     "howWasExperienceQuestion": "您的体验如何？",
     "addPhotoLabel": "添加照片 (最多{{max}}张)",
     "postAsAnonymousLabel": "以匿名身份发布此评价",
-    "postButton": "发布"
+    "postButton": "发布",
+    "suggestionTags": {
+      "greatService": "服务很好",
+      "notBad": "还不错",
+      "wrongLocation": "位置错误",
+      "poorService": "服务差",
+      "businessClosed": "已关闭",
+      "notAsDescribed": "与描述不符"
+    }
   }
 }

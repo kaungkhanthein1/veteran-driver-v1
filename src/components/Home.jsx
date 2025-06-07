@@ -259,7 +259,7 @@ const HomePage = () => {
                   onClick={() => setShowAuthModal(true)}
                   className="text-xl font-bold text-theme-text focus:outline-none"
                 >
-                  {t("loginPage.title")} Or {t("registerPage.title")}
+                  {t("loginPage.title")} {t("loginPage.orText")} {t("registerPage.title")}
                 </button>
                 {/* Icons */}
                 <div className="flex gap-3">

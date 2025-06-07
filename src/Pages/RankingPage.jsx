@@ -206,7 +206,7 @@ export default function RankingPage() {
                   className={`px-5 py-2.5 rounded-xl text-sm flex-shrink-0 ${selectedService === service ? 'border border-[#886600] text-[#A27A00]' : 'text-theme-primary'}`}
                   onClick={() => setSelectedService(service)}
                 >
-                  {service}
+                  {t(`rankingPage.serviceFilters.${service.toLowerCase()}`)}
                 </button>
               ))}
               <button className="p-2 flex-shrink-0" onClick={openFilterPanel}>
