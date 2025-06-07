@@ -12,6 +12,7 @@
     "start": "vite --host"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.8.2",
     "flowbite": "^1.6.5",
     "framer-motion": "^12.12.1",
     "i18next": "^25.2.0",
@@ -25,6 +26,7 @@
     "react-leaflet": "^4.2.1",
     "react-player": "^2.16.0",
     "react-range": "^1.10.0",
+    "react-redux": "^9.2.0",
     "react-router-dom": "^6.30.0",
     "swiper": "^11.2.6"
   },

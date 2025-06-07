@@ -8,6 +8,7 @@ import GoldenGateImage from 'assets/GoldenGate.png';
 import HarrierImage from 'assets/Harrier.png';
 import { useBookmarks } from '../hooks/useBookmarks';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from "react-redux";
 
 // Mock data for explore items
 const exploreItems = [
@@ -47,6 +48,9 @@ const exploreItems = [
 ];
 
 export default function ExplorePage() {
+  const country = useSelector((state) => state.country)
+  console.log(country,"exp")
+
   const [activeTab, setActiveTab] = useState("Hotel");
   const navigate = useNavigate();
   const { isBookmarked, toggleBookmark } = useBookmarks();

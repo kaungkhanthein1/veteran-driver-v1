@@ -149,6 +149,7 @@
   },
   "chooseLocation": {
     "selectRegionTitle": "Select Region",
+    "selectCityTitle": "Select City",
     "searchLocationPlaceholder": "Search location...",
     "chooseThisRegionButton": "Choose this region"
   },
@@ -232,7 +233,8 @@
     "continueWithPhoneButton": "Continue With Phone Number",
     "continueWithFacebookButton": "Continue With Facebook",
     "noAccountText": "Don't you have an account? ",
-    "signUpLink": "Sign Up"
+    "signUpLink": "Sign Up",
+    "orText": "Or"
   },
   "otpVerifyPage": {
     "title": "Verify OTP",
@@ -383,11 +385,12 @@
     "trendingTab": "Trending",
     "subtitle": "Top Picks In {{city}}",
     "nearbyTab": "Nearby",
-    "massageFilter": "Massage",
-    "visaFilter": "Visa",
-    "barFilter": "Bar",
-    "clubFilter": "Club",
-    "serviceFilter": "Service",
+    "serviceFilters": {
+      "massage": "Massage",
+      "visa": "Visa",
+      "bar": "Bar",
+      "club": "Club"
+    },
     "distance": "{{distance}}",
     "reviews": "({{count}})",
     "bookNowButton": "Book Now"
@@ -450,6 +453,14 @@
     "servicesLabel": "Services",
     "sortByLabel": "Sort By",
     "applyButton": "Apply",
+    "categoryLabel": "Categories",
+    "categoryOptions": {
+      "all": "All",
+      "hotel": "Hotel",
+      "massage": "Massage",
+      "club": "Club",
+      "bar": "Bar"
+    },
     "ratingOptions": {
       "all": "All",
       "5stars": "5 Stars",
