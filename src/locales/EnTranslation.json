@@ -422,12 +422,15 @@
     "loginLink": "Login"
   },
   "searchLocationPage": {
-    "searchPlaceholder": "Search Places ...",
+    "searchPlaceholder": "Searrch Places ...",
     "resultsFound": "{{count}} Results found",
     "hotSearch": "Hot Search",
     "recents": "Recents",
     "recentView": "Recent View",
-    "clear": "Clear"
+    "clear": "Clear",
+    "bestRanking": "Best Ranking",
+    "recommended": "Recommended",
+    "clearAll": "Clear All"
   },
   "socialUpload": {
     "title": "Upload Post",
@@ -536,7 +539,9 @@
     "reviewsCount": "{{count}}",
     "bookmarkAlt": "bookmark",
     "restoreButton": "Restore",
-    "viewPlaceButton": "View Place"
+    "viewPlaceButton": "View Place",
+    "views": "Views",
+    "reviews": "Reviews"
   },
   "socialPostCard": {
     "viewPlace": "View Place",
