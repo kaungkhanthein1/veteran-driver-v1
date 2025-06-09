@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Varified from "icons/Varified.svg";
 import Views from "icons/Views.svg";
-import PlayCircle from "icons/PlayCircle.svg";
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
 
