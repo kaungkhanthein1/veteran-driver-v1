@@ -427,7 +427,10 @@
     "hotSearch": "人気検索",
     "recents": "最近",
     "recentView": "最近閲覧",
-    "clear": "クリア"
+    "clear": "クリア",
+    "bestRanking": "ベストランキング",
+    "recommended": "おすすめ",
+    "clearAll": "すべてクリア"
   },
   "socialUpload": {
     "title": "投稿をアップロード",
@@ -536,7 +539,9 @@
     "reviewsCount": "（{{count}}）",
     "bookmarkAlt": "ブックマーク",
     "restoreButton": "復元",
-    "viewPlaceButton": "場所を見る"
+    "viewPlaceButton": "場所を見る",
+    "views": "閲覧数",
+    "reviews": "レビュー"
   },
   "socialPostCard": {
     "viewPlace": "場所を見る",

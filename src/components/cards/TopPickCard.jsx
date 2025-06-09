@@ -89,7 +89,6 @@ TopPickCard.propTypes = {
     name: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     distance: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
     reviews: PropTypes.number.isRequired,
     price: PropTypes.string.isRequired,
     views: PropTypes.number.isRequired,

@@ -422,7 +422,10 @@
     "hotSearch": "인기 검색어",
     "recents": "최근",
     "recentView": "최근 본",
-    "clear": "지우기"
+    "clear": "지우기",
+    "bestRanking": "최고 순위",
+    "recommended": "추천",
+    "clearAll": "모두 지우기"
   },
   "socialUpload": {
     "title": "게시물 업로드",
@@ -531,7 +534,9 @@
     "reviewsCount": "({{count}})",
     "bookmarkAlt": "북마크",
     "restoreButton": "복원",
-    "viewPlaceButton": "장소 보기"
+    "viewPlaceButton": "장소 보기",
+    "views": "조회수",
+    "reviews": "리뷰"
   },
   "socialPostCard": {
     "viewPlace": "장소 보기",

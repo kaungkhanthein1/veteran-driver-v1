@@ -426,7 +426,10 @@
     "hotSearch": "热门搜索",
     "recents": "最近",
     "recentView": "最近查看",
-    "clear": "清除"
+    "clear": "清除",
+    "bestRanking": "最佳排名",
+    "recommended": "推荐",
+    "clearAll": "清除全部"
   },
   "socialUpload": {
     "title": "上传帖子",
@@ -535,7 +538,9 @@
     "reviewsCount": "({{count}})",
     "bookmarkAlt": "收藏",
     "restoreButton": "恢复",
-    "viewPlaceButton": "查看地点"
+    "viewPlaceButton": "查看地点",
+    "views": "浏览量",
+    "reviews": "评论"
   },
   "socialPostCard": {
     "viewPlace": "查看地点",
