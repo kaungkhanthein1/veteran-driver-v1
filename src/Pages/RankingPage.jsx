@@ -191,7 +191,7 @@ export default function RankingPage() {
               {[t('rankingPage.popularTab'), t('rankingPage.mostViewTab'), t('rankingPage.trendingTab')].map((tab) => (
                 <button
                   key={tab}
-                  className={`px-4 py-2 rounded-xl text-sm text-theme-primary ${activeTab === tab ? 'bg-[#FFC61B]' : 'bg-theme-secondary'}`}
+                  className={`px-4 py-2 rounded-xl text-sm ${activeTab === tab ? 'bg-[#FFC61B] text-[#5D4702]' : 'bg-theme-secondary text-theme-primary'}`}
                   onClick={() => setActiveTab(tab)}
                 >
                   {tab}
