@@ -21,7 +21,7 @@ const exploreItems = [
     distance: "12km away",
     services: ["Service 1", "Service 2", "Service3"],
     type: "Hotel",
-    image: GoldenGate // Using imported image
+    image: GoldenGate 
   },
   {
     id: 2,
@@ -31,7 +31,7 @@ const exploreItems = [
     distance: "12km away",
     services: ["Service 1", "Service 2", "Service3"],
     type: "Hotel",
-    image: Harrier // Using imported image
+    image: Harrier 
   },
   {
     id: 3,
@@ -51,7 +51,7 @@ const exploreItems = [
     distance: "12km away",
     services: ["Service 1", "Service 2", "Service3"],
     type: "Villa",
-    image: Beach // Using imported image
+    image: Beach 
   },
   {
     id: 5,
@@ -61,7 +61,7 @@ const exploreItems = [
     distance: "12km away",
     services: ["Service 1", "Service 2", "Service3"],
     type: "Hotel",
-    image: Room // Using imported image
+    image: Room 
   },
   {
     id: 6,
@@ -71,7 +71,7 @@ const exploreItems = [
     distance: "12km away",
     services: ["Service 1", "Service 2", "Service3"],
     type: "Resort",
-    image: GoldenGate // Reusing imported image
+    image: GoldenGate 
   },
   {
     id: 7,
@@ -81,7 +81,7 @@ const exploreItems = [
     distance: "5km away",
     services: ["Service 1", "Service 2"],
     type: "Condo",
-    image: Harrier // Reusing imported image
+    image: Harrier 
   }
 ];
 
@@ -171,7 +171,7 @@ export default function SearchLocationPage() {
           {primaryActiveTab === 'Hot Search' && (
             <div>
               <h2 className="text-theme-primary text-lg font-medium mb-3">{t('searchLocationPage.hotSearch')}</h2>
-              <div className="flex flex-wrap gap-2 w-full"> {/* Added w-full here */}
+              <div className="flex flex-wrap gap-2 w-full"> 
                 {hotSearches.map((tag) => (
                   <button
                     key={tag}
@@ -191,7 +191,7 @@ export default function SearchLocationPage() {
                 <h2 className="text-theme-primary text-lg font-medium">{t('searchLocationPage.recents')}</h2>
                 <button 
                   className="text-theme-primary text-sm"
-                  onClick={() => setRecentSearches([])} // Clear All functionality
+                  onClick={() => setRecentSearches([])} 
                 >
                   {t('searchLocationPage.clearAll')}
                 </button>

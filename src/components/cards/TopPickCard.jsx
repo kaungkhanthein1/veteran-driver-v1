@@ -9,7 +9,6 @@ export default function TopPickCard({
   item,
   onClick,
   showNumbering,
-  showPlayIcon
 }) {
   const { t } = useTranslation();
   const { theme } = useTheme();
@@ -26,11 +25,7 @@ export default function TopPickCard({
           </div>
         )}
         <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
-        {showPlayIcon && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
-            <img src={PlayCircle} alt="Play" className="w-8 h-8 filter-white" />
-          </div>
-        )}
+      
       </div>
       <div className="flex-1">
         <div className="flex justify-between items-start">
