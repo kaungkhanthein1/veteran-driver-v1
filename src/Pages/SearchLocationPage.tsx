@@ -12,8 +12,28 @@ import Beach from "assets/Beach.png";
 import Room from "assets/Room.png";
 import NoRecent from "assets/NoRecent.png";
 
+interface ExploreItem {
+  id: number;
+  name: string;
+  price: string;
+  reviews: number;
+  distance: string;
+  services: string[];
+  type: string;
+  image: string;
+  views?: number; // Optional, as it's added later for ranking/recommended
+}
+
+interface Filters {
+  priceRange: [number, number];
+  distance: number;
+  rating: number;
+  services: string[];
+  sort: string;
+}
+
 // Import explore items from ExplorePage
-const exploreItems = [
+const exploreItems: ExploreItem[] = [
   {
     id: 1,
     name: "BUGARIA",
@@ -91,8 +111,8 @@ const hotSearches = ['Novaria Hotel', 'Angela Condo', 'The Hill Villa', 'BUGARIA
 // const recentSearches = ['Havana', 'Archon', 'Novaria Hotel']; // This will be converted to state
 
 // Mock data for Best Ranking and Recommended
-const bestRankingItems = exploreItems.map(item => ({ ...item, views: 1567 }));
-const recommendedItems = exploreItems.map(item => ({ ...item, views: 1567 }));
+const bestRankingItems: ExploreItem[] = exploreItems.map(item => ({ ...item, views: 1567 }));
+const recommendedItems: ExploreItem[] = exploreItems.map(item => ({ ...item, views: 1567 }));
 
 export default function SearchLocationPage() {
   const navigate = useNavigate();
@@ -100,18 +120,18 @@ export default function SearchLocationPage() {
   const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
   const [showFilter, setShowFilter] = useState(false);
-  const [primaryActiveTab, setPrimaryActiveTab] = useState('Recents'); 
-  const [secondaryActiveTab, setSecondaryActiveTab] = useState('Best Ranking'); 
-  const [filters, setFilters] = useState({
+  const [primaryActiveTab, setPrimaryActiveTab] = useState<string>('Recents'); 
+  const [secondaryActiveTab, setSecondaryActiveTab] = useState<string>('Best Ranking'); 
+  const [filters, setFilters] = useState<Filters>({
     priceRange: [0, 1000],
     distance: 10,
     rating: 0,
     services: [],
     sort: 'Comprehensive'
   });
-  const [recentSearches, setRecentSearches] = useState(['Havana', 'Archon', 'Novaria Hotel']); // Converted to state
+  const [recentSearches, setRecentSearches] = useState<string[]>(['Havana', 'Archon', 'Novaria Hotel']); // Converted to state
 
-  const handleApplyFilters = (newFilters) => {
+  const handleApplyFilters = (newFilters: Filters) => {
     setFilters(newFilters);
     setShowFilter(false);
   };

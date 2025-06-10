@@ -1,15 +1,35 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Varified from "icons/Varified.svg";
 import Views from "icons/Views.svg";
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
 
+interface ExploreItem {
+  id: number;
+  name: string;
+  price: string;
+  reviews: number;
+  distance: string;
+  services: string[];
+  type: string;
+  image: string;
+  views?: number; // Optional, as it's added later for ranking/recommended
+  rating?: number; // Add rating as optional, it's used in the component but not in ExploreItem yet
+}
+
+interface TopPickCardProps {
+  item: ExploreItem;
+  onClick: () => void;
+  showNumbering?: boolean;
+  showPlayIcon?: boolean;
+}
+
 export default function TopPickCard({
   item,
   onClick,
   showNumbering,
-}) {
+  showPlayIcon,
+}: TopPickCardProps) {
   const { t } = useTranslation();
   const { theme } = useTheme();
 
@@ -69,25 +89,10 @@ export default function TopPickCard({
           </div>
           <div className="flex items-center space-x-1 text-theme-secondary text-sm">
             <img src={Views} alt="Views" className="w-4 h-4 [filter:var(--icon-filter)]" />
-            <span>{item.views} {t('exploreCard.views')}</span>
+            <span>{item.views ?? 0} {t('exploreCard.views')}</span>
           </div>
         </div>
       </div>
     </div>
   );
 }
-
-TopPickCard.propTypes = {
-  item: PropTypes.shape({
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    name: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    distance: PropTypes.string.isRequired,
-    reviews: PropTypes.number.isRequired,
-    price: PropTypes.string.isRequired,
-    views: PropTypes.number.isRequired,
-  }).isRequired,
-  onClick: PropTypes.func.isRequired,
-  showNumbering: PropTypes.bool,
-  showPlayIcon: PropTypes.bool,
-};
