@@ -1,15 +1,27 @@
 import { useState, useCallback } from 'react';
 
-const useLocation = () => {
-  const [location, setLocation] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+interface LocationData {
+  lat: number;
+  lng: number;
+}
 
-  const getCurrentLocation = useCallback(() => {
+interface UseLocationReturn {
+  location: LocationData | null;
+  error: string | null;
+  loading: boolean;
+  getCurrentLocation: () => Promise<LocationData>;
+}
+
+const useLocation = (): UseLocationReturn => {
+  const [location, setLocation] = useState<LocationData | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const getCurrentLocation = useCallback((): Promise<LocationData> => {
     return new Promise((resolve, reject) => {
       if (!("geolocation" in navigator)) {
         const error = new Error("Geolocation is not supported");
-        setError(error);
+        setError(error.message);
         reject(error);
         return;
       }
@@ -19,7 +31,7 @@ const useLocation = () => {
 
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          const locationData = {
+          const locationData: LocationData = {
             lat: position.coords.latitude,
             lng: position.coords.longitude
           };

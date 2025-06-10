@@ -1,14 +1,23 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
-const ThemeContext = createContext();
+interface ThemeContextType {
+  theme: string;
+  toggleTheme: (newTheme: string) => void;
+}
 
-export function ThemeProvider({ children }) {
+interface ThemeProviderProps {
+  children: ReactNode;
+}
+
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+
+export function ThemeProvider({ children }: ThemeProviderProps) {
   const [theme, setTheme] = useState(() => {
     const savedTheme = localStorage.getItem('theme');
     return savedTheme || 'dark';
   });
 
-  const toggleTheme = (newTheme) => {
+  const toggleTheme = (newTheme: string) => {
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
     document.documentElement.setAttribute('data-theme', newTheme);
@@ -27,6 +36,10 @@ export function ThemeProvider({ children }) {
   );
 }
 
-export function useTheme() {
-  return useContext(ThemeContext);
+export function useTheme(): ThemeContextType {
+  const context = useContext(ThemeContext);
+  if (context === undefined) {
+    throw new Error('useTheme must be used within a ThemeProvider');
+  }
+  return context;
 }

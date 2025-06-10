@@ -1,7 +1,18 @@
 import { useState, useEffect } from 'react';
 
-export function useBookmarks() {
-  const [bookmarkedItems, setBookmarkedItems] = useState(() => {
+interface BookmarkItem {
+  id: string | number;
+  [key: string]: any;
+}
+
+interface UseBookmarksReturn {
+  bookmarkedItems: BookmarkItem[];
+  toggleBookmark: (item: BookmarkItem) => void;
+  isBookmarked: (itemId: string | number) => boolean;
+}
+
+export function useBookmarks(): UseBookmarksReturn {
+  const [bookmarkedItems, setBookmarkedItems] = useState<BookmarkItem[]>(() => {
     const saved = localStorage.getItem('bookmarkedItems');
     return saved ? JSON.parse(saved) : [];
   });
@@ -10,7 +21,7 @@ export function useBookmarks() {
     localStorage.setItem('bookmarkedItems', JSON.stringify(bookmarkedItems));
   }, [bookmarkedItems]);
 
-  const toggleBookmark = (item) => {
+  const toggleBookmark = (item: BookmarkItem) => {
     setBookmarkedItems(prev => {
       const isBookmarked = prev.some(bookmarked => bookmarked.id === item.id);
       if (isBookmarked) {
@@ -21,7 +32,7 @@ export function useBookmarks() {
     });
   };
 
-  const isBookmarked = (itemId) => {
+  const isBookmarked = (itemId: string | number): boolean => {
     return bookmarkedItems.some(item => item.id === itemId);
   };
 

@@ -35,7 +35,7 @@ import ReviewPage from "./Pages/ReviewPage";
 import CheckMap from "./Pages/map/CheckMap";
 import AddMap from "./Pages/map/AddMap";
 
-function App() {
+function App(): JSX.Element {
   return (
     <div className="max-w-[480px] mx-auto dvh-fallback bg-theme-primary">
       <ThemeProvider>
@@ -86,4 +86,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 

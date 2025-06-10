@@ -1,6 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-const initialState = {
+interface CountryState {
+  name: string;
+}
+
+const initialState: CountryState = {
   name: "myanmar",
 }
 
@@ -9,7 +13,7 @@ export const countrySlice = createSlice({
   initialState,
   reducers: {
    
-    changeCountry: (state, action) => {
+    changeCountry: (state, action: PayloadAction<string>) => {
       state.name = action.payload
     },
   },
@@ -18,4 +22,4 @@ export const countrySlice = createSlice({
 // Action creators are generated for each case reducer function
 export const { changeCountry } = countrySlice.actions
 
-export default countrySlice.reducer
+export default countrySlice.reducer 
