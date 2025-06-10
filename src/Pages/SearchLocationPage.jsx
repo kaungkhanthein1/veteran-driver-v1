@@ -10,6 +10,7 @@ import Harrier from "assets/Harrier.png";
 import HarrierRoom from "assets/HarrierRoom.png";
 import Beach from "assets/Beach.png";
 import Room from "assets/Room.png";
+import NoRecent from "assets/NoRecent.png";
 
 // Import explore items from ExplorePage
 const exploreItems = [
@@ -196,24 +197,31 @@ export default function SearchLocationPage() {
                   {t('searchLocationPage.clearAll')}
                 </button>
               </div>
-              <div className="flex flex-wrap gap-2 w-full">
-                {recentSearches.map((search) => (
-                  <div key={search} className="px-4 py-2 rounded-full bg-theme-secondary text-theme-primary text-sm flex items-center gap-2">
-                    <button
-                      className="text-theme-primary"
-                      onClick={() => setSearchQuery(search)}
-                    >
-                      {search}
-                    </button>
-                    <button 
-                      className="p-1 -mr-2"
-                      onClick={() => setRecentSearches(recentSearches.filter(item => item !== search))} // Delete individual item
-                    >
-                      <span className="text-theme-primary text-xl">×</span>
-                    </button>
-                  </div>
-                ))}
-              </div>
+              {recentSearches.length > 0 ? (
+                <div className="flex flex-wrap gap-2 w-full">
+                  {recentSearches.map((search) => (
+                    <div key={search} className="px-4 py-2 rounded-full bg-theme-secondary text-theme-primary text-sm flex items-center gap-2">
+                      <button
+                        className="text-theme-primary"
+                        onClick={() => setSearchQuery(search)}
+                      >
+                        {search}
+                      </button>
+                      <button 
+                        className="p-1 -mr-2"
+                        onClick={() => setRecentSearches(recentSearches.filter(item => item !== search))} // Delete individual item
+                      >
+                        <span className="text-theme-primary text-xl">×</span>
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="flex flex-col items-center justify-center py-0">
+                  <img src={NoRecent} alt="No Recent" className="w-24 h-24" />
+                  <p className="text-theme-primary text-lg">No Recent</p>
+                </div>
+              )}
             </div>
           )}
         </div>
@@ -266,6 +274,10 @@ export default function SearchLocationPage() {
               ))}
             </div>
           )}
+
+          <button className="w-full py-3 bg-[#A7DAFF1F] text-[#53B7FF] font-bold rounded-lg mt-4">
+            View More
+          </button>
         </div>
 
         {/* Filter Panel */}
