@@ -251,7 +251,7 @@
   color: #fff;
   font-variant-numeric: lining-nums proportional-nums;
   font-feature-settings: "dlig" on;
-  font-family: Roboto;
+  /* font-family: Roboto; */
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
