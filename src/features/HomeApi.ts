@@ -11,8 +11,8 @@ export const HomeApi = createApi({
   reducerPath: "HomeApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://18.139.108.25:3201/api/v1" }),
   endpoints: (build) => ({
-    getCountries: build.query<any, string>({
-      query: (name) => `/countries`,
+    getCountries: build.query({
+      query: () => `/countries`,
     }),
     getLocationNearby: build.query<any, LocationNearbyParams>({
       query: ({ lat, lng, distance, country_id }) => {
