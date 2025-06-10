@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SocialTabs from "../components/SocialTabs";
 import SocialPostCard from "../components/cards/SocialPostCard";
+import AdSection from "../components/AdSection";
 import BottomNavBar from "../components/common/BottomNavBar";
 import CommentModal from "../components/common/CommentModal";
 import { useNavigate } from 'react-router-dom';
@@ -120,6 +121,7 @@ export default function SocialPage() {
             <div className="h-[1px] bg-theme-secondary"></div>
           </div>
           <div className="w-full">
+            <AdSection />
             {posts.map(post => (
               <SocialPostCard
                 key={post.id}
