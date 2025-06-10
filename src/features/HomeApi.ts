@@ -1,13 +1,20 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+interface LocationNearbyParams {
+  lat: number;
+  lng: number;
+  distance: number;
+  country_id: string | number;
+}
+
 export const HomeApi = createApi({
   reducerPath: "HomeApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://18.139.108.25:3201/api/v1" }),
   endpoints: (build) => ({
-    getCountries: build.query({
+    getCountries: build.query<any, string>({
       query: (name) => `/countries`,
     }),
-    getLocationNearby: build.query({
+    getLocationNearby: build.query<any, LocationNearbyParams>({
       query: ({ lat, lng, distance, country_id }) => {
         return `/locations/nearby?lat=${lat}&lng=${lng}&distance=${distance}&country_id=${country_id}`;
       },
@@ -15,4 +22,4 @@ export const HomeApi = createApi({
   }),
 });
 
-export const { useGetCountriesQuery, useGetLocationNearbyQuery } = HomeApi;
+export const { useGetCountriesQuery, useGetLocationNearbyQuery } = HomeApi; 
