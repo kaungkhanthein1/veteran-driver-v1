@@ -1,6 +1,6 @@
 # React Tailwind Starter Repository
 
-Welcome to the React Tailwind Starter Repository! This repository provides a solid foundation for developing React applications with the Tailwind CSS framework. It's designed to help you quickly set up a React project with a preconfigured development environment and the necessary dependencies.
+Welcome to the Veteran Driver V1 Repository! This repository provides a solid foundation for developing React applications with the Tailwind CSS framework. It's designed to help you quickly set up a React project with a preconfigured development environment and the necessary dependencies.
 
 ## Features
 
