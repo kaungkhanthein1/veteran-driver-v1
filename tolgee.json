@@ -1,0 +1,10 @@
+{
+    "apiKey": "tgpak_ge4donbrl5zw2ojxgjxgc4tnnjrdi3zqnq2to5bzobutcyzzobxq",
+    "apiUrl": "https://app.tolgee.io",
+    "projectId": "18741",
+    "inputPath": "src/locales",
+    "outputPath": "src/locales",
+    "languages": ["en"],
+    "format": "i18next",
+    "baseLanguage": "en"
+  }
