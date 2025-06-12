@@ -3,7 +3,7 @@ name: React CI Check
 
 on:
   push:
-    branches: [main]
+    branches: -main
 
 jobs:
   build:
