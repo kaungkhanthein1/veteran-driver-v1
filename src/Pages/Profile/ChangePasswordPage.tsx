@@ -3,6 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import BackButton from '../../components/common/BackButton';
 import FormInput from '../../components/common/FormInput';
+import ViewIcon from '../../icons/Views.svg';
+import ViewOffIcon from '../../icons/ViewOff.svg';
+
+
 
 export default function ChangePasswordPage() {
   const navigate = useNavigate();
@@ -15,7 +19,7 @@ export default function ChangePasswordPage() {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Handle password change logic here
     console.log({
@@ -34,24 +38,30 @@ export default function ChangePasswordPage() {
         <div className="absolute left-3">
           <BackButton />
         </div>
-        <h1 className="flex-grow text-center text-xl font-semibold">{t('Change Password')}</h1>
+        <h1 className="flex-grow text-center text-xl font-semibold">{t('Password')}</h1>
       </div>
 
       {/* Warning Text */}
-      <div className="px-4 text-theme-primary text-sm mb-4">
-        <p>{t('Please ensure your password is at least 8 characters long and includes a mix of uppercase, lowercase, numbers, and symbols.')}</p>
+      <div className="px-4 text-theme-secondary text-sm mb-4">
+        <p>{t('Your password must be at least 6 characters and should include a combination of numbers, letters and special characters (!%@$).')}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="px-4 py-2">
         <div className="mb-6">
           <FormInput
-            label={t('Current Password')}
+            label={t('Current password')}
+            name="currentPassword"
             type={showCurrentPassword ? 'text' : 'password'}
             value={currentPassword}
             onChange={(e) => setCurrentPassword(e.target.value)}
             placeholder={t('Enter your current password')}
             rightIcon={
               <button type="button" onClick={() => setShowCurrentPassword(!showCurrentPassword)}>
+                {showCurrentPassword ? (
+                  <img src="/src/icons/Views.svg" alt="Show Password" className="w-5 h-5" />
+                ) : (
+                  <img src="/src/icons/ViewOff.svg" alt="Hide Password" className="w-5 h-5" />
+                )}
               </button>
             }
           />
@@ -59,13 +69,19 @@ export default function ChangePasswordPage() {
 
         <div className="mb-6">
           <FormInput
-            label={t('New Password')}
+            label={t('New password')}
+            name="newPassword"
             type={showNewPassword ? 'text' : 'password'}
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
             placeholder={t('Enter your new password')}
             rightIcon={
               <button type="button" onClick={() => setShowNewPassword(!showNewPassword)}>
+                {showNewPassword ? (
+                  <img src="/src/icons/Views.svg" alt="Show Password" className="w-5 h-5" />
+                ) : (
+                  <img src="/src/icons/ViewOff.svg" alt="Hide Password" className="w-5 h-5" />
+                )}
               </button>
             }
           />
@@ -73,40 +89,40 @@ export default function ChangePasswordPage() {
 
         <div className="mb-6">
           <FormInput
-            label={t('Confirm New Password')}
+            label={t('Retype new password')}
+            name="confirmNewPassword"
             type={showConfirmNewPassword ? 'text' : 'password'}
             value={confirmNewPassword}
             onChange={(e) => setConfirmNewPassword(e.target.value)}
-            placeholder={t('Confirm your new password')}
+            placeholder={t('Retype new password')}
             rightIcon={
               <button type="button" onClick={() => setShowConfirmNewPassword(!showConfirmNewPassword)}>
+                {showConfirmNewPassword ? (
+                  <img src="/src/icons/Views.svg" alt="Show Password" className="w-5 h-5" />
+                ) : (
+                  <img src="/src/icons/ViewOff.svg" alt="Hide Password" className="w-5 h-5" />
+                )}
               </button>
             }
           />
         </div>
 
         {/* Forgot Password Link */}
-        <div className="text-right mb-4">
+        <div className="text-right mb-6">
           <button
             type="button"
             onClick={() => navigate('/forget-password')}
-            className="text-theme-accent text-sm font-medium"
+            className="text-[#FDC51B] text-sm font-medium"
           >
             {t('Forgot Password?')}
           </button>
         </div>
 
-        {/* I'm not a robot checkbox - Placeholder */}
-        <div className="flex items-center mb-6">
-          <input type="checkbox" id="not-robot" className="mr-2" />
-          <label htmlFor="not-robot" className="text-theme-primary text-sm">{t("I'm not a robot")}</label>
-        </div>
-
         <button
           type="submit"
-          className="w-full bg-theme-accent text-white py-3 rounded-lg font-semibold mt-4"
+          className="w-full bg-[#FDC51B] text-black py-3 rounded-lg font-semibold mt-4"
         >
-          {t('Change Password')}
+          {t('Apply')}
         </button>
       </form>
     </div>

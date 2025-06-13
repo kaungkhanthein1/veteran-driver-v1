@@ -196,7 +196,7 @@ export default function SearchLocationPage() {
                 {hotSearches.map((tag) => (
                   <button
                     key={tag}
-                    className="px-4 py-2 rounded-full bg-theme-secondary text-theme-primary text-sm"
+                    className="px-2 py-2 rounded-full bg-theme-secondary text-theme-primary text-sm"
                     onClick={() => setSearchQuery(tag)}
                   >
                     {tag}
