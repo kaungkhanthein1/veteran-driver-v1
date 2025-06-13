@@ -1,7 +1,14 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import UploadIcon from "icons/Upload.svg";
 
-export default function SocialTabs({ activeTab, setActiveTab, onUpload }) {
+interface SocialTabsProps {
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
+  onUpload: () => void;
+}
+
+export default function SocialTabs({ activeTab, setActiveTab, onUpload }: SocialTabsProps) {
   const { t } = useTranslation();
   const tabs = [
     { key: "newest", label: t('socialTabs.newestTab') },
@@ -29,9 +36,7 @@ export default function SocialTabs({ activeTab, setActiveTab, onUpload }) {
         className="flex items-center text-theme-primary"
         onClick={onUpload}
       >
-        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-        </svg>
+        <img src={UploadIcon} alt="Upload" className="w-5 h-5 [filter:var(--icon-filter)]" />
         <span className="ml-1">{t('socialTabs.uploadButton')}</span>
       </button>
     </div>
