@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import SocialTabs from "../components/SocialTabs";
 import SocialPostCard from "../components/cards/SocialPostCard";
 import AdSection from "../components/AdSection";
@@ -90,10 +90,18 @@ export default function SocialPage() {
   const [activeTab, setActiveTab] = useState("newest");
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const [commentModalPostId, setCommentModalPostId] = useState(null); // State for modal visibility and context
+  const [commentModalPostId, setCommentModalPostId] = useState<number | null>(null); // State for modal visibility and context
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const [headerHeight, setHeaderHeight] = useState(0);
 
-  const openCommentModal = (postId) => {
+  useEffect(() => {
+    if (headerRef.current) {
+      setHeaderHeight(headerRef.current.offsetHeight);
+    }
+  }, []);
+
+  const openCommentModal = (postId: number) => {
     setCommentModalPostId(postId);
   };
 
@@ -101,7 +109,7 @@ export default function SocialPage() {
     setCommentModalPostId(null);
   };
 
-  const handleCommentSubmit = (comment) => {
+  const handleCommentSubmit = (comment: string) => {
     // Here you would typically handle the comment submission for the specific post
     console.log(`Comment for post ${commentModalPostId}:`, comment);
     // You might want to update the 'posts' data or send it to a server
@@ -110,16 +118,16 @@ export default function SocialPage() {
 
   return (
     <div className="dvh-fallback flex justify-center bg-theme-primary">
-      <div className="w-full max-w-[480px] flex flex-col">
+      <div ref={headerRef} className="fixed top-0 z-50 w-full max-w-[480px] bg-theme-primary">
+        <SocialTabs
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          onUpload={() => navigate('/social/upload')}
+        />
+        <div className="h-[1px] bg-theme-secondary"></div>
+      </div>
+      <div className="w-full max-w-[480px] flex flex-col" style={{ marginTop: `${headerHeight}px` }}>
         <div className="flex-1 overflow-y-auto pb-16">
-          <div className="sticky top-0 z-10 bg-theme-primary">
-            <SocialTabs
-              activeTab={activeTab}
-              setActiveTab={setActiveTab}
-              onUpload={() => navigate('/social/upload')}
-            />
-            <div className="h-[1px] bg-theme-secondary"></div>
-          </div>
           <div className="w-full">
             <AdSection />
             {posts.map(post => (

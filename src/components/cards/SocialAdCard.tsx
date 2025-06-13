@@ -78,14 +78,20 @@ export default function SocialAdCard({
 
   // Modified to handle text-based truncation rather than just line-based
   const truncateText = (text: string, maxLines: number, charsPerLine: number) => {
-    const lines = text.split('\n');
-    if (lines.length <= maxLines) return text;
-    
-    // Join the first maxLines lines
-    return lines.slice(0, maxLines).join('\n');
+    const charLimit = maxLines * charsPerLine;
+    if (text.length <= charLimit) {
+      return text;
+    }
+    let truncated = text.substring(0, charLimit);
+    // Ensure we don't cut off in the middle of a word
+    const lastSpace = truncated.lastIndexOf(' ');
+    if (lastSpace !== -1 && lastSpace > charLimit - charsPerLine / 2) { // Allow cutting a bit earlier for cleaner words
+        truncated = truncated.substring(0, lastSpace);
+    }
+    return truncated;
   };
 
-  const truncatedDescription = truncateText(description, 3, 50);
+  const truncatedDescription = truncateText(description, 3, 40);
   const needsTruncation = description.length > truncatedDescription.length;
 
   const handlePlayPause = () => {
@@ -108,7 +114,7 @@ export default function SocialAdCard({
   const progressPercentage = (currentTime / duration) * 100;
 
   return (
-    <div className="bg-theme-secondary border-b border-theme mb-4 flex flex-col h-full">
+    <div className="bg-theme-secondary border-b border-theme mb-4 flex flex-col">
       {/* Header */}
       <div className="flex items-center justify-between px-5 py-4">
         <div className="flex items-center">
@@ -131,7 +137,7 @@ export default function SocialAdCard({
 
       {/* Description */}
       <div className="px-5 py-3 bg-theme-secondary">
-        <p className="text-theme-primary text-base leading-relaxed whitespace-pre-line">
+        <p className="text-theme-primary text-base leading-relaxed whitespace-pre-line" onClick={showFullDescription ? toggleDescription : undefined}>
           {showFullDescription ? description : truncatedDescription}
           {needsTruncation && !showFullDescription && (
             <span className="text-gray-500 ml-1 cursor-pointer inline-block" onClick={toggleDescription}>
@@ -166,10 +172,6 @@ export default function SocialAdCard({
                   objectFit: 'cover',
                   width: '100%',
                   height: '100%',
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%) scale(1.5)' // Scale up the video to ensure it fills the container
                 }
               }
             }
@@ -179,14 +181,14 @@ export default function SocialAdCard({
         />
         
         {/* Overlay Text - Top center */}
-        <div className="absolute top-0 left-0 right-0 flex flex-col items-center text-white text-center p-6 z-10">
+        <div className="absolute top-0 left-0 right-0 flex flex-col items-center text-white text-center p-6">
           <div className="p-2 w-full">
             <h2 className="text-sm uppercase tracking-wider mb-1">{title}</h2>
             <h1 className="text-3xl font-light">{subtitle}</h1>
           </div>
         </div>
 
-        <div className="absolute inset-0 p-4 text-white z-20">
+        <div className="absolute inset-0 p-4 text-white">
           {/* Top Right: Mute/Unmute Button */}
           <button onClick={handleMuteUnmute} className="p-2 rounded-full bg-black/50 absolute top-4 right-4">
             <img src={internalIsMuted ? MuteIcon : UnmuteIcon} alt={internalIsMuted ? "Mute" : "Unmute"} className="w-6 h-6" />

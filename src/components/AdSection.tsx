@@ -6,7 +6,7 @@ export default function AdSection() {
     id: 1,
     title: "DREAMING OF A JAMAICA GETAWAY?",
     subtitle: "We'll Help You Get Here",
-    description: "Experience luxury and tranquility at our beachfront resort. Book now for exclusive deals and unforgettable memories.",
+    description: "Discover an unparalleled escape at our exquisite beachfront resort, where luxury meets tranquility. Immerse yourself in breathtaking ocean views, indulge in world-class amenities, and create unforgettable memories. Book your dream getaway today and experience the ultimate blend of relaxation and adventure. Our resort offers pristine beaches, gourmet dining, and a variety of activities for all ages. Don't miss out on our exclusive deals and make your dream vacation a reality.",
     logoUrl: "/path/to/logo.png", // You'll need to add the actual logo
     logoName: "SKY HAUS",
     deliveredBy: "Delivered to You!",
@@ -28,7 +28,7 @@ export default function AdSection() {
   };
 
   return (
-    <div className="mb-4">
+    <div className="mb-4 relative overflow-hidden">
       <SocialAdCard
         {...adData}
         onBookNow={handleBookNow}
