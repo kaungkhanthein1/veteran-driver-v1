@@ -11,6 +11,7 @@ import UnmuteIcon from "icons/Unmute.svg";
 import ReviewProfile from "../../assets/ReviewProfile.gif";
 import AdVideo from "../../assets/Ad.mp4";
 import ReactPlayer from 'react-player';
+import SocialShareIcon from "icons/SocialShare.svg";
 
 interface SocialAdCardProps {
   id: number;
@@ -190,14 +191,14 @@ export default function SocialAdCard({
 
         <div className="absolute inset-0 p-4 text-white">
           {/* Top Right: Mute/Unmute Button */}
-          <button onClick={handleMuteUnmute} className="p-2 rounded-full bg-black/50 absolute top-4 right-4">
+          <button onClick={handleMuteUnmute} className="p-2 rounded-full absolute top-2 right-2">
             <img src={internalIsMuted ? MuteIcon : UnmuteIcon} alt={internalIsMuted ? "Mute" : "Unmute"} className="w-6 h-6" />
           </button>
 
           {/* Bottom Controls Container - Aligned horizontally */}
           <div className="absolute bottom-4 left-0 right-0 flex items-center justify-between px-4">
             {/* Play/Pause Button */}
-            <button onClick={handlePlayPause} className="p-2 rounded-full bg-black/50">
+            <button onClick={handlePlayPause} className="p-2 rounded-full">
               <img src={internalIsPaused ? PlayIcon : PauseIcon} alt={internalIsPaused ? "Play" : "Pause"} className="w-6 h-6" />
             </button>
             
@@ -244,7 +245,7 @@ export default function SocialAdCard({
               <span>{comments}</span>
             </div>
             <div className="flex items-center">
-              <img src={ShareIcon} alt="Shares" className="w-4 h-4 mr-1.5 [filter:var(--icon-filter)]" />
+              <img src={SocialShareIcon} alt="Shares" className="w-4 h-4 mr-1.5 [filter:var(--icon-filter)]" />
               <span>{shares}</span>
             </div>
           </div>

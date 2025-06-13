@@ -7,10 +7,57 @@ import RoomImg from "assets/Room.png";
 import SampleVideo from "assets/Sample.mp4";
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import SocialShareIcon from "icons/SocialShare.svg";
 
-export default function SocialPostCard({ post: providedPost, onOpenComments, compact = false, setIsModalOpen, className }) {
+interface PostUser {
+  name: string;
+  avatar?: string;
+  verified: boolean;
+}
+
+interface PostTag {
+  icon?: string;
+  text: string;
+}
+
+interface PostMediaItem {
+  type: 'image' | 'video';
+  url: string;
+  thumbnailUrl?: string;
+}
+
+interface Post {
+  id: string | number;
+  user: PostUser;
+  place?: string;
+  content: string;
+  media: PostMediaItem[];
+  time: string;
+  likes: string | number;
+  comments: string | number;
+  shares: string | number;
+  isAnonymous?: boolean;
+  tags?: PostTag[];
+  locationId?: string | number;
+}
+
+interface SocialPostCardProps {
+  post: Post;
+  onOpenComments?: (postId: number) => void;
+  compact?: boolean;
+  setIsModalOpen?: (isOpen: boolean) => void;
+  className?: string;
+}
+
+interface SelectedMediaState {
+  type: 'modal';
+  media: PostMediaItem[];
+  initialIndex: number;
+}
+
+export default function SocialPostCard({ post: providedPost, onOpenComments, compact = false, setIsModalOpen, className }: SocialPostCardProps) {
   const [expanded, setExpanded] = useState(false);
-  const [selectedMedia, setSelectedMedia] = useState(null);
+  const [selectedMedia, setSelectedMedia] = useState<SelectedMediaState | null>(null);
   const [showShareModal, setShowShareModal] = useState(false);
   const navigate = useNavigate();
 
@@ -18,7 +65,7 @@ export default function SocialPostCard({ post: providedPost, onOpenComments, com
   const post = providedPost;
 
   // Define all available media for this post
-  const allMedia = [
+  const allMedia: PostMediaItem[] = [
     { type: 'image', url: BeachImg },
     { type: 'image', url: RoomImg },
     { type: 'video', url: SampleVideo, thumbnailUrl: RoomImg }
@@ -26,7 +73,7 @@ export default function SocialPostCard({ post: providedPost, onOpenComments, com
 
   const { t } = useTranslation();
 
-  const handleMediaClick = (media, index) => {
+  const handleMediaClick = (media: PostMediaItem, index: number) => {
     setSelectedMedia({
       type: 'modal',
       media: allMedia,
@@ -45,7 +92,7 @@ export default function SocialPostCard({ post: providedPost, onOpenComments, com
   // Add handlers for comments and share
   const handleCommentClick = () => {
     if (onOpenComments) {
-      onOpenComments(post.id);
+      onOpenComments(post.id as number);
     }
   };
 
@@ -108,13 +155,15 @@ export default function SocialPostCard({ post: providedPost, onOpenComments, com
         <div className="px-3 text-xs text-theme-primary">
           {post.content.slice(0, 80)}...
           <div className="flex flex-wrap gap-1 mt-1 mb-2">
-            {post.tags?.slice(0, 2).map((tag, index) => (
+            {(post.tags || []).slice(0, 2).map((tag: PostTag, index: number) => {
+              const currentTags = post.tags || [];
+              return (
               <span key={index} className="text-[11px] text-theme-primary flex items-center">
                 {tag.icon && <span className="mr-1">{tag.icon}</span>}
                 {tag.text}
-                {index < 1 && <span className="mx-1">•</span>}
+                {index < currentTags.length - 1 && <span className="mx-1">•</span>}
               </span>
-            ))}
+            )})}
           </div>
         </div>
       ) : (
@@ -129,13 +178,15 @@ export default function SocialPostCard({ post: providedPost, onOpenComments, com
             </span>
           )}
           <div className="flex flex-wrap gap-1.5 mt-2.5 mb-4">
-            {post.tags?.map((tag, index) => (
+            {(post.tags || []).map((tag: PostTag, index: number) => {
+              const currentTags = post.tags || [];
+              return (
               <span key={index} className="text-[13px] text-theme-primary flex items-center">
                 {tag.icon && <span className="mr-1.5">{tag.icon}</span>}
                 {tag.text}
-                {index < post.tags.length - 1 && <span className="mx-1.5">•</span>}
+                {index < currentTags.length - 1 && <span className="mx-1.5">•</span>}
               </span>
-            ))}
+            )})}
           </div>
         </div>
       )}
@@ -196,9 +247,7 @@ export default function SocialPostCard({ post: providedPost, onOpenComments, com
             onClick={handleShareClick}
             className={`flex items-center ${compact ? 'text-[11px]' : 'text-[13px]'}`}
           >
-            <svg className={`${compact ? 'w-3 h-3 mr-1' : 'w-4 h-4 mr-1.5'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
-            </svg>
+            <img src={SocialShareIcon} alt="Share" className={`${compact ? 'w-3 h-3 mr-1' : 'w-4 h-4 mr-1.5'} [filter:var(--icon-filter)]`} />
             {post.shares}
           </button>
         </div>
@@ -207,7 +256,6 @@ export default function SocialPostCard({ post: providedPost, onOpenComments, com
       {/* Media Modals */}
       {selectedMedia && (
         <ImageModal
-          isOpen={!!selectedMedia}
           images={selectedMedia.media}
           initialIndex={selectedMedia.initialIndex}
           onClose={handleCloseMediaModal}
@@ -222,6 +270,8 @@ export default function SocialPostCard({ post: providedPost, onOpenComments, com
   );
 }
 
+// Remove PropTypes as TypeScript interfaces are used
+/*
 SocialPostCard.propTypes = {
   post: PropTypes.shape({
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
@@ -245,3 +295,4 @@ SocialPostCard.propTypes = {
   setIsModalOpen: PropTypes.func,
   className: PropTypes.string,
 };
+*/
