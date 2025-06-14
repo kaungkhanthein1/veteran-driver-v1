@@ -101,7 +101,8 @@
     "schedule": "Schedule",
     "settings": "Settings",
     "shareourapplication": "Share Our Application",
-    "uploadedlocation": "My uploaded location"
+    "uploadedlocation": "My uploaded location",
+    "loginOrSignUp": "Login Or Sign Up"
   },
   "social": {
     "addComment": "Add a comment...",

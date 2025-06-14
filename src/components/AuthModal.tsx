@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import LoginPage from '../Pages/LoginPage'; 
 import RegisterPage from '../Pages/RegisterPage'; 
+import LoginPage from '../Pages/LoginPage';
 
 export default function AuthModal({ isOpen, onClose }) {
   const { t } = useTranslation();
