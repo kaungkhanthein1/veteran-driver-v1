@@ -17,11 +17,14 @@ import SettingIcon from "icons/Setting.svg";
 import { useNavigate } from "react-router-dom";
 import LanguageModal from "../components/common/LanguageModal";
 import NotificationsPage from "../Pages/Profile/NotificationsPage";
+import Modal from "../components/common/Modal";
+import LoginPage from "./LoginPage";
 
 export default function ProfilePage() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [showLanguageModal, setShowLanguageModal] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
   const userProfile = {
     avatar: DefaultAvator
   };
@@ -112,7 +115,7 @@ export default function ProfilePage() {
             </div>
 
             {/* Profile Info */}
-            <button className="flex items-center gap-4 w-full" onClick={() => navigate('/login')}>
+            <button className="flex items-center gap-4 w-full" onClick={() => setShowLoginModal(true)}>
               <div className="w-20 h-20 rounded-full overflow-hidden flex items-center justify-center bg-theme-secondary">
                 <img src={userProfile.avatar} alt="Default Avatar" className="w-full h-full" />
               </div>
@@ -180,12 +183,20 @@ export default function ProfilePage() {
             ))}
           </div>
         </div>
-        <BottomNavBar active="profile" />
+        {!showLoginModal && <BottomNavBar active="profile" />}
       </div>
       <LanguageModal 
         isOpen={showLanguageModal} 
         onClose={() => setShowLanguageModal(false)} 
       />
+      <Modal
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+        type="bottom"
+        hideFooter
+      >
+        <LoginPage />
+      </Modal>
     </div>
   );
 }
