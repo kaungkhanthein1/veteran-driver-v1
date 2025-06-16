@@ -1,13 +1,20 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import FormInput from '../components/common/FormInput';
 import { useTranslation } from 'react-i18next';
 import RecaptchaLogo from '../icons/RecaptchaLogo.svg';
 import ViewIcon from '../icons/Views.svg';
 import ViewOffIcon from '../icons/ViewOff.svg';
 
-export default function LoginPage() {
+type LoginPageProps = {
+  onShowRegister?: () => void;
+  onClose?: () => void;
+};
+
+export default function LoginPage({ onShowRegister, onClose }: LoginPageProps) {
   const navigate = useNavigate();
+  const location = useLocation();
+  const background = location.state?.background || location;
   const [showPassword, setShowPassword] = useState(false);
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
@@ -19,8 +26,15 @@ export default function LoginPage() {
   return (
     <div className="dvh-fallback flex flex-col items-center bg-theme-primary px-4">
       <div className="w-full max-w-md mx-auto flex flex-col items-center">
-        <div className="mb-2 text-center">
-          <h1 className="text-3xl font-bold text-theme-primary mb-2">{t('loginPage.title')}</h1>
+        <div className="w-full flex justify-between items-center mb-6">
+          <h1 className="text-xl font-semibold text-theme-primary">{t('loginPage.title')}</h1>
+          {onClose && (
+            <button onClick={onClose} className="text-theme-primary">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          )}
         </div>
         <form className="w-full space-y-6">
           <FormInput
@@ -63,6 +77,14 @@ export default function LoginPage() {
               }
             />
           </div>
+          <div className="w-full text-right mt-4 mb-4">
+          <button 
+            className="text-theme-primary"
+            onClick={() => navigate("/forgot-password")}
+          >
+            {t('loginPage.forgotPasswordLink')}
+          </button>
+        </div>
           {/* Recaptcha Placeholder */}
           <div className="flex justify-center">
             <div className="bg-theme-secondary rounded-lg px-4 py-3 flex items-center justify-between w-full max-w-[240px]">
@@ -93,14 +115,18 @@ export default function LoginPage() {
             {t('loginPage.loginButton')}
           </button>
         </form>
-        <div className="w-full flex justify-center mt-4 mb-4">
-          <button 
-            className="text-theme-primary"
-            onClick={() => navigate("/forgot-password")}
+       
+         {/* Register Link */}
+         <div className="mt-4 mb-4 text-center">
+          <span className="text-theme-secondary">{t('loginPage.noAccountText')} </span>
+          <button
+            className="text-[#FFC61B] font-semibold"
+            onClick={() => navigate("/register", { state: { background } })}
           >
-            {t('loginPage.forgotPasswordLink')}
+            {t('loginPage.signUpLink')}
           </button>
         </div>
+
         <div className="w-full mt-2 space-y-4">
           <button className="w-full flex items-center justify-center bg-theme-secondary rounded-full py-3 text-theme-primary font-medium text-base space-x-3">
             <span>
@@ -108,27 +134,17 @@ export default function LoginPage() {
             </span>
             <span>{t('loginPage.continueWithGoogleButton')}</span>
           </button>
-          <button className="w-full flex items-center justify-center bg-theme-secondary rounded-full py-3 text-theme-primary font-medium text-base space-x-3">
+          {/* <button className="w-full flex items-center justify-center bg-theme-secondary rounded-full py-3 text-theme-primary font-medium text-base space-x-3">
             <span>
               <svg className="w-6 h-6 inline-block mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1.003 1.003 0 011.11-.21c1.21.48 2.53.73 3.88.73a1 1 0 011 1v3.5a1 1 0 01-1 1C10.07 22 2 13.93 2 4.5A1 1 0 013 3.5h3.5a1 1 0 011 1c0 1.35.25 2.67.73 3.88a1.003 1.003 0 01-.21 1.11l-2.2 2.2z"/></svg>
                 </span>
             <span>{t('loginPage.continueWithPhoneButton')}</span>
-          </button>
+          </button> */}
           <button className="w-full flex items-center justify-center bg-theme-secondary rounded-full py-3 text-theme-primary font-medium text-base space-x-3">
             <span>
               <svg className="w-6 h-6 inline-block mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 23.403.597 24 1.326 24H12.82v-9.294H9.692v-3.622h3.127V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.403 24 24 23.403 24 22.674V1.326C24 .597 23.403 0 22.675 0"/></svg>
             </span>
             <span>{t('loginPage.continueWithFacebookButton')}</span>
-          </button>
-        </div>
-        {/* Register Link */}
-        <div className="mt-8 text-center">
-          <span className="text-theme-secondary">{t('loginPage.noAccountText')} </span>
-          <button
-            className="text-[#FFC61B] font-semibold"
-            onClick={() => navigate("/register")}
-          >
-            {t('loginPage.signUpLink')}
           </button>
         </div>
       </div>

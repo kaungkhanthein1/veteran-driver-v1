@@ -19,12 +19,14 @@ import LanguageModal from "../components/common/LanguageModal";
 import NotificationsPage from "../Pages/Profile/NotificationsPage";
 import Modal from "../components/common/Modal";
 import LoginPage from "./LoginPage";
+import RegisterPage from "./RegisterPage";
 
 export default function ProfilePage() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [showLanguageModal, setShowLanguageModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
   const userProfile = {
     avatar: DefaultAvator
   };
@@ -195,7 +197,19 @@ export default function ProfilePage() {
         type="bottom"
         hideFooter
       >
-        <LoginPage />
+        <LoginPage onShowRegister={() => {
+          setShowLoginModal(false);
+          setShowRegisterModal(true);
+        }}
+        onClose={() => setShowLoginModal(false)} />
+      </Modal>
+      <Modal
+        isOpen={showRegisterModal}
+        onClose={() => setShowRegisterModal(false)}
+        type="bottom"
+        hideFooter
+      >
+        <RegisterPage onClose={() => setShowRegisterModal(false)} />
       </Modal>
     </div>
   );

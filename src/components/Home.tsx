@@ -16,13 +16,14 @@ import BarIcon from "icons/HomeUpdate/Bar.svg";
 import EVisaIcon from "icons/HomeUpdate/Evisa.svg";
 import MoreIcon from "icons/HomeUpdate/More.svg";
 import TuneIcon from "../icons/Tune.svg";
-import { useNavigate } from "react-router-dom";
-import AuthModal from "./AuthModal";
+import { useNavigate, useLocation } from "react-router-dom";
 import FilterPanel from "../Pages/map/FilterPanel";
 import { useTheme } from "../context/ThemeContext";
 import { useDispatch, useSelector } from "react-redux";
 import { changeCountry } from "../app/countrySlice";
 import { useGetCountriesQuery } from "../features/HomeApi";
+import LoginPage from '../Pages/LoginPage';
+import RegisterPage from '../Pages/RegisterPage';
 
 const HomePage = () => {
   const { name } = useSelector((state) => state.country);
@@ -39,7 +40,6 @@ const HomePage = () => {
   );
   const { isBookmarked, toggleBookmark } = useBookmarks();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [showAuthModal, setShowAuthModal] = useState(false);
   const navigate = useNavigate();
   const [showFilterPanel, setShowFilterPanel] = useState(false);
   const [filters, setFilters] = useState({
@@ -51,6 +51,7 @@ const HomePage = () => {
   });
   const categoryTabsRef = useRef(null);
   const themeTabsRef = useRef(null);
+  const location = useLocation();
 
   const applyFilters = () => {
     // TODO: Implement actual filter application logic
@@ -256,7 +257,7 @@ const HomePage = () => {
             <div className="px-4 py-5 bg-theme-primary">
               <div className="flex justify-between items-center mb-4">
                 <button
-                  onClick={() => setShowAuthModal(true)}
+                  onClick={() => navigate('/login', { state: { background: location } })}
                   className="text-xl font-bold text-theme-text focus:outline-none"
                 >
                   {t("loginPage.title")} {t("loginPage.orText")} {t("registerPage.title")}
@@ -588,13 +589,6 @@ const HomePage = () => {
         </div>
 
         {!isModalOpen && <BottomNavBar active="home" />}
-
-        {showAuthModal && (
-          <AuthModal
-            isOpen={showAuthModal}
-            onClose={() => setShowAuthModal(false)}
-          />
-        )}
 
         {/* Filter Panel Modal */}
         {showFilterPanel ? (
