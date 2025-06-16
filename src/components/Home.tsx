@@ -24,6 +24,7 @@ import { changeCountry } from "../app/countrySlice";
 import { useGetCountriesQuery } from "../features/HomeApi";
 import LoginPage from '../Pages/LoginPage';
 import RegisterPage from '../Pages/RegisterPage';
+import Modal from "../components/common/Modal";
 
 const HomePage = () => {
   const { name } = useSelector((state) => state.country);
@@ -40,6 +41,8 @@ const HomePage = () => {
   );
   const { isBookmarked, toggleBookmark } = useBookmarks();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
   const navigate = useNavigate();
   const [showFilterPanel, setShowFilterPanel] = useState(false);
   const [filters, setFilters] = useState({
@@ -257,7 +260,7 @@ const HomePage = () => {
             <div className="px-4 py-5 bg-theme-primary">
               <div className="flex justify-between items-center mb-4">
                 <button
-                  onClick={() => navigate('/login', { state: { background: location } })}
+                  onClick={() => setShowLoginModal(true)}
                   className="text-xl font-bold text-theme-text focus:outline-none"
                 >
                   {t("loginPage.title")} {t("loginPage.orText")} {t("registerPage.title")}
@@ -588,7 +591,7 @@ const HomePage = () => {
           </div>
         </div>
 
-        {!isModalOpen && <BottomNavBar active="home" />}
+        {!isModalOpen && !showLoginModal && !showRegisterModal && <BottomNavBar active="home" />}
 
         {/* Filter Panel Modal */}
         {showFilterPanel ? (
@@ -601,6 +604,32 @@ const HomePage = () => {
         ) : (
           ""
         )}
+
+        {/* Login Modal */}
+        <Modal
+          isOpen={showLoginModal}
+          onClose={() => setShowLoginModal(false)}
+          type="bottom"
+          hideFooter
+        >
+          <LoginPage 
+            onShowRegister={() => {
+              setShowLoginModal(false);
+              setShowRegisterModal(true);
+            }}
+            onClose={() => setShowLoginModal(false)} 
+          />
+        </Modal>
+
+        {/* Register Modal */}
+        <Modal
+          isOpen={showRegisterModal}
+          onClose={() => setShowRegisterModal(false)}
+          type="bottom"
+          hideFooter
+        >
+          <RegisterPage onClose={() => setShowRegisterModal(false)} />
+        </Modal>
       </div>
     </div>
   );
