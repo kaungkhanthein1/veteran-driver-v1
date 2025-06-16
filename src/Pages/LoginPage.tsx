@@ -21,6 +21,14 @@ export default function LoginPage({ onShowRegister, onClose }: LoginPageProps) {
   const [isRecaptchaVerified, setIsRecaptchaVerified] = useState(false);
   const { t } = useTranslation();
 
+  const handleClose = () => {
+    if (onClose) {
+      onClose();
+    } else if (background) {
+      navigate(background.pathname, { replace: true });
+    }
+  };
+
   const isFormFilled = emailOrPhone.trim() !== "" && password.trim() !== "";
 
   return (
@@ -28,13 +36,11 @@ export default function LoginPage({ onShowRegister, onClose }: LoginPageProps) {
       <div className="w-full max-w-md mx-auto flex flex-col items-center">
         <div className="w-full flex justify-between items-center mb-6">
           <h1 className="text-xl font-semibold text-theme-primary">{t('loginPage.title')}</h1>
-          {onClose && (
-            <button onClick={onClose} className="text-theme-primary">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          )}
+          <button onClick={handleClose} className="text-theme-primary">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
         </div>
         <form className="w-full space-y-6">
           <FormInput

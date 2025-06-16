@@ -20,6 +20,14 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
   const [isRecaptchaVerified, setIsRecaptchaVerified] = useState(false);
   const { t } = useTranslation();
 
+  const handleClose = () => {
+    if (onClose) {
+      onClose();
+    } else if (background) {
+      navigate(background.pathname, { replace: true });
+    }
+  };
+
   const isFormFilled = emailOrPhone.trim() !== "" && password.trim() !== "";
 
   return (
@@ -28,13 +36,11 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
         {/* Header with Sign Up text and close button */}
         <div className="w-full flex justify-between items-center mb-2">
           <h1 className="text-xl font-semibold text-theme-primary">{t('registerPage.title')}</h1>
-          {onClose && (
-            <button onClick={onClose} className="text-theme-primary">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          )}
+          <button onClick={handleClose} className="text-theme-primary">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
         </div>
         <form className="w-full mt-6 space-y-6" onSubmit={e => { e.preventDefault(); navigate("/otp-verify"); }}>
           <FormInput
