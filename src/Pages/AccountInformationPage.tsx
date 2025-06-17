@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import FormInput from '../components/common/FormInput';
 import GenderSelectionModal from '../components/common/GenderSelectionModal';
 
 export default function AccountInformationPage() {
-  console.log("AccountInformationPage - Rendering");
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -13,31 +12,13 @@ export default function AccountInformationPage() {
   const [gender, setGender] = useState('');
   const [showGenderModal, setShowGenderModal] = useState(false);
 
-  useEffect(() => {
-    console.log("AccountInformationPage - showGenderModal:", showGenderModal);
-  }, [showGenderModal]);
-
   const handleConfirm = () => {
-    console.log('Username:', username);
-    console.log('Gender:', gender);
-    // TODO: Implement logic to save account information and proceed
-    navigate('/location-access'); // Assuming next step is LocationAccessPage
+    navigate('/location-access');
   };
 
   const handleGenderApply = (selected: string) => {
-    console.log("AccountInformationPage - handleGenderApply received:", selected);
     setGender(selected);
     setShowGenderModal(false);
-  };
-
-  const handleGenderModalClose = () => {
-    console.log("AccountInformationPage - handleGenderModalClose called");
-    setShowGenderModal(false);
-  };
-
-  const handleOpenGenderModal = () => {
-    console.log("AccountInformationPage - Opening gender modal");
-    setShowGenderModal(true);
   };
 
   return (
@@ -56,7 +37,6 @@ export default function AccountInformationPage() {
 
       {/* Form Fields */}
       <div className="px-4 py-5 flex-1">
-        {/* Username Input using FormInput component */}
         <FormInput
           label={t('accountInformation.username')}
           name="username"
@@ -70,7 +50,7 @@ export default function AccountInformationPage() {
         <div className="relative mt-6">
           <button
             type="button"
-            onClick={handleOpenGenderModal}
+            onClick={() => setShowGenderModal(true)}
             className="w-full bg-theme-secondary border border-theme rounded-lg px-4 h-[56px] text-base focus:outline-none focus:ring-0 appearance-none pr-8 text-theme-text flex items-center justify-between"
           >
             <span>{gender ? t('accountInformation.gender' + gender.charAt(0).toUpperCase() + gender.slice(1)) : t('accountInformation.selectGender')}</span>
@@ -94,7 +74,7 @@ export default function AccountInformationPage() {
       {/* Gender Selection Modal */}
       <GenderSelectionModal
         isOpen={showGenderModal}
-        onClose={handleGenderModalClose}
+        onClose={() => setShowGenderModal(false)}
         onApply={handleGenderApply}
         currentGender={gender}
       />
