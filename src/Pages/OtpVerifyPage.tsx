@@ -92,7 +92,7 @@ export default function OtpVerifyPage({ onClose }: OtpVerifyPageProps) {
         </div>
         <button
           type="button"
-          onClick={() => navigate("/location-access")}
+          onClick={() => navigate("/account-information")}
           className={`w-full rounded-full py-3 text-lg font-semibold mb-4 shadow-lg transition-colors duration-200 ${
             isOtpFilled
               ? "bg-yellow-gradient text-black"

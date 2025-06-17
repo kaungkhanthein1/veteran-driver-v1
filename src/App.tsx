@@ -35,6 +35,7 @@ import ReviewPage from "./Pages/ReviewPage";
 import CheckMap from "./Pages/map/CheckMap";
 import AddMap from "./Pages/map/AddMap";
 import ModalRoute from "components/common/ModalRoute";
+import AccountInformationPage from "./Pages/AccountInformationPage";
 
 function AppRoutes() {
   const location = useLocation();
@@ -76,6 +77,7 @@ function AppRoutes() {
         <Route path="/review" element={<ReviewPage />} />
         <Route path="/CheckMap/:id" element={<CheckMap />} />
         <Route path="/addMap" element={<AddMap />} />
+        <Route path="/account-information" element={<AccountInformationPage />} />
       </Routes>
       {/* Modal routes, only render if background exists */}
       {state?.background && (

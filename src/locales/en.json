@@ -579,5 +579,17 @@
       "businessClosed": "Business Closed",
       "notAsDescribed": "Not as described"
     }
+  },
+  "accountInformation": {
+    "title": "Account Information",
+    "skip": "Skip",
+    "username": "User Name",
+    "enterUsername": "Enter Your User Name",
+    "gender": "Gender",
+    "selectGender": "Select Your Gender",
+    "genderMale": "Male",
+    "genderFemale": "Female",
+    "genderOther": "Other",
+    "confirm": "Confirm"
   }
 }

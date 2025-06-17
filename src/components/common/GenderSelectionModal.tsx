@@ -1,0 +1,108 @@
+import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import Modal from './Modal';
+
+interface GenderSelectionModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onApply: (gender: string) => void;
+  currentGender: string;
+}
+
+export default function GenderSelectionModal({ isOpen, onClose, onApply, currentGender }: GenderSelectionModalProps) {
+  const { t } = useTranslation();
+  const [selectedGender, setSelectedGender] = useState(currentGender);
+
+  // Debug logging for modal state
+  useEffect(() => {
+    console.log("GenderSelectionModal - Component mounted/updated");
+    console.log("GenderSelectionModal - isOpen:", isOpen);
+    console.log("GenderSelectionModal - currentGender:", currentGender);
+  }, [isOpen, currentGender]);
+
+  // Update selectedGender when currentGender prop changes
+  useEffect(() => {
+    setSelectedGender(currentGender);
+  }, [currentGender]);
+
+  const handleApply = () => {
+    console.log("GenderSelectionModal - Applying selectedGender:", selectedGender);
+    onApply(selectedGender);
+  };
+
+  const handleOptionClick = (gender: string) => {
+    console.log("GenderSelectionModal - Option clicked:", gender);
+    setSelectedGender(gender);
+  };
+
+  const handleClose = () => {
+    console.log("GenderSelectionModal - handleClose called");
+    onClose();
+  };
+
+  // Debug render
+  console.log("GenderSelectionModal - Rendering with isOpen:", isOpen);
+
+  return (
+    <Modal
+      isOpen={isOpen}
+      onClose={handleClose}
+      type="bottom"
+      hideFooter
+      title=""
+      showDragHandle={false}
+    >
+      <div className="flex flex-col mx-4 bg-theme-secondary rounded-lg" onClick={(e) => e.stopPropagation()}>
+        {/* Custom Header for Gender Selection Modal */}
+        <div className="flex justify-between items-center px-4 py-3">
+          <h2 className="text-lg font-semibold text-theme-text">{t('accountInformation.gender')}</h2>
+          <button onClick={handleClose} className="text-theme-text">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        
+        <button
+          className={`w-full py-3 text-center text-lg font-medium transition-colors duration-200 
+          ${selectedGender === 'other' ? 'text-[#FFC61B] bg-white/5' : 'text-theme-text'}`}
+          onClick={() => handleOptionClick('other')}
+        >
+          {t('accountInformation.genderOther')}
+        </button>
+        <div className="w-full h-[1px] bg-white/30 my-2" />
+        <button
+          className={`w-full py-3 text-center text-lg font-medium transition-colors duration-200 
+          ${selectedGender === 'female' ? 'text-[#FFC61B] bg-white/5' : 'text-theme-text'}`}
+          onClick={() => handleOptionClick('female')}
+        >
+          {t('accountInformation.genderFemale')}
+        </button>
+        <div className="w-full h-[1px] bg-white/30 my-2" />
+        <button
+          className={`w-full py-3 text-center text-lg font-medium transition-colors duration-200 
+          ${selectedGender === 'male' ? 'text-[#FFC61B] bg-white/5' : 'text-theme-text'}`}
+          onClick={() => handleOptionClick('male')}
+        >
+          {t('accountInformation.genderMale')}
+        </button>
+      </div>
+
+      {/* Custom Footer Buttons */}
+      <div className="flex gap-2 px-4 py-3" onClick={(e) => e.stopPropagation()}>
+        <button 
+          onClick={handleClose}
+          className="flex-1 py-3 bg-theme-secondary text-theme-text font-medium rounded-lg"
+        >
+          {t('modal.cancelButton')}
+        </button>
+        <button 
+          onClick={handleApply}
+          className="flex-1 py-3 bg-[#FFC61B] text-black font-medium rounded-lg"
+        >
+          {t('modal.applyButton')}
+        </button>
+      </div>
+    </Modal>
+  );
+} 
