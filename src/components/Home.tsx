@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import SocialPostCard from "../components/cards/SocialPostCard";
 import ExploreCard from "../components/cards/ExploreCard";
@@ -27,7 +27,7 @@ import RegisterPage from '../Pages/RegisterPage';
 import Modal from "../components/common/Modal";
 
 const HomePage = () => {
-  const { name } = useSelector((state) => state.country);
+  const { name } = useSelector((state: any) => state.country);
   const { data, error, isLoading } = useGetCountriesQuery("");
   const dispatch = useDispatch();
   console.log(" test api =>", data);
@@ -41,8 +41,6 @@ const HomePage = () => {
   );
   const { isBookmarked, toggleBookmark } = useBookmarks();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showRegisterModal, setShowRegisterModal] = useState(false);
   const navigate = useNavigate();
   const [showFilterPanel, setShowFilterPanel] = useState(false);
   const [filters, setFilters] = useState({
@@ -52,9 +50,14 @@ const HomePage = () => {
     services: [],
     sort: t("filterPanel.sortOptions.comprehensive"),
   });
-  const categoryTabsRef = useRef(null);
-  const themeTabsRef = useRef(null);
+  const categoryTabsRef = useRef<HTMLDivElement>(null);
+  const themeTabsRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
+  const state = location.state as { background?: Location };
+
+  useEffect(() => {
+    console.log("HomePage - location.state.background:", location.state?.background);
+  }, [location.state?.background]);
 
   const applyFilters = () => {
     // TODO: Implement actual filter application logic
@@ -63,12 +66,12 @@ const HomePage = () => {
   };
 
   // Function to scroll tab to center
-  const scrollTabToCenter = (tabRef, tabIndex) => {
+  const scrollTabToCenter = (tabRef: React.RefObject<HTMLDivElement>, tabIndex: number) => {
     if (tabRef.current) {
       const container = tabRef.current;
       const tabs = container.children;
       if (tabs[tabIndex]) {
-        const tab = tabs[tabIndex];
+        const tab = tabs[tabIndex] as HTMLElement;
         const containerWidth = container.offsetWidth;
         const tabLeft = tab.offsetLeft;
         const tabWidth = tab.offsetWidth;
@@ -83,13 +86,13 @@ const HomePage = () => {
   };
 
   // Handle category tab click
-  const handleCategoryTabClick = (tab, index) => {
+  const handleCategoryTabClick = (tab: string, index: number) => {
     setActiveCategoryTab(tab);
     scrollTabToCenter(categoryTabsRef, index);
   };
 
   // Handle theme tab click
-  const handleThemeTabClick = (theme, index) => {
+  const handleThemeTabClick = (theme: string, index: number) => {
     setActiveThemeTab(theme);
     scrollTabToCenter(themeTabsRef, index);
   };
@@ -114,6 +117,7 @@ const HomePage = () => {
       likes: "5324",
       comments: "20",
       shares: "6",
+      media: [],
     },
     {
       id: "2",
@@ -132,6 +136,7 @@ const HomePage = () => {
       likes: "3242",
       comments: "15",
       shares: "4",
+      media: [],
     },
     {
       id: "3",
@@ -150,6 +155,7 @@ const HomePage = () => {
       likes: "4521",
       comments: "25",
       shares: "8",
+      media: [],
     },
   ];
 
@@ -260,7 +266,7 @@ const HomePage = () => {
             <div className="px-4 py-5 bg-theme-primary">
               <div className="flex justify-between items-center mb-4">
                 <button
-                  onClick={() => setShowLoginModal(true)}
+                  onClick={() => navigate('/login', { state: { background: location } })}
                   className="text-xl font-bold text-theme-text focus:outline-none"
                 >
                   {t("loginPage.title")} {t("loginPage.orText")} {t("registerPage.title")}
@@ -488,7 +494,6 @@ const HomePage = () => {
                           post={feedback}
                           compact
                           setIsModalOpen={setIsModalOpen}
-                          className="flex-1 rounded-lg"
                         />
                       </div>
                     ))}
@@ -585,13 +590,12 @@ const HomePage = () => {
                   /* Handle navigation to location details */
                 }}
                 setIsModalOpen={setIsModalOpen}
-                className="rounded-2xl"
               />
             ))}
           </div>
         </div>
 
-        {!isModalOpen && !showLoginModal && !showRegisterModal && <BottomNavBar active="home" />}
+        {!isModalOpen && !state?.background && !showFilterPanel && <BottomNavBar active="home" />}
 
         {/* Filter Panel Modal */}
         {showFilterPanel ? (
@@ -605,31 +609,6 @@ const HomePage = () => {
           ""
         )}
 
-        {/* Login Modal */}
-        <Modal
-          isOpen={showLoginModal}
-          onClose={() => setShowLoginModal(false)}
-          type="bottom"
-          hideFooter
-        >
-          <LoginPage 
-            onShowRegister={() => {
-              setShowLoginModal(false);
-              setShowRegisterModal(true);
-            }}
-            onClose={() => setShowLoginModal(false)} 
-          />
-        </Modal>
-
-        {/* Register Modal */}
-        <Modal
-          isOpen={showRegisterModal}
-          onClose={() => setShowRegisterModal(false)}
-          type="bottom"
-          hideFooter
-        >
-          <RegisterPage onClose={() => setShowRegisterModal(false)} />
-        </Modal>
       </div>
     </div>
   );

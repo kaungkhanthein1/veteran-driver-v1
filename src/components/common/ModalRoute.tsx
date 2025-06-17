@@ -14,7 +14,7 @@ export default function ModalRoute({ children }: ModalRouteProps) {
   const handleClose = () => {
     if (background) {
       // If we have a background location, navigate to it
-      navigate(background.pathname, { replace: true });
+      navigate(background.pathname, { replace: true, state: {} });
     } else {
       // If no background, just close the modal
       navigate(-1);

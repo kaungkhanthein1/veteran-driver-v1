@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from 'react-i18next';
 import BottomNavBar from "../components/common/BottomNavBar";
 // Import icons
@@ -14,7 +14,7 @@ import LogoutIcon from "icons/Profile/Logout.svg";
 import DefaultAvator from "icons/DefaultAvator.svg";
 import NotificationIcon from "icons/Notification.svg";
 import SettingIcon from "icons/Setting.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import LanguageModal from "../components/common/LanguageModal";
 import NotificationsPage from "../Pages/Profile/NotificationsPage";
 import Modal from "../components/common/Modal";
@@ -25,11 +25,15 @@ export default function ProfilePage() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [showLanguageModal, setShowLanguageModal] = useState(false);
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showRegisterModal, setShowRegisterModal] = useState(false);
   const userProfile = {
     avatar: DefaultAvator
   };
+  const location = useLocation();
+  const state = location.state as { background?: Location };
+
+  useEffect(() => {
+    console.log("ProfilePage - location.state.background:", location.state?.background);
+  }, [location.state?.background]);
 
   const menuItems = [
     {
@@ -117,7 +121,7 @@ export default function ProfilePage() {
             </div>
 
             {/* Profile Info */}
-            <button className="flex items-center gap-4 w-full" onClick={() => setShowLoginModal(true)}>
+            <button className="flex items-center gap-4 w-full" onClick={() => navigate('/login', { state: { background: location } })}> 
               <div className="w-20 h-20 rounded-full overflow-hidden flex items-center justify-center bg-theme-secondary">
                 <img src={userProfile.avatar} alt="Default Avatar" className="w-full h-full" />
               </div>
@@ -185,32 +189,12 @@ export default function ProfilePage() {
             ))}
           </div>
         </div>
-        {!showLoginModal && <BottomNavBar active="profile" />}
+        {!state?.background && <BottomNavBar active="profile" />} 
       </div>
       <LanguageModal 
         isOpen={showLanguageModal} 
         onClose={() => setShowLanguageModal(false)} 
       />
-      <Modal
-        isOpen={showLoginModal}
-        onClose={() => setShowLoginModal(false)}
-        type="bottom"
-        hideFooter
-      >
-        <LoginPage onShowRegister={() => {
-          setShowLoginModal(false);
-          setShowRegisterModal(true);
-        }}
-        onClose={() => setShowLoginModal(false)} />
-      </Modal>
-      <Modal
-        isOpen={showRegisterModal}
-        onClose={() => setShowRegisterModal(false)}
-        type="bottom"
-        hideFooter
-      >
-        <RegisterPage onClose={() => setShowRegisterModal(false)} />
-      </Modal>
     </div>
   );
 }
