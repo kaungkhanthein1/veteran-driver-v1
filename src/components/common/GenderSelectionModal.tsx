@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import Modal from './Modal';
 
 interface GenderSelectionModalProps {
   isOpen: boolean;
@@ -9,72 +10,77 @@ interface GenderSelectionModalProps {
 }
 
 export default function GenderSelectionModal({ isOpen, onClose, onApply, currentGender }: GenderSelectionModalProps) {
-  const [selected, setSelected] = useState<string | null>(null);
   const { t } = useTranslation();
+  const [selectedGender, setSelectedGender] = useState(currentGender);
 
-  // Update selected when currentGender changes
+  // Update selectedGender when currentGender prop changes
   useEffect(() => {
-    setSelected(currentGender);
+    setSelectedGender(currentGender);
   }, [currentGender]);
 
   const handleApply = () => {
-    if (selected) {
-      onApply(selected);
-      onClose();
-    }
+    onApply(selectedGender);
+    onClose();
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div className="fixed inset-0 z-50 flex justify-center items-end bg-black bg-opacity-50">
-      <div className="bg-theme-primary rounded-t-3xl p-6 w-full max-w-sm relative">
-        {/* Close button */}
-        <button onClick={onClose} className="absolute top-4 right-4 text-theme-primary">
-          X
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      type="bottom"
+      hideFooter
+      title=""
+      showDragHandle={false}
+    >
+      {/* Custom Header for Gender Selection Modal */}
+      <div className="flex justify-between items-center px-4 py-3">
+        <h2 className="text-lg font-semibold text-theme-text">{t('accountInformation.gender')}</h2>
+        <button onClick={onClose} className="text-theme-text">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
         </button>
+      </div>
+      
+      <button
+        className={`w-full py-3 text-center text-lg font-medium transition-colors duration-200 
+        ${selectedGender === 'other' ? 'text-[#FFC61B]' : 'text-theme-text'}`}
+        onClick={() => setSelectedGender('other')}
+      >
+        {t('accountInformation.genderOther')}
+      </button>
+      <div className="w-full h-[1px] bg-white/30 my-2" />
+      <button
+        className={`w-full py-3 text-center text-lg font-medium transition-colors duration-200 
+        ${selectedGender === 'female' ? 'text-[#FFC61B]' : 'text-theme-text'}`}
+        onClick={() => setSelectedGender('female')}
+      >
+        {t('accountInformation.genderFemale')}
+      </button>
+      <div className="w-full h-[1px] bg-white/30 my-2" />
+      <button
+        className={`w-full py-3 text-center text-lg font-medium transition-colors duration-200 
+        ${selectedGender === 'male' ? 'text-[#FFC61B]' : 'text-theme-text'}`}
+        onClick={() => setSelectedGender('male')}
+      >
+        {t('accountInformation.genderMale')}
+      </button>
 
-        <h2 className="text-xl font-bold text-theme-primary mb-4">{t('accountInformation.gender')}</h2>
-
-        {/* Gender Options */}
-        <div className="flex flex-col gap-4 mb-6">
-          <button
-            className={`flex items-center justify-center rounded-lg p-4 border-2 bg-theme-secondary ${
-              selected === 'other' ? "border-[#FFD75E]" : "border-transparent"
-            }`}
-            onClick={() => setSelected('other')}
-          >
-            <span className="text-theme-primary text-lg">{t('accountInformation.genderOther')}</span>
-          </button>
-
-          <button
-            className={`flex items-center justify-center rounded-lg p-4 border-2 bg-theme-secondary ${
-              selected === 'female' ? "border-[#FFD75E]" : "border-transparent"
-            }`}
-            onClick={() => setSelected('female')}
-          >
-            <span className="text-theme-primary text-lg">{t('accountInformation.genderFemale')}</span>
-          </button>
-
-          <button
-            className={`flex items-center justify-center rounded-lg p-4 border-2 bg-theme-secondary ${
-              selected === 'male' ? "border-[#FFD75E]" : "border-transparent"
-            }`}
-            onClick={() => setSelected('male')}
-          >
-            <span className="text-theme-primary text-lg">{t('accountInformation.genderMale')}</span>
-          </button>
-        </div>
-
-        {/* Apply Button */}
-        <button
-          className="w-full bg-yellow-gradient text-black rounded-full py-3 text-lg font-semibold"
-          disabled={!selected}
+      {/* Custom Footer Buttons */}
+      <div className="flex gap-2 px-4 py-3">
+        <button 
+          onClick={onClose}
+          className="flex-1 py-3 bg-theme-secondary text-theme-text font-medium rounded-lg"
+        >
+          {t('modal.cancelButton')}
+        </button>
+        <button 
           onClick={handleApply}
+          className="flex-1 py-3 bg-[#FFC61B] text-black font-medium rounded-lg"
         >
           {t('modal.applyButton')}
         </button>
       </div>
-    </div>
+    </Modal>
   );
 } 
