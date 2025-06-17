@@ -1,14 +1,28 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import BackButton from "../components/common/BackButton";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
+import { Trans } from 'react-i18next';
 
-export default function OtpVerifyPage() {
+type OtpVerifyPageProps = {
+  onClose?: () => void;
+};
+
+export default function OtpVerifyPage({ onClose }: OtpVerifyPageProps) {
   const navigate = useNavigate();
+  const location = useLocation();
+  const background = location.state?.background || location;
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [timer, setTimer] = useState(53);
-  const inputRefs = useRef([]);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const { t } = useTranslation();
+
+  const handleClose = () => {
+    if (onClose) {
+      onClose();
+    } else if (background) {
+      navigate(background.pathname, { replace: true });
+    }
+  };
 
   // Add this line to check if all OTP boxes are filled
   const isOtpFilled = otp.every(char => char.trim() !== "");
@@ -20,7 +34,7 @@ export default function OtpVerifyPage() {
     }
   }, [timer]);
 
-  const handleChange = (e, idx) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, idx: number) => {
     const value = e.target.value.replace(/[^0-9]/g, "");
     if (!value) return;
     const newOtp = [...otp];
@@ -28,28 +42,37 @@ export default function OtpVerifyPage() {
     setOtp(newOtp);
     // Move to next input if not last
     if (idx < 5 && value) {
-      inputRefs.current[idx + 1].focus();
+      inputRefs.current[idx + 1]?.focus();
     }
   };
 
-  const handleKeyDown = (e, idx) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, idx: number) => {
     if (e.key === "Backspace" && !otp[idx] && idx > 0) {
-      inputRefs.current[idx - 1].focus();
+      inputRefs.current[idx - 1]?.focus();
     }
   };
 
   return (
-    <div className="dvh-fallback flex flex-col items-center justify-center bg-theme-primary px-4 py-8">
+    <div className="dvh-fallback flex flex-col items-center justify-start bg-theme-primary px-4 py-8">
       <div className="w-full max-w-md mx-auto flex flex-col items-center">
         <div className="w-full flex items-center mb-8">
-          <BackButton/>
+          <button onClick={handleClose} className="text-theme-primary">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
           <h1 className="text-xl font-bold text-theme-primary flex-1 text-center">{t('otpVerifyPage.title')}</h1>
           <div className="w-8" />
         </div>
         <div className="text-center mb-8">
-          <p className="text-theme-secondary text-base">
-            {t('otpVerifyPage.description', { email: 'DevelopX10@gmail.com', phone: '+868880818' })}. {t('otpVerifyPage.checkSpam')}
-          </p>
+          <Trans
+            i18nKey="otpVerifyPage.description"
+            values={{ email: 'DevelopX10@gmail.com', phone: '+868880818' }}
+            components={{
+              email: <span className="font-semibold text-theme-primary" />,
+              phone: <span className="font-semibold text-theme-primary" />
+            }}
+          />
         </div>
         <div className="flex justify-center space-x-3 mb-8">
           {otp.map((char, idx) => (

@@ -239,7 +239,7 @@
   },
   "otpVerifyPage": {
     "title": "Verify OTP",
-    "description": "Verification code sent to <span className=\"font-semibold text-theme-primary\">{{email}}</span> / <span className=\"font-semibold text-theme-primary\">{{phone}}</span>",
+    "description": "Verification code sent to <email>{{email}}</email> / <phone>{{phone}}</phone>. Please check your messages and be sure to check your spam folder",
     "checkSpam": "Please check your messages and be sure to check your spam folder",
     "confirmButton": "Confirm",
     "didntGetCode": "Didn't get the verification code?",

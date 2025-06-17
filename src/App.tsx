@@ -83,6 +83,7 @@ function AppRoutes() {
           <Route path="/login" element={<ModalRoute><LoginPage /></ModalRoute>} />
           <Route path="/register" element={<ModalRoute><RegisterPage /></ModalRoute>} />
           <Route path="/forgot-password" element={<ModalRoute><ForgetPasswordPage /></ModalRoute>} />
+          <Route path="/otp-verify" element={<ModalRoute><OtpVerifyPage /></ModalRoute>} />
         </Routes>
       )}
     </>

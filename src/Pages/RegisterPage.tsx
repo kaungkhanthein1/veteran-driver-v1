@@ -42,7 +42,10 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
             </svg>
           </button>
         </div>
-        <form className="w-full mt-6 space-y-6" onSubmit={e => { e.preventDefault(); navigate("/otp-verify"); }}>
+        <form className="w-full mt-6 space-y-6" onSubmit={e => { 
+          e.preventDefault(); 
+          navigate("/otp-verify", { state: { background } }); 
+        }}>
           <FormInput
             label={t('registerPage.emailOrPhoneLabel')}
             name="emailOrPhone"
