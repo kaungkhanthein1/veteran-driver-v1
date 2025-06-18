@@ -1,29 +1,53 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import FormInput from '../components/common/FormInput';
 import BackButton from "../components/common/BackButton";
 import { useTranslation } from 'react-i18next';
+import RecaptchaLogo from '../icons/RecaptchaLogo.svg';
+import ViewIcon from '../icons/Views.svg';
+import ViewOffIcon from '../icons/ViewOff.svg';
+
 
 export default function ForgetPasswordPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const background = location.state?.background || { pathname: "/" };
   const [showPassword, setShowPassword] = useState(false);
   const [emailOrPhone, setEmailOrPhone] = useState("+66");
   const [newPassword, setNewPassword] = useState("");
   const { t } = useTranslation();
+  const [isRecaptchaVerified, setIsRecaptchaVerified] = useState(false);
+
 
   const isFormFilled = emailOrPhone.trim() !== "+66" && newPassword.trim() !== "";
 
+  const handleClose = () => {
+    if (background) {
+      navigate(background.pathname, { replace: true });
+    } else {
+      navigate(-1);
+    }
+  };
+
   return (
-    <div className="dvh-fallback flex flex-col justify-between items-center bg-theme-primary px-4 py-8">
+    <div className="dvh-fallback flex flex-col justify-between items-center bg-theme-primary px-4">
       <div className="w-full max-w-md mx-auto flex flex-col items-center">
         <div className="w-full flex items-center mb-8">
-          <BackButton/>
+          <BackButton />
           <h1 className="text-xl font-bold text-theme-primary flex-1 text-center">{t('forgotPasswordPage.title')}</h1>
-          <div className="w-8" />
-        </div>
-        <p className="text-theme-secondary text-base text-center mb-8">{t('forgotPasswordPage.description')}</p>
-        
-        <form className="w-full mt-8 space-y-6" onSubmit={e => { e.preventDefault(); navigate("/otp-verify"); }}>
+          <button onClick={handleClose} className="text-theme-primary text-left">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>        
+        <form
+          className="w-full mt-8 space-y-6"
+          onSubmit={e => {
+            e.preventDefault();
+            navigate("/otp-verify", { state: { background } });
+          }}
+        >
           <FormInput
             label={t('forgotPasswordPage.emailOrPhoneLabel')}
             name="emailOrPhone"
@@ -46,22 +70,37 @@ export default function ForgetPasswordPage() {
                   tabIndex={-1}
                   className="text-theme-secondary"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    {showPassword ? (
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-5.523 0-10-4.477-10-10 0-1.657.336-3.234.938-4.675M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    ) : (
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0zm7.938-2.675A9.956 9.956 0 0022 12c0 5.523-4.477 10-10 10a9.956 9.956 0 01-4.675-.938M3.06 3.06l17.88 17.88" />
-                    )}
-                  </svg>
+                  {showPassword ? (
+                    <img
+                      src={ViewIcon}
+                      alt="Show password"
+                      className="w-6 h-6 [filter:var(--icon-filter)]"
+                    />
+                  ) : (
+                    <img
+                      src={ViewOffIcon}
+                      alt="Hide password"
+                      className="w-6 h-6 [filter:var(--icon-filter)]"
+                    />
+                  )}
                 </button>
               }
             />
           </div>
           <div className="flex justify-center">
-            <div className="bg-theme-primary rounded-lg px-4 py-3 flex items-center gap-2 w-full max-w-xs">
-              <input type="checkbox" className="accent-blue-500" />
-              <span className="text-theme-secondary text-sm">{t('forgotPasswordPage.notRobotCheckbox')}</span>
-              <div className="ml-20 text-theme-secondary text-md">{t('forgotPasswordPage.recaptchaLabel')}</div>
+            <div className="bg-theme-secondary rounded-lg px-4 py-3 flex items-center justify-between w-full max-w-[240px]">
+              <div className="flex items-center gap-2">
+                <input 
+                  type="checkbox" 
+                  className="accent-blue-500 border-none"
+                  checked={isRecaptchaVerified}
+                  onChange={() => setIsRecaptchaVerified((v) => !v)}
+                />
+                <span className="text-theme-secondary text-sm">{t('registerPage.notRobotCheckbox')}</span>
+              </div>
+              <div className="flex flex-col items-end gap-1">
+                <img src={RecaptchaLogo} alt="reCAPTCHA" className="h-8 w-8 cursor-pointer" onClick={() => setIsRecaptchaVerified(false)} />
+              </div>
             </div>
           </div>
           <button

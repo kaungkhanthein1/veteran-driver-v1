@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { Trans } from 'react-i18next';
+import BackButton from "components/common/BackButton";
 
 type OtpVerifyPageProps = {
   onClose?: () => void;
@@ -53,16 +54,16 @@ export default function OtpVerifyPage({ onClose }: OtpVerifyPageProps) {
   };
 
   return (
-    <div className="dvh-fallback flex flex-col items-center justify-start bg-theme-primary px-4 py-8">
+    <div className="dvh-fallback flex flex-col items-center justify-start bg-theme-primary px-4">
       <div className="w-full max-w-md mx-auto flex flex-col items-center">
         <div className="w-full flex items-center mb-8">
-          <button onClick={handleClose} className="text-theme-primary">
+          <BackButton />
+          <h1 className="text-xl font-bold text-theme-primary flex-1 text-center">{t('otpVerifyPage.title')}</h1>
+          <button onClick={handleClose} className="text-theme-primary ml-auto">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
-          <h1 className="text-xl font-bold text-theme-primary flex-1 text-center">{t('otpVerifyPage.title')}</h1>
-          <div className="w-8" />
         </div>
         <div className="text-center mb-8">
           <Trans

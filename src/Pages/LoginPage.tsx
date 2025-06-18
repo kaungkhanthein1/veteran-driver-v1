@@ -86,7 +86,7 @@ export default function LoginPage({ onShowRegister, onClose }: LoginPageProps) {
           <div className="w-full text-right mt-4 mb-4">
           <button 
             className="text-theme-primary"
-            onClick={() => navigate("/forgot-password")}
+            onClick={() => navigate("/forgot-password", { state: { background } })}
           >
             {t('loginPage.forgotPasswordLink')}
           </button>
