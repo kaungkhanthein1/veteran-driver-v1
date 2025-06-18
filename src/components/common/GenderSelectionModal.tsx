@@ -11,17 +11,20 @@ interface GenderSelectionModalProps {
 
 export default function GenderSelectionModal({ isOpen, onClose, onApply, currentGender }: GenderSelectionModalProps) {
   const { t } = useTranslation();
-  const [selectedGender, setSelectedGender] = useState(currentGender);
+  const [selected, setSelected] = useState<string | null>(null);
 
-  // Update selectedGender when currentGender prop changes
   useEffect(() => {
-    setSelectedGender(currentGender);
+    setSelected(currentGender);
   }, [currentGender]);
 
   const handleApply = () => {
-    onApply(selectedGender);
-    onClose();
+    if (selected) {
+      onApply(selected);
+      onClose();
+    }
   };
+
+  if (!isOpen) return null;
 
   return (
     <Modal
@@ -44,24 +47,24 @@ export default function GenderSelectionModal({ isOpen, onClose, onApply, current
       
       <button
         className={`w-full py-3 text-center text-lg font-medium transition-colors duration-200 
-        ${selectedGender === 'other' ? 'text-[#FFC61B]' : 'text-theme-text'}`}
-        onClick={() => setSelectedGender('other')}
+        ${selected === 'other' ? 'text-[#FFC61B]' : 'text-theme-text'}`}
+        onClick={() => setSelected('other')}
       >
         {t('accountInformation.genderOther')}
       </button>
       <div className="w-full h-[1px] bg-white/30 my-2" />
       <button
         className={`w-full py-3 text-center text-lg font-medium transition-colors duration-200 
-        ${selectedGender === 'female' ? 'text-[#FFC61B]' : 'text-theme-text'}`}
-        onClick={() => setSelectedGender('female')}
+        ${selected === 'female' ? 'text-[#FFC61B]' : 'text-theme-text'}`}
+        onClick={() => setSelected('female')}
       >
         {t('accountInformation.genderFemale')}
       </button>
       <div className="w-full h-[1px] bg-white/30 my-2" />
       <button
         className={`w-full py-3 text-center text-lg font-medium transition-colors duration-200 
-        ${selectedGender === 'male' ? 'text-[#FFC61B]' : 'text-theme-text'}`}
-        onClick={() => setSelectedGender('male')}
+        ${selected === 'male' ? 'text-[#FFC61B]' : 'text-theme-text'}`}
+        onClick={() => setSelected('male')}
       >
         {t('accountInformation.genderMale')}
       </button>
@@ -77,6 +80,7 @@ export default function GenderSelectionModal({ isOpen, onClose, onApply, current
         <button 
           onClick={handleApply}
           className="flex-1 py-3 bg-[#FFC61B] text-black font-medium rounded-lg"
+          disabled={!selected}
         >
           {t('modal.applyButton')}
         </button>
