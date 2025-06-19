@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import FormInput from '../components/common/FormInput';
+import ReCaptcha, { ReCaptchaRef } from '../components/common/ReCaptcha';
 import { useTranslation } from 'react-i18next';
+import { verifyRecaptchaToken } from '../services/recaptchaService';
 import RecaptchaLogo from '../icons/RecaptchaLogo.svg';
 import ViewIcon from '../icons/Views.svg';
 import ViewOffIcon from '../icons/ViewOff.svg';
+import { useGoogleLogin } from '@react-oauth/google';
+import { authService } from '../services/authService';
+import { useAuth } from '../context/AuthContext';
 
 type LoginPageProps = {
   onShowRegister?: () => void;
@@ -18,14 +23,99 @@ export default function LoginPage({ onShowRegister, onClose }: LoginPageProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
-  const [isRecaptchaVerified, setIsRecaptchaVerified] = useState(false);
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  const [isVerifying, setIsVerifying] = useState(false);
+  const [recaptchaError, setRecaptchaError] = useState<string | null>(null);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+  const recaptchaRef = useRef<ReCaptchaRef>(null);
   const { t } = useTranslation();
+  const { login } = useAuth();
+
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      setIsGoogleLoading(true);
+      try {
+        const response = await authService.handleGoogleLogin({
+          code: tokenResponse.code,
+          scope: tokenResponse.scope
+        });
+
+        if (response.success && response.user && response.token) {
+          login(response.user, response.token);
+          navigate("/location-access");
+        }
+      } catch (error) {
+        console.error('Error during Google login:', error);
+        // Handle error appropriately - you might want to show an error message
+      } finally {
+        setIsGoogleLoading(false);
+      }
+    },
+    onError: () => {
+      console.error('Google login failed');
+      // Handle error appropriately
+    },
+    flow: 'auth-code',
+    redirect_uri: import.meta.env.VITE_GOOGLE_REDIRECT_URI,
+  });
 
   const handleClose = () => {
     if (onClose) {
       onClose();
     } else if (background) {
       navigate(background.pathname, { replace: true });
+    }
+  };
+
+  const handleRecaptchaVerify = (token: string | null) => {
+    setRecaptchaToken(token);
+    setRecaptchaError(null);
+  };
+
+  const handleRecaptchaExpired = () => {
+    setRecaptchaToken(null);
+    setRecaptchaError(t('loginPage.recaptchaExpired') || 'reCAPTCHA expired. Please try again.');
+  };
+
+  const handleRecaptchaError = () => {
+    setRecaptchaToken(null);
+    setRecaptchaError(t('loginPage.recaptchaError') || 'reCAPTCHA error occurred. Please try again.');
+  };
+
+  const handleLogin = async () => {
+    if (!recaptchaToken) {
+      setRecaptchaError(t('loginPage.recaptchaRequired') || 'Please complete the reCAPTCHA verification.');
+      return;
+    }
+
+    setIsVerifying(true);
+    setRecaptchaError(null);
+
+    try {
+      // Verify reCAPTCHA token with your backend
+      const verificationResult = await verifyRecaptchaToken(recaptchaToken);
+      
+      if (verificationResult.success) {
+        // reCAPTCHA verification successful, proceed with login
+        console.log('reCAPTCHA verified successfully');
+        navigate("/location-access");
+      } else {
+        // reCAPTCHA verification failed
+        setRecaptchaError(verificationResult.error || 'Verification failed. Please try again.');
+        if (recaptchaRef.current) {
+          recaptchaRef.current.reset();
+        }
+        setRecaptchaToken(null);
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      setRecaptchaError(t('loginPage.loginError') || 'An error occurred during login. Please try again.');
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
+      }
+      setRecaptchaToken(null);
+    } finally {
+      setIsVerifying(false);
     }
   };
 
@@ -42,7 +132,7 @@ export default function LoginPage({ onShowRegister, onClose }: LoginPageProps) {
             </svg>
           </button>
         </div>
-        <form className="w-full space-y-6">
+        <form className="w-full space-y-6" onSubmit={(e) => e.preventDefault()}>
           <FormInput
             label={t('loginPage.emailOrPhoneLabel')}
             name="emailOrPhone"
@@ -84,43 +174,38 @@ export default function LoginPage({ onShowRegister, onClose }: LoginPageProps) {
             />
           </div>
           <div className="w-full text-right mt-4 mb-4">
-          <button 
-            className="text-theme-primary"
-            onClick={() => navigate("/forgot-password", { state: { background } })}
-          >
-            {t('loginPage.forgotPasswordLink')}
-          </button>
-        </div>
-          {/* Recaptcha Placeholder */}
-          <div className="flex justify-center">
-            <div className="bg-theme-secondary rounded-lg px-4 py-3 flex items-center justify-between w-full max-w-[240px]">
-              <div className="flex items-center gap-2">
-                <input 
-                  type="checkbox" 
-                  className="accent-blue-500 border-none"
-                  checked={isRecaptchaVerified}
-                  onChange={() => setIsRecaptchaVerified((v) => !v)}
-                />
-                <span className="text-theme-secondary text-sm">{t('loginPage.notRobotCheckbox')}</span>
-              </div>
-              <div className="flex flex-col items-end gap-1">
-                <img src={RecaptchaLogo} alt="reCAPTCHA" className="h-8 w-8 cursor-pointer" onClick={() => setIsRecaptchaVerified(false)} />
-              </div>
-            </div>
+            <button 
+              className="text-theme-primary"
+              onClick={() => navigate("/forgot-password", { state: { background } })}
+            >
+              {t('loginPage.forgotPasswordLink')}
+            </button>
           </div>
+          
+          
+          {/* Real reCAPTCHA Component */}
+          <div style={{}}>
+            <ReCaptcha
+              onVerify={handleRecaptchaVerify}
+              onExpired={handleRecaptchaExpired}
+              onError={handleRecaptchaError}
+            />
+          </div>
+
           <button
             type="button"
-            onClick={() => navigate("/location-access")}
+            onClick={handleLogin}
+            disabled={!isFormFilled || !recaptchaToken || isVerifying}
             className={`w-full rounded-full py-3 text-lg font-semibold mt-2 transition-colors duration-200 ${
-              isFormFilled && isRecaptchaVerified
+              isFormFilled && recaptchaToken && !isVerifying
                 ? "bg-yellow-gradient text-black"
                 : "bg-theme-secondary text-theme-primary"
             }`}
-            disabled={!isFormFilled || !isRecaptchaVerified}
           >
-            {t('loginPage.loginButton')}
+            {isVerifying ? t('loginPage.verifying') || 'Verifying...' : t('loginPage.loginButton')}
           </button>
-        </form>
+         
+         </form>
        
          {/* Register Link */}
          <div className="mt-4 mb-4 text-center">
@@ -134,18 +219,24 @@ export default function LoginPage({ onShowRegister, onClose }: LoginPageProps) {
         </div>
 
         <div className="w-full mt-2 space-y-4">
-          <button className="w-full flex items-center justify-center bg-theme-secondary rounded-full py-3 text-theme-primary font-medium text-base space-x-3">
+          <button 
+            onClick={() => handleGoogleLogin()}
+            disabled={isGoogleLoading}
+            className={`w-full flex items-center justify-center bg-theme-secondary rounded-full py-3 text-theme-primary font-medium text-base space-x-3 ${
+              isGoogleLoading ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
+          >
             <span>
-              <svg className="w-6 h-6 inline-block mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M21.805 10.023h-9.765v3.954h5.617c-.242 1.242-1.484 3.648-5.617 3.648-3.375 0-6.133-2.789-6.133-6.25s2.758-6.25 6.133-6.25c1.922 0 3.211.82 3.953 1.523l2.703-2.633c-1.703-1.578-3.891-2.547-6.656-2.547-5.523 0-10 4.477-10 10s4.477 10 10 10c5.742 0 9.547-4.023 9.547-9.711 0-.656-.07-1.156-.156-1.633z"/></svg>
+              <svg className="w-6 h-6 inline-block mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M21.805 10.023h-9.765v3.954h5.617c-.242 1.242-1.484 3.648-5.617 3.648-3.375 0-6.133-2.789-6.133-6.25s2.758-6.25 6.133-6.25c1.922 0 3.211.82 3.953 1.523l2.703-2.633c-1.703-1.578-3.891-2.547-6.656-2.547-5.523 0-10 4.477-10 10s4.477 10 10 10c5.742 0 9.547-4.023 9.547-9.711 0-.656-.07-1.156-.156-1.633z"/>
+              </svg>
             </span>
-            <span>{t('loginPage.continueWithGoogleButton')}</span>
-          </button>
-          {/* <button className="w-full flex items-center justify-center bg-theme-secondary rounded-full py-3 text-theme-primary font-medium text-base space-x-3">
             <span>
-              <svg className="w-6 h-6 inline-block mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1.003 1.003 0 011.11-.21c1.21.48 2.53.73 3.88.73a1 1 0 011 1v3.5a1 1 0 01-1 1C10.07 22 2 13.93 2 4.5A1 1 0 013 3.5h3.5a1 1 0 011 1c0 1.35.25 2.67.73 3.88a1.003 1.003 0 01-.21 1.11l-2.2 2.2z"/></svg>
-                </span>
-            <span>{t('loginPage.continueWithPhoneButton')}</span>
-          </button> */}
+              {isGoogleLoading 
+                ? t('loginPage.signingInWithGoogle') || 'Signing in with Google...'
+                : t('loginPage.continueWithGoogleButton')}
+            </span>
+          </button>
           <button className="w-full flex items-center justify-center bg-theme-secondary rounded-full py-3 text-theme-primary font-medium text-base space-x-3">
             <span>
               <svg className="w-6 h-6 inline-block mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 23.403.597 24 1.326 24H12.82v-9.294H9.692v-3.622h3.127V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.403 24 24 23.403 24 22.674V1.326C24 .597 23.403 0 22.675 0"/></svg>

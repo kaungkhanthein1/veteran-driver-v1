@@ -69,19 +69,18 @@ export default function Modal({ title, children, isOpen, onClose, onApply, type 
   if (type === 'bottom') {
     return (
       <animated.div 
-        className="fixed inset-0 flex flex-col items-end" 
+        className="fixed inset-0 flex items-end justify-center z-[9999]" 
         style={{ 
-          zIndex: 9999, 
           opacity, 
           pointerEvents: animatedPointerEvents,
           visibility: opacity.to(o => o === 0 ? 'hidden' : 'visible')
         }}
         onClick={handleBackdropClick}
       >
-        <div className="bg-black bg-opacity-40 flex-1 w-full" />
+        <div className="absolute inset-0 bg-black bg-opacity-40 z-0" />
         <animated.div 
-          className="bg-theme-primary rounded-t-xl w-full max-w-md mx-0 p-4 max-h-[80vh] overflow-y-auto relative modal-content"
-          style={{ y }}
+          className="bg-theme-primary rounded-t-xl w-full sm:max-w-md mx-0 p-4 max-h-[80vh] overflow-y-auto overflow-x-auto relative z-10 modal-content min-w-[304px]"
+          style={{ y, minWidth: 304 }}
           onClick={handleContentClick}
         >
           {showDragHandle && (
@@ -120,18 +119,17 @@ export default function Modal({ title, children, isOpen, onClose, onApply, type 
 
   return (
     <animated.div 
-      className="fixed inset-0 flex items-center justify-center" 
+      className="fixed inset-0 flex items-center justify-center z-[9999]" 
       style={{ 
-        zIndex: 9999, 
         opacity, 
         pointerEvents: animatedPointerEvents,
         visibility: opacity.to(o => o === 0 ? 'hidden' : 'visible')
       }}
       onClick={handleBackdropClick}
     >
-      <div className="bg-black bg-opacity-50 absolute inset-0" />
+      <div className="bg-black bg-opacity-50 absolute inset-0 z-0" />
       <div 
-        className="bg-theme-primary rounded-xl w-full max-w-md mx-4 p-4 relative z-10"
+        className="bg-theme-primary rounded-xl w-full max-w-md mx-4 p-4 relative z-10 overflow-x-auto"
         onClick={handleContentClick}
       >
         <div className="flex justify-between items-center mb-1">

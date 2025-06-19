@@ -7,14 +7,24 @@ import { Provider } from 'react-redux';
 import { store } from './app/store';
 import { TolgeeProvider } from '@tolgee/react';
 import { tolgee } from './i18n';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { AuthProvider } from './context/AuthContext';
+
+// Initialize axios interceptors
+import { authService } from './services/authService';
+authService.setupAxiosInterceptors();
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <TolgeeProvider tolgee={tolgee}>
-        <App />
-      </TolgeeProvider>
+      <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+        <AuthProvider>
+          <TolgeeProvider tolgee={tolgee}>
+            <App />
+          </TolgeeProvider>
+        </AuthProvider>
+      </GoogleOAuthProvider>
     </Provider>
   </React.StrictMode>
 ); 

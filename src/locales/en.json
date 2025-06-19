@@ -235,7 +235,12 @@
     "continueWithFacebookButton": "Continue With Facebook",
     "noAccountText": "Don't you have an account? ",
     "signUpLink": "Sign Up",
-    "orText": "Or"
+    "orText": "Or",
+    "recaptchaRequired": "Please complete the reCAPTCHA verification.",
+    "recaptchaExpired": "reCAPTCHA expired. Please try again.",
+    "recaptchaError": "reCAPTCHA error occurred. Please try again.",
+    "loginError": "An error occurred during login. Please try again.",
+    "verifying": "Verifying..."
   },
   "otpVerifyPage": {
     "title": "Verify OTP",
