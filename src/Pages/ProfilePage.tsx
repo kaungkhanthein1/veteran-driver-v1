@@ -12,6 +12,7 @@ import HelpCenterIcon from "icons/Profile/HelpCenter.svg";
 import ContactUsIcon from "icons/Profile/ContactUs.svg";
 import LogoutIcon from "icons/Profile/Logout.svg";
 import DefaultAvator from "icons/DefaultAvator.svg";
+import DefaultAvatorWhite from "icons/DefaultAvatorWhite.svg";
 import NotificationIcon from "icons/Notification.svg";
 import SettingIcon from "icons/Setting.svg";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -25,8 +26,18 @@ export default function ProfilePage() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [showLanguageModal, setShowLanguageModal] = useState(false);
+  const [theme, setTheme] = useState<string>(document.documentElement.getAttribute('data-theme') || 'dark');
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setTheme(document.documentElement.getAttribute('data-theme') || 'dark');
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    return () => observer.disconnect();
+  }, []);
+
   const userProfile = {
-    avatar: DefaultAvator
+    avatar: theme === 'white' ? DefaultAvatorWhite : DefaultAvator
   };
   const location = useLocation();
   const state = location.state as { background?: Location };
@@ -123,7 +134,7 @@ export default function ProfilePage() {
             {/* Profile Info */}
             <button className="flex items-center gap-4 w-full" onClick={() => navigate('/login', { state: { background: location } })}> 
               <div className="w-20 h-20 rounded-full overflow-hidden flex items-center justify-center bg-theme-secondary">
-                <img src={userProfile.avatar} alt="Default Avatar" className="w-full h-full" />
+                <img src={userProfile.avatar} alt="Default Avatar" className="w-full h-full [filter:var(--icon-filter)]" />
               </div>
               <div className="flex items-center gap-2">
                 <h1 className="text-xl font-semibold">{t('profile.loginOrSignUp')}</h1>
