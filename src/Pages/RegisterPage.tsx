@@ -5,6 +5,9 @@ import { useTranslation } from 'react-i18next';
 import RecaptchaLogo from '../icons/RecaptchaLogo.svg';
 import ViewIcon from '../icons/Views.svg';
 import ViewOffIcon from '../icons/ViewOff.svg';
+import GoogleIcon from '../icons/G.svg';
+import FacebookIcon from '../icons/Facebook.svg';
+import AppleIcon from '../icons/Apple.svg';
 
 type RegisterPageProps = {
   onClose?: () => void;
@@ -15,6 +18,7 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
   const location = useLocation();
   const background = location.state?.background || location;
   const [showPassword, setShowPassword] = useState(false);
+  const [userName, setUserName] = useState("");
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
   const [isRecaptchaVerified, setIsRecaptchaVerified] = useState(false);
@@ -28,7 +32,7 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
     }
   };
 
-  const isFormFilled = emailOrPhone.trim() !== "" && password.trim() !== "";
+  const isFormFilled = userName.trim() !== "" && emailOrPhone.trim() !== "" && password.trim() !== "";
 
   return (
     <div className="dvh-fallback flex flex-col justify-between items-center bg-theme-primary px-4">
@@ -46,6 +50,14 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
           e.preventDefault(); 
           navigate("/otp-verify", { state: { background } }); 
         }}>
+          {/* User Name Input */}
+          <FormInput
+            label={t('registerPage.userNameLabel')}
+            name="userName"
+            placeholder={t('registerPage.userNamePlaceholder')}
+            value={userName}
+            onChange={e => setUserName(e.target.value)}
+          />
           <FormInput
             label={t('registerPage.emailOrPhoneLabel')}
             name="emailOrPhone"
@@ -53,7 +65,6 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
             value={emailOrPhone}
             onChange={e => setEmailOrPhone(e.target.value)}
           />
-          
           <div className="relative">
             <FormInput
               label={t('registerPage.passwordLabel')}
@@ -86,6 +97,10 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
               }
             />
           </div>
+          {/* Password requirements text */}
+          <div className="text-xs text-theme-secondary -mt-4 mb-2">
+            {t('registerPage.passwordRequirement', 'Password must be 8–20 characters and include letters, numbers, and symbols')}
+          </div>
           {/* Recaptcha Placeholder */}
           <div className="flex justify-center">
             <div className="bg-theme-secondary rounded-lg px-4 py-3 flex items-center justify-between w-full max-w-[240px]">
@@ -115,43 +130,27 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
             {t('registerPage.signUpButton')}
           </button>
         </form>
-         {/* Login Link */}
-         <div className="mt-4 text-center">
-          <span className="text-theme-secondary">{t('registerPage.alreadyAccountText')} </span>
-          <button
-            className="text-[#FFC61B] font-semibold"
-            onClick={() => navigate('/login', {state: {background}})}
-          >
-            {t('registerPage.loginLink')}
+        {/* Social Login - single button with icons */}
+        <div className="w-full mt-6">
+          <button className="w-full flex items-center justify-center bg-theme-secondary rounded-full py-3 px-6 text-theme-primary font-medium text-base">
+            <span className="whitespace-nowrap">Continue with Social Account</span>
+            <span className="flex items-center gap-2 ml-3">
+              <img src={GoogleIcon} alt="Google" className="w-6 h-6 object-contain align-middle [filter:var(--icon-filter)]" />
+              <img src={FacebookIcon} alt="Facebook" className="w-6 h-6 object-contain align-middle [filter:var(--icon-filter)]" />
+              <img src={AppleIcon} alt="Apple" className="w-6 h-6 object-contain align-middle mt-[1px] [filter:var(--icon-filter)]" />
+            </span>
           </button>
         </div>
-        {/* Social Login */}
-        <div className="w-full mt-4 space-y-4">
-          <button className="w-full flex items-center justify-center bg-theme-secondary rounded-full py-3 text-theme-primary font-medium text-base space-x-3">
-            {/* <GoogleIcon className="w-6 h-6" /> */}
-            <span>
-              <svg className="w-6 h-6 inline-block mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M21.805 10.023h-9.765v3.954h5.617c-.242 1.242-1.484 3.648-5.617 3.648-3.375 0-6.133-2.789-6.133-6.25s2.758-6.25 6.133-6.25c1.922 0 3.211.82 3.953 1.523l2.703-2.633c-1.703-1.578-3.891-2.547-6.656-2.547-5.523 0-10 4.477-10 10s4.477 10 10 10c5.742 0 9.547-4.023 9.547-9.711 0-.656-.07-1.156-.156-1.633z"/></svg>
-            </span>
-            <span>{t('registerPage.continueWithGoogleButton')}</span>
-          </button>
-          <button 
-            className="w-full flex items-center justify-center bg-theme-secondary rounded-full py-3 text-theme-primary font-medium text-base space-x-3"
-            onClick={() => navigate("/phone-signup")}
-          >
-            {/* <PhoneIcon className="w-6 h-6" /> */}
-            <span>
-              <svg className="w-6 h-6 inline-block mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1.003 1.003 0 011.11-.21c1.21.48 2.53.73 3.88.73a1 1 0 011 1v3.5a1 1 0 01-1 1C10.07 22 2 13.93 2 4.5A1 1 0 013 3.5h3.5a1 1 0 011 1c0 1.35.25 2.67.73 3.88a1.003 1.003 0 01-.21 1.11l-2.2 2.2z"/></svg>
-            </span>
-            <span>{t('registerPage.continueWithPhoneButton')}</span>
-          </button>
-          <button className="w-full flex items-center justify-center bg-theme-secondary rounded-full py-3 text-theme-primary font-medium text-base space-x-3">
-            {/* <FacebookIcon className="w-6 h-6" /> */}
-            <span>
-              <svg className="w-6 h-6 inline-block mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 23.403.597 24 1.326 24H12.82v-9.294H9.692v-3.622h3.127V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.403 24 24 23.403 24 22.674V1.326C24 .597 23.403 0 22.675 0"/></svg>
-            </span>
-            <span>{t('registerPage.continueWithFacebookButton')}</span>
-          </button>
-        </div>
+        {/* Login Link at the bottom */}
+      <div className="w-full max-w-md mx-auto mt-6 mb-4 text-center">
+        <span className="text-theme-secondary">{t('registerPage.alreadyAccountText')} </span>
+        <button
+          className="text-[#FFC61B] font-semibold"
+          onClick={() => navigate('/login', {state: {background}})}
+        >
+          {t('registerPage.loginLink')}
+        </button>
+      </div>
       </div>
     </div>
   );
