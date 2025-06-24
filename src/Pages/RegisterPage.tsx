@@ -132,7 +132,7 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
         </form>
         {/* Social Login - single button with icons */}
         <div className="w-full mt-6">
-          <button className="w-full flex items-center justify-center bg-theme-secondary rounded-full py-3 px-6 text-theme-primary font-medium text-base">
+          <button className="w-full flex items-center justify-center bg-theme-secondary rounded-full py-3 px-5 text-theme-primary font-medium text-base">
             <span className="whitespace-nowrap">Continue with Social Account</span>
             <span className="flex items-center gap-2 ml-3">
               <img src={GoogleIcon} alt="Google" className="w-6 h-6 object-contain align-middle [filter:var(--icon-filter)]" />

@@ -184,12 +184,29 @@ export default function LoginPage({ onShowRegister, onClose }: LoginPageProps) {
           
           
           {/* Real reCAPTCHA Component */}
-          <div style={{}}>
-            <ReCaptcha
-              onVerify={handleRecaptchaVerify}
-              onExpired={handleRecaptchaExpired}
-              onError={handleRecaptchaError}
-            />
+          {/*
+          <ReCaptcha
+            onVerify={handleRecaptchaVerify}
+            onExpired={handleRecaptchaExpired}
+            onError={handleRecaptchaError}
+          />
+          */}
+          {/* Temporary Recaptcha Placeholder for design consistency */}
+          <div className="flex justify-center">
+            <div className="bg-theme-secondary rounded-lg px-4 py-3 flex items-center justify-between w-full max-w-[240px]">
+              <div className="flex items-center gap-2">
+                <input 
+                  type="checkbox" 
+                  className="accent-blue-500 border-none"
+                  checked={!!recaptchaToken}
+                  onChange={() => setRecaptchaToken(recaptchaToken ? null : 'dummy-token')}
+                />
+                <span className="text-theme-secondary text-sm">{t('registerPage.notRobotCheckbox')}</span>
+              </div>
+              <div className="flex flex-col items-end gap-1">
+                <img src={RecaptchaLogo} alt="reCAPTCHA" className="h-8 w-8 cursor-pointer" onClick={() => setRecaptchaToken(null)} />
+              </div>
+            </div>
           </div>
 
           <button
