@@ -1,0 +1,23 @@
+@font-face {
+  font-family: 'Arbeit Pro';
+  src: url('./assets/fonts/fonnts.com-arbeitpro-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Arbeit Pro';
+  src: url('./assets/fonts/fonnts.com-arbeitpro-medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Arbeit Pro';
+  src: url('./assets/fonts/fonnts.com-arbeitpro-semi-bold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+} 
