@@ -1,0 +1,262 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Code coverage report for veteran-driver-v1/src/Pages/map/MapSideBar.tsx</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../../../favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+    
+<body>
+<div class='wrapper'>
+    <div class='pad1'>
+        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">veteran-driver-v1/src/Pages/map</a> MapSideBar.tsx</h1>
+        <div class='clearfix'>
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">0% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>0/49</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>1/1</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>1/1</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">0% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>0/49</span>
+            </div>
+        
+            
+        </div>
+        <p class="quiet">
+            Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
+        </p>
+        <template id="filterTemplate">
+            <div class="quiet">
+                Filter:
+                <input type="search" id="fileSearch">
+            </div>
+        </template>
+    </div>
+    <div class='status-line low'></div>
+    <pre><table class="coverage">
+<tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
+<a name='L2'></a><a href='#L2'>2</a>
+<a name='L3'></a><a href='#L3'>3</a>
+<a name='L4'></a><a href='#L4'>4</a>
+<a name='L5'></a><a href='#L5'>5</a>
+<a name='L6'></a><a href='#L6'>6</a>
+<a name='L7'></a><a href='#L7'>7</a>
+<a name='L8'></a><a href='#L8'>8</a>
+<a name='L9'></a><a href='#L9'>9</a>
+<a name='L10'></a><a href='#L10'>10</a>
+<a name='L11'></a><a href='#L11'>11</a>
+<a name='L12'></a><a href='#L12'>12</a>
+<a name='L13'></a><a href='#L13'>13</a>
+<a name='L14'></a><a href='#L14'>14</a>
+<a name='L15'></a><a href='#L15'>15</a>
+<a name='L16'></a><a href='#L16'>16</a>
+<a name='L17'></a><a href='#L17'>17</a>
+<a name='L18'></a><a href='#L18'>18</a>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from "react";
+<span class="cstat-no" title="statement not covered" >import { useNavigate } from "react-router-dom";</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >const MapSideBar = ({onRecenterClick,setShowFilter}) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  const navigate = useNavigate()</span>
+<span class="cstat-no" title="statement not covered" >  return (</span>
+<span class="cstat-no" title="statement not covered" >    &lt;div className=" absolute bottom-6 right-2 shadow-xl z-[1] p-4"&gt;</span>
+<span class="cstat-no" title="statement not covered" >      &lt;div className=" flex flex-col gap-[11px]"&gt;</span>
+        {/* re-center */}
+<span class="cstat-no" title="statement not covered" >        &lt;div onClick={onRecenterClick} className="map_sidebar_btn p-[11px]"&gt;</span>
+<span class="cstat-no" title="statement not covered" >          &lt;svg</span>
+<span class="cstat-no" title="statement not covered" >            xmlns="http://www.w3.org/2000/svg"</span>
+<span class="cstat-no" title="statement not covered" >            width="26"</span>
+<span class="cstat-no" title="statement not covered" >            height="26"</span>
+<span class="cstat-no" title="statement not covered" >            viewBox="0 0 26 26"</span>
+<span class="cstat-no" title="statement not covered" >            fill="none"</span>
+          &gt;
+<span class="cstat-no" title="statement not covered" >            &lt;path</span>
+<span class="cstat-no" title="statement not covered" >              d="M12.9997 8.66732C10.6055 8.66732 8.66634 10.6065 8.66634 13.0007C8.66634 15.3948 10.6055 17.334 12.9997 17.334C15.3938 17.334 17.333 15.3948 17.333 13.0007C17.333 10.6065 15.3938 8.66732 12.9997 8.66732ZM22.6847 11.9173C22.1863 7.39982 18.6005 3.81398 14.083 3.31565V1.08398H11.9163V3.31565C7.39884 3.81398 3.81301 7.39982 3.31467 11.9173H1.08301V14.084H3.31467C3.81301 18.6015 7.39884 22.1873 11.9163 22.6857V24.9173H14.083V22.6857C18.6005 22.1873 22.1863 18.6015 22.6847 14.084H24.9163V11.9173H22.6847ZM12.9997 20.584C8.80717 20.584 5.41634 17.1932 5.41634 13.0007C5.41634 8.80815 8.80717 5.41732 12.9997 5.41732C17.1922 5.41732 20.583 8.80815 20.583 13.0007C20.583 17.1932 17.1922 20.584 12.9997 20.584Z"</span>
+<span class="cstat-no" title="statement not covered" >              fill="#444444"</span>
+<span class="cstat-no" title="statement not covered" >            /&gt;</span>
+<span class="cstat-no" title="statement not covered" >          &lt;/svg&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;/div&gt;</span>
+        {/* add_location */}
+<span class="cstat-no" title="statement not covered" >        &lt;div onClick={() =&gt; navigate("/add-location")} className="map_sidebar_btn p-[11px]"&gt;</span>
+<span class="cstat-no" title="statement not covered" >          &lt;svg</span>
+<span class="cstat-no" title="statement not covered" >            xmlns="http://www.w3.org/2000/svg"</span>
+<span class="cstat-no" title="statement not covered" >            width="26"</span>
+<span class="cstat-no" title="statement not covered" >            height="26"</span>
+<span class="cstat-no" title="statement not covered" >            viewBox="0 0 26 26"</span>
+<span class="cstat-no" title="statement not covered" >            fill="none"</span>
+          &gt;
+<span class="cstat-no" title="statement not covered" >            &lt;path</span>
+<span class="cstat-no" title="statement not covered" >              d="M20.0413 1.08398V4.33398H23.2913V6.50065H20.0413V9.75065H17.8747V6.50065H14.6247V4.33398H17.8747V1.08398H20.0413ZM11.3747 14.084C10.183 14.084 9.20801 13.109 9.20801 11.9173C9.20801 10.7257 10.183 9.75065 11.3747 9.75065C12.5663 9.75065 13.5413 10.7257 13.5413 11.9173C13.5413 13.109 12.5663 14.084 11.3747 14.084ZM12.458 3.31565V5.50398C12.0997 5.44736 11.7375 5.41838 11.3747 5.41732C7.74551 5.41732 4.87467 8.20148 4.87467 12.134C4.87467 14.669 6.98717 18.0273 11.3747 22.0357C15.7622 18.0273 17.8747 14.6798 17.8747 12.134V11.9173H20.0413V12.134C20.0413 15.7307 17.1488 19.9882 11.3747 24.9173C5.60051 19.9882 2.70801 15.7307 2.70801 12.134C2.70801 6.73898 6.82467 3.25065 11.3747 3.25065C11.743 3.25065 12.1005 3.27232 12.458 3.31565Z"</span>
+<span class="cstat-no" title="statement not covered" >              fill="#444444"</span>
+<span class="cstat-no" title="statement not covered" >            /&gt;</span>
+<span class="cstat-no" title="statement not covered" >          &lt;/svg&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;/div&gt;</span>
+        {/* filter */}
+<span class="cstat-no" title="statement not covered" >        &lt;div onClick={() =&gt; setShowFilter(true)} className="map_sidebar_btn p-[11px]"&gt;</span>
+<span class="cstat-no" title="statement not covered" >          &lt;svg</span>
+<span class="cstat-no" title="statement not covered" >            xmlns="http://www.w3.org/2000/svg"</span>
+<span class="cstat-no" title="statement not covered" >            width="26"</span>
+<span class="cstat-no" title="statement not covered" >            height="26"</span>
+<span class="cstat-no" title="statement not covered" >            viewBox="0 0 26 26"</span>
+<span class="cstat-no" title="statement not covered" >            fill="none"</span>
+          &gt;
+<span class="cstat-no" title="statement not covered" >            &lt;path</span>
+<span class="cstat-no" title="statement not covered" >              d="M3.25 18.4167V20.5833H9.75V18.4167H3.25ZM3.25 5.41667V7.58333H14.0833V5.41667H3.25ZM14.0833 22.75V20.5833H22.75V18.4167H14.0833V16.25H11.9167V22.75H14.0833ZM7.58333 9.75V11.9167H3.25V14.0833H7.58333V16.25H9.75V9.75H7.58333ZM22.75 14.0833V11.9167H11.9167V14.0833H22.75ZM16.25 9.75H18.4167V7.58333H22.75V5.41667H18.4167V3.25H16.25V9.75Z"</span>
+<span class="cstat-no" title="statement not covered" >              fill="#444444"</span>
+<span class="cstat-no" title="statement not covered" >            /&gt;</span>
+<span class="cstat-no" title="statement not covered" >          &lt;/svg&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >      &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >    &lt;/div&gt;</span>
+  );
+<span class="cstat-no" title="statement not covered" >};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >export default MapSideBar;</span>
+&nbsp;</pre></td></tr></table></pre>
+
+                <div class='push'></div><!-- for sticky footer -->
+            </div><!-- /wrapper -->
+            <div class='footer quiet pad2 space-top1 center small'>
+                Code coverage generated by
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at 2025-06-25T10:02:57.034Z
+            </div>
+        <script src="../../../../prettify.js"></script>
+        <script>
+            window.onload = function () {
+                prettyPrint();
+            };
+        </script>
+        <script src="../../../../sorter.js"></script>
+        <script src="../../../../block-navigation.js"></script>
+    </body>
+</html>
+    

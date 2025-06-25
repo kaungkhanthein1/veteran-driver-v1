@@ -9,6 +9,21 @@ const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   plugins: [react(), svgr()],
+  test: {
+    environment: "jsdom",
+    setupFiles: "./src/setupTests.ts",
+    globals: true,
+    coverage: {
+      reporter: ["text", "html"],
+      include: ["src/**/*.{ts,tsx}"],
+      exclude: [
+        "src/**/*.test.{ts,tsx}",
+        "src/**/__tests__/**",
+        "node_modules/**",
+      ],
+    },
+  },
+
   base: "/",
   resolve: {
     alias: {
@@ -18,4 +33,4 @@ export default defineConfig({
       // add more as needed
     },
   },
-}); 
+});
