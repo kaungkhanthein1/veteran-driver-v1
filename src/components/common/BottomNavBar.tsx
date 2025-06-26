@@ -75,12 +75,12 @@ export default function BottomNavBar({ active }: BottomNavBarProps) {
         <div className="relative w-full rounded-t-2xl overflow-hidden" style={{ maxWidth: 480 }}>
           {/* Shadow background for Nav Bar */}
           <div
-            className="absolute bottom-[-2px] left-1/2 -translate-x-1/2 min-w-[100%] h-[100px] rounded-t-2xl pointer-events-none"
+            className="absolute bottom-[-5px] left-1/2 -translate-x-1/2 min-w-[100%] h-[100px] rounded-t-2xl pointer-events-none"
             style={{ zIndex: 0, boxShadow: '0 12px 48px 0 rgba(0,0,0,0.38), 0 2px 16px 0 rgba(0,0,0,0.18), 0 6px 32px 0 rgba(254,116,14,0.18)' }}
           />
           {/* Nav Bar Background with Curved SVG */}
           <svg
-            className="absolute bottom-[-2px] left-1/2 -translate-x-1/2 min-w-[100%] h-[100px] pointer-events-auto"
+            className="absolute bottom-[-5px] left-1/2 -translate-x-1/2 min-w-[100%] h-[100px] pointer-events-auto"
             preserveAspectRatio="none"
             viewBox="0 0 409 88"
             fill="none"
