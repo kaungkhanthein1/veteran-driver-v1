@@ -11,6 +11,7 @@ import RegionSelectModal from '../components/RegionSelectModal';
 import CitySelectModal from '../components/CitySelectModal';
 import TuneIcon from '../icons/Tune.svg';
 import FilterPanel from '../Pages/map/FilterPanel';
+import BottomNavBar from "../components/common/BottomNavBar";
 
 // Import new assets for top 3 places
 import FirstPlace from "assets/Explore/First.png";
@@ -353,6 +354,7 @@ export default function RankingPage() {
           onClose={() => setShowCityModal(false)}
         />
       )}
+       {!showRegionModal && !showCityModal && <BottomNavBar active="ranking" />}
     </div>
   );
 }

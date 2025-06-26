@@ -2,15 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import NavHomeIcon from "../../icons/NavBar/NavHome.svg";
 import NavExploreIcon from "../../icons/NavBar/NavExplore.svg";
-import NavSocialIcon from "../../icons/NavBar/NavSocial.svg";
+import NavRankingIcon from "../../icons/NavBar/NavRanking.svg";
 import NavProfileIcon from "../../icons/NavBar/NavProfile.svg";
 import NavHomeActiveIcon from "../../icons/NavBar/NavHomeActive.svg";
 import NavExploreActiveIcon from "../../icons/NavBar/NavExploreActive.svg";
-import NavSocialActiveIcon from "../../icons/NavBar/NavSocialActive.svg";
+import NavRankingActiveIcon from "../../icons/NavBar/NavRankingActive.svg";
 import NavProfileActiveIcon from "../../icons/NavBar/NavProfileActive.svg";
-import AddBgIcon from "../../icons/NavBar/AddBg.svg";
-import AddIcon from "../../icons/NavBar/Add.svg";
-import ActiveBgIcon from "../../icons/NavBar/ActiveBg.svg";
 import UploadIcon from "../../icons/NavBar/upload.png";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
@@ -42,11 +39,11 @@ export default function BottomNavBar({ active }: BottomNavBarProps) {
       path: "/explore"
     },
     {
-      key: "social",
-      label: t('bottomNavBar.social'),
-      icon: NavSocialIcon,
-      activeIcon: NavSocialActiveIcon,
-      path: "/social"
+      key: "ranking",
+      label: t('bottomNavBar.ranking'),
+      icon: NavRankingIcon,
+      activeIcon: NavRankingActiveIcon,
+      path: "/ranking"
     },
     {
       key: "profile",
