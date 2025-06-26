@@ -11,6 +11,7 @@ import NavProfileActiveIcon from "../../icons/NavBar/NavProfileActive.svg";
 import AddBgIcon from "../../icons/NavBar/AddBg.svg";
 import AddIcon from "../../icons/NavBar/Add.svg";
 import ActiveBgIcon from "../../icons/NavBar/ActiveBg.svg";
+import UploadIcon from "../../icons/NavBar/upload.png";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import { useTheme } from "../../context/ThemeContext";
@@ -67,13 +68,16 @@ export default function BottomNavBar({ active }: BottomNavBarProps) {
         <button
           aria-label="Add"
           className="absolute left-1/2 -translate-x-1/2 -top-6 z-20 flex items-center justify-center w-[60px] h-[60px] rounded-full focus:outline-none pointer-events-auto"
-          style={{ boxShadow: '0 4px 24px 0 rgba(253,197,27,0.25)' }}
           onClick={() => { /* TODO: handle FAB click */ }}
         >
-          <img src={AddBgIcon} alt="Add Background" className="w-[60px] h-[60px] absolute" style={{ left: 0, top: 0 }} />
-          <img src={AddIcon} alt="Add" className="w-8 h-8 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+          <img src={UploadIcon} alt="Upload" className="w-[60px] h-[60px] object-contain" />
         </button>
         <div className="relative w-full rounded-t-2xl overflow-hidden" style={{ maxWidth: 480 }}>
+          {/* Shadow background for Nav Bar */}
+          <div
+            className="absolute bottom-[-2px] left-1/2 -translate-x-1/2 min-w-[100%] h-[100px] rounded-t-2xl pointer-events-none"
+            style={{ zIndex: 0, boxShadow: '0 12px 48px 0 rgba(0,0,0,0.38), 0 2px 16px 0 rgba(0,0,0,0.18), 0 6px 32px 0 rgba(254,116,14,0.18)' }}
+          />
           {/* Nav Bar Background with Curved SVG */}
           <svg
             className="absolute bottom-[-2px] left-1/2 -translate-x-1/2 min-w-[100%] h-[100px] pointer-events-auto"
@@ -81,10 +85,10 @@ export default function BottomNavBar({ active }: BottomNavBarProps) {
             viewBox="0 0 409 88"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            style={{ zIndex: 1, boxShadow: '0 8px 32px 0 rgba(0,0,0,0.18), 0 2px 12px 0 rgba(254,116,14,0.12)' }}
+            style={{ zIndex: 1 }}
           >
             <g>
-              <path d="M401 86V34C401 22.9543 392.046 14 381 14H272.5C254.827 14 242.261 31.2653 228.839 42.7618C223.598 47.2507 216.113 50.3585 205.5 50.5C194.023 50.653 186.035 47.1523 180.526 42.0804C167.773 30.3375 155.19 14.0003 137.853 14.0002L28 14C16.9543 14 8 22.9543 8 34V86H401Z" fill="var(--bg-secondary)" stroke={navBarBorderColor} strokeWidth="1"/>
+              <path d="M401 86V34C401 22.9543 392.046 14 381 14H272.5C254.827 14 242.261 31.2653 228.839 42.7618C223.598 47.2507 216.113 50.3585 205.5 50.5C194.023 50.653 186.035 47.1523 180.526 42.0804C167.773 30.3375 155.19 14.0003 137.853 14.0002L28 14C16.9543 14 8 22.9543 8 34V86H401Z" fill="var(--bg-secondary)" stroke="none" strokeWidth="0"/>
             </g>
           </svg>
 
