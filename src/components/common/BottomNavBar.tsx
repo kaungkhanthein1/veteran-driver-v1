@@ -4,8 +4,13 @@ import NavHomeIcon from "../../icons/NavBar/NavHome.svg";
 import NavExploreIcon from "../../icons/NavBar/NavExplore.svg";
 import NavSocialIcon from "../../icons/NavBar/NavSocial.svg";
 import NavProfileIcon from "../../icons/NavBar/NavProfile.svg";
+import NavHomeActiveIcon from "../../icons/NavBar/NavHomeActive.svg";
+import NavExploreActiveIcon from "../../icons/NavBar/NavExploreActive.svg";
+import NavSocialActiveIcon from "../../icons/NavBar/NavSocialActive.svg";
+import NavProfileActiveIcon from "../../icons/NavBar/NavProfileActive.svg";
 import AddBgIcon from "../../icons/NavBar/AddBg.svg";
 import AddIcon from "../../icons/NavBar/Add.svg";
+import ActiveBgIcon from "../../icons/NavBar/ActiveBg.svg";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
@@ -22,24 +27,28 @@ export default function BottomNavBar({ active }: BottomNavBarProps) {
       key: "home",
       label: t('bottomNavBar.home'),
       icon: NavHomeIcon,
+      activeIcon: NavHomeActiveIcon,
       path: "/"
     },
     {
       key: "explore",
       label: t('bottomNavBar.explore'),
       icon: NavExploreIcon,
+      activeIcon: NavExploreActiveIcon,
       path: "/explore"
     },
     {
       key: "social",
       label: t('bottomNavBar.social'),
       icon: NavSocialIcon,
+      activeIcon: NavSocialActiveIcon,
       path: "/social"
     },
     {
       key: "profile",
       label: t('bottomNavBar.profile'),
       icon: NavProfileIcon,
+      activeIcon: NavProfileActiveIcon,
       path: "/profile"
     }
   ];
@@ -51,7 +60,17 @@ export default function BottomNavBar({ active }: BottomNavBarProps) {
   return (
     <div className="w-full flex justify-center">
       <div className="fixed bottom-0 w-full max-w-[480px] z-[999] flex justify-center pointer-events-none">
-        <div className="relative w-full" style={{ maxWidth: 480 }}>
+        {/* FAB */}
+        <button
+          aria-label="Add"
+          className="absolute left-1/2 -translate-x-1/2 -top-6 z-20 flex items-center justify-center w-[60px] h-[60px] rounded-full focus:outline-none pointer-events-auto"
+          style={{ boxShadow: '0 4px 24px 0 rgba(253,197,27,0.25)' }}
+          onClick={() => { /* TODO: handle FAB click */ }}
+        >
+          <img src={AddBgIcon} alt="Add Background" className="w-[60px] h-[60px] absolute" style={{ left: 0, top: 0 }} />
+          <img src={AddIcon} alt="Add" className="w-8 h-8 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+        </button>
+        <div className="relative w-full rounded-t-2xl overflow-hidden" style={{ maxWidth: 480 }}>
           {/* Nav Bar Background with Curved SVG */}
           <svg
             className="absolute bottom-[-2px] left-1/2 -translate-x-1/2 min-w-[100%] h-[100px] pointer-events-auto"
@@ -66,17 +85,6 @@ export default function BottomNavBar({ active }: BottomNavBarProps) {
             </g>
           </svg>
 
-          {/* FAB */}
-          <button
-            aria-label="Add"
-            className="absolute left-1/2 -translate-x-1/2 -top-6 z-20 flex items-center justify-center w-[60px] h-[60px] rounded-full focus:outline-none pointer-events-auto"
-            style={{ boxShadow: '0 4px 24px 0 rgba(253,197,27,0.25)' }}
-            onClick={() => { /* TODO: handle FAB click */ }}
-          >
-            <img src={AddBgIcon} alt="Add Background" className="w-[60px] h-[60px] absolute" style={{ left: 0, top: 0 }} />
-            <img src={AddIcon} alt="Add" className="w-8 h-8 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
-          </button>
-
           {/* Tabs */}
           <div className="relative flex justify-between items-end h-[80px] px-4 pointer-events-auto" style={{ zIndex: 2 }}>
             {/* Left Tabs */}
@@ -88,15 +96,15 @@ export default function BottomNavBar({ active }: BottomNavBarProps) {
                   className="flex flex-col items-center min-w-[64px] focus:outline-none"
                   onClick={() => navigate(tab.path)}
                 >
-                  <div className={`p-2 rounded-full flex items-center justify-center ${active === tab.key ? "bg-[#FDC51B]/10" : ""}`}>
+                  <div className={`p-2 rounded-full flex items-center justify-center relative`}>
                     <img
-                      src={tab.icon}
+                      src={active === tab.key ? tab.activeIcon : tab.icon}
                       alt={tab.label}
-                      className={`w-[24px] h-[24px] object-contain ${active === tab.key ? "[filter:brightness(0)_saturate(100%)_invert(89%)_sepia(61%)_saturate(1415%)_hue-rotate(319deg)_brightness(103%)_contrast(101%)]" : "[filter:var(--icon-filter)]"}`}
+                      className="w-8 h-8 object-contain z-10"
                       style={{ display: 'block' }}
                     />
                   </div>
-                  <span className="text-xs mt-1 text-theme-secondary">
+                  <span className={`text-sm mt-0 ${active === tab.key ? "text-[#FE740E]" : "text-theme-secondary"}`}>
                     {tab.label}
                   </span>
                 </button>
@@ -113,15 +121,15 @@ export default function BottomNavBar({ active }: BottomNavBarProps) {
                   className="flex flex-col items-center min-w-[64px] focus:outline-none"
                   onClick={() => navigate(tab.path)}
                 >
-                  <div className={`p-2 rounded-full flex items-center justify-center ${active === tab.key ? "bg-[#FDC51B]/10" : ""}`}>
+                  <div className={`p-2 rounded-full flex items-center justify-center relative`}>
                     <img
-                      src={tab.icon}
+                      src={active === tab.key ? tab.activeIcon : tab.icon}
                       alt={tab.label}
-                      className={`w-[24px] h-[24px] object-contain ${active === tab.key ? "[filter:brightness(0)_saturate(100%)_invert(89%)_sepia(61%)_saturate(1415%)_hue-rotate(319deg)_brightness(103%)_contrast(101%)]" : "[filter:var(--icon-filter)]"}`}
+                      className="w-8 h-8 object-contain z-10"
                       style={{ display: 'block' }}
                     />
                   </div>
-                  <span className="text-xs mt-1 text-theme-secondary">
+                  <span className={`text-sm mt-0 ${active === tab.key ? "text-[#FE740E]" : "text-theme-secondary"}`}>
                     {tab.label}
                   </span>
                 </button>
