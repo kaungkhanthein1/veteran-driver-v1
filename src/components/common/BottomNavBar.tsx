@@ -13,6 +13,7 @@ import AddIcon from "../../icons/NavBar/Add.svg";
 import ActiveBgIcon from "../../icons/NavBar/ActiveBg.svg";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
+import { useTheme } from "../../context/ThemeContext";
 
 interface BottomNavBarProps {
   active: string;
@@ -21,6 +22,8 @@ interface BottomNavBarProps {
 export default function BottomNavBar({ active }: BottomNavBarProps) {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { theme } = useTheme();
+  const navBarBorderColor = theme === 'white' ? '#F4F4F4' : 'var(--border-color)';
 
   const tabs = [
     {
@@ -81,7 +84,7 @@ export default function BottomNavBar({ active }: BottomNavBarProps) {
             style={{ zIndex: 1, boxShadow: '0 8px 32px 0 rgba(0,0,0,0.18), 0 2px 12px 0 rgba(254,116,14,0.12)' }}
           >
             <g>
-              <path d="M401 86V34C401 22.9543 392.046 14 381 14H272.5C254.827 14 242.261 31.2653 228.839 42.7618C223.598 47.2507 216.113 50.3585 205.5 50.5C194.023 50.653 186.035 47.1523 180.526 42.0804C167.773 30.3375 155.19 14.0003 137.853 14.0002L28 14C16.9543 14 8 22.9543 8 34V86H401Z" fill="var(--bg-secondary)" stroke="var(--border-color)" strokeWidth="1"/>
+              <path d="M401 86V34C401 22.9543 392.046 14 381 14H272.5C254.827 14 242.261 31.2653 228.839 42.7618C223.598 47.2507 216.113 50.3585 205.5 50.5C194.023 50.653 186.035 47.1523 180.526 42.0804C167.773 30.3375 155.19 14.0003 137.853 14.0002L28 14C16.9543 14 8 22.9543 8 34V86H401Z" fill="var(--bg-secondary)" stroke={navBarBorderColor} strokeWidth="1"/>
             </g>
           </svg>
 
