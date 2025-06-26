@@ -146,12 +146,14 @@ const TopThreePlaces: React.FC<TopThreePlacesProps> = ({ places, onPlaceClick })
                 className="w-8 h-8"
               />
             </div>
-            <div className="absolute bottom-2 left-2 right-2 flex flex-col">
-              <h3 className="text-white text-base truncate">{place.name}</h3>
-              <div className="flex items-center gap-1 text-white font-bold text-sm mt-1 truncate">
-                <span>{place.rating}</span>
-                <span className="text-[#FFC61B]">★</span>
-                <span className="font-normal">({place.distance})</span>
+            <div className="absolute bottom-0 left-0 right-0 pb-3 pt-2 bg-gradient-to-t from-black/80 to-transparent">
+              <div className="px-4">
+                <h3 className="text-white font-bold text-sm truncate whitespace-nowrap w-full">{place.name}</h3>
+                <div className="flex items-center gap-1 text-white font-bold text-xs mt-1 truncate whitespace-nowrap w-full">
+                  <span>{place.rating}</span>
+                  <span className="text-[#FFC61B]">★</span>
+                  <span className="font-normal">({place.distance})</span>
+                </div>
               </div>
             </div>
           </div>
@@ -219,7 +221,7 @@ export default function RankingPage() {
       {/* Main Content */}
       <div className="flex-1 px-4">
         {/* Top 3 Places (first place taller, 2nd/3rd shorter, all vertically centered) */}
-        <div className="flex gap-2 px-2 py-4 items-center justify-center">
+        <div className="flex gap-2 px-1 py-4 items-center justify-center">
           {[topThreePlaces[1], topThreePlaces[0], topThreePlaces[2]].map((place, idx) => (
             <div key={place.id} className={`flex-1 relative rounded-2xl overflow-hidden`} style={{ height: idx === 1 ? '180px' : '160px', aspectRatio: '3/4' }}>
               <img src={place.image} alt={place.name} className="w-full h-full object-cover" />
@@ -228,9 +230,9 @@ export default function RankingPage() {
               </div>
               {/* Strong dark gradient overlay for text readability, edge-to-edge */}
               <div className="absolute bottom-0 left-0 right-0 pb-3 pt-2 bg-gradient-to-t from-black/80 to-transparent">
-                <div className="px-4">
-                  <h3 className="text-white font-bold text-sm truncate">{place.name}</h3>
-                  <div className="flex items-center gap-1 text-white font-bold text-xs mt-1 truncate">
+                <div className="px-2">
+                  <h3 className="text-white font-bold text-xs truncate whitespace-nowrap w-full">{place.name}</h3>
+                  <div className="flex items-center gap-1 text-white font-bold text-[10px] mt-1 truncate whitespace-nowrap w-full">
                     <span>{place.rating}</span>
                     <span className="text-[#FFC61B]">★</span>
                     <span className="font-normal">({place.distance})</span>
