@@ -12,6 +12,14 @@ import CitySelectModal from '../components/CitySelectModal';
 import TuneIcon from '../icons/Tune.svg';
 import FilterPanel from '../Pages/map/FilterPanel';
 
+// Import new assets for top 3 places
+import FirstPlace from "assets/Explore/First.png";
+import SecondPlace from "assets/Explore/Second.png";
+import ThirdPlace from "assets/Explore/Third.png";
+import FirstMedal from "assets/Explore/FirstTitle.png";
+import SecondMedal from "assets/Explore/SecondTitle.png";
+import ThirdMedal from "assets/Explore/ThirdTitle.png";
+
 // Mock data for ranking items
 const rankingItems = [
   {
@@ -71,210 +79,278 @@ const rankingItems = [
   }
 ];
 
+interface Place {
+  id: number;
+  name: string;
+  rating: number;
+  distance: string;
+  image: string;
+  medal: string;
+}
+
+interface TopThreePlacesProps {
+  places: Place[];
+  onPlaceClick: (id: number) => void;
+}
+
+// Top three places data
+const topThreePlaces: Place[] = [
+  {
+    id: 1,
+    name: "Binh Tanh Park",
+    rating: 5.0,
+    distance: "12km away",
+    image: FirstPlace,
+    medal: FirstMedal
+  },
+  {
+    id: 2,
+    name: "Binh Tanh Park",
+    rating: 5.0,
+    distance: "12km away",
+    image: SecondPlace,
+    medal: SecondMedal
+  },
+  {
+    id: 3,
+    name: "Binh Tanh Park",
+    rating: 5.0,
+    distance: "12km away",
+    image: ThirdPlace,
+    medal: ThirdMedal
+  }
+];
+
+// Top Three Places Component
+const TopThreePlaces: React.FC<TopThreePlacesProps> = ({ places, onPlaceClick }) => {
+  return (
+    <div className="flex gap-2 px-4 py-6 overflow-x-auto no-scrollbar">
+      {places.map((place: Place, index: number) => (
+        <div 
+          key={place.id}
+          className="relative flex-shrink-0 cursor-pointer"
+          onClick={() => onPlaceClick(place.id)}
+          style={{ width: 'calc(33.333% - 8px)' }}
+        >
+          <div className="relative aspect-[3/4] rounded-xl overflow-hidden">
+            <img 
+              src={place.image} 
+              alt={place.name}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute top-2 left-2">
+              <img 
+                src={place.medal} 
+                alt={`${index + 1} place`}
+                className="w-8 h-8"
+              />
+            </div>
+            <div className="absolute bottom-2 left-2 right-2 flex flex-col">
+              <h3 className="text-white text-base truncate">{place.name}</h3>
+              <div className="flex items-center gap-1 text-white font-bold text-sm mt-1 truncate">
+                <span>{place.rating}</span>
+                <span className="text-[#FFC61B]">★</span>
+                <span className="font-normal">({place.distance})</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+interface Region {
+  name: string;
+}
+
 export default function RankingPage() {
   const { t } = useTranslation();
-  const [activeTab, setActiveTab] = useState(t('rankingPage.popularTab'));
   const navigate = useNavigate();
   const [country, setCountry] = useState('');
   const [state, setState] = useState('');
   const [showRegionModal, setShowRegionModal] = useState(false);
   const [showCityModal, setShowCityModal] = useState(false);
-  const [selectedService, setSelectedService] = useState(null);
-  const [showFilterPanel, setShowFilterPanel] = useState(false);
+  const [activeTab, setActiveTab] = useState('Today');
 
-  const openRegionModal = () => {
-    setShowRegionModal(true);
-  };
-
-  const closeRegionModal = () => {
-    setShowRegionModal(false);
-  };
-
-  const handleRegionSelect = (region) => {
+  const handleRegionSelect = (region: Region) => {
     setCountry(region.name.toLowerCase().replace(' ', ''));
     setState('');
     setShowRegionModal(false);
   };
 
-  const openCityModal = () => {
-    if (country) {
-      setShowCityModal(true);
-    }
-  };
-
-  const closeCityModal = () => {
-    setShowCityModal(false);
-  };
-
-  const handleCitySelect = (city) => {
+  const handleCitySelect = (city: string) => {
     setState(city);
     setShowCityModal(false);
   };
 
-  const openFilterPanel = () => {
-    setShowFilterPanel(true);
-  };
-
-  const closeFilterPanel = () => {
-    setShowFilterPanel(false);
-  };
-
-  const [filters, setFilters] = useState({
-    priceRange: [0, 1000],
-    distance: 50,
-    rating: 0,
-    services: [],
-    sort: 'Comprehensive',
-  });
-
-  const applyFilters = () => {
-    console.log('Applying filters:', filters);
-    closeFilterPanel();
-  };
-
   return (
-    <div className="dvh-fallback flex flex-col">
-      {/* Header Section */}
-      <div className="h-[150px] w-full sticky top-0 z-40" style={{ backgroundColor: '#271D0099' }}>
-        <img
-          src={RankingHeader}
-          alt="Ranking Header Background"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 w-full h-full" style={{ backgroundColor: '#271D0099' }}></div>
-        <div className="relative z-10 h-full flex flex-col items-center justify-center text-theme-primary">
-          <div className="absolute top-4 left-4">
-            <BackButton color="text-theme-primary"/>
+    <div className="flex flex-col min-h-screen bg-[#F8F8F8]">
+      {/* Header */}
+      <div className="bg-white">
+        <div className="relative px-4 pt-4 pb-3">
+          <div className="absolute left-4 top-4">
+            <BackButton className="text-theme-primary" />
           </div>
-          <h1 className="absolute text-2xl font-bold top-5 text-center text-white">{t('rankingPage.title')}</h1>
-          <div className="text-center">
-            <p className="text-lg text-white">&#34;Top Picks In Phnom Penh&#34;</p>
-          </div>
+          <h1 className="text-xl font-semibold text-center text-theme-primary">Top Travel Destination</h1>
         </div>
-      </div>
 
-      <div className=" w-full max-w-[480px] mx-auto flex flex-col flex-1 rounded-t-2xl z-20 overflow-y-auto">
-        <div className="pt-3">
-          <div className="bg-theme-primary z-30 sticky top-0 ">
-            <div className="px-3 mb-4 flex space-x-4">
-              <div className="flex-1">
-                <div 
-                  className="relative w-full py-3 px-4 rounded-xl flex justify-between items-center cursor-pointer"
-                  onClick={openRegionModal}
-                  style={{ background: 'linear-gradient(#FFE3D4, #FEA269)' }}
-                >
-                  <span style={{ color: '#581E00' }}>{country ? t(`regions.${country}`) : t('addLocation.selectCountryPlaceholder')}</span>
-                  <span className="w-6 h-6 flex items-center justify-center rounded-full" style={{ backgroundColor: '#B15200' }}>
-                    <svg className="w-4 h-4 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                  </span>
-                </div>
-              </div>
-              <div className="flex-1">
-                <div
-                  className={`relative w-full py-3 px-4 rounded-xl flex justify-between items-center cursor-pointer ${!country ? 'opacity-50 cursor-not-allowed' : ''}`}
-                  onClick={openCityModal}
-                  style={{ background: 'linear-gradient(268deg, #FFDF7D 5.8%, #FFF7DF 85.51%)' }}
-                >
-                   <span style={{ color: '#1A1300' }}>{state ? state : t('addLocation.selectStatePlaceholder')}</span>
-                   <span className="w-6 h-6 flex items-center justify-center rounded-full" style={{ backgroundColor: '#DAA400' }}>
-                     <svg className="w-4 h-4 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-                     </svg>
-                   </span>
-                </div>
-              </div>
-            </div>
-
-            <div className="px-5 flex space-x-3 mb-2">
-              {[t('rankingPage.popularTab'), t('rankingPage.mostViewTab'), t('rankingPage.trendingTab')].map((tab) => (
-                <button
-                  key={tab}
-                  className={`px-4 py-2 rounded-xl text-sm ${activeTab === tab ? 'bg-[#FFC61B] text-[#5D4702]' : 'bg-theme-secondary text-theme-primary'}`}
-                  onClick={() => setActiveTab(tab)}
-                >
-                  {tab}
-                </button>
-              ))}
-            </div>
-
-            <div className="px-5 flex items-center space-x-2 mb-1 overflow-x-auto no-scrollbar py-5">
-              {['Massage', 'Visa', 'Bar', 'Club'].map((service) => (
-                <button
-                  key={service}
-                  className={`px-5 py-2.5 rounded-xl text-sm flex-shrink-0 ${selectedService === service ? 'border border-[#886600] text-[#A27A00]' : 'text-theme-primary'}`}
-                  onClick={() => setSelectedService(service)}
-                >
-                  {t(`rankingPage.serviceFilters.${service.toLowerCase()}`)}
-                </button>
-              ))}
-              <button className="p-2 flex-shrink-0" onClick={openFilterPanel}>
-                <img src={TuneIcon} alt="Tune Icon" style={{ filter: 'var(--icon-filter)' }} />
-              </button>
-            </div>
-          </div>
-
-          <div className="space-y-2 pt-2">
-            {rankingItems.map((item, index) => (
-              <div key={item.id} 
-                className="rounded-2xl overflow-hidden cursor-pointer mx-2"
-                onClick={() => navigate(`/location/${item.id}`)}
+        {/* Filter Tabs */}
+        <div className="px-4 py-3">
+          <div className="flex gap-2 overflow-x-auto no-scrollbar">
+            {['Today', 'This Week', 'Trending', 'Nearby'].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-6 py-2 rounded-xl whitespace-nowrap text-sm ${
+                  activeTab === tab
+                    ? 'bg-[#FFC61B] text-[#5D4702]'
+                    : 'bg-[#F5F5F5] text-theme-primary'
+                }`}
               >
-                <div className="flex items-center p-2">
-                  <div className="relative w-[150px] h-[120px] bg-theme-primary rounded-lg overflow-hidden mr-4">
-                    <div className="absolute top-0 left-0 w-10 h-10 bg-theme-primary bg-opacity-50 flex items-center justify-center rounded-br-lg">
-                      <span 
-                        className="text-transparent text-[28px] font-bold"
-                        style={{
-                          WebkitTextStrokeWidth: '1px',
-                          WebkitTextStrokeColor: 'var(--text-primary)'
-                        }}
-                      >
-                        {index + 1}
-                      </span>
-                    </div>
-                    <img 
-                      src={item.image} 
-                      alt={item.name} 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="text-theme-primary text-lg font-semibold">{item.name}</h3>
-                    </div>
-                    <p className="text-theme-primary text-sm mb-2">{t('rankingPage.distance', { distance: item.distance })}</p>
-                    <div className="flex items-center gap-1 mb-2">
-                      <span className="text-[#FFC61B] text-sm">{item.rating}</span>
-                      {[...Array(5)].map((_, i) => (
-                        <svg key={i} className="w-4 h-4 text-[#FFC61B]" fill="currentColor" viewBox="0 0 20 20">
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                      ))}
-                      <span className="text-theme-primary text-sm">{t('rankingPage.reviews', { count: item.reviews })}</span>
-                    </div>
-                    {item.services && item.services.length > 0 && (
-                      <p className="text-theme-primary text-sm mb-2">{item.services.join(', ')}</p>
-                    )}
-                    <div className="flex items-center justify-between">
-                      <div className="text-[#FFC61B] font-semibold">{item.price}</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                {tab}
+              </button>
             ))}
           </div>
         </div>
       </div>
-      {showRegionModal && <RegionSelectModal onSelectRegion={handleRegionSelect} onClose={closeRegionModal} />}
-      {showCityModal && <CitySelectModal country={country} onSelectCity={handleCitySelect} onClose={closeCityModal} />}
-      {showFilterPanel && (
-        <FilterPanel
-          filters={filters}
-          setFilters={setFilters}
-          applyFilters={applyFilters}
-          onClose={closeFilterPanel}
+
+      {/* Main Content */}
+      <div className="flex-1 px-4">
+        {/* Top 3 Places (first place taller, 2nd/3rd shorter, all vertically centered) */}
+        <div className="flex gap-2 px-2 py-4 items-center justify-center">
+          {[topThreePlaces[1], topThreePlaces[0], topThreePlaces[2]].map((place, idx) => (
+            <div key={place.id} className={`flex-1 relative rounded-2xl overflow-hidden`} style={{ height: idx === 1 ? '180px' : '160px', aspectRatio: '3/4' }}>
+              <img src={place.image} alt={place.name} className="w-full h-full object-cover" />
+              <div className="absolute top-2 left-2 z-20">
+                <img src={place.medal} alt={`${idx + 1} place`} className="w-8 h-8" />
+              </div>
+              {/* Strong dark gradient overlay for text readability, edge-to-edge */}
+              <div className="absolute bottom-0 left-0 right-0 pb-3 pt-2 bg-gradient-to-t from-black/80 to-transparent">
+                <div className="px-4">
+                  <h3 className="text-white font-bold text-sm truncate">{place.name}</h3>
+                  <div className="flex items-center gap-1 text-white font-bold text-xs mt-1 truncate">
+                    <span>{place.rating}</span>
+                    <span className="text-[#FFC61B]">★</span>
+                    <span className="font-normal">({place.distance})</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Region/City Selection - restore previous design */}
+        <div className="flex gap-4 mb-4">
+          <div className="flex-1">
+            <div
+              className="relative w-full py-3 px-4 rounded-xl flex justify-between items-center cursor-pointer"
+              onClick={() => setShowRegionModal(true)}
+              style={{ background: 'linear-gradient(#FFE3D4, #FEA269)' }}
+            >
+              <span style={{ color: '#581E00' }}>{country || 'Select Country'}</span>
+              <span className="w-6 h-6 flex items-center justify-center rounded-full" style={{ backgroundColor: '#B15200' }}>
+                <svg className="w-4 h-4 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </span>
+            </div>
+          </div>
+          <div className="flex-1">
+            <div
+              className={`relative w-full py-3 px-4 rounded-xl flex justify-between items-center cursor-pointer ${!country ? 'opacity-50 cursor-not-allowed' : ''}`}
+              onClick={() => country && setShowCityModal(true)}
+              style={{ background: 'linear-gradient(268deg, #FFDF7D 5.8%, #FFF7DF 85.51%)' }}
+            >
+              <span style={{ color: '#1A1300' }}>{state || 'Select State'}</span>
+              <span className="w-6 h-6 flex items-center justify-center rounded-full" style={{ backgroundColor: '#DAA400' }}>
+                <svg className="w-4 h-4 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Ranking List (rounded L-shaped cut corner for number) */}
+        <div className="space-y-4 pb-4">
+          {rankingItems.map((item, idx) => (
+            <div
+              key={item.id}
+              className="flex bg-white rounded-2xl cursor-pointer overflow-hidden h-[110px] items-center"
+              style={{ minHeight: '110px', boxShadow: '0 2px 8px 0 rgba(0,0,0,0.04)' }}
+              onClick={() => navigate(`/location/${item.id}`)}
+            >
+              {/* Image with rounded L-shaped cut corner and number */}
+              <div className="relative h-[110px] w-[110px] flex-shrink-0">
+                {/* Rounded L-shaped (square) cut for number */}
+                <div className="absolute top-[-2px] left-[-2px] z-10" style={{ width: '28px', height: '28px', background: '#ffffff', borderBottomRightRadius: '10px' }} />
+                <div
+                  className="absolute top-0 left-0 z-20 flex items-center justify-center"
+                  style={{ width: '28px', height: '28px', background: 'transparent' }}
+                >
+                  <span
+                    style={{
+                      fontFamily: 'Heebo, sans-serif',
+                      fontWeight: 700,
+                      fontSize: '20px',
+                      lineHeight: '18px',
+                      letterSpacing: '1.1px',
+                      background: 'linear-gradient(180deg, #FFC61B 0%, #FF9500 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                      display: 'inline-block',
+                    }}
+                  >
+                    {idx + 1}
+                  </span>
+                </div>
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-full h-full object-cover rounded-xl"
+                  style={{ height: '110px', width: '110px' }}
+                />
+              </div>
+              {/* Content */}
+              <div className="flex-1 min-w-0 flex flex-col justify-center h-full pl-4">
+                <div className="flex items-center mb-1">
+                  <h3 className="font-bold text-[17px] leading-[22px] text-[#222] truncate" style={{ fontFamily: 'Heebo, sans-serif' }}>{item.name}</h3>
+                </div>
+                <div className="text-[13px] leading-[16px] text-[#888] mb-1 truncate" style={{ fontFamily: 'Heebo, sans-serif' }}>
+                  {item.distance}
+                </div>
+                <div className="flex items-center mb-1">
+                  <span className="text-[#FFC61B] font-bold text-[15px] leading-[18px]" style={{ fontFamily: 'Heebo, sans-serif' }}>{item.rating}</span>
+                  <span className="ml-1 text-[#FFC61B] text-[15px] leading-[18px]">{'★★★★★'}</span>
+                  <span className="ml-2 text-[#888] text-[13px] leading-[16px]" style={{ fontFamily: 'Heebo, sans-serif' }}>({item.reviews})</span>
+                </div>
+                <div className="text-[13px] leading-[16px] text-[#888] truncate mb-1" style={{ fontFamily: 'Heebo, sans-serif' }}>
+                  {item.services.join(', ')}
+                </div>
+                <div className="flex items-end gap-1 mt-1">
+                  <span className="text-[#FFC61B] font-bold text-[18px] leading-[22px]" style={{ fontFamily: 'Heebo, sans-serif' }}>{item.price.split(' ')[0]}</span>
+                  <span className="text-[#FFC61B] text-[12px] font-bold" style={{ fontFamily: 'Heebo, sans-serif' }}>{item.price.split(' ')[1]}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Modals */}
+      {showRegionModal && (
+        <RegionSelectModal
+          onSelectRegion={handleRegionSelect}
+          onClose={() => setShowRegionModal(false)}
+        />
+      )}
+      {showCityModal && (
+        <CitySelectModal
+          country={country}
+          onSelectCity={handleCitySelect}
+          onClose={() => setShowCityModal(false)}
         />
       )}
     </div>
