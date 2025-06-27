@@ -218,31 +218,31 @@ export default function RankingPage() {
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="flex-1 px-4">
-        {/* Top 3 Places (first place taller, 2nd/3rd shorter, all vertically centered) */}
-        <div className="flex gap-2 px-1 py-4 items-center justify-center">
-          {[topThreePlaces[1], topThreePlaces[0], topThreePlaces[2]].map((place, idx) => (
-            <div key={place.id} className={`flex-1 relative rounded-2xl overflow-hidden`} style={{ height: idx === 1 ? '180px' : '160px', aspectRatio: '3/4' }}>
-              <img src={place.image} alt={place.name} className="w-full h-full object-cover" />
-              <div className="absolute top-0 left-2 z-20">
-                <img src={place.medal} alt={`${idx + 1} place`} className="w-8 h-8" />
-              </div>
-              {/* Strong dark gradient overlay for text readability, edge-to-edge */}
-              <div className="absolute bottom-0 left-0 right-0 pb-3 pt-2 bg-gradient-to-t from-black/80 to-transparent">
-                <div className="px-2">
-                  <h3 className="text-white font-bold text-xs truncate whitespace-nowrap w-full">{place.name}</h3>
-                  <div className="flex items-center gap-1 text-white font-bold text-[10px] mt-1 truncate whitespace-nowrap w-full">
-                    <span>{place.rating}</span>
-                    <span className="text-[var(--accent-yellow)]">★</span>
-                    <span className="font-normal">({place.distance})</span>
-                  </div>
+      {/* Top 3 Places (first place taller, 2nd/3rd shorter, all vertically centered) */}
+      <div className="flex gap-2 px-1 py-4 items-center justify-center">
+        {[topThreePlaces[1], topThreePlaces[0], topThreePlaces[2]].map((place, idx) => (
+          <div key={place.id} className={`flex-1 relative rounded-2xl overflow-hidden`} style={{ height: idx === 1 ? '180px' : '160px', aspectRatio: '3/4' }}>
+            <img src={place.image} alt={place.name} className="w-full h-full object-cover" />
+            <div className="absolute top-0 left-2 z-20">
+              <img src={place.medal} alt={`${idx + 1} place`} className="w-8 h-8" />
+            </div>
+            {/* Strong dark gradient overlay for text readability, edge-to-edge */}
+            <div className="absolute bottom-0 left-0 right-0 pb-3 pt-2 bg-gradient-to-t from-black/80 to-transparent">
+              <div className="px-2">
+                <h3 className="text-white font-bold text-xs truncate whitespace-nowrap w-full">{place.name}</h3>
+                <div className="flex items-center gap-1 text-white font-bold text-[10px] mt-1 truncate whitespace-nowrap w-full">
+                  <span>{place.rating}</span>
+                  <span className="text-[var(--accent-yellow)]">★</span>
+                  <span className="font-normal">({place.distance})</span>
                 </div>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
+      </div>
 
+      {/* Main Content Wrapper: from dropdowns to bottom */}
+      <div className="bg-theme-secondary rounded-t-3xl px-4 pt-4 flex-1">
         {/* Region/City Selection - theme colors only */}
         <div className="flex gap-4 mb-4">
           <div className="flex-1">
@@ -340,23 +340,23 @@ export default function RankingPage() {
             </div>
           ))}
         </div>
-      </div>
 
-      {/* Modals */}
-      {showRegionModal && (
-        <RegionSelectModal
-          onSelectRegion={handleRegionSelect}
-          onClose={() => setShowRegionModal(false)}
-        />
-      )}
-      {showCityModal && (
-        <CitySelectModal
-          country={country}
-          onSelectCity={handleCitySelect}
-          onClose={() => setShowCityModal(false)}
-        />
-      )}
-       {!showRegionModal && !showCityModal && <BottomNavBar active="ranking" />}
+        {/* Modals and BottomNavBar */}
+        {showRegionModal && (
+          <RegionSelectModal
+            onSelectRegion={handleRegionSelect}
+            onClose={() => setShowRegionModal(false)}
+          />
+        )}
+        {showCityModal && (
+          <CitySelectModal
+            country={country}
+            onSelectCity={handleCitySelect}
+            onClose={() => setShowCityModal(false)}
+          />
+        )}
+        {!showRegionModal && !showCityModal && <BottomNavBar active="ranking" />}
+      </div>
     </div>
   );
 }
