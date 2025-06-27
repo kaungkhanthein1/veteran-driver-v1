@@ -151,7 +151,7 @@ const TopThreePlaces: React.FC<TopThreePlacesProps> = ({ places, onPlaceClick })
                 <h3 className="text-white font-bold text-sm truncate whitespace-nowrap w-full">{place.name}</h3>
                 <div className="flex items-center gap-1 text-white font-bold text-xs mt-1 truncate whitespace-nowrap w-full">
                   <span>{place.rating}</span>
-                  <span className="text-[#FFC61B]">★</span>
+                  <span className="text-[var(--accent-yellow)]">★</span>
                   <span className="font-normal">({place.distance})</span>
                 </div>
               </div>
@@ -188,9 +188,9 @@ export default function RankingPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#F8F8F8]">
+    <div className="flex flex-col min-h-screen bg-theme-primary">
       {/* Header */}
-      <div className="bg-white">
+      <div className="bg-theme-secondary">
         <div className="relative px-4 pt-4 pb-3">
           <div className="absolute left-4 top-4">
             <BackButton className="text-theme-primary" />
@@ -207,8 +207,8 @@ export default function RankingPage() {
                 onClick={() => setActiveTab(tab)}
                 className={`px-6 py-2 rounded-xl whitespace-nowrap text-sm ${
                   activeTab === tab
-                    ? 'bg-[#FFC61B] text-[#5D4702]'
-                    : 'bg-[#F5F5F5] text-theme-primary'
+                    ? 'bg-[var(--accent-yellow)] text-[#5D4702]'
+                    : 'bg-theme-secondary text-theme-secondary'
                 }`}
               >
                 {tab}
@@ -234,7 +234,7 @@ export default function RankingPage() {
                   <h3 className="text-white font-bold text-xs truncate whitespace-nowrap w-full">{place.name}</h3>
                   <div className="flex items-center gap-1 text-white font-bold text-[10px] mt-1 truncate whitespace-nowrap w-full">
                     <span>{place.rating}</span>
-                    <span className="text-[#FFC61B]">★</span>
+                    <span className="text-[var(--accent-yellow)]">★</span>
                     <span className="font-normal">({place.distance})</span>
                   </div>
                 </div>
@@ -243,7 +243,7 @@ export default function RankingPage() {
           ))}
         </div>
 
-        {/* Region/City Selection - restore previous design */}
+        {/* Region/City Selection - theme colors only */}
         <div className="flex gap-4 mb-4">
           <div className="flex-1">
             <div
@@ -251,9 +251,9 @@ export default function RankingPage() {
               onClick={() => setShowRegionModal(true)}
               style={{ background: 'linear-gradient(#FFE3D4, #FEA269)' }}
             >
-              <span style={{ color: '#581E00' }}>{country || 'Select Country'}</span>
-              <span className="w-6 h-6 flex items-center justify-center rounded-full" style={{ backgroundColor: '#B15200' }}>
-                <svg className="w-4 h-4 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <span style={{ color: '#5D4702', fontWeight: 600 }}>{country || 'Select Country'}</span>
+              <span className="w-6 h-6 flex items-center justify-center rounded-full" style={{ backgroundColor: '#FFC61B' }}>
+                <svg className="w-4 h-4" style={{ color: '#5D4702' }} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
               </span>
@@ -263,11 +263,11 @@ export default function RankingPage() {
             <div
               className={`relative w-full py-3 px-4 rounded-xl flex justify-between items-center cursor-pointer ${!country ? 'opacity-50 cursor-not-allowed' : ''}`}
               onClick={() => country && setShowCityModal(true)}
-              style={{ background: 'linear-gradient(268deg, #FFDF7D 5.8%, #FFF7DF 85.51%)' }}
+              style={{ background: 'linear-gradient(315deg, #FFDF7D 7.55%, #FFF7DF 100.13%)' }}
             >
-              <span style={{ color: '#1A1300' }}>{state || 'Select State'}</span>
-              <span className="w-6 h-6 flex items-center justify-center rounded-full" style={{ backgroundColor: '#DAA400' }}>
-                <svg className="w-4 h-4 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <span style={{ color: '#5D4702', fontWeight: 600 }}>{state || 'Select State'}</span>
+              <span className="w-6 h-6 flex items-center justify-center rounded-full" style={{ backgroundColor: '#FFC61B' }}>
+                <svg className="w-4 h-4" style={{ color: '#5D4702' }} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
               </span>
@@ -280,14 +280,14 @@ export default function RankingPage() {
           {rankingItems.map((item, idx) => (
             <div
               key={item.id}
-              className="flex bg-white rounded-2xl cursor-pointer overflow-hidden h-[110px] items-center"
+              className="flex bg-theme-secondary rounded-2xl cursor-pointer overflow-hidden h-[110px] items-center"
               style={{ minHeight: '110px', boxShadow: '0 2px 8px 0 rgba(0,0,0,0.04)' }}
               onClick={() => navigate(`/location/${item.id}`)}
             >
               {/* Image with rounded L-shaped cut corner and number */}
               <div className="relative h-[110px] w-[110px] flex-shrink-0">
                 {/* Rounded L-shaped (square) cut for number */}
-                <div className="absolute top-[-2px] left-[-2px] z-10" style={{ width: '28px', height: '28px', background: '#ffffff', borderBottomRightRadius: '10px' }} />
+                <div className="absolute top-[-2px] left-[-2px] z-10 bg-theme-primary" style={{ width: '28px', height: '28px', borderBottomRightRadius: '10px' }} />
                 <div
                   className="absolute top-0 left-0 z-20 flex items-center justify-center"
                   style={{ width: '28px', height: '28px', background: 'transparent' }}
@@ -319,22 +319,22 @@ export default function RankingPage() {
               {/* Content */}
               <div className="flex-1 min-w-0 flex flex-col justify-center h-full pl-4">
                 <div className="flex items-center mb-1">
-                  <h3 className="font-bold text-[17px] leading-[22px] text-[#222] truncate" style={{ fontFamily: 'Heebo, sans-serif' }}>{item.name}</h3>
+                  <h3 className="font-bold text-[17px] leading-[22px] text-theme-primary truncate" style={{ fontFamily: 'Heebo, sans-serif' }}>{item.name}</h3>
                 </div>
-                <div className="text-[13px] leading-[16px] text-[#888] mb-1 truncate" style={{ fontFamily: 'Heebo, sans-serif' }}>
+                <div className="text-[13px] leading-[16px] text-theme-secondary mb-1 truncate" style={{ fontFamily: 'Heebo, sans-serif' }}>
                   {item.distance}
                 </div>
                 <div className="flex items-center mb-1">
-                  <span className="text-[#FFC61B] font-bold text-[15px] leading-[18px]" style={{ fontFamily: 'Heebo, sans-serif' }}>{item.rating}</span>
-                  <span className="ml-1 text-[#FFC61B] text-[15px] leading-[18px]">{'★★★★★'}</span>
-                  <span className="ml-2 text-[#888] text-[13px] leading-[16px]" style={{ fontFamily: 'Heebo, sans-serif' }}>({item.reviews})</span>
+                  <span className="text-[var(--accent-yellow)] font-bold text-[15px] leading-[18px]" style={{ fontFamily: 'Heebo, sans-serif' }}>{item.rating}</span>
+                  <span className="ml-1 text-[var(--accent-yellow)] text-[15px] leading-[18px]">{'★★★★★'}</span>
+                  <span className="ml-2 text-theme-secondary text-[13px] leading-[16px]" style={{ fontFamily: 'Heebo, sans-serif' }}>({item.reviews})</span>
                 </div>
-                <div className="text-[13px] leading-[16px] text-[#888] truncate mb-1" style={{ fontFamily: 'Heebo, sans-serif' }}>
+                <div className="text-[13px] leading-[16px] text-theme-secondary truncate mb-1" style={{ fontFamily: 'Heebo, sans-serif' }}>
                   {item.services.join(', ')}
                 </div>
                 <div className="flex items-end gap-1 mt-1">
-                  <span className="text-[#FFC61B] font-bold text-[18px] leading-[22px]" style={{ fontFamily: 'Heebo, sans-serif' }}>{item.price.split(' ')[0]}</span>
-                  <span className="text-[#FFC61B] text-[12px] font-bold" style={{ fontFamily: 'Heebo, sans-serif' }}>{item.price.split(' ')[1]}</span>
+                  <span className="text-[var(--accent-yellow)] font-bold text-[18px] leading-[22px]" style={{ fontFamily: 'Heebo, sans-serif' }}>{item.price.split(' ')[0]}</span>
+                  <span className="text-[var(--accent-yellow)] text-[12px] font-bold" style={{ fontFamily: 'Heebo, sans-serif' }}>{item.price.split(' ')[1]}</span>
                 </div>
               </div>
             </div>
