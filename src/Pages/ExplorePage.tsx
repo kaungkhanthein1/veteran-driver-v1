@@ -1,14 +1,19 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BottomNavBar from "../components/common/BottomNavBar";
-import ExploreTabs from "../components/ExploreTabs";
-import ExploreCard from "../components/cards/ExploreCard";
-import AddLocationIcon from "icons/AddLocation.svg";
 import GoldenGateImage from 'assets/GoldenGate.png';
 import HarrierImage from 'assets/Harrier.png';
-import { useBookmarks } from '../hooks/useBookmarks';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from "react-redux";
+import DefaultAvatar from '../icons/DefaultAvatorWhite.svg';
+import AdVideo from '../assets/Ad.mp4';
+import ExploreVideo from '../assets/Explore.mp4';
+import ExploreVdVideo from '../assets/Explore Vd.mp4';
+import SampleVideo from '../assets/Sample.mp4';
+import BeachImg from '../assets/Beach.png';
+import HarrierImg from '../assets/Harrier.png';
+import GoldenGateImg from '../assets/GoldenGate.png';
+import RoomImg from '../assets/Room.png';
+import VideoPlayer from '../components/common/VideoPlayer';
+import Masonry from 'react-masonry-css';
 
 // Mock data for explore items
 const exploreItems = [
@@ -47,135 +52,186 @@ const exploreItems = [
   },
 ];
 
-export default function ExplorePage() {
-  const country = useSelector((state) => state.country)
-  console.log(country,"exp")
+const videoItems = [
+  {
+    id: 1,
+    video: AdVideo,
+    thumbnail: BeachImg,
+    description: 'Best Snooker Table In Hochiminh',
+    user: { name: 'XUXUI03', avatar: DefaultAvatar },
+    likes: 819100,
+    category: 'Snooker',
+  },
+  {
+    id: 2,
+    video: ExploreVideo,
+    thumbnail: HarrierImg,
+    description: 'Reddish Porn Service',
+    user: { name: 'nana0156', avatar: DefaultAvatar },
+    likes: 89100,
+    category: 'Lady',
+  },
+  {
+    id: 3,
+    video: ExploreVdVideo,
+    thumbnail: GoldenGateImg,
+    description: 'Sussy KTV Binh Thang',
+    user: { name: 'mena', avatar: DefaultAvatar },
+    likes: 819000,
+    category: 'Bar & Drinks',
+  },
+  {
+    id: 4,
+    video: SampleVideo,
+    thumbnail: RoomImg,
+    description: 'Museum Park',
+    user: { name: 'yoyo', avatar: DefaultAvatar },
+    likes: 12000,
+    category: 'Tour',
+  },
+  {
+    id: 5,
+    video: ExploreVdVideo,
+    thumbnail: HarrierImg,
+    description: 'Yankee Cafe',
+    user: { name: 'Jace', avatar: DefaultAvatar },
+    likes: 819100,
+    category: 'Cafe',
+  },
+  {
+    id: 6,
+    video: AdVideo,
+    thumbnail: GoldenGateImg,
+    description: 'Grace Bar',
+    user: { name: 'XUXUI03', avatar: DefaultAvatar },
+    likes: 819100,
+    category: 'Bar & Drinks',
+  },
+  {
+    id: 7,
+    video: ExploreVideo,
+    thumbnail: RoomImg,
+    description: 'Luxury Hotel',
+    user: { name: 'nana0156', avatar: DefaultAvatar },
+    likes: 89100,
+    category: 'Hotel',
+  },
+  {
+    id: 8,
+    video: SampleVideo,
+    thumbnail: BeachImg,
+    description: 'Sunset Resort',
+    user: { name: 'mena', avatar: DefaultAvatar },
+    likes: 819000,
+    category: 'Resort',
+  },
+];
 
-  const [activeTab, setActiveTab] = useState("Hotel");
+const categories = [
+  { label: 'Bar & Drinks', icon: '🍸' },
+  { label: 'Lady', icon: '👩‍🦰' },
+  { label: 'Snooker', icon: '🎱' },
+  { label: 'Coffee', icon: '☕' },
+];
+
+export default function ExplorePage() {
+  const [activeTab, setActiveTab] = useState('Trending');
+  const [activeCategory, setActiveCategory] = useState('All');
+  const [hoveredVideoId, setHoveredVideoId] = useState<number | null>(null);
+  const [modalVideo, setModalVideo] = useState<string | null>(null);
   const navigate = useNavigate();
-  const { isBookmarked, toggleBookmark } = useBookmarks();
-  const { t } = useTranslation();
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div className="dvh-fallback flex justify-center bg-theme-primary">
       <div className="w-full max-w-[480px] flex flex-col">
         <div className="flex-1 overflow-y-auto pb-24">
-          {/* Scrollable Content - Search Bar, Ads, Top Picks, Recommended */}
-          <div className="bg-theme-primary">
-            {/* Search Bar */}
-            <div className="px-4 py-3 flex items-center gap-3">
-              <div className="flex-1 flex items-center gap-2 bg-theme-secondary rounded-[14px] px-3 py-[8px]">
-                <svg className="w-[18px] h-[18px] text-theme-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-                <input
-                  type="text"
-                  placeholder={t('explorePage.searchPlaceholder')}
-                  className="bg-transparent text-theme-primary w-full outline-none text-[14px] placeholder-theme-secondary focus:outline-none focus:ring-0 border-none"
-                  onClick={() => navigate('/search')}
-                />
-              </div>
-              <button 
-                className="flex items-center justify-center"
-                onClick={() => navigate('/add-location')}
-              >
-                <img 
-                  src={AddLocationIcon} 
-                  alt="Add Location" 
-                  className="w-[35px] h-[35px] [filter:var(--icon-filter)]"
-                />
-              </button>
-            </div>
-
-            {/* Ads Section */}
-            <div className="px-4 mb-4">
-              <div className="relative w-full h-32 rounded-lg overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 opacity-50"></div>
-                <div className="absolute inset-0 flex flex-col justify-center px-6">
-                  <h3 className="text-theme-primary text-xl font-semibold mb-2">{t('explorePage.dreamVacationTitle')}</h3>
-                  <p className="text-theme-primary text-sm opacity-80">{t('explorePage.dreamVacationDescription')}</p>
-                </div>
-                <div className="absolute top-2 right-2 text-xs text-theme-primary bg-theme-primary bg-opacity-50 px-2 py-1 rounded">{t('explorePage.adsLabel')}</div>
-              </div>
-            </div>
-
-            {/* Top Picks Section */}
-            <div className="px-4 mb-4">
-              <div className="flex items-center justify-between mb-3">
-                <h2 className="text-theme-primary text-lg font-semibold">{t('explorePage.topPicksTitle')}</h2>
-                <button 
-                  className="text-[#FFC61B] text-sm"
-                  onClick={() => navigate('/ranking')}
+          {/* Top Filter Tabs */}
+          <div className="flex items-center justify-between px-4 pt-4 pb-2">
+            <div className="flex gap-6">
+              {['Trending', 'Nearby'].map(tab => (
+                <button
+                  key={tab}
+                  className={`text-lg font-semibold pb-1 border-b-2 ${activeTab === tab ? 'border-[var(--accent-yellow)] text-theme-primary' : 'border-transparent text-theme-secondary'}`}
+                  onClick={() => setActiveTab(tab)}
                 >
-                  {t('explorePage.viewAllButton')}
+                  {tab}
                 </button>
-              </div>
-              <div className="flex space-x-3 overflow-x-auto pb-2">
-                {[1, 2].map((num) => (
-                  <div 
-                    key={num} 
-                    className="relative min-w-[200px] h-32 bg-theme-secondary rounded-lg overflow-hidden cursor-pointer"
-                    onClick={() => navigate(`/location/${exploreItems[num-1].id}`)}
-                    style={{
-                      backgroundImage: `url(${num === 1 ? GoldenGateImage : HarrierImage})`,
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center'
-                    }}
-                  >
-                    <div className="absolute top-0 left-0 w-12 h-12 bg-theme-primary bg-opacity-50 flex items-center justify-center rounded-br-lg">
-                      <span 
-                        className="text-transparent text-[32px] font-bold tracking-[1.28px]"
-                        style={{
-                          fontFamily: 'Heebo',
-                          fontVariantNumeric: 'lining-nums proportional-nums',
-                          fontFeatureSettings: "'dlig' on",
-                          WebkitTextStrokeWidth: '1px',
-                          WebkitTextStrokeColor: 'var(--text-primary)',
-                          textEdge: 'cap',
-                          leadingTrim: 'both',
-                          lineHeight: '20px'
-                        }}
-                      >
-                        {num}
-                      </span>
-                    </div>
-                    <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent">
-                      <div className="text-theme-primary font-semibold text-lg">{exploreItems[num-1].name}</div>
-                      <div className="text-[#FFC61B] font-medium">{exploreItems[num-1].price}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              ))}
             </div>
-
-            {/* Recommended Section */}
-            <div className="px-4 mb-4">
-              <h2 className="text-theme-primary text-lg font-semibold mb-3">{t('explorePage.recommendedTitle')}</h2>
-            </div>
+            <button className="text-theme-secondary">
+              <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            </button>
           </div>
 
-          {/* Sticky Tabs */}
-          <div className="sticky top-0 z-10 bg-theme-primary">
-            <ExploreTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-            <div className="h-[1px] bg-theme-secondary"></div>
-          </div>
-
-          {/* Cards Grid */}
-          <div className="p-4 grid gap-4">
-            {exploreItems.map((item) => (
-              <ExploreCard
-                key={item.id}
-                item={item}
-                onClick={() => {}}
-                setIsModalOpen={setIsModalOpen}
-                isBookmarked={isBookmarked(item.id)}
-                onBookmarkClick={() => toggleBookmark(item)}
-              />
+          {/* Category Chips */}
+          <div className="flex gap-2 px-4 pb-3 overflow-x-auto no-scrollbar h-12 items-center whitespace-nowrap">
+            {categories.map(cat => (
+              <button
+                key={cat.label}
+                className={`flex items-center gap-1 px-4 py-1 h-9 rounded-full border ${activeCategory === cat.label ? 'bg-theme-secondary border-theme-primary' : 'bg-theme-primary border-theme-primary'} text-base`}
+                onClick={() => setActiveCategory(cat.label)}
+                style={{ minWidth: 'max-content' }}
+              >
+                <span>{cat.icon}</span>
+                <span>{cat.label}</span>
+              </button>
             ))}
           </div>
+
+          {/* Masonry Video Grid */}
+          <div className="px-1">
+            <Masonry
+              breakpointCols={2}
+              className="my-masonry-grid"
+              columnClassName="my-masonry-grid_column"
+            >
+              {videoItems.map((item, idx) => (
+                <div
+                  key={item.id}
+                  className="mb-3 rounded-2xl overflow-hidden bg-theme-secondary flex flex-col break-inside-avoid cursor-pointer"
+                  onMouseEnter={() => setHoveredVideoId(item.id)}
+                  onMouseLeave={() => setHoveredVideoId(null)}
+                  onClick={() => setModalVideo(item.video)}
+                >
+                  <div className={`w-full bg-black relative ${idx % 3 === 0 ? 'h-56' : idx % 3 === 1 ? 'h-64' : 'h-72'}`}>
+                    {hoveredVideoId === item.id ? (
+                      <video
+                        src={item.video}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        className="w-full h-full object-cover absolute inset-0"
+                      />
+                    ) : (
+                      <img
+                        src={item.thumbnail}
+                        alt="thumbnail"
+                        className="w-full h-full object-cover absolute inset-0"
+                      />
+                    )}
+                  </div>
+                  <div className="p-2">
+                    <div className="font-semibold text-theme-primary text-sm truncate mb-1">{item.description}</div>
+                    <div className="flex items-center gap-2 mt-1">
+                      <img src={item.user.avatar} alt="avatar" className="w-6 h-6 rounded-full object-cover" />
+                      <span className="text-xs text-theme-primary font-medium">{item.user.name}</span>
+                      <span className="ml-auto flex items-center gap-1 text-xs text-theme-secondary">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        {item.likes >= 1000 ? (item.likes/1000).toFixed(1) + 'K' : item.likes}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </Masonry>
+          </div>
         </div>
-        {!isModalOpen && <BottomNavBar active="explore" />}
+        <BottomNavBar active="explore" />
+        {/* Video Modal */}
+        {modalVideo && (
+          <VideoPlayer isOpen={!!modalVideo} videoUrl={modalVideo} onClose={() => setModalVideo(null)} />
+        )}
       </div>
     </div>
   );

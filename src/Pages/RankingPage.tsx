@@ -341,6 +341,8 @@ export default function RankingPage() {
           ))}
         </div>
 
+        <div className="h-20" />
+
         {/* Modals and BottomNavBar */}
         {showRegionModal && (
           <RegionSelectModal

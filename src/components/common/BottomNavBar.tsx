@@ -70,22 +70,39 @@ export default function BottomNavBar({ active }: BottomNavBarProps) {
           <img src={UploadIcon} alt="Upload" className="w-[60px] h-[60px] object-contain" />
         </button>
         <div className="relative w-full rounded-t-2xl overflow-hidden" style={{ maxWidth: 480 }}>
-          {/* Shadow background for Nav Bar */}
-          <div
-            className="absolute bottom-[-5px] left-1/2 -translate-x-1/2 min-w-[100%] h-[100px] rounded-t-2xl pointer-events-none"
-            style={{ zIndex: 0, boxShadow: '0 12px 48px 0 rgba(0,0,0,0.38), 0 2px 16px 0 rgba(0,0,0,0.18), 0 6px 32px 0 rgba(254,116,14,0.18)' }}
-          />
           {/* Nav Bar Background with Curved SVG */}
           <svg
-            className="absolute bottom-[-5px] left-1/2 -translate-x-1/2 min-w-[100%] h-[100px] pointer-events-auto"
+            className="absolute bottom-0 left-1/2 -translate-x-1/2 min-w-[100%] h-[100px] pointer-events-auto"
             preserveAspectRatio="none"
             viewBox="0 0 409 88"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             style={{ zIndex: 1 }}
           >
+            <defs>
+              <filter id="navBarCurveShadow" x="-40" y="0" width="489" height="140" filterUnits="userSpaceOnUse">
+                <feOffset dy="8" result="offOut"/>
+                <feGaussianBlur in="offOut" stdDeviation="10" result="blurOut"/>
+                <feColorMatrix in="blurOut" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.18 0" result="shadow"/>
+                <feBlend in="SourceGraphic" in2="shadow" mode="normal"/>
+              </filter>
+            </defs>
             <g>
-              <path d="M401 86V34C401 22.9543 392.046 14 381 14H272.5C254.827 14 242.261 31.2653 228.839 42.7618C223.598 47.2507 216.113 50.3585 205.5 50.5C194.023 50.653 186.035 47.1523 180.526 42.0804C167.773 30.3375 155.19 14.0003 137.853 14.0002L28 14C16.9543 14 8 22.9543 8 34V86H401Z" fill="var(--bg-secondary)" stroke="none" strokeWidth="0"/>
+              {/* Nav bar background with shadow */}
+              <path
+                d="M401 86V34C401 22.9543 392.046 14 381 14H272.5C254.827 14 242.261 31.2653 228.839 42.7618C223.598 47.2507 216.113 50.3585 205.5 50.5C194.023 50.653 186.035 47.1523 180.526 42.0804C167.773 30.3375 155.19 14.0003 137.853 14.0002L28 14C16.9543 14 8 22.9543 8 34V86H401Z"
+                fill="var(--bg-secondary)"
+                filter="url(#navBarCurveShadow)"
+              />
+              {/* Light stroke for separation */}
+              <path
+                d="M401 86V34C401 22.9543 392.046 14 381 14H272.5C254.827 14 242.261 31.2653 228.839 42.7618C223.598 47.2507 216.113 50.3585 205.5 50.5C194.023 50.653 186.035 47.1523 180.526 42.0804C167.773 30.3375 155.19 14.0003 137.853 14.0002L28 14C16.9543 14 8 22.9543 8 34V86H401Z"
+                fill="none"
+                stroke="var(--nav-bar-stroke, rgba(255,255,255,0.10))"
+                strokeWidth="1.2"
+              />
+              {/* Rectangle to fill the very bottom gap */}
+              <rect x="0" y="86" width="409" height="10" fill="var(--bg-secondary)" />
             </g>
           </svg>
 
