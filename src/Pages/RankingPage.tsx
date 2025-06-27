@@ -139,7 +139,7 @@ const TopThreePlaces: React.FC<TopThreePlacesProps> = ({ places, onPlaceClick })
               alt={place.name}
               className="w-full h-full object-cover"
             />
-            <div className="absolute top-2 left-2">
+            <div className="absolute top-0 left-2 z-20">
               <img 
                 src={place.medal} 
                 alt={`${index + 1} place`}
@@ -225,7 +225,7 @@ export default function RankingPage() {
           {[topThreePlaces[1], topThreePlaces[0], topThreePlaces[2]].map((place, idx) => (
             <div key={place.id} className={`flex-1 relative rounded-2xl overflow-hidden`} style={{ height: idx === 1 ? '180px' : '160px', aspectRatio: '3/4' }}>
               <img src={place.image} alt={place.name} className="w-full h-full object-cover" />
-              <div className="absolute top-2 left-2 z-20">
+              <div className="absolute top-0 left-2 z-20">
                 <img src={place.medal} alt={`${idx + 1} place`} className="w-8 h-8" />
               </div>
               {/* Strong dark gradient overlay for text readability, edge-to-edge */}
@@ -280,12 +280,12 @@ export default function RankingPage() {
           {rankingItems.map((item, idx) => (
             <div
               key={item.id}
-              className="flex bg-theme-secondary rounded-2xl cursor-pointer overflow-hidden h-[110px] items-center"
+              className="flex bg-theme-secondary rounded-2xl cursor-pointer overflow-hidden h-[130px] items-stretch"
               style={{ minHeight: '110px', boxShadow: '0 2px 8px 0 rgba(0,0,0,0.04)' }}
               onClick={() => navigate(`/location/${item.id}`)}
             >
               {/* Image with rounded L-shaped cut corner and number */}
-              <div className="relative h-[110px] w-[110px] flex-shrink-0">
+              <div className="relative h-full w-[130px] flex-shrink-0">
                 {/* Rounded L-shaped (square) cut for number */}
                 <div className="absolute top-[-2px] left-[-2px] z-10 bg-theme-primary" style={{ width: '28px', height: '28px', borderBottomRightRadius: '10px' }} />
                 <div
@@ -313,11 +313,11 @@ export default function RankingPage() {
                   src={item.image}
                   alt={item.name}
                   className="w-full h-full object-cover rounded-xl"
-                  style={{ height: '110px', width: '110px' }}
+                  style={{ height: '100%', width: '130px' }}
                 />
               </div>
-              {/* Content */}
-              <div className="flex-1 min-w-0 flex flex-col justify-center h-full pl-4">
+              {/* Content: vertical padding */}
+              <div className="flex flex-col h-full min-w-0 pl-4 py-2">
                 <div className="flex items-center mb-1">
                   <h3 className="font-bold text-[17px] leading-[22px] text-theme-primary truncate" style={{ fontFamily: 'Heebo, sans-serif' }}>{item.name}</h3>
                 </div>
