@@ -2,10 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 // import { countrySlice } from "./countrySlice";
 import countryReducer from "./countrySlice";
 import { HomeApi } from "../features/HomeApi";
+import hideBarSlice from "./hideBarSlice";
 
 export const store = configureStore({
   reducer: {
     country: countryReducer,
+    hideBarSlice: hideBarSlice,
     [HomeApi.reducerPath]: HomeApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
