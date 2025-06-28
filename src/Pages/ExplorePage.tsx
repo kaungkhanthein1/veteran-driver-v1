@@ -146,7 +146,7 @@ export default function ExplorePage() {
       <div className="w-full max-w-[480px] flex flex-col">
         <div className="flex-1 overflow-y-auto pb-24">
           {/* Top Filter Tabs */}
-          <div className="flex items-center justify-between px-4 pt-4 pb-2">
+          <div className="flex items-center justify-center px-4 pt-4 pb-2 relative">
             <div className="flex gap-6">
               {['Trending', 'Nearby'].map(tab => (
                 <button
@@ -158,7 +158,7 @@ export default function ExplorePage() {
                 </button>
               ))}
             </div>
-            <button className="text-theme-secondary">
+            <button className="absolute right-4 text-theme-secondary">
               <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
             </button>
           </div>
@@ -168,7 +168,7 @@ export default function ExplorePage() {
             {categories.map(cat => (
               <button
                 key={cat.label}
-                className={`flex items-center gap-1 px-4 py-1 h-9 rounded-full border ${activeCategory === cat.label ? 'bg-theme-secondary border-theme-primary' : 'bg-theme-primary border-theme-primary'} text-base`}
+                className={`flex items-center gap-1 px-4 py-1 h-9 rounded-full border ${activeCategory === cat.label ? 'bg-theme-secondary border-theme-primary' : 'bg-theme-primary border-theme-secondary'} text-base`}
                 onClick={() => setActiveCategory(cat.label)}
                 style={{ minWidth: 'max-content' }}
               >

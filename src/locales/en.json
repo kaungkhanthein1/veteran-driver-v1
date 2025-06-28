@@ -532,8 +532,10 @@
       "more": "More"
     },
     "nearestPlacesTitle": "Nearest Places",
-    "viewAllButton": "View All",
+    "favoritePlacesTitle": "Favorite Places",
+    "recommendedTitle": "Recommended",
     "feedbacksTitle": "Feedbacks",
+    "viewAllButton": "View All",
     "viewMoreFeedbackText": "View more authentic feedback from real visitors.",
     "viewMoreButton": "View More"
   },

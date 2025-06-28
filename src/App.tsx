@@ -36,6 +36,7 @@ import CheckMap from "./Pages/map/CheckMap";
 import AddMap from "./Pages/map/AddMap";
 import ModalRoute from "components/common/ModalRoute";
 import AccountInformationPage from "./Pages/AccountInformationPage";
+import HomePage from "./Pages/Home/HomePage";
 
 function AppRoutes() {
   const location = useLocation();
@@ -46,6 +47,7 @@ function AppRoutes() {
       {/* Main routes, use background location if present */}
       <Routes location={state?.background || location}>
         <Route path="/" element={<Home />} />
+        <Route path="/new-home" element={<HomePage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/otp-verify" element={<OtpVerifyPage />} />
         <Route path="/location-access" element={<LocationAccessPage />} />
