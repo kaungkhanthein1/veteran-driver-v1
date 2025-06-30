@@ -3,12 +3,16 @@ import { useSpring, animated } from "@react-spring/web";
 import { useDrag } from "@use-gesture/react";
 import MainContent from "./MainContent";
 
-export default function BottomSheetModal() {
+interface BottomSheetModalProps {
+  isExpanded: boolean;
+  setIsExpanded: (expanded: boolean) => void;
+}
+
+export default function BottomSheetModal({ isExpanded, setIsExpanded }: BottomSheetModalProps) {
   const sheetRef = useRef<HTMLDivElement>(null);
   const [sheetHeight, setSheetHeight] = useState(520);
   const TOP_BAR_HEIGHT = 200; // px, updated to match actual TopBar height
   const SHEET_MIN = 360; // collapsed height
-  const isExpandedRef = useRef(false);
 
   // Snap points: collapsed and expanded
   const openY = 0;
@@ -18,9 +22,9 @@ export default function BottomSheetModal() {
 
   // Always use the latest closedY/openY
   useEffect(() => {
-    api.start({ y: isExpandedRef.current ? openY : closedY, immediate: true });
+    api.start({ y: isExpanded ? openY : closedY, immediate: true });
     // eslint-disable-next-line
-  }, [sheetHeight]);
+  }, [sheetHeight, isExpanded]);
 
   useEffect(() => {
     const updateHeight = () => {
@@ -39,10 +43,10 @@ export default function BottomSheetModal() {
     if (last) {
       if (newY < latestClosedY / 2) {
         api.start({ y: openY });
-        isExpandedRef.current = true;
+        setIsExpanded(true);
       } else {
         api.start({ y: latestClosedY });
-        isExpandedRef.current = false;
+        setIsExpanded(false);
       }
     } else {
       api.start({ y: newY, immediate: true });

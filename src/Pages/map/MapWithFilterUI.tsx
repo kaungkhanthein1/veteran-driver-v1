@@ -5,6 +5,10 @@ import "./map.css";
 import MapSideBar from "./MapSideBar";
 import LocationIndicator from "../../icons/HomeUpdate/LocationIndicator.svg";
 
+interface MapWithFilterUIProps {
+  isExpanded: boolean;
+}
+
 const AttachMapRef = ({ mapRef, onReady }) => {
   const map = useMap();
 
@@ -28,7 +32,7 @@ const RecenterMap = ({ center }) => {
   return null;
 };
 
-const MapWithFilterUI = () => {
+const MapWithFilterUI = ({ isExpanded }: MapWithFilterUIProps) => {
   const [isMapReady, setIsMapReady] = useState(false);
   const mapRef = useRef();
   const userMarkerRef = useRef(null);
@@ -114,6 +118,7 @@ const MapWithFilterUI = () => {
         {isMapReady && mapRef.current && (
           <MapSideBar
             onRecenterClick={handleRecenter}
+            isExpanded={isExpanded}
           />
         )}
       </div>

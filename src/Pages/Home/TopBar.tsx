@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import DropdownArrow from "icons/HomeUpdate/Dropdown.svg";
 import CountryFlag from "icons/HomeUpdate/thai.png";
 import HotelIcon from "icons/HomeUpdate/Hotel.png";
@@ -13,6 +14,15 @@ export default function TopBar() {
   const location = useLocation();
   const dispatch = useDispatch();
   const { name } = useSelector((state: any) => state.country);
+
+  // Active filter chip state
+  const [activeChip, setActiveChip] = useState<string | null>(null);
+
+  const filterChips = [
+    { key: "hotels", label: "Hotels", icon: HotelIcon },
+    { key: "bar", label: "Bar & Drinks", icon: BarIcon },
+    { key: "lady", label: "Lady", icon: LadyIcon },
+  ];
 
   return (
     <div className="px-4 pt-5 pb-2 bg-theme-secondary">
@@ -71,18 +81,20 @@ export default function TopBar() {
       </div>
       {/* Filter Chips Row */}
       <div className="flex gap-2 px-1 pt-3 pb-1 overflow-x-auto no-scrollbar h-12 items-center whitespace-nowrap">
-        <button className="flex items-center gap-1 px-4 py-1 h-9 rounded-full border bg-theme-primary border-theme-primary text-base">
-          <img src={HotelIcon} alt="Hotels" className="w-5 h-5" />
-          Hotels
-        </button>
-        <button className="flex items-center gap-1 px-4 py-1 h-9 rounded-full border bg-theme-primary border-theme-primary text-base">
-          <img src={BarIcon} alt="Bar & Drinks" className="w-5 h-5" />
-          Bar & Drinks
-        </button>
-        <button className="flex items-center gap-1 px-4 py-1 h-9 rounded-full border bg-theme-primary border-theme-primary text-base">
-          <img src={LadyIcon} alt="Lady" className="w-5 h-5" />
-          Lady
-        </button>
+        {filterChips.map((chip) => (
+          <button
+            key={chip.key}
+            onClick={() => setActiveChip(chip.key)}
+            className={`flex items-center gap-1 px-4 py-1 h-9 rounded-full border text-base transition-colors duration-150
+              ${activeChip === chip.key
+                ? 'bg-gradient-to-r from-yellow-200 to-yellow-100 text-black border-yellow-200 shadow-md'
+                : 'bg-theme-primary border-theme-primary text-theme-text'}
+            `}
+          >
+            <img src={chip.icon} alt={chip.label} className="w-5 h-5" />
+            {chip.label}
+          </button>
+        ))}
       </div>
     </div>
   );
