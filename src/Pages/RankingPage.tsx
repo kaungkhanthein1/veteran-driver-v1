@@ -14,12 +14,12 @@ import FilterPanel from '../Pages/map/FilterPanel';
 import BottomNavBar from "../components/common/BottomNavBar";
 
 // Import new assets for top 3 places
-import FirstPlace from "assets/Explore/First.png";
-import SecondPlace from "assets/Explore/Second.png";
-import ThirdPlace from "assets/Explore/Third.png";
-import FirstMedal from "assets/Explore/FirstTitle.png";
-import SecondMedal from "assets/Explore/SecondTitle.png";
-import ThirdMedal from "assets/Explore/ThirdTitle.png";
+import FirstPlace from "assets/Ranking/First.png";
+import SecondPlace from "assets/Ranking/Second.png";
+import ThirdPlace from "assets/Ranking/Third.png";
+import FirstMedal from "assets/Ranking/GoldMedal.png";
+import SecondMedal from "assets/Ranking/SilverMedal.png";
+import ThirdMedal from "assets/Ranking/CopperMedal.png";
 
 // Mock data for ranking items
 const rankingItems = [

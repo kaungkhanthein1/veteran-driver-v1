@@ -5,7 +5,6 @@ import RegisterPage from "./Pages/RegisterPage";
 import OtpVerifyPage from "./Pages/OtpVerifyPage";
 import LocationAccessPage from "./Pages/LocationAccessPage";
 import ChooseLocationPage from "./Pages/ChooseLocationPage";
-import Home from "./components/Home";
 import ExplorePage from "./Pages/ExplorePage";
 import SocialPage from "./Pages/SocialPage";
 import PhoneSignUpPage from "./Pages/PhoneSignUpPage";
@@ -46,7 +45,7 @@ function AppRoutes() {
     <>
       {/* Main routes, use background location if present */}
       <Routes location={state?.background || location}>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/new-home" element={<HomePage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/otp-verify" element={<OtpVerifyPage />} />

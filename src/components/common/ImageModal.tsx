@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
 
 const ImageModal = ({ images, initialIndex = 0, onClose }) => {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
@@ -29,11 +30,9 @@ const ImageModal = ({ images, initialIndex = 0, onClose }) => {
     if (touchStartX !== null && touchEndX !== null) {
       const distance = touchStartX - touchEndX;
       if (distance > 50) {
-        // Swiped left
-        handleNext();
+        handleNext({});
       } else if (distance < -50) {
-        // Swiped right
-        handlePrevious();
+        handlePrevious({});
       }
     }
     setTouchStartX(null);
@@ -57,9 +56,9 @@ const ImageModal = ({ images, initialIndex = 0, onClose }) => {
 
   const currentMedia = images[currentIndex];
 
-  return (
+  const modalContent = (
     <div 
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/90"
+      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black/90"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -139,6 +138,8 @@ const ImageModal = ({ images, initialIndex = 0, onClose }) => {
       {/* Image Counter - Removed as per design */}
     </div>
   );
+
+  return ReactDOM.createPortal(modalContent, document.body);
 };
 
 ImageModal.propTypes = {
