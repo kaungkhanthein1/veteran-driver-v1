@@ -1,28 +1,48 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import { useDrag } from "@use-gesture/react";
 import MainContent from "./MainContent";
 
-const SHEET_HEIGHT = 520; // px, expanded height
-const SHEET_MIN = 280; // collapsed height, shows more of the cards
-
 export default function BottomSheetModal() {
   const sheetRef = useRef<HTMLDivElement>(null);
-  const [{ y }, api] = useSpring(() => ({ y: SHEET_HEIGHT - SHEET_MIN }));
+  const [sheetHeight, setSheetHeight] = useState(520);
+  const TOP_BAR_HEIGHT = 155; // px, updated to match actual TopBar height
+  const SHEET_MIN = 380; // collapsed height
+  const isExpandedRef = useRef(false);
 
   // Snap points: collapsed and expanded
   const openY = 0;
-  const closedY = SHEET_HEIGHT - SHEET_MIN;
+  const closedY = sheetHeight - SHEET_MIN;
+
+  const [{ y }, api] = useSpring(() => ({ y: closedY }));
+
+  // Always use the latest closedY/openY
+  useEffect(() => {
+    api.start({ y: isExpandedRef.current ? openY : closedY, immediate: true });
+    // eslint-disable-next-line
+  }, [sheetHeight]);
+
+  useEffect(() => {
+    const updateHeight = () => {
+      const newHeight = window.innerHeight - TOP_BAR_HEIGHT;
+      setSheetHeight(newHeight);
+    };
+    updateHeight();
+    window.addEventListener("resize", updateHeight);
+    return () => window.removeEventListener("resize", updateHeight);
+  }, []);
 
   const bind = useDrag(({ last, movement: [, my], velocity: [, vy], direction: [, dy], cancel }) => {
     let newY = my + y.get();
-    newY = Math.max(openY, Math.min(closedY, newY));
+    const latestClosedY = sheetHeight - SHEET_MIN;
+    newY = Math.max(openY, Math.min(latestClosedY, newY));
     if (last) {
-      // Snap to closest point
-      if (newY < closedY / 2) {
+      if (newY < latestClosedY / 2) {
         api.start({ y: openY });
+        isExpandedRef.current = true;
       } else {
-        api.start({ y: closedY });
+        api.start({ y: latestClosedY });
+        isExpandedRef.current = false;
       }
     } else {
       api.start({ y: newY, immediate: true });
@@ -37,10 +57,10 @@ export default function BottomSheetModal() {
   return (
     <animated.div
       ref={sheetRef}
-      className="fixed left-0 right-0 bottom-0 z-30 bg-theme-primary rounded-t-2xl shadow-xl max-w-[480px] mx-auto"
+      className="fixed left-0 right-0 bottom-0 z-30 bg-theme-secondary rounded-t-2xl shadow-xl max-w-[480px] mx-auto"
       style={{
         y,
-        height: SHEET_HEIGHT,
+        height: sheetHeight,
         touchAction: 'none',
       }}
     >

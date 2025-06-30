@@ -12,7 +12,7 @@ export default function TopBar() {
   const { name } = useSelector((state: any) => state.country);
 
   return (
-    <div className="px-4 pt-5 pb-2 bg-theme-primary">
+    <div className="px-4 pt-5 pb-2 bg-theme-secondary">
       <div className="flex justify-between items-center mb-1">
         <button
           onClick={() => navigate('/login', { state: { background: location } })}
@@ -43,7 +43,7 @@ export default function TopBar() {
       </div>
       {/* Search Bar */}
       <div className="flex items-center">
-        <div className="bg-theme-secondary rounded-full px-3 py-2 flex items-center flex-grow">
+        <div className="bg-theme-primary rounded-full px-3 py-2 flex items-center flex-grow">
           <svg
             className="w-5 h-5 text-theme-secondary mr-2"
             fill="none"

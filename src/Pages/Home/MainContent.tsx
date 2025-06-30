@@ -54,9 +54,29 @@ export default function MainContent() {
       location: "Phenom Penh ( 12km away )",
       rating: 5.0,
       reviews: 128,
-      price: 15,
+      price: "15 USD",
       images: [GoldenGateImage, HarrierImage, RoomImage],
       services: ["Service 1", "Service 2", "Service3"],
+    },
+    {
+      id: "fav2",
+      name: "Luxury Hotel",
+      location: "Phnom Penh ( 2km away )",
+      rating: 4.8,
+      reviews: 98,
+      price: "30 USD",
+      images: [HarrierImage, RoomImage, GoldenGateImage],
+      services: ["Service 1", "Service 2"],
+    },
+    {
+      id: "fav3",
+      name: "Sunset Resort",
+      location: "Phnom Penh ( 5km away )",
+      rating: 4.6,
+      reviews: 76,
+      price: "25 USD",
+      images: [RoomImage, GoldenGateImage, HarrierImage],
+      services: ["Service 1", "Service 3"],
     },
   ];
 
@@ -68,9 +88,19 @@ export default function MainContent() {
       location: "District 1",
       rating: 4.7,
       reviews: 98,
-      price: 10,
+      price: "10 USD",
       images: [RoomImage, GoldenGateImage],
       services: ["Service 1", "Service 2"],
+    },
+    {
+      id: "rec2",
+      name: "Grace Bar",
+      location: "District 2",
+      rating: 4.9,
+      reviews: 120,
+      price: "20 USD",
+      images: [GoldenGateImage, HarrierImage],
+      services: ["Service 2", "Service 3"],
     },
   ];
 
@@ -101,7 +131,7 @@ export default function MainContent() {
   return (
     <div className="w-full max-w-[480px] mx-auto">
       {/* Nearest Places Section */}
-      <div className="px-4 py-5 bg-theme-primary">
+      <div className="px-4 py-5 bg-theme-secondary">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg font-semibold text-theme-text">
             {t("homePage.nearestPlacesTitle") || "Nearest Place"}
@@ -162,7 +192,7 @@ export default function MainContent() {
       </div>
 
       {/* Favorite Places Section */}
-      <div className="px-4 py-5 bg-theme-primary">
+      <div className="px-4 py-5 bg-theme-secondary">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg font-semibold text-theme-text">
             {t("homePage.favoritePlacesTitle") || "Favorite Places"}
@@ -171,38 +201,17 @@ export default function MainContent() {
             {t("homePage.viewAllButton") || "View All"}
           </button>
         </div>
-        <div className="flex flex-col gap-4">
+        <div className="flex overflow-x-auto gap-3 pb-4 scrollbar-hide">
           {favoritePlaces.map((item) => (
-            <div key={item.id} className="bg-white rounded-2xl p-4 shadow">
-              <div className="flex justify-between items-center mb-2">
-                <div>
-                  <div className="font-semibold text-base text-theme-primary mb-1">{item.name}</div>
-                  <div className="text-xs text-theme-secondary mb-1">{item.location}</div>
-                  <div className="flex items-center text-xs text-yellow-500 mb-1">
-                    {item.rating} <span className="ml-1">★</span> <span className="ml-2 text-theme-secondary">({item.reviews})</span>
-                  </div>
-                </div>
-                <button className="text-[#FFC61B] text-xl">♥</button>
-              </div>
-              <div className="flex gap-2 mb-2">
-                {item.images.map((img, idx) => (
-                  <img key={idx} src={img} alt="" className="w-16 h-16 rounded-lg object-cover" />
-                ))}
-              </div>
-              <div className="text-xs text-theme-secondary mb-2">
-                {item.services.join(", ")}
-              </div>
-              <div className="flex justify-between items-center">
-                <div className="font-bold text-lg text-theme-primary">{item.price} <span className="text-xs">USD</span></div>
-                <button className="bg-[#FFC61B] text-white px-4 py-2 rounded-full text-sm font-medium">View Place</button>
-              </div>
+            <div key={item.id} className="flex-none w-[300px]">
+              <ExploreCard item={item} onClick={() => {}} context="explore" />
             </div>
           ))}
         </div>
       </div>
 
       {/* Recommended Section */}
-      <div className="px-4 py-5 bg-theme-primary">
+      <div className="px-4 py-5 bg-theme-secondary">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg font-semibold text-theme-text">
             {t("homePage.recommendedTitle") || "Recommended"}
@@ -211,38 +220,17 @@ export default function MainContent() {
             {t("homePage.viewAllButton") || "View All"}
           </button>
         </div>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 pb-4">
           {recommended.map((item) => (
-            <div key={item.id} className="bg-white rounded-2xl p-4 shadow">
-              <div className="flex justify-between items-center mb-2">
-                <div>
-                  <div className="font-semibold text-base text-theme-primary mb-1">{item.name}</div>
-                  <div className="text-xs text-theme-secondary mb-1">{item.location}</div>
-                  <div className="flex items-center text-xs text-yellow-500 mb-1">
-                    {item.rating} <span className="ml-1">★</span> <span className="ml-2 text-theme-secondary">({item.reviews})</span>
-                  </div>
-                </div>
-                <button className="text-[#FFC61B] text-xl">♥</button>
-              </div>
-              <div className="flex gap-2 mb-2">
-                {item.images.map((img, idx) => (
-                  <img key={idx} src={img} alt="" className="w-16 h-16 rounded-lg object-cover" />
-                ))}
-              </div>
-              <div className="text-xs text-theme-secondary mb-2">
-                {item.services.join(", ")}
-              </div>
-              <div className="flex justify-between items-center">
-                <div className="font-bold text-lg text-theme-primary">{item.price} <span className="text-xs">USD</span></div>
-                <button className="bg-[#FFC61B] text-white px-4 py-2 rounded-full text-sm font-medium">View Place</button>
-              </div>
+            <div key={item.id} className="w-full">
+              <ExploreCard item={item} onClick={() => {}} context="explore" />
             </div>
           ))}
         </div>
       </div>
 
       {/* Feedbacks Section */}
-      <div className="px-4 py-5 bg-theme-primary">
+      <div className="px-4 py-5 bg-theme-secondary">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg font-semibold text-theme-text">
             {t("homePage.feedbacksTitle") || "Feedbacks"}

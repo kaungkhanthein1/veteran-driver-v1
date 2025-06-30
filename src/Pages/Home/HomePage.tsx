@@ -1,6 +1,7 @@
 import TopBar from './TopBar';
 import MapWithFilterUI from '../map/MapWithFilterUI';
 import BottomSheetModal from './BottomSheetModal';
+import BottomNavBar from '../../components/common/BottomNavBar';
 
 export default function HomePage() {
   return (
@@ -10,6 +11,7 @@ export default function HomePage() {
         <MapWithFilterUI />
         <BottomSheetModal />
       </div>
+      <BottomNavBar active="home" />
     </div>
   );
 }
