@@ -25,7 +25,7 @@ export default function TopBar() {
   ];
 
   return (
-    <div className="px-4 pt-5 pb-2 bg-theme-secondary">
+    <div className="px-4 pt-5 pb-2 bg-gradient-to-b from-gray-100">
       <div className="flex justify-between items-center mb-1">
         <button
           onClick={() => navigate('/login', { state: { background: location } })}
