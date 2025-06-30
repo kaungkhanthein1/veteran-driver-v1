@@ -6,8 +6,8 @@ import MainContent from "./MainContent";
 export default function BottomSheetModal() {
   const sheetRef = useRef<HTMLDivElement>(null);
   const [sheetHeight, setSheetHeight] = useState(520);
-  const TOP_BAR_HEIGHT = 155; // px, updated to match actual TopBar height
-  const SHEET_MIN = 380; // collapsed height
+  const TOP_BAR_HEIGHT = 200; // px, updated to match actual TopBar height
+  const SHEET_MIN = 360; // collapsed height
   const isExpandedRef = useRef(false);
 
   // Snap points: collapsed and expanded

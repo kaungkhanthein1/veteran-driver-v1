@@ -3,6 +3,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import DropdownArrow from "icons/HomeUpdate/Dropdown.svg";
 import CountryFlag from "icons/HomeUpdate/thai.png";
+import HotelIcon from "icons/HomeUpdate/Hotel.png";
+import BarIcon from "icons/HomeUpdate/Bar.png";
+import LadyIcon from "icons/HomeUpdate/Lady.png";
 
 export default function TopBar() {
   const { t } = useTranslation();
@@ -65,6 +68,21 @@ export default function TopBar() {
             className="bg-transparent text-theme-text w-full outline-none focus:outline-none border-none"
           />
         </div>
+      </div>
+      {/* Filter Chips Row */}
+      <div className="flex gap-2 px-1 pt-3 pb-1 overflow-x-auto no-scrollbar h-12 items-center whitespace-nowrap">
+        <button className="flex items-center gap-1 px-4 py-1 h-9 rounded-full border bg-theme-primary border-theme-primary text-base">
+          <img src={HotelIcon} alt="Hotels" className="w-5 h-5" />
+          Hotels
+        </button>
+        <button className="flex items-center gap-1 px-4 py-1 h-9 rounded-full border bg-theme-primary border-theme-primary text-base">
+          <img src={BarIcon} alt="Bar & Drinks" className="w-5 h-5" />
+          Bar & Drinks
+        </button>
+        <button className="flex items-center gap-1 px-4 py-1 h-9 rounded-full border bg-theme-primary border-theme-primary text-base">
+          <img src={LadyIcon} alt="Lady" className="w-5 h-5" />
+          Lady
+        </button>
       </div>
     </div>
   );

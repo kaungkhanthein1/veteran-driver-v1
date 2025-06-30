@@ -1,57 +1,28 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-const MapSideBar = ({onRecenterClick,setShowFilter}) => {
+interface MapSideBarProps {
+  onRecenterClick: () => void;
+}
+
+const MapSideBar = ({ onRecenterClick }: MapSideBarProps) => {
+  const { t } = useTranslation();
   const navigate = useNavigate()
+
   return (
-    <div className=" absolute bottom-6 right-2 shadow-xl z-[1] p-4">
-      <div className=" flex flex-col gap-[11px]">
-        {/* re-center */}
-        <div onClick={onRecenterClick} className="map_sidebar_btn p-[11px]">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="26"
-            height="26"
-            viewBox="0 0 26 26"
-            fill="none"
-          >
-            <path
-              d="M12.9997 8.66732C10.6055 8.66732 8.66634 10.6065 8.66634 13.0007C8.66634 15.3948 10.6055 17.334 12.9997 17.334C15.3938 17.334 17.333 15.3948 17.333 13.0007C17.333 10.6065 15.3938 8.66732 12.9997 8.66732ZM22.6847 11.9173C22.1863 7.39982 18.6005 3.81398 14.083 3.31565V1.08398H11.9163V3.31565C7.39884 3.81398 3.81301 7.39982 3.31467 11.9173H1.08301V14.084H3.31467C3.81301 18.6015 7.39884 22.1873 11.9163 22.6857V24.9173H14.083V22.6857C18.6005 22.1873 22.1863 18.6015 22.6847 14.084H24.9163V11.9173H22.6847ZM12.9997 20.584C8.80717 20.584 5.41634 17.1932 5.41634 13.0007C5.41634 8.80815 8.80717 5.41732 12.9997 5.41732C17.1922 5.41732 20.583 8.80815 20.583 13.0007C20.583 17.1932 17.1922 20.584 12.9997 20.584Z"
-              fill="#444444"
-            />
-          </svg>
-        </div>
-        {/* add_location */}
-        <div onClick={() => navigate("/add-location")} className="map_sidebar_btn p-[11px]">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="26"
-            height="26"
-            viewBox="0 0 26 26"
-            fill="none"
-          >
-            <path
-              d="M20.0413 1.08398V4.33398H23.2913V6.50065H20.0413V9.75065H17.8747V6.50065H14.6247V4.33398H17.8747V1.08398H20.0413ZM11.3747 14.084C10.183 14.084 9.20801 13.109 9.20801 11.9173C9.20801 10.7257 10.183 9.75065 11.3747 9.75065C12.5663 9.75065 13.5413 10.7257 13.5413 11.9173C13.5413 13.109 12.5663 14.084 11.3747 14.084ZM12.458 3.31565V5.50398C12.0997 5.44736 11.7375 5.41838 11.3747 5.41732C7.74551 5.41732 4.87467 8.20148 4.87467 12.134C4.87467 14.669 6.98717 18.0273 11.3747 22.0357C15.7622 18.0273 17.8747 14.6798 17.8747 12.134V11.9173H20.0413V12.134C20.0413 15.7307 17.1488 19.9882 11.3747 24.9173C5.60051 19.9882 2.70801 15.7307 2.70801 12.134C2.70801 6.73898 6.82467 3.25065 11.3747 3.25065C11.743 3.25065 12.1005 3.27232 12.458 3.31565Z"
-              fill="#444444"
-            />
-          </svg>
-        </div>
-        {/* filter */}
-        <div onClick={() => setShowFilter(true)} className="map_sidebar_btn p-[11px]">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="26"
-            height="26"
-            viewBox="0 0 26 26"
-            fill="none"
-          >
-            <path
-              d="M3.25 18.4167V20.5833H9.75V18.4167H3.25ZM3.25 5.41667V7.58333H14.0833V5.41667H3.25ZM14.0833 22.75V20.5833H22.75V18.4167H14.0833V16.25H11.9167V22.75H14.0833ZM7.58333 9.75V11.9167H3.25V14.0833H7.58333V16.25H9.75V9.75H7.58333ZM22.75 14.0833V11.9167H11.9167V14.0833H22.75ZM16.25 9.75H18.4167V7.58333H22.75V5.41667H18.4167V3.25H16.25V9.75Z"
-              fill="#444444"
-            />
-          </svg>
-        </div>
-      </div>
+    <div className="absolute right-4 top-1/2 -translate-y-1/2 flex flex-col gap-3 z-50">
+      <button
+        onClick={onRecenterClick}
+        className="w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path
+            d="M12 8C9.79 8 8 9.79 8 12C8 14.21 9.79 16 12 16C14.21 16 16 14.21 16 12C16 9.79 14.21 8 12 8ZM20.94 11C20.48 6.83 17.17 3.52 13 3.06V2C13 1.45 12.55 1 12 1C11.45 1 11 1.45 11 2V3.06C6.83 3.52 3.52 6.83 3.06 11H2C1.45 11 1 11.45 1 12C1 12.55 1.45 13 2 13H3.06C3.52 17.17 6.83 20.48 11 20.94V22C11 22.55 11.45 23 12 23C12.55 23 13 22.55 13 22V20.94C17.17 20.48 20.48 17.17 20.94 13H22C22.55 13 23 12.55 23 12C23 11.45 22.55 11 22 11H20.94ZM12 19C8.13 19 5 15.87 5 12C5 8.13 8.13 5 12 5C15.87 5 19 8.13 19 12C19 15.87 15.87 19 12 19Z"
+            fill="#275FFC"
+          />
+        </svg>
+      </button>
     </div>
   );
 };
