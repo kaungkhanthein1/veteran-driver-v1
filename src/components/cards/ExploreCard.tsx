@@ -10,6 +10,31 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
 import { useNavigate } from "react-router-dom";
 
+interface ExploreCardItem {
+  id: string | number;
+  name: string;
+  address?: string;
+  distance?: string;
+  rating: number;
+  reviews: number;
+  price: string;
+  services: string[];
+  status?: string;
+  image?: string;
+}
+
+interface ExploreCardProps {
+  item: ExploreCardItem;
+  status?: string;
+  onClick: () => void;
+  selected?: boolean;
+  context?: 'uploaded' | 'recycleBin' | 'explore';
+  onRestore?: (item: ExploreCardItem) => void;
+  isBookmarked?: boolean;
+  onBookmarkClick?: (item: ExploreCardItem) => void;
+  setIsModalOpen?: (open: boolean) => void;
+}
+
 export default function ExploreCard({
   item,
   status,
@@ -20,11 +45,11 @@ export default function ExploreCard({
   isBookmarked = false,
   onBookmarkClick,
   setIsModalOpen
-}) {
+}: ExploreCardProps) {
   const { t } = useTranslation();
   const { theme } = useTheme();
   const navigate = useNavigate();
-  const [selectedMedia, setSelectedMedia] = useState(null);
+  const [selectedMedia, setSelectedMedia] = useState<null | { media: any; initialIndex: number }>(null);
 
   // Define all available media for this card
   const allMedia = [
@@ -33,9 +58,8 @@ export default function ExploreCard({
     { type: 'video', url: ExploreVideo, thumbnailUrl: HarrierRoom }
   ];
 
-  const handleMediaClick = (media, index) => {
+  const handleMediaClick = (media: any, index: number) => {
     setSelectedMedia({
-      type: 'modal',
       media: allMedia,
       initialIndex: index,
     });
@@ -65,15 +89,15 @@ export default function ExploreCard({
       );
     } else if (context === 'recycleBin' && onRestore) {
       return (
-         <button
-            className="bg-[#FFC61B] text-black px-4 py-1.5 rounded-full text-sm font-medium"
-            onClick={(e) => {
-              e.stopPropagation();
-              onRestore(item);
-            }}
-          >
-            {t('exploreCard.restoreButton') || 'Restore'}
-          </button>
+        <button
+          className="bg-[#FFC61B] text-black px-4 py-1.5 rounded-full text-sm font-medium"
+          onClick={(e) => {
+            e.stopPropagation();
+            onRestore(item);
+          }}
+        >
+          {t('exploreCard.restoreButton') || 'Restore'}
+        </button>
       );
     } else {
       return (
@@ -91,7 +115,7 @@ export default function ExploreCard({
   };
 
   // Determine status label color and background using inline styles
-  const getStatusColor = (status) => {
+  const getStatusColor = (status: string) => {
     switch (status?.toLowerCase()) {
       case 'approved':
         return { backgroundColor: '#00B96E1F', color: '#00B96E' };
@@ -105,7 +129,7 @@ export default function ExploreCard({
   };
 
   // Determine background and shadow classes based on theme
-  const cardClasses = `rounded-xl overflow-hidden cursor-pointer ${selected ? 'border-2 border-[#FDC51B]' : ''} ${theme === 'dark' ? 'bg-theme-secondary' : 'bg-theme-secondary shadow-lg'}`;
+  const cardClasses = `rounded-xl overflow-hidden cursor-pointer border border-[#E5E7EB] ${selected ? 'border-2 border-[#FDC51B]' : ''} ${theme === 'dark' ? 'bg-theme-secondary' : 'bg-theme-secondary shadow-lg'}`;
 
   return (
     <div
@@ -136,7 +160,7 @@ export default function ExploreCard({
             className="aspect-square bg-theme-primary rounded-lg relative overflow-hidden cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
-              handleMediaClick({ type: "video", url: ExploreVideo, thumbnail: HarrierRoom }, 2);
+              handleMediaClick(allMedia[2], 2);
             }}
           >
             <img src={HarrierRoom} alt={t('exploreCard.videoThumbnailAlt')} className="w-full h-full object-cover" />
@@ -194,7 +218,7 @@ export default function ExploreCard({
         </div>
 
         <div className="flex items-center space-x-2 text-sm text-theme-secondary">
-          {item.services.map((service, index) => (
+          {item.services.map((service: string, index: number) => (
             <React.Fragment key={index}>
               <span>{service}</span>
               {index < item.services.length - 1 && (
@@ -206,27 +230,27 @@ export default function ExploreCard({
 
         <div className="flex justify-between">
           <div>
-          <span style={{
-            color: theme === 'dark' ? '#FFF' : '#444',
-            fontFamily: 'Helvetica Neue',
-            fontSize: '18px',
-            fontStyle: 'normal',
-            fontWeight: '700',
-            lineHeight: 'normal'
-          }}>
-            {item.price.split(' ')[0]}
-          </span>
-          <span style={{
-            color: theme === 'dark' ? '#FFF' : '#444',
-            fontFamily: 'Helvetica Neue',
-            fontSize: '10.75px',
-            fontStyle: 'normal',
-            fontWeight: '700',
-            lineHeight: 'normal',
-            marginLeft: '4px'
-          }}>
-            {item.price.split(' ')[1]}
-          </span>
+            <span style={{
+              color: theme === 'dark' ? '#FFF' : '#444',
+              fontFamily: 'Helvetica Neue',
+              fontSize: '18px',
+              fontStyle: 'normal',
+              fontWeight: '700',
+              lineHeight: 'normal'
+            }}>
+              {item.price.split(' ')[0]}
+            </span>
+            <span style={{
+              color: theme === 'dark' ? '#FFF' : '#444',
+              fontFamily: 'Helvetica Neue',
+              fontSize: '10.75px',
+              fontStyle: 'normal',
+              fontWeight: '700',
+              lineHeight: 'normal',
+              marginLeft: '4px'
+            }}>
+              {item.price.split(' ')[1]}
+            </span>
           </div>
           {renderButton()}
         </div>
@@ -234,7 +258,6 @@ export default function ExploreCard({
 
       {selectedMedia && (
         <ImageModal
-          isOpen={!!selectedMedia}
           images={selectedMedia.media}
           initialIndex={selectedMedia.initialIndex}
           onClose={handleCloseModal}

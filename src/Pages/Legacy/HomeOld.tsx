@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import SocialPostCard from "../components/cards/SocialPostCard";
-import ExploreCard from "../components/cards/ExploreCard";
-import BottomNavBar from "../components/common/BottomNavBar";
-import { useBookmarks } from "../hooks/useBookmarks";
+import SocialPostCard from "../../components/cards/SocialPostCard";
+import ExploreCard from "../../components/cards/ExploreCard";
+import BottomNavBar from "../../components/common/BottomNavBar";
+import { useBookmarks } from "../../hooks/useBookmarks";
 import GoldenGateImage from "assets/GoldenGate.png";
 import HarrierImage from "assets/Harrier.png";
 import RoomImage from "assets/Room.png";
@@ -17,14 +17,14 @@ import EVisaIcon from "icons/HomeUpdate/Evisa.svg";
 import MoreIcon from "icons/HomeUpdate/More.svg";
 import TuneIcon from "../icons/Tune.svg";
 import { useNavigate, useLocation } from "react-router-dom";
-import FilterPanel from "../Pages/map/FilterPanel";
-import { useTheme } from "../context/ThemeContext";
+import FilterPanel from "../map/FilterPanel";
+import { useTheme } from "../../context/ThemeContext";
 import { useDispatch, useSelector } from "react-redux";
-import { changeCountry } from "../app/countrySlice";
-import { useGetCountriesQuery } from "../features/HomeApi";
-import LoginPage from '../Pages/LoginPage';
-import RegisterPage from '../Pages/RegisterPage';
-import Modal from "../components/common/Modal";
+import { changeCountry } from "../../app/countrySlice";
+import { useGetCountriesQuery } from "../../features/HomeApi";
+import LoginPage from '../LoginPage';
+import RegisterPage from '../RegisterPage';
+import Modal from "../../components/common/Modal";
 
 const HomePage = () => {
   const { name } = useSelector((state: any) => state.country);

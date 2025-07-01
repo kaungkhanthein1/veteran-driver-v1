@@ -3,6 +3,7 @@ import MapWithFilterUI from '../map/MapWithFilterUI';
 import BottomSheetModal from './BottomSheetModal';
 import BottomNavBar from '../../components/common/BottomNavBar';
 import { useState } from 'react';
+import MainContent from './MainContent';
 
 export default function HomePage() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -13,7 +14,9 @@ export default function HomePage() {
       </div>
       <div className="flex-1 relative max-w-[480px] mx-auto w-full">
         <MapWithFilterUI isExpanded={isExpanded} />
-        <BottomSheetModal isExpanded={isExpanded} setIsExpanded={setIsExpanded} />
+        <BottomSheetModal isExpanded={isExpanded} setIsExpanded={setIsExpanded}>
+          <MainContent />
+        </BottomSheetModal>
       </div>
       <BottomNavBar active="home" />
     </div>

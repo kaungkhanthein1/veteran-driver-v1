@@ -1,14 +1,15 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import { useDrag } from "@use-gesture/react";
-import MainContent from "./MainContent";
+// import MainContent from "./MainContent";
 
 interface BottomSheetModalProps {
   isExpanded: boolean;
   setIsExpanded: (expanded: boolean) => void;
+  children?: React.ReactNode;
 }
 
-export default function BottomSheetModal({ isExpanded, setIsExpanded }: BottomSheetModalProps) {
+export default function BottomSheetModal({ isExpanded, setIsExpanded, children }: BottomSheetModalProps) {
   const sheetRef = useRef<HTMLDivElement>(null);
   const [sheetHeight, setSheetHeight] = useState(520);
   const TOP_BAR_HEIGHT = 200; // px, updated to match actual TopBar height
@@ -76,7 +77,7 @@ export default function BottomSheetModal({ isExpanded, setIsExpanded }: BottomSh
       />
       {/* Main content */}
       <div className="overflow-y-auto h-[calc(100%-32px)] pb-8">
-        <MainContent />
+        {children}
       </div>
     </animated.div>
   );
