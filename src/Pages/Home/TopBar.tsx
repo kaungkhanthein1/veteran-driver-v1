@@ -25,7 +25,7 @@ export default function TopBar() {
   ];
 
   return (
-    <div className="px-4 pt-5 pb-2 bg-gradient-to-b from-gray-100">
+    <div className="pb-2 px-4 pt-10 bg-gradient-to-b from-white from-60% via-white via-70% to-transparent">
       <div className="flex justify-between items-center mb-1">
         <button
           onClick={() => navigate('/login', { state: { background: location } })}
@@ -56,7 +56,7 @@ export default function TopBar() {
       </div>
       {/* Search Bar */}
       <div className="flex items-center">
-        <div className="bg-theme-primary rounded-full px-3 py-2 flex items-center flex-grow">
+        <div className="bg-[#F2F4FA] rounded-full px-3 py-2 flex items-center flex-grow">
           <svg
             className="w-5 h-5 text-theme-secondary mr-2"
             fill="none"
