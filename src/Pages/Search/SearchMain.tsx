@@ -19,14 +19,14 @@ export default function SearchMain() {
   const handleSubmit = () => setSearchState("results");
 
   return (
-    <div className="bg-theme-primary min-h-screen">
+    <div className="bg-theme-secondary">
       <div className="flex items-center gap-2 mb-4 px-4 pt-4 pb-1">
         <BackButton />
         <div className="flex-1">
-          <div className="bg-theme-secondary rounded-full w-full relative">
+          <div className="bg-theme-primary rounded-full w-full relative">
             <input
               type="text"
-              className="w-full bg-theme-secondary rounded-full px-6 py-3 text-base outline-none border-none placeholder:text-gray-400 focus:outline-none focus:ring-0"
+              className="w-full bg-theme-primary rounded-full px-6 py-3 text-base outline-none border-none placeholder:text-gray-400 focus:outline-none focus:ring-0"
               placeholder="Search location..."
               value={searchQuery}
               onChange={e => handleInput(e.target.value)}

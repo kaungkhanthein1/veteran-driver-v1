@@ -98,7 +98,7 @@ const MapWithFilterUI = ({ isExpanded }: MapWithFilterUIProps) => {
   };
 
   return (
-    <div className="absolute inset-0 bg-theme-primary">
+    <div className="absolute inset-0">
       <div className="w-full h-full relative">
         <MapContainer
           center={stableCenter}

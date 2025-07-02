@@ -144,3 +144,7 @@ body {
 .my-masonry-grid_column > div {
   margin-bottom: 16px;
 }
+
+.search-filter-bar {
+  background: var(--bg-secondary);
+}

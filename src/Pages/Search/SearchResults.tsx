@@ -2,7 +2,8 @@ import { useState } from "react";
 import MapWithFilterUI from "../map/MapWithFilterUI";
 import BottomSheetModal from "../Home/BottomSheetModal";
 import ExploreCard from "../../components/cards/ExploreCard";
-import FilterIcon from "../../icons/Filter.svg";
+import DropIcon from "../../icons/Drop.svg";
+import TuneIcon from '../../icons/Tune.svg';
 
 interface SearchResultsProps {
   query: string;
@@ -56,22 +57,26 @@ export default function SearchResults({ query, onBack }: SearchResultsProps) {
   );
 
   return (
-    <div className="flex flex-col h-full min-h-screen relative bg-theme-primary">
+    <div className="flex flex-col h-full min-h-screen relative">
       <div className="flex flex-col flex-1 relative w-full h-full">
         {/* Filter bar under search bar */}
-        <div className="w-full px-4 pt-0 pb-0 z-20">
-          <div className="flex items-center gap-3 overflow-x-auto no-scrollbar">
-            <button className="flex items-center justify-center rounded-full border border-gray-200 bg-white shadow-sm px-4 py-2">
-              <img src={FilterIcon} alt="Filter" className="w-5 h-5" />
+        <div className="search-filter-bar w-full pr-4 pl-0 pt-0 pb-2 z-20">
+          <div className="flex items-center gap-3 overflow-x-auto bg-transparent">
+            <button className="flex items-center justify-center rounded-full border border-gray-200 bg-white/70 w-10 h-10 p-1">
+              <img
+                src={TuneIcon}
+                alt="Filter"
+                className="w-6 h-6"
+              />
             </button>
-            <button className="rounded-full border border-gray-200 bg-white shadow-sm px-4 py-2 text-theme-primary text-sm font-medium whitespace-nowrap flex items-center">
-              Sort By <span className="ml-1">▼</span>
+            <button className="rounded-full border border-gray-200 bg-theme-secondary py-2 text-theme-primary text-sm font-medium whitespace-nowrap flex items-center gap-1 px-6">
+              Sort By <img src={DropIcon} alt="▼" className="w-3 h-3 ml-1" />
             </button>
-            <button className="rounded-full border border-gray-200 bg-white shadow-sm px-4 py-2 text-theme-primary text-sm font-medium whitespace-nowrap flex items-center">
-              Services <span className="ml-1">▼</span>
+            <button className="rounded-full border border-gray-200 bg-theme-secondary py-2 text-theme-primary text-sm font-medium whitespace-nowrap flex items-center gap-1 px-6">
+              Services <img src={DropIcon} alt="▼" className="w-3 h-3 ml-1" />
             </button>
-            <button className="rounded-full border border-gray-200 bg-white shadow-sm px-4 py-2 text-theme-primary text-sm font-medium whitespace-nowrap flex items-center">
-              Categories <span className="ml-1">▼</span>
+            <button className="rounded-full border border-gray-200 bg-theme-secondary py-2 text-theme-primary text-sm font-medium whitespace-nowrap flex items-center gap-1 px-6">
+              Categories <img src={DropIcon} alt="▼" className="w-3 h-3 ml-1" />
             </button>
           </div>
         </div>
