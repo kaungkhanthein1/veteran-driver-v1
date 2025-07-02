@@ -82,11 +82,11 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }: any) => {
     <>
       <div className="fixed inset-0 bg-black/50 z-40" onClick={handleClose} />
       <div
-        className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] h-[95vh] bg-[var(--bg-primary)] p-4 z-[1000] shadow-lg rounded-t-2xl transition-all duration-300 ease-out overflow-y-auto
+        className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] h-[calc(95vh-50px)] bg-[var(--bg-primary)] p-4 z-[1000] shadow-lg rounded-t-2xl transition-all duration-300 ease-out overflow-y-auto
         ${isVisible ? "translate-y-0" : "translate-y-full"}`}
       >
         {/* Drag handle */}
-        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-[var(--bg-secondary)] rounded-[8px]" />
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-[#232323] rounded-[8px]" />
 
         <div className="mt-6 flex flex-col gap-[24px]">
           {/* Header */}
