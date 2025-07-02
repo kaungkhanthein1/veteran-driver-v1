@@ -4,11 +4,12 @@ import { Range } from "react-range";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import { useTheme } from "../../context/ThemeContext";
+import RatingStar from '../../icons/RatingStar.svg';
 
 const MIN = 0;
 const MAX = 1000;
 
-const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
+const FilterPanel = ({ filters, setFilters, applyFilters, onClose }: any) => {
   const { theme } = useTheme();
   // TODO: Add PropTypes for prop validation
   const [isVisible, setIsVisible] = useState(false);
@@ -47,17 +48,17 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
     setTimeout(() => setIsVisible(true), 10);
   }, []);
 
-  const handleChange = (key, value) => {
+  const handleChange = (key: any, value: any) => {
     setFilters({ ...filters, [key]: value });
   };
 
-  const toggleService = (service) => {
+  const toggleService = (service: any) => {
     if (service === "All") {
       setFilters({ ...filters, services: [] });
     } else {
       const exists = filters.services.includes(service);
       const newServices = exists
-        ? filters.services.filter((s) => s !== service)
+        ? filters.services.filter((s: any) => s !== service)
         : [...filters.services, service];
       setFilters({ ...filters, services: newServices });
     }
@@ -117,12 +118,10 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
           </div>
 
           {/* Price */}
-          <div className="space-y-4">
+          <div className="space-y-8">
             <div className="flex w-full price_tags justify-between items-center text-[var(--text-primary)]">
               <span
-                className={`${
-                  theme === "white" ? "filter_title" : "filter_title_dark"
-                }`}
+                className="text-lg font-bold"
               >
                 {t("filterPanel.priceRangeLabel")}
               </span>
@@ -131,142 +130,85 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
               </span>
             </div>
 
-            <Range
-              step={1}
-              min={MIN}
-              max={MAX}
-              values={filters.priceRange}
-              onChange={(values) =>
-                setFilters({ ...filters, priceRange: values })
-              }
-              renderTrack={({ props, children }) => {
-                const [minVal, maxVal] = filters.priceRange;
-                const minPercent = ((minVal - MIN) / (MAX - MIN)) * 100;
-                const maxPercent = ((maxVal - MIN) / (MAX - MIN)) * 100;
-                const { key, ...restProps } = props;
-
-                return (
-                  <div
-                    key={key}
-                    {...restProps}
-                    className="w-full h-[16px] rounded-[8px] relative"
-                    style={{
-                      background: `linear-gradient(
-                  to right,
-                  var(--bg-secondary) 0%,
-                  var(--bg-secondary) ${minPercent}%,
-                  var(--accent-yellow) ${minPercent}%,
-                  var(--accent-yellow) ${maxPercent}%,
-                  var(--bg-secondary) ${maxPercent}%,
-                  var(--bg-secondary) 100%
-                )`,
-                    }}
-                  >
-                    {children}
-                  </div>
-                );
-              }}
-              renderThumb={({ props }) => {
-                const { key, ...restProps } = props;
-                return (
-                  <div
-                    key={key}
-                    {...restProps}
-                    className={`w-[8px] h-[44px] ${
-                      theme === "white" ? "border-white" : "border-black"
-                    } border-[3px] rounded-[8px] shadow`}
-                    style={{
-                      ...restProps.style,
-                      backgroundColor: "var(--accent-yellow)",
-                      transform: "translateY(-50%)",
-                    }}
-                  />
-                );
-              }}
-            />
-          </div>
-
-          {/* Distance */}
-          <div className="space-y-4">
-            <div className="flex w-full price_tags justify-between items-center text-[var(--text-primary)]">
-              <span
-                className={`${
-                  theme === "white" ? "filter_title" : "filter_title_dark"
-                }`}
+            <div className="relative w-full">
+              {/* Tooltip */}
+              <div
+                className="absolute left-1/2 -translate-x-1/2 -top-10 z-10 flex flex-col items-center"
+                style={{ pointerEvents: 'none' }}
               >
-                {t("filterPanel.distanceLabel")}
-              </span>
-              <span
-              //  style={{ color: "var(--accent-yellow)" }}
-              >
-                0km - {filters.distance}km
-              </span>
+                <div className="bg-[#232323] text-white text-xs font-semibold rounded-md px-3 py-2 shadow-lg flex items-center justify-center whitespace-nowrap">
+                  {`${filters.priceRange[0]} USD to ${filters.priceRange[1]} USD`}
+                </div>
+                <svg width="16" height="6" viewBox="0 0 16 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 6L0 0H16L8 6Z" fill="#232323"/>
+                </svg>
+              </div>
+              <Range
+                step={1}
+                min={MIN}
+                max={MAX}
+                values={filters.priceRange}
+                onChange={(values) =>
+                  setFilters({ ...filters, priceRange: values })
+                }
+                renderTrack={({ props, children }) => {
+                  const [minVal, maxVal] = filters.priceRange;
+                  const minPercent = ((minVal - MIN) / (MAX - MIN)) * 100;
+                  const maxPercent = ((maxVal - MIN) / (MAX - MIN)) * 100;
+                  return (
+                    <div
+                      {...props}
+                      className="w-full h-[12px] rounded-full relative"
+                      style={{ background: '#EDEDED' }}
+                    >
+                      <div
+                        className="absolute h-full rounded-full"
+                        style={{
+                          left: `${minPercent}%`,
+                          width: `${maxPercent - minPercent}%`,
+                          background: '#FFC61B',
+                          top: 0,
+                          bottom: 0,
+                        }}
+                      />
+                      {children}
+                    </div>
+                  );
+                }}
+                renderThumb={({ props }) => {
+                  return (
+                    <div
+                      {...props}
+                      className="w-[28px] h-[28px] rounded-full bg-white shadow-lg border border-[#EDEDED]"
+                      style={{
+                        ...props.style,
+                        boxShadow: '0 2px 8px 0 rgba(0,0,0,0.08)',
+                        border: '2px solid #EDEDED',
+                      }}
+                    />
+                  );
+                }}
+              />
             </div>
-            <Range
-              step={1}
-              min={0}
-              max={50}
-              values={[filters.distance]}
-              onChange={(values) => handleChange("distance", values[0])}
-              renderTrack={({ props, children }) => {
-                const distance = filters.distance;
-                const percentage = ((distance - 0) / (50 - 0)) * 100;
-                const { key, ...restProps } = props;
-                return (
-                  <div
-                    key={key}
-                    {...restProps}
-                    className="w-full h-[16px] range_input_c rounded"
-                    style={{
-                      background: `linear-gradient(to right, var(--accent-yellow) ${percentage}%, var(--bg-secondary) ${percentage}%)`,
-                    }}
-                  >
-                    {children}
-                  </div>
-                );
-              }}
-              renderThumb={({ props }) => {
-                const { key, ...restProps } = props;
-                return (
-                  <div
-                    key={key}
-                    {...restProps}
-                    className={`w-[8px] border-[3px] ${
-                      theme === "white" ? "border-white" : "border-black"
-                    } h-[44px] rounded-[8px] shadow`}
-                    style={{
-                      ...restProps.style,
-                      backgroundColor: "var(--accent-yellow)",
-                      transform: "translateY(-50%)",
-                    }}
-                  />
-                );
-              }}
-            />
           </div>
 
           {/* Rating */}
           <div className="space-y-3">
             <label className="block text-[var(--text-primary)] font-medium">
-              {t("filterPanel.ratingLabel")}
+              <span className="text-lg font-bold">{t("filterPanel.ratingLabel")}</span>
             </label>
             <div className="flex flex-wrap gap-2">
-              {ratingOptions.map((value) => (
+              {ratingOptions.map((value: any) => (
                 <button
                   key={value}
                   onClick={() => handleChange("rating", value)}
-                  className={`px-4 py-2 rounded-[8px] text-[12px] font-[500]
-                    ${
-                      filters.rating === value
-                        ? `${
-                            theme === "white"
-                              ? "filter_active_map"
-                              : "filter_active_map_dark"
-                          }`
-                        : "bg-[var(--bg-secondary)] text-[var(--text-primary)]"
-                    }`}
+                  className={"px-4 py-2 rounded-[8px] text-[12px] font-[500] flex items-center gap-1"}
+                  style={filters.rating === value ? { background: 'rgba(255, 195, 0, 0.20)', color: '#FFAE00' } : { background: '#fff', color: '#000' }}
                 >
-                  {ratingLabels[value]}
+                  {ratingLabels[value as keyof typeof ratingLabels]}
+                  {value !== 0 && (
+                    <img src={RatingStar} alt="star" className="w-4 h-4 ml-1" />
+                  )}
                 </button>
               ))}
             </div>
@@ -275,26 +217,17 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
           {/* category */}
           <div className="space-y-3">
             <label className="block text-[var(--text-primary)] font-medium">
-              {/* {t("filterPanel.servicesLabel")} */}
-              Categories
+              <span className="text-lg font-bold">Categories</span>
             </label>
             <div className="flex flex-wrap gap-2">
-              {categoryOptions.map((category) => {
+              {categoryOptions.map((category: any) => {
                 const isActive = activeCategory === category;
                 return (
                   <button
                     key={category}
                     onClick={() => setActiveCategory(category)}
-                    className={`px-4 py-2 rounded-[8px] text-[12px] font-[500]
-        ${
-          isActive
-            ? `${
-                theme === "white"
-                  ? "filter_active_map"
-                  : "filter_active_map_dark"
-              }`
-            : "bg-[var(--bg-secondary)] text-[var(--text-primary)]"
-        }`}
+                    className={"px-4 py-2 rounded-[8px] text-[12px] font-[500]"}
+                    style={isActive ? { background: 'rgba(255, 195, 0, 0.20)', color: '#FFAE00' } : { background: '#fff', color: '#000' }}
                   >
                     {category}
                   </button>
@@ -306,10 +239,10 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
           {/* Services */}
           <div className="space-y-3">
             <label className="block text-[var(--text-primary)] font-medium">
-              {t("filterPanel.servicesLabel")}
+              <span className="text-lg font-bold">{t("filterPanel.servicesLabel")}</span>
             </label>
             <div className="flex flex-wrap gap-2">
-              {serviceOptions.map((service) => {
+              {serviceOptions.map((service: any) => {
                 const isActive =
                   service === "All"
                     ? filters.services.length === 0
@@ -318,16 +251,8 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
                   <button
                     key={service}
                     onClick={() => toggleService(service)}
-                    className={`px-4 py-2 rounded-[8px] text-[12px] font-[500]
-                      ${
-                        isActive
-                          ? `${
-                              theme === "white"
-                                ? "filter_active_map"
-                                : "filter_active_map_dark"
-                            }`
-                          : "bg-[var(--bg-secondary)] text-[var(--text-primary)]"
-                      }`}
+                    className={"px-4 py-2 rounded-[8px] text-[12px] font-[500]"}
+                    style={isActive ? { background: 'rgba(255, 195, 0, 0.20)', color: '#FFAE00' } : { background: '#fff', color: '#000' }}
                   >
                     {service}
                   </button>
@@ -339,23 +264,15 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
           {/* Sort */}
           <div className="space-y-3">
             <label className="block text-[var(--text-primary)] font-medium">
-              {t("filterPanel.sortByLabel")}
+              <span className="text-lg font-bold">{t("filterPanel.sortByLabel")}</span>
             </label>
             <div className=" flex flex-wrap gap-2">
-              {sortOptions.map((option) => (
+              {sortOptions.map((option: any) => (
                 <button
                   key={option}
                   onClick={() => handleChange("sort", option)}
-                  className={`px-4 py-2 rounded-[8px] text-[12px] font-[500]
-                    ${
-                      filters.sort === option
-                        ? `${
-                            theme === "white"
-                              ? "filter_active_map"
-                              : "filter_active_map_dark"
-                          }`
-                        : "bg-[var(--bg-secondary)] text-[var(--text-primary)]"
-                    }`}
+                  className={"px-4 py-2 rounded-[8px] text-[12px] font-[500]"}
+                  style={filters.sort === option ? { background: 'rgba(255, 195, 0, 0.20)', color: '#FFAE00' } : { background: 'var(--bg-secondary)', color: 'var(--text-primary)' }}
                 >
                   {option}
                 </button>
@@ -367,7 +284,8 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }) => {
         {/* Apply Button */}
         <button
           onClick={applyFilters}
-          className="filter_apply_button sticky bottom-0 w-full mt-8 py-[16px] font-medium"
+          className="sticky bottom-0 w-full mt-8 py-[16px] font-medium rounded-[100px] border-0"
+          style={{ background: 'linear-gradient(180deg, #FFC61B 0%, #FF9500 100%)', color: '#fff' }}
         >
           {t("filterPanel.applyButton")}
         </button>
