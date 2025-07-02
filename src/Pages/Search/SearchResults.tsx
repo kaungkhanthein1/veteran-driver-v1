@@ -50,6 +50,8 @@ const searchResults = [
 
 export default function SearchResults({ query, onBack }: SearchResultsProps) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isSortModalOpen, setIsSortModalOpen] = useState(false);
+  const [sortBy, setSortBy] = useState("Relevance");
 
   // Filter results by query (case-insensitive)
   const filteredResults = searchResults.filter(item =>
@@ -69,8 +71,25 @@ export default function SearchResults({ query, onBack }: SearchResultsProps) {
                 className="w-6 h-6"
               />
             </button>
-            <button className="rounded-full border border-gray-200 bg-theme-secondary py-2 text-theme-primary text-sm font-medium whitespace-nowrap flex items-center gap-1 px-6">
-              Sort By <img src={DropIcon} alt="▼" className="w-3 h-3 ml-1" />
+            <button
+              className="rounded-full border border-gray-200 bg-theme-secondary py-2 text-theme-primary text-sm font-medium whitespace-nowrap flex items-center gap-1 px-6"
+              onClick={() => setIsSortModalOpen(true)}
+            >
+              <span style={sortBy !== "Relevance" ? { color: '#FFAE00' } : {}}>{sortBy}</span>
+              <svg
+                className="w-3 h-3 ml-1"
+                viewBox="0 0 11 6"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M1 0.75L5.5 5.25L10 0.75"
+                  stroke={sortBy === "Relevance" ? "#FFAE00" : sortBy === "Distance" ? "#FFAE00" : "#000"}
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
             </button>
             <button className="rounded-full border border-gray-200 bg-theme-secondary py-2 text-theme-primary text-sm font-medium whitespace-nowrap flex items-center gap-1 px-6">
               Services <img src={DropIcon} alt="▼" className="w-3 h-3 ml-1" />
@@ -80,6 +99,45 @@ export default function SearchResults({ query, onBack }: SearchResultsProps) {
             </button>
           </div>
         </div>
+        {/* Custom Sort Modal */}
+        {isSortModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40">
+            <div className="bg-white w-full max-w-md rounded-t-2xl p-6">
+              <div className="text-lg font-semibold mb-4">Sort By</div>
+              <div className="flex gap-2 mb-6">
+                <button
+                  className={`flex-1 py-2 rounded-lg ${sortBy === "Relevance" ? "" : "bg-gray-100"}`}
+                  style={sortBy === "Relevance" ? { background: 'rgba(255, 195, 0, 0.20)', color: '#FFAE00' } : {}}
+                  onClick={() => setSortBy("Relevance")}
+                >
+                  Relevance
+                </button>
+                <button
+                  className={`flex-1 py-2 rounded-lg ${sortBy === "Distance" ? "" : "bg-gray-100"}`}
+                  style={sortBy === "Distance" ? { background: 'rgba(255, 195, 0, 0.20)', color: '#FFAE00' } : {}}
+                  onClick={() => setSortBy("Distance")}
+                >
+                  Distance
+                </button>
+              </div>
+              <div className="flex gap-2">
+                <button
+                  className="flex-1 py-2 rounded-lg bg-gray-200"
+                  onClick={() => setIsSortModalOpen(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="flex-1 py-2 rounded-lg text-white border-0"
+                  style={{ background: 'linear-gradient(180deg, #FFC61B 0%, #FF9500 100%)' }}
+                  onClick={() => setIsSortModalOpen(false)}
+                >
+                  Done
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
         <div className="flex-1 relative w-full h-full">
           <MapWithFilterUI isExpanded={isExpanded} />
           <BottomSheetModal
