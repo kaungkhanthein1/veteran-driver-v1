@@ -1,32 +1,43 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import { useDrag } from "@use-gesture/react";
-// import MainContent from "./MainContent";
 
 interface BottomSheetModalProps {
   isExpanded: boolean;
   setIsExpanded: (expanded: boolean) => void;
   children?: React.ReactNode;
   minHeight?: number;
+  expendable?: boolean;
 }
 
-export default function BottomSheetModal({ isExpanded, setIsExpanded, children, minHeight = 360 }: BottomSheetModalProps) {
+export default function BottomSheetModal({
+  isExpanded,
+  setIsExpanded,
+  children,
+  minHeight = 360,
+  expendable = true,
+}: BottomSheetModalProps) {
   const sheetRef = useRef<HTMLDivElement>(null);
   const [sheetHeight, setSheetHeight] = useState(520);
-  const TOP_BAR_HEIGHT = 200; // px, updated to match actual TopBar height
-  const SHEET_MIN = minHeight; // use the prop instead of hardcoded value
+  const TOP_BAR_HEIGHT = 20;
+  const SHEET_MIN = minHeight;
 
-  // Snap points: collapsed and expanded
+  // Snap points
   const openY = 0;
   const closedY = sheetHeight - SHEET_MIN;
 
   const [{ y }, api] = useSpring(() => ({ y: closedY }));
 
-  // Always use the latest closedY/openY
+  // Set y position based on expanded/collapsed
   useEffect(() => {
-    api.start({ y: isExpanded ? openY : closedY, immediate: true });
+    if (expendable) {
+      api.start({ y: isExpanded ? openY : closedY, immediate: true });
+    } else {
+      api.start({ y: closedY, immediate: true });
+      if (isExpanded) setIsExpanded(false);
+    }
     // eslint-disable-next-line
-  }, [sheetHeight, isExpanded]);
+  }, [sheetHeight, isExpanded, expendable]);
 
   useEffect(() => {
     const updateHeight = () => {
@@ -67,16 +78,17 @@ export default function BottomSheetModal({ isExpanded, setIsExpanded, children, 
       style={{
         y,
         height: sheetHeight,
-        touchAction: 'none',
+        touchAction: "none",
       }}
     >
-      {/* Drag handle */}
+      {/* Only handle is draggable */}
       <div
         className="w-12 h-1.5 bg-gray-400 rounded-full mx-auto mt-2 mb-4 cursor-grab active:cursor-grabbing"
         {...bind()}
         style={{ touchAction: 'none' }}
       />
-      {/* Main content */}
+
+      {/* Content is scrollable and does NOT have any drag events */}
       <div className="overflow-y-auto h-[calc(100%-32px)] pb-8">
         {children}
       </div>

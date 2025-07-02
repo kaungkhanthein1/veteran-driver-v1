@@ -14,7 +14,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export function ThemeProvider({ children }: ThemeProviderProps) {
   const [theme, setTheme] = useState(() => {
     const savedTheme = localStorage.getItem('theme');
-    return savedTheme || 'dark';
+    return savedTheme || 'white';
   });
 
   const toggleTheme = (newTheme: string) => {
