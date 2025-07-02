@@ -125,9 +125,6 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }: any) => {
               >
                 {t("filterPanel.priceRangeLabel")}
               </span>
-              <span className="price_num">
-                ${filters.priceRange[0]} - ${filters.priceRange[1]}
-              </span>
             </div>
 
             <div className="relative w-full">
@@ -158,8 +155,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }: any) => {
                   return (
                     <div
                       {...props}
-                      className="w-full h-[12px] rounded-full relative"
-                      style={{ background: '#EDEDED' }}
+                      className="w-full h-[12px] rounded-full relative bg-theme-secondary"
                     >
                       <div
                         className="absolute h-full rounded-full"
@@ -175,19 +171,17 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }: any) => {
                     </div>
                   );
                 }}
-                renderThumb={({ props }) => {
-                  return (
-                    <div
-                      {...props}
-                      className="w-[28px] h-[28px] rounded-full bg-white shadow-lg border border-[#EDEDED]"
-                      style={{
-                        ...props.style,
-                        boxShadow: '0 2px 8px 0 rgba(0,0,0,0.08)',
-                        border: '2px solid #EDEDED',
-                      }}
-                    />
-                  );
-                }}
+                renderThumb={({ props }) => (
+                  <div
+                    {...props}
+                    className="w-[28px] h-[28px] rounded-full bg-white shadow-lg border border-[#EDEDED]"
+                    style={{
+                      ...props.style,
+                      boxShadow: '0 2px 8px 0 rgba(0,0,0,0.08)',
+                      border: '2px solid #EDEDED',
+                    }}
+                  />
+                )}
               />
             </div>
           </div>
@@ -196,19 +190,27 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }: any) => {
           <div className="space-y-3">
             <label className="block text-[var(--text-primary)] font-medium">
               <span className="text-lg font-bold">{t("filterPanel.ratingLabel")}</span>
+              <span className="text-sm text-gray-400 ml-1">. at least</span>
             </label>
-            <div className="flex flex-wrap gap-2">
-              {ratingOptions.map((value: any) => (
+            <div className="flex flex-nowrap gap-2 overflow-x-auto no-scrollbar">
+              {/* All chip */}
+              <button
+                onClick={() => handleChange("rating", 0)}
+                className={"px-5 py-1 h-9 rounded-[10px] border border-[#E0E0E0] text-base font-[500] flex items-center gap-1 whitespace-nowrap"}
+                style={filters.rating === 0 ? { background: 'rgba(255, 195, 0, 0.20)', color: '#FFAE00' } : { background: '#fff', color: '#FFAE00' }}
+              >
+                All
+              </button>
+              {/* Number chips */}
+              {[2.5, 3.5, 4.5].map((num) => (
                 <button
-                  key={value}
-                  onClick={() => handleChange("rating", value)}
-                  className={"px-4 py-2 rounded-[8px] text-[12px] font-[500] flex items-center gap-1"}
-                  style={filters.rating === value ? { background: 'rgba(255, 195, 0, 0.20)', color: '#FFAE00' } : { background: '#fff', color: '#000' }}
+                  key={num}
+                  onClick={() => handleChange("rating", num)}
+                  className={"px-5 py-1 h-9 rounded-[10px] border border-[#E0E0E0] text-base font-[500] flex items-center gap-1 whitespace-nowrap"}
+                  style={filters.rating === num ? { background: 'rgba(255, 195, 0, 0.20)', color: '#FFAE00' } : { background: '#fff', color: '#000' }}
                 >
-                  {ratingLabels[value as keyof typeof ratingLabels]}
-                  {value !== 0 && (
-                    <img src={RatingStar} alt="star" className="w-4 h-4 ml-1" />
-                  )}
+                  {num}
+                  <img src={RatingStar} alt="star" className="w-4 h-4 ml-1" />
                 </button>
               ))}
             </div>
@@ -226,7 +228,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }: any) => {
                   <button
                     key={category}
                     onClick={() => setActiveCategory(category)}
-                    className={"px-4 py-2 rounded-[8px] text-[12px] font-[500]"}
+                    className={"px-3 py-1 h-8 rounded-[8px] border border-[#E0E0E0] text-sm font-[500] flex items-center gap-1 whitespace-nowrap"}
                     style={isActive ? { background: 'rgba(255, 195, 0, 0.20)', color: '#FFAE00' } : { background: '#fff', color: '#000' }}
                   >
                     {category}
@@ -251,7 +253,7 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }: any) => {
                   <button
                     key={service}
                     onClick={() => toggleService(service)}
-                    className={"px-4 py-2 rounded-[8px] text-[12px] font-[500]"}
+                    className={"px-3 py-1 h-8 rounded-[8px] border border-[#E0E0E0] text-sm font-[500] flex items-center gap-1 whitespace-nowrap"}
                     style={isActive ? { background: 'rgba(255, 195, 0, 0.20)', color: '#FFAE00' } : { background: '#fff', color: '#000' }}
                   >
                     {service}
@@ -266,13 +268,15 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }: any) => {
             <label className="block text-[var(--text-primary)] font-medium">
               <span className="text-lg font-bold">{t("filterPanel.sortByLabel")}</span>
             </label>
-            <div className=" flex flex-wrap gap-2">
-              {sortOptions.map((option: any) => (
+            <div className="w-full flex rounded-[16px] border border-[#E0E0E0] overflow-hidden">
+              {['Relevance', 'Distance'].map((option: string, idx) => (
                 <button
                   key={option}
                   onClick={() => handleChange("sort", option)}
-                  className={"px-4 py-2 rounded-[8px] text-[12px] font-[500]"}
-                  style={filters.sort === option ? { background: 'rgba(255, 195, 0, 0.20)', color: '#FFAE00' } : { background: 'var(--bg-secondary)', color: 'var(--text-primary)' }}
+                  className={`flex-1 py-3 text-base font-[500] transition-colors duration-150 ${filters.sort === option ? '' : ''}`}
+                  style={filters.sort === option
+                    ? { background: 'rgba(255, 195, 0, 0.20)', color: '#FFAE00', border: 'none' }
+                    : { background: '#fff', color: '#000', border: 'none' }}
                 >
                   {option}
                 </button>
