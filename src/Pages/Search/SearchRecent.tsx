@@ -45,7 +45,7 @@ const recentItems = [
 
 export default function SearchRecent() {
   return (
-    <>
+    <div className="px-4 pb-4">
       {/* Recent View Title */}
       <div className="text-lg font-medium mb-3">Recent View</div>
 
@@ -67,6 +67,6 @@ export default function SearchRecent() {
           <p className="text-theme-primary text-lg">No Recent</p>
         </div>
       )}
-    </>
+    </div>
   );
 }

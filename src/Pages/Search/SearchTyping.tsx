@@ -3,7 +3,7 @@ import ArrowRightIcon from "icons/RightArrow.svg";
 
 const allLocations = [
   "Baby Bar", "Banana", "Barcelona Cafe", "Barandon House", "Bama Restaurant",
-  "Babe Club", "Bobxy Bar", "Bruno"
+  "Babe Club", "Bobxy Bar", "Bruno", "Thanh Club", "Dan Cafe", "Thanh Cafe", "Coffee House"
   // ...add more
 ];
 

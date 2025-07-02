@@ -7,13 +7,14 @@ interface BottomSheetModalProps {
   isExpanded: boolean;
   setIsExpanded: (expanded: boolean) => void;
   children?: React.ReactNode;
+  minHeight?: number;
 }
 
-export default function BottomSheetModal({ isExpanded, setIsExpanded, children }: BottomSheetModalProps) {
+export default function BottomSheetModal({ isExpanded, setIsExpanded, children, minHeight = 360 }: BottomSheetModalProps) {
   const sheetRef = useRef<HTMLDivElement>(null);
   const [sheetHeight, setSheetHeight] = useState(520);
   const TOP_BAR_HEIGHT = 200; // px, updated to match actual TopBar height
-  const SHEET_MIN = 360; // collapsed height
+  const SHEET_MIN = minHeight; // use the prop instead of hardcoded value
 
   // Snap points: collapsed and expanded
   const openY = 0;
