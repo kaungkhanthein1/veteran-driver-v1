@@ -227,7 +227,10 @@ const FilterPanel = ({ filters, setFilters, applyFilters, onClose }: any) => {
                 return (
                   <button
                     key={category}
-                    onClick={() => setActiveCategory(category)}
+                    onClick={() => {
+                      setActiveCategory(category);
+                      setFilters({ ...filters, categories: category });
+                    }}
                     className={"px-3 py-1 h-8 rounded-[8px] border border-[#E0E0E0] text-sm font-[500] flex items-center gap-1 whitespace-nowrap"}
                     style={isActive ? { background: 'rgba(255, 195, 0, 0.20)', color: '#FFAE00' } : { background: '#fff', color: '#000' }}
                   >

@@ -53,16 +53,30 @@ const searchResults = [
 export default function SearchResults({ query, onBack }: SearchResultsProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isSortModalOpen, setIsSortModalOpen] = useState(false);
-  const [sortBy, setSortBy] = useState("Relevance");
-  const [appliedSortBy, setAppliedSortBy] = useState("Sort by");
   const [showFilterPanel, setShowFilterPanel] = useState(false);
+
+  // Centralized filter state
   const [filters, setFilters] = useState({
     priceRange: [0, 1000],
     distance: 10,
     rating: 0,
     services: [],
-    sort: 'Comprehensive',
+    categories: '',
+    sort: 'Sort By',
   });
+
+  // Helper to get display label for services
+  const getServicesLabel = () => {
+    if (!filters.services || filters.services.length === 0) return 'Services';
+    if (filters.services.length === 1) return filters.services[0];
+    return `${filters.services[0]} +${filters.services.length - 1}`;
+  };
+
+  // Helper to get display label for categories
+  const getCategoriesLabel = () => {
+    if (!filters.categories || filters.categories === '' || filters.categories === 'All') return 'Categories';
+    return filters.categories;
+  };
 
   // Filter results by query (case-insensitive)
   const filteredResults = searchResults.filter(item =>
@@ -74,7 +88,9 @@ export default function SearchResults({ query, onBack }: SearchResultsProps) {
       <div className="flex flex-col flex-1 relative w-full h-full">
         {/* Filter bar under search bar */}
         <SearchFilterBar
-          selectedSortLabel={appliedSortBy}
+          selectedSortLabel={filters.sort}
+          selectedServicesLabel={getServicesLabel()}
+          selectedCategoriesLabel={getCategoriesLabel()}
           onSortClick={() => setIsSortModalOpen(true)}
           onTuneClick={() => setShowFilterPanel(true)}
         />
@@ -85,16 +101,16 @@ export default function SearchResults({ query, onBack }: SearchResultsProps) {
               <div className="text-lg font-semibold mb-4">Sort By</div>
               <div className="flex gap-2 mb-6">
                 <button
-                  className={`flex-1 py-2 rounded-lg ${sortBy === "Relevance" ? "" : "bg-gray-100"}`}
-                  style={sortBy === "Relevance" ? { background: 'rgba(255, 195, 0, 0.20)', color: '#FFAE00' } : {}}
-                  onClick={() => setSortBy("Relevance")}
+                  className={`flex-1 py-2 rounded-lg ${filters.sort === "Relevance" ? "" : "bg-gray-100"}`}
+                  style={filters.sort === "Relevance" ? { background: 'rgba(255, 195, 0, 0.20)', color: '#FFAE00' } : {}}
+                  onClick={() => setFilters(f => ({ ...f, sort: "Relevance" }))}
                 >
                   Relevance
                 </button>
                 <button
-                  className={`flex-1 py-2 rounded-lg ${sortBy === "Distance" ? "" : "bg-gray-100"}`}
-                  style={sortBy === "Distance" ? { background: 'rgba(255, 195, 0, 0.20)', color: '#FFAE00' } : {}}
-                  onClick={() => setSortBy("Distance")}
+                  className={`flex-1 py-2 rounded-lg ${filters.sort === "Distance" ? "" : "bg-gray-100"}`}
+                  style={filters.sort === "Distance" ? { background: 'rgba(255, 195, 0, 0.20)', color: '#FFAE00' } : {}}
+                  onClick={() => setFilters(f => ({ ...f, sort: "Distance" }))}
                 >
                   Distance
                 </button>
@@ -109,10 +125,7 @@ export default function SearchResults({ query, onBack }: SearchResultsProps) {
                 <button
                   className="flex-1 py-2 rounded-lg text-white border-0"
                   style={{ background: 'linear-gradient(180deg, #FFC61B 0%, #FF9500 100%)' }}
-                  onClick={() => {
-                    setAppliedSortBy(sortBy);
-                    setIsSortModalOpen(false);
-                  }}
+                  onClick={() => setIsSortModalOpen(false)}
                 >
                   Done
                 </button>

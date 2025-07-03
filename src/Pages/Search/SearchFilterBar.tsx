@@ -10,7 +10,9 @@ interface SearchFilterBarProps {
   sortLabel?: string;
   selectedSortLabel?: string;
   servicesLabel?: string;
+  selectedServicesLabel?: string;
   categoriesLabel?: string;
+  selectedCategoriesLabel?: string;
   children?: React.ReactNode;
 }
 
@@ -22,10 +24,14 @@ const SearchFilterBar: React.FC<SearchFilterBarProps> = ({
   sortLabel = 'Sort By',
   selectedSortLabel = 'Sort By',
   servicesLabel = 'Services',
+  selectedServicesLabel = 'Services',
   categoriesLabel = 'Categories',
+  selectedCategoriesLabel = 'Categories',
   children,
 }) => {
   const isSortSelected = selectedSortLabel && selectedSortLabel !== 'Sort By';
+  const isServicesSelected = selectedServicesLabel && selectedServicesLabel !== 'Services';
+  const isCategoriesSelected = selectedCategoriesLabel && selectedCategoriesLabel !== 'Categories';
   return (
     <div className="w-full pt-0 pb-2 z-20 bg-transparent">
       <div className="flex items-center gap-3 overflow-x-auto no-scrollbar bg-transparent px-2">
@@ -51,16 +57,20 @@ const SearchFilterBar: React.FC<SearchFilterBarProps> = ({
           className="flex items-center justify-center rounded-full border border-gray-200 bg-white h-10 min-w-[100px] px-5 text-sm font-medium whitespace-nowrap"
           onClick={onServicesClick}
         >
-          {servicesLabel}
-          <img src={DropIcon} alt="▼" className="w-3 h-3 ml-2" />
+          <span style={isServicesSelected ? { color: '#FFAE00' } : { color: '#000' }}>
+            {isServicesSelected ? selectedServicesLabel : servicesLabel}
+          </span>
+          <img src={DropIcon} alt="▼" className="w-3 h-3 ml-2" style={{ filter: isServicesSelected ? 'invert(62%) sepia(98%) saturate(1000%) hue-rotate(0deg) brightness(101%) contrast(101%)' : 'none' }} />
         </button>
         {/* Categories chip */}
         <button
           className="flex items-center justify-center rounded-full border border-gray-200 bg-white h-10 min-w-[100px] px-5 text-sm font-medium whitespace-nowrap"
           onClick={onCategoriesClick}
         >
-          {categoriesLabel}
-          <img src={DropIcon} alt="▼" className="w-3 h-3 ml-2" />
+          <span style={isCategoriesSelected ? { color: '#FFAE00' } : { color: '#000' }}>
+            {isCategoriesSelected ? selectedCategoriesLabel : categoriesLabel}
+          </span>
+          <img src={DropIcon} alt="▼" className="w-3 h-3 ml-2" style={{ filter: isCategoriesSelected ? 'invert(62%) sepia(98%) saturate(1000%) hue-rotate(0deg) brightness(101%) contrast(101%)' : 'none' }} />
         </button>
         {/* Additional chips from children */}
         {children}
