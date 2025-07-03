@@ -8,7 +8,7 @@ import NavHomeActiveIcon from "../../icons/NavBar/NavHomeActive.svg";
 import NavExploreActiveIcon from "../../icons/NavBar/NavExploreActive.svg";
 import NavRankingActiveIcon from "../../icons/NavBar/NavRankingActive.svg";
 import NavProfileActiveIcon from "../../icons/NavBar/NavProfileActive.svg";
-import UploadIcon from "../../icons/NavBar/upload.png";
+import UploadIcon from "../../icons/NavBar/upload.webp";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import { useTheme } from "../../context/ThemeContext";
