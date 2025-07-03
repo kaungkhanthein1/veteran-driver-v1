@@ -4,13 +4,15 @@ import BottomSheetModal from "../Home/BottomSheetModal";
 import ExploreCard from "../../components/cards/ExploreCard";
 import DropIcon from "../../icons/Drop.svg";
 import TuneIcon from '../../icons/Tune.svg';
+import SearchFilterBar from './SearchFilterBar';
+import FilterPanel from '../map/FilterPanel';
 
 interface SearchResultsProps {
   query: string;
   onBack: () => void;
 }
 
-// Mock data for search results (replace with real filtered data as needed)
+// Mock data for search results
 const searchResults = [
   {
     id: 1,
@@ -52,6 +54,15 @@ export default function SearchResults({ query, onBack }: SearchResultsProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isSortModalOpen, setIsSortModalOpen] = useState(false);
   const [sortBy, setSortBy] = useState("Relevance");
+  const [appliedSortBy, setAppliedSortBy] = useState("Sort by");
+  const [showFilterPanel, setShowFilterPanel] = useState(false);
+  const [filters, setFilters] = useState({
+    priceRange: [0, 1000],
+    distance: 10,
+    rating: 0,
+    services: [],
+    sort: 'Comprehensive',
+  });
 
   // Filter results by query (case-insensitive)
   const filteredResults = searchResults.filter(item =>
@@ -62,43 +73,11 @@ export default function SearchResults({ query, onBack }: SearchResultsProps) {
     <div className="flex flex-col h-full min-h-screen relative">
       <div className="flex flex-col flex-1 relative w-full h-full">
         {/* Filter bar under search bar */}
-        <div className="search-filter-bar w-full pr-4 pl-0 pt-0 pb-2 z-20">
-          <div className="flex items-center gap-3 overflow-x-auto bg-transparent">
-            <button className="flex items-center justify-center rounded-full border border-gray-200 bg-white/70 w-10 h-10 p-1">
-              <img
-                src={TuneIcon}
-                alt="Filter"
-                className="w-6 h-6"
-              />
-            </button>
-            <button
-              className="rounded-full border border-gray-200 bg-theme-secondary py-2 text-theme-primary text-sm font-medium whitespace-nowrap flex items-center gap-1 px-6"
-              onClick={() => setIsSortModalOpen(true)}
-            >
-              <span style={sortBy !== "Relevance" ? { color: '#FFAE00' } : {}}>{sortBy}</span>
-              <svg
-                className="w-3 h-3 ml-1"
-                viewBox="0 0 11 6"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1 0.75L5.5 5.25L10 0.75"
-                  stroke={sortBy === "Relevance" ? "#FFAE00" : sortBy === "Distance" ? "#FFAE00" : "#000"}
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
-            <button className="rounded-full border border-gray-200 bg-theme-secondary py-2 text-theme-primary text-sm font-medium whitespace-nowrap flex items-center gap-1 px-6">
-              Services <img src={DropIcon} alt="▼" className="w-3 h-3 ml-1" />
-            </button>
-            <button className="rounded-full border border-gray-200 bg-theme-secondary py-2 text-theme-primary text-sm font-medium whitespace-nowrap flex items-center gap-1 px-6">
-              Categories <img src={DropIcon} alt="▼" className="w-3 h-3 ml-1" />
-            </button>
-          </div>
-        </div>
+        <SearchFilterBar
+          selectedSortLabel={appliedSortBy}
+          onSortClick={() => setIsSortModalOpen(true)}
+          onTuneClick={() => setShowFilterPanel(true)}
+        />
         {/* Custom Sort Modal */}
         {isSortModalOpen && (
           <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40">
@@ -130,13 +109,25 @@ export default function SearchResults({ query, onBack }: SearchResultsProps) {
                 <button
                   className="flex-1 py-2 rounded-lg text-white border-0"
                   style={{ background: 'linear-gradient(180deg, #FFC61B 0%, #FF9500 100%)' }}
-                  onClick={() => setIsSortModalOpen(false)}
+                  onClick={() => {
+                    setAppliedSortBy(sortBy);
+                    setIsSortModalOpen(false);
+                  }}
                 >
                   Done
                 </button>
               </div>
             </div>
           </div>
+        )}
+        {/* Filter Panel Modal */}
+        {showFilterPanel && (
+          <FilterPanel
+            filters={filters}
+            setFilters={setFilters}
+            applyFilters={() => setShowFilterPanel(false)}
+            onClose={() => setShowFilterPanel(false)}
+          />
         )}
         <div className="flex-1 relative w-full h-full">
           <MapWithFilterUI isExpanded={isExpanded} />
