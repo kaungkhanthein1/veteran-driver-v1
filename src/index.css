@@ -148,3 +148,7 @@ body {
 .search-filter-bar {
   background: var(--bg-secondary);
 }
+
+.art-bottom {
+  display: none !important;
+}
