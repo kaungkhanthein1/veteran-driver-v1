@@ -26,7 +26,6 @@ import RecycleBinPage from "./Pages/RecycleBinPage";
 import EditLocationPage from "./Pages/EditLocationPage";
 import BookmarksPage from "./Pages/Profile/BookmarksPage";
 import RankingPage from "./Pages/RankingPage";
-// import SearchLocationPage from "./Pages/SearchLocationPage";
 import LocationDetailsPage from "./Pages/LocationDetailsPage";
 import NotificationsPage from "./Pages/Profile/NotificationsPage";
 import ChangePasswordPage from "./Pages/Profile/ChangePasswordPage";

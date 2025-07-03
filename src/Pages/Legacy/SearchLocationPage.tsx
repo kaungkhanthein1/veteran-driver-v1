@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import TopPickCard from '../components/cards/TopPickCard';
-import { useBookmarks } from '../hooks/useBookmarks';
-import FilterPanel from './map/FilterPanel';
-import BackButton from '../components/common/BackButton';
+import TopPickCard from '../../components/cards/TopPickCard';
+import { useBookmarks } from '../../hooks/useBookmarks';
+import FilterPanel from '.././map/FilterPanel';
+import BackButton from '../../components/common/BackButton';
 import { useTranslation } from 'react-i18next';
 import GoldenGate from "assets/GoldenGate.png";
 import Harrier from "assets/Harrier.png";

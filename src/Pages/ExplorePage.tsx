@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import BottomNavBar from "../components/common/BottomNavBar";
 import GoldenGateImage from 'assets/GoldenGate.png';
@@ -139,27 +139,73 @@ export default function ExplorePage() {
   const [activeCategory, setActiveCategory] = useState('All');
   const [hoveredVideoId, setHoveredVideoId] = useState<number | null>(null);
   const navigate = useNavigate();
+  const [showNavBar, setShowNavBar] = useState(true);
+  const lastScrollY = useRef(0);
+  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
+
+  // Use a callback ref to always attach the event to the correct element
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+  const setScrollRef = (node: HTMLDivElement | null) => {
+    if (scrollRef.current) {
+      scrollRef.current.removeEventListener('scroll', handleScroll);
+    }
+    if (node) {
+      node.addEventListener('scroll', handleScroll);
+    }
+    scrollRef.current = node;
+  };
+
+  function handleScroll() {
+    if (!scrollRef.current) return;
+    const currentScrollY = scrollRef.current.scrollTop;
+    
+    // Add a small threshold to prevent accidental triggers
+    const threshold = 5;
+    const scrollDelta = currentScrollY - lastScrollY.current;
+    
+    if (Math.abs(scrollDelta) > threshold) {
+      setShowNavBar(scrollDelta < 0);
+      lastScrollY.current = currentScrollY;
+    }
+  }
+
+  useEffect(() => {
+    // Clean up on unmount
+    return () => {
+      if (scrollRef.current) {
+        scrollRef.current.removeEventListener('scroll', handleScroll);
+      }
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+    };
+  }, []);
 
   return (
-    <div className="dvh-fallback flex justify-center bg-theme-primary">
-      <div className="w-full max-w-[480px] flex flex-col">
-        <div className="flex-1 overflow-y-auto pb-24">
-          {/* Top Filter Tabs */}
-          <div className="flex items-center justify-center px-4 pt-4 pb-2 relative">
-            <div className="flex gap-6">
-              {['Trending', 'Nearby'].map(tab => (
-                <button
-                  key={tab}
-                  className={`text-lg font-semibold pb-1 border-b-2 ${activeTab === tab ? 'border-[var(--accent-yellow)] text-theme-primary' : 'border-transparent text-theme-secondary'}`}
-                  onClick={() => setActiveTab(tab)}
-                >
-                  {tab}
-                </button>
-              ))}
+    <div className="dvh-fallback flex justify-center bg-theme-primary min-h-screen">
+      <div className="w-full max-w-[480px] flex flex-col h-screen">
+        <div
+          className="flex-1 overflow-y-auto pb-24"
+          ref={setScrollRef}
+        >
+          {/* Sticky Filter Tabs */}
+          <div className="sticky top-0 z-10 bg-theme-primary">
+            <div className="flex items-center justify-center px-4 pt-4 pb-2 relative">
+              <div className="flex gap-6">
+                {['Trending', 'Nearby'].map(tab => (
+                  <button
+                    key={tab}
+                    className={`text-lg font-semibold pb-1 border-b-2 ${activeTab === tab ? 'border-[var(--accent-yellow)] text-theme-primary' : 'border-transparent text-theme-secondary'}`}
+                    onClick={() => setActiveTab(tab)}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </div>
+              <button className="absolute right-4 text-theme-secondary">
+                <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+              </button>
             </div>
-            <button className="absolute right-4 text-theme-secondary">
-              <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-            </button>
           </div>
 
           {/* Category Chips */}
