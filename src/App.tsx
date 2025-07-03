@@ -26,7 +26,7 @@ import RecycleBinPage from "./Pages/RecycleBinPage";
 import EditLocationPage from "./Pages/EditLocationPage";
 import BookmarksPage from "./Pages/Profile/BookmarksPage";
 import RankingPage from "./Pages/RankingPage";
-import SearchLocationPage from "./Pages/SearchLocationPage";
+// import SearchLocationPage from "./Pages/SearchLocationPage";
 import LocationDetailsPage from "./Pages/LocationDetailsPage";
 import NotificationsPage from "./Pages/Profile/NotificationsPage";
 import ChangePasswordPage from "./Pages/Profile/ChangePasswordPage";
@@ -71,7 +71,7 @@ function AppRoutes() {
         <Route path="/edit-location" element={<EditLocationPage />} />
         <Route path="/bookmarks" element={<BookmarksPage />} />
         <Route path="/ranking" element={<RankingPage />} />
-        <Route path="/search" element={<SearchLocationPage />} />
+        <Route path="/search" element={<SearchMain />} />
         <Route path="/location/:id" element={<LocationDetailsPage />} />
         <Route path="/notifications" element={<NotificationsPage />} />
         <Route path="/settings/password" element={<ChangePasswordPage />} />
@@ -79,7 +79,6 @@ function AppRoutes() {
         <Route path="/CheckMap/:id" element={<CheckMap />} />
         <Route path="/addMap" element={<AddMap />} />
         <Route path="/account-information" element={<AccountInformationPage />} />
-        <Route path="/search-new" element={<SearchMain />} />
       </Routes>
       {/* Modal routes, only render if background exists */}
       {state?.background && (
