@@ -19,6 +19,7 @@
     "@tolgee/i18next": "^6.2.6",
     "@tolgee/react": "^6.2.6",
     "@use-gesture/react": "^10.3.1",
+    "artplayer": "^5.2.3",
     "axios": "^1.10.0",
     "flowbite": "^1.6.5",
     "framer-motion": "^12.12.1",

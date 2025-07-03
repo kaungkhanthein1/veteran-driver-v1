@@ -12,7 +12,7 @@ import BeachImg from '../assets/Beach.png';
 import HarrierImg from '../assets/Harrier.png';
 import GoldenGateImg from '../assets/GoldenGate.png';
 import RoomImg from '../assets/Room.png';
-import VideoPlayer from '../components/common/VideoPlayer';
+
 import Masonry from 'react-masonry-css';
 
 // Mock data for explore items
@@ -138,7 +138,6 @@ export default function ExplorePage() {
   const [activeTab, setActiveTab] = useState('Trending');
   const [activeCategory, setActiveCategory] = useState('All');
   const [hoveredVideoId, setHoveredVideoId] = useState<number | null>(null);
-  const [modalVideo, setModalVideo] = useState<string | null>(null);
   const navigate = useNavigate();
 
   return (
@@ -191,7 +190,9 @@ export default function ExplorePage() {
                   className="mb-3 rounded-2xl overflow-hidden bg-theme-secondary flex flex-col break-inside-avoid cursor-pointer"
                   onMouseEnter={() => setHoveredVideoId(item.id)}
                   onMouseLeave={() => setHoveredVideoId(null)}
-                  onClick={() => setModalVideo(item.video)}
+                  onClick={() => {
+                    navigate(`/video/${item.id}`, { state: { videoItem: item } });
+                  }}
                 >
                   <div className={`w-full bg-black relative ${idx % 3 === 0 ? 'h-56' : idx % 3 === 1 ? 'h-64' : 'h-72'}`}>
                     {hoveredVideoId === item.id ? (
@@ -228,10 +229,6 @@ export default function ExplorePage() {
           </div>
         </div>
         <BottomNavBar active="explore" />
-        {/* Video Modal */}
-        {modalVideo && (
-          <VideoPlayer isOpen={!!modalVideo} videoUrl={modalVideo} onClose={() => setModalVideo(null)} />
-        )}
       </div>
     </div>
   );

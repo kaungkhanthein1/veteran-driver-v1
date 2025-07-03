@@ -1,0 +1,156 @@
+.art-video-player {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: #000;
+}
+
+.art-video-player .art-controls {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+  padding: 10px 0;
+}
+
+.art-video-player .art-control-back {
+  margin-left: 10px;
+}
+
+.art-video-player .art-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background-color: #000;
+}
+
+/* Custom play button overlay */
+.art-video-player .art-video-player-center {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Custom progress bar */
+.art-video-player .art-bottom {
+  padding-bottom: 10px;
+}
+
+/* Hide unnecessary controls */
+.art-video-player .art-control-volume,
+.art-video-player .art-control-fullscreen,
+.art-video-player .art-control-pip,
+.art-video-player .art-control-playbackRate,
+.art-video-player .art-control-loop,
+.art-video-player .art-control-setting,
+.art-video-player .art-control-back,
+.art-video-player .art-control-flip,
+.art-video-player .art-control-time,
+.art-video-player .art-control-play,
+.art-video-player .art-progress,
+.art-video-player .art-bottom {
+  display: none !important;
+}
+
+/* Custom progress bar styling */
+.custom-progress-bar {
+  position: absolute;
+  bottom: 80px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.3);
+  z-index: 20;
+  transition: height 0.2s ease;
+}
+
+.custom-progress-bar.dragging {
+  height: 8px;
+}
+
+.custom-progress-loaded {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.custom-progress-played {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #ffb800;
+}
+
+.custom-progress-indicator {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 12px;
+  width: 12px;
+  background-color: #ffb800;
+  border-radius: 50%;
+  transition: height 0.2s ease, width 0.2s ease;
+}
+
+.custom-progress-bar.dragging .custom-progress-indicator {
+  height: 16px;
+  width: 16px;
+}
+
+/* Time display */
+.art-video-player .art-control-time {
+  font-size: 12px;
+  color: white;
+}
+
+/* Play button */
+.art-video-player .art-control-play svg {
+  fill: white;
+}
+
+/* Center play button */
+.art-video-player .art-video-player-center-state {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.art-video-player .art-video-player-center-state svg {
+  fill: white;
+  width: 30px;
+  height: 30px;
+}
+
+/* Custom play button */
+.custom-play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  cursor: pointer;
+}
+
+.custom-time-display {
+  position: absolute;
+  bottom: 50px;
+  left: 10px;
+  font-size: 12px;
+  color: white;
+  z-index: 20;
+}

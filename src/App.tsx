@@ -37,6 +37,7 @@ import ModalRoute from "components/common/ModalRoute";
 import AccountInformationPage from "./Pages/AccountInformationPage";
 import HomePage from "./Pages/Home/HomePage";
 import SearchMain from "./Pages/Search/SearchMain";
+import VideoDetailPage from "./Pages/VideoDetailPage";
 
 function AppRoutes() {
   const location = useLocation();
@@ -60,7 +61,7 @@ function AppRoutes() {
         <Route path="/forgot-password" element={<ForgetPasswordPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/map" element={<MapWithFilterUI />} />
+        <Route path="/map" element={<MapWithFilterUI isExpanded={false} />} />
         <Route path="/theme" element={<ChangeThemePage />} />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/wallet" element={<WalletPage />} />
@@ -79,6 +80,7 @@ function AppRoutes() {
         <Route path="/CheckMap/:id" element={<CheckMap />} />
         <Route path="/addMap" element={<AddMap />} />
         <Route path="/account-information" element={<AccountInformationPage />} />
+        <Route path="/video/:id" element={<VideoDetailPage />} />
       </Routes>
       {/* Modal routes, only render if background exists */}
       {state?.background && (
@@ -105,4 +107,4 @@ function App(): JSX.Element {
   );
 }
 
-export default App; 
+export default App;
