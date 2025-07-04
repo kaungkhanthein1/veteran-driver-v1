@@ -10,7 +10,10 @@ interface LocationNearbyParams {
 
 export const HomeApi = createApi({
   reducerPath: "HomeApi",
-  baseQuery: gatewayBaseQuery({ baseUrl: "http://18.139.108.25:3201/api/v1" }),
+  baseQuery: gatewayBaseQuery({
+    baseUrl:
+      "http://ec2-13-229-71-69.ap-southeast-1.compute.amazonaws.com:8080/api/v1",
+  }),
   endpoints: (build) => ({
     getCountries: build.query({
       query: () => ({ url: "/countries" }),

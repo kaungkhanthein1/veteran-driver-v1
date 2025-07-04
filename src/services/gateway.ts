@@ -149,6 +149,9 @@ async function decryptResponse(res: AxiosResponse) {
 const gateway: AxiosInstance = axios.create({
   // baseURL: GATEWAY_URL, // Uncomment if you want to set a default base URL
   timeout: 15000,
+  headers: {
+    "access-control-allow-credentials": "true",
+  },
   responseType: "arraybuffer", // To handle binary encrypted responses
 });
 
@@ -191,16 +194,18 @@ gateway.interceptors.request.use((config: InternalAxiosRequestConfig) => {
           : headers,
     });
     const signature = CryptoJS.MD5(signatureStr).toString();
-    headers.set(GATEWAY_CONFIG.signatureHeader, signature);
+    // headers.set("x-lang", getCurrentLang());
+    // headers.set("access-control-allow-headers", getCurrentLang());
+    //headers.set(GATEWAY_CONFIG.signatureHeader, signature);
     config.headers = headers;
     return config;
   } else {
     // Fallback to plain object
     headers = { ...(headers || {}) };
-    headers["x-lang"] = getCurrentLang();
+    //headers["x-lang"] = getCurrentLang();
     const token = getToken();
-    if (token) headers["Authorization"] = `Bearer ${token}`;
-    headers["x-device-id"] = headers["x-device-id"] || "demo-device-001";
+    // if (token) headers["Authorization"] = `Bearer ${token}`;
+    //headers["x-device-id"] = headers["x-device-id"] || "demo-device-001";
     const timestamp = Math.floor(Date.now() / 1000).toString();
     const nonce = generateNonce();
     headers[GATEWAY_CONFIG.timestampHeader] = timestamp;
