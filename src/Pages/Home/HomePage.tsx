@@ -5,8 +5,12 @@ import BottomNavBar from '../../components/common/BottomNavBar';
 import { useState } from 'react';
 import MainContent from './MainContent';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useGetCountriesQuery } from '../../features/HomeApi';
 
 export default function HomePage() {
+  const { data, error, isLoading } = useGetCountriesQuery("");
+  console.log(data);
+
   const [isExpanded, setIsExpanded] = useState(false);
   return (
     <div className="flex flex-col h-full relative bg-theme-primary">

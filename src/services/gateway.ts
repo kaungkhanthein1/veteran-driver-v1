@@ -185,7 +185,10 @@ gateway.interceptors.request.use((config: InternalAxiosRequestConfig) => {
       path,
       query,
       body,
-      headers: Object.fromEntries(headers.entries()),
+      headers:
+        typeof headers.entries === "function"
+          ? Object.fromEntries(headers.entries())
+          : headers,
     });
     const signature = CryptoJS.MD5(signatureStr).toString();
     headers.set(GATEWAY_CONFIG.signatureHeader, signature);
