@@ -15,7 +15,6 @@ import { useEmailOTPMutation, useSendverifyMutation } from "./services/AuthApi";
 import ReCaptcha from "../components/common/ReCaptcha";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { update } from "@react-spring/web";
 import { updaterecaptcha } from "../services/recaptchaSlice";
 
 type RegisterPageProps = {
@@ -39,6 +38,7 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
 
   const { t } = useTranslation();
   const [triggerVerify] = useSendverifyMutation();
+  const dispatch = useDispatch();
 
   const handleClose = () => {
     if (onClose) {
@@ -82,8 +82,6 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
       />
     );
   }
-
-  const dispatch = useDispatch();
 
   const handleRecaptchaVerify = (token: any) => {
     setRecaptchaToken(token);

@@ -22,7 +22,7 @@ import SocialUpload from "./Pages/SocialUpload";
 import AddLocationPage from "./Pages/AddLocation/AddLocationPage";
 import ChangeThemePage from "./Pages/ChangeThemePage";
 import SettingsPage from "./Pages/Profile/SettingsPage";
-import EditProfilePage from "./Pages/Profile/EditProfilePage";
+import ProfileEditWrapper from "./Pages/Profile/ProfileEditWrapper";
 import WalletPage from "./Pages/Profile/WalletPage";
 import PointHistoryPage from "./Pages/PointHistoryPage";
 import WithdrawPage from "./Pages/Profile/WithdrawPage";
@@ -60,7 +60,8 @@ function AppRoutes() {
         <Route path="/add-location" element={<AddLocationPage />} />
         <Route path="/social" element={<SocialPage />} />
         <Route path="/social/upload" element={<SocialUpload />} />
-        <Route path="/profile/edit" element={<EditProfilePage />} />
+        <Route path="/profile/edit/*" element={<ProfileEditWrapper />} />
+        <Route path="/edit-profile/*" element={<ProfileEditWrapper />} />
         <Route path="/phone-signup" element={<PhoneSignUpPage />} />
         <Route path="/forgot-password" element={<ForgetPasswordPage />} />
         <Route path="/login" element={<LoginPage />} />
