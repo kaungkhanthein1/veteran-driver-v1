@@ -1,5 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { gatewayBaseQuery } from "../services/gatewayBaseQuery";
+import { gatewayUrl } from "../config/env";
 
 interface LocationNearbyParams {
   lat: number;
@@ -11,8 +12,7 @@ interface LocationNearbyParams {
 export const HomeApi = createApi({
   reducerPath: "HomeApi",
   baseQuery: gatewayBaseQuery({
-    baseUrl:
-      "http://ec2-13-229-71-69.ap-southeast-1.compute.amazonaws.com:8080/api/v1",
+    baseUrl: gatewayUrl,
   }),
   endpoints: (build) => ({
     getCountries: build.query({

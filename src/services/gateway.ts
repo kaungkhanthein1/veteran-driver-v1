@@ -6,12 +6,17 @@ import axios, {
 } from "axios";
 import i18n from "../i18n";
 import CryptoJS from "crypto-js";
+import {
+  gatewayUrl,
+  signatureSecret,
+  aesKeyHex,
+  enableEncryption,
+  enableSignature,
+} from "../config/env";
 
-const GATEWAY_URL =
-  "http://ec2-13-229-71-69.ap-southeast-1.compute.amazonaws.com:8080/api/v1";
-const SIGNATURE_SECRET = "123456";
-const AES_KEY_HEX =
-  "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef";
+const GATEWAY_URL = gatewayUrl;
+const SIGNATURE_SECRET = signatureSecret;
+const AES_KEY_HEX = aesKeyHex;
 
 const GATEWAY_CONFIG = {
   timestampHeader: "x-timestamp",
@@ -196,7 +201,9 @@ gateway.interceptors.request.use((config: InternalAxiosRequestConfig) => {
     const signature = CryptoJS.MD5(signatureStr).toString();
     // headers.set("x-lang", getCurrentLang());
     // headers.set("access-control-allow-headers", getCurrentLang());
-    //headers.set(GATEWAY_CONFIG.signatureHeader, signature);
+    if (enableSignature) {
+      headers.set(GATEWAY_CONFIG.signatureHeader, signature);
+    }
     config.headers = headers;
     return config;
   } else {
@@ -204,7 +211,7 @@ gateway.interceptors.request.use((config: InternalAxiosRequestConfig) => {
     headers = { ...(headers || {}) };
     //headers["x-lang"] = getCurrentLang();
     const token = getToken();
-    // if (token) headers["Authorization"] = `Bearer ${token}`;
+    if (token) headers["Authorization"] = `Bearer ${token}`;
     //headers["x-device-id"] = headers["x-device-id"] || "demo-device-001";
     const timestamp = Math.floor(Date.now() / 1000).toString();
     const nonce = generateNonce();
@@ -233,7 +240,9 @@ gateway.interceptors.request.use((config: InternalAxiosRequestConfig) => {
       headers,
     });
     const signature = CryptoJS.MD5(signatureStr).toString();
-    headers[GATEWAY_CONFIG.signatureHeader] = signature;
+    if (enableSignature) {
+      headers[GATEWAY_CONFIG.signatureHeader] = signature;
+    }
     config.headers = headers;
     return config;
   }
@@ -244,7 +253,7 @@ gateway.interceptors.response.use(
     // Decrypt if needed
     const encHdr = response.headers["x-resp-encrypt"];
     const ivHex = response.headers["x-resp-iv"];
-    if (encHdr && ivHex) {
+    if (enableEncryption && encHdr && ivHex) {
       // Convert arraybuffer to string for b64/hex
       let dataStr = "";
       if (response.data instanceof ArrayBuffer) {

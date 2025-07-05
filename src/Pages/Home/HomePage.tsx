@@ -7,6 +7,7 @@ import MainContent from "./MainContent";
 import { motion, AnimatePresence } from "framer-motion";
 import { useGetCountriesQuery } from "../../features/HomeApi";
 import { gatewayRequest } from "../../services/gateway";
+import { apiBaseUrl } from "../../config/env";
 
 export default function HomePage() {
   const { data, error, isLoading } = useGetCountriesQuery("");
@@ -20,7 +21,7 @@ export default function HomePage() {
       try {
         const response = await gatewayRequest({
           method: "GET",
-          url: "https://vtt_dev.movie06.com/api/v1/profile/me",
+          url: `${apiBaseUrl}/profile/me`,
         });
         console.log("Profile/me result:", response.data);
       } catch (err) {

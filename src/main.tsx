@@ -1,20 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import './index.css';
-import './i18n';
-import { Provider } from 'react-redux';
-import { store } from './app/store';
-import { TolgeeProvider } from '@tolgee/react';
-import { tolgee } from './i18n';
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import { AuthProvider } from './context/AuthContext';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import "./index.css";
+import "./i18n";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
+import { TolgeeProvider } from "@tolgee/react";
+import { tolgee } from "./i18n";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { AuthProvider } from "./context/AuthContext";
+
+// Initialize environment validation
+import { validateEnvironment } from "./config/env";
+validateEnvironment();
 
 // Initialize axios interceptors
-import { authService } from './services/authService';
+import { authService } from "./services/authService";
 authService.setupAxiosInterceptors();
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
@@ -27,4 +33,4 @@ root.render(
       </GoogleOAuthProvider>
     </Provider>
   </React.StrictMode>
-); 
+);
