@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 // Import new icons from ProfileUpdate
+
 import NotiIcon from "icons/ProfileUpdate/Noti.svg";
 import EditProfileIcon from "icons/ProfileUpdate/EditProfile.svg";
 import FemaleIcon from "icons/ProfileUpdate/Female.svg";
@@ -16,6 +17,7 @@ import QrIcon from "icons/ProfileUpdate/Qr.svg";
 import FeedBackIcon from "icons/ProfileUpdate/FeedBack.svg";
 import CustomerSupportIcon from "icons/ProfileUpdate/CustomerSupport.svg";
 import HelpsIcon from "icons/ProfileUpdate/Helps.svg";
+import { useNavigate } from "react-router-dom";
 
 // Import the gradient image (place it in src/assets/gradient-bg.png for example)
 import GradientBg from "assets/gradient-bg.png";
@@ -40,8 +42,8 @@ const ProfileCard: React.FC = () => {
           <img src={NotiIcon} alt="Notifications" className="w-6 h-6" />
         </button>
         <button
+          className="bg-white rounded-xl px-4 py-2 flex items-center gap-2 shadow"
           onClick={() => navigate("/profile/edit")}
-          className="bg-white rounded-xl px-4 py-2 flex items-center gap-2 shadow hover:bg-gray-50 transition-colors"
         >
           <img src={EditProfileIcon} alt="Edit Profile" className="w-5 h-5" />
           <span className="font-medium text-sm">Edit Profile</span>

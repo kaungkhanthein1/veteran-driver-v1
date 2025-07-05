@@ -27,9 +27,10 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
   const location = useLocation();
   const background = location.state?.background || location;
   const [showPassword, setShowPassword] = useState(false);
-  const [userName, setUserName] = useState("");
-  const [emailOrPhone, setEmailOrPhone] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [code, setCode] = useState<string | undefined>(undefined); // For OTP, can be undefined at first
   const [isRecaptchaVerified, setIsRecaptchaVerified] = useState(false);
   const [showOpt, setshowOtp] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
