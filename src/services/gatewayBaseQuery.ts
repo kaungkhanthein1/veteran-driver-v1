@@ -23,13 +23,59 @@ export const gatewayBaseQuery =
         params,
         headers,
       });
+      
+      // Handle business logic at service level
+      if (response.data && response.data.error) {
+        return {
+          error: {
+            status: response.status,
+            data: {
+              message: response.data.error.message || "Business error",
+              code: response.data.error.code,
+              details: response.data.error,
+            },
+          },
+        };
+      }
+      
       return { data: response.data };
     } catch (axiosError: any) {
-      return {
-        error: {
-          status: axiosError.response?.status || 500,
-          data: axiosError.response?.data || axiosError.message,
-        },
-      };
+      // Handle different types of errors
+      if (axiosError.response) {
+        // Server responded with error status
+        const errorData = axiosError.response.data;
+        return {
+          error: {
+            status: axiosError.response.status,
+            data: {
+              message: errorData?.error?.message || errorData?.message || "Server error",
+              code: errorData?.error?.code || errorData?.code,
+              details: errorData,
+            },
+          },
+        };
+      } else if (axiosError.request) {
+        // Request was made but no response received
+        return {
+          error: {
+            status: 0,
+            data: {
+              message: "Network error - no response received",
+              code: "NETWORK_ERROR",
+            },
+          },
+        };
+      } else {
+        // Something else happened
+        return {
+          error: {
+            status: 500,
+            data: {
+              message: axiosError.message || "Unknown error occurred",
+              code: "UNKNOWN_ERROR",
+            },
+          },
+        };
+      }
     }
   };

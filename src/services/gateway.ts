@@ -152,12 +152,12 @@ async function decryptResponse(res: AxiosResponse) {
 
 // Create Axios instance
 const gateway: AxiosInstance = axios.create({
-  // baseURL: GATEWAY_URL, // Uncomment if you want to set a default base URL
   timeout: 15000,
   headers: {
     "access-control-allow-credentials": "true",
   },
-  responseType: "arraybuffer", // To handle binary encrypted responses
+  // Use json as default response type, not arraybuffer
+  responseType: "json",
 });
 
 gateway.interceptors.request.use((config: InternalAxiosRequestConfig) => {
@@ -172,6 +172,7 @@ gateway.interceptors.request.use((config: InternalAxiosRequestConfig) => {
     const nonce = generateNonce();
     headers.set(GATEWAY_CONFIG.timestampHeader, timestamp);
     headers.set(GATEWAY_CONFIG.nonceHeader, nonce);
+
     // Prepare for signature
     const url = new URL(config.url!, config.baseURL || window.location.origin);
     const path = url.pathname;
@@ -179,6 +180,8 @@ gateway.interceptors.request.use((config: InternalAxiosRequestConfig) => {
     url.searchParams.forEach((value, key) => {
       query[key] = value;
     });
+
+    // Don't modify the body - let it pass through as is
     let body = "";
     if (config.data) {
       if (typeof config.data === "string") {
@@ -186,8 +189,12 @@ gateway.interceptors.request.use((config: InternalAxiosRequestConfig) => {
       } else {
         body = JSON.stringify(config.data);
       }
-      headers.set("Content-Type", "application/json");
+      // Only set Content-Type if not already set
+      if (!headers.get("Content-Type")) {
+        headers.set("Content-Type", "application/json");
+      }
     }
+
     const signatureStr = buildSignature({
       method: config.method || "GET",
       path,
@@ -199,8 +206,7 @@ gateway.interceptors.request.use((config: InternalAxiosRequestConfig) => {
           : headers,
     });
     const signature = CryptoJS.MD5(signatureStr).toString();
-    // headers.set("x-lang", getCurrentLang());
-    // headers.set("access-control-allow-headers", getCurrentLang());
+
     if (enableSignature) {
       headers.set(GATEWAY_CONFIG.signatureHeader, signature);
     }
@@ -209,20 +215,23 @@ gateway.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   } else {
     // Fallback to plain object
     headers = { ...(headers || {}) };
-    //headers["x-lang"] = getCurrentLang();
+    headers["x-lang"] = getCurrentLang();
     const token = getToken();
     if (token) headers["Authorization"] = `Bearer ${token}`;
-    //headers["x-device-id"] = headers["x-device-id"] || "demo-device-001";
+    headers["x-device-id"] = headers["x-device-id"] || "demo-device-001";
     const timestamp = Math.floor(Date.now() / 1000).toString();
     const nonce = generateNonce();
     headers[GATEWAY_CONFIG.timestampHeader] = timestamp;
     headers[GATEWAY_CONFIG.nonceHeader] = nonce;
+
     const url = new URL(config.url!, config.baseURL || window.location.origin);
     const path = url.pathname;
     const query: Record<string, string> = {};
     url.searchParams.forEach((value, key) => {
       query[key] = value;
     });
+
+    // Don't modify the body - let it pass through as is
     let body = "";
     if (config.data) {
       if (typeof config.data === "string") {
@@ -230,8 +239,12 @@ gateway.interceptors.request.use((config: InternalAxiosRequestConfig) => {
       } else {
         body = JSON.stringify(config.data);
       }
-      headers["Content-Type"] = "application/json";
+      // Only set Content-Type if not already set
+      if (!headers["Content-Type"]) {
+        headers["Content-Type"] = "application/json";
+      }
     }
+
     const signatureStr = buildSignature({
       method: config.method || "GET",
       path,
@@ -250,42 +263,45 @@ gateway.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 
 gateway.interceptors.response.use(
   async (response: AxiosResponse) => {
-    // Decrypt if needed
+    // Handle encryption if enabled and response is encrypted
     const encHdr = response.headers["x-resp-encrypt"];
     const ivHex = response.headers["x-resp-iv"];
     if (enableEncryption && encHdr && ivHex) {
-      // Convert arraybuffer to string for b64/hex
+      // Temporarily change response type for decryption
+      const originalResponseType = response.config.responseType;
+      response.config.responseType = "arraybuffer";
+
+      // Re-fetch with arraybuffer to decrypt
+      const encryptedResponse = await axios.request({
+        ...response.config,
+        responseType: "arraybuffer",
+      });
+
+      // Convert arraybuffer to string for decryption
       let dataStr = "";
-      if (response.data instanceof ArrayBuffer) {
-        const uint8 = new Uint8Array(response.data);
+      if (encryptedResponse.data instanceof ArrayBuffer) {
+        const uint8 = new Uint8Array(encryptedResponse.data);
         dataStr = Array.from(uint8)
           .map((b) => String.fromCharCode(b))
           .join("");
       } else {
-        dataStr = response.data;
+        dataStr = encryptedResponse.data;
       }
-      response.data = dataStr;
-      return decryptResponse(response);
+
+      encryptedResponse.data = dataStr;
+      const decryptedResponse = await decryptResponse(encryptedResponse);
+
+      // Restore original response type
+      response.config.responseType = originalResponseType;
+      response.data = decryptedResponse.data;
+      return response;
     }
-    // Business error parsing (customize as needed)
-    if (response.data && response.data.error) {
-      return Promise.reject({
-        message: response.data.error.message || "Business error",
-        code: response.data.error.code,
-        data: response.data,
-      });
-    }
+
+    // Don't handle business errors at gateway level - let services handle them
     return response;
   },
   (error) => {
-    // Standardize error handling
-    if (error.response && error.response.data && error.response.data.error) {
-      return Promise.reject({
-        message: error.response.data.error.message || "Business error",
-        code: error.response.data.error.code,
-        data: error.response.data,
-      });
-    }
+    // Don't transform errors at gateway level - let services handle them
     return Promise.reject(error);
   }
 );
