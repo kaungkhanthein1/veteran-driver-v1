@@ -95,11 +95,17 @@ export default function LoginPage({ onShowRegister, onClose }: LoginPageProps) {
     try {
       // Send login data + recaptchaToken to your gateway
       const response = await axios.post(
-        import.meta.env.VITE_API_BASE_URL + '/api/auth/login', // Replace with your gateway endpoint
+        import.meta.env.VITE_API_BASE_URL + '/api/auth/login',
         {
-          emailOrPhone,
+          username: '', // Leave username empty
+          email: emailOrPhone,
           password,
-          recaptchaToken, // <-- include this
+          code: recaptchaToken, // Send recaptchaToken as code
+        },
+        {
+          headers: {
+            'x-recaptcha-token': recaptchaToken,
+          }
         }
       );
       // Handle response (e.g., store JWT, redirect, etc.)

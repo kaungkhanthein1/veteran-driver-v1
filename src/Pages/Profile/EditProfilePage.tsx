@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from 'react-i18next';
 import { fetchProfile, updateProfile } from '../../services/ProfileService';
 import BackButton from '../../components/common/BackButton';
+import DefaultAvatorWhite from '../../icons/DefaultAvatorWhite.svg';
+import EditProfileIcon from '../../icons/ProfileUpdate/EditProfile.svg';
 
 export default function EditProfilePage() {
   const { t } = useTranslation();
@@ -74,7 +76,7 @@ export default function EditProfilePage() {
       <div className="flex flex-col items-center mt-2 mb-4">
         <div className="relative">
           <img
-            src={formData.avatar || 'https://randomuser.me/api/portraits/lego/1.jpg'}
+            src={formData.avatar || DefaultAvatorWhite}
             alt="Avatar"
             className="w-24 h-24 rounded-full object-cover border-4 border-white shadow"
           />
@@ -85,11 +87,7 @@ export default function EditProfilePage() {
               onChange={handleAvatarUpload}
               className="hidden"
             />
-            <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="3.2" />
-              <path d="M4.75 19.25v-1.5A2.75 2.75 0 017.5 15h9a2.75 2.75 0 012.75 2.75v1.5" />
-              <path d="M12 12v.01" />
-            </svg>
+            <img src={EditProfileIcon} alt="Upload" className="w-6 h-6 text-blue-500" />
           </label>
         </div>
       </div>
