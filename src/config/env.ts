@@ -5,6 +5,7 @@ interface EnvironmentConfig {
   // API Configuration
   apiBaseUrl: string;
   gatewayUrl: string;
+  mediaApiUrl: string;
 
   // Security Configuration
   signatureSecret: string;
@@ -46,6 +47,10 @@ export const env: EnvironmentConfig = {
     "VITE_GATEWAY_URL",
     "http://ec2-13-229-71-69.ap-southeast-1.compute.amazonaws.com:8080/api/v1"
   ),
+  mediaApiUrl: getEnvVar(
+    "VITE_MEDIA_API_URL",
+    "http://ec2-13-229-71-69.ap-southeast-1.compute.amazonaws.com:3004"
+  ),
 
   // Security Configuration
   signatureSecret: getEnvVar("VITE_SIGNATURE_SECRET", "123456"),
@@ -72,6 +77,7 @@ export function validateEnvironment(): void {
   const requiredVars = [
     "apiBaseUrl",
     "gatewayUrl",
+    "mediaApiUrl",
     "signatureSecret",
     "aesKeyHex",
   ];
@@ -89,6 +95,7 @@ export function validateEnvironment(): void {
 export const {
   apiBaseUrl,
   gatewayUrl,
+  mediaApiUrl,
   signatureSecret,
   aesKeyHex,
   appName,
