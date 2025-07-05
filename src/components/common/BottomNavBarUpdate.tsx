@@ -34,29 +34,32 @@ const tabs = [
 export default function BottomNavBarUpdate() {
   const navigate = useNavigate();
   const location = useLocation();
-  const activeTab = tabs.find(tab => location.pathname.startsWith(tab.path))?.key || "home";
 
   return (
     <div className="w-full flex justify-center">
       <div className="fixed bottom-0 w-full max-w-[480px] z-[999] flex justify-center bg-white border-t border-[#F4F4F4]">
         <div className="flex w-full justify-between items-center px-6 py-1">
-          {tabs.map(tab => (
-            <button
-              key={tab.key}
-              aria-label={tab.label}
-              className="flex flex-col items-center flex-1 focus:outline-none"
-              onClick={() => navigate(tab.path)}
-            >
-              <img
-                src={activeTab === tab.key ? tab.activeIcon : tab.icon}
-                alt={tab.label}
-                className="w-7 h-7 object-contain mb-1"
-              />
-              <span className="text-xs text-black font-normal">
-                {tab.label}
-              </span>
-            </button>
-          ))}
+          {tabs.map(tab => {
+            // For home, only exact match on '/'. For others, exact match on their path.
+            const isActive = location.pathname === tab.path || (tab.path === '/' && location.pathname === '/');
+            return (
+              <button
+                key={tab.key}
+                aria-label={tab.label}
+                className="flex flex-col items-center flex-1 focus:outline-none"
+                onClick={() => navigate(tab.path)}
+              >
+                <img
+                  src={isActive ? tab.activeIcon : tab.icon}
+                  alt={tab.label}
+                  className="w-7 h-7 object-contain mb-1"
+                />
+                <span className="text-xs text-black font-normal">
+                  {tab.label}
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
     </div>
