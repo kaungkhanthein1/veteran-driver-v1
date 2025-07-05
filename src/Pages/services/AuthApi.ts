@@ -1,6 +1,16 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { gatewayBaseQuery } from "../../services/gatewayBaseQuery";
+//   // Get the recaptcha token from Redux state
+//   const state = api.getState() as RootState;
+//   const recaptchaToken = state.recaptchaSlice.data;
 
+//   console.log("Recaptcha Token:", recaptchaToken);
+
+//   // Prepare headers with recaptcha token if available
+//   const requestHeaders = {
+//     ...headers,
+//     ...(recaptchaToken ? { "x-recaptcha-token": recaptchaToken } : {}),
+//   };
 export const AuthApi = createApi({
   reducerPath: "AuthApi",
   baseQuery: gatewayBaseQuery({
@@ -23,7 +33,6 @@ export const AuthApi = createApi({
     }),
     sendverify: builder.mutation<void, { data: any }>({
       query: ({ data }) => {
-        console.log("Sending verification code with data:", data);
         // This endpoint is used to send a verification code for registration or login
         // It can be used for both email and phone verification
         // The data object should contain the necessary information like 'to', 'channel', and 'scene'

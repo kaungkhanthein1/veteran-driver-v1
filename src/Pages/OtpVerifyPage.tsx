@@ -54,14 +54,16 @@ export default function OtpVerifyPage({
       const otpCode = otp.join("");
       console.log("OTP Code:", otpCode);
       try {
-        await triggerResgister({
+        const response = await triggerResgister({
           data: {
-            code: otpCode,
+            code: +otpCode,
             email: emailorPhone,
             username: userName,
             password,
           },
         }).unwrap();
+
+        console.log("Register response:", response);
 
         navigate("/profile", { replace: true });
       } catch (error) {
