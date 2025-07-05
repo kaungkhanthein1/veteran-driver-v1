@@ -56,7 +56,7 @@ const EditProfileContent: React.FC = () => {
         setLoading(false);
       })
       .catch(() => {
-        setError('Failed to fetch profile');
+        setError("Failed to fetch profile");
         setLoading(false);
       });
   }, [setProfileData, setOriginalData]);
@@ -80,7 +80,11 @@ const EditProfileContent: React.FC = () => {
   const locationString = [profileData.country, profileData.city].filter(Boolean).join(' , ');
 
   if (loading) {
-    return <div className="text-center py-8">{t('editProfilePage.loading', 'Loading...')}</div>;
+    return (
+      <div className="text-center py-8">
+        {t("editProfilePage.loading", "Loading...")}
+      </div>
+    );
   }
 
   return (
@@ -90,7 +94,9 @@ const EditProfileContent: React.FC = () => {
         <div className="absolute left-0 top-1/2 -translate-y-1/2 pl-2">
           <BackButton />
         </div>
-        <h1 className="text-xl font-semibold text-center w-full">Edit Profile</h1>
+        <h1 className="text-xl font-semibold text-center w-full">
+          Edit Profile
+        </h1>
       </div>
 
       {/* Avatar Section */}
@@ -118,7 +124,11 @@ const EditProfileContent: React.FC = () => {
               }}
               className="hidden"
             />
-            <img src={EditProfileIcon} alt="Upload" className="w-6 h-6 text-blue-500" />
+            <img
+              src={EditProfileIcon}
+              alt="Upload"
+              className="w-6 h-6 text-blue-500"
+            />
           </label>
         </div>
       </div>

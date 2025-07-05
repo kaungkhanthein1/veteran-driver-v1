@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { gatewayBaseQuery } from "../../services/gatewayBaseQuery";
+import { storeTokens } from "./tokenUtils";
 //   // Get the recaptcha token from Redux state
 //   const state = api.getState() as RootState;
 //   const recaptchaToken = state.recaptchaSlice.data;
@@ -23,6 +24,12 @@ export const AuthApi = createApi({
         method: "POST",
         body: data,
       }),
+      transformResponse: (response: any) => {
+        if (response.data?.token) {
+          storeTokens(response.data.token);
+        }
+        return response;
+      },
     }),
     me: builder.query<any, void>({
       query: () => ({
@@ -37,6 +44,12 @@ export const AuthApi = createApi({
         method: "POST",
         body: data,
       }),
+      transformResponse: (response: any) => {
+        if (response.data?.token) {
+          storeTokens(response.data.token);
+        }
+        return response;
+      },
     }),
     sendverify: builder.mutation<void, { data: any }>({
       query: ({ data }) => {
@@ -55,6 +68,14 @@ export const AuthApi = createApi({
       // method: "POST",
       // body: data,
       //   }),
+    }),
+    // Add this to your AuthApi endpoints
+    refreshToken: builder.mutation<{ token: any }, { refreshToken: string }>({
+      query: ({ refreshToken }) => ({
+        url: `/refresh-token`,
+        method: "POST",
+        body: { refreshToken },
+      }),
     }),
     emailOTP: builder.mutation<void, { data: any }>({
       query: ({ data }) => ({
@@ -87,4 +108,5 @@ export const {
   useResetPasswordCodeMutation,
   useSendverifyMutation,
   useResetPasswordMutation,
+  useRefreshTokenMutation,
 } = AuthApi;

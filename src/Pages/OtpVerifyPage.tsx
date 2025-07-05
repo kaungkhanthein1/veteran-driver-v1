@@ -63,7 +63,7 @@ export default function OtpVerifyPage({
           },
         }).unwrap();
 
-        localStorage.setItem("token", response?.data.token.accessToken);
+        // localStorage.setItem("token", response?.data.token.accessToken);
         localStorage.setItem("profileData", JSON.stringify(response?.data));
 
         console.log("Register response:", response);
