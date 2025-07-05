@@ -151,8 +151,7 @@ export default function LoginPage({ onShowRegister, onClose }: LoginPageProps) {
           <FormInput
             label={t("Account name")}
             name="Account name"
-            // placeholder={t("loginPage.accountNameLabelPlaceholder")}
-            placeholder="Enter Your Email"
+            placeholder={t("loginPage.accountNameLabelPlaceholder")}
             value={emailOrPhone}
             onChange={(e) => setEmailOrPhone(e.target.value)}
           />
