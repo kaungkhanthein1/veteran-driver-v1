@@ -14,6 +14,9 @@ export interface RecaptchaVerifyResponse {
 export const verifyRecaptchaToken = async (
   token: string
 ): Promise<RecaptchaVerifyResponse> => {
+export const verifyRecaptchaToken = async (
+  token: string
+): Promise<RecaptchaVerifyResponse> => {
   try {
     const response = await gatewayRequest({
       url: `${gatewayUrl}/auth/verify-recaptcha`,
@@ -34,8 +37,10 @@ export const verifyRecaptchaToken = async (
       };
     }
 
+
     return {
       success: false,
+      error: "Network error occurred",
       error: "Network error occurred",
     };
   }
@@ -64,6 +69,9 @@ export const verifyRecaptchaWithGoogle = async (
     return response.data.success;
   } catch (error) {
     console.error("Google reCAPTCHA verification error:", error);
+    console.error("Google reCAPTCHA verification error:", error);
     return false;
   }
+};
+
 };
