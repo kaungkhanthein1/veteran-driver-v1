@@ -128,12 +128,12 @@ export default function OtpVerifyPage({
           <Trans
             i18nKey="otpVerifyPage.description"
             values={{
-              email: "DevelopX10@gmail.com",
-              phone: "+868880818",
+              email: { emailorPhone },
+              // phone: "+868880818",
             }}
             components={{
               email: <span className="font-semibold text-theme-primary" />,
-              phone: <span className="font-semibold text-theme-primary" />,
+              // phone: <span className="font-semibold text-theme-primary" />,
             }}
           />
         </div>
