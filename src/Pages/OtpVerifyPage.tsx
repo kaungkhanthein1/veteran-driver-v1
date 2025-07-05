@@ -1,14 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useTranslation } from 'react-i18next';
-import { Trans } from 'react-i18next';
+import { useTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
 import BackButton from "components/common/BackButton";
+import { useRegisterMutation } from "./services/AuthApi";
 
 type OtpVerifyPageProps = {
   onClose?: () => void;
+  emailorPhone: any;
+  userName: any;
+  password: any;
 };
 
-export default function OtpVerifyPage({ onClose }: OtpVerifyPageProps) {
+export default function OtpVerifyPage({
+  onClose,
+  emailorPhone,
+  userName,
+  password,
+}: OtpVerifyPageProps) {
   const navigate = useNavigate();
   const location = useLocation();
   const background = location.state?.background || location;
@@ -16,6 +25,7 @@ export default function OtpVerifyPage({ onClose }: OtpVerifyPageProps) {
   const [timer, setTimer] = useState(53);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const { t } = useTranslation();
+  const [triggerResgister] = useRegisterMutation(); // Assuming this is the correct hook for sending verification
 
   const handleClose = () => {
     if (onClose) {
@@ -25,17 +35,46 @@ export default function OtpVerifyPage({ onClose }: OtpVerifyPageProps) {
     }
   };
 
+  console.log("Email or Phone:", emailorPhone);
+  console.log("User Name:", userName);
+  console.log("Password:", password);
+
   // Add this line to check if all OTP boxes are filled
-  const isOtpFilled = otp.every(char => char.trim() !== "");
+  const isOtpFilled = otp.every((char) => char.trim() !== "");
 
   useEffect(() => {
     if (timer > 0) {
-      const interval = setInterval(() => setTimer(t => t - 1), 1000);
+      const interval = setInterval(() => setTimer((t) => t - 1), 1000);
       return () => clearInterval(interval);
     }
   }, [timer]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, idx: number) => {
+  const handleRegister = async () => {
+    if (isOtpFilled) {
+      const otpCode = otp.join("");
+      console.log("OTP Code:", otpCode);
+      try {
+        await triggerResgister({
+          data: {
+            otp: otpCode,
+            emailorPhone,
+            userName,
+            password,
+          },
+        }).unwrap();
+
+        navigate("/profile", { replace: true });
+      } catch (error) {
+        console.error("register failed:", error);
+      }
+    } else {
+      alert(t("otpVerifyPage.fillAllFields"));
+    }
+  };
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    idx: number
+  ) => {
     const value = e.target.value.replace(/[^0-9]/g, "");
     if (!value) return;
     const newOtp = [...otp];
@@ -47,7 +86,10 @@ export default function OtpVerifyPage({ onClose }: OtpVerifyPageProps) {
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, idx: number) => {
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    idx: number
+  ) => {
     if (e.key === "Backspace" && !otp[idx] && idx > 0) {
       inputRefs.current[idx - 1]?.focus();
     }
@@ -58,20 +100,35 @@ export default function OtpVerifyPage({ onClose }: OtpVerifyPageProps) {
       <div className="w-full max-w-md mx-auto flex flex-col items-center">
         <div className="w-full flex items-center mb-8">
           <BackButton />
-          <h1 className="text-xl font-bold text-theme-primary flex-1 text-center">{t('otpVerifyPage.title')}</h1>
+          <h1 className="text-xl font-bold text-theme-primary flex-1 text-center">
+            {t("otpVerifyPage.title")}
+          </h1>
           <button onClick={handleClose} className="text-theme-primary ml-auto">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           </button>
         </div>
         <div className="text-center mb-8">
           <Trans
             i18nKey="otpVerifyPage.description"
-            values={{ email: 'DevelopX10@gmail.com', phone: '+868880818' }}
+            values={{
+              email: "DevelopX10@gmail.com",
+              phone: "+868880818",
+            }}
             components={{
               email: <span className="font-semibold text-theme-primary" />,
-              phone: <span className="font-semibold text-theme-primary" />
+              phone: <span className="font-semibold text-theme-primary" />,
             }}
           />
         </div>
@@ -79,21 +136,21 @@ export default function OtpVerifyPage({ onClose }: OtpVerifyPageProps) {
           {otp.map((char, idx) => (
             <input
               key={idx}
-              ref={el => inputRefs.current[idx] = el}
+              ref={(el) => (inputRefs.current[idx] = el)}
               type="text"
               inputMode="numeric"
               maxLength={1}
               className="w-12 h-12 rounded-lg border border-theme bg-theme-primary flex items-center justify-center text-2xl text-theme-primary text-center outline-none"
               value={char}
-              onChange={e => handleChange(e, idx)}
-              onKeyDown={e => handleKeyDown(e, idx)}
+              onChange={(e) => handleChange(e, idx)}
+              onKeyDown={(e) => handleKeyDown(e, idx)}
               autoFocus={idx === 0}
             />
           ))}
         </div>
         <button
           type="button"
-          onClick={() => navigate("/account-information")}
+          onClick={() => handleRegister()}
           className={`w-full rounded-full py-3 text-lg font-semibold mb-4 shadow-lg transition-colors duration-200 ${
             isOtpFilled
               ? "bg-yellow-gradient text-black"
@@ -101,13 +158,15 @@ export default function OtpVerifyPage({ onClose }: OtpVerifyPageProps) {
           }`}
           disabled={!isOtpFilled}
         >
-          {t('otpVerifyPage.confirmButton')}
+          {t("otpVerifyPage.confirmButton")}
         </button>
         <div className="text-center">
           <span className="text-theme-secondary">
-            {t('otpVerifyPage.didntGetCode')}{" "}
+            {t("otpVerifyPage.didntGetCode")}{" "}
             <span className="text-[#FFC61B] font-semibold cursor-pointer">
-              {timer > 0 ? t('otpVerifyPage.timer', { timer: timer }) : t('otpVerifyPage.resendButton')}
+              {timer > 0
+                ? t("otpVerifyPage.timer", { timer: timer })
+                : t("otpVerifyPage.resendButton")}
             </span>
           </span>
         </div>
