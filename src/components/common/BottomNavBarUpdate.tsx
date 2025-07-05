@@ -34,8 +34,6 @@ const tabs = [
 export default function BottomNavBarUpdate() {
   const navigate = useNavigate();
   const location = useLocation();
-
-  // Determine active tab by path
   const activeTab = tabs.find(tab => location.pathname.startsWith(tab.path))?.key || "home";
 
   return (
@@ -54,13 +52,9 @@ export default function BottomNavBarUpdate() {
                 alt={tab.label}
                 className="w-7 h-7 object-contain mb-1"
               />
-              <span className={`text-xs ${activeTab === tab.key ? "text-[#FE740E] font-semibold" : "text-theme-secondary"}`}>
+              <span className="text-xs text-black font-normal">
                 {tab.label}
               </span>
-              {/* Active underline */}
-              {activeTab === tab.key && (
-                <div className="w-6 h-1 rounded-full bg-[#FE740E] mt-1" />
-              )}
             </button>
           ))}
         </div>

@@ -1,7 +1,6 @@
 import TopBar from "./TopBar";
 import MapWithFilterUI from "../map/MapWithFilterUI";
 import BottomSheetModal from "./BottomSheetModal";
-import BottomNavBar from "../../components/common/BottomNavBar";
 import { useState, useEffect } from "react";
 import MainContent from "./MainContent";
 import { motion, AnimatePresence } from "framer-motion";
@@ -53,7 +52,6 @@ export default function HomePage() {
           <MainContent />
         </BottomSheetModal>
       </div>
-      <BottomNavBar active="home" />
     </div>
   );
 }

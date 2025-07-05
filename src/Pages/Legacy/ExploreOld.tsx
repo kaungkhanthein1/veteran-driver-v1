@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import BottomNavBar from "../../components/common/BottomNavBar";
 import ExploreTabs from "../../components/ExploreTabs";
 import ExploreCard from "../../components/cards/ExploreCard";
 import AddLocationIcon from "icons/AddLocation.svg";
@@ -175,7 +174,6 @@ export default function ExplorePage() {
             ))}
           </div>
         </div>
-        {!isModalOpen && <BottomNavBar active="explore" />}
       </div>
     </div>
   );

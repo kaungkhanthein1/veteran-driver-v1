@@ -39,9 +39,25 @@ import CheckMap from "./Pages/map/CheckMap";
 import AddMap from "./Pages/map/AddMap";
 import ModalRoute from "components/common/ModalRoute";
 import AccountInformationPage from "./Pages/AccountInformationPage";
-import HomePage from "./Pages/Home/HomePage";
 import SearchMain from "./Pages/Search/SearchMain";
 import VideoDetailPage from "./Pages/VideoDetailPage";
+import BottomNavBarUpdate from "./components/common/BottomNavBarUpdate";
+import HomeTab from "./tabs/HomeTab";
+import BookmarksTab from "./tabs/BookmarksTab";
+import ProfileTab from "./tabs/ProfileTab";
+
+function MainTabs() {
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<HomeTab />} />
+        <Route path="/bookmarks" element={<BookmarksTab />} />
+        <Route path="/profile" element={<ProfileTab />} />
+      </Routes>
+      <BottomNavBarUpdate />
+    </>
+  );
+}
 
 function AppRoutes() {
   const location = useLocation();
@@ -49,10 +65,10 @@ function AppRoutes() {
 
   return (
     <>
-      {/* Main routes, use background location if present */}
+      {/* Main tab routes */}
       <Routes location={state?.background || location}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/*" element={<MainTabs />} />
+        {/* Other routes remain as-is */}
         <Route path="/otp-verify" element={<OtpVerifyPage />} />
         <Route path="/location-access" element={<LocationAccessPage />} />
         <Route path="/choose-location" element={<ChooseLocationPage />} />
@@ -75,7 +91,6 @@ function AppRoutes() {
         <Route path="/uploaded-location" element={<UploadedLocationPage />} />
         <Route path="/recycle-bin" element={<RecycleBinPage />} />
         <Route path="/edit-location" element={<EditLocationPage />} />
-        <Route path="/bookmarks" element={<BookmarksPage />} />
         <Route path="/ranking" element={<RankingPage />} />
         <Route path="/search" element={<SearchMain />} />
         <Route path="/location/:id" element={<LocationDetailsPage />} />
@@ -84,10 +99,7 @@ function AppRoutes() {
         <Route path="/review" element={<ReviewPage />} />
         <Route path="/CheckMap/:id" element={<CheckMap />} />
         <Route path="/addMap" element={<AddMap />} />
-        <Route
-          path="/account-information"
-          element={<AccountInformationPage />}
-        />
+        <Route path="/account-information" element={<AccountInformationPage />} />
         <Route path="/video/:id" element={<VideoDetailPage />} />
       </Routes>
       {/* Modal routes, only render if background exists */}

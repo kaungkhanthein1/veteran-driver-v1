@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import BottomNavBar from "../components/common/BottomNavBar";
 import GoldenGateImage from 'assets/GoldenGate.png';
 import HarrierImage from 'assets/Harrier.png';
 import DefaultAvatar from '../icons/DefaultAvatorWhite.svg';
@@ -274,7 +273,6 @@ export default function ExplorePage() {
             </Masonry>
           </div>
         </div>
-        <BottomNavBar active="explore" />
       </div>
     </div>
   );

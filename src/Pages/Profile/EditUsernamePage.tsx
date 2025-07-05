@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useProfileEdit } from '../../context/ProfileEditContext';
 import BackButton from '../../components/common/BackButton';
+import { updateProfile } from '../../services/ProfileService';
 
 function EditUsernameContent() {
   const { t } = useTranslation();
@@ -10,14 +11,27 @@ function EditUsernameContent() {
   const { profileData, updateField } = useProfileEdit();
   const [username, setUsername] = useState(profileData.username);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState<string | null>(null);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!username.trim()) {
       setError('Username cannot be empty');
       return;
     }
-    updateField('username', username.trim());
-    navigate('/edit-profile');
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
+    try {
+      await updateProfile({ username: username.trim() });
+      updateField('username', username.trim());
+      setSuccess('Username updated successfully!');
+      setTimeout(() => navigate('/edit-profile'), 1000);
+    } catch {
+      setError('Failed to update username');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -31,8 +45,9 @@ function EditUsernameContent() {
         <button
           className="absolute right-0 top-1/2 -translate-y-1/2 pr-4 text-[#007AFF] text-base font-medium"
           onClick={handleSave}
+          disabled={loading}
         >
-          save
+          {loading ? 'Saving...' : 'save'}
         </button>
       </div>
 
@@ -55,6 +70,7 @@ function EditUsernameContent() {
           </span>
         </div>
         {error && <div className="text-red-500 text-sm mt-2">{error}</div>}
+        {success && <div className="text-green-600 text-sm mt-2">{success}</div>}
       </div>
     </div>
   );

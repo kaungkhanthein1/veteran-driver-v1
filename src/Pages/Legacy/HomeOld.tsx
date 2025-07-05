@@ -2,8 +2,6 @@ import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import SocialPostCard from "../../components/cards/SocialPostCard";
 import ExploreCard from "../../components/cards/ExploreCard";
-import BottomNavBar from "../../components/common/BottomNavBar";
-import { useBookmarks } from "../../hooks/useBookmarks";
 import GoldenGateImage from "assets/GoldenGate.png";
 import HarrierImage from "assets/Harrier.png";
 import RoomImage from "assets/Room.png";

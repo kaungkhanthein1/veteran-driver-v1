@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useProfileEdit } from '../../context/ProfileEditContext';
 import BackButton from '../../components/common/BackButton';
+import { updateProfile } from '../../services/ProfileService';
 
 function EditBioContent() {
   const { t } = useTranslation();
@@ -10,10 +11,23 @@ function EditBioContent() {
   const { profileData, updateField } = useProfileEdit();
   const [bio, setBio] = useState(profileData.bio);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState<string | null>(null);
 
-  const handleSave = () => {
-    updateField('bio', bio.trim());
-    navigate('/edit-profile');
+  const handleSave = async () => {
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
+    try {
+      await updateProfile({ bio: bio.trim() });
+      updateField('bio', bio.trim());
+      setSuccess('Bio updated successfully!');
+      setTimeout(() => navigate('/edit-profile'), 1000);
+    } catch {
+      setError('Failed to update bio');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -27,8 +41,9 @@ function EditBioContent() {
         <button
           className="absolute right-0 top-1/2 -translate-y-1/2 pr-4 text-[#007AFF] text-base font-medium"
           onClick={handleSave}
+          disabled={loading}
         >
-          save
+          {loading ? 'Saving...' : 'save'}
         </button>
       </div>
 
@@ -41,7 +56,7 @@ function EditBioContent() {
               setBio(e.target.value);
               setError(null);
             }}
-            placeholder="Tell us about yourself"
+            placeholder="Enter your bio"
             className="w-full bg-transparent border border-theme rounded-lg px-4 py-3 text-base focus:outline-none focus:ring-0 placeholder:text-theme-secondary/50 min-h-[120px] resize-none pt-7"
             maxLength={200}
           />
@@ -49,8 +64,8 @@ function EditBioContent() {
             Bio
           </span>
         </div>
-        <div className="text-sm text-gray-500 mt-1">{bio.length}/200 characters</div>
         {error && <div className="text-red-500 text-sm mt-2">{error}</div>}
+        {success && <div className="text-green-600 text-sm mt-2">{success}</div>}
       </div>
     </div>
   );

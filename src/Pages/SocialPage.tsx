@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import SocialTabs from "../components/SocialTabs";
 import SocialPostCard from "../components/cards/SocialPostCard";
 import AdSection from "../components/AdSection";
-import BottomNavBar from "../components/common/BottomNavBar";
 import CommentModal from "../components/common/CommentModal";
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -140,7 +139,6 @@ export default function SocialPage() {
             ))}
           </div>
         </div>
-        {!isModalOpen && <BottomNavBar active="social" />}
         <div className="relative z-[1000]">
           <CommentModal
             isOpen={!!commentModalPostId}
