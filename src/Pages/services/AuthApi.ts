@@ -24,6 +24,13 @@ export const AuthApi = createApi({
         body: data,
       }),
     }),
+    me: builder.query<any, void>({
+      query: () => ({
+        url: `/profile/me`,
+        method: "GET",
+      }),
+    }),
+
     register: builder.mutation<void, { data: any }>({
       query: ({ data }) => ({
         url: `/register`,

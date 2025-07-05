@@ -19,6 +19,14 @@ export default function TopBar() {
 
   const [state, setState] = useState("");
 
+  useEffect(() => {
+    // Check if location is already stored in localStorage
+    const storedLocation = localStorage.getItem("locaion");
+    if (storedLocation) {
+      setState(storedLocation);
+    }
+  }, []);
+
   // Active filter chip state
   const [activeChip, setActiveChip] = useState<string | null>(null);
 
@@ -42,8 +50,9 @@ export default function TopBar() {
           method: "GET",
           url: `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`,
         });
-        console.log("Location result:", response.data);
+
         setState(response.data?.display_name || "Unknown Location");
+        localStorage.setItem("locaion", response.data?.display_name);
       } catch (err) {
         console.error("Error:", err);
         if (err?.code === err?.PERMISSION_DENIED) {
@@ -53,7 +62,7 @@ export default function TopBar() {
     }
 
     // Check if geolocation is available
-    if ("geolocation" in navigator) {
+    if ("geolocation" in navigator && !localStorage.getItem("locaion")) {
       fetchLocation();
     } else {
       console.log("Geolocation is not supported by this browser");
