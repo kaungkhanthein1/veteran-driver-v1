@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext";
 import RegisterPage from "./Pages/RegisterPage";
 import OtpVerifyPage from "./Pages/OtpVerifyPage";
@@ -37,6 +42,7 @@ import AccountInformationPage from "./Pages/AccountInformationPage";
 import HomePage from "./Pages/Home/HomePage";
 import SearchMain from "./Pages/Search/SearchMain";
 import VideoDetailPage from "./Pages/VideoDetailPage";
+import MediaUploadTestPage from "./Pages/MediaUploadTestPage";
 
 function AppRoutes() {
   const location = useLocation();
@@ -78,16 +84,48 @@ function AppRoutes() {
         <Route path="/review" element={<ReviewPage />} />
         <Route path="/CheckMap/:id" element={<CheckMap />} />
         <Route path="/addMap" element={<AddMap />} />
-        <Route path="/account-information" element={<AccountInformationPage />} />
+        <Route
+          path="/account-information"
+          element={<AccountInformationPage />}
+        />
         <Route path="/video/:id" element={<VideoDetailPage />} />
+        <Route path="/media-upload-test" element={<MediaUploadTestPage />} />
       </Routes>
       {/* Modal routes, only render if background exists */}
       {state?.background && (
         <Routes>
-          <Route path="/login" element={<ModalRoute><LoginPage /></ModalRoute>} />
-          <Route path="/register" element={<ModalRoute><RegisterPage /></ModalRoute>} />
-          <Route path="/forgot-password" element={<ModalRoute><ForgetPasswordPage /></ModalRoute>} />
-          <Route path="/otp-verify" element={<ModalRoute><OtpVerifyPage /></ModalRoute>} />
+          <Route
+            path="/login"
+            element={
+              <ModalRoute>
+                <LoginPage />
+              </ModalRoute>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <ModalRoute>
+                <RegisterPage />
+              </ModalRoute>
+            }
+          />
+          <Route
+            path="/forgot-password"
+            element={
+              <ModalRoute>
+                <ForgetPasswordPage />
+              </ModalRoute>
+            }
+          />
+          <Route
+            path="/otp-verify"
+            element={
+              <ModalRoute>
+                <OtpVerifyPage />
+              </ModalRoute>
+            }
+          />
         </Routes>
       )}
     </>
