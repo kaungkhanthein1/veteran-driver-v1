@@ -193,6 +193,7 @@
     "description": "휴대폰 번호로 등록 완료",
     "emailOrPhoneLabel": "이메일 또는 휴대폰 번호",
     "newPasswordLabel": "새 비밀번호",
+    "accountNameLabelPlaceholder": "Enter Your Email",
     "newPasswordPlaceholder": "새 비밀번호 입력",
     "notRobotCheckbox": "로봇이 아닙니다",
     "recaptchaLabel": "로봇 인증",

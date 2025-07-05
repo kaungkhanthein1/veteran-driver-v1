@@ -196,6 +196,7 @@
     "emailOrPhoneLabel": "Email or Phone Number",
     "newPasswordLabel": "New Password",
     "newPasswordPlaceholder": "Enter New Password",
+    "accountNameLabelPlaceholder": "Enter Your Email",
     "notRobotCheckbox": "I'm not a robot",
     "recaptchaLabel": "Recaptcha",
     "continueButton": "Continue"

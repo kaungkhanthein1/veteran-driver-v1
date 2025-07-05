@@ -139,6 +139,7 @@ async function decryptResponse(res: AxiosResponse) {
       encWithTag
     );
     const plaintext = atou8(new Uint8Array(decryptedBuf));
+    console.log("Decrypted response plaintext:", plaintext);
     try {
       res.data = JSON.parse(plaintext);
     } catch {
@@ -176,55 +177,39 @@ gateway.interceptors.request.use((config: InternalAxiosRequestConfig) => {
     // Prepare for signature
     const url = new URL(config.url!, config.baseURL || window.location.origin);
     const path = url.pathname;
-
-    // Handle query parameters from both URL and axios params
     const query: Record<string, string> = {};
     url.searchParams.forEach((value, key) => {
       query[key] = value;
     });
-    if (config.params) {
-      Object.entries(config.params).forEach(([key, value]) => {
-        if (value !== undefined && value !== null) {
-          query[key] = String(value);
-        }
-      });
-    }
 
-    // For file uploads (FormData), body should be empty string for signature
+    // Don't modify the body - let it pass through as is
     let body = "";
     if (config.data) {
-      if (typeof FormData !== "undefined" && config.data instanceof FormData) {
-        body = "";
-      } else if (typeof config.data === "string") {
+      if (typeof config.data === "string") {
         body = config.data;
       } else {
         body = JSON.stringify(config.data);
       }
       // Only set Content-Type if not already set
-      if (
-        !headers.get("Content-Type") &&
-        !(typeof FormData !== "undefined" && config.data instanceof FormData)
-      ) {
+      if (!headers.get("Content-Type")) {
         headers.set("Content-Type", "application/json");
       }
     }
-
-    const headersObj =
-      typeof headers.entries === "function"
-        ? Object.fromEntries(headers.entries())
-        : headers;
 
     const signatureStr = buildSignature({
       method: config.method || "GET",
       path,
       query,
       body,
-      headers: headersObj,
+      headers:
+        typeof headers.entries === "function"
+          ? Object.fromEntries(headers.entries())
+          : headers,
     });
     const signature = CryptoJS.MD5(signatureStr).toString();
-    if (enableSignature) {
-      headers.set(GATEWAY_CONFIG.signatureHeader, signature);
-    }
+    headers.set("x-lang", getCurrentLang());
+    headers.set("access-control-allow-headers", getCurrentLang());
+    headers.set(GATEWAY_CONFIG.signatureHeader, signature);
     config.headers = headers;
     return config;
   } else {
@@ -241,34 +226,21 @@ gateway.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 
     const url = new URL(config.url!, config.baseURL || window.location.origin);
     const path = url.pathname;
-
-    // Handle query parameters from both URL and axios params
     const query: Record<string, string> = {};
     url.searchParams.forEach((value, key) => {
       query[key] = value;
     });
-    if (config.params) {
-      Object.entries(config.params).forEach(([key, value]) => {
-        if (value !== undefined && value !== null) {
-          query[key] = String(value);
-        }
-      });
-    }
 
-    // For file uploads (FormData), body should be empty string for signature
+    // Don't modify the body - let it pass through as is
     let body = "";
     if (config.data) {
-      if (typeof FormData !== "undefined" && config.data instanceof FormData) {
-        body = "";
-      } else if (typeof config.data === "string") {
+      if (typeof config.data === "string") {
         body = config.data;
       } else {
         body = JSON.stringify(config.data);
       }
-      if (
-        !headers["Content-Type"] &&
-        !(typeof FormData !== "undefined" && config.data instanceof FormData)
-      ) {
+      // Only set Content-Type if not already set
+      if (!headers["Content-Type"]) {
         headers["Content-Type"] = "application/json";
       }
     }

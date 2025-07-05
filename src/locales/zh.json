@@ -192,6 +192,7 @@
     "description": "使用您的手机号完成注册",
     "emailOrPhoneLabel": "邮箱或手机号",
     "newPasswordLabel": "新密码",
+    "accountNameLabelPlaceholder": "Enter Your Email",
     "newPasswordPlaceholder": "输入新密码",
     "notRobotCheckbox": "我不是机器人",
     "recaptchaLabel": "验证码",
