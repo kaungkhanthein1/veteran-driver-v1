@@ -1,5 +1,5 @@
 import { gatewayRequest } from "./gateway";
-import { apiBaseUrl, mediaApiUrl } from "../config/env";
+import { mediaApiUrl, gatewayUrl } from "../config/env";
 
 export interface UploadUrlResponse {
   uploadUrl: string;
@@ -37,23 +37,23 @@ export interface MediaUploadOptions {
 }
 
 /**
- * Media Upload Service
- * Handles media file uploads using the upload-url API
+ * Media Proxy Service
+ * Handles media file uploads with fallback mechanisms
  */
-export class MediaService {
-  private static instance: MediaService;
+export class MediaProxyService {
+  private static instance: MediaProxyService;
 
   private constructor() {}
 
-  public static getInstance(): MediaService {
-    if (!MediaService.instance) {
-      MediaService.instance = new MediaService();
+  static getInstance(): MediaProxyService {
+    if (!MediaProxyService.instance) {
+      MediaProxyService.instance = new MediaProxyService();
     }
-    return MediaService.instance;
+    return MediaProxyService.instance;
   }
 
   /**
-   * Get upload URL from the API
+   * Get upload URL through gateway proxy
    * @param options - Upload options including type, usage, and mimeType
    * @returns Promise with upload URL and key
    */
@@ -91,11 +91,11 @@ export class MediaService {
         params.expiresIn = options.expiresIn;
       }
 
-      // Try gateway first
+      // Try gateway first (recommended)
       try {
         const response = await gatewayRequest({
           method: "GET",
-          url: `${apiBaseUrl}/media/upload-url`,
+          url: `${gatewayUrl}/media/upload-url`,
           params,
         });
 
@@ -114,7 +114,7 @@ export class MediaService {
         );
       }
 
-      // Fallback: Try direct media API
+      // Fallback: Try direct API
       const response = await fetch(
         `${mediaApiUrl}/public/media/upload-url?${new URLSearchParams(params)}`
       );
@@ -228,6 +228,12 @@ export class MediaService {
       xhr.addEventListener("load", () => {
         if (xhr.status >= 200 && xhr.status < 300) {
           resolve();
+        } else if (xhr.status === 403) {
+          reject(new Error("Upload URL expired or invalid"));
+        } else if (xhr.status === 413) {
+          reject(new Error("File size too large for upload"));
+        } else if (xhr.status === 400) {
+          reject(new Error("Invalid file or upload request"));
         } else {
           reject(new Error(`Upload failed with status: ${xhr.status}`));
         }
@@ -274,6 +280,7 @@ export class MediaService {
         success: true,
         key: uploadUrlResponse.key,
         accessUrl: uploadUrlResponse.accessUrl,
+        expiresIn: uploadUrlResponse.expiresIn,
       };
     } catch (error: any) {
       return {
@@ -282,95 +289,31 @@ export class MediaService {
       };
     }
   }
-
-  /**
-   * Upload multiple files
-   * @param files - Array of files to upload
-   * @param onProgress - Progress callback for each file
-   * @returns Promise with array of upload results
-   */
-  async uploadMultipleMedia(
-    files: File[],
-    onProgress?: (fileIndex: number, progress: number) => void
-  ): Promise<MediaUploadResult[]> {
-    const results: MediaUploadResult[] = [];
-
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      const result = await this.uploadMedia({
-        file,
-        onProgress: onProgress
-          ? (progress) => onProgress(i, progress)
-          : undefined,
-      });
-      results.push(result);
-    }
-
-    return results;
-  }
-
-  /**
-   * Validate file before upload
-   * @param file - File to validate
-   * @returns Validation result
-   */
-  validateFile(file: File): { valid: boolean; error?: string } {
-    // Check file size (10MB limit)
-    const maxSize = 10 * 1024 * 1024; // 10MB
-    if (file.size > maxSize) {
-      return {
-        valid: false,
-        error: "File size must be less than 10MB",
-      };
-    }
-
-    // Check file type
-    const allowedTypes = [
-      "image/jpeg",
-      "image/jpg",
-      "image/png",
-      "image/gif",
-      "image/webp",
-      "video/mp4",
-      "video/avi",
-      "video/mov",
-      "video/wmv",
-    ];
-
-    if (!allowedTypes.includes(file.type)) {
-      return {
-        valid: false,
-        error: "File type not supported. Please upload image or video files.",
-      };
-    }
-
-    return { valid: true };
-  }
-
-  /**
-   * Get file preview URL
-   * @param file - File to get preview for
-   * @returns Promise with preview URL
-   */
-  getFilePreview(file: File): Promise<string> {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result as string);
-      reader.onerror = () => reject(new Error("Failed to read file"));
-      reader.readAsDataURL(file);
-    });
-  }
 }
 
 // Export singleton instance
-export const mediaService = MediaService.getInstance();
+export const mediaProxyService = MediaProxyService.getInstance();
 
 // Export convenience functions
+export const getUploadUrl = (options: {
+  type:
+    | "avatar"
+    | "image"
+    | "video"
+    | "audio"
+    | "document"
+    | "place-photo"
+    | "place-video"
+    | "chat";
+  usage:
+    | "profile"
+    | "cover"
+    | "message-attachment"
+    | "verification"
+    | "promotion"
+    | "temp";
+  mimeType?: string;
+  expiresIn?: number;
+}) => mediaProxyService.getUploadUrl(options);
 export const uploadMedia = (options: MediaUploadOptions) =>
-  mediaService.uploadMedia(options);
-export const uploadMultipleMedia = (
-  files: File[],
-  onProgress?: (fileIndex: number, progress: number) => void
-) => mediaService.uploadMultipleMedia(files, onProgress);
-export const validateFile = (file: File) => mediaService.validateFile(file);
-export const getFilePreview = (file: File) => mediaService.getFilePreview(file);
+  mediaProxyService.uploadMedia(options);

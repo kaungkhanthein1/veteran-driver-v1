@@ -42,7 +42,6 @@ import AccountInformationPage from "./Pages/AccountInformationPage";
 import HomePage from "./Pages/Home/HomePage";
 import SearchMain from "./Pages/Search/SearchMain";
 import VideoDetailPage from "./Pages/VideoDetailPage";
-import MediaUploadTestPage from "./Pages/MediaUploadTestPage";
 
 function AppRoutes() {
   const location = useLocation();
@@ -89,7 +88,6 @@ function AppRoutes() {
           element={<AccountInformationPage />}
         />
         <Route path="/video/:id" element={<VideoDetailPage />} />
-        <Route path="/media-upload-test" element={<MediaUploadTestPage />} />
       </Routes>
       {/* Modal routes, only render if background exists */}
       {state?.background && (

@@ -22,7 +22,10 @@ export default function MediaUploadTestPage() {
   ) => {
     const file = event.target.files?.[0];
     if (file) {
-      const result = await uploadMedia(file);
+      const result = await uploadMedia(file, {
+        type: "image",
+        usage: "temp",
+      });
       if (result.success && result.key) {
         setSingleUploadKey(result.key);
         alert(`Single upload successful! Key: ${result.key}`);
@@ -37,7 +40,10 @@ export default function MediaUploadTestPage() {
   ) => {
     const files = Array.from(event.target.files || []);
     if (files.length > 0) {
-      const results = await uploadMultipleMedia(files);
+      const results = await uploadMultipleMedia(files, {
+        type: "image",
+        usage: "temp",
+      });
       const keys = results
         .filter((result) => result.success)
         .map((result) => result.key!);
@@ -49,7 +55,7 @@ export default function MediaUploadTestPage() {
 
   const handleComponentUpload = (result: {
     key: string;
-    accessLink?: string;
+    accessUrl?: string;
   }) => {
     setUploadedKeys((prev) => [...prev, result.key]);
     alert(`Component upload successful! Key: ${result.key}`);
@@ -155,6 +161,8 @@ export default function MediaUploadTestPage() {
               accept="image/*"
               maxSize={5}
               showPreview={true}
+              type="image"
+              usage="temp"
             />
           </div>
 
