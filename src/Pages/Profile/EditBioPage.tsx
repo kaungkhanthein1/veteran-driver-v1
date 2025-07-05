@@ -16,10 +16,6 @@ function EditBioContent() {
     navigate('/edit-profile');
   };
 
-  const handleCancel = () => {
-    navigate('/edit-profile');
-  };
-
   return (
     <div className="min-h-screen bg-[#F8F9FB] flex flex-col items-center">
       {/* Header */}
@@ -27,44 +23,34 @@ function EditBioContent() {
         <div className="absolute left-0 top-1/2 -translate-y-1/2 pl-2">
           <BackButton />
         </div>
-        <h1 className="text-xl font-semibold text-center w-full">Edit Bio</h1>
+        <h1 className="text-xl font-semibold text-center w-full">Bio</h1>
+        <button
+          className="absolute right-0 top-1/2 -translate-y-1/2 pr-4 text-[#007AFF] text-base font-medium"
+          onClick={handleSave}
+        >
+          save
+        </button>
       </div>
 
       {/* Content */}
       <div className="w-full max-w-[480px] mx-auto p-4">
-        <div className="bg-white rounded-lg p-4 mb-4">
-          <label className="block mb-2 font-medium text-gray-700">Bio</label>
+        <div className="relative">
           <textarea
             value={bio}
-            onChange={(e) => {
+            onChange={e => {
               setBio(e.target.value);
               setError(null);
             }}
             placeholder="Tell us about yourself"
-            className="w-full bg-theme-secondary text-theme-primary px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDC51B] min-h-[120px] resize-none"
+            className="w-full bg-transparent border border-theme rounded-lg px-4 py-3 text-base focus:outline-none focus:ring-0 placeholder:text-theme-secondary/50 min-h-[120px] resize-none pt-7"
             maxLength={200}
           />
-          <div className="text-sm text-gray-500 mt-1">
-            {bio.length}/200 characters
-          </div>
-          {error && <div className="text-red-500 text-sm mt-1">{error}</div>}
+          <span className="absolute -top-[10px] left-[18px] px-1 text-sm text-theme-secondary bg-[#F8F9FB]">
+            Bio
+          </span>
         </div>
-
-        {/* Action Buttons */}
-        <div className="flex gap-3">
-          <button
-            onClick={handleCancel}
-            className="flex-1 bg-gray-200 text-gray-700 rounded-full py-3 text-lg font-semibold transition-colors duration-200"
-          >
-            Cancel
-          </button>
-          <button
-            onClick={handleSave}
-            className="flex-1 bg-yellow-gradient text-black rounded-full py-3 text-lg font-semibold transition-colors duration-200"
-          >
-            Save
-          </button>
-        </div>
+        <div className="text-sm text-gray-500 mt-1">{bio.length}/200 characters</div>
+        {error && <div className="text-red-500 text-sm mt-2">{error}</div>}
       </div>
     </div>
   );

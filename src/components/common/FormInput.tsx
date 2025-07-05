@@ -1,5 +1,17 @@
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
+import React from 'react';
+
+interface FormInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
+  name?: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
+  type?: string;
+  required?: boolean;
+  rightIcon?: React.ReactNode;
+}
 
 const FormInput = ({ 
   label, 
@@ -9,8 +21,9 @@ const FormInput = ({
   placeholder, 
   type = 'text', 
   required = false,
-  rightIcon
-}) => {
+  rightIcon,
+  ...rest
+}: FormInputProps) => {
   const { t } = useTranslation();
   return (
     <div className="relative">
@@ -21,6 +34,7 @@ const FormInput = ({
         className="w-full bg-transparent border border-theme rounded-lg px-4 h-[56px] text-base focus:outline-none focus:ring-0 placeholder:text-theme-secondary/50 flex items-center"
         value={value}
         onChange={onChange}
+        {...rest}
       />
       <span className="absolute -top-[10px] left-[18px] px-1 text-sm text-theme-secondary bg-theme-primary">
         {label ? t(label) : ''} {required && <span className="text-[#FDC51B]">*</span>}
