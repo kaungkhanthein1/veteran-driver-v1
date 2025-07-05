@@ -158,10 +158,8 @@ body {
 }
 
 .display_name {
-  color: #444;
-  font-family: "Arbeit Pro Trial";
+  color: #444444;
   font-size: 22px;
   font-style: normal;
   font-weight: 500;
-  line-height: 22px; /* 100% */
 }

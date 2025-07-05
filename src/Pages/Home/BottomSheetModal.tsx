@@ -13,7 +13,7 @@ export default function BottomSheetModal({
   isExpanded,
   setIsExpanded,
   children,
-  minHeight = 360,
+  minHeight = 150,
   expendable = true,
 }: BottomSheetModalProps) {
   const sheetRef = useRef<HTMLDivElement>(null);
