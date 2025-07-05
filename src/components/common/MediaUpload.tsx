@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { useMediaUpload } from "../../hooks/useMediaUpload";
 
 interface MediaUploadProps {
-  onUploadComplete: (result: { key: string; accessLink?: string }) => void;
+  onUploadComplete: (result: { key: string; accessUrl?: string }) => void;
   onUploadError?: (error: string) => void;
   onProgress?: (progress: number) => void;
   accept?: string;
@@ -14,6 +14,22 @@ interface MediaUploadProps {
   disabled?: boolean;
   showPreview?: boolean;
   previewClassName?: string;
+  type?:
+    | "avatar"
+    | "image"
+    | "video"
+    | "audio"
+    | "document"
+    | "place-photo"
+    | "place-video"
+    | "chat";
+  usage?:
+    | "profile"
+    | "cover"
+    | "message-attachment"
+    | "verification"
+    | "promotion"
+    | "temp";
 }
 
 export const MediaUpload: React.FC<MediaUploadProps> = ({
@@ -29,6 +45,8 @@ export const MediaUpload: React.FC<MediaUploadProps> = ({
   disabled = false,
   showPreview = true,
   previewClassName = "",
+  type,
+  usage,
 }) => {
   const {
     uploadMedia,
@@ -73,7 +91,11 @@ export const MediaUpload: React.FC<MediaUploadProps> = ({
 
       // Upload files
       if (multiple) {
-        const results = await uploadMultipleMedia(files, onProgress);
+        const results = await uploadMultipleMedia(files, {
+          type,
+          usage,
+          onProgress,
+        });
         const successfulUploads = results.filter((result) => result.success);
         const failedUploads = results.filter((result) => !result.success);
 
@@ -89,18 +111,22 @@ export const MediaUpload: React.FC<MediaUploadProps> = ({
           successfulUploads.forEach((result) => {
             onUploadComplete({
               key: result.key!,
-              accessLink: result.accessLink,
+              accessUrl: result.accessUrl,
             });
           });
         }
       } else {
-        const result = await uploadMedia(files[0], onProgress);
+        const result = await uploadMedia(files[0], {
+          type,
+          usage,
+          onProgress,
+        });
 
         if (result.success && result.key) {
           setUploadedKeys([result.key]);
           onUploadComplete({
             key: result.key,
-            accessLink: result.accessLink,
+            accessUrl: result.accessUrl,
           });
         } else {
           onUploadError?.(result.error || "Upload failed");

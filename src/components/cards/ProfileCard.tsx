@@ -221,16 +221,6 @@ const ProfileCard: React.FC = () => {
           </button>
         </div>
       </div>
-
-      {/* Quick Access */}
-      <div className="relative z-10 px-4 mt-4">
-        <button
-          onClick={() => navigate("/media-upload-test")}
-          className="w-full bg-purple-500 text-white py-3 rounded-lg hover:bg-purple-600 transition-colors text-sm font-medium"
-        >
-          🧪 Test Media Upload
-        </button>
-      </div>
     </div>
   );
 };

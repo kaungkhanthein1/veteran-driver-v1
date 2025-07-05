@@ -8,11 +8,47 @@ import {
 export interface UseMediaUploadReturn {
   uploadMedia: (
     file: File,
-    onProgress?: (progress: number) => void
+    options?: {
+      type?:
+        | "avatar"
+        | "image"
+        | "video"
+        | "audio"
+        | "document"
+        | "place-photo"
+        | "place-video"
+        | "chat";
+      usage?:
+        | "profile"
+        | "cover"
+        | "message-attachment"
+        | "verification"
+        | "promotion"
+        | "temp";
+      onProgress?: (progress: number) => void;
+    }
   ) => Promise<MediaUploadResult>;
   uploadMultipleMedia: (
     files: File[],
-    onProgress?: (fileIndex: number, progress: number) => void
+    options?: {
+      type?:
+        | "avatar"
+        | "image"
+        | "video"
+        | "audio"
+        | "document"
+        | "place-photo"
+        | "place-video"
+        | "chat";
+      usage?:
+        | "profile"
+        | "cover"
+        | "message-attachment"
+        | "verification"
+        | "promotion"
+        | "temp";
+      onProgress?: (fileIndex: number, progress: number) => void;
+    }
   ) => Promise<MediaUploadResult[]>;
   isUploading: boolean;
   uploadProgress: number;
@@ -37,7 +73,25 @@ export const useMediaUpload = (): UseMediaUploadReturn => {
   const uploadMedia = useCallback(
     async (
       file: File,
-      onProgress?: (progress: number) => void
+      options?: {
+        type?:
+          | "avatar"
+          | "image"
+          | "video"
+          | "audio"
+          | "document"
+          | "place-photo"
+          | "place-video"
+          | "chat";
+        usage?:
+          | "profile"
+          | "cover"
+          | "message-attachment"
+          | "verification"
+          | "promotion"
+          | "temp";
+        onProgress?: (progress: number) => void;
+      }
     ): Promise<MediaUploadResult> => {
       setIsUploading(true);
       setError(null);
@@ -53,9 +107,11 @@ export const useMediaUpload = (): UseMediaUploadReturn => {
 
         const result = await mediaService.uploadMedia({
           file,
+          type: options?.type,
+          usage: options?.usage,
           onProgress: (progress) => {
             setUploadProgress(progress);
-            onProgress?.(progress);
+            options?.onProgress?.(progress);
           },
         });
 
@@ -79,7 +135,25 @@ export const useMediaUpload = (): UseMediaUploadReturn => {
   const uploadMultipleMedia = useCallback(
     async (
       files: File[],
-      onProgress?: (fileIndex: number, progress: number) => void
+      options?: {
+        type?:
+          | "avatar"
+          | "image"
+          | "video"
+          | "audio"
+          | "document"
+          | "place-photo"
+          | "place-video"
+          | "chat";
+        usage?:
+          | "profile"
+          | "cover"
+          | "message-attachment"
+          | "verification"
+          | "promotion"
+          | "temp";
+        onProgress?: (fileIndex: number, progress: number) => void;
+      }
     ): Promise<MediaUploadResult[]> => {
       setIsUploading(true);
       setError(null);
@@ -95,10 +169,19 @@ export const useMediaUpload = (): UseMediaUploadReturn => {
           }
         }
 
-        const results = await mediaService.uploadMultipleMedia(
-          files,
-          onProgress
-        );
+        const results: MediaUploadResult[] = [];
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+          const result = await mediaService.uploadMedia({
+            file,
+            type: options?.type,
+            usage: options?.usage,
+            onProgress: options?.onProgress
+              ? (progress) => options.onProgress!(i, progress)
+              : undefined,
+          });
+          results.push(result);
+        }
 
         // Check if any upload failed
         const failedUploads = results.filter((result) => !result.success);
