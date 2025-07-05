@@ -8,42 +8,54 @@ export const AuthApi = createApi({
   }),
   endpoints: (builder) => ({
     login: builder.mutation<void, { data: any }>({
-      query: (data) => ({
+      query: ({ data }) => ({
         url: `/password-login`,
         method: "POST",
         body: data,
       }),
     }),
     register: builder.mutation<void, { data: any }>({
-      query: (data) => ({
+      query: ({ data }) => ({
         url: `/register`,
         method: "POST",
         body: data,
       }),
     }),
     sendverify: builder.mutation<void, { data: any }>({
-      query: (data) => ({
-        url: `/send-verification-code`,
-        method: "POST",
-        body: data,
-      }),
+      query: ({ data }) => {
+        console.log("Sending verification code with data:", data);
+        // This endpoint is used to send a verification code for registration or login
+        // It can be used for both email and phone verification
+        // The data object should contain the necessary information like 'to', 'channel', and 'scene'
+        return {
+          url: `/send-verification-code`,
+          method: "POST",
+          body: data,
+        };
+      },
+      //   } ({
+
+      // url: `/send-verification-code`,
+      // method: "POST",
+      // body: data,
+      //   }),
     }),
     emailOTP: builder.mutation<void, { data: any }>({
-      query: (data) => ({
+      query: ({ data }) => ({
         url: `/email-otp-login`,
         method: "POST",
         body: data,
       }),
     }),
     resetPasswordCode: builder.mutation<void, { data: any }>({
-      query: (data) => ({
+      query: ({ data }) => ({
         url: `/send-reset-password-code`,
         method: "POST",
         body: data,
       }),
     }),
     resetPassword: builder.mutation<void, { data: any }>({
-      query: (data) => ({
+      query: ({ data }) => ({
         url: `/reset-password`,
         method: "POST",
         body: data,

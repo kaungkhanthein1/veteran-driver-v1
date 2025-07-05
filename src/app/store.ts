@@ -3,9 +3,11 @@ import { configureStore } from "@reduxjs/toolkit";
 import countryReducer from "./countrySlice";
 import { HomeApi } from "../features/HomeApi";
 import { AuthApi } from "../Pages/services/AuthApi";
+import recaptchaSlice from "../services/recaptchaSlice";
 
 export const store = configureStore({
   reducer: {
+    recaptchaSlice: recaptchaSlice,
     country: countryReducer,
     [HomeApi.reducerPath]: HomeApi.reducer,
     [AuthApi.reducerPath]: AuthApi.reducer,

@@ -56,9 +56,9 @@ export default function OtpVerifyPage({
       try {
         await triggerResgister({
           data: {
-            otp: otpCode,
-            emailorPhone,
-            userName,
+            code: otpCode,
+            email: emailorPhone,
+            username: userName,
             password,
           },
         }).unwrap();

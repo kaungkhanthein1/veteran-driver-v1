@@ -134,6 +134,7 @@ async function decryptResponse(res: AxiosResponse) {
       encWithTag
     );
     const plaintext = atou8(new Uint8Array(decryptedBuf));
+    console.log("Decrypted response plaintext:", plaintext);
     try {
       res.data = JSON.parse(plaintext);
     } catch {
@@ -194,9 +195,9 @@ gateway.interceptors.request.use((config: InternalAxiosRequestConfig) => {
           : headers,
     });
     const signature = CryptoJS.MD5(signatureStr).toString();
-    // headers.set("x-lang", getCurrentLang());
-    // headers.set("access-control-allow-headers", getCurrentLang());
-    //headers.set(GATEWAY_CONFIG.signatureHeader, signature);
+    headers.set("x-lang", getCurrentLang());
+    headers.set("access-control-allow-headers", getCurrentLang());
+    headers.set(GATEWAY_CONFIG.signatureHeader, signature);
     config.headers = headers;
     return config;
   } else {

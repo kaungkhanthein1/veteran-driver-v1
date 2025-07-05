@@ -14,6 +14,9 @@ import { useEmailOTPMutation, useSendverifyMutation } from "./services/AuthApi";
 
 import ReCaptcha from "../components/common/ReCaptcha";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { update } from "@react-spring/web";
+import { updaterecaptcha } from "../services/recaptchaSlice";
 
 type RegisterPageProps = {
   onClose?: () => void;
@@ -49,25 +52,25 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
     emailOrPhone.trim() !== "" &&
     password.trim() !== "";
 
-  const handleOpt = async () => {
-    if (isFormFilled && isRecaptchaVerified) {
-      await triggerVerify({
-        data: {
-          to: emailOrPhone,
-          channel: "email",
-          scene: "register",
-        },
-      }).unwrap();
-      setshowOtp(true);
-    } else {
-      alert(
-        t(
-          "registerPage.fillAllFields",
-          "Please fill all fields and verify reCAPTCHA"
-        )
-      );
-    }
-  };
+  // const handleOpt = async () => {
+  //   if (isFormFilled && isRecaptchaVerified) {
+  //     await triggerVerify({
+  //       data: {
+  //         to: emailOrPhone,
+  //         channel: "email",
+  //         scene: "register",
+  //       },
+  //     }).unwrap();
+  //     setshowOtp(true);
+  //   } else {
+  //     alert(
+  //       t(
+  //         "registerPage.fillAllFields",
+  //         "Please fill all fields and verify reCAPTCHA"
+  //       )
+  //     );
+  //   }
+  // };
 
   if (showOpt) {
     return (
@@ -79,8 +82,13 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
     );
   }
 
-  const handleRecaptchaVerify = (token: string | null) =>
+  const dispatch = useDispatch();
+
+  const handleRecaptchaVerify = (token: any) => {
     setRecaptchaToken(token);
+    dispatch(updaterecaptcha(token));
+  };
+
   const handleRecaptchaExpired = () => setRecaptchaToken(null);
   const handleRecaptchaError = () => setRecaptchaToken(null);
 
@@ -98,18 +106,29 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
     }
     setIsSubmitting(true);
     try {
-      const response = await axios.post(
-        import.meta.env.VITE_API_BASE_URL + "/api/auth/register",
-        {
-          userName,
-          emailOrPhone,
-          password,
-          recaptchaToken,
-        }
-      );
-      // On success, navigate to OTP verify (or handle as needed)
-      navigate("/otp-verify", { state: { background } });
+      // Trigger the verification code
+      await triggerVerify({
+        data: {
+          to: emailOrPhone,
+          channel: "email",
+          scene: "register",
+        },
+      }).unwrap();
+
+      setshowOtp(true);
+      // const response = await axios.post(
+      //   import.meta.env.VITE_API_BASE_URL + "/api/auth/register",
+      //   {
+      //     userName,
+      //     emailOrPhone,
+      //     password,
+      //     recaptchaToken,
+      //   }
+      // );
+      // // On success, navigate to OTP verify (or handle as needed)
+      // navigate("/otp-verify", { state: { background } });
     } catch (err: any) {
+      console.log("Registration error:", err);
       setError(err.response?.data?.message || "Registration failed.");
     } finally {
       setIsSubmitting(false);
