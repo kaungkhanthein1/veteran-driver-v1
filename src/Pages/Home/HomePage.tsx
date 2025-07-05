@@ -8,10 +8,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useGetCountriesQuery } from "../../features/HomeApi";
 import { gatewayRequest } from "../../services/gateway";
 import { apiBaseUrl } from "../../config/env";
+import axios from "axios";
 
 export default function HomePage() {
-  const { data, error, isLoading } = useGetCountriesQuery("");
-  console.log(data);
+  // const { data, error, isLoading } = useGetCountriesQuery("");
 
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -31,7 +31,7 @@ export default function HomePage() {
     fetchProfile();
   }, []);
 
-  return (
+  https: return (
     <div className="flex flex-col h-full relative bg-theme-primary">
       <AnimatePresence>
         {!isExpanded && (

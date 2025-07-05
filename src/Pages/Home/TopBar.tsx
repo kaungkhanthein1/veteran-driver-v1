@@ -1,12 +1,13 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DropdownArrow from "icons/HomeUpdate/Dropdown.svg";
 import CountryFlag from "icons/HomeUpdate/thai.png";
 import HotelIcon from "icons/HomeUpdate/Hotel.png";
 import BarIcon from "icons/HomeUpdate/Bar.png";
 import LadyIcon from "icons/HomeUpdate/Lady.png";
+import axios from "axios";
 
 export default function TopBar() {
   const { t } = useTranslation();
@@ -14,6 +15,9 @@ export default function TopBar() {
   const location = useLocation();
   const dispatch = useDispatch();
   const { name } = useSelector((state: any) => state.country);
+  const token = localStorage.getItem("token");
+
+  const [state, setState] = useState("");
 
   // Active filter chip state
   const [activeChip, setActiveChip] = useState<string | null>(null);
@@ -24,26 +28,64 @@ export default function TopBar() {
     { key: "lady", label: "Lady", icon: LadyIcon },
   ];
 
+  useEffect(() => {
+    async function fetchLocation() {
+      try {
+        // First get current position
+        const position = await new Promise((resolve, reject) => {
+          navigator.geolocation.getCurrentPosition(resolve, reject);
+        });
+
+        const { latitude: lat, longitude: lon } = position?.coords;
+
+        const response = await axios({
+          method: "GET",
+          url: `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`,
+        });
+        console.log("Location result:", response.data);
+        setState(response.data?.display_name || "Unknown Location");
+      } catch (err) {
+        console.error("Error:", err);
+        if (err?.code === err?.PERMISSION_DENIED) {
+          console.log("User denied geolocation prompt");
+        }
+      }
+    }
+
+    // Check if geolocation is available
+    if ("geolocation" in navigator) {
+      fetchLocation();
+    } else {
+      console.log("Geolocation is not supported by this browser");
+    }
+  }, []);
+
   return (
     <div className="pb-2 px-4 pt-10 bg-gradient-to-b from-white from-60% via-white via-70% to-transparent">
-      <div className="flex justify-between items-center mb-1">
-        <button
-          onClick={() => navigate('/login', { state: { background: location } })}
-          className="text-xl font-bold text-theme-text focus:outline-none"
-        >
-          {t("loginPage.title")} {t("loginPage.orText")} {t("registerPage.title")}
-        </button>
+      <div className="flex justify-between items-center mb-4 mr-6">
+        {token ? (
+          <div className="truncate display_name">{state}</div>
+        ) : (
+          <button
+            onClick={() =>
+              navigate("/login", { state: { background: location } })
+            }
+            className="text-xl font-bold text-theme-text focus:outline-none"
+          >
+            {t("loginPage.title")} {t("loginPage.orText")}{" "}
+            {t("registerPage.title")}
+          </button>
+        )}
+
         {/* Country Selector */}
         <div
-          onClick={() => dispatch({ type: 'country/changeCountry', payload: 'thailand' })}
+          onClick={() =>
+            dispatch({ type: "country/changeCountry", payload: "thailand" })
+          }
           className="flex items-center text-theme-text text-sm cursor-pointer ml-4"
         >
-          <img
-            src={CountryFlag}
-            alt="Thailand Flag"
-            className="w-5 h-5 mr-2"
-          />
-          <span>{name || 'VNM'}</span>
+          <img src={CountryFlag} alt="Thailand Flag" className="w-5 h-5 mr-2" />
+          <span>{name || "VNM"}</span>
           <img
             src={DropdownArrow}
             alt="Dropdown"
@@ -51,9 +93,12 @@ export default function TopBar() {
           />
         </div>
       </div>
-      <div className="text-theme-secondary text-base mb-4 ml-1">
-        One login to explore it all.
-      </div>
+      {!token && (
+        <div className="text-theme-secondary text-base mb-4 ml-1">
+          One login to explore it all.
+        </div>
+      )}
+
       {/* Search Bar */}
       <div className="flex items-center">
         <div className="bg-[#F2F4FA] rounded-full px-3 py-2 flex items-center flex-grow">
@@ -86,9 +131,11 @@ export default function TopBar() {
             key={chip.key}
             onClick={() => setActiveChip(chip.key)}
             className={`flex items-center gap-1 px-4 py-1 h-9 rounded-full border text-base transition-colors duration-150
-              ${activeChip === chip.key
-                ? 'bg-gradient-to-r from-yellow-200 to-yellow-100 text-black border-yellow-200 shadow-md'
-                : 'bg-theme-primary border-theme-primary text-theme-text'}
+              ${
+                activeChip === chip.key
+                  ? "bg-gradient-to-r from-yellow-200 to-yellow-100 text-black border-yellow-200 shadow-md"
+                  : "bg-theme-primary border-theme-primary text-theme-text"
+              }
             `}
           >
             <img src={chip.icon} alt={chip.label} className="w-5 h-5" />
