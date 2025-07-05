@@ -110,8 +110,8 @@ export default function LoginPage({ onShowRegister, onClose }: LoginPageProps) {
         },
       }).unwrap();
       console.log("Login response:", response);
-      localStorage.removeItem("token");
-      localStorage.setItem("token", response?.data.token.accessToken);
+      // localStorage.removeItem("token");
+      // localStorage.setItem("token", response?.data.token.accessToken);
       navigate("/");
       alert("Login successful!");
     } catch (error) {
