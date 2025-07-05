@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 // Import new icons from ProfileUpdate
 
 import NotiIcon from "icons/ProfileUpdate/Noti.svg";
@@ -17,22 +17,19 @@ import QrIcon from "icons/ProfileUpdate/Qr.svg";
 import FeedBackIcon from "icons/ProfileUpdate/FeedBack.svg";
 import CustomerSupportIcon from "icons/ProfileUpdate/CustomerSupport.svg";
 import HelpsIcon from "icons/ProfileUpdate/Helps.svg";
-import { useNavigate } from "react-router-dom";
 
 // Import the gradient image (place it in src/assets/gradient-bg.png for example)
-import GradientBg from "assets/gradient-bg.png";
+import { useMeQuery } from "../../Pages/services/ProfileApi";
 
 const ProfileCard: React.FC = () => {
+  const location = useLocation();
   const navigate = useNavigate();
-  // Placeholder user data
-  const user = {
-    name: "Laura Lin",
-    gender: "female",
-    badge: "SILVER",
-    avatar: "https://randomuser.me/api/portraits/women/44.jpg",
-    location: "Phnom Penh, Cambodia",
-    bio: "Passionate traveler 🌏 embracing the journey.",
-  };
+  const token = localStorage.getItem("token");
+
+  const { data } = useMeQuery();
+  console.log("User Data:", data);
+
+  const user = data?.data || {};
 
   return (
     <div className="relative w-full max-w-[480px] mx-auto overflow-hidden">
@@ -41,39 +38,142 @@ const ProfileCard: React.FC = () => {
         <button className="bg-white/70 rounded-full p-2 shadow">
           <img src={NotiIcon} alt="Notifications" className="w-6 h-6" />
         </button>
-        <button
-          className="bg-white rounded-xl px-4 py-2 flex items-center gap-2 shadow"
-          onClick={() => navigate("/profile/edit")}
-        >
-          <img src={EditProfileIcon} alt="Edit Profile" className="w-5 h-5" />
-          <span className="font-medium text-sm">Edit Profile</span>
-        </button>
+        {token && (
+          <button
+            className="bg-white rounded-xl px-4 py-2 flex items-center gap-2 shadow"
+            onClick={() => navigate("/profile/edit")}
+          >
+            <img src={EditProfileIcon} alt="Edit Profile" className="w-5 h-5" />
+            <span className="font-medium text-sm">Edit Profile</span>
+          </button>
+        )}
       </div>
-      {/* Profile Info */}
-      <div className="flex items-center gap-4 px-4">
-        <img
-          src={user.avatar}
-          alt="Avatar"
-          className="w-16 h-16 rounded-full border-4 border-white object-cover"
-        />
-        <div>
-          <div className="flex items-center gap-2 mb-1">
-            <span className="text-lg font-semibold text-gray-900">
-              {user.name}
-            </span>
-            <img src={FemaleIcon} alt="Female" className="w-4 h-4" />
+
+      {token ? (
+        <div className="flex items-center gap-4 px-4">
+          {user?.avatar ? (
+            <img
+              src={user.avatar}
+              alt="Avatar"
+              className="w-16 h-16 rounded-full border-4 border-white object-cover"
+            />
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="81"
+              height="81"
+              viewBox="0 0 81 81"
+              fill="none"
+            >
+              <circle
+                cx="40.5"
+                cy="40.5"
+                r="40.5"
+                fill="#444444"
+                fill-opacity="0.16"
+              />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M40.208 43.8809C33.7043 43.8809 28 47.707 28 52.0667C28 57.6762 37.1897 57.6762 40.208 57.6762C43.2264 57.6762 52.4144 57.6762 52.4144 52.0301C52.4144 47.6887 46.7101 43.8809 40.208 43.8809Z"
+                fill="white"
+              />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M40.1433 40.2437H40.1949C44.6742 40.2437 48.3175 36.6003 48.3175 32.121C48.3175 27.6433 44.6742 24 40.1949 24C35.7156 24 32.0723 27.6433 32.0723 32.1177C32.0574 36.582 35.6757 40.2271 40.1433 40.2437Z"
+                fill="white"
+              />
+            </svg>
+          )}
+
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-lg font-semibold text-gray-900">
+                {user.nickname}
+              </span>
+              {user?.gender && (
+                <img src={FemaleIcon} alt="Female" className="w-4 h-4" />
+              )}
+            </div>
+            <div className="flex items-center gap-2 mb-0">
+              <span className="text-[#777] text-xs  py-0.5 rounded-md">
+                (Uid {user.uid})
+              </span>
+            </div>
+            <div className="text-sm text-gray-700 flex items-center gap-1">
+              {user?.city ||
+                (user?.country && (
+                  <span>
+                    📍 {user.city} {user.country}
+                  </span>
+                ))}
+            </div>
+
+            <div className="text-xs text-gray-500 mt-1">{user.bio}</div>
           </div>
-          <div className="flex items-center gap-2 mb-1">
-            <span className="bg-[#E5EAF3] text-[#6B7A90] text-xs font-bold px-2 py-0.5 rounded-md">
-              {user.badge}
-            </span>
-          </div>
-          <div className="text-sm text-gray-700 flex items-center gap-1">
-            <span>📍 {user.location}</span>
-          </div>
-          <div className="text-xs text-gray-500 mt-1">{user.bio}</div>
         </div>
-      </div>
+      ) : (
+        <div className="flex items-center gap-4 px-4">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="81"
+            height="81"
+            viewBox="0 0 81 81"
+            fill="none"
+          >
+            <circle
+              cx="40.5"
+              cy="40.5"
+              r="40.5"
+              fill="#444444"
+              fill-opacity="0.16"
+            />
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M40.208 43.8809C33.7043 43.8809 28 47.707 28 52.0667C28 57.6762 37.1897 57.6762 40.208 57.6762C43.2264 57.6762 52.4144 57.6762 52.4144 52.0301C52.4144 47.6887 46.7101 43.8809 40.208 43.8809Z"
+              fill="white"
+            />
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M40.1433 40.2437H40.1949C44.6742 40.2437 48.3175 36.6003 48.3175 32.121C48.3175 27.6433 44.6742 24 40.1949 24C35.7156 24 32.0723 27.6433 32.0723 32.1177C32.0574 36.582 35.6757 40.2271 40.1433 40.2437Z"
+              fill="white"
+            />
+          </svg>
+
+          <div
+            onClick={() =>
+              navigate("/login", { state: { background: location } })
+            }
+          >
+            <div className="flex items-center gap-1 mb-1">
+              <span className="text-[24px] font-[500] leading-[36px] text-[#444]">
+                Login Or Sign Up
+              </span>
+              <span className="mt-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 18 18"
+                  fill="none"
+                >
+                  <path
+                    d="M6.75 13.5L11.25 9L6.75 4.5"
+                    stroke="black"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Profile Info */}
+
       {/* Card 1: Quick Actions */}
       <div className="relative z-10 px-4 pb-2 mt-4">
         <div className="grid grid-cols-4 bg-theme-secondary rounded-xl shadow-lg p-4 gap-2">

@@ -30,6 +30,7 @@ export default function HomePage() {
     }
     fetchProfile();
   }, []);
+  console.log("HomePage rendered");
 
   https: return (
     <div className="flex flex-col h-full relative bg-theme-primary">
