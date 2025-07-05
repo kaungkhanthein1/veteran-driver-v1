@@ -161,12 +161,13 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
         </form>
         {/* Social Login - single button with icons */}
         <div className="w-full mt-6">
-          <button className="w-full flex items-center justify-center bg-theme-secondary rounded-full py-3 px-5 text-theme-primary font-medium text-base">
+          <button className="w-full flex items-center justify-between bg-white rounded-full py-3 px-6 text-black font-medium text-base shadow-sm border border-gray-200">
             <span className="whitespace-nowrap">Continue with Social Account</span>
-            <span className="flex items-center gap-2 ml-3">
-              <img src={GoogleIcon} alt="Google" className="w-6 h-6 object-contain align-middle [filter:var(--icon-filter)]" />
-              <img src={FacebookIcon} alt="Facebook" className="w-6 h-6 object-contain align-middle [filter:var(--icon-filter)]" />
-              <img src={AppleIcon} alt="Apple" className="w-6 h-6 object-contain align-middle mt-[1px] [filter:var(--icon-filter)]" />
+            <span className="flex items-center gap-4 ml-4" style={{ minWidth: '120px' }}>
+              <img src={GoogleIcon} alt="Google" className="w-6 h-6 object-contain align-middle" />
+              <img src={FacebookIcon} alt="Facebook" className="w-6 h-6 object-contain align-middle" />
+              {/* <img src={AppleIcon} alt="Apple" className="w-6 h-6 object-contain align-middle" /> */}
+              <span className="w-2" /> {/* Spacer to push Apple icon left */}
             </span>
           </button>
         </div>

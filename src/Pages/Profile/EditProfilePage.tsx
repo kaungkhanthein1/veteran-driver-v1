@@ -1,63 +1,83 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { fetchProfile, updateProfile } from '../../services/ProfileService';
+import { useProfileEdit } from '../../context/ProfileEditContext';
 import BackButton from '../../components/common/BackButton';
 import DefaultAvatorWhite from '../../icons/DefaultAvatorWhite.svg';
 import EditProfileIcon from '../../icons/ProfileUpdate/EditProfile.svg';
+import NextIcon from '../../icons/Next.svg';
 
-export default function EditProfilePage() {
+const FieldRow: React.FC<{
+  label: string;
+  value: string;
+  onClick?: () => void;
+  clickable?: boolean;
+  showArrow?: boolean;
+  last?: boolean;
+}> = ({ label, value, onClick, clickable, showArrow, last }) => (
+  <div
+    className={`flex items-center justify-between px-4 py-4 ${
+      !last ? 'border-b border-gray-100' : ''
+    } ${clickable ? 'cursor-pointer hover:bg-gray-50 transition-colors' : ''}`}
+    onClick={clickable ? onClick : undefined}
+  >
+    <span className="text-gray-500 text-base">{label}</span>
+    <span className="flex items-center gap-2">
+      <span className={`text-right text-base ${value ? 'text-gray-900' : 'text-gray-400'}`}>{value || ''}</span>
+      {showArrow && (
+        <img src={NextIcon} alt="Next" className="w-4 h-4 ml-2" />
+      )}
+    </span>
+  </div>
+);
+
+const EditProfileContent: React.FC = () => {
   const { t } = useTranslation();
-  const [formData, setFormData] = useState({
-    nickname: '',
-    bio: '',
-    gender: '',
-    country: '',
-    city: '',
-    avatar: '',
-    userId: ''
-  });
+  const navigate = useNavigate();
+  const {
+    profileData,
+    setProfileData,
+    updateField,
+    setOriginalData,
+    hasChanges,
+    resetChanges
+  } = useProfileEdit();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     fetchProfile()
       .then(res => {
-        setFormData(res.data);
+        setProfileData(res.data);
+        setOriginalData(res.data);
         setLoading(false);
       })
       .catch(() => {
         setError('Failed to fetch profile');
         setLoading(false);
       });
-  }, []);
+  }, [setProfileData, setOriginalData]);
 
-  const handleInputChange = (field: keyof typeof formData, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-  };
-
-  const handleAvatarUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData(prev => ({ ...prev, avatar: reader.result as string }));
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleSave = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSave = async () => {
+    setSaving(true);
     setError(null);
     setSuccess(null);
     try {
-      await updateProfile(formData);
+      await updateProfile(profileData);
       setSuccess('Profile updated successfully!');
+      setOriginalData(profileData);
     } catch {
       setError('Failed to update profile');
+    } finally {
+      setSaving(false);
     }
   };
+
+  // Helper for location string
+  const locationString = [profileData.country, profileData.city].filter(Boolean).join(' , ');
 
   if (loading) {
     return <div className="text-center py-8">{t('editProfilePage.loading', 'Loading...')}</div>;
@@ -72,11 +92,12 @@ export default function EditProfilePage() {
         </div>
         <h1 className="text-xl font-semibold text-center w-full">Edit Profile</h1>
       </div>
+
       {/* Avatar Section */}
       <div className="flex flex-col items-center mt-2 mb-4">
         <div className="relative">
           <img
-            src={formData.avatar || DefaultAvatorWhite}
+            src={profileData.avatar || DefaultAvatorWhite}
             alt="Avatar"
             className="w-24 h-24 rounded-full object-cover border-4 border-white shadow"
           />
@@ -84,77 +105,101 @@ export default function EditProfilePage() {
             <input
               type="file"
               accept="image/*"
-              onChange={handleAvatarUpload}
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  const reader = new FileReader();
+                  reader.onloadend = () => {
+                    const newAvatar = reader.result as string;
+                    updateField('avatar', newAvatar);
+                  };
+                  reader.readAsDataURL(file);
+                }
+              }}
               className="hidden"
             />
             <img src={EditProfileIcon} alt="Upload" className="w-6 h-6 text-blue-500" />
           </label>
         </div>
       </div>
-      {/* Edit Form */}
-      <form className="w-full max-w-[480px] mx-auto p-4" onSubmit={handleSave}>
-        <div className="mb-4">
-          <label className="block mb-1 font-medium">Profile Name</label>
-          <input
-            type="text"
-            value={formData.nickname}
-            onChange={e => handleInputChange('nickname', e.target.value)}
-            className="w-full bg-theme-secondary text-theme-primary px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDC51B]"
+
+      {/* Cards Section */}
+      <div className="w-full max-w-[480px] mx-auto p-4 space-y-4">
+        {/* First Card: Profile Name, Username, Veteran ID */}
+        <div className="bg-white rounded-xl shadow p-0 overflow-hidden">
+          <FieldRow
+            label="Profile Name"
+            value={profileData.nickname}
+            clickable={true}
+            showArrow={true}
+            onClick={() => navigate('nickname')}
+          />
+          <FieldRow
+            label="Username"
+            value={profileData.username || ''}
+            clickable={true}
+            showArrow={true}
+            onClick={() => navigate('username')}
+          />
+          <FieldRow
+            label="Veteran ID"
+            value={profileData.userId || ''}
+            clickable={false}
+            showArrow={false}
+            last={true}
           />
         </div>
-        <div className="mb-4">
-          <label className="block mb-1 font-medium">User ID</label>
-          <input
-            type="text"
-            value={formData.userId}
-            readOnly
-            className="w-full bg-gray-100 text-gray-400 px-4 py-3 rounded-lg cursor-not-allowed"
+
+        {/* Second Card: Bio */}
+        <div className="bg-white rounded-xl shadow p-0 overflow-hidden">
+          <FieldRow
+            label="Bio"
+            value={profileData.bio}
+            clickable={true}
+            showArrow={true}
+            onClick={() => navigate('bio')}
+            last={true}
           />
         </div>
-        <div className="mb-4">
-          <label className="block mb-1 font-medium">Bio</label>
-          <textarea
-            value={formData.bio}
-            onChange={e => handleInputChange('bio', e.target.value)}
-            className="w-full bg-theme-secondary text-theme-primary px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDC51B] min-h-[80px] resize-none"
+
+        {/* Third Card: Gender, Location */}
+        <div className="bg-white rounded-xl shadow p-0 overflow-hidden">
+          <FieldRow
+            label="Gender"
+            value={profileData.gender}
+            clickable={true}
+            showArrow={true}
+            onClick={() => navigate('gender')}
+          />
+          <FieldRow
+            label="Location"
+            value={locationString}
+            clickable={true}
+            showArrow={true}
+            onClick={() => navigate('country')}
+            last={true}
           />
         </div>
-        <div className="mb-4">
-          <label className="block mb-1 font-medium">Gender</label>
-          <input
-            type="text"
-            value={formData.gender}
-            onChange={e => handleInputChange('gender', e.target.value)}
-            className="w-full bg-theme-secondary text-theme-primary px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDC51B]"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block mb-1 font-medium">Country</label>
-          <input
-            type="text"
-            value={formData.country}
-            onChange={e => handleInputChange('country', e.target.value)}
-            className="w-full bg-theme-secondary text-theme-primary px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDC51B]"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block mb-1 font-medium">City</label>
-          <input
-            type="text"
-            value={formData.city}
-            onChange={e => handleInputChange('city', e.target.value)}
-            className="w-full bg-theme-secondary text-theme-primary px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDC51B]"
-          />
-        </div>
+      </div>
+
+      {/* Save Button */}
+      <div className="w-full max-w-[480px] mx-auto p-4">
         <button
-          type="submit"
-          className="w-full rounded-full py-3 text-lg font-semibold mt-2 transition-colors duration-200 bg-yellow-gradient text-black"
+          onClick={handleSave}
+          disabled={saving}
+          className={`w-full rounded-full py-3 text-lg font-semibold transition-colors duration-200 ${
+            !saving 
+              ? 'bg-yellow-gradient text-black' 
+              : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+          }`}
         >
-          Save
+          {saving ? 'Saving...' : 'Save Changes'}
         </button>
-        {error && <div className="text-red-500 text-center py-2">{error}</div>}
-        {success && <div className="text-green-600 text-center py-2">{success}</div>}
-      </form>
+        {error && <div className="text-red-500 text-center py-2 mt-2">{error}</div>}
+        {success && <div className="text-green-600 text-center py-2 mt-2">{success}</div>}
+      </div>
     </div>
   );
-}
+};
+
+export default EditProfileContent;
