@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Herr+Von+Muellerhoff&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Herr+Von+Muellerhoff&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -12,16 +12,17 @@
   --bg-secondary: #232323;
   --text-primary: #ffffff;
   --text-secondary: #999999;
-  --border-color: #2C2C2C;
-  --card-bg: #FFFFFF14;
+  --border-color: #2c2c2c;
+  --card-bg: #ffffff14;
   --modal-bg: #232323;
   --filter-box-bg: #161614;
-  --icon-filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
-  --accent-yellow: #FFC61B;
+  --icon-filter: brightness(0) saturate(100%) invert(100%) sepia(0%)
+    saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+  --accent-yellow: #ffc61b;
 }
 
 :root[data-theme="white"] {
-  --accent-yellow: #FFC61B;
+  --accent-yellow: #ffc61b;
   --bg-gradient: linear-gradient(to bottom, #ffffff, #f5f5f5);
   --bg-solid: #ffffff;
   --bg-primary: #edeef1;
@@ -29,14 +30,15 @@
   --text-primary: #000000;
   --text-secondary: #666666;
   --border-color: #888888;
-  --card-bg: #F2F4FA;
+  --card-bg: #f2f4fa;
   --modal-bg: #ffffff;
   --filter-box-bg: #f5f5f5;
   --icon-filter: brightness(0) saturate(100%);
 }
 
 /* Reset default margins and ensure full height */
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -68,7 +70,7 @@ body {
 }
 
 .yellow-gradient {
-  background: linear-gradient(325deg, #FFC61B 43.64%, #FFE38E 100%);
+  background: linear-gradient(325deg, #ffc61b 43.64%, #ffe38e 100%);
 }
 
 ::-webkit-scrollbar {
@@ -126,7 +128,9 @@ body {
   }
 }
 
-.leaflet-touch .leaflet-control-attribution, .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
+.leaflet-touch .leaflet-control-attribution,
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
   display: none !important;
 }
 
@@ -151,4 +155,13 @@ body {
 
 .art-bottom {
   display: none !important;
+}
+
+.display_name {
+  color: #444;
+  font-family: "Arbeit Pro Trial";
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 22px; /* 100% */
 }
