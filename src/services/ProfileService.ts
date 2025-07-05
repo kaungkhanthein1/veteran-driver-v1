@@ -1,9 +1,13 @@
-import axios from 'axios';
+import { gatewayRequest } from "./gateway";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 // Fetch current user's profile
-export const fetchProfile = () => axios.get(`${API_BASE_URL}/api/v1/public/profile/me`);
+export const fetchProfile = () =>
+  gatewayRequest({
+    url: `${API_BASE_URL}/profile/me`,
+    method: "GET",
+  }).then((res) => res.data);
 
 // Update current user's profile
 export type ProfileUpdatePayload = {
@@ -16,4 +20,8 @@ export type ProfileUpdatePayload = {
 };
 
 export const updateProfile = (data: ProfileUpdatePayload) =>
-  axios.put(`${API_BASE_URL}/api/v1/public/profile/me`, data); 
+  gatewayRequest({
+    url: `${API_BASE_URL}/profile/me`,
+    method: "PUT",
+    data,
+  }).then((res) => res.data); 

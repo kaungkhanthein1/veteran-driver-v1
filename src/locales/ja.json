@@ -193,6 +193,7 @@
     "description": "電話番号で登録を完了",
     "emailOrPhoneLabel": "メールまたは電話番号",
     "newPasswordLabel": "新しいパスワード",
+    "accountNameLabelPlaceholder": "Enter Your Email",
     "newPasswordPlaceholder": "新しいパスワードを入力",
     "notRobotCheckbox": "私はロボットではありません",
     "recaptchaLabel": "reCAPTCHA",

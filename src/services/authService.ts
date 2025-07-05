@@ -1,4 +1,5 @@
-import axios from 'axios';
+import { gatewayRequest } from "./gateway";
+import { gatewayUrl } from "../config/env";
 
 export interface AuthResponse {
   success: boolean;
@@ -21,65 +22,51 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const authService = {
   // Handle Google OAuth login
-  handleGoogleLogin: async (response: GoogleAuthResponse): Promise<AuthResponse> => {
+  handleGoogleLogin: async (
+    response: GoogleAuthResponse
+  ): Promise<AuthResponse> => {
     try {
-      const { data } = await axios.post(`${API_BASE_URL}/auth/google`, {
-        code: response.code,
+      const { data } = await gatewayRequest({
+        url: `${gatewayUrl}/auth/google`,
+        method: "POST",
+        data: {
+          code: response.code,
+        },
       });
-      
+
       // Store the token in localStorage or your preferred storage method
       if (data.token) {
-        localStorage.setItem('auth_token', data.token);
+        localStorage.setItem("token", data.token);
       }
-      
+
       return data;
     } catch (error) {
-      console.error('Google auth error:', error);
+      console.error("Google auth error:", error);
       throw error;
     }
   },
 
   // Check if user is authenticated
   isAuthenticated: (): boolean => {
-    const token = localStorage.getItem('auth_token');
+    const token = localStorage.getItem("token");
     return !!token;
   },
 
   // Get the current auth token
   getToken: (): string | null => {
-    return localStorage.getItem('auth_token');
+    return localStorage.getItem("token");
   },
 
   // Logout
   logout: (): void => {
-    localStorage.removeItem('auth_token');
+    localStorage.removeItem("token");
   },
 
   // Set up axios interceptor for authentication
   setupAxiosInterceptors: () => {
-    axios.interceptors.request.use(
-      (config) => {
-        const token = authService.getToken();
-        if (token) {
-          config.headers.Authorization = `Bearer ${token}`;
-        }
-        return config;
-      },
-      (error) => {
-        return Promise.reject(error);
-      }
-    );
-
-    axios.interceptors.response.use(
-      (response) => response,
-      (error) => {
-        if (error.response?.status === 401) {
-          authService.logout();
-          // You might want to redirect to login page here
-          window.location.href = '/login';
-        }
-        return Promise.reject(error);
-      }
-    );
-  }
-}; 
+    // Note: This is now handled by the gateway automatically
+    // The gateway will automatically add the Authorization header
+    // when a token is present in localStorage
+    console.log("Auth interceptors are now handled by the gateway");
+  },
+};
