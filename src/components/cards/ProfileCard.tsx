@@ -15,11 +15,13 @@ import QrIcon from 'icons/ProfileUpdate/Qr.svg';
 import FeedBackIcon from 'icons/ProfileUpdate/FeedBack.svg';
 import CustomerSupportIcon from 'icons/ProfileUpdate/CustomerSupport.svg';
 import HelpsIcon from 'icons/ProfileUpdate/Helps.svg';
+import { useNavigate } from 'react-router-dom';
 
 // Import the gradient image (place it in src/assets/gradient-bg.png for example)
 import GradientBg from 'assets/gradient-bg.png';
 
 const ProfileCard: React.FC = () => {
+  const navigate = useNavigate();
   // Placeholder user data
   const user = {
     name: 'Laura Lin',
@@ -37,7 +39,7 @@ const ProfileCard: React.FC = () => {
         <button className="bg-white/70 rounded-full p-2 shadow">
           <img src={NotiIcon} alt="Notifications" className="w-6 h-6" />
         </button>
-        <button className="bg-white rounded-xl px-4 py-2 flex items-center gap-2 shadow">
+        <button className="bg-white rounded-xl px-4 py-2 flex items-center gap-2 shadow" onClick={() => navigate('/profile/edit')}>
           <img src={EditProfileIcon} alt="Edit Profile" className="w-5 h-5" />
           <span className="font-medium text-sm">Edit Profile</span>
         </button>

@@ -20,9 +20,10 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
   const location = useLocation();
   const background = location.state?.background || location;
   const [showPassword, setShowPassword] = useState(false);
-  const [userName, setUserName] = useState("");
-  const [emailOrPhone, setEmailOrPhone] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [code, setCode] = useState<string | undefined>(undefined); // For OTP, can be undefined at first
   const [isRecaptchaVerified, setIsRecaptchaVerified] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -41,12 +42,12 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
   const handleRecaptchaExpired = () => setRecaptchaToken(null);
   const handleRecaptchaError = () => setRecaptchaToken(null);
 
-  const isFormFilled = userName.trim() !== "" && emailOrPhone.trim() !== "" && password.trim() !== "";
+  const isFormFilled = username.trim() !== "" && email.trim() !== "" && password.trim() !== "";
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    if (!userName.trim() || !emailOrPhone.trim() || !password.trim() || !recaptchaToken) {
+    if (!username.trim() || !email.trim() || !password.trim() || !recaptchaToken) {
       setError('Please fill all fields and complete the reCAPTCHA.');
       return;
     }
@@ -55,10 +56,15 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
       const response = await axios.post(
         import.meta.env.VITE_API_BASE_URL + '/api/auth/register',
         {
-          userName,
-          emailOrPhone,
+          username,
+          email,
           password,
-          recaptchaToken,
+          code: recaptchaToken, // Send recaptchaToken as code
+        },
+        {
+          headers: {
+            'x-recaptcha-token': recaptchaToken,
+          }
         }
       );
       // On success, navigate to OTP verify (or handle as needed)
@@ -86,17 +92,17 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
           {/* User Name Input */}
           <FormInput
             label={t('registerPage.userNameLabel')}
-            name="userName"
+            name="username"
             placeholder={t('registerPage.userNamePlaceholder')}
-            value={userName}
-            onChange={e => setUserName(e.target.value)}
+            value={username}
+            onChange={e => setUsername(e.target.value)}
           />
           <FormInput
             label={t('registerPage.emailOrPhoneLabel')}
-            name="emailOrPhone"
+            name="email"
             placeholder={t('registerPage.emailOrPhonePlaceholder')}
-            value={emailOrPhone}
-            onChange={e => setEmailOrPhone(e.target.value)}
+            value={email}
+            onChange={e => setEmail(e.target.value)}
           />
           <div className="relative">
             <FormInput

@@ -1,228 +1,162 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from 'react-i18next';
-import ProfilePic from 'icons/Profile/ProfilePic.svg';
-import Modal from '../../components/common/Modal';
-import BackButton from "../../components/common/BackButton";
+import { fetchProfile, updateProfile } from '../../services/ProfileService';
+import BackButton from '../../components/common/BackButton';
 
 export default function EditProfilePage() {
   const { t } = useTranslation();
   const [formData, setFormData] = useState({
-    name: "Rachel Zane Noel",
-    bio: "Passionate traveller 🌍",
-    gender: "Female",
-    location: "Cambodia , Phnom Penh",
-    avatar: ProfilePic,
-    userId: "5839234"
+    nickname: '',
+    bio: '',
+    gender: '',
+    country: '',
+    city: '',
+    avatar: '',
+    userId: ''
   });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
 
-  const [modalState, setModalState] = useState({
-    name: false,
-    bio: false,
-    gender: false,
-    location: false
-  });
+  useEffect(() => {
+    fetchProfile()
+      .then(res => {
+        setFormData(res.data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setError('Failed to fetch profile');
+        setLoading(false);
+      });
+  }, []);
 
-  const handleOpenModal = (field) => {
-    setModalState({ ...modalState, [field]: true });
+  const handleInputChange = (field: keyof typeof formData, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleCloseModal = (field) => {
-    setModalState({ ...modalState, [field]: false });
-  };
-
-  const handleApply = (field, value) => {
-    setFormData({ ...formData, [field]: value });
-    localStorage.setItem('profileData', JSON.stringify({ ...formData, [field]: value }));
-    handleCloseModal(field);
-  };
-
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
+  const handleAvatarUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setFormData(prev => ({
-          ...prev,
-          avatar: reader.result
-        }));
-        // Save to localStorage
-        localStorage.setItem('profileData', JSON.stringify({
-          ...formData,
-          avatar: reader.result
-        }));
+        setFormData(prev => ({ ...prev, avatar: reader.result as string }));
       };
       reader.readAsDataURL(file);
     }
   };
 
+  const handleSave = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setSuccess(null);
+    try {
+      await updateProfile(formData);
+      setSuccess('Profile updated successfully!');
+    } catch {
+      setError('Failed to update profile');
+    }
+  };
+
+  if (loading) {
+    return <div className="text-center py-8">{t('editProfilePage.loading', 'Loading...')}</div>;
+  }
+
   return (
-    <div className="dvh-fallback bg-theme-background">
-      <div className="max-w-[480px] mx-auto">
-        {/* Header */}
-        <div className="flex items-center px-4 py-4">
-          <BackButton/>
-          <h1 className="flex-1 text-center text-xl font-normal text-theme-text">{t('editProfilePage.title')}</h1>
-          <div className="w-6"></div>
+    <div className="min-h-screen bg-[#F8F9FB] flex flex-col items-center">
+      {/* Header with Back Button and Title */}
+      <div className="relative w-full max-w-[480px] flex items-center justify-center py-4 bg-transparent">
+        <div className="absolute left-0 top-1/2 -translate-y-1/2 pl-2">
+          <BackButton />
         </div>
-
-        {/* Profile Picture */}
-        <div className="flex justify-center mb-6">
-          <div className="relative">
-            <div className="w-24 h-24 rounded-full overflow-hidden">
-              <img 
-                src={formData.avatar} 
-                alt={t('editProfilePage.profileAltText')}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <label className="absolute bottom-0 right-0 w-6 h-6 bg-[#FDC51B] rounded-full flex items-center justify-center cursor-pointer">
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageUpload}
-                className="hidden"
-              />
-              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
-              </svg>
-            </label>
-          </div>
+        <h1 className="text-xl font-semibold text-center w-full">Edit Profile</h1>
+      </div>
+      {/* Avatar Section */}
+      <div className="flex flex-col items-center mt-2 mb-4">
+        <div className="relative">
+          <img
+            src={formData.avatar || 'https://randomuser.me/api/portraits/lego/1.jpg'}
+            alt="Avatar"
+            className="w-24 h-24 rounded-full object-cover border-4 border-white shadow"
+          />
+          <label className="absolute bottom-0 right-0 bg-white rounded-full p-1 shadow cursor-pointer border border-gray-200">
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleAvatarUpload}
+              className="hidden"
+            />
+            <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="3.2" />
+              <path d="M4.75 19.25v-1.5A2.75 2.75 0 017.5 15h9a2.75 2.75 0 012.75 2.75v1.5" />
+              <path d="M12 12v.01" />
+            </svg>
+          </label>
         </div>
-
-        {/* Menu List Container */}
-        <div className="mx-4 bg-theme-secondary rounded-xl overflow-hidden">
-          <button 
-            onClick={() => handleOpenModal('name')}
-            className="w-full px-4 py-4 flex items-center justify-between"
-          >
-            <span className="text-theme-text">{t('editProfilePage.changeUsernameLabel')}</span>
-            <div className="flex items-center gap-2">
-              <span className="text-theme-subtext">{formData.name}</span>
-              <svg className="w-5 h-5 text-theme-subtext" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </div>
-          </button>
-
-          <button 
-            onClick={() => handleOpenModal('bio')}
-            className="w-full px-4 py-4 flex items-center justify-between"
-          >
-            <span className="text-theme-text">{t('editProfilePage.changeBioLabel')}</span>
-            <div className="flex items-center gap-2">
-              <span className="text-theme-subtext">{formData.bio}</span>
-              <svg className="w-5 h-5 text-theme-subtext" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </div>
-          </button>
-
-          <button 
-            onClick={() => handleOpenModal('gender')}
-            className="w-full px-4 py-4 flex items-center justify-between"
-          >
-            <span className="text-theme-text">{t('editProfilePage.genderLabel')}</span>
-            <div className="flex items-center gap-2">
-              <span className="text-theme-subtext">{formData.gender}</span>
-              <svg className="w-5 h-5 text-theme-subtext" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </div>
-          </button>
-
-          <button 
-            onClick={() => handleOpenModal('location')}
-            className="w-full px-4 py-4 flex items-center justify-between"
-          >
-            <span className="text-theme-text">{t('editProfilePage.locationLabel')}</span>
-            <div className="flex items-center gap-2">
-              <span className="text-theme-subtext">{formData.location}</span>
-              <svg className="w-5 h-5 text-theme-subtext" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </div>
-          </button>
-
-          <div className="w-full px-4 py-4 flex items-center justify-between">
-            <span className="text-theme-text">{t('editProfilePage.userIdLabel')}</span>
-            <span className="text-theme-subtext">{formData.userId}</span>
-          </div>
-        </div>
-
-        {/* Modals */}
-        <Modal
-          title={t('editProfilePage.changeUsernameModalTitle')}
-          isOpen={modalState.name}
-          onClose={() => handleCloseModal('name')}
-          onApply={() => handleApply('name', formData.name)}
-        >
+      </div>
+      {/* Edit Form */}
+      <form className="w-full max-w-[480px] mx-auto p-4" onSubmit={handleSave}>
+        <div className="mb-4">
+          <label className="block mb-1 font-medium">Profile Name</label>
           <input
             type="text"
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            value={formData.nickname}
+            onChange={e => handleInputChange('nickname', e.target.value)}
             className="w-full bg-theme-secondary text-theme-primary px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDC51B]"
-            placeholder={t('editProfilePage.usernamePlaceholder')}
           />
-        </Modal>
-
-        <Modal
-          title={t('editProfilePage.changeBioModalTitle')}
-          isOpen={modalState.bio}
-          onClose={() => handleCloseModal('bio')}
-          onApply={() => handleApply('bio', formData.bio)}
-        >
+        </div>
+        <div className="mb-4">
+          <label className="block mb-1 font-medium">User ID</label>
+          <input
+            type="text"
+            value={formData.userId}
+            readOnly
+            className="w-full bg-gray-100 text-gray-400 px-4 py-3 rounded-lg cursor-not-allowed"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block mb-1 font-medium">Bio</label>
           <textarea
             value={formData.bio}
-            onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
-            className="w-full bg-theme-secondary text-theme-primary px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDC51B] min-h-[100px] resize-none"
-            placeholder={t('editProfilePage.bioPlaceholder')}
+            onChange={e => handleInputChange('bio', e.target.value)}
+            className="w-full bg-theme-secondary text-theme-primary px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDC51B] min-h-[80px] resize-none"
           />
-        </Modal>
-
-        <Modal
-          title={t('editProfilePage.genderModalTitle')}
-          isOpen={modalState.gender}
-          onClose={() => handleCloseModal('gender')}
-          onApply={() => handleApply('gender', formData.gender)}
-          type="bottom"
+        </div>
+        <div className="mb-4">
+          <label className="block mb-1 font-medium">Gender</label>
+          <input
+            type="text"
+            value={formData.gender}
+            onChange={e => handleInputChange('gender', e.target.value)}
+            className="w-full bg-theme-secondary text-theme-primary px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDC51B]"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block mb-1 font-medium">Country</label>
+          <input
+            type="text"
+            value={formData.country}
+            onChange={e => handleInputChange('country', e.target.value)}
+            className="w-full bg-theme-secondary text-theme-primary px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDC51B]"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block mb-1 font-medium">City</label>
+          <input
+            type="text"
+            value={formData.city}
+            onChange={e => handleInputChange('city', e.target.value)}
+            className="w-full bg-theme-secondary text-theme-primary px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDC51B]"
+          />
+        </div>
+        <button
+          type="submit"
+          className="w-full rounded-full py-3 text-lg font-semibold mt-2 transition-colors duration-200 bg-yellow-gradient text-black"
         >
-          <div className="flex flex-col space-y-2">
-            {[t('editProfilePage.maleOption'), t('editProfilePage.femaleOption'), t('editProfilePage.otherOption')].map((option) => (
-              <button
-                key={option}
-                onClick={() => setFormData({ ...formData, gender: option })}
-                className={`w-full p-2 rounded-lg ${formData.gender === option ? 'bg-[#FDC51B]' : 'bg-theme-secondary text-theme-text'}`}
-              >
-                {option}
-              </button>
-            ))}
-          </div>
-        </Modal>
-
-        <Modal
-          title={t('editProfilePage.locationModalTitle')}
-          isOpen={modalState.location}
-          onClose={() => handleCloseModal('location')}
-          onApply={() => handleApply('location', formData.location)}
-          type="bottom"
-        >
-          <div className="flex flex-col space-y-2">
-            {[t('editProfilePage.thailandOption'), t('editProfilePage.cambodiaOption'), t('editProfilePage.phnomPenhOption'), t('editProfilePage.krongOption')].map((option) => (
-              <button
-                key={option}
-                onClick={() => setFormData({ ...formData, location: option })}
-                className={`w-full p-2 rounded-lg ${
-                  formData.location === option 
-                    ? 'bg-[#FDC51B]' 
-                    : 'bg-theme-secondary text-theme-text'
-                }`}
-              >
-                {option}
-              </button>
-            ))}
-          </div>
-        </Modal>
-      </div>
+          Save
+        </button>
+        {error && <div className="text-red-500 text-center py-2">{error}</div>}
+        {success && <div className="text-green-600 text-center py-2">{success}</div>}
+      </form>
     </div>
   );
 }
