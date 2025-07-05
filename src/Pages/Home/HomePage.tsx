@@ -20,7 +20,7 @@ export default function HomePage() {
       try {
         const response = await gatewayRequest({
           method: "GET",
-          url: "http://ec2-13-229-71-69.ap-southeast-1.compute.amazonaws.com:8080/api/v1/profile/me",
+          url: "https://vtt_dev.movie06.com/api/v1/profile/me",
         });
         console.log("Profile/me result:", response.data);
       } catch (err) {
