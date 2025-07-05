@@ -105,26 +105,18 @@ export default function LoginPage({ onShowRegister, onClose }: LoginPageProps) {
     try {
       const response = await triggerLogin({
         data: {
-          emailOrPhone,
+          account: emailOrPhone,
           password,
         },
       }).unwrap();
       console.log("Login response:", response);
-      // // Send login data + recaptchaToken to your gateway
-      // const response = await axios.post(
-      //   import.meta.env.VITE_API_BASE_URL + "/api/auth/login", // Replace with your gateway endpoint
-      //   {
-      //     emailOrPhone,
-      //     password,
-      //     recaptchaToken, // <-- include this
-      //   }
-      // );
-      // // Handle response (e.g., store JWT, redirect, etc.)
-      // // ...
+      localStorage.removeItem("token");
+      localStorage.setItem("token", response?.data.token.accessToken);
+      navigate("/");
+      alert("Login successful!");
     } catch (error) {
+      alert(error?.data?.message || "Login failed. Please try again.");
       console.error("Login failed:", error);
-      // Handle error
-      // ...
     } finally {
       setIsVerifying(false);
     }
@@ -157,9 +149,9 @@ export default function LoginPage({ onShowRegister, onClose }: LoginPageProps) {
         </div>
         <form className="w-full space-y-6" onSubmit={(e) => e.preventDefault()}>
           <FormInput
-            label={t("loginPage.emailOrPhoneLabel")}
-            name="emailOrPhone"
-            placeholder={t("loginPage.emailOrPhonePlaceholder")}
+            label={t("Account name")}
+            name="Account name"
+            placeholder={t("loginPage.accountNameLabelPlaceholder")}
             value={emailOrPhone}
             onChange={(e) => setEmailOrPhone(e.target.value)}
           />
