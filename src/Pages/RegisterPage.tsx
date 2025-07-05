@@ -43,13 +43,13 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
 
   const handleOpt = async () => {
     if (isFormFilled && isRecaptchaVerified) {
-      // await triggerVerify({
-      //   data: {
-      //     to: emailOrPhone,
-      //     channel: "email",
-      //     scene: "register",
-      //   },
-      // }).unwrap();
+      await triggerVerify({
+        data: {
+          to: emailOrPhone,
+          channel: "email",
+          scene: "register",
+        },
+      }).unwrap();
       setshowOtp(true);
     } else {
       alert(

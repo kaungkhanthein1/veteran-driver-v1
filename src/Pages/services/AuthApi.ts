@@ -1,15 +1,9 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
-interface LocationNearbyParams {
-  lat: number;
-  lng: number;
-  distance: number;
-  country_id: string | number;
-}
+import { createApi } from "@reduxjs/toolkit/query/react";
+import { gatewayBaseQuery } from "../../services/gatewayBaseQuery";
 
 export const AuthApi = createApi({
   reducerPath: "AuthApi",
-  baseQuery: fetchBaseQuery({
+  baseQuery: gatewayBaseQuery({
     baseUrl: "https://vtt_dev.movie06.com/api/v1/auth",
   }),
   endpoints: (builder) => ({
