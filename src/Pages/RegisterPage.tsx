@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+
 import FormInput from "../components/common/FormInput";
 import { useTranslation } from "react-i18next";
 import RecaptchaLogo from "../icons/RecaptchaLogo.svg";
@@ -10,6 +11,9 @@ import FacebookIcon from "../icons/Facebook.svg";
 import AppleIcon from "../icons/Apple.svg";
 import OtpVerifyPage from "./OtpVerifyPage";
 import { useEmailOTPMutation, useSendverifyMutation } from "./services/AuthApi";
+
+import ReCaptcha from "../components/common/ReCaptcha";
+import axios from "axios";
 
 type RegisterPageProps = {
   onClose?: () => void;
@@ -25,6 +29,10 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
   const [password, setPassword] = useState("");
   const [isRecaptchaVerified, setIsRecaptchaVerified] = useState(false);
   const [showOpt, setshowOtp] = useState(false);
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const { t } = useTranslation();
   const [triggerVerify] = useSendverifyMutation();
 
@@ -71,6 +79,43 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
     );
   }
 
+  const handleRecaptchaVerify = (token: string | null) =>
+    setRecaptchaToken(token);
+  const handleRecaptchaExpired = () => setRecaptchaToken(null);
+  const handleRecaptchaError = () => setRecaptchaToken(null);
+
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    if (
+      !userName.trim() ||
+      !emailOrPhone.trim() ||
+      !password.trim() ||
+      !recaptchaToken
+    ) {
+      setError("Please fill all fields and complete the reCAPTCHA.");
+      return;
+    }
+    setIsSubmitting(true);
+    try {
+      const response = await axios.post(
+        import.meta.env.VITE_API_BASE_URL + "/api/auth/register",
+        {
+          userName,
+          emailOrPhone,
+          password,
+          recaptchaToken,
+        }
+      );
+      // On success, navigate to OTP verify (or handle as needed)
+      navigate("/otp-verify", { state: { background } });
+    } catch (err: any) {
+      setError(err.response?.data?.message || "Registration failed.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="dvh-fallback flex flex-col justify-between items-center bg-theme-primary px-4">
       <div className="w-full max-w-md mx-auto flex flex-col items-center">
@@ -95,15 +140,8 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
             </svg>
           </button>
         </div>
-        <form
-          className="w-full mt-6 space-y-6"
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleOpt();
 
-            // navigate("/otp-verify", { state: { background } });
-          }}
-        >
+        <form className="w-full mt-6 space-y-6" onSubmit={handleRegister}>
           {/* User Name Input */}
           <FormInput
             label={t("registerPage.userNameLabel")}
@@ -158,40 +196,26 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
               "Password must be 8–20 characters and include letters, numbers, and symbols"
             )}
           </div>
-          {/* Recaptcha Placeholder */}
-          <div className="flex justify-center">
-            <div className="bg-theme-secondary rounded-lg px-4 py-3 flex items-center justify-between w-full max-w-[240px]">
-              <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  className="accent-blue-500 border-none"
-                  checked={isRecaptchaVerified}
-                  onChange={() => setIsRecaptchaVerified((v) => !v)}
-                />
-                <span className="text-theme-secondary text-sm">
-                  {t("registerPage.notRobotCheckbox")}
-                </span>
-              </div>
-              <div className="flex flex-col items-end gap-1">
-                <img
-                  src={RecaptchaLogo}
-                  alt="reCAPTCHA"
-                  className="h-8 w-8 cursor-pointer"
-                  onClick={() => setIsRecaptchaVerified(false)}
-                />
-              </div>
-            </div>
-          </div>
+
+          {/* Remove old Recaptcha placeholder, keep only real ReCaptcha */}
+          <ReCaptcha
+            onVerify={handleRecaptchaVerify}
+            onExpired={handleRecaptchaExpired}
+            onError={handleRecaptchaError}
+          />
+          {error && <div className="text-red-500 text-sm">{error}</div>}
           <button
             type="submit"
             className={`w-full rounded-full py-3 text-lg font-semibold mt-2 transition-colors duration-200 ${
-              isFormFilled && isRecaptchaVerified
+              isFormFilled && recaptchaToken && !isSubmitting
                 ? "bg-yellow-gradient text-black"
                 : "bg-theme-secondary text-theme-primary"
             }`}
-            disabled={!isFormFilled || !isRecaptchaVerified}
+            disabled={!isFormFilled || !recaptchaToken || isSubmitting}
           >
-            {t("registerPage.signUpButton")}
+            {isSubmitting
+              ? t("registerPage.signingUp", "Signing up...")
+              : t("registerPage.signUpButton")}
           </button>
         </form>
         {/* Social Login - single button with icons */}

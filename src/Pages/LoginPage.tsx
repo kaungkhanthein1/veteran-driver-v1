@@ -10,6 +10,7 @@ import ViewOffIcon from '../icons/ViewOff.svg';
 import { useGoogleLogin } from '@react-oauth/google';
 import { authService } from '../services/authService';
 import { useAuth } from '../context/AuthContext';
+import axios from 'axios'; // Added axios import
 
 type LoginPageProps = {
   onShowRegister?: () => void;
@@ -92,28 +93,20 @@ export default function LoginPage({ onShowRegister, onClose }: LoginPageProps) {
     setRecaptchaError(null);
 
     try {
-      // Verify reCAPTCHA token with your backend
-      const verificationResult = await verifyRecaptchaToken(recaptchaToken);
-      
-      if (verificationResult.success) {
-        // reCAPTCHA verification successful, proceed with login
-        console.log('reCAPTCHA verified successfully');
-        navigate("/location-access");
-      } else {
-        // reCAPTCHA verification failed
-        setRecaptchaError(verificationResult.error || 'Verification failed. Please try again.');
-        if (recaptchaRef.current) {
-          recaptchaRef.current.reset();
+      // Send login data + recaptchaToken to your gateway
+      const response = await axios.post(
+        import.meta.env.VITE_API_BASE_URL + '/api/auth/login', // Replace with your gateway endpoint
+        {
+          emailOrPhone,
+          password,
+          recaptchaToken, // <-- include this
         }
-        setRecaptchaToken(null);
-      }
+      );
+      // Handle response (e.g., store JWT, redirect, etc.)
+      // ...
     } catch (error) {
-      console.error('Login error:', error);
-      setRecaptchaError(t('loginPage.loginError') || 'An error occurred during login. Please try again.');
-      if (recaptchaRef.current) {
-        recaptchaRef.current.reset();
-      }
-      setRecaptchaToken(null);
+      // Handle error
+      // ...
     } finally {
       setIsVerifying(false);
     }
@@ -184,30 +177,11 @@ export default function LoginPage({ onShowRegister, onClose }: LoginPageProps) {
           
           
           {/* Real reCAPTCHA Component */}
-          {/*
           <ReCaptcha
             onVerify={handleRecaptchaVerify}
             onExpired={handleRecaptchaExpired}
             onError={handleRecaptchaError}
           />
-          */}
-          {/* Temporary Recaptcha Placeholder for design consistency */}
-          <div className="flex justify-center">
-            <div className="bg-theme-secondary rounded-lg px-4 py-3 flex items-center justify-between w-full max-w-[240px]">
-              <div className="flex items-center gap-2">
-                <input 
-                  type="checkbox" 
-                  className="accent-blue-500 border-none"
-                  checked={!!recaptchaToken}
-                  onChange={() => setRecaptchaToken(recaptchaToken ? null : 'dummy-token')}
-                />
-                <span className="text-theme-secondary text-sm">{t('registerPage.notRobotCheckbox')}</span>
-              </div>
-              <div className="flex flex-col items-end gap-1">
-                <img src={RecaptchaLogo} alt="reCAPTCHA" className="h-8 w-8 cursor-pointer" onClick={() => setRecaptchaToken(null)} />
-              </div>
-            </div>
-          </div>
 
           <button
             type="button"
