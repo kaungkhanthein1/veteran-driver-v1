@@ -1,14 +1,17 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { sendSignedAndDecrypt } from "../../services/gatewayCryptoHelper";
 import { apiBaseUrl } from "../../config/env";
+import { gatewayBaseQuery } from "../../services/gatewayBaseQuery";
 
 export const ProfileApi = createApi({
   reducerPath: "ProfileApi",
-  baseQuery: async () => ({ data: {} }), // dummy, not used for custom queryFn endpoints
+  baseQuery: gatewayBaseQuery({
+    baseUrl: apiBaseUrl,
+  }),
   endpoints: (builder) => ({
     me: builder.query<any, void>({
       query: () => ({
-        url: `/profile/me`,
+        url: "/profile/me",
         method: "GET",
       }),
     }),
