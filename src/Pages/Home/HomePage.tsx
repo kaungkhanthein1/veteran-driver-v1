@@ -4,10 +4,6 @@ import BottomSheetModal from "./BottomSheetModal";
 import { useState, useEffect } from "react";
 import MainContent from "./MainContent";
 import { motion, AnimatePresence } from "framer-motion";
-import { useGetCountriesQuery } from "../../features/HomeApi";
-import { gatewayRequest } from "../../services/gateway";
-import { apiBaseUrl } from "../../config/env";
-import axios from "axios";
 import { useMeQuery } from "../../Pages/services/ProfileApi";
 
 export default function HomePage() {
