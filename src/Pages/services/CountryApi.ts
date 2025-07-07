@@ -9,10 +9,10 @@ export const CountryApi = createApi({
   endpoints: (builder) => ({
     getCountries: builder.query<any, void>({
       query: () => ({
-        url: "/geo/countries", // Use the correct endpoint from your API docs
+        url: "/geo/supported-countries", // Use the correct endpoint from your API docs
         method: "GET",
       }),
-      transformResponse: (response: any) => response.data?.countries || [],
+      transformResponse: (response: any) => response.data || [],
     }),
     getLanguages: builder.query<any, void>({
       query: () => ({

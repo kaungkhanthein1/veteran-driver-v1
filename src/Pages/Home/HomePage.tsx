@@ -28,6 +28,8 @@ export default function HomePage() {
   } = useGetLanguagesQuery();
   const { data } = useMeQuery();
 
+  console.log(countries,languages)
+
   return (
     <div className="flex flex-col h-full relative bg-theme-primary">
       <AnimatePresence>

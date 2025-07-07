@@ -186,7 +186,7 @@ const CountryLanguageModal = ({ open, onClose }: CountryLanguageModalProps) => {
                     key={c.id}
                     onClick={() => setSelectedCountry(c)}
                     className={`${
-                      selectedCountry?.id === c.id
+                      selectedCountry?.code === c.code
                         ? "country_card_flag_active"
                         : "country_card_flag"
                     } flex flex-col items-center justify-center p-[10px] gap-[8px]`}
