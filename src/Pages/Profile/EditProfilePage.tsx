@@ -58,6 +58,10 @@ const EditProfileContent: React.FC = () => {
   const [saving, setSaving] = useState(false);
   const [genderModalOpen, setGenderModalOpen] = useState(false);
   const [genderLoading, setGenderLoading] = useState(false);
+  const [locationModalOpen, setLocationModalOpen] = useState(false);
+  const [locationLoading, setLocationLoading] = useState(false);
+  const [countries, setCountries] = useState<string[]>([]);
+  const [cities, setCities] = useState<string[]>([]);
 
   const [getUploadUrl] = useGetUploadUrlMutation();
   const [confirmUpload] = useConfirmUploadMutation();
@@ -75,6 +79,13 @@ const EditProfileContent: React.FC = () => {
         setLoading(false);
       });
   }, [setProfileData, setOriginalData]);
+
+  // Fetch country and city lists (mocked for now)
+  useEffect(() => {
+    // Replace with real API calls
+    setCountries(['Thailand', 'Cambodia']);
+    setCities(['Phnom Penh', 'Krong']);
+  }, []);
 
   const handleSave = async () => {
     setSaving(true);
@@ -113,7 +124,18 @@ const EditProfileContent: React.FC = () => {
     }
   };
 
-  // ... (keep your existing useEffect and handleSave)
+  const handleLocationApply = async (country: string, city: string) => {
+    setLocationLoading(true);
+    try {
+      await updateProfile({ country, city });
+      updateField('country', country);
+      updateField('city', city);
+    } catch {
+      // Optionally show error
+    } finally {
+      setLocationLoading(false);
+    }
+  };
 
   const handleAvatarUpload = async (file: File) => {
     try {
@@ -399,6 +421,8 @@ const EditProfileContent: React.FC = () => {
           <div className="bg-white rounded-lg px-6 py-4 shadow text-theme-text">Saving gender...</div>
         </div>
       )}
+
+      {/* Location Select Modal */}
     </div>
   );
 };
