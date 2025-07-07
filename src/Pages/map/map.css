@@ -302,6 +302,7 @@
 
 .unselected_tabs {
   background: var(--Neutral-Color-N10, #f5f5f5);
+  border-radius: 9px;
   color: #000;
   /* font-family: "Arbeit Pro Trial"; */
   font-size: 16px;

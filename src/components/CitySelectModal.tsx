@@ -155,29 +155,31 @@ const CountryLanguageModal = ({ open, onClose }: CountryLanguageModalProps) => {
             onClick={(e) => e.stopPropagation()}
           >
             <div className=" bg-[#BBB] rounded-[12px] w-[48px] h-[4px] mx-auto mb-[30px]"></div>
-            <div className=" flex justify-center items-center">
-              <button
-                className={`${
-                  tab === "country" ? "selected_tabs" : "unselected_tabs"
-                } py-[10px] px-[28px]`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setTab("country");
-                }}
-              >
-                Country
-              </button>
-              <button
-                className={`${
-                  tab === "language" ? "selected_tabs" : "unselected_tabs"
-                } py-[10px] px-[28px]`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setTab("language");
-                }}
-              >
-                Language
-              </button>
+            <div className=" flex justify-center items-center ">
+              <div className=" flex justify-center items-center unselected_tabs">
+                <button
+                  className={`${
+                    tab === "country" ? "selected_tabs" : ""
+                  } py-[10px] px-[28px]`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setTab("country");
+                  }}
+                >
+                  Country
+                </button>
+                <button
+                  className={`${
+                    tab === "language" ? "selected_tabs" : ""
+                  } py-[10px] px-[28px]`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setTab("language");
+                  }}
+                >
+                  Language
+                </button>
+              </div>
             </div>
             {tab === "country" && (
               <div className="grid grid-cols-3 gap-[20px] my-[40px]">
