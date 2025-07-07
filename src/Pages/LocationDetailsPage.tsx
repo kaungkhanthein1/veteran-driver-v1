@@ -9,6 +9,7 @@ import GoldenGateRoomImage from 'assets/GoldenGateRoom.png';
 import HarrierRoomImage from 'assets/HarrierRoom.png';
 import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
+import { useBookmarks } from '../hooks/useBookmarks';
 import ReviewCard from '../components/cards/ReviewCard';
 import ExploreCard from '../components/cards/ExploreCard';
 
@@ -20,6 +21,7 @@ const LocationDetailsPage = () => {
   const [showHeaderBg, setShowHeaderBg] = useState(false);
   const [activeReviewFilter, setActiveReviewFilter] = useState('Hottest');
   const { t } = useTranslation();
+  const { toggleBookmark, isBookmarked } = useBookmarks();
   
   useEffect(() => {
     const rootElement = document.getElementById('root');
@@ -68,7 +70,9 @@ const LocationDetailsPage = () => {
       {/* Header */}
       <div className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${showHeaderBg ? 'bg-theme-primary' : 'bg-transparent'}`} style={{ top: '0' }}>
         <div className="flex items-center justify-between p-4">
-          <BackButton onClick={() => navigate(-1)} />
+          <div onClick={() => navigate(-1)} className="cursor-pointer">
+            <BackButton />
+          </div>
           <div className="flex items-center flex-grow justify-center">
             <h1 className={`text-lg font-semibold transition-colors duration-300 ${showHeaderBg ? 'text-theme-text' : 'text-white'}`}>{locationData.name}</h1>
           </div>
@@ -90,16 +94,23 @@ const LocationDetailsPage = () => {
           className="w-full h-full object-cover"
         />
         <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
-          {locationData.images && locationData.images.map((_, index) => (
-            <button
+          {locationData.images && locationData.images.map((_: any, index: number) => (
+            <span
               key={index}
-              className={`w-2 h-2 rounded-full ${index === activeImageIndex ? 'bg-[#FDC51B]' : 'bg-white/50'}`}
+              className={`w-2 h-2 rounded-full ${index === activeImageIndex ? 'bg-[#FDC51B]' : 'bg-white/50'} inline-block cursor-pointer`}
               onClick={() => setActiveImageIndex(index)}
             />
           ))}
         </div>
-        <button className="absolute bottom-4 right-4 p-2 rounded-full bg-black/30">
-          <img src={BookmarkIcon} alt={t('locationDetails.bookmarkAltText')} className="w-6 h-6 [filter:brightness(0)_saturate(100%)_invert(100%)]" />
+        <button
+          className="absolute bottom-4 right-4 p-2 rounded-full bg-black/30"
+          onClick={() => toggleBookmark(locationData)}
+        >
+          <img
+            src={BookmarkIcon}
+            alt={t('locationDetails.bookmarkAltText')}
+            className={`w-6 h-6 ${isBookmarked(locationData.id) ? 'filter-orange' : '[filter:brightness(0)_saturate(100%)_invert(100%)]'}`}
+          />
         </button>
       </div>
 
@@ -162,7 +173,7 @@ const LocationDetailsPage = () => {
         <div>
           <h3 className="text-theme-text text-lg font-semibold mb-3">{t('locationDetails.servicesTitle')}</h3>
           <div className="space-y-3">
-            {locationData?.services?.map((service, index) => (
+            {locationData?.services?.map((service: any, index: number) => (
               <div 
                 key={index}
                 className="flex items-center justify-between px-4 py-3 rounded-lg bg-theme-secondary"
@@ -203,7 +214,6 @@ const LocationDetailsPage = () => {
             onClick={() => navigate('/review')}
           >
             <textarea 
-              type="text" 
               placeholder={t('reviewPage.writeReviewPlaceholder')} 
               className="bg-transparent text-theme-text w-full outline-none resize-none focus:outline-none focus:ring-0 focus:border-transparent border-none"
             />

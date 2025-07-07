@@ -359,6 +359,19 @@ const EditProfileContent: React.FC = () => {
           <div className="text-green-600 text-center py-2 mt-2">{success}</div>
         )}
       </div>
+
+      {/* Gender Selection Modal */}
+      <GenderSelectionModal
+        isOpen={genderModalOpen}
+        onClose={() => setGenderModalOpen(false)}
+        onApply={handleGenderApply}
+        currentGender={profileData.gender}
+      />
+      {genderLoading && (
+        <div className="fixed inset-0 bg-black bg-opacity-20 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg px-6 py-4 shadow text-theme-text">Saving gender...</div>
+        </div>
+      )}
     </div>
   );
 };
