@@ -5,6 +5,7 @@ import { HomeApi } from "../features/HomeApi";
 import { AuthApi } from "../Pages/services/AuthApi";
 import recaptchaSlice from "../services/recaptchaSlice";
 import { ProfileApi } from "../Pages/services/ProfileApi";
+import { CountryApi } from "../Pages/services/CountryApi";
 
 export const store = configureStore({
   reducer: {
@@ -13,12 +14,14 @@ export const store = configureStore({
     [HomeApi.reducerPath]: HomeApi.reducer,
     [AuthApi.reducerPath]: AuthApi.reducer,
     [ProfileApi.reducerPath]: ProfileApi.reducer,
+    [CountryApi.reducerPath]: CountryApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
       .concat(HomeApi.middleware)
       .concat(AuthApi.middleware)
-      .concat(ProfileApi.middleware),
+      .concat(ProfileApi.middleware)
+      .concat(CountryApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
