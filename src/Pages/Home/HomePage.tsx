@@ -11,11 +11,13 @@ import {
 import { gatewayRequest } from "../../services/gateway";
 import { apiBaseUrl } from "../../config/env";
 import axios from "axios";
+import CountryLanguageModal from "../../components/CitySelectModal";
 
 export default function HomePage() {
   // const { data, error, isLoading } = useGetCountriesQuery("");
 
   const [isExpanded, setIsExpanded] = useState(false);
+  const [showCountryLangModal, setShowCountryLangModal] = useState(false);
 
   // Fetch countries and languages using RTK Query
   const {
@@ -60,7 +62,7 @@ export default function HomePage() {
             exit={{ opacity: 0, y: -50 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
           >
-            <TopBar />
+            <TopBar onFlagClick={() => setShowCountryLangModal(true)} />
           </motion.div>
         )}
       </AnimatePresence>
@@ -70,6 +72,10 @@ export default function HomePage() {
           <MainContent />
         </BottomSheetModal>
       </div>
+      <CountryLanguageModal
+        open={showCountryLangModal}
+        onClose={() => setShowCountryLangModal(false)}
+      />
     </div>
   );
 }

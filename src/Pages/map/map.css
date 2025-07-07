@@ -275,3 +275,15 @@
   line-height: var(--Label-Large-Line-Height, 20px); /* 125% */
   letter-spacing: var(--Label-Large-Tracking, 0.1px);
 }
+
+.country_card_flag {
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #fff;
+}
+
+ .country_card_flag_active{
+  border-radius: 16px;
+  border: 3px solid var(--Primary-Color, #ffc300);
+  background: #fff;
+}

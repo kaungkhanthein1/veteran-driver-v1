@@ -9,7 +9,11 @@ import BarIcon from "icons/HomeUpdate/Bar.png";
 import LadyIcon from "icons/HomeUpdate/Lady.png";
 import axios from "axios";
 
-export default function TopBar() {
+type TopBarProps = {
+  onFlagClick?: () => void;
+};
+
+export default function TopBar({ onFlagClick }: TopBarProps) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
@@ -88,9 +92,10 @@ export default function TopBar() {
 
         {/* Country Selector */}
         <div
-          onClick={() =>
-            dispatch({ type: "country/changeCountry", payload: "thailand" })
-          }
+          onClick={() => {
+            console.log("Flag clicked");
+            onFlagClick && onFlagClick();
+          }}
           className="flex items-center text-theme-text text-sm cursor-pointer ml-4"
         >
           <img src={CountryFlag} alt="Thailand Flag" className="w-5 h-5 mr-2" />
