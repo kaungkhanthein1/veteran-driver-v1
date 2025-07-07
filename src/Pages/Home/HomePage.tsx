@@ -1,14 +1,7 @@
 import TopBar from "./TopBar";
 import MapWithFilterUI from "../googlemap/MapWithFilterUI";
-<<<<<<< HEAD
-import MapWithFilterUI from "../googlemap/MapWithFilterUI";
 import BottomSheetModal from "./BottomSheetModal";
 import BottomSheetModal1 from "./BottomSheetModal1";
-import BottomSheetModal1 from "./BottomSheetModal1";
-=======
-import BottomSheetModal from "./BottomSheetModal";
-import BottomSheetModal1 from "./BottomSheetModal1";
->>>>>>> 1f28383 (fix)
 import { useState, useEffect } from "react";
 import MainContent from "./MainContent";
 import { motion, AnimatePresence } from "framer-motion";
@@ -21,15 +14,13 @@ import CountryLanguageModal from "../../components/CitySelectModal";
 import { useMeQuery } from "../../Pages/services/ProfileApi";
 import { useGetLocationNearbyQuery } from "../../features/HomeApi";
 import NearContent from "./NearContent";
-<<<<<<< HEAD
-import { useGetLocationNearbyQuery } from "../../features/HomeApi";
-import NearContent from "./NearContent";
 =======
 >>>>>>> 1f28383 (fix)
 
 export default function HomePage() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [showCountryLangModal, setShowCountryLangModal] = useState(false);
+  const [selectedPlace, setSelectedPlace] = useState(null);
   const [selectedPlace, setSelectedPlace] = useState(null);
 
   const tabs = useGetTabsQuery("")
@@ -48,14 +39,6 @@ export default function HomePage() {
   } = useGetLanguagesQuery();
   const { data } = useMeQuery();
 
-  const { data: newData } = useGetLocationNearbyQuery({});
-  const nearByData = newData?.data;
-  const handlePlaceSelect = (place: any) => {
-    setSelectedPlace(place);
-    setIsExpanded(true);
-  };
-  console.log("selectedPlace", selectedPlace);
-<<<<<<< HEAD
   const { data: newData } = useGetLocationNearbyQuery({});
   const nearByData = newData?.data;
   const handlePlaceSelect = (place: any) => {
@@ -82,33 +65,6 @@ export default function HomePage() {
         )}
       </AnimatePresence>
       <div className="flex-1 relative max-w-[480px] mx-auto w-full">
-        <MapWithFilterUI
-          isExpanded={isExpanded}
-          nearbyPlaces={nearByData?.places || []}
-          onPlaceSelect={handlePlaceSelect}
-        />
-
-        {!selectedPlace ? (
-          <BottomSheetModal
-            isExpanded={isExpanded}
-            setIsExpanded={setIsExpanded}
-          >
-            <MainContent />
-          </BottomSheetModal>
-        ) : (
-          <BottomSheetModal1
-            isExpanded={isExpanded}
-            setIsExpanded={setIsExpanded}
-            setSelectedPlace={setSelectedPlace}
-          >
-            <NearContent
-              selectedPlace={selectedPlace}
-              setSelectedPlace={setSelectedPlace}
-              setIsExpanded={setIsExpanded}
-            />
-          </BottomSheetModal1>
-        )}
-<<<<<<< HEAD
         <MapWithFilterUI
           isExpanded={isExpanded}
           nearbyPlaces={nearByData?.places || []}
