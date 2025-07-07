@@ -1,0 +1,104 @@
+.place-name {
+  color: #000;
+  font-family: "Arbeit Pro Trial";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 27px; /* 150% */
+}
+
+.distance {
+  color: var(--Neutral-Color-N50, #555);
+  font-family: "Arbeit Pro Trial";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.rat-count {
+  color: #444;
+  leading-trim: both;
+  text-edge: cap;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "dlig" on;
+  font-family: "Arbeit Pro Trial";
+  font-size: 12.9px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 21.5px; /* 166.667% */
+}
+
+.view-count {
+  color: var(--Neutral-Color-N50, #555);
+  font-family: "Arbeit Pro Trial";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.tag-div {
+  border-radius: 100px;
+  border: 1px solid #ddd;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(16px);
+  display: flex;
+  height: 32px;
+  padding: 2px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  color: #000;
+  text-align: center;
+
+  /* Typeface/Font_xs/Font_xs_medium */
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 21px; /* 150% */
+}
+
+.loc-text {
+  color: #000;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "dlig" on;
+  font-family: "Arbeit Pro Trial";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px; /* 112.5% */
+}
+
+.loc-des {
+  color: var(--Neutral-Color-N50, #555);
+  font-family: "Arbeit Pro Trial";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; /* 128.571% */
+}
+
+.check-btn {
+  color: #fff;
+  font-family: "Helvetica Neue";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border-radius: 100px;
+  background: linear-gradient(180deg, #ffc61b 0%, #ff9500 100%);
+  width: 100%;
+
+  /* Button Inner Shadow */
+  box-shadow: 0px 0px 8px 0px rgba(255, 255, 255, 0.8) inset;
+  display: flex;
+  height: 53px;
+  padding: 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  align-self: stretch;
+}
