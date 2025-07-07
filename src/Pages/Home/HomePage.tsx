@@ -4,7 +4,10 @@ import BottomSheetModal from "./BottomSheetModal";
 import { useState, useEffect } from "react";
 import MainContent from "./MainContent";
 import { motion, AnimatePresence } from "framer-motion";
-import { useGetCountriesQuery } from "../../features/HomeApi";
+import {
+  useGetCountriesQuery,
+  useGetLanguagesQuery,
+} from "../services/CountryApi";
 import { gatewayRequest } from "../../services/gateway";
 import { apiBaseUrl } from "../../config/env";
 import axios from "axios";
@@ -14,24 +17,39 @@ export default function HomePage() {
 
   const [isExpanded, setIsExpanded] = useState(false);
 
-  // Test /profile/me API call via gateway
-  useEffect(() => {
-    async function fetchProfile() {
-      try {
-        const response = await gatewayRequest({
-          method: "GET",
-          url: `${apiBaseUrl}/profile/me`,
-        });
-        console.log("Profile/me result:", response.data);
-      } catch (err) {
-        console.error("Profile/me error:", err);
-      }
-    }
-    fetchProfile();
-  }, []);
+  // Fetch countries and languages using RTK Query
+  const {
+    data: countries,
+    error: countriesError,
+    isLoading: countriesLoading,
+  } = useGetCountriesQuery();
+  const {
+    data: languages,
+    error: languagesError,
+    isLoading: languagesLoading,
+  } = useGetLanguagesQuery();
+
+  console.log("countries", countries);
+  console.log("languages", languages);
+
+  // // Test /profile/me API call via gateway
+  // useEffect(() => {
+  //   async function fetchProfile() {
+  //     try {
+  //       const response = await gatewayRequest({
+  //         method: "GET",
+  //         url: `${apiBaseUrl}/profile/me`,
+  //       });
+  //       console.log("Profile/me result:", response.data);
+  //     } catch (err) {
+  //       console.error("Profile/me error:", err);
+  //     }
+  //   }
+  //   fetchProfile();
+  // }, []);
   console.log("HomePage rendered");
 
-  https: return (
+  return (
     <div className="flex flex-col h-full relative bg-theme-primary">
       <AnimatePresence>
         {!isExpanded && (
