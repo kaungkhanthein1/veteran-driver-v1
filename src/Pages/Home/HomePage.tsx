@@ -1,9 +1,14 @@
 import TopBar from "./TopBar";
 import MapWithFilterUI from "../googlemap/MapWithFilterUI";
+<<<<<<< HEAD
 import MapWithFilterUI from "../googlemap/MapWithFilterUI";
 import BottomSheetModal from "./BottomSheetModal";
 import BottomSheetModal1 from "./BottomSheetModal1";
 import BottomSheetModal1 from "./BottomSheetModal1";
+=======
+import BottomSheetModal from "./BottomSheetModal";
+import BottomSheetModal1 from "./BottomSheetModal1";
+>>>>>>> 1f28383 (fix)
 import { useState, useEffect } from "react";
 import MainContent from "./MainContent";
 import { motion, AnimatePresence } from "framer-motion";
@@ -16,8 +21,11 @@ import CountryLanguageModal from "../../components/CitySelectModal";
 import { useMeQuery } from "../../Pages/services/ProfileApi";
 import { useGetLocationNearbyQuery } from "../../features/HomeApi";
 import NearContent from "./NearContent";
+<<<<<<< HEAD
 import { useGetLocationNearbyQuery } from "../../features/HomeApi";
 import NearContent from "./NearContent";
+=======
+>>>>>>> 1f28383 (fix)
 
 export default function HomePage() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -47,6 +55,7 @@ export default function HomePage() {
     setIsExpanded(true);
   };
   console.log("selectedPlace", selectedPlace);
+<<<<<<< HEAD
   const { data: newData } = useGetLocationNearbyQuery({});
   const nearByData = newData?.data;
   const handlePlaceSelect = (place: any) => {
@@ -54,6 +63,8 @@ export default function HomePage() {
     setIsExpanded(true);
   };
   console.log("selectedPlace", selectedPlace);
+=======
+>>>>>>> 1f28383 (fix)
 
   return (
     <div className="flex flex-col h-full relative bg-theme-primary">
@@ -97,6 +108,7 @@ export default function HomePage() {
             />
           </BottomSheetModal1>
         )}
+<<<<<<< HEAD
         <MapWithFilterUI
           isExpanded={isExpanded}
           nearbyPlaces={nearByData?.places || []}
@@ -123,6 +135,8 @@ export default function HomePage() {
             />
           </BottomSheetModal1>
         )}
+=======
+>>>>>>> 1f28383 (fix)
       </div>
       <CountryLanguageModal
         languages={languages}
