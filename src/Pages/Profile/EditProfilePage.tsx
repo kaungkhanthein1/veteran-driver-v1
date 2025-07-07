@@ -11,6 +11,7 @@ import {
   useGetUploadUrlMutation,
   useConfirmUploadMutation,
 } from "../../Pages/services/ProfileApi";
+import GenderSelectionModal from '../../components/common/GenderSelectionModal';
 
 const FieldRow: React.FC<{
   label: string;
@@ -55,6 +56,8 @@ const EditProfileContent: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [genderModalOpen, setGenderModalOpen] = useState(false);
+  const [genderLoading, setGenderLoading] = useState(false);
 
   const [getUploadUrl] = useGetUploadUrlMutation();
   const [confirmUpload] = useConfirmUploadMutation();
@@ -85,6 +88,28 @@ const EditProfileContent: React.FC = () => {
       setError("Failed to update profile");
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handleGenderApply = async (newGender: string) => {
+    setGenderLoading(true);
+    // Capitalize first letter for API
+    const genderMap: Record<string, string> = {
+      male: 'Male',
+      female: 'Female',
+      other: 'Other',
+      Male: 'Male',
+      Female: 'Female',
+      Other: 'Other',
+    };
+    const payloadGender = genderMap[newGender] || newGender;
+    try {
+      await updateProfile({ gender: payloadGender });
+      updateField('gender', payloadGender);
+    } catch {
+      // Optionally show error
+    } finally {
+      setGenderLoading(false);
     }
   };
 
@@ -164,7 +189,7 @@ const EditProfileContent: React.FC = () => {
       // 5. Update profile with new avatar URL
       updateField("avatar", accessUrl);
       setSuccess("Avatar updated successfully!");
-    } catch (err) {
+    } catch (err: any) {
       setError(err.message || "Failed to upload avatar");
       console.error("Upload error:", err);
     } finally {
@@ -209,7 +234,9 @@ const EditProfileContent: React.FC = () => {
       {/* Header with Back Button and Title */}
       <div className="relative w-full max-w-[480px] flex items-center justify-center py-4 bg-transparent">
         <div className="absolute left-0 top-1/2 -translate-y-1/2 pl-2">
-          <BackButton />
+          <div onClick={() => navigate('/profile', { replace: true })} className="cursor-pointer">
+            <BackButton />
+          </div>
         </div>
         <h1 className="text-xl font-semibold text-center w-full">
           Edit Profile
@@ -326,7 +353,7 @@ const EditProfileContent: React.FC = () => {
             value={profileData.gender}
             clickable={true}
             showArrow={true}
-            onClick={() => navigate("gender")}
+            onClick={() => setGenderModalOpen(true)}
           />
           <FieldRow
             label="Location"
