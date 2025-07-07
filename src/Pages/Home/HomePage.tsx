@@ -8,30 +8,15 @@ import { useGetCountriesQuery } from "../../features/HomeApi";
 import { gatewayRequest } from "../../services/gateway";
 import { apiBaseUrl } from "../../config/env";
 import axios from "axios";
+import { useMeQuery } from "../../Pages/services/ProfileApi";
 
 export default function HomePage() {
   // const { data, error, isLoading } = useGetCountriesQuery("");
 
   const [isExpanded, setIsExpanded] = useState(false);
+  const { data } = useMeQuery();
 
-  // Test /profile/me API call via gateway
-  useEffect(() => {
-    async function fetchProfile() {
-      try {
-        const response = await gatewayRequest({
-          method: "GET",
-          url: `${apiBaseUrl}/profile/me`,
-        });
-        console.log("Profile/me result:", response.data);
-      } catch (err) {
-        console.error("Profile/me error:", err);
-      }
-    }
-    fetchProfile();
-  }, []);
-  console.log("HomePage rendered");
-
-  https: return (
+  return (
     <div className="flex flex-col h-full relative bg-theme-primary">
       <AnimatePresence>
         {!isExpanded && (
