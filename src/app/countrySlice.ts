@@ -1,25 +1,32 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface CountryState {
-  name: string;
+  selectedCountry: any | null;
+  selectedLanguage: any | null;
 }
 
 const initialState: CountryState = {
-  name: "myanmar",
-}
+  selectedCountry: null,
+  selectedLanguage: null,
+};
 
 export const countrySlice = createSlice({
-  name: 'country',
+  name: "country",
   initialState,
   reducers: {
-   
+    setCountry: (state, action: PayloadAction<any>) => {
+      state.selectedCountry = action.payload;
+    },
+    setLanguage: (state, action: PayloadAction<any>) => {
+      state.selectedLanguage = action.payload;
+    },
     changeCountry: (state, action: PayloadAction<string>) => {
-      state.name = action.payload
+      state.selectedCountry = { name: action.payload };
     },
   },
-})
+});
 
 // Action creators are generated for each case reducer function
-export const { changeCountry } = countrySlice.actions
+export const { setCountry, setLanguage, changeCountry } = countrySlice.actions;
 
-export default countrySlice.reducer 
+export default countrySlice.reducer;

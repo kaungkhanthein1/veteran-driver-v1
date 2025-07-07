@@ -4,45 +4,44 @@ import BottomSheetModal from "./BottomSheetModal";
 import { useState, useEffect } from "react";
 import MainContent from "./MainContent";
 import { motion, AnimatePresence } from "framer-motion";
-import { useGetCountriesQuery } from "../../features/HomeApi";
-import { gatewayRequest } from "../../services/gateway";
-import { apiBaseUrl } from "../../config/env";
-import axios from "axios";
+import {
+  useGetCountriesQuery,
+  useGetLanguagesQuery,
+} from "../services/CountryApi";
+import CountryLanguageModal from "../../components/CitySelectModal";
+import { useMeQuery } from "../../Pages/services/ProfileApi";
 
 export default function HomePage() {
-  // const { data, error, isLoading } = useGetCountriesQuery("");
-
   const [isExpanded, setIsExpanded] = useState(false);
+  const [showCountryLangModal, setShowCountryLangModal] = useState(false);
 
-  // Test /profile/me API call via gateway
-  useEffect(() => {
-    async function fetchProfile() {
-      try {
-        const response = await gatewayRequest({
-          method: "GET",
-          url: `${apiBaseUrl}/profile/me`,
-        });
-        console.log("Profile/me result:", response.data);
-      } catch (err) {
-        console.error("Profile/me error:", err);
-      }
-    }
-    fetchProfile();
-  }, []);
-  console.log("HomePage rendered");
+  // Fetch countries and languages using RTK Query
+  const {
+    data: countries,
+    error: countriesError,
+    isLoading: countriesLoading,
+  } = useGetCountriesQuery();
+  const {
+    data: languages,
+    error: languagesError,
+    isLoading: languagesLoading,
+  } = useGetLanguagesQuery();
+  const { data } = useMeQuery();
 
-  https: return (
+  console.log(countries,languages)
+
+  return (
     <div className="flex flex-col h-full relative bg-theme-primary">
       <AnimatePresence>
         {!isExpanded && (
           <motion.div
-            className="fixed top-0 left-0 right-0 z-50"
+            className="fixed top-0 left-0 right-0 z-50 max-w-[480px] mx-auto"
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -50 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
           >
-            <TopBar />
+            <TopBar onFlagClick={() => setShowCountryLangModal(true)} />
           </motion.div>
         )}
       </AnimatePresence>
@@ -52,6 +51,12 @@ export default function HomePage() {
           <MainContent />
         </BottomSheetModal>
       </div>
+      <CountryLanguageModal
+        languages={languages}
+        countries={countries}
+        open={showCountryLangModal}
+        onClose={() => setShowCountryLangModal(false)}
+      />
     </div>
   );
 }
