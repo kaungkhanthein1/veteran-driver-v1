@@ -35,8 +35,8 @@ import LocationDetailsPage from "./Pages/LocationDetailsPage";
 import NotificationsPage from "./Pages/Profile/NotificationsPage";
 import ChangePasswordPage from "./Pages/Profile/ChangePasswordPage";
 import ReviewPage from "./Pages/ReviewPage";
-import CheckMap from "./Pages/map/CheckMap";
-import AddMap from "./Pages/map/AddMap";
+import CheckMap from "./Pages/googlemap/CheckMap";
+import AddMap from "./Pages/googlemap/AddMap";
 import ModalRoute from "components/common/ModalRoute";
 import AccountInformationPage from "./Pages/AccountInformationPage";
 import SearchMain from "./Pages/Search/SearchMain";
@@ -99,7 +99,10 @@ function AppRoutes() {
         <Route path="/review" element={<ReviewPage />} />
         <Route path="/CheckMap/:id" element={<CheckMap />} />
         <Route path="/addMap" element={<AddMap />} />
-        <Route path="/account-information" element={<AccountInformationPage />} />
+        <Route
+          path="/account-information"
+          element={<AccountInformationPage />}
+        />
         <Route path="/video/:id" element={<VideoDetailPage />} />
       </Routes>
       {/* Modal routes, only render if background exists */}

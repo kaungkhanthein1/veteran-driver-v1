@@ -1,7 +1,7 @@
-import React from 'react';
-import RatingStar from '../../icons/RatingStar.svg';
-import ViewsIcon from '../../icons/Views.svg';
-import DefaultAvator from '../../icons/DefaultAvator.svg';
+import React from "react";
+import RatingStar from "../../icons/RatingStar.svg";
+import ViewsIcon from "../../icons/Views.svg";
+import DefaultAvator from "../../icons/DefaultAvator.svg";
 
 interface PlaceCardProps {
   image?: string;
@@ -39,7 +39,9 @@ const PlaceCard: React.FC<PlaceCardProps> = ({
         />
       </div>
       <div className="flex-1 min-w-0 ml-4">
-        <div className="font-semibold text-theme-primary text-xl truncate">{name}</div>
+        <div className="font-semibold text-theme-primary text-xl truncate">
+          {name}
+        </div>
         <div className="text-theme-secondary text-base truncate">
           {address}
           {address && distance && <span className="mx-1">•</span>}
@@ -64,4 +66,4 @@ const PlaceCard: React.FC<PlaceCardProps> = ({
   );
 };
 
-export default PlaceCard; 
+export default PlaceCard;
