@@ -7,6 +7,7 @@ import BackButton from '../../components/common/BackButton';
 import DefaultAvatorWhite from '../../icons/DefaultAvatorWhite.svg';
 import EditProfileIcon from '../../icons/ProfileUpdate/EditProfile.svg';
 import NextIcon from '../../icons/Next.svg';
+import GenderSelectionModal from '../../components/common/GenderSelectionModal';
 
 const FieldRow: React.FC<{
   label: string;
@@ -47,6 +48,8 @@ const EditProfileContent: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [genderModalOpen, setGenderModalOpen] = useState(false);
+  const [genderLoading, setGenderLoading] = useState(false);
 
   useEffect(() => {
     fetchProfile()
@@ -73,6 +76,24 @@ const EditProfileContent: React.FC = () => {
       setError('Failed to update profile');
     } finally {
       setSaving(false);
+    }
+  };
+
+  const genderMap: Record<string, string> = {
+    male: "Male",
+    female: "Female",
+    other: "Other"
+  };
+
+  const handleGenderApply = async (newGender: string) => {
+    setGenderLoading(true);
+    try {
+      await updateProfile({ gender: genderMap[newGender] });
+      updateField('gender', genderMap[newGender]);
+    } catch {
+      // Optionally show error
+    } finally {
+      setGenderLoading(false);
     }
   };
 
@@ -179,7 +200,7 @@ const EditProfileContent: React.FC = () => {
             value={profileData.gender}
             clickable={true}
             showArrow={true}
-            onClick={() => navigate('gender')}
+            onClick={() => setGenderModalOpen(true)}
           />
           <FieldRow
             label="Location"
@@ -208,6 +229,19 @@ const EditProfileContent: React.FC = () => {
         {error && <div className="text-red-500 text-center py-2 mt-2">{error}</div>}
         {success && <div className="text-green-600 text-center py-2 mt-2">{success}</div>}
       </div>
+
+      {/* Gender Selection Modal */}
+      <GenderSelectionModal
+        isOpen={genderModalOpen}
+        onClose={() => setGenderModalOpen(false)}
+        onApply={handleGenderApply}
+        currentGender={profileData.gender}
+      />
+      {genderLoading && (
+        <div className="fixed inset-0 bg-black bg-opacity-20 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg px-6 py-4 shadow text-theme-text">Saving gender...</div>
+        </div>
+      )}
     </div>
   );
 };
