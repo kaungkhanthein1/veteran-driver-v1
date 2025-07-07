@@ -19,7 +19,7 @@ export const CountryApi = createApi({
         url: "/geo/supported-languages", // Use the correct endpoint from your API docs
         method: "GET",
       }),
-      transformResponse: (response: any) => response.data?.languages || [],
+      transformResponse: (response: any) => response.data || [],
     }),
   }),
 });

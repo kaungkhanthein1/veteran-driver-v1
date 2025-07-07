@@ -73,6 +73,8 @@ export default function HomePage() {
         </BottomSheetModal>
       </div>
       <CountryLanguageModal
+        languages={languages}
+        countries={countries}
         open={showCountryLangModal}
         onClose={() => setShowCountryLangModal(false)}
       />
