@@ -1,31 +1,10 @@
-// import { createApi } from "@reduxjs/toolkit/query/react";
-// import { gatewayBaseQuery } from "../../services/gatewayBaseQuery";
-
-// export const ProfileApi = createApi({
-//   reducerPath: "ProfileApi",
-//   baseQuery: gatewayBaseQuery({
-//     baseUrl: "https://vtt_dev.movie06.com/api/v1",
-//   }),
-//   endpoints: (builder) => ({
-//     me: builder.query<any, void>({
-//       query: () => ({
-//         url: `/profile/me`,
-//         method: "GET",
-//       }),
-//     }),
-//   }),
-// });
-
-// export const { useMeQuery } = ProfileApi;
-
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { gatewayBaseQuery } from "../../services/gatewayBaseQuery";
+import { sendSignedAndDecrypt } from "../../services/gatewayCryptoHelper";
+import { apiBaseUrl } from "../../config/env";
 
 export const ProfileApi = createApi({
   reducerPath: "ProfileApi",
-  baseQuery: gatewayBaseQuery({
-    baseUrl: "https://vtt_dev.movie06.com/api/v1",
-  }),
+  baseQuery: async () => ({ data: {} }), // dummy, not used for custom queryFn endpoints
   endpoints: (builder) => ({
     me: builder.query<any, void>({
       query: () => ({
@@ -33,50 +12,51 @@ export const ProfileApi = createApi({
         method: "GET",
       }),
     }),
-    getUploadUrl: builder.mutation<
-      any,
-      { type: string; usage: string; mimeType?: string }
-    >({
-      query: (params) => ({
-        url: `/public/media/upload-url`,
-        method: "GET",
-        params: {
-          type: params.type,
-          usage: params.usage,
-          // mimeType: params.mimeType,
-        },
-      }),
+    getUploadUrl: builder.mutation<any, { type: string; usage: string; mimeType?: string }>({
+      async queryFn(params) {
+        try {
+          const response = await sendSignedAndDecrypt({
+            url: `${apiBaseUrl}/media/upload-url`,
+            method: "GET",
+            query: {
+              type: params.type,
+              usage: params.usage,
+              // mimeType: params.mimeType,
+            },
+          });
+          return { data: response };
+        } catch (error: any) {
+          return { error: error.message || error };
+        }
+      },
     }),
-    getBatchUploadUrls: builder.mutation<
-      any,
-      {
-        uploads: Array<{
-          type: string;
-          usage: string;
-          mimeType: string;
-          expiresIn?: number;
-        }>;
-      }
-    >({
-      query: (body) => ({
-        url: `/public/media/batch-upload-urls`,
-        method: "POST",
-        body,
-      }),
+    getBatchUploadUrls: builder.mutation<any, { uploads: Array<{ type: string; usage: string; mimeType: string; expiresIn?: number }> }>({
+      async queryFn(body) {
+        try {
+          const response = await sendSignedAndDecrypt({
+            url: `${apiBaseUrl}/media/batch-upload-urls`,
+            method: "POST",
+            bodyObject: body,
+          });
+          return { data: response };
+        } catch (error: any) {
+          return { error: error.message || error };
+        }
+      },
     }),
-    confirmUpload: builder.mutation<
-      any,
-      {
-        key: string;
-        size: number;
-        meta?: { width?: number; height?: number; source?: string };
-      }
-    >({
-      query: (body) => ({
-        url: `/public/media/confirm-upload`,
-        method: "POST",
-        body,
-      }),
+    confirmUpload: builder.mutation<any, { key: string; size: number; meta?: { width?: number; height?: number; source?: string } }>({
+      async queryFn(body) {
+        try {
+          const response = await sendSignedAndDecrypt({
+            url: `${apiBaseUrl}/media/confirm-upload`,
+            method: "POST",
+            bodyObject: body,
+          });
+          return { data: response };
+        } catch (error: any) {
+          return { error: error.message || error };
+        }
+      },
     }),
   }),
 });

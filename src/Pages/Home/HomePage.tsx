@@ -36,7 +36,7 @@ export default function HomePage() {
       <AnimatePresence>
         {!isExpanded && (
           <motion.div
-            className="fixed top-0 left-0 right-0 z-50"
+            className="fixed top-0 left-0 right-0 z-50 max-w-[480px] mx-auto"
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -50 }}
