@@ -8,14 +8,10 @@ import {
   useGetCountriesQuery,
   useGetLanguagesQuery,
 } from "../services/CountryApi";
-import { gatewayRequest } from "../../services/gateway";
-import { apiBaseUrl } from "../../config/env";
-import axios from "axios";
 import CountryLanguageModal from "../../components/CitySelectModal";
+import { useMeQuery } from "../../Pages/services/ProfileApi";
 
 export default function HomePage() {
-  // const { data, error, isLoading } = useGetCountriesQuery("");
-
   const [isExpanded, setIsExpanded] = useState(false);
   const [showCountryLangModal, setShowCountryLangModal] = useState(false);
 
@@ -30,33 +26,14 @@ export default function HomePage() {
     error: languagesError,
     isLoading: languagesLoading,
   } = useGetLanguagesQuery();
-
-  console.log("countries", countries);
-  console.log("languages", languages);
-
-  // // Test /profile/me API call via gateway
-  // useEffect(() => {
-  //   async function fetchProfile() {
-  //     try {
-  //       const response = await gatewayRequest({
-  //         method: "GET",
-  //         url: `${apiBaseUrl}/profile/me`,
-  //       });
-  //       console.log("Profile/me result:", response.data);
-  //     } catch (err) {
-  //       console.error("Profile/me error:", err);
-  //     }
-  //   }
-  //   fetchProfile();
-  // }, []);
-  console.log("HomePage rendered");
+  const { data } = useMeQuery();
 
   return (
     <div className="flex flex-col h-full relative bg-theme-primary">
       <AnimatePresence>
         {!isExpanded && (
           <motion.div
-            className="fixed top-0 left-0 right-0 z-50"
+            className="fixed top-0 left-0 right-0 z-50 max-w-[480px] mx-auto"
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -50 }}

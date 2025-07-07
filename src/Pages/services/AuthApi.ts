@@ -15,7 +15,8 @@ import { storeTokens } from "./tokenUtils";
 export const AuthApi = createApi({
   reducerPath: "AuthApi",
   baseQuery: gatewayBaseQuery({
-    baseUrl: "https://vtt_dev.movie06.com/api/v1/auth",
+    baseUrl:
+      "http://ec2-52-221-179-216.ap-southeast-1.compute.amazonaws.com/api/v1/auth",
   }),
   endpoints: (builder) => ({
     login: builder.mutation<void, { data: any }>({
