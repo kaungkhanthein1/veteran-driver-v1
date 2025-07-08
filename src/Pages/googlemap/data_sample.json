@@ -1,0 +1,1802 @@
+[
+    {
+        "id": "686bb1e8c9663b9cadcf3475",
+        "googlePlaceId": "ChIJcQ-WIRhRCTER-lbtUrg_bvw",
+        "name": "Sky Bar Tower 43 Floors",
+        "otherName": [
+            "Sky Bar Tower 43 Floors"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab6a3537aaaf0b40f23d",
+                "key": "bar",
+                "name": "酒吧"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 165.3,
+        "address": "GWWJ+W5J, Street No.6, Phnom Penh",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9304032,
+                11.5473351
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888360114_6kP1cFTXmj.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=Z-52EjJonRFfKdNhU5eMh-kF0WwMorJsg4XzbiQdgWU5vyNp6uHsU7WNOgliLm0b7fzDRTWgFuutdksTdYjJR90AwiJfiqrYXB-9IJ8fhsI9ASAcKfXEVZdS9AxGbdHQXf0CXxdiyAUaylnDHMpVMwPay7w7ausHokiR2LYAumCparllcpCHGAnYZT5XgNkJntAD4GZDTS3DqWIKv-zMeix3RdCWAnw8wylPz2cAu2K3GfwgOaWpDvBrbOiGqBJXPfkA9r8utaS3xM8pHKCUj15Cxl7NS9PorjwBhxh6ZFwVpxVENRVNe8BkAarOB1NP8SRTPm5WkrbHnslU3xPffA__"
+        ],
+        "rating": 4.3,
+        "ratingCount": 72,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:39:20.186Z",
+        "updatedAt": "2025-07-07T11:39:20.186Z"
+    },
+    {
+        "id": "686bb242c9663b9cadcf3502",
+        "googlePlaceId": "ChIJnxkvsShRCTERW1vJ2TcUx4E",
+        "name": "The Spa @ RoseGarden",
+        "otherName": [
+            "The Spa @ RoseGarden"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686babae3537aaaf0b40f249",
+                "key": "massage",
+                "name": "按摩"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 245.17,
+        "address": "42 Street Tonle Bassac Park, Phnom Penh",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9326113,
+                11.5449897
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888450769_ymdFDjfBbe.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=XjlEFBjOfMYaoDBrZB1ZiUybWKZoUYy2hN3~B9xJeacITx-Jh9E507Gy6Qsz5~13DRPu4I7KB~8OFBXVWX55PC3KCvXS8863QG0PdIwhet4Bo0-pQSpDR8oKXszxrSzTPNCG5mhmHxTtcVyYPEIkCHHCOsFDncEfdDdanms2oiuJJSAf5Lz49bJ3~piFoYvEVU6rzrXukfAEKsEI~HQCfvoXFml9~XdEIbQ2O5xCGQEmlv019tyo5NmUP7Jb~5EEB1hVZmGfPKobpOfPycpFji1TDnW88ajEXiyQHjQ4OKklDIqVrligrOoToHi8jle~-LbMMuX0v-j9bh963e5m~A__"
+        ],
+        "rating": 4.6,
+        "ratingCount": 37,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:40:50.831Z",
+        "updatedAt": "2025-07-07T11:40:50.831Z"
+    },
+    {
+        "id": "686bb268c9663b9cadcf3556",
+        "googlePlaceId": "ChIJxbqEYylRCTERH9Z-YguRebs",
+        "name": "Phokeethra Sports Club",
+        "otherName": [
+            "Phokeethra Sports Club"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab5f3537aaaf0b40f23a",
+                "key": "club",
+                "name": "俱乐部"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 251.31,
+        "address": "26 Old August Site Sothearos Boulevard, Sangkat Tonle Bassac, Phnom Penh 12301",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.932447,
+                11.5471282
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888488125_Y29QFC5ZbY.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=Onqxu540cDKV~CPVIOdzHvFbnNTH6yknGdazzbSS~Qk7iSUIjMGn9gQAOTTppGR-FS0fJJvZrYvcO27CFYk-T6eT1UB1DqxlnZQ2goVwouQ~o7ALMx~PFtdgofOvC7hhn7ZBqrDhULY98LXj9yLnYYbumsiQ1phDHSNsoCKcfltZZdNTATsdBHZrLwlqEjZEvOmLbdeaBkAx7k6TufeF-1thojfTR0WXnveiU5IgrO6rQ2~xYPAcoalUVoB4QWncSylyJ4RoL-cs8hLlAaFXii~TVjWDwBsIxkUdOhnPuwEgYeGwr0or5IakX6MNW-uG5Bnke9ko36NRXWT4niiwgg__"
+        ],
+        "rating": 4.7,
+        "ratingCount": 30,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:41:28.206Z",
+        "updatedAt": "2025-07-07T11:41:28.206Z"
+    },
+    {
+        "id": "686bb2a7c9663b9cadcf35e9",
+        "googlePlaceId": "ChIJfaFYxdlRCTERykxXFTVvvSI",
+        "name": "Sofitel Spa",
+        "otherName": [
+            "Sofitel Spa"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab9a3537aaaf0b40f246",
+                "key": "spa",
+                "name": "Spa"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 301.94,
+        "address": "Old August Site, 26 Samdach Sothearos Blvd (3), Phnom Penh 12301",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9332933,
+                11.5461762
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888551153_IdSVilpXuS.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=QLkVn9CcfcIznP5QCQZAXwNdcb5pw6s1MXQlwUK9ln1kxi5KMfIHAetdNCSVBAokqYK-DF9zUg4LsnHwbAYdJYsEhcOZfXBzvAIe36P-fGy9q~djuiwwPwD7g1Fih6ZpeuxtA1uchoq6IIuUTxYa1ln4Zqv0~4onU1yWHf-clD3d-0W75dGq8eUTYJMZaPanZvJRX5IUhRZE7xpsgX2tuRJDJc9dweC4FCW0Kv4INooDjyO6f19eHV76sxvCgLLt1YxHkUv79zPuw-rJOWZiUCFRt11uzYl1OMXE1Zg7KCJhysubJOLk0YnNsb~hEQqjTwi1GIRNRS4kJlrzSTGjXA__"
+        ],
+        "rating": 4.9,
+        "ratingCount": 17,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:42:31.243Z",
+        "updatedAt": "2025-07-07T11:42:31.243Z"
+    },
+    {
+        "id": "686bb276c9663b9cadcf357a",
+        "googlePlaceId": "ChIJOdVBt2BRCTERmB5EUaYARVM",
+        "name": "KAI Coffee Street 21",
+        "otherName": [
+            "KAI Coffee Street 21"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686baadd3537aaaf0b40f237",
+                "key": "coffee",
+                "name": "咖啡厅"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 323.06,
+        "address": "City, Abdul Carime, Phnom Penh",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9305573,
+                11.54876
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888502826_PYXNx3OJfP.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=LjKBs4g6Qj~KRQ4G~0--Oi1MA9XAFI61PrUoccI3dJbE4d6pzpvpa~Hj8ZmgTazlQV1jLO1GQoYI1ihI-YlXMPpjW1CMQiHQyXB3FPGArQsZ0zjzyVUItq5Ut2Xh4xrD56~D~t~t4jE-9Souia39YwtRvd8OvPz-X1xcV7TFz4wXiFmAknc8q~Vqc9sW6M4F~2yeHAdYwraR17s7U4pHLkXA6SN55JR3mWGvwrGNlyoTlVgJBQlPc5wEHK4dBrelzr68ahUJAS9ElddV83MQwt2FoxprEbicGXjg~W1SLv56ortTM~ZuSw~W8M8TQbLGdhkv652m6Nzst--Ueykacw__"
+        ],
+        "rating": 4.8,
+        "ratingCount": 25,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:41:42.878Z",
+        "updatedAt": "2025-07-07T11:41:42.878Z"
+    },
+    {
+        "id": "686bb28cc9663b9cadcf35ad",
+        "googlePlaceId": "ChIJYdWbdK5RCTERLPqBMa54xdc",
+        "name": "Le Bar",
+        "otherName": [
+            "Le Bar"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab6a3537aaaf0b40f23d",
+                "key": "bar",
+                "name": "酒吧"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 323.87,
+        "address": "Old August Site, 26 Samdach Sothearos Blvd (3), Phnom Penh 12301",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9333456,
+                11.5468214
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888524091_oqMioU3IsT.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=I64PZQq6S7yu7ExWGuWQ6pgwUEm7GEoHHMxPGGBOz0YXbyLx-mpu02SiobQfAgWan7uFcAPVe3FhZIdcvJ50CCdhnuR-OQ5oPdwpW-R9SUm17iqk24lgJBN0pEbA66ahe9w3eyLMn~U9IAAseRWnlbYMjzJIRe45HO~K8ScjS5gKA0zQ9YdkjbqE9PdikysH-3lP0f98Nlw5sV981vbt7es3SGvfmskW-7wsH4u-1RE7-bDa1Ij~dKGqKr41rII80VccyyrHE-DtITxN65U8wHnPSWrC~2yeBDtlvCjENDW2~aNseIcOF-CtbkdR24QIECDM36B2HayQMj~ySTsZdw__"
+        ],
+        "rating": 4.7,
+        "ratingCount": 23,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:42:04.137Z",
+        "updatedAt": "2025-07-07T11:42:04.137Z"
+    },
+    {
+        "id": "686bb2d8c9663b9cadcf365e",
+        "googlePlaceId": "ChIJG38DHUdRCTERjqD2T21yr3s",
+        "name": "ប្រៃសណីយ៍កម្ពុជាសាខាអ៊ីអនទន្លេបាសាក់ Post Office Aeon",
+        "otherName": [
+            "ប្រៃសណីយ៍កម្ពុជាសាខាអ៊ីអនទន្លេបាសាក់ Post Office Aeon"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686baacb3537aaaf0b40f234",
+                "key": "mall",
+                "name": "商场"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 339.51,
+        "address": "GWXM+548, Phnom Penh",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9328386,
+                11.5479178
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888600761__Lox327fNB.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=Dm0wY4Bni4zRSi0-n383dJTeyP9IhT3ToMrSpa78D2jWAjaNYUJHJFx4ox2RrgziWK58UxBGtEPBrEEv35WAmplCW41PpUDml9gTh1Rn7EEFPjJQj0PjhoOzzmzdFuK2OthgKJJimffFJRN6lFxKCZdiKl2r2ewgxDy75MIoc1QQAFhK8BcJPDd4uXPJB8bbhCSC1rTHJurKQxN0nf8PIixfpVLWtJgzQNQhRVYvGuytYDSSpSjYjHWKb0yKO1vVnoQACjAZUVtl4A5sUl-FSm3h2FssTaqkdASflsJnWHchNEa~q6TGcIKEXDfKeC0CF7kAPnHx~nGt-WmdLSTM9A__"
+        ],
+        "rating": 4.2,
+        "ratingCount": 17,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:43:20.860Z",
+        "updatedAt": "2025-07-07T11:43:20.860Z"
+    },
+    {
+        "id": "686bb0f68574e05af3b0a123",
+        "googlePlaceId": "ChIJI_0prS5RCTER2dF5mq85kMU",
+        "name": "永旺",
+        "otherName": [
+            "ÆON Mall Phnom Penh"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686baacb3537aaaf0b40f234",
+                "key": "mall",
+                "name": "商场"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 362.64,
+        "address": "132 Samdach Sothearos Blvd (3), Phnom Penh",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9328627,
+                11.548192
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888118208_CM9XoHibxN.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=CxkktDF1y7X1z8jMztV2W6UP0hywTwcGCuVR3lCc95vHPJity9ycovbvIqdGYynrC7aFrvTKrCArxRmB1qWJsTAcLht0z-mjL2afowGsZLDg~D3e1RmN2L1q8cGnUXgZmL9ovF2R33-2~s-Qhf8HoYItI2AjSVHqtTqbjszXI3-Y3Ug5mGkaIiKrr~1ZJ22bY1v23OD-VNlOIafWZ-wmWA283UArdf5zdgblaq8vSpyntABqYfBF5dGAy6dZOHB2hYd-U~YXOB8I3Koi7bCJ5BnlolHFbCu03PbkFTW5GfUeSrEnK-rXJhUCYN89AnkHj-LdQKQK~Euor1xy6IquJA__"
+        ],
+        "rating": 4.4,
+        "ratingCount": 11409,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:35:18.406Z",
+        "updatedAt": "2025-07-07T11:35:18.406Z"
+    },
+    {
+        "id": "686bb1328574e05af3b0a1bf",
+        "googlePlaceId": "ChIJq3B9oYZRCTERto8TphAcZiA",
+        "name": "Chip Mong Noro Mall",
+        "otherName": [
+            "Chip Mong Noro Mall"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686baacb3537aaaf0b40f234",
+                "key": "mall",
+                "name": "商场"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 408,
+        "address": "#199 Preah Norodom Blvd (41), Phnom Penh",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.928214,
+                11.5487294
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888178906_CJGPe5eJaR.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=VYJW8UFym8fzdo9nZKO~QVXxD1QDb-wqMzUN5J5-G0XmCwi4Ac0YWjBowT9DOO88ClbPIbjzSkz2s9YZ9A6IaLbOzPN-DHciK2H315fxIyKinHRjcsYDHFXwRGGa28NJHc~KNa8V9lZhYUvOEDq4JM9VaHWThiEmHTFjgkqcbqPnvE4mOaQ5YCSGp1qmB2jXV~u5Vmwutwx5fu4JH5GRg~~1T8-RS9lK1sO1sauyP7qkjHLue2TMc-LmtVVuVU2MUwGHwjhE3e~mFMNQ0Xf0FKHaHnUy0j9ASZVizczKwP9XsHrHWH2EP7QVch3QcDqLYky7zxZrWyx7C73TxjtjuA__"
+        ],
+        "rating": 4.2,
+        "ratingCount": 674,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:36:18.984Z",
+        "updatedAt": "2025-07-07T11:36:18.984Z"
+    },
+    {
+        "id": "686bb358c9663b9cadcf374e",
+        "googlePlaceId": "ChIJ9SldioZRCTEReVqZHbgWsVQ",
+        "name": "BillKing Billiards Club Norodom",
+        "otherName": [
+            "BillKing Billiards Club Norodom"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab8a3537aaaf0b40f243",
+                "key": "billiards",
+                "name": "台球"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 429.9,
+        "address": "3F. Moon terrace building No5 street norodom, Phnom Penh",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9279552,
+                11.5429346
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888728740_idFrae0wB8.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=BVSU86rEUGGb5beiRojYBDOwcyuYgFNhcnH5kxgdp6maH3BLMND2k5b7TLi8ocYDVm6ar48B39CnUzEvs8iY25jZnnu-ZD47eKOtkqg0g-Eeovhe0-Njqlolgd~OYfwThVAhm1rYUJCQNeEpJXte480XhxxIblfGKbDrXsSp0fOAyzoUVcR0QnuS5jG~XhVnAZvx~26FGlyWMiAVdMTvaxiHFwON1S1FxPaXwjCMUJzE4YgSsdIs-M4-bBx3FvV678CdQjbVLsVxF6cGGsDZth0G~MfU~k6bpL9jvdQijdMO~f78pLxWqBLM9c6KbmtrjoHFcZ-PNpee8S4i7LN1vw__"
+        ],
+        "rating": 4.6,
+        "ratingCount": 5,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:45:28.785Z",
+        "updatedAt": "2025-07-07T11:45:28.785Z"
+    },
+    {
+        "id": "686bb1bfc9663b9cadcf3412",
+        "googlePlaceId": "ChIJH1xP_DZRCTERpQqgwwW74zI",
+        "name": "THREE HANDS ST830",
+        "otherName": [
+            "THREE HANDS ST830"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686babae3537aaaf0b40f249",
+                "key": "massage",
+                "name": "按摩"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 543.65,
+        "address": "Nº 9 St 830, Phnom Penh",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9310807,
+                11.5507152
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888319710_AKxieDTZek.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=Cv1uATGsM-EsFCfRyvoVdVrDGyO0-ejhp0bVVHwbjmqPCmr-tcsOFM1k5a22t18k3-VDE4Yhp4YV~B6GVXcaPAdDWP33jIAyw4XoXNg5xVApYPI-cdKc8ueV5AwHs9R4KtPYcoalZ~NVyi-JmMA6GJQaqbMM7RG~2wFLYPty9pywMPm-eZpGxBsLflinFZeMVRst1dGf5HS2ymj84Iz-QHtDHQUG4xoZv5CgkNZa6EqQyhLo5xDJu3qzRyfFbGRqAYqhb5NdYp4R-CNPyH3HGE74L0zkKPYLUSynD4pfCxebBd9ATD1lim52M-kAA-ps0~KqL7GqOvZqQQ76CFexUw__"
+        ],
+        "rating": 4.2,
+        "ratingCount": 109,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:38:39.750Z",
+        "updatedAt": "2025-07-07T11:38:39.750Z"
+    },
+    {
+        "id": "686bb1c5c9663b9cadcf3421",
+        "googlePlaceId": "ChIJ4652gRVRCTERcObR3nwnCrY",
+        "name": "ចិត្ត9 (Jet 9) Restaurant & Bar",
+        "otherName": [
+            "ចិត្ត9 (Jet 9) Restaurant & Bar"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab6a3537aaaf0b40f23d",
+                "key": "bar",
+                "name": "酒吧"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 567.43,
+        "address": "Abdul Carime St. (21), Phnom Penh",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9301455,
+                11.550943
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888325672_oFf1jGS0vm.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=Vc8~AKNbh0y-17Rl4jz6Z0YEUBdFzROkdk-SFdd6SOVrq2CcV~8WX4Fp16~SrGmQmPg43TauzmkyqHFCqq9KwHv8SDMuvG8tAC~pkdn3jjJBr3Lf-8iznR6wNzSMvVRjKPWe1ghTE9gFV7TdoG6epVHOoqW61CgB1kQrfhBKAgdneUpmMaDgsnZ0voc59SPMfNTpzaGqIdxt4Siew-X~I2FJ8DX4G8jspg99Bm15EZXpVnWh3om5r1wINhHbVbpgP54z0TTfB-jyK2hrCwM2BWylOTiC~ISUJx6ABBN0kAR~1geM88~CNZN4fBdzuTz16BA8pL2htttqTTv-F~zk0A__"
+        ],
+        "rating": 4.3,
+        "ratingCount": 92,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:38:45.745Z",
+        "updatedAt": "2025-07-07T11:38:45.745Z"
+    },
+    {
+        "id": "686bb10d8574e05af3b0a168",
+        "googlePlaceId": "ChIJLf_FpTtRCTER3vaTW8rQfQQ",
+        "name": "Wild Phnom Penh",
+        "otherName": [
+            "Wild Phnom Penh"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab6a3537aaaf0b40f23d",
+                "key": "bar",
+                "name": "酒吧"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 605.73,
+        "address": "13Y St 830, Phnom Penh",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9297591,
+                11.551248
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888141876_6GURWPCh2Q.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=SpHzjT8SLPamtcwmGAvgmaI9cE6RMvnXT56v4mBvFye9tgjdG-sSbXVewhzfMVB0HJ0~Nl1otg7fCwdOHVVK-S4nvktrupipjxYvzkXaJvunP-9nSDZ9bqTrKR8hz448WQNeqaUG5ITU70YYzSkdn-Tfs9FxGhdy33nvxYZlMSHeRDSytR9QlUCjifbTMwxLXcRtLJVoAVDtoH0v8Gc5Leoby9V46yOcv5nnuLnTHwQwfQmNJApk38hoedlXMj6CaCjfacYadbF41ARcjUtlgtVxB467SOywnwRk8EfNpEgO~LmWKdjYa9j19umUMcbKfAv9Z9c8wjhZyaW2AcSsnA__"
+        ],
+        "rating": 4.8,
+        "ratingCount": 623,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:35:41.956Z",
+        "updatedAt": "2025-07-07T11:35:41.956Z"
+    },
+    {
+        "id": "686bb180c9663b9cadcf3376",
+        "googlePlaceId": "ChIJS8KJpHxRCTERNTlPcsJPUag",
+        "name": "Autumn",
+        "otherName": [
+            "Autumn"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686babe53537aaaf0b40f24f",
+                "key": "live-music",
+                "name": "现场音乐"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 613.68,
+        "address": "Street 21, Phnom Penh 12000",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9301108,
+                11.5513575
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888256027_LYOfc72M2O.jpg?Expires=1751974662&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=dLdur93E4XM06tZvjQD9gelpweiwDozIfAi~m7Qb2D97bbJnneehZk7eEW2HHyutB2F2X6OhJsGKn6V5EF1ue7OZ79mep5OIn7u0ozgq7sFvkZmD2K0yl-H7nORPbzwQQbRPI7PSlZJJIE9G0d46EUUiqNYcKQ4E6ntcvJ9n11BFFWjHqXVm8givw54ffULtO9B0LXfHoiwkZSRJpAX7FInK0mUYuE5vxP0hTc32PJA0bNTRovX5xh5hdjC1XMcwptJ92czMac3sqV8ANU-g06LA6o5259Suw1~69sWxtKhubs2ZMBzZfhJZIdLbq41OCzvsMNNzeO2-dqFGCw6KSA__"
+        ],
+        "rating": 4,
+        "ratingCount": 249,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:37:36.098Z",
+        "updatedAt": "2025-07-07T11:37:36.098Z"
+    },
+    {
+        "id": "686bb1cec9663b9cadcf3436",
+        "googlePlaceId": "ChIJg7b7cJ9RCTERyqcNmYJZhL4",
+        "name": "NOIR COFFEE BKK-ណ",
+        "otherName": [
+            "NOIR COFFEE BKK-ណ"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686baadd3537aaaf0b40f237",
+                "key": "coffee",
+                "name": "咖啡厅"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 641.04,
+        "address": "Phnom, Preah Trasak Paem St. (63), Penh 12302",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9246608,
+                11.546056
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888334292_88ud2gCMYE.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=XuzyrW0gkoo~7~zWAxe2iB0flaRQ0khq6Glp2gBZnptFwPrGHUbXzrb8ibKyz29-C14hJEGAlpxUZCbiW4HOKYAsH8wMqxf8-9gGeiG4zUCI08gGa6zZT2L2Qz~I8S8Ti1OP-bnl3Cp2e6LQgtgHcLKS~ygrvN6xbNoSgx1q1zCBHOrkhD93AP-432bd8bWyEHsSz60ykNOZphV5QhyGKoR9yJPd9qV7crIrFal0sJyJUg3A~cZdhUk~Q1nyD37yZpEY7zkTC8zJqgVOmkabNsDwoPaiViCfu~0UPmpJltGzUcAC7TtyqvjduP10opCmgt-akt64KTHESEu5rqMgNA__"
+        ],
+        "rating": 4.2,
+        "ratingCount": 99,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:38:54.360Z",
+        "updatedAt": "2025-07-07T11:38:54.360Z"
+    },
+    {
+        "id": "686bb1778574e05af3b0a25e",
+        "googlePlaceId": "ChIJd5pB8DtRCTERr6j2UGNcMZQ",
+        "name": "Coffee Bridge 24H BKK",
+        "otherName": [
+            "Coffee Bridge 24H BKK"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686baadd3537aaaf0b40f237",
+                "key": "coffee",
+                "name": "咖啡厅"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 642.44,
+        "address": "St 392, Phnom Penh",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9246618,
+                11.5462986
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888246963_s8teiCAlCR.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=Xffn9jIhbM2j0cvgiXtKfF-hsVeX1vAjZi0NpfbV6UmfXbbW4-VpupcEVxpsBLWqWwWA~8PvyjSihgobaOfmi3WbfckaADRIkW3Y5iPehr5ncjkVsoUkX5hhmiOSxIJGmUR26PlWK0ol1RWzj8OkQiU37ElpcopoD5LzIrKJ~DuqoP6l5ib~Ld9~djOM-muKZOpbkuvf7yTLMqp4ui5ndIGUkAXzPcRbHyn69xYKdPRftbh6ZZgRTvvYGek~TmzaMFqEWLhQkXWAHn96STYVwUEkRgX5E7iPB1zyyCBSiaPc674K8qNd-zkdF4-t9Kg0Pj9hr1Yftd-7XwMEjGPixQ__"
+        ],
+        "rating": 4.3,
+        "ratingCount": 192,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:37:27.023Z",
+        "updatedAt": "2025-07-07T11:37:27.023Z"
+    },
+    {
+        "id": "686bb1c4c9663b9cadcf341e",
+        "googlePlaceId": "ChIJ2eetHQBRCTERuA4L5ZT7fWI",
+        "name": "U Mall Phnom Penh",
+        "otherName": [
+            "U Mall Phnom Penh"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686baacb3537aaaf0b40f234",
+                "key": "mall",
+                "name": "商场"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 660.07,
+        "address": "HW2M+C8W, Street Sothearos, Phnom Penh",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9333324,
+                11.5511235
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888324462_aGqj2wk7yu.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=cIZrRIvWINAGR6A~hEpZC1LLo0zzmr64GwsCHfXVA~HKbHk1MeMvTQFMDbR8hfnlSAVX8XNCDR2CtXAXxVJXTFV23fHxWPAORzX9aA~3S-cpxBWJ3olbFyGkSiom1eiu6lpf5eWYpiXNqVmh3wZvNGA3yvwDX4zT6bMEsPPW4vWvUGND4gs5QlOUUA8UDxEynteUvq2XujjtZQHiVkUPP7eVDsdgwIJaCgqdI0Oq-rmwz4y2s~vVYS~9~ufT7I2bs3qTUS47ZglU0G4137kRMKCs8cwJlxef0OqmJtLv5BhaWkDubmcxhcmJ8dNo9CUyWyf2K~mdDnZgMrTAgRIZAQ__"
+        ],
+        "rating": 3.9,
+        "ratingCount": 150,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:38:44.539Z",
+        "updatedAt": "2025-07-07T11:38:44.539Z"
+    },
+    {
+        "id": "686bb357c9663b9cadcf374b",
+        "googlePlaceId": "ChIJC4rUWQBRCTERZX1yCAjl0EU",
+        "name": "Miniso U Mall",
+        "otherName": [
+            "Miniso U Mall"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686baacb3537aaaf0b40f234",
+                "key": "mall",
+                "name": "商场"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 665.31,
+        "address": "HW2M+F8Q, Phnom Penh",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9333619,
+                11.5511616
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888727591_U379AjTkR3.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=HKUiTTFrUB-LBErqYaqlQp8QJrfGxAT9yAgft7z-f8zURGNA~1JUePJ1y1xf-ta63cO7nCJg4gliFA191OvESJ6B2wniyyuY-0O6NeYMoOSxDHF3VylUCvEY7sLCiQ9kIDyIKD3HaiNwvG95QEZ7j5s7lVHRbybt7Cn6VzlEsz~dikh7gbYoGrKXAQ6H3LCBjQ~4Mzb5k1EdDtAg4Q~7oENqsp23NdXJW1vyfAMmsGy5SlxUfp5az9gUA4zZAg~roQnwOwSpTuQ0xaPWhbJD40eg9bOGq~VgA~7BF9B8Zibe8Wo62AZM4WNlY5hcYx3qpv6tQoRJzfHWqF9hGcU~ng__"
+        ],
+        "rating": 4.6,
+        "ratingCount": 5,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:45:27.639Z",
+        "updatedAt": "2025-07-07T11:45:27.639Z"
+    },
+    {
+        "id": "686bb226c9663b9cadcf34bd",
+        "googlePlaceId": "ChIJtV7yhSVRCTERXldS_U8nStI",
+        "name": "Champa Spa ចំប៉ាស្ប៉ា (BKK1)",
+        "otherName": [
+            "Champa Spa ចំប៉ាស្ប៉ា (BKK1)"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab9a3537aaaf0b40f246",
+                "key": "spa",
+                "name": "Spa"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 678.55,
+        "address": "233, St.51, Pasteur, Phnom Penh",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9268132,
+                11.5507432
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888422212_65V9KdyFre.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=Rho9GGwdq9FYht1VRg3PLEHJyJ4mFRAG~pgQUnfTt7rHY8GBlByAsSGq2r1LrEZUwO7-Tsz5bgFH9-5sFV~0Eic2nda4tsIcezlcTcYrDfy~rhwOiwX8RH19HM9yn-p6VftMzfB-nJBJdFxkTeFa8j7rlD0CPhoXct9NkZYl3O-yfX6cqqcoJ0hAYFIdbQ9ccOf1i084~gwldVELdmB1Di16kS5pUrV7eAmpN8VQBbcyz1r92a1QqmvlP70I-mkquK~HvsWr4wdTlpyqoLcjd2Nu26LKVXV18WHOwCXvrmzBMWZUi8NKlCflB3ALWmLUNdguWPBrtexzF82SDE-nwg__"
+        ],
+        "rating": 3.6,
+        "ratingCount": 125,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:40:22.307Z",
+        "updatedAt": "2025-07-07T11:40:22.307Z"
+    },
+    {
+        "id": "686bb1ffc9663b9cadcf34ae",
+        "googlePlaceId": "ChIJuXxO6-tRCTERv2ZnQtf-Dw0",
+        "name": "Central X Club",
+        "otherName": [
+            "Central X Club"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab5f3537aaaf0b40f23a",
+                "key": "club",
+                "name": "俱乐部"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 685.43,
+        "address": "Central, near Russian embassy, Sangkat Tonle Bassac, Khan Chamkamon Phnom, Phnom Penh 120101",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9349987,
+                11.550205
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888383124_pMkuyYY8N_.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=GnwBPiyP2zrLvXF3Mk4lzngqGVTvP0-lv2wzSjNx3X4QyJF~p-v9aC1muWLsf26BSuyLjQiSuWyj~nKdAaiOe3c92m6nbfV5m-xf2tajnaScsyNl~7YoOhRezMCZFcAqD9nJGSqZbPnJU1Iul6yEoJ-yGsQdx3LRwsL8LGni7Q4oDncaE~zmFjpOd2rfVRpiNBYzZGfnvFacHr7frtfFbJD2-cfvPb3HqwjxhG9o5qbK~T1iSWMy7we3927AQwBxvVQfu~g7x~Zn0E-wvb7nxrEFlnQ-7svl-kUSlfk4F8D4BxBMsMxx7Hh~QCg9~oe3e93mo5XRvvbLdq3Ojlwkng__"
+        ],
+        "rating": 4.3,
+        "ratingCount": 60,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:39:43.197Z",
+        "updatedAt": "2025-07-07T11:39:43.197Z"
+    },
+    {
+        "id": "686bb1698574e05af3b0a240",
+        "googlePlaceId": "ChIJm_hAaR5RCTERPvc-M4XKALI",
+        "name": "Pimean Massage & Spa (ពិមាន)",
+        "otherName": [
+            "Pimean Massage & Spa (ពិមាន)"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab9a3537aaaf0b40f246",
+                "key": "spa",
+                "name": "Spa"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 712.29,
+        "address": "N16 Street 63, Phnom Penh 120101",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9251099,
+                11.5422888
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888233904_rBLofNKDFV.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=GWwv~bIiObeIpgqn0LImec1G-D6X-YS7TgKafbPBX~IuUg0KXSjY28eEK9FaDDAOCtfrDHnVJemWJTGV88RePGOi~sZfya4xLD009~sCBl6aiJIufByw~Yf2KUKhRHUl2KzUN~b76j9LnNSlKR6hkNMmBvJOlFUOiyMfRnfDb-2-Rqt62LDY6E89OUIwyio6e3~28fNFMSsDGkaC6l55cbOHYSDwp~ZwXziVp6PMeXhvJUhVC2KvOviNWepg~8GuTuYW4rZH66O-ucAWi3NMFW8r0xC0FgwftOiOv23n1IQeuqWQs2g1XJspOwjbWx~krCACmCbxTnFnzF5T5KNbEQ__"
+        ],
+        "rating": 4.5,
+        "ratingCount": 178,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:37:13.988Z",
+        "updatedAt": "2025-07-07T11:37:13.988Z"
+    },
+    {
+        "id": "686bb1468574e05af3b0a1ef",
+        "googlePlaceId": "ChIJ3dDrUZlRCTERptPNf9VVJP4",
+        "name": "Kuntheak Spa - គន្ធៈ ស្ប៉ា",
+        "otherName": [
+            "Kuntheak Spa - គន្ធៈ ស្ប៉ា"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab9a3537aaaf0b40f246",
+                "key": "spa",
+                "name": "Spa"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 716.83,
+        "address": "13, 12302 St 400, Phnom Penh",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9240707,
+                11.5446853
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888198446_y4bPoORECJ.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=FNl3s3vUXYWP-husVfYGPxKNfBlm7dbK~lJJzHnaEp9P~dcUyJBR3Btij2oaWCeHh8POZ5ZLleVAdqpp5cIoOBPqvf2YDiJbuyv3hNJJufO1KqyV9uhsTzSp9KaLXton9xU13wtCcPAvnEA5yg5YO9ymkDkG8-Q6BA1fC9QLdVbQMGfq2l0CPbGQNpL-VFE1Ng-eUx18B5jSMeyVjsxhIB4SR-9hFEk2UdsGWhl4gjmLw3YJ2I0iMgsenzCKkO0WG7kCs~QDQoX99smMroQMV1e0sZIDjqCEGqbGHpEOpBY-bFqeraKFy9-Lw1MlwRL3eq-JB9xj98w1XPsjSrcZ2g__"
+        ],
+        "rating": 4.8,
+        "ratingCount": 195,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:36:38.526Z",
+        "updatedAt": "2025-07-07T11:36:38.526Z"
+    },
+    {
+        "id": "686bb37fc9663b9cadcf37a5",
+        "googlePlaceId": "ChIJ385qCm5RCTERUeA23seuLEE",
+        "name": "The Gold Spa & Massage",
+        "otherName": [
+            "The Gold Spa & Massage"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686babae3537aaaf0b40f249",
+                "key": "massage",
+                "name": "按摩"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 753.71,
+        "address": "17, Street 312 corner street 21, 12301",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9304346,
+                11.5526322
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888767192_-DNBfs1iM9.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=M5w6pvXyiuviCEY~SDlfDKr4zm~NfF6KTzPtoyJqPD2vqh7TXfqgTbgSOqN2Cdopy-LPaNlC9jSgJOHxg~AoTiq6DtHjnpBMEN1wA~bFCYqsXYF~NZWcTUNFVszPkc3WpD2-D1SqPhbi9-bAtqvWWK4b5c5jENOSFO~PGtR05vvcXw0KGQhBuXJ-I8jUGcjLFTegiWLf9rcldtEuqoTLhmS8HqW4o4WBbH3thmESNrDBeLJu3w7OedYBPiuag2lB8XxIQwppvHAexdcglFj8Wv7dNZrJgaC5d8yD~mMIxLdgI-ou1eExJ3-MhX5YR4Qs6NuoZC5aIH37w3GMiF012A__"
+        ],
+        "rating": 3.4,
+        "ratingCount": 5,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:46:07.286Z",
+        "updatedAt": "2025-07-07T11:46:07.286Z"
+    },
+    {
+        "id": "686bb2f2c9663b9cadcf3694",
+        "googlePlaceId": "ChIJS_5hnHJRCTER8S3tz5NdTfM",
+        "name": "SOHO Mall 蘇豪商城",
+        "otherName": [
+            "SOHO Mall 蘇豪商城"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686baacb3537aaaf0b40f234",
+                "key": "mall",
+                "name": "商场"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 755.83,
+        "address": "1, National Assembly, Road",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9345658,
+                11.5513915
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888626438_XCO5c277MT.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=V7I-S1bk~9Oe7JBma-UKdwNrumvBoOEhjsfDk3~u0~-FjAtAHEGZq1XUyd~4TaRJq7ZZ5TIovVnc1tbhLzPllM5Lv4S1ZUOjxVfPPdJqBEavBk-syvcIc~8D6eJBODWpt8gh3ppWJW9~okFwFfiaF1zvLpj6dR01PABQ7QwfxfERoAIWaWBFI8DnhMsCIFS6sPhJJThC8nn1VeVWdi7P7K3r2cZwI0yY2rxMQFtkGA8xrwdS8QfDoDfeFCfw1t~g7gzI8Fiomp4NK7BJdGKuo4C0YQfTZi41HiA-uTpgQLDAdiuDSAxvVjZhLTD5lf2JqB4ktGRlETuywE7zAXiCGQ__"
+        ],
+        "rating": 3.9,
+        "ratingCount": 17,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:43:46.528Z",
+        "updatedAt": "2025-07-07T11:43:46.528Z"
+    },
+    {
+        "id": "686bb22dc9663b9cadcf34cf",
+        "googlePlaceId": "ChIJ25-wOcNRCTERPJrXqGbY-2Y",
+        "name": "Uniga",
+        "otherName": [
+            "Uniga"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686babe53537aaaf0b40f24f",
+                "key": "live-music",
+                "name": "现场音乐"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 759.54,
+        "address": "M111 Street 308 Phnom Penh, 12301",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9297189,
+                11.5526377
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888429582_D7NyMqMzRg.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=YELngUh6BOYZGRPolx4ScqIomYMSqwVH~wfkLicaQaJCduVUQk81XXln7holJ3U7jpiiyNi-TZaN5gbAriMWasNX64nk-1w~s31398xG4UVa-lzrEaPbXRRjul0i-b08YpPh8jI3de-UatFF607hZ0SbObIyKrKPLqSpfgVIPVAQexvvt08IWSLhObxF6I9mdDrd-fN19CEgje96R5-vf98pGpkp54B9NHRH-CfR0bT16JleFneieIKkJeELkXNvvaWBK-kEK3mBn3BqB2xkeA803dTFysLEHD3WcZ3RTSbhrZ0ATCu66j0Yve6dRxf80hbukDCx5ieS9bQYJwiaDg__"
+        ],
+        "rating": 4.6,
+        "ratingCount": 40,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:40:29.665Z",
+        "updatedAt": "2025-07-07T11:40:29.665Z"
+    },
+    {
+        "id": "686bb1aec9663b9cadcf33ee",
+        "googlePlaceId": "ChIJRfWUKiRRCTERhFNywO0lj4M",
+        "name": "U&ME Spa - Massage and Wellness",
+        "otherName": [
+            "U&ME Spa - Massage and Wellness"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab9a3537aaaf0b40f246",
+                "key": "spa",
+                "name": "Spa"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 764.29,
+        "address": "Trasak Pa-em, No, 216B Preah Trasak Paem St. (63), Phnom Penh",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9242172,
+                11.54883
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888302079_hNBco9A6xi.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=duUEM~thiXxp2EqC1OMf6VYMVl~0sVen0pLUVaoL0aYDF824B6w3zKOHI3GqciEaqrSshgUk~~jJHlY7IMkIeGGOAtH8Gk8lZTpxSRwxMj10BETqR71aalS3mrRtJjunexsKB-bHRLC0oMD6utoXRR2cyRYuZmwVa7Pota11zMLMkOSuJlnx1fvWGLMdUrwUUEVEODJqmfR7qaVajLd2n95-NWPw6U12ae0HnpXQRrqqSNyT28RZYGHwki5FnURaDMRB3YYz5fXpWsi33z7tlGF0eV1AnBMpcyvUUVhuE9J4H3uf0UYSps34cvftLA0rUVxnCBLjc3czVDV-n9cdqw__"
+        ],
+        "rating": 4.3,
+        "ratingCount": 120,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:38:22.142Z",
+        "updatedAt": "2025-07-07T11:38:22.142Z"
+    },
+    {
+        "id": "686bb1c6c9663b9cadcf3424",
+        "googlePlaceId": "ChIJJ_bEtS1RCTERJ3ay3IO36bY",
+        "name": "Wonderland KTV",
+        "otherName": [
+            "Wonderland KTV"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab7c3537aaaf0b40f240",
+                "key": "karaoke",
+                "name": "KTV"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 769.78,
+        "address": "National Assembly Street, Phnom Penh",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9356501,
+                11.5506371
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888326861_mQMvDaXvwk.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=AX9JlF3Mf1Hme3sAlUkYQObPrGPfN2RK7~VPtwlS~km4G6zhnTNp-CMCXDIHibh2q23O9lRg-DRs1pLW-bzX5EEW6jyGsmC-I3wj8a5xhcFiHQpz9BDUjnD44SFvpZjxsc1cYE-ZminxXQmQvAOwLjSfQ4cqFbiHKIs0B~QgyYMKSi6YHngsUwufz1VVxnNqc4g-QTK85xVUHy~6-rUZ0PwLl3e3K94yGsUvF3qLHcp430fvTleEDBWa9HvmbKWoR2sTeWKh6nz18NhwXLC~XTJVuqo3lb0UTAGdV9HCMLQ~~z~eBAK6JJZOVKhTL0QZ0yn~SAEOgTnwQ8k8qP2SKA__"
+        ],
+        "rating": 4.3,
+        "ratingCount": 92,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:38:46.954Z",
+        "updatedAt": "2025-07-07T11:38:46.954Z"
+    },
+    {
+        "id": "686bb2e9c9663b9cadcf367f",
+        "googlePlaceId": "ChIJIa3nr9lRCTERjcpc-pu-_ME",
+        "name": "Sky Massage Phnom Penh",
+        "otherName": [
+            "Sky Massage Phnom Penh"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686babae3537aaaf0b40f249",
+                "key": "massage",
+                "name": "按摩"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 772.58,
+        "address": "រាជធានី, 17 St 398, Phnom Penh 12000",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9234602,
+                11.5454783
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888617272_D3xv5qgKJh.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=XMenLmmsanLRTyjazfiET5-Qj85luw~e0KbxQGlhX3YXaiGxqwTGM0aPm~a~DQVJkWiTWChNvWI9WJWj8zGKZ~FB4lyq~Vfcf79ZM9U9IGwtxfgfsanz-yhDl5QuXNUie4firmjtwfKXGe13qUrvY~kRghwVj21lg0FiX0ZsirlE1h73DRaIqnvlKDQn5UDZzWOOFFvch76ZWlbQM~eijmp7Ykr6Pxp6xjFj9xAOdgpOBqf~o08AZMNsuXX9kWowr1MWcK5NiOVP~f-plm~IUY3TIwSS-GlZ0Cww6HQBDCcAxWK0jgee1GoF0wwW3b9ms8h~3FshG1Hlclzq1Gzsxg__"
+        ],
+        "rating": 3.6,
+        "ratingCount": 24,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:43:37.320Z",
+        "updatedAt": "2025-07-07T11:43:37.320Z"
+    },
+    {
+        "id": "686bb1748574e05af3b0a258",
+        "googlePlaceId": "ChIJiXjTFS5RCTER6VVDFXwucK8",
+        "name": "Cloud",
+        "otherName": [
+            "Cloud"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686babe53537aaaf0b40f24f",
+                "key": "live-music",
+                "name": "现场音乐"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 775.83,
+        "address": "Ke Nou St. (9), Phnom Penh",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9317848,
+                11.5527247
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888244542_oYZP71TdS9.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=JTGTQnYo3rgrZemPy11WsPKEY3ymjwQA28FPKRW1bem5vdyHL~1wZfIXItIPvvj4YTk-ispS4rExEENVq9qOB0tZtGLng6yUDQInle1in6pijOyKes6BP-EmgTgNkLIpWN2SjboyUL8t8LI1wwqSIZ2pY-ZTZgANosZBwpodWm-hjzWCcvdKi1bP5ppaTrolj7k8i7pATH0-QrzD3BrSjSlhn~qbSWGU-rt06Gpf-BF81QOeptvVlzzPBGH-JlTHW1kiKvcHPVe7JGQ9OQQ2PDYEFhWai8IlDiaM0Q48tLk~daWdDSkwzphkzYSuYo0v1q6Oj0dKRuKTXiYRoSI2hA__"
+        ],
+        "rating": 4.6,
+        "ratingCount": 142,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:37:24.637Z",
+        "updatedAt": "2025-07-07T11:37:24.637Z"
+    },
+    {
+        "id": "686bb338c9663b9cadcf3700",
+        "googlePlaceId": "ChIJRVzihKBRCTERcNbvOGGtiU0",
+        "name": "ស្រ្ពីង ម៉ាស្សា Spring Massage",
+        "otherName": [
+            "ស្រ្ពីង ម៉ាស្សា Spring Massage"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686babae3537aaaf0b40f249",
+                "key": "massage",
+                "name": "按摩"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 776.4,
+        "address": "HW3J+2WX, Phnom Penh",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9323602,
+                11.5526058
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888696248_8yelDaJYAo.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=Klq9qYADokSkMXP954BsYVeCgK~ppvkxlbkI3gFCQVFZbdBM1IhMilpAQjTWi4xH7W4sJZJUCKcuvLNIN0voAUd~tx0Kf-qNetvu~QkWA0AbXm1S1mXHDAvP~qkrHGjBxk~-ECqOLsNXn~wm3g4pPIgLSVRWdsZpH1n8WW80cTc5iJF4ENV2xvai8wmZKGbks01zK9jhxh1roKkB8IAFYogFoamHJJOVba~XYYeoiibGmqCKG3T9rDEOtMTGXIx2bayMgl9sjnRPgfgcej2Vz0YajKsv5mJX37NnmXpZtxVUonALctCdO8BnnUL00Jbev64~KlNMNnCWz60Idtqycg__"
+        ],
+        "rating": 3.5,
+        "ratingCount": 15,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:44:56.330Z",
+        "updatedAt": "2025-07-07T11:44:56.330Z"
+    },
+    {
+        "id": "686bb2ebc9663b9cadcf3685",
+        "googlePlaceId": "ChIJZT3Y8mJRCTERy9m7uizp7kM",
+        "name": "SROLANH Cocktail Bar",
+        "otherName": [
+            "SROLANH Cocktail Bar"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab6a3537aaaf0b40f23d",
+                "key": "bar",
+                "name": "酒吧"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 778.63,
+        "address": "St 308, Phnom Penh 12301",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9296882,
+                11.552807
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888619612_zLRlTwi_Yn.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=FBJnD1dgZbpiwZMQn06HRskaArZODr1y85noc~rD9DHWHXTNpRMNQsJ2YZEdRzOoS98ITtG1EtF7uVJgLdn2l6Juom5mCq8faPv7kXULKlvBKKIe1P3i5NPZPQVD7E51ISR1r-Yt5fUiE~UjVQus25SS6ZUi2jAOf6yPmUNnxcrqGrrwCQA1nENS2G~FwBVT~PQNfufGWy9qYz36oXm0oGSZ8DsZcUDAeEwY5M3Str1fxSUEdN1Yx4~sI1k09MAP-d8SRJmWnUDxVWZqtuqK0in-1jT3krdWRdtSLnYqOBOVzxxdkD0YONyyvvj2cjEyL0ipDgIkW5Z3fdjmbD7hfg__"
+        ],
+        "rating": 5,
+        "ratingCount": 9,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:43:39.707Z",
+        "updatedAt": "2025-07-07T11:43:39.707Z"
+    },
+    {
+        "id": "686bb1298574e05af3b0a1aa",
+        "googlePlaceId": "ChIJEc1R2RpRCTERrDfRZN_uFyg",
+        "name": "BODIA SPA BKK1",
+        "otherName": [
+            "BODIA SPA BKK1"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab9a3537aaaf0b40f246",
+                "key": "spa",
+                "name": "Spa"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 782.39,
+        "address": "#40 Eo, st 63 corner st352 Phnom Penh, 13302",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9241997,
+                11.5491567
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888169797_6v5c8Z6IGh.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=O5zljLnw8EwCKwTe3mluliijBFawl3eSpti3Ae2RKROoo3u6ylV6m6SzvAI4U5apVFyREukDXaAQYd2rPCoSpQuR9CT3suzocrhRc9i3XqgOyM23ho~eCzT~Nklq8b1iRrutGjze-sRxJk~C7i7UauDZXYwkdCNPPsKpp~Wt8J71OrenOzvyzX06qjtvs7wIxYSv4TRxa78NzC2X8uHQSnjPSUOpt5Q~2SPCzJVgmjT7bxXJs-LQxMp7UoO2Ov~y3PYS4qwz4C~Skv-AI4aGOxyEQmYVRuHYv7rf-mNq7-m7ce~rKb68CC3PQrUwIDgJNWtv5KDWWSo2L-~Rbqtr1Q__"
+        ],
+        "rating": 4.6,
+        "ratingCount": 502,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:36:09.880Z",
+        "updatedAt": "2025-07-07T11:36:09.880Z"
+    },
+    {
+        "id": "686bb34ac9663b9cadcf372a",
+        "googlePlaceId": "ChIJvaUOaxlRCTERfovl0XO30dA",
+        "name": "蘇豪夜市SOHO NIGHT MARKET",
+        "otherName": [
+            "蘇豪夜市SOHO NIGHT MARKET"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686babc23537aaaf0b40f24c",
+                "key": "night-market",
+                "name": "夜市"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 783.91,
+        "address": "HW2M+PRF Container Night Market, Phnom Penh",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9346307,
+                11.5516554
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888714485_hv22pAogP2.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=KL0Vr2ZvxkBSIRadGxxLfXwF1qoagRr-jMF4CkoaFLs~nR-byfd5g77KDYT30t0gmEb5dcs7cfGa0Np1ko0I5xi0zWH1k9EZ5acZfVLFhlqOu4UC65RhUxcLXhN5xz-Nx~YNt5gjDIJb2kG-8rrrwmH4oNl1nV6GCKAlZikvBTMmalKfF5ud3FrD~2XtE-sWlcZA5uc3INa21NZKgKXFl3aIGTVScyrks3PBRknk1w4UHU2BmpY~3PgWU~iMpDLF3~vwl-ZG24250mjDMSa2Izg0I1ncUCwYJs1QNhne5D5Ka3dF~CWoT6JM9-F9tbfuW1RwjzOHVkNF~-VyMPyncA__"
+        ],
+        "rating": 4.7,
+        "ratingCount": 6,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:45:14.571Z",
+        "updatedAt": "2025-07-07T11:45:14.571Z"
+    },
+    {
+        "id": "686bb11a8574e05af3b0a186",
+        "googlePlaceId": "ChIJs_vWeyVRCTERvY5iXY2iwxY",
+        "name": "Angkor Spa អង្គរស្ប៉ា",
+        "otherName": [
+            "Angkor Spa អង្គរស្ប៉ា"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab9a3537aaaf0b40f246",
+                "key": "spa",
+                "name": "Spa"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 787.64,
+        "address": "Sangkat Boengkengkang1, Chomkarmorn, 16 St 310, Phnom Penh",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9261484,
+                11.5514806
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888154498_HaMDZopYdY.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=V1wI7kHGDxsWjhsm-fSCfwBVQcBFYFbbcDRMH8z0XYApp-WUp4NX1zyfdM1E0o15wTWEszq5ZjANNe5hXd8vQqx6YbFbptExxNI8rlC766fSoadzr5OfSlO2smhegT6e24G4GbKyNHG~glInI27eg7RnQV3X46AK8iAd7r0JtX5ZOcdNGNEe6sREBNy5PErxGW3EU3D8OdQEf2V4D8gotrv~89OvHnzxtxe7HMHXico77OxN377N1mBkKv~b7xma9Xl5q5yWdXG4Crp8TULRsl3er9D1Adp0xjbhv-McfOMAg8FJqugdU8NMUOVcBK-Z9C5fPmLrNaTDm3bC8d96kg__"
+        ],
+        "rating": 4.5,
+        "ratingCount": 708,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:35:54.573Z",
+        "updatedAt": "2025-07-07T11:35:54.573Z"
+    },
+    {
+        "id": "686bb258c9663b9cadcf352f",
+        "googlePlaceId": "ChIJAxCfmGJRCTER5fiCqsJ0pBU",
+        "name": "The Tree Bar and Cafe",
+        "otherName": [
+            "The Tree Bar and Cafe"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab6a3537aaaf0b40f23d",
+                "key": "bar",
+                "name": "酒吧"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 794.55,
+        "address": "HW3J+58W, St 308, Phnom Penh",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9308312,
+                11.5529946
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888472237_MtJyBiiiVi.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=MpECkLjsejQM5jiYlcrLj5DbwnNBZKQZsy0q1KKD-YAP1ICRYRk8zRbMfr59BwIEc9JlGHXuyo-Gt~k40nfrUhdwtYmuEjRI9ncDYT2BvqF~b9iSp1jIAs5Q~tCSk6W0y8uzR7sK73ncxlcwdAXtBJIX91Onb1yUKrwGCskgu4KoThmJsNMoxwJrmPEhsdCX8ZLFMW-w-GX-C8JeHCWd0hW474dgnW6OTIVVe1MlMC9~F0~LZCOqWYRg76poj2OlKNpqiJwJcO4NWPC06IrCo0Iln8j-NOJu-DEUOr0CEfaak-JcUP3yBcZeVj5KYrV8fwUSHDrakfLJX8lll4u4mQ__"
+        ],
+        "rating": 5,
+        "ratingCount": 26,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:41:12.314Z",
+        "updatedAt": "2025-07-07T11:41:12.314Z"
+    },
+    {
+        "id": "686bb1168574e05af3b0a17d",
+        "googlePlaceId": "ChIJnfzyzC9RCTER3E3rAtnM9q4",
+        "name": "Bassac Lane",
+        "otherName": [
+            "Bassac Lane"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab6a3537aaaf0b40f23d",
+                "key": "bar",
+                "name": "酒吧"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 796.36,
+        "address": "Bassac Lane, Corner St 308, Phnom Penh 12301",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9297221,
+                11.5529714
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888150698_AV3zpLcM1R.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=SY~EWgt1za-f1lmYq1XiZ5R317oEVQSFgkdW22hJlkwZc6Mc~HNDC9RcNgZruObTrpso7PWpPWZ07r9PTyg4tnI61CrwQdgy3EhvE4F4uSXae420Zjz8XzTu-YBbE8O4jjzicrqp1zXA9VC62DsfrYT9-gh~7WOKr6hLwJoR4rYRXXaG0psnwcD3kj5-~hSBvI79o8a6kn51-LUbCMAO9PzxO5szyj1kVHAaFA-tNysc7pBWci1yMow6mEbwyWhMizIPw7uAGQxZ8A0~q0jb7MlrrwCUWw0VzrUV16ZwjoUqw-6CfIZTDdIbqJfJmXqFlNWfSh9eT3LY7Phw7idmUg__"
+        ],
+        "rating": 4.5,
+        "ratingCount": 727,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:35:50.773Z",
+        "updatedAt": "2025-07-07T11:35:50.773Z"
+    },
+    {
+        "id": "686bb2abc9663b9cadcf35f2",
+        "googlePlaceId": "ChIJMU6LDD5RCTERVYPb872zpkg",
+        "name": "ECL club",
+        "otherName": [
+            "ECL club"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab5f3537aaaf0b40f23a",
+                "key": "club",
+                "name": "俱乐部"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 796.65,
+        "address": "GWXP+WQ5, Phnom Penh",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9368161,
+                11.5495335
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888555054_JPN_ekgT6U.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=IgFNo0siXyQw-T1D4AzpOgYZ7rCYo44Qth9Dl90DBnKWgSnDnyrm1qyn7Fk8WHtnTnOxAtZxyeudwrNGU8~TthCP3pd8CxE~08IXPKtUszjMa1DONcWpqYgyGYEFYI15vv80DYQ-kQDN7oRFGHTjjBI9BTGTdwMWM6K7Aiz6G8rR6bu0fvLnyWXbocV9eR4IZxrQ1zobQnHzBi~ZNJxdZ~zsgfmAHusNwDkux7fFZ9ut5tdUpybQ1Yz7tMRbMAyX3i9okOPqSxfXFIjrlXZ0Oe66xqDBnsKpdw~4rkhp5pjUHFanh-jfMpZ2okTW4qI3t0s8kTZaOmnCAkyb2VJoLA__"
+        ],
+        "rating": 4.6,
+        "ratingCount": 20,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:42:35.135Z",
+        "updatedAt": "2025-07-07T11:42:35.135Z"
+    },
+    {
+        "id": "686bb27ec9663b9cadcf358c",
+        "googlePlaceId": "ChIJ9zXhtZpRCTERAIS6wwC4RTw",
+        "name": "MARS BAR AND COFFEE",
+        "otherName": [
+            "MARS BAR AND COFFEE"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab6a3537aaaf0b40f23d",
+                "key": "bar",
+                "name": "酒吧"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 799.19,
+        "address": "M35 St 308, Phnom Penh",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9298332,
+                11.5530084
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888510227_fzdD0rl0Um.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=JvGRsKkjopFM0S9jwAlk4RGyAp9mQYRh~aMfphdeylBYBe3a9KKH6BmeNAcVcSmFFuaYuaFvhjSmEMEuK0dxXI0ZD6FPZagn0w1QxTN3VOet3NF0QGFDy~eA~dSGShjM6Yje8op2SQgqex2ZK~Jo7Bc2h0pPXpvYktZ91mcraL3K74RcE7OFuJNO6g0-SKLq0CSwQZTbBPjuNgJbAQ5z--SalEp9LiZJXcEZjWDJuf0piABcjeAdveQQv9Qaq14GVtrsqWhjIv2CQ1Q30QGVyQCWYIYfj8v5Qd~2Ne5CE0oh5bQt--lRRqxvSAkvgllfRVklyPUcC0Tyd0MmYhPcBQ__"
+        ],
+        "rating": 4.5,
+        "ratingCount": 29,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:41:50.291Z",
+        "updatedAt": "2025-07-07T11:41:50.291Z"
+    },
+    {
+        "id": "686bb292c9663b9cadcf35bc",
+        "googlePlaceId": "ChIJP6w3R3hRCTERixlZm_RnNfI",
+        "name": "Koh cafe",
+        "otherName": [
+            "Koh cafe"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab6a3537aaaf0b40f23d",
+                "key": "bar",
+                "name": "酒吧"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 799.81,
+        "address": "12301 Street 308, Phnom Penh 12301",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9299004,
+                11.5530201
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888530800_vz_QntlS4c.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=flmYPa-p7BlC5vNnbVVWc83VUCdiy5ZmRpbmzUEjr894beWWvuOTIJdhkEXQ2UeouUrz63IZF5KDX1XUfJ-3q4cRLVLzhq1zMWGXeDZ-QQYKmIgWfts0eT6WwP3AE9iSGwlAXcGv6DDjBbxaq-p5Yf9kmuvFUAjOfP~C9Sy39pq8UDingcSAgWnUy0kUm-usK11i1769c9vyVwNoTmfyBKWd68wvZai~OXGvUIYCA~JD55H2BhSmie454iwjy-~9LenLkhOEeyzJWQipEZcApohsPdD54YJpIplkzIV-AtiNIbzYleDWGwMOVH0KGb9cZQ~AtN2zNhSaofX~chrFIQ__"
+        ],
+        "rating": 4.6,
+        "ratingCount": 24,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:42:10.851Z",
+        "updatedAt": "2025-07-07T11:42:10.851Z"
+    },
+    {
+        "id": "686bb1548574e05af3b0a20d",
+        "googlePlaceId": "ChIJB-N2jIhRCTERQsSqqG6i0eE",
+        "name": "Back Street Bar",
+        "otherName": [
+            "Back Street Bar"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab6a3537aaaf0b40f23d",
+                "key": "bar",
+                "name": "酒吧"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 805.77,
+        "address": "14b Street 308, Phnom Penh",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9301617,
+                11.5530916
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888212045_erezONC8qj.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=CvoEJOIwBd~evkJnmXIASJ1-Xyv-pxoKNrJcLmx9QPu3cfajvq1-Z7GsomVjuK~ALu~VyRYKBxcPqwgljnXLFz6E-0R0oIbiaF8wYp7PMLNKD1pl7knZM2Lv2QRx8AJdIGZFblOdtVJE9WK5vQkbDcnHw5vWId81CtLruy3vb0dMIcudHL~BnYOk4SP37XV4hQYaOpDQVVctWwdVa~r-YxroBV00KL66HAeNlVsUYoIxNfcPNiDANCR~K2nWyQ6tebcPDvHZWDh0UNGwNI~fOvtyZ8WyWIIU7locYcnX8jU8Fzograwj8Gwi48XMeDmmoCtExjeJIc63J2CX1rxbXg__"
+        ],
+        "rating": 4.3,
+        "ratingCount": 287,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:36:52.132Z",
+        "updatedAt": "2025-07-07T11:36:52.132Z"
+    },
+    {
+        "id": "686bb264c9663b9cadcf354d",
+        "googlePlaceId": "ChIJNxamhaJRCTERjagpluBRb0Q",
+        "name": "Captain's Sports Bar",
+        "otherName": [
+            "Captain's Sports Bar"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab6a3537aaaf0b40f23d",
+                "key": "bar",
+                "name": "酒吧"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 808.4,
+        "address": "Street 29 & Street, St 308, 12010",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9297222,
+                11.5530804
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888484515_rso9uEwo57.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=TMKZvopt7mIuIHfnPuYS0AjhwR7ZkxmPViOze~gddoiXVMkRB38zaHr4v6ba~rEBOdR0GmZT7p6LHLjfio~VVGQjjm0QVHGfbvY7Fw2~yF7m1EWN2PBkN50tW3HGtC9n1CJMH4F9AZYzg3drBCelrkvRWcjrYxv387iU54WI~a9eFEAOzRG-4qbUK9lkDL2ZriwNb4M2MmJjIjeIKTPbFJJ9e72gtSZIYXFHcB8AxM6xRR48iZt5Vnxu2bjnmhr3~tEX5wdhdZgp40xUPtZ4MtLEmFwWNqBgF49s6Upsks1YBgfhY52s-LlfzknCrl9kpufzFwk48pPqHKJ0XUmwRw__"
+        ],
+        "rating": 4.2,
+        "ratingCount": 46,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:41:24.585Z",
+        "updatedAt": "2025-07-07T11:41:24.585Z"
+    },
+    {
+        "id": "686bb1318574e05af3b0a1bc",
+        "googlePlaceId": "ChIJD8HOES5RCTER7XpxKF4XeOs",
+        "name": "VEHAA | Restaurant & Bar",
+        "otherName": [
+            "VEHAA | Restaurant & Bar"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab6a3537aaaf0b40f23d",
+                "key": "bar",
+                "name": "酒吧"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 810.64,
+        "address": "59 Samdach Sothearos Blvd (3), Phnom Penh",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9322407,
+                11.5529523
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888177733_lXgcssig5K.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=H6WiHUQY1YXvwRTZIH3MxyLEjh~7CCH-FhcCBDq0VEPd-0dXcSUucvMRCWf6Tr8obZMs3j-Jk0dq3c-TaEOmBxbywOEXu3rc3NOy0A3YoEX5EHikGqwKcK24EWAD1TNgsME-d265QpH43dfsKC8cbG0O-x7jbz7v4i8ORtTNp5Hf2jymoGqXokB6~up8SEnnYbzxA4EQj8e51iJdOm-HGaSo8IKCO7GrXnskOcT8fIu2UF4yZdR8FMzUeRhuuehXBK4l5KSPoyChdWSOrK6BZ4QE4cHxo96yebRA~MuNnB6z3p4rZnf7hQgsXcNil8V5v3QSU-rCH6XMdYqpJ9aRGg__"
+        ],
+        "rating": 4.3,
+        "ratingCount": 590,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:36:17.788Z",
+        "updatedAt": "2025-07-07T11:36:17.788Z"
+    },
+    {
+        "id": "686bb1eac9663b9cadcf347b",
+        "googlePlaceId": "ChIJzyG0XcdRCTERzM9JREopwuw",
+        "name": "EDM9 club",
+        "otherName": [
+            "EDM9 club"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab5f3537aaaf0b40f23a",
+                "key": "club",
+                "name": "俱乐部"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 813.21,
+        "address": "HW2P+774, National Assembly Street, Phnom Penh",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.935493,
+                11.5513272
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888362745_Jj5CRwiubp.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=MB7JhXn4xJcKI03Et909VK~430GhZwpOUYuNZrGApd1vFh6DyRf6XGcx2PgPF8FULzNhMYZBH0OSJA-8I7-z9ONo9zSLUn33xG8kSSV14bFlLHQMm-TKyxgVtbTEV8840p93tUBOzFzJ1tZdjeT7md7iek00R08p7tldr0q2Hai7MKTktqbfyZEm~~f4JBxzK1rE9YYduzF5bEgxfVzl7c~ipwwqjSt1cyy-79X29~PGc93ZgVmWsIf-yub1xadCEl-jb893E4UjTmrYhBZvCV4P1w0p9Dqg~PLpIpqLQ4rLuVqVsRgCHLDIKe~bz0hYIkU~X0PV0JLUM4-Euaa5AA__"
+        ],
+        "rating": 3.9,
+        "ratingCount": 109,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:39:22.838Z",
+        "updatedAt": "2025-07-07T11:39:22.838Z"
+    },
+    {
+        "id": "686bb18bc9663b9cadcf339d",
+        "googlePlaceId": "ChIJpYUn9kdRCTERbgiqEsYzsS8",
+        "name": "H Club",
+        "otherName": [
+            "H Club"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686babe53537aaaf0b40f24f",
+                "key": "live-music",
+                "name": "现场音乐"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 814.62,
+        "address": "12C St 308, Phnom Penh 12103",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9301263,
+                11.5531695
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888267897_PcAN5us4F5.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=OymrHI2Q6t~IS408kSTCSGdAIv44ENYAxyqkjjNzwn59dGB-y09-DgUcSPbhIsZh2NWoVnVwlme29GlDai6u6INXDgA-QHCzSQTeY~-mO9Amz15geQQ~Om4oXfN62BGYuds8yW5fOf1L9XpdUs~SxsnZC~r-N1OMOd-VfAwuwhTJLRghd~d84eLuHtDHjb84mw3TupOQV4p77qRLLgiM~SGQya-Y2GeMclRHeW39-K1ag9W8fIZXFv7NYGZ1qGGkOPOoEGu-qxN6gEMFTf8AWmOb-yU6cBzyTRKnsOnLdRx~nXT2L7MLacWRMRJVH03Q1TdQgOczDrQgkCqUrcefUw__"
+        ],
+        "rating": 4.4,
+        "ratingCount": 137,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:37:47.980Z",
+        "updatedAt": "2025-07-07T11:37:47.980Z"
+    },
+    {
+        "id": "686bb196c9663b9cadcf33b5",
+        "googlePlaceId": "ChIJdSmW29hRCTERl525uS-ZIFU",
+        "name": "CanCan Club Restaurant Dancing Live Music DJs",
+        "otherName": [
+            "CanCan Club Restaurant Dancing Live Music DJs"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab5f3537aaaf0b40f23a",
+                "key": "club",
+                "name": "俱乐部"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 814.78,
+        "address": "14C Street 308, Phnom Penh 12301",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9300925,
+                11.553169
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888277925_td6nqJ2TFI.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=DLJ177Poukjq8aHhsri5NHuEyW2k1uGY0FqInqD3eS8CMQtOrs0V2pjQz5cAtARSc3nzNk3MuVRTkCfmz7BL0RXVHSRbi5CavJB1O6J0i5elYHtRJgbrD98Aai9eVYDPuIW9m1kEEutrLKMvLs8YN~wTdnf78dp34ygKnoblFgOhdWIpHA1OrLJc3saEg9K5qLIo6V8D9Sov8uh9T8HXm4vTPNqDmGC6ozvB46qdoaF8dUYaJXAPiiDw6UHrzLnA18Quid7O4nxAF4UEMShj0Dn9vYyFV51-EoVWkpaqfLgXhXZ9Y5EL~0cfVMKAGeqUBmb3Tp-v2TCovJu0JKXSeg__"
+        ],
+        "rating": 4.4,
+        "ratingCount": 125,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:37:58.003Z",
+        "updatedAt": "2025-07-07T11:37:58.003Z"
+    },
+    {
+        "id": "686bb17cc9663b9cadcf336d",
+        "googlePlaceId": "ChIJ0azcoCVRCTERe7q26NVO5OE",
+        "name": "Champei Spa",
+        "otherName": [
+            "Champei Spa"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab9a3537aaaf0b40f246",
+                "key": "spa",
+                "name": "Spa"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 815.34,
+        "address": "St 57, Phnom Penh",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9254395,
+                11.5512195
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888252433_5NC2pPqi5a.jpg?Expires=1751974662&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=W9ChJuNVnRRDoYiyBkcbyTYjDAR0kKdwlhco5815egDMPlVMaUp1FZp5fMrdeyRex3WMIYXeYDby5q2nwLGUvHRMJ25VIKL9vP58D5oW6EjA9INWTG01IVO9Qd0m85GrSDkuw5vM8SsDPJYoM2tJprBFg~S8RNCLnoOqN1wbqrB5C0qz26AYlfTMzXFsBdlG2bBO72HxwpDjRIsBWdTsYsFh9pQzCTAOvEhGzTqtrBzsE51wChXhcWrodk~yHrnjcDczw9tcLs6C8gJ8o7V0TBSWUqxThY4FMDZk2Vn~QyII~m0MPbgTPkBiI~Gxy0SHvWMMCgX0KZ40Ah4WHgGdmQ__"
+        ],
+        "rating": 4,
+        "ratingCount": 267,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:37:32.514Z",
+        "updatedAt": "2025-07-07T11:37:32.514Z"
+    },
+    {
+        "id": "686bb2d5c9663b9cadcf3655",
+        "googlePlaceId": "ChIJMyhATrtRCTERJlDp1o9Qc1A",
+        "name": "Champei Spa 1",
+        "otherName": [
+            "Champei Spa 1"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab9a3537aaaf0b40f246",
+                "key": "spa",
+                "name": "Spa"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 816.84,
+        "address": "House No, 38 St 57, Phnom Penh 12302",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9254356,
+                11.5512344
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888597134_5T-aIEVpAf.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=T4amj7nuFFVVTCKl51keXuurLp9COQpZJroXPf4ZRU5r~tjFyTxaNCRPOfnP~jK~mtnXEmzolp7AxxBdf3u7N1fneTz7YmqoRdzf8mmU1hLBGR1j7kEJwpmM6L0VWVK4p5WHwdmsiGg0kwZMY-bAbV4tztjno-ptPZ52k0MiZp7W7yNRORjobWhSQApQhB9X59qiRqMtbwX~apJadetbNHd8GhaTOQriUiwWwsKjStpPgY~wH3YM7WMw1xPQANWeayK7~By7WJXfMGi0D~8uYgfYMyHLMAyE6e5b6pHGw8V73fotN6nt6aO5vbu1eL0gT7yKRwM3dYtt2mJwETxIgw__"
+        ],
+        "rating": 4.8,
+        "ratingCount": 12,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:43:17.185Z",
+        "updatedAt": "2025-07-07T11:43:17.185Z"
+    },
+    {
+        "id": "686bb198c9663b9cadcf33bb",
+        "googlePlaceId": "ChIJm8WwGVRRCTEReCPs8AT1ToY",
+        "name": "Kute Gin Bar",
+        "otherName": [
+            "Kute Gin Bar"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab6a3537aaaf0b40f23d",
+                "key": "bar",
+                "name": "酒吧"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 818.45,
+        "address": "bassac lane Phnom Penh邮政编码: 12100",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9305863,
+                11.5532151
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888280282_j2rGOTEK82.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=NMQ4qrMpqw~dCVVjy2f6ApX3nS~~--T4WZHplWGVaYCr-29MMiM60yKR0qXwmum88MmapLU9r8HYSxQGPJpa0HjyBCBk6-2z3Tqix0tVpjt~yVfK36WA1T3o1Ag~koW~HUYu6zUUN~wh9oT4TdEii11nVdtSpDwOwkNpQ2yy8zjCl95ZidJO-A1Vn6yOts-6SOKv8pdwXzK9xs-XhHSz22BVBHa-u2FL5YFTT0a-60BcbO5Xfjgu4E9ohQ2TQd7T7zkw-hl7V2aRu3CT4eVbKnXSRkXfnR9paSlZ8ftnNpfFkGH8gyqG37zE6xVzxlaTPp9ON2b-qxbSkwPQFXC8HA__"
+        ],
+        "rating": 4.9,
+        "ratingCount": 75,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:38:00.358Z",
+        "updatedAt": "2025-07-07T11:38:00.358Z"
+    },
+    {
+        "id": "686bb1478574e05af3b0a1f2",
+        "googlePlaceId": "ChIJa8NqRSVRCTERP1Ep_DlZZek",
+        "name": "Aussie XL Sports Bar & Restaurant",
+        "otherName": [
+            "Aussie XL Sports Bar & Restaurant"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab6a3537aaaf0b40f23d",
+                "key": "bar",
+                "name": "酒吧"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 819.18,
+        "address": "18 St 306, Phnom Penh 12000",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9270561,
+                11.5523826
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888199615_1FK3Cfhn_I.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=OmkZWRAofW4i9vtCX00O7qZdu~fB1tbAByUxRfInF4D1Fei1SPqpZ7UFHPG9z7y9da~D2YD1CCxBAcjmN5Jxb4Q0zCylR7HflNr6~0C0pViZDSlLWyHyMm7~Rm~uDsqMKnnlZ9hWZcFuLh51unG6zZQsfxO-eUjao2BQWRsc3pwkGUjZeZndC3tyscIdLoBQnMTiOYMkqYw8JOirnbIErLsFAlCVFE9O6r~o0JLNsVULrnHoNaUAO1IJwkPRel9KCXFYbhh6lpNfyw-gD0j40wAhgcWcp3s6f8yFh8zJeoYqEE9-t4EXu0hxqE7QzuhKmUIzB1uCGFyS5IQ1xSNcTw__"
+        ],
+        "rating": 4.3,
+        "ratingCount": 336,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:36:39.691Z",
+        "updatedAt": "2025-07-07T11:36:39.691Z"
+    },
+    {
+        "id": "686bb1578574e05af3b0a213",
+        "googlePlaceId": "ChIJ3VnQszZRCTER3Wc7W4e2DCw",
+        "name": "Hub Street Cocktails",
+        "otherName": [
+            "Hub Street Cocktails"
+        ],
+        "description": "地点暂时没有描述信息",
+        "tags": [
+            {
+                "id": "686bab8a3537aaaf0b40f243",
+                "key": "billiards",
+                "name": "台球"
+            }
+        ],
+        "country": "KH",
+        "city": "Phnom Penh",
+        "distance": 820.63,
+        "address": "20 Street 21, Phnom Penh",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                104.9305944,
+                11.5532346
+            ]
+        },
+        "photos": [
+            "https://d1rzp152lm97vw.cloudfront.net/uploads/place-photo/1751888215033_lD3rfsg4I5.jpg?Expires=1751975261&Key-Pair-Id=K1LXH9PNOGBKTM&Signature=KHxBppBpWRauocHjZwLcv6S41zBzUZxsRgExLn2gUC54e~E6fLfxE23yh4gHkDXcwnLY-CUd5UOeiJbpwbz-S1ubeQcpPMjP0iUZ~XwarDcvU62XYZfDvTQGD1jHwcV8XhzbCtoZPeokmqrW1okQrRkrd3Vj20gQcTYs-ZSUoBAYhrLEoGbQQmk0B-UMlHEpFI~EkeZGw4ySqL0nNp~sDQpn4J~adlSo~3qCwHSsmfcikhbtuAU1nQ0RJUgHF9DFGxygBY2UZfSAtlnllGPMSaCgOPKU3uL~Y3-OiuwnXup8-MLcTz460XMDNgKNDHjEh99JzvvO6y67VDeaJL9N2w__"
+        ],
+        "rating": 4.4,
+        "ratingCount": 241,
+        "viewCount": 0,
+        "favoriteCount": 0,
+        "createdAt": "2025-07-07T11:36:55.139Z",
+        "updatedAt": "2025-07-07T11:36:55.139Z"
+    }
+]
