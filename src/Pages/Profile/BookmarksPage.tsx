@@ -164,8 +164,8 @@ export default function BookmarksPage() {
             )
           )}
           {activeTab === 'notifications' && (
-            <div className="flex flex-col items-center justify-center flex-1 pt-12">
-              <img src={NoNoti} alt="No Notifications" className="w-[120px] h-[102px] mb-6" />
+            <div className="flex flex-col items-center justify-center flex-1 pt-4">
+              <img src={NoNoti} alt="No Notifications" className="w-[120px] h-[102px] mb-4 mt-4" />
               <div className="flex flex-col items-center mb-2">
                 <span className="text-theme-primary text-lg font-semibold text-center">You’ve caught up with everything</span>
                 <span className="text-theme-secondary text-base font-normal text-center mt-1">No notification at this time</span>
