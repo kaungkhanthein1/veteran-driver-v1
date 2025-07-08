@@ -11,6 +11,7 @@ import {
   useGetUploadUrlMutation,
   useConfirmUploadMutation,
 } from "../../Pages/services/ProfileApi";
+import GenderSelectionModal from '../../components/common/GenderSelectionModal';
 
 const FieldRow: React.FC<{
   label: string;
@@ -55,6 +56,12 @@ const EditProfileContent: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [genderModalOpen, setGenderModalOpen] = useState(false);
+  const [genderLoading, setGenderLoading] = useState(false);
+  const [locationModalOpen, setLocationModalOpen] = useState(false);
+  const [locationLoading, setLocationLoading] = useState(false);
+  const [countries, setCountries] = useState<string[]>([]);
+  const [cities, setCities] = useState<string[]>([]);
 
   const [getUploadUrl] = useGetUploadUrlMutation();
   const [confirmUpload] = useConfirmUploadMutation();
@@ -73,6 +80,13 @@ const EditProfileContent: React.FC = () => {
       });
   }, [setProfileData, setOriginalData]);
 
+  // Fetch country and city lists (mocked for now)
+  useEffect(() => {
+    // Replace with real API calls
+    setCountries(['Thailand', 'Cambodia']);
+    setCities(['Phnom Penh', 'Krong']);
+  }, []);
+
   const handleSave = async () => {
     setSaving(true);
     setError(null);
@@ -88,7 +102,40 @@ const EditProfileContent: React.FC = () => {
     }
   };
 
-  // ... (keep your existing useEffect and handleSave)
+  const handleGenderApply = async (newGender: string) => {
+    setGenderLoading(true);
+    // Capitalize first letter for API
+    const genderMap: Record<string, string> = {
+      male: 'Male',
+      female: 'Female',
+      other: 'Other',
+      Male: 'Male',
+      Female: 'Female',
+      Other: 'Other',
+    };
+    const payloadGender = genderMap[newGender] || newGender;
+    try {
+      await updateProfile({ gender: payloadGender });
+      updateField('gender', payloadGender);
+    } catch {
+      // Optionally show error
+    } finally {
+      setGenderLoading(false);
+    }
+  };
+
+  const handleLocationApply = async (country: string, city: string) => {
+    setLocationLoading(true);
+    try {
+      await updateProfile({ country, city });
+      updateField('country', country);
+      updateField('city', city);
+    } catch {
+      // Optionally show error
+    } finally {
+      setLocationLoading(false);
+    }
+  };
 
   const handleAvatarUpload = async (file: File) => {
     try {
@@ -164,7 +211,7 @@ const EditProfileContent: React.FC = () => {
       // 5. Update profile with new avatar URL
       updateField("avatar", accessUrl);
       setSuccess("Avatar updated successfully!");
-    } catch (err) {
+    } catch (err: any) {
       setError(err.message || "Failed to upload avatar");
       console.error("Upload error:", err);
     } finally {
@@ -209,7 +256,9 @@ const EditProfileContent: React.FC = () => {
       {/* Header with Back Button and Title */}
       <div className="relative w-full max-w-[480px] flex items-center justify-center py-4 bg-transparent">
         <div className="absolute left-0 top-1/2 -translate-y-1/2 pl-2">
-          <BackButton />
+          <div onClick={() => navigate('/profile', { replace: true })} className="cursor-pointer">
+            <BackButton />
+          </div>
         </div>
         <h1 className="text-xl font-semibold text-center w-full">
           Edit Profile
@@ -326,7 +375,7 @@ const EditProfileContent: React.FC = () => {
             value={profileData.gender}
             clickable={true}
             showArrow={true}
-            onClick={() => navigate("gender")}
+            onClick={() => setGenderModalOpen(true)}
           />
           <FieldRow
             label="Location"
@@ -359,6 +408,21 @@ const EditProfileContent: React.FC = () => {
           <div className="text-green-600 text-center py-2 mt-2">{success}</div>
         )}
       </div>
+
+      {/* Gender Selection Modal */}
+      <GenderSelectionModal
+        isOpen={genderModalOpen}
+        onClose={() => setGenderModalOpen(false)}
+        onApply={handleGenderApply}
+        currentGender={profileData.gender}
+      />
+      {genderLoading && (
+        <div className="fixed inset-0 bg-black bg-opacity-20 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg px-6 py-4 shadow text-theme-text">Saving gender...</div>
+        </div>
+      )}
+
+      {/* Location Select Modal */}
     </div>
   );
 };
