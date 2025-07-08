@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   useGetCountriesQuery,
   useGetLanguagesQuery,
+  useGetTabsQuery,
 } from "../services/CountryApi";
 import CountryLanguageModal from "../../components/CitySelectModal";
 import { useMeQuery } from "../../Pages/services/ProfileApi";
@@ -14,6 +15,9 @@ import { useMeQuery } from "../../Pages/services/ProfileApi";
 export default function HomePage() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [showCountryLangModal, setShowCountryLangModal] = useState(false);
+
+  const tabs = useGetTabsQuery("")
+  console.log("tabs",tabs)
 
   // Fetch countries and languages using RTK Query
   const {
