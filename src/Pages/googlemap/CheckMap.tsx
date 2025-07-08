@@ -78,63 +78,63 @@ const CheckMap = () => {
     <div className="dvh-fallback flex justify-center bg-theme-primary">
       <div className="w-full max-w-[480px] flex flex-col relative">
         <div className="flex-1">
-          <LoadScript googleMapsApiKey="AIzaSyA4mTDHRw_8u_fRaYe2ZPCHSxpDxhZpIuc">
-            <GoogleMap
-              mapContainerStyle={{ width: "100%", height: "100vh" }}
-              center={selectedLocation}
-              zoom={15}
-              options={{
-                zoomControl: false,
-                streetViewControl: false,
-                mapTypeControl: false,
-                fullscreenControl: false,
-                clickableIcons: false,
+          {/* <LoadScript googleMapsApiKey="AIzaSyA4mTDHRw_8u_fRaYe2ZPCHSxpDxhZpIuc"> */}
+          <GoogleMap
+            mapContainerStyle={{ width: "100%", height: "100vh" }}
+            center={selectedLocation}
+            zoom={15}
+            options={{
+              zoomControl: false,
+              streetViewControl: false,
+              mapTypeControl: false,
+              fullscreenControl: false,
+              clickableIcons: false,
+            }}
+            onLoad={onLoad}
+            onUnmount={onUnmount}
+          >
+            {/* Destination Marker */}
+            <Marker
+              position={selectedLocation}
+              icon={{
+                url: "https://picsum.photos/seed/0/400/300",
+                scaledSize: new google.maps.Size(50, 50),
+                anchor: new google.maps.Point(25, 50),
               }}
-              onLoad={onLoad}
-              onUnmount={onUnmount}
-            >
-              {/* Destination Marker */}
+            />
+
+            {/* User Location Marker */}
+            {userLocation && (
               <Marker
-                position={selectedLocation}
+                position={userLocation}
                 icon={{
-                  url: "https://picsum.photos/seed/0/400/300",
-                  scaledSize: new google.maps.Size(50, 50),
-                  anchor: new google.maps.Point(25, 50),
+                  url: Lot,
+                  scaledSize: new google.maps.Size(35, 35),
+                  anchor: new google.maps.Point(17, 35),
                 }}
               />
+            )}
 
-              {/* User Location Marker */}
-              {userLocation && (
-                <Marker
-                  position={userLocation}
-                  icon={{
-                    url: Lot,
-                    scaledSize: new google.maps.Size(35, 35),
-                    anchor: new google.maps.Point(17, 35),
-                  }}
-                />
-              )}
-
-              {/* Route Line */}
-              {routePath.length > 0 && (
-                <Polyline
-                  path={routePath}
-                  options={{
-                    strokeColor: "#FF5733",
-                    strokeOpacity: 0.8,
-                    strokeWeight: 5,
-                    fillColor: "#FF5733",
-                    fillOpacity: 0.35,
-                    clickable: false,
-                    draggable: false,
-                    editable: false,
-                    visible: true,
-                    zIndex: 1,
-                  }}
-                />
-              )}
-            </GoogleMap>
-          </LoadScript>
+            {/* Route Line */}
+            {routePath.length > 0 && (
+              <Polyline
+                path={routePath}
+                options={{
+                  strokeColor: "#FF5733",
+                  strokeOpacity: 0.8,
+                  strokeWeight: 5,
+                  fillColor: "#FF5733",
+                  fillOpacity: 0.35,
+                  clickable: false,
+                  draggable: false,
+                  editable: false,
+                  visible: true,
+                  zIndex: 1,
+                }}
+              />
+            )}
+          </GoogleMap>
+          {/* </LoadScript> */}
 
           {/* Top Header Bar */}
           <div className="fixed w-full top-0 bg-white left-0 text-white rounded-full">

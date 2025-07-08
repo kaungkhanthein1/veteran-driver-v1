@@ -4,18 +4,18 @@
 import { gatewayUrl, signatureSecret, aesKeyHex } from "../config/env";
 
 export const gatewayConfig = {
-  timestampHeader: 'x-timestamp',
-  nonceHeader: 'x-nonce',
-  signatureHeader: 'x-signature',
-  optionalHeaders: ['x-device-id'],
+  timestampHeader: "x-timestamp",
+  nonceHeader: "x-nonce",
+  signatureHeader: "x-signature",
+  optionalHeaders: ["x-device-id"],
   requireHeaders: [],
 };
 
 // === utils ===
 export function generateNonce(length = 16) {
   const chars =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let result = '';
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let result = "";
   const array = new Uint8Array(length);
   window.crypto.getRandomValues(array);
   for (let i = 0; i < length; i++) {
@@ -25,9 +25,7 @@ export function generateNonce(length = 16) {
 }
 
 export function hex2buf(hex: string): Uint8Array {
-  return new Uint8Array(
-    hex.match(/../g)!.map((x) => parseInt(x, 16))
-  );
+  return new Uint8Array(hex.match(/../g)!.map((x) => parseInt(x, 16)));
 }
 
 export function b64tobuf(b64: string): Uint8Array {
@@ -64,7 +62,7 @@ export function buildSignature({
   const sortedQuery = Object.entries(query)
     .map(([k, v]) => `${k}=${v}`)
     .sort()
-    .join('&');
+    .join("&");
   parts.push(sortedQuery);
 
   if (body) {
@@ -72,7 +70,7 @@ export function buildSignature({
   }
 
   for (const key of gatewayConfig.requireHeaders) {
-    parts.push(headers[key] || '');
+    parts.push(headers[key] || "");
   }
 
   const optionalParts = gatewayConfig.optionalHeaders
@@ -81,16 +79,16 @@ export function buildSignature({
     .sort();
   parts.push(...optionalParts);
 
-  parts.push(headers[gatewayConfig.timestampHeader] || '');
-  parts.push(headers[gatewayConfig.nonceHeader] || '');
+  parts.push(headers[gatewayConfig.timestampHeader] || "");
+  parts.push(headers[gatewayConfig.nonceHeader] || "");
   parts.push(signatureSecret);
 
-  return parts.join('|');
+  return parts.join("|");
 }
 
 // === Web Crypto API MD5 polyfill (browser doesn't support MD5 natively) ===
 // Use a JS implementation for MD5 (e.g., spark-md5)
-import SparkMD5 from 'spark-md5';
+import SparkMD5 from "spark-md5";
 
 export function md5(str: string): string {
   return SparkMD5.hash(str);
@@ -99,10 +97,10 @@ export function md5(str: string): string {
 // === send request + decrypt response ===
 export async function sendSignedAndDecrypt({
   url = gatewayUrl,
-  method = 'GET',
+  method = "GET",
   query = {},
   bodyObject = null,
-  additionalHeaders = { 'x-device-id': 'demo-device-001' },
+  additionalHeaders = { "x-device-id": "demo-device-001" },
 }: {
   url?: string;
   method?: string;
@@ -120,13 +118,13 @@ export async function sendSignedAndDecrypt({
   const nonce = generateNonce();
 
   const headers: Record<string, string> = {
-    Accept: '*/*',
+    Accept: "*/*",
     ...additionalHeaders,
     [gatewayConfig.timestampHeader]: timestamp,
     [gatewayConfig.nonceHeader]: nonce,
   };
 
-  const body = bodyObject ? JSON.stringify(bodyObject) : '';
+  const body = bodyObject ? JSON.stringify(bodyObject) : "";
 
   const signatureStr = buildSignature({
     method,
@@ -140,16 +138,16 @@ export async function sendSignedAndDecrypt({
   const signature = md5(signatureStr);
 
   headers[gatewayConfig.signatureHeader] = signature;
-  if (body) headers['Content-Type'] = 'application/json';
+  if (body) headers["Content-Type"] = "application/json";
 
   // LOGGING: Show all request details
-  console.log('[sendSignedAndDecrypt] URL:', urlObj.toString());
-  console.log('[sendSignedAndDecrypt] Method:', method);
-  console.log('[sendSignedAndDecrypt] Query:', query);
-  console.log('[sendSignedAndDecrypt] Body:', body);
-  console.log('[sendSignedAndDecrypt] Headers:', headers);
-  console.log('[sendSignedAndDecrypt] Signature String:', signatureStr);
-  console.log('[sendSignedAndDecrypt] Signature (MD5):', signature);
+  console.log("[sendSignedAndDecrypt] URL:", urlObj.toString());
+  console.log("[sendSignedAndDecrypt] Method:", method);
+  console.log("[sendSignedAndDecrypt] Query:", query);
+  console.log("[sendSignedAndDecrypt] Body:", body);
+  console.log("[sendSignedAndDecrypt] Headers:", headers);
+  console.log("[sendSignedAndDecrypt] Signature String:", signatureStr);
+  console.log("[sendSignedAndDecrypt] Signature (MD5):", signature);
 
   const fetchOptions: RequestInit = {
     method,
@@ -161,21 +159,24 @@ export async function sendSignedAndDecrypt({
   try {
     res = await fetch(urlObj.toString(), fetchOptions);
   } catch (err) {
-    console.error('[sendSignedAndDecrypt] Fetch error:', err);
+    console.error("[sendSignedAndDecrypt] Fetch error:", err);
     throw err;
   }
 
   // LOGGING: Show response status and headers
-  console.log('[sendSignedAndDecrypt] Response status:', res.status);
-  console.log('[sendSignedAndDecrypt] Response headers:', Array.from(res.headers.entries()));
+  console.log("[sendSignedAndDecrypt] Response status:", res.status);
+  console.log(
+    "[sendSignedAndDecrypt] Response headers:",
+    Array.from(res.headers.entries())
+  );
 
-  const encHdr = res.headers.get('x-resp-encrypt');
-  const ivHex = res.headers.get('x-resp-iv');
+  const encHdr = res.headers.get("x-resp-encrypt");
+  const ivHex = res.headers.get("x-resp-iv");
 
   if (!encHdr || !ivHex) {
     // Plain response
     const text = await res.text();
-    console.log('[sendSignedAndDecrypt] Plain response:', text);
+    console.log("[sendSignedAndDecrypt] Plain response:", text);
     try {
       return JSON.parse(text);
     } catch {
@@ -183,13 +184,13 @@ export async function sendSignedAndDecrypt({
     }
   }
 
-  const fmt = encHdr.split('-').pop();
+  const fmt = encHdr.split("-").pop();
   const iv = hex2buf(ivHex);
 
   let rawBuf: Uint8Array;
-  if (fmt === 'raw') {
+  if (fmt === "raw") {
     rawBuf = new Uint8Array(await res.arrayBuffer());
-  } else if (fmt === 'b64') {
+  } else if (fmt === "b64") {
     rawBuf = b64tobuf(await res.text());
   } else {
     rawBuf = hex2buf(await res.text());
@@ -204,29 +205,29 @@ export async function sendSignedAndDecrypt({
   encWithTag.set(tag, enc.length);
 
   const cryptoKey = await window.crypto.subtle.importKey(
-    'raw',
+    "raw",
     hex2buf(aesKeyHex),
-    'AES-GCM',
+    "AES-GCM",
     false,
-    ['decrypt']
+    ["decrypt"]
   );
 
   try {
     const decryptedBuf = await window.crypto.subtle.decrypt(
-      { name: 'AES-GCM', iv, tagLength: 128 },
+      { name: "AES-GCM", iv, tagLength: 128 },
       cryptoKey,
       encWithTag
     );
     const plaintext = atou8(new Uint8Array(decryptedBuf));
-    console.log('[sendSignedAndDecrypt] Decrypted plaintext:', plaintext);
+    console.log("[sendSignedAndDecrypt] Decrypted plaintext:", plaintext);
     try {
       return JSON.parse(plaintext);
     } catch {
       return plaintext;
     }
   } catch (e: any) {
-    console.error('[sendSignedAndDecrypt] Decryption failed:', e.message || e);
-    throw new Error('Decryption failed: ' + (e.message || e));
+    console.error("[sendSignedAndDecrypt] Decryption failed:", e.message || e);
+    throw new Error("Decryption failed: " + (e.message || e));
   }
 }
 
@@ -251,4 +252,4 @@ export async function sendSignedAndDecrypt({
 //     authorization:
 //       'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3MzQ0MzMyNzM0NDM0NjQzOTY4IiwibG9naW5NZXRob2QiOiJlbWFpbCIsImlzQmFubmVkIjpmYWxzZSwiaWF0IjoxNzUxNzEyMDU0LCJleHAiOjE3NTE3MTU2NTR9.Par0hRD4_4Ms47jWLL0klilB-FFQ3KomykouVC4iV4w',
 //   },
-// }).then(console.log); 
+// }).then(console.log);

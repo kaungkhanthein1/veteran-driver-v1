@@ -89,34 +89,34 @@ const AddMap = () => {
     <div className="dvh-fallback flex justify-center bg-theme-primary">
       <div className="w-full max-w-[480px] flex flex-col relative">
         <div className="flex-1">
-          <LoadScript googleMapsApiKey="AIzaSyA4mTDHRw_8u_fRaYe2ZPCHSxpDxhZpIuc">
-            <GoogleMap
-              mapContainerStyle={{ width: "100%", height: "100vh" }}
-              center={selectedLocation}
-              zoom={15}
-              options={{
-                zoomControl: false,
-                streetViewControl: false,
-                mapTypeControl: false,
-                fullscreenControl: false,
-                clickableIcons: false,
-              }}
-              onClick={handleMapClick}
-              onLoad={onLoad}
-              onUnmount={onUnmount}
-            >
-              {clickedLocation && (
-                <Marker
-                  position={clickedLocation}
-                  //   icon={{
-                  //     url: Pin,
-                  //     scaledSize: new google.maps.Size(50, 50),
-                  //     anchor: new google.maps.Point(25, 50),
-                  //   }}
-                />
-              )}
-            </GoogleMap>
-          </LoadScript>
+          {/* <LoadScript googleMapsApiKey="AIzaSyA4mTDHRw_8u_fRaYe2ZPCHSxpDxhZpIuc"> */}
+          <GoogleMap
+            mapContainerStyle={{ width: "100%", height: "100vh" }}
+            center={selectedLocation}
+            zoom={15}
+            options={{
+              zoomControl: false,
+              streetViewControl: false,
+              mapTypeControl: false,
+              fullscreenControl: false,
+              clickableIcons: false,
+            }}
+            onClick={handleMapClick}
+            onLoad={onLoad}
+            onUnmount={onUnmount}
+          >
+            {clickedLocation && (
+              <Marker
+                position={clickedLocation}
+                //   icon={{
+                //     url: Pin,
+                //     scaledSize: new google.maps.Size(50, 50),
+                //     anchor: new google.maps.Point(25, 50),
+                //   }}
+              />
+            )}
+          </GoogleMap>
+          {/* </LoadScript> */}
 
           {/* Top Header Bar */}
           <div className="fixed w-full top-6 left-0 text-white rounded-full">

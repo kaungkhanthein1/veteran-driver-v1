@@ -1,6 +1,7 @@
 .place-name {
   color: #000;
-  font-family: "Arbeit Pro Trial";
+  /* font-family: "Arbeit Pro Trial"; */
+  font-family: "Helvetica Neue";
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
@@ -9,7 +10,8 @@
 
 .distance {
   color: var(--Neutral-Color-N50, #555);
-  font-family: "Arbeit Pro Trial";
+  /* font-family: "Arbeit Pro Trial"; */
+  font-family: "Helvetica Neue";
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -22,7 +24,8 @@
   text-edge: cap;
   font-variant-numeric: lining-nums proportional-nums;
   font-feature-settings: "dlig" on;
-  font-family: "Arbeit Pro Trial";
+  /* font-family: "Arbeit Pro Trial"; */
+  font-family: "Helvetica Neue";
   font-size: 12.9px;
   font-style: normal;
   font-weight: 400;
@@ -31,7 +34,8 @@
 
 .view-count {
   color: var(--Neutral-Color-N50, #555);
-  font-family: "Arbeit Pro Trial";
+  /* font-family: "Arbeit Pro Trial"; */
+  font-family: "Helvetica Neue";
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -51,9 +55,9 @@
   gap: 4px;
   color: #000;
   text-align: center;
-
+  font-family: "Helvetica Neue";
   /* Typeface/Font_xs/Font_xs_medium */
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -65,6 +69,7 @@
   font-variant-numeric: lining-nums proportional-nums;
   font-feature-settings: "dlig" on;
   font-family: "Arbeit Pro Trial";
+  font-family: "Helvetica Neue";
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -74,6 +79,7 @@
 .loc-des {
   color: var(--Neutral-Color-N50, #555);
   font-family: "Arbeit Pro Trial";
+  font-family: "Helvetica Neue";
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -101,4 +107,97 @@
   gap: 10px;
   flex-shrink: 0;
   align-self: stretch;
+}
+
+.open_text {
+  color: #444;
+
+  /* Typeface/Font_lg/Font_lg_medium */
+  font-family: "Helvetica Neue";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 30px; /* 150% */
+}
+
+.always-btn {
+  border-radius: 58px;
+  background: var(
+    --Gradient-Yellow-Gradient,
+    linear-gradient(180deg, #ffc61b 0%, #ff9500 100%)
+  );
+
+  /* Button Inner Shadow */
+  box-shadow: 0px 0px 8px 0px rgba(255, 255, 255, 0.8) inset;
+  border-radius: 58px;
+  background: var(
+    --Gradient-Yellow-Gradient,
+    linear-gradient(180deg, #ffc61b 0%, #ff9500 100%)
+  );
+
+  /* Button Inner Shadow */
+  box-shadow: 0px 0px 8px 0px rgba(255, 255, 255, 0.8) inset;
+  color: #fff;
+
+  /* Typeface/Font_sm/Font_sm_medium */
+  font-family: "Helvetica Neue";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+  width: 100%;
+  height: 44px;
+}
+
+.once-btn {
+  width: 100%;
+  display: flex;
+  height: 44px;
+  padding: 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: 58px;
+  background: var(--Neutral-Color-N20, #ececec);
+  color: #444;
+
+  /* Typeface/Font_sm/Font_sm_medium */
+  font-family: "Helvetica Neue";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+}
+
+.g_name {
+  color: #444;
+  text-align: center;
+  font-family: "Helvetica Neue";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 114.286% */
+}
+
+.image-container_exp {
+  position: relative;
+  border-radius: none !important;
+  background-color: red;
+  /* background-image: url("../search/images/cardSkeleton.png"); */
+  /* background-size: cover;
+    background-position: center; */
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+  /* border-radius: 8.934px; */
+}
+
+.image-placeholder {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.image-loaded {
+  opacity: 1;
 }
