@@ -9,8 +9,6 @@ import SettingIcon from "icons/ProfileUpdate/Setting.svg";
 import LanguageIcon from "icons/ProfileUpdate/Language.svg";
 import ThemeIcon from "icons/ProfileUpdate/Theme.svg";
 import ShareIcon from "icons/ProfileUpdate/Share.svg";
-import QrIcon from "icons/ProfileUpdate/Qr.svg";
-import FeedBackIcon from "icons/ProfileUpdate/FeedBack.svg";
 import VersionIcon from "icons/Version.svg";
 import ShareModal from '../common/ShareModal';
 import { useState } from 'react';
@@ -21,6 +19,7 @@ import LanguageModal from '../common/LanguageModal';
 
 // Import the gradient image (place it in src/assets/gradient-bg.png for example)
 import { useMeQuery } from "../../Pages/services/ProfileApi";
+import { ProfileResponseDto } from "../../dto";
 
 const ProfileCard: React.FC = () => {
   const location = useLocation();
@@ -30,7 +29,7 @@ const ProfileCard: React.FC = () => {
   const { data } = useMeQuery();
   console.log("User Data:", data);
 
-  const user = data?.data || {};
+  const user = data?.data as ProfileResponseDto || {};
   const [isShareModalOpen, setShareModalOpen] = useState(false);
   const [isLanguageModalOpen, setLanguageModalOpen] = useState(false);
 
@@ -59,13 +58,14 @@ const ProfileCard: React.FC = () => {
         <div className="flex flex-col items-center px-4">
           <div className="flex items-center gap-4 w-full">
             <div className="relative">
-              {user?.avatar ? (
+              {user?.avatar && (
                 <img
-                  src={user.avatar}
+                  src={user.avatar || ''}
                   alt="Avatar"
                   className="w-20 h-20 rounded-full border-4 border-white object-cover"
                 />
-              ) : (
+              )}
+              {!user?.avatar && (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="100"

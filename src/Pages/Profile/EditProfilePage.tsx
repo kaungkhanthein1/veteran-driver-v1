@@ -8,9 +8,9 @@ import DefaultAvatorWhite from "../../icons/DefaultAvatorWhite.svg";
 import EditProfileIcon from "../../icons/ProfileUpdate/EditProfile.svg";
 import NextIcon from "../../icons/Next.svg";
 import {
-  useGetUploadUrlMutation,
+  useGetUploadUrlQuery,
   useConfirmUploadMutation,
-} from "../../Pages/services/ProfileApi";
+} from "../../Pages/services/MediaApi";
 import GenderSelectionModal from '../../components/common/GenderSelectionModal';
 
 const FieldRow: React.FC<{
@@ -63,7 +63,6 @@ const EditProfileContent: React.FC = () => {
   const [countries, setCountries] = useState<string[]>([]);
   const [cities, setCities] = useState<string[]>([]);
 
-  const [getUploadUrl] = useGetUploadUrlMutation();
   const [confirmUpload] = useConfirmUploadMutation();
   const [uploadProgress, setUploadProgress] = useState(0);
 
@@ -144,17 +143,25 @@ const EditProfileContent: React.FC = () => {
       setUploadProgress(0);
 
       // 1. Get upload URL
-      const uploadResponse = await getUploadUrl({
-        type: "avatar",
-        usage: "profile",
-        mimeType: file.type,
-      }).unwrap();
+      const uploadResponse = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/media/upload-url?type=avatar&usage=profile&mimeType=${encodeURIComponent(file.type)}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      
+      if (!uploadResponse.ok) {
+        throw new Error("Failed to get upload URL");
+      }
+      
+      const uploadResponseData = await uploadResponse.json();
 
-      if (!uploadResponse.data) {
+      if (!uploadResponseData.data) {
         throw new Error("Failed to get upload URL");
       }
 
-      const { key, uploadUrl, accessUrl } = uploadResponse.data;
+      const { key, uploadUrl, accessUrl } = uploadResponseData.data;
 
       // 2. Upload to S3
       const xhr = new XMLHttpRequest();
@@ -202,8 +209,8 @@ const EditProfileContent: React.FC = () => {
         key,
         size: file.size,
         meta: {
-          width: dimensions.width,
-          height: dimensions.height,
+          width: dimensions.width.toString(),
+          height: dimensions.height.toString(),
           source: "upload",
         },
       }).unwrap();

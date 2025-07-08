@@ -5,9 +5,10 @@ import { setCountry, setLanguage } from "../app/countrySlice";
 import { motion, AnimatePresence } from "framer-motion";
 import "../Pages/map/map.css";
 import {
-  useGetCountriesQuery,
-  useGetLanguagesQuery,
-} from "../Pages/services/CountryApi";
+  useGetSupportedCountriesQuery,
+  useGetSupportedLanguagesQuery,
+} from "../Pages/services/GeoApi";
+import { SupportedCountriesResponseDto } from "../dto";
 
 interface CountryLanguageModalProps {
   open: boolean;
@@ -35,8 +36,8 @@ interface RootState {
 }
 
 const CountryLanguageModal = ({ open, onClose }: CountryLanguageModalProps) => {
-  const { data: countries = [] } = useGetCountriesQuery();
-  const { data: languages = [] } = useGetLanguagesQuery();
+  const { data: countries = [] } = useGetSupportedCountriesQuery();
+  const { data: languages = [] } = useGetSupportedLanguagesQuery();
   const dispatch = useDispatch();
 
   const globalSelectedCountry = useSelector(
@@ -60,15 +61,17 @@ const CountryLanguageModal = ({ open, onClose }: CountryLanguageModalProps) => {
     if (open) {
       // If no global selectedCountry, default to first country from API
       if (!globalSelectedCountry && countries.length > 0) {
-        setSelectedCountry(countries[0]);
-        dispatch(setCountry(countries[0]));
+        const country = countries[0] as unknown as Country;
+        setSelectedCountry(country);
+        dispatch(setCountry(country));
       } else {
         setSelectedCountry(globalSelectedCountry);
       }
       // If no global selectedLanguage, default to first language from API
       if (!globalSelectedLanguage && languages.length > 0) {
-        setSelectedLanguage(languages[0]);
-        dispatch(setLanguage(languages[0]));
+        const language = languages[0] as unknown as Language;
+        setSelectedLanguage(language);
+        dispatch(setLanguage(language));
       } else {
         setSelectedLanguage(globalSelectedLanguage);
       }
@@ -109,8 +112,8 @@ const CountryLanguageModal = ({ open, onClose }: CountryLanguageModalProps) => {
           y2="22"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFC61B" />
-          <stop offset="1" stop-color="#FF9500" />
+          <stop stopColor="#FFC61B" />
+          <stop offset="1" stopColor="#FF9500" />
         </linearGradient>
       </defs>
     </svg>
@@ -127,7 +130,7 @@ const CountryLanguageModal = ({ open, onClose }: CountryLanguageModalProps) => {
       <path
         d="M22 11C22 17.0751 17.0751 22 11 22C4.92487 22 0 17.0751 0 11C0 4.92487 4.92487 0 11 0C17.0751 0 22 4.92487 22 11ZM2.21792 11C2.21792 15.8502 6.14979 19.7821 11 19.7821C15.8502 19.7821 19.7821 15.8502 19.7821 11C19.7821 6.14979 15.8502 2.21792 11 2.21792C6.14979 2.21792 2.21792 6.14979 2.21792 11Z"
         fill="black"
-        fill-opacity="0.12"
+        fillOpacity="0.12"
       />
     </svg>
   );
@@ -181,10 +184,10 @@ const CountryLanguageModal = ({ open, onClose }: CountryLanguageModalProps) => {
             </div>
             {tab === "country" && (
               <div className="grid grid-cols-3 gap-[20px] my-[40px]">
-                {countries?.map((c: Country) => (
+                {countries?.map((c: SupportedCountriesResponseDto) => (
                   <div
-                    key={c.id}
-                    onClick={() => setSelectedCountry(c)}
+                    key={c.code}
+                    onClick={() => setSelectedCountry(c as unknown as Country)}
                     className={`${
                       selectedCountry?.code === c.code
                         ? "country_card_flag_active"
@@ -192,15 +195,15 @@ const CountryLanguageModal = ({ open, onClose }: CountryLanguageModalProps) => {
                     } flex flex-col items-center justify-center p-[10px] gap-[8px]`}
                   >
                     <img
-                      src={c.flag}
+                      src={c.flag || ''}
                       alt={c.code}
                       style={{ width: 40, height: 30 }}
                     />
                     <div
                       className="text-[14px] text-black font-[400] truncate w-full text-center"
-                      title={c.translations?.[0]?.name || c.code}
+                      title={c.name || c.code}
                     >
-                      {c.translations?.[0]?.name || c.code}
+                      {c.name || c.code}
                     </div>
                   </div>
                 ))}

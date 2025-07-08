@@ -8,7 +8,7 @@ import HarrierRoom from "assets/HarrierRoom.png";
 import { useTranslation } from 'react-i18next';
 import RankingHeader from "assets/RankingHeader.png";
 import RegionSelectModal from '../components/RegionSelectModal';
-import CitySelectModal from '../components/CitySelectModal';
+import CitySelectModal from '../components/CountryLangSelectModal';
 import TuneIcon from '../icons/Tune.svg';
 import FilterPanel from '../Pages/map/FilterPanel';
 

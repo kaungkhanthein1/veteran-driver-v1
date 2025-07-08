@@ -11,7 +11,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 import { authService } from "../services/authService";
 import { useAuth } from "../context/AuthContext";
 import axios from "axios"; // Added axios import
-import { useLoginMutation } from "./services/AuthApi";
+import { usePasswordLoginMutation } from "./services/AuthApi";
 
 type LoginPageProps = {
   onShowRegister?: () => void;
@@ -32,7 +32,7 @@ export default function LoginPage({ onShowRegister, onClose }: LoginPageProps) {
   const recaptchaRef = useRef<ReCaptchaRef>(null);
   const { t } = useTranslation();
   const { login } = useAuth();
-  const [triggerLogin] = useLoginMutation(); // Assuming you have a login mutation in your authService
+  const [triggerLogin] = usePasswordLoginMutation();
 
   const handleGoogleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
@@ -104,17 +104,15 @@ export default function LoginPage({ onShowRegister, onClose }: LoginPageProps) {
 
     try {
       const response = await triggerLogin({
-        data: {
-          account: emailOrPhone,
-          password,
-        },
+        account: emailOrPhone,
+        password,
       }).unwrap();
       console.log("Login response:", response);
       // localStorage.removeItem("token");
       // localStorage.setItem("token", response?.data.token.accessToken);
       navigate("/");
       alert("Login successful!");
-    } catch (error) {
+    } catch (error: any) {
       alert(error?.data?.message || "Login failed. Please try again.");
       console.error("Login failed:", error);
     } finally {

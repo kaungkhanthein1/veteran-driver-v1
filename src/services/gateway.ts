@@ -30,11 +30,10 @@ const GATEWAY_CONFIG = {
 const SUPPORTED_LANGS = ["zh", "zh-hant", "en", "ja", "ko"];
 
 // Helper to get current language, fallback to 'en' if not supported
-function getCurrentLang() {
+function getCurrentLang(): string {
   let lang = i18n.language || "en";
   lang = lang.toLowerCase();
-  if (lang === "zh-hant" || lang === "zh-hk" || lang === "zh-tw")
-    return "zh-hant";
+  if (lang === "zh-hant" || lang === "zh-hk" || lang === "zh-tw") return "zh-hant";
   if (SUPPORTED_LANGS.includes(lang)) return lang;
   if (lang.startsWith("zh")) return "zh";
   if (lang.startsWith("ja")) return "ja";
@@ -44,41 +43,93 @@ function getCurrentLang() {
 }
 
 // Helper to get token (customize as needed)
-function getToken() {
+function getToken(): string | null {
   return localStorage.getItem("token");
 }
 
-function generateNonce(length = 16) {
-  const chars =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+function generateNonce(length = 16): string {
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   return Array.from(
     { length },
     () => chars[Math.floor(Math.random() * chars.length)]
   ).join("");
 }
 
-function hex2buf(hex: string) {
+function hex2buf(hex: string): Uint8Array {
   return new Uint8Array(hex.match(/../g)!.map((x) => parseInt(x, 16)));
 }
 
-function b64tobuf(b64: string) {
+function b64tobuf(b64: string): Uint8Array {
   return new Uint8Array(Buffer.from(b64, "base64"));
 }
 
-function atou8(uint8: Uint8Array) {
-  return new TextDecoder().decode(uint8);
+function arrayBufferToString(buffer: ArrayBuffer): string {
+  return new TextDecoder('utf-8').decode(buffer);
 }
 
-function buildSignature({ method, path, query, body, headers }: any) {
+// Optimized query parameter extraction and merging
+function extractAndMergeQueryParams(url: string, params?: any): { path: string; query: Record<string, string> } {
+  try {
+    let path: string;
+    let queryString = '';
+    
+    // Handle both full URLs and relative paths
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+      const urlObj = new URL(url);
+      path = urlObj.pathname;
+      queryString = urlObj.search.slice(1); // Remove the '?' prefix
+    } else {
+      // It's a relative path
+      const [pathPart, ...queryParts] = url.split('?');
+      path = pathPart;
+      queryString = queryParts.join('?'); // Handle edge case of multiple '?' in query
+    }
+    
+    // Parse existing query parameters
+    const existingQuery: Record<string, string> = {};
+    if (queryString) {
+      const searchParams = new URLSearchParams(queryString);
+      for (const [key, value] of searchParams) {
+        existingQuery[key] = value;
+      }
+    }
+    
+    // Merge with axios params (params take precedence)
+    const mergedQuery: Record<string, string> = { ...existingQuery };
+    if (params && typeof params === 'object') {
+      for (const [key, value] of Object.entries(params)) {
+        if (value !== null && value !== undefined) {
+          mergedQuery[key] = String(value);
+        }
+      }
+    }
+    
+    return { path, query: mergedQuery };
+  } catch (error) {
+    console.warn('Failed to parse URL for query extraction:', error);
+    // Safe fallback
+    const safePath = url.split('?')[0];
+    return { path: safePath, query: {} };
+  }
+}
+
+function buildSignature({ method, path, query, body, headers }: {
+  method: string;
+  path: string;
+  query: Record<string, string>;
+  body: string;
+  headers: Record<string, string>;
+}): string {
   const parts = [];
   parts.push(method.toUpperCase());
-  parts.push(path);
+  parts.push(path); // path is already cleaned by extractAndMergeQueryParams
 
-  const sortedQuery = Object.entries(query)
-    .map(([k, v]) => `${k}=${v}`)
-    .sort()
-    .join("&");
-  parts.push(sortedQuery);
+  // Build sorted query string for consistent signature
+  const sortedEntries = Object.entries(query).sort(([a], [b]) => a.localeCompare(b));
+  const queryString = sortedEntries.length > 0 
+    ? sortedEntries.map(([k, v]) => `${k}=${v}`).join("&")
+    : "";
+  parts.push(queryString);
 
   if (body) {
     parts.push(body);
@@ -101,36 +152,37 @@ function buildSignature({ method, path, query, body, headers }: any) {
   return parts.join("|");
 }
 
-async function decryptResponse(res: AxiosResponse) {
-  const encHdr = res.headers["x-resp-encrypt"];
-  const ivHex = res.headers["x-resp-iv"];
-  if (!encHdr || !ivHex) return res;
+async function decryptResponse(responseData: any, ivHex: string, encHdr: string): Promise<any> {
+  if (!ivHex || !encHdr) return responseData;
 
   const fmt = encHdr.split("-").pop();
   const iv = hex2buf(ivHex);
 
   let rawBuf: Uint8Array;
   if (fmt === "raw") {
-    rawBuf = new Uint8Array(res.data);
+    rawBuf = responseData instanceof ArrayBuffer 
+      ? new Uint8Array(responseData)
+      : new Uint8Array(responseData);
   } else if (fmt === "b64") {
-    rawBuf = b64tobuf(res.data);
+    rawBuf = b64tobuf(typeof responseData === 'string' ? responseData : arrayBufferToString(responseData));
   } else {
-    rawBuf = hex2buf(res.data);
+    rawBuf = hex2buf(typeof responseData === 'string' ? responseData : arrayBufferToString(responseData));
   }
 
   const tag = rawBuf.slice(-16);
   const enc = rawBuf.slice(0, -16);
 
   const keyBuf = hex2buf(AES_KEY_HEX);
-  const cryptoKey = await window.crypto.subtle.importKey(
-    "raw",
-    keyBuf,
-    "AES-GCM",
-    false,
-    ["decrypt"]
-  );
-
+  
   try {
+    const cryptoKey = await window.crypto.subtle.importKey(
+      "raw",
+      keyBuf,
+      "AES-GCM",
+      false,
+      ["decrypt"]
+    );
+
     // Web Crypto expects tag to be appended to ciphertext
     const encWithTag = new Uint8Array([...enc, ...tag]);
     const decryptedBuf = await window.crypto.subtle.decrypt(
@@ -138,17 +190,36 @@ async function decryptResponse(res: AxiosResponse) {
       cryptoKey,
       encWithTag
     );
-    const plaintext = atou8(new Uint8Array(decryptedBuf));
-    console.log("Decrypted response plaintext:", plaintext);
+    
+    const plaintext = new TextDecoder('utf-8').decode(decryptedBuf);
+    
     try {
-      res.data = JSON.parse(plaintext);
+      return JSON.parse(plaintext);
     } catch {
-      res.data = plaintext;
+      return plaintext;
     }
-    return res;
   } catch (e: any) {
-    return Promise.reject({ message: "Decryption failed", error: e });
+    throw new Error(`Decryption failed: ${e.message}`);
   }
+}
+
+function setHeaders(headers: any, headersToSet: Record<string, string>): void {
+  if (typeof headers?.set === "function") {
+    // AxiosHeaders instance
+    Object.entries(headersToSet).forEach(([key, value]) => {
+      headers.set(key, value);
+    });
+  } else {
+    // Plain object
+    Object.assign(headers, headersToSet);
+  }
+}
+
+function getHeadersObject(headers: any): Record<string, string> {
+  if (typeof headers?.entries === "function") {
+    return Object.fromEntries(headers.entries());
+  }
+  return headers || {};
 }
 
 // Create Axios instance
@@ -157,41 +228,36 @@ const gateway: AxiosInstance = axios.create({
   headers: {
     "access-control-allow-credentials": "true",
   },
-  // Use json as default response type, not arraybuffer
+  // Handle encrypted responses by defaulting to arraybuffer when needed
   responseType: "json",
 });
 
 gateway.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-  // If config.headers is an AxiosHeaders instance, use set method; otherwise, use plain object
-  let headers: any = config.headers;
-  if (typeof headers?.set === "function") {
-    headers.set("x-lang", getCurrentLang());
-    const token = getToken();
-    if (token) headers.set("Authorization", `Bearer ${token}`);
-    headers.set("x-device-id", headers.get("x-device-id") || "demo-device-001");
+  try {
     const timestamp = Math.floor(Date.now() / 1000).toString();
     const nonce = generateNonce();
-    headers.set(GATEWAY_CONFIG.timestampHeader, timestamp);
-    headers.set(GATEWAY_CONFIG.nonceHeader, nonce);
+    const token = getToken();
+    const lang = getCurrentLang();
 
-    // Prepare for signature
-    const url = new URL(config.url!, config.baseURL || window.location.origin);
-    const path = url.pathname;
+    // Prepare headers to set
+    const headersToSet: Record<string, string> = {
+      "x-lang": lang,
+      "x-device-id": getHeadersObject(config.headers)["x-device-id"] || "demo-device-001",
+      [GATEWAY_CONFIG.timestampHeader]: timestamp,
+      [GATEWAY_CONFIG.nonceHeader]: nonce,
+    };
 
-    // Handle query parameters from both URL and axios params
-    const query: Record<string, string> = {};
-    url.searchParams.forEach((value, key) => {
-      query[key] = value;
-    });
-    if (config.params) {
-      Object.entries(config.params).forEach(([key, value]) => {
-        if (value !== undefined && value !== null) {
-          query[key] = String(value);
-        }
-      });
+    if (token) {
+      headersToSet["Authorization"] = `Bearer ${token}`;
     }
 
-    // For file uploads (FormData), body should be empty string for signature
+    // Set headers using unified function
+    setHeaders(config.headers, headersToSet);
+
+    // Optimized query parameter extraction and merging
+    const { path, query } = extractAndMergeQueryParams(config.url || '', config.params);
+
+    // Prepare body for signature
     let body = "";
     if (config.data) {
       if (typeof FormData !== "undefined" && config.data instanceof FormData) {
@@ -201,136 +267,106 @@ gateway.interceptors.request.use((config: InternalAxiosRequestConfig) => {
       } else {
         body = JSON.stringify(config.data);
       }
-      // Only set Content-Type if not already set
+
+      // Set Content-Type if not already set and not FormData
       if (
-        !headers.get("Content-Type") &&
+        !getHeadersObject(config.headers)["Content-Type"] &&
         !(typeof FormData !== "undefined" && config.data instanceof FormData)
       ) {
-        headers.set("Content-Type", "application/json");
+        setHeaders(config.headers, { "Content-Type": "application/json" });
       }
     }
 
-    const headersObj =
-      typeof headers.entries === "function"
-        ? Object.fromEntries(headers.entries())
-        : headers;
-
-    const signatureStr = buildSignature({
-      method: config.method || "GET",
-      path,
-      query,
-      body,
-      headers: headersObj,
-    });
-    const signature = CryptoJS.MD5(signatureStr).toString();
-    headers.set("x-lang", getCurrentLang());
-    headers.set("access-control-allow-headers", getCurrentLang());
-    headers.set(GATEWAY_CONFIG.signatureHeader, signature);
-    config.headers = headers;
-    return config;
-  } else {
-    // Fallback to plain object
-    headers = { ...(headers || {}) };
-    headers["x-lang"] = getCurrentLang();
-    const token = getToken();
-    if (token) headers["Authorization"] = `Bearer ${token}`;
-    headers["x-device-id"] = headers["x-device-id"] || "demo-device-001";
-    const timestamp = Math.floor(Date.now() / 1000).toString();
-    const nonce = generateNonce();
-    headers[GATEWAY_CONFIG.timestampHeader] = timestamp;
-    headers[GATEWAY_CONFIG.nonceHeader] = nonce;
-
-    const url = new URL(config.url!, config.baseURL || window.location.origin);
-    const path = url.pathname;
-
-    // Handle query parameters from both URL and axios params
-    const query: Record<string, string> = {};
-    url.searchParams.forEach((value, key) => {
-      query[key] = value;
-    });
-    if (config.params) {
-      Object.entries(config.params).forEach(([key, value]) => {
-        if (value !== undefined && value !== null) {
-          query[key] = String(value);
-        }
-      });
-    }
-
-    // For file uploads (FormData), body should be empty string for signature
-    let body = "";
-    if (config.data) {
-      if (typeof FormData !== "undefined" && config.data instanceof FormData) {
-        body = "";
-      } else if (typeof config.data === "string") {
-        body = config.data;
-      } else {
-        body = JSON.stringify(config.data);
-      }
-      if (
-        !headers["Content-Type"] &&
-        !(typeof FormData !== "undefined" && config.data instanceof FormData)
-      ) {
-        headers["Content-Type"] = "application/json";
-      }
-    }
-
-    const signatureStr = buildSignature({
-      method: config.method || "GET",
-      path,
-      query,
-      body,
-      headers,
-    });
-    const signature = CryptoJS.MD5(signatureStr).toString();
+    // Generate signature if enabled
     if (enableSignature) {
-      headers[GATEWAY_CONFIG.signatureHeader] = signature;
+      const headersObj = getHeadersObject(config.headers);
+      const signatureStr = buildSignature({
+        method: config.method || "GET",
+        path,
+        query,
+        body,
+        headers: headersObj,
+      });
+      const signature = CryptoJS.MD5(signatureStr).toString();
+      setHeaders(config.headers, { [GATEWAY_CONFIG.signatureHeader]: signature });
     }
-    config.headers = headers;
+
+    // Handle encrypted responses by setting appropriate response type
+    if (enableEncryption) {
+      config.responseType = "arraybuffer";
+    }
+
+    // Rebuild URL with properly merged query parameters
+    const finalQueryString = Object.keys(query).length > 0
+      ? Object.entries(query)
+          .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
+          .join("&")
+      : '';
+    
+    // Preserve the full URL structure for the actual request
+    let finalUrl: string;
+    if (config.url?.startsWith('http://') || config.url?.startsWith('https://')) {
+      // It's a full URL - rebuild with base + path + query
+      const originalUrl = new URL(config.url);
+      const baseUrl = `${originalUrl.protocol}//${originalUrl.host}`;
+      finalUrl = finalQueryString ? `${baseUrl}${path}?${finalQueryString}` : `${baseUrl}${path}`;
+    } else {
+      // It's a relative path - use as is
+      finalUrl = finalQueryString ? `${path}?${finalQueryString}` : path;
+    }
+    
+    config.url = finalUrl;
+    
+    // Clear params since we've incorporated them into the URL
+    delete config.params;
+
+    return config;
+  } catch (error) {
+    console.error("Request interceptor error:", error);
     return config;
   }
 });
 
 gateway.interceptors.response.use(
   async (response: AxiosResponse) => {
-    // Handle encryption if enabled and response is encrypted
-    const encHdr = response.headers["x-resp-encrypt"];
-    const ivHex = response.headers["x-resp-iv"];
-    if (enableEncryption && encHdr && ivHex) {
-      // Temporarily change response type for decryption
-      const originalResponseType = response.config.responseType;
-      response.config.responseType = "arraybuffer";
-
-      // Re-fetch with arraybuffer to decrypt
-      const encryptedResponse = await axios.request({
-        ...response.config,
-        responseType: "arraybuffer",
-      });
-
-      // Convert arraybuffer to string for decryption
-      let dataStr = "";
-      if (encryptedResponse.data instanceof ArrayBuffer) {
-        const uint8 = new Uint8Array(encryptedResponse.data);
-        dataStr = Array.from(uint8)
-          .map((b) => String.fromCharCode(b))
-          .join("");
-      } else {
-        dataStr = encryptedResponse.data;
+    try {
+      // Handle encryption if enabled and response is encrypted
+      const encHdr = response.headers["x-resp-encrypt"];
+      const ivHex = response.headers["x-resp-iv"];
+      
+      if (enableEncryption && encHdr && ivHex) {
+        console.log("Decrypting response...");
+        response.data = await decryptResponse(response.data, ivHex, encHdr);
+      } else if (response.config.responseType === "arraybuffer" && response.data instanceof ArrayBuffer) {
+        // Convert ArrayBuffer to JSON if no encryption but responseType was set to arraybuffer
+        const textData = arrayBufferToString(response.data);
+        try {
+          response.data = JSON.parse(textData);
+        } catch {
+          response.data = textData;
+        }
       }
 
-      encryptedResponse.data = dataStr;
-      const decryptedResponse = await decryptResponse(encryptedResponse);
-
-      // Restore original response type
-      response.config.responseType = originalResponseType;
-      response.data = decryptedResponse.data;
       return response;
+    } catch (error) {
+      console.error("Response decryption error:", error);
+      return Promise.reject(error);
     }
-
-    // Don't handle business errors at gateway level - let services handle them
-    return response;
   },
   (error) => {
-    // Don't transform errors at gateway level - let services handle them
+    // Enhanced error logging
+    if (error.response) {
+      console.error("Gateway response error:", {
+        status: error.response.status,
+        statusText: error.response.statusText,
+        data: error.response.data,
+        url: error.config?.url,
+      });
+    } else if (error.request) {
+      console.error("Gateway request error:", error.request);
+    } else {
+      console.error("Gateway setup error:", error.message);
+    }
     return Promise.reject(error);
   }
 );

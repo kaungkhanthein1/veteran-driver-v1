@@ -1,100 +1,143 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import { apiBaseUrl } from "../../config/env";
 import { gatewayBaseQuery } from "../../services/gatewayBaseQuery";
 import { storeTokens } from "./tokenUtils";
-//   // Get the recaptcha token from Redux state
-//   const state = api.getState() as RootState;
-//   const recaptchaToken = state.recaptchaSlice.data;
+import {
+  SendVerificationCodeDto,
+  SendVerificationCodeResponse,
+  UserRegisterDto,
+  UserRegisterResponse,
+  PasswordLoginDto,
+  PasswordLoginResponse,
+  EmailOtpLoginDto,
+  EmailOtpLoginResponse,
+  SendResetPasswordCodeDto,
+  SendResetPasswordCodeResponse,
+  ResetPasswordDto,
+  ResetPasswordResponse,
+  RefreshTokenDto,
+  RefreshTokenResponse,
+  UpdateUsernameDto,
+  UpdateUsernameResponse,
+  UpdateEmailDto,
+  UpdateEmailResponse,
+  UpdatePasswordDto,
+  UpdatePasswordResponse
+} from "../../dto";
 
-//   console.log("Recaptcha Token:", recaptchaToken);
-
-//   // Prepare headers with recaptcha token if available
-//   const requestHeaders = {
-//     ...headers,
-//     ...(recaptchaToken ? { "x-recaptcha-token": recaptchaToken } : {}),
-//   };
 export const AuthApi = createApi({
   reducerPath: "AuthApi",
-  baseQuery: gatewayBaseQuery({
-    baseUrl:
-      "http://ec2-52-221-179-216.ap-southeast-1.compute.amazonaws.com/api/v1/auth",
-  }),
+  baseQuery: gatewayBaseQuery({ baseUrl: apiBaseUrl }),
   endpoints: (builder) => ({
-    login: builder.mutation<void, { data: any }>({
-      query: ({ data }) => ({
-        url: `/password-login`,
+    // Send Verification Code
+    sendVerificationCode: builder.mutation<SendVerificationCodeResponse, SendVerificationCodeDto>({
+      query: (data) => ({
+        url: `/auth/send-verification-code`,
         method: "POST",
         body: data,
       }),
-      transformResponse: (response: any) => {
-        if (response.data?.token) {
-          storeTokens(response.data.token);
+    }),
+
+    // User Registration
+    register: builder.mutation<UserRegisterResponse, UserRegisterDto>({
+      query: (data) => ({
+        url: `/auth/register`,
+        method: "POST",
+        body: data,
+      }),
+      transformResponse: (response: UserRegisterResponse) => {
+        if (response?.token) {
+          storeTokens(response.token);
         }
         return response;
       },
     }),
-    me: builder.query<any, void>({
-      query: () => ({
-        url: `/profile/me`,
-        method: "GET",
-      }),
-    }),
 
-    register: builder.mutation<void, { data: any }>({
-      query: ({ data }) => ({
-        url: `/register`,
+    // Password Login
+    passwordLogin: builder.mutation<PasswordLoginResponse, PasswordLoginDto>({
+      query: (data) => ({
+        url: `/auth/password-login`,
         method: "POST",
         body: data,
       }),
-      transformResponse: (response: any) => {
-        if (response.data?.token) {
-          storeTokens(response.data.token);
+      transformResponse: (response: PasswordLoginResponse) => {
+        if (response?.token) {
+          storeTokens(response.token);
         }
         return response;
       },
     }),
-    sendverify: builder.mutation<void, { data: any }>({
-      query: ({ data }) => {
-        // This endpoint is used to send a verification code for registration or login
-        // It can be used for both email and phone verification
-        // The data object should contain the necessary information like 'to', 'channel', and 'scene'
-        return {
-          url: `/send-verification-code`,
-          method: "POST",
-          body: data,
-        };
-      },
-      //   } ({
 
-      // url: `/send-verification-code`,
-      // method: "POST",
-      // body: data,
-      //   }),
-    }),
-    // Add this to your AuthApi endpoints
-    refreshToken: builder.mutation<{ token: any }, { refreshToken: string }>({
-      query: ({ refreshToken }) => ({
-        url: `/refresh-token`,
+    // Email OTP Login
+    emailOtpLogin: builder.mutation<EmailOtpLoginResponse, EmailOtpLoginDto>({
+      query: (data) => ({
+        url: `/auth/email-otp-login`,
         method: "POST",
-        body: { refreshToken },
+        body: data,
       }),
+      transformResponse: (response: EmailOtpLoginResponse) => {
+        if (response?.token) {
+          storeTokens(response.token);
+        }
+        return response;
+      },
     }),
-    emailOTP: builder.mutation<void, { data: any }>({
-      query: ({ data }) => ({
-        url: `/email-otp-login`,
+
+    // Send Reset Password Code
+    sendResetPasswordCode: builder.mutation<SendResetPasswordCodeResponse, SendResetPasswordCodeDto>({
+      query: (data) => ({
+        url: `/auth/send-reset-password-code`,
         method: "POST",
         body: data,
       }),
     }),
-    resetPasswordCode: builder.mutation<void, { data: any }>({
-      query: ({ data }) => ({
-        url: `/send-reset-password-code`,
+
+    // Reset Password
+    resetPassword: builder.mutation<ResetPasswordResponse, ResetPasswordDto>({
+      query: (data) => ({
+        url: `/auth/reset-password`,
         method: "POST",
         body: data,
       }),
     }),
-    resetPassword: builder.mutation<void, { data: any }>({
-      query: ({ data }) => ({
-        url: `/reset-password`,
+
+    // Refresh Token
+    refreshToken: builder.mutation<RefreshTokenResponse, RefreshTokenDto>({
+      query: (data) => ({
+        url: `/auth/refresh-token`,
+        method: "POST",
+        body: data,
+      }),
+      transformResponse: (response: RefreshTokenResponse) => {
+        if (response?.token) {
+          storeTokens(response.token);
+        }
+        return response;
+      },
+    }),
+
+    // Update Username
+    updateUsername: builder.mutation<UpdateUsernameResponse, UpdateUsernameDto>({
+      query: (data) => ({
+        url: `/auth/update-username`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+
+    // Update Email
+    updateEmail: builder.mutation<UpdateEmailResponse, UpdateEmailDto>({
+      query: (data) => ({
+        url: `/auth/update-email`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+
+    // Update Password
+    updatePassword: builder.mutation<UpdatePasswordResponse, UpdatePasswordDto>({
+      query: (data) => ({
+        url: `/auth/update-password`,
         method: "POST",
         body: data,
       }),
@@ -103,11 +146,14 @@ export const AuthApi = createApi({
 });
 
 export const {
-  useLoginMutation,
-  useEmailOTPMutation,
+  useSendVerificationCodeMutation,
   useRegisterMutation,
-  useResetPasswordCodeMutation,
-  useSendverifyMutation,
+  usePasswordLoginMutation,
+  useEmailOtpLoginMutation,
+  useSendResetPasswordCodeMutation,
   useResetPasswordMutation,
   useRefreshTokenMutation,
+  useUpdateUsernameMutation,
+  useUpdateEmailMutation,
+  useUpdatePasswordMutation,
 } = AuthApi;

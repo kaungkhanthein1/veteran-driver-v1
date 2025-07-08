@@ -164,3 +164,36 @@ body {
   font-style: normal;
   font-weight: 500;
 }
+
+/* Bookmark Icon Filters */
+.filter-yellow {
+  filter: brightness(0) saturate(100%) invert(73%) sepia(97%) saturate(346%) hue-rotate(8deg) brightness(106%) contrast(97%);
+}
+
+/* Loading animation for bookmark */
+@keyframes bookmark-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.bookmark-pulse {
+  animation: bookmark-pulse 0.3s ease-in-out;
+}
+
+/* Yellow Gradient for buttons */
+.bg-yellow-gradient {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+}
+
+/* Border utilities for pin */
+.border-l-\[6px\] {
+  border-left-width: 6px;
+}
+
+.border-r-\[6px\] {
+  border-right-width: 6px;
+}
+
+.border-t-\[8px\] {
+  border-top-width: 8px;
+}

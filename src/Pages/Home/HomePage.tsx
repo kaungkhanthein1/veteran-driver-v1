@@ -6,35 +6,51 @@ import { useState, useEffect } from "react";
 import MainContent from "./MainContent";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  useGetCountriesQuery,
-  useGetLanguagesQuery,
-} from "../services/CountryApi";
-import CountryLanguageModal from "../../components/CitySelectModal";
+  useGetSupportedCountriesQuery,
+  useGetSupportedLanguagesQuery,
+} from "../services/GeoApi";
+import CountryLanguageModal from "../../components/CountryLangSelectModal";
 import { useMeQuery } from "../../Pages/services/ProfileApi";
-import { useGetLocationNearbyQuery } from "../../features/HomeApi";
+import { useGetNearbyPlacesForMapQuery } from "../../Pages/services/PlaceApi";
 import NearContent from "./NearContent";
+import { NearbyForMapResponseDto } from "../../dto";
+import { PlaceResponseDto } from "../../dto/place/place.dto";
 
 export default function HomePage() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [showCountryLangModal, setShowCountryLangModal] = useState(false);
-  const [selectedPlace, setSelectedPlace] = useState(null);
+  const [selectedPlace, setSelectedPlace] = useState<PlaceResponseDto | null>(null);
 
-  // Fetch countries and languages using RTK Query
-  const {
-    data: countries,
-    error: countriesError,
-    isLoading: countriesLoading,
-  } = useGetCountriesQuery();
-  const {
-    data: languages,
-    error: languagesError,
-    isLoading: languagesLoading,
-  } = useGetLanguagesQuery();
+  // Fetch countries and languages using RTK Query (keeping queries for future use)
+  const { data: _countries } = useGetSupportedCountriesQuery();
+  const { data: _languages } = useGetSupportedLanguagesQuery();
   const { data } = useMeQuery();
 
-  const { data: newData } = useGetLocationNearbyQuery({});
-  const nearByData = newData?.data;
-  const handlePlaceSelect = (place: any) => {
+  const { data: newData } = useGetNearbyPlacesForMapQuery({
+    lat: 0,
+    lng: 0,
+    limit: 10,
+  });
+  const nearByData = newData as NearbyForMapResponseDto;
+  
+  // Convert PlaceResponseDto[] to the format expected by MapWithFilterUI
+  const convertPlacesForMap = (places: PlaceResponseDto[]) => {
+    return places.map(place => ({
+      id: place.id,
+      name: place.name.en || place.name.zh || "", // Use English name first, fallback to Chinese
+      location: {
+        coordinates: place.location.coordinates
+      },
+      photos: place.photos,
+      rating: place.rating,
+      tags: place.tags?.map(tag => ({
+        key: tag,
+        name: tag
+      }))
+    }));
+  };
+
+  const handlePlaceSelect = (place: PlaceResponseDto) => {
     setSelectedPlace(place);
     setIsExpanded(true);
   };
@@ -58,7 +74,7 @@ export default function HomePage() {
       <div className="flex-1 relative max-w-[480px] mx-auto w-full">
         <MapWithFilterUI
           isExpanded={isExpanded}
-          nearbyPlaces={nearByData?.places || []}
+          nearbyPlaces={convertPlacesForMap(nearByData?.places || [])}
           onPlaceSelect={handlePlaceSelect}
         />
 
@@ -84,8 +100,6 @@ export default function HomePage() {
         )}
       </div>
       <CountryLanguageModal
-        languages={languages}
-        countries={countries}
         open={showCountryLangModal}
         onClose={() => setShowCountryLangModal(false)}
       />

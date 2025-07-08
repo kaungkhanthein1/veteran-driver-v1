@@ -12,7 +12,7 @@ interface PlaceCardProps {
   reviews: number;
   views?: number;
   onClick?: () => void;
-  rightSection?: React.ReactNode;
+  rightSection?: React.ReactNode; // Use this for BookmarkButton: <BookmarkButton place={place} size="sm" />
 }
 
 const PlaceCard: React.FC<PlaceCardProps> = ({

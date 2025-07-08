@@ -10,7 +10,7 @@ import GoogleIcon from "../icons/G.svg";
 import FacebookIcon from "../icons/Facebook.svg";
 import AppleIcon from "../icons/Apple.svg";
 import OtpVerifyPage from "./OtpVerifyPage";
-import { useEmailOTPMutation, useSendverifyMutation } from "./services/AuthApi";
+import { useEmailOtpLoginMutation, useSendVerificationCodeMutation } from "./services/AuthApi";
 
 import ReCaptcha from "../components/common/ReCaptcha";
 import axios from "axios";
@@ -37,7 +37,7 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { t } = useTranslation();
-  const [triggerVerify] = useSendverifyMutation();
+  const [triggerVerify] = useSendVerificationCodeMutation();
   const dispatch = useDispatch();
 
   const handleClose = () => {
@@ -107,11 +107,9 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
     try {
       // Trigger the verification code
       await triggerVerify({
-        data: {
-          to: emailOrPhone,
-          channel: "email",
-          scene: "register",
-        },
+        to: emailOrPhone,
+        channel: "email",
+        scene: "register",
       }).unwrap();
 
       setshowOtp(true);
