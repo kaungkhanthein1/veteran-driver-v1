@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { gatewayBaseQuery } from "../../services/gatewayBaseQuery";
 import { storeTokens } from "./tokenUtils";
+import { config } from "process";
 //   // Get the recaptcha token from Redux state
 //   const state = api.getState() as RootState;
 //   const recaptchaToken = state.recaptchaSlice.data;
@@ -16,7 +17,7 @@ export const AuthApi = createApi({
   reducerPath: "AuthApi",
   baseQuery: gatewayBaseQuery({
     baseUrl:
-      "http://ec2-52-221-179-216.ap-southeast-1.compute.amazonaws.com/api/v1/auth",
+      `https://vtt_dev.movie06.com/api/v1/auth`,
   }),
   endpoints: (builder) => ({
     login: builder.mutation<void, { data: any }>({
