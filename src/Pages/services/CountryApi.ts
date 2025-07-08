@@ -21,7 +21,14 @@ export const CountryApi = createApi({
       }),
       transformResponse: (response: any) => response.data || [],
     }),
+    getTabs: builder.query<any, void>({
+      query: () => ({
+        url: "/ui-config/key", // Use the correct endpoint from your API docs
+        method: "GET",
+      }),
+      transformResponse: (response: any) => response.data || [],
+    }),
   }),
 });
 
-export const { useGetCountriesQuery, useGetLanguagesQuery } = CountryApi;
+export const { useGetCountriesQuery, useGetLanguagesQuery , useGetTabsQuery } = CountryApi;

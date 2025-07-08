@@ -22,8 +22,8 @@ const FieldRow: React.FC<{
   last?: boolean;
 }> = ({ label, value, onClick, clickable, showArrow, last }) => (
   <div
-    className={`flex items-center justify-between px-4 py-4 ${
-      !last ? "border-b border-gray-100" : ""
+    className={`flex items-center justify-between px-4 py-4${
+      ""
     } ${clickable ? "cursor-pointer hover:bg-gray-50 transition-colors" : ""}`}
     onClick={clickable ? onClick : undefined}
   >
@@ -331,27 +331,26 @@ const EditProfileContent: React.FC = () => {
 
       {/* Cards Section */}
       <div className="w-full max-w-[480px] mx-auto p-4 space-y-4">
-        {/* First Card: Profile Name, Username, Veteran ID */}
+        {/* First Card: Veteran ID, User ID, Nickname */}
         <div className="bg-white rounded-xl shadow p-0 overflow-hidden">
-          <FieldRow
-            label="Profile Name"
-            value={profileData.nickname}
-            clickable={true}
-            showArrow={true}
-            onClick={() => navigate("nickname")}
-          />
-          <FieldRow
-            label="Username"
-            value={profileData.username || ""}
-            clickable={true}
-            showArrow={true}
-            onClick={() => navigate("username")}
-          />
           <FieldRow
             label="Veteran ID"
             value={profileData.userId || ""}
             clickable={false}
             showArrow={false}
+          />
+          <FieldRow
+            label="User ID"
+            value={profileData.username || ""}
+            clickable={false}
+            showArrow={false}
+          />
+          <FieldRow
+            label="Nickname"
+            value={profileData.nickname}
+            clickable={true}
+            showArrow={true}
+            onClick={() => navigate("nickname")}
             last={true}
           />
         </div>
@@ -386,27 +385,6 @@ const EditProfileContent: React.FC = () => {
             last={true}
           />
         </div>
-      </div>
-
-      {/* Save Button */}
-      <div className="w-full max-w-[480px] mx-auto p-4">
-        <button
-          onClick={handleSave}
-          disabled={saving}
-          className={`w-full rounded-full py-3 text-lg font-semibold transition-colors duration-200 ${
-            !saving
-              ? "bg-yellow-gradient text-black"
-              : "bg-gray-300 text-gray-500 cursor-not-allowed"
-          }`}
-        >
-          {saving ? "Saving..." : "Save Changes"}
-        </button>
-        {error && (
-          <div className="text-red-500 text-center py-2 mt-2">{error}</div>
-        )}
-        {success && (
-          <div className="text-green-600 text-center py-2 mt-2">{success}</div>
-        )}
       </div>
 
       {/* Gender Selection Modal */}
