@@ -23,6 +23,9 @@ export default function HomePage() {
   const tabs = useGetTabsQuery("")
   console.log("tabs",tabs)
 
+  const tabs = useGetTabsQuery("")
+  console.log("tabs",tabs)
+
   // Fetch countries and languages using RTK Query
   const {
     data: countries,
