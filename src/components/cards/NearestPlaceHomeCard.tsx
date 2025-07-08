@@ -784,7 +784,7 @@ const NearestPlacHomeCard = ({ item }: any) => {
               streetViewControl: false,
               mapTypeControl: false,
               fullscreenControl: false,
-              gestureHandling: "none",
+              gestureHandling: "greedy",
             }}
             onLoad={(map) => {
               onMapLoad(map);

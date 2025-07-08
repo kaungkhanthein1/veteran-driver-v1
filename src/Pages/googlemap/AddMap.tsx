@@ -100,6 +100,7 @@ const AddMap = () => {
               mapTypeControl: false,
               fullscreenControl: false,
               clickableIcons: false,
+              gestureHandling: "greedy", // Allows panning and zooming
             }}
             onClick={handleMapClick}
             onLoad={onLoad}
