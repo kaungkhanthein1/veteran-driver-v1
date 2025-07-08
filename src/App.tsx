@@ -45,6 +45,7 @@ import BottomNavBarUpdate from "./components/common/BottomNavBarUpdate";
 import HomeTab from "./tabs/HomeTab";
 import BookmarksTab from "./tabs/BookmarksTab";
 import ProfileTab from "./tabs/ProfileTab";
+import FeedbackPage from "./Pages/FeedbackPage";
 
 function MainTabs() {
   return (
@@ -69,7 +70,7 @@ function AppRoutes() {
       <Routes location={state?.background || location}>
         <Route path="/*" element={<MainTabs />} />
         {/* Other routes remain as-is */}
-        <Route path="/otp-verify" element={<OtpVerifyPage />} />
+        <Route path="/otp-verify" element={<OtpVerifyPage emailorPhone="" userName="" password="" />} />
         <Route path="/location-access" element={<LocationAccessPage />} />
         <Route path="/choose-location" element={<ChooseLocationPage />} />
         <Route path="/explore" element={<ExplorePage />} />
@@ -104,6 +105,7 @@ function AppRoutes() {
           element={<AccountInformationPage />}
         />
         <Route path="/video/:id" element={<VideoDetailPage />} />
+        <Route path="/feedback" element={<FeedbackPage />} />
       </Routes>
       {/* Modal routes, only render if background exists */}
       {state?.background && (
@@ -136,7 +138,7 @@ function AppRoutes() {
             path="/otp-verify"
             element={
               <ModalRoute>
-                <OtpVerifyPage />
+                <OtpVerifyPage emailorPhone="" userName="" password="" />
               </ModalRoute>
             }
           />

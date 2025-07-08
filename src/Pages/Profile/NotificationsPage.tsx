@@ -1,14 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import BackButton from '../../components/common/BackButton';
-import NotificationIcon from 'icons/Bell.svg';
-import WalletIcon from 'icons/Wallet.svg';
-import TrophyIcon from 'icons/Trophy.svg';
+import NoNoti from '../../icons/NoNoti.svg'; // or .png
 
 const NotificationsPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  
+
   return (
     <div className="dvh-fallback bg-theme-primary text-theme-text">
       {/* Header */}
@@ -18,29 +16,16 @@ const NotificationsPage = () => {
           <h1 className="text-lg font-semibold text-center flex-grow">{t('notificationsPage.title')}</h1>
         </div>
       </div>
-
-      {/* Notification Categories */}
-      <div className="pt-16 space-y-4">
-        <div className="flex items-center p-4 border-b border-theme-secondary">
-          <img src={NotificationIcon} alt={t('notificationsPage.systemNotificationAltText')} className="w-8 h-8 mr-4" />
-          <div>
-            <h2 className="text-lg font-semibold">{t('notificationsPage.systemNotificationTitle')}</h2>
-            <p className="text-theme-secondary">{t('notificationsPage.systemNotificationDescription')}</p>
-          </div>
-        </div>
-        <div className="flex items-center p-4 border-b border-theme-secondary">
-          <img src={WalletIcon} alt={t('notificationsPage.balanceAlertAltText')} className="w-8 h-8 mr-4" />
-          <div>
-            <h2 className="text-lg font-semibold">{t('notificationsPage.balanceAlertTitle')}</h2>
-            <p className="text-theme-secondary">{t('notificationsPage.balanceAlertDescription')}</p>
-          </div>
-        </div>
-        <div className="flex items-center p-4 border-b border-theme-secondary">
-          <img src={TrophyIcon} alt={t('notificationsPage.achievementsAlertAltText')} className="w-8 h-8 mr-4" />
-          <div>
-            <h2 className="text-lg font-semibold">{t('notificationsPage.achievementsAlertTitle')}</h2>
-            <p className="text-theme-secondary">{t('notificationsPage.achievementsAlertDescription')}</p>
-          </div>
+      {/* Empty State */}
+      <div className="flex flex-col items-center justify-center flex-1 pt-20">
+        <img src={NoNoti} alt="No Notifications" className="w-[120px] h-[102px] mb-4 mt-4" />
+        <div className="flex flex-col items-center mb-2">
+          <span className="text-theme-primary text-lg font-semibold text-center">
+            You’ve caught up with everything
+          </span>
+          <span className="text-theme-secondary text-base font-normal text-center mt-1">
+            No notification at this time
+          </span>
         </div>
       </div>
     </div>

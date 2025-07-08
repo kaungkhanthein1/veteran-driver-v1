@@ -9,6 +9,8 @@ import PlaceCard from '../../components/cards/PlaceCard';
 import Bookmark from '../../icons/Bookmark.svg';
 import { useEffect } from 'react';
 import NoRecent from '../../assets/NoRecent.png';
+import HighlightBar from '../../icons/Highlight.png';
+import NoNoti from '../../icons/NoNoti.svg';
 
 const RECENTLY_VISITED_KEY = 'recentlyVisitedPlaces';
 
@@ -74,18 +76,30 @@ export default function BookmarksPage() {
         <div className="flex-1 overflow-y-auto pb-16 flex flex-col">
           {/* Tabs */}
           <div className="flex items-center justify-center pt-6 pb-2 bg-theme-primary sticky top-0 z-20">
-            <button
-              className={`text-lg font-medium px-4 pb-2 border-b-2 transition-colors ${activeTab === 'bookmarks' ? 'border-[#FFC61B] text-theme-primary' : 'border-transparent text-theme-secondary'}`}
-              onClick={() => setActiveTab('bookmarks')}
-            >
-              Bookmarks
-            </button>
-            <button
-              className={`text-lg font-medium px-4 pb-2 border-b-2 transition-colors ${activeTab === 'notifications' ? 'border-[#FFC61B] text-theme-primary' : 'border-transparent text-theme-secondary'}`}
-              onClick={() => setActiveTab('notifications')}
-            >
-              Notification
-            </button>
+            <div className="flex gap-8">
+              <button
+                className={`flex flex-col items-center text-lg font-medium px-4 pb-0 transition-colors ${activeTab === 'bookmarks' ? 'text-theme-primary font-bold' : 'text-theme-secondary font-normal'}`}
+                onClick={() => setActiveTab('bookmarks')}
+              >
+                <span>Bookmarks</span>
+                {activeTab === 'bookmarks' && (
+                  <div className="mt-1">
+                    <img src={HighlightBar} alt="highlight" className="w-10 h-1" />
+                  </div>
+                )}
+              </button>
+              <button
+                className={`flex flex-col items-center text-lg font-medium px-4 pb-0 transition-colors ${activeTab === 'notifications' ? 'text-theme-primary font-bold' : 'text-theme-secondary font-normal'}`}
+                onClick={() => setActiveTab('notifications')}
+              >
+                <span>Notification</span>
+                {activeTab === 'notifications' && (
+                  <div className="mt-1">
+                    <img src={HighlightBar} alt="highlight" className="w-10 h-1" />
+                  </div>
+                )}
+              </button>
+            </div>
           </div>
           {activeTab === 'bookmarks' && (
             showEmpty ? (
@@ -150,8 +164,12 @@ export default function BookmarksPage() {
             )
           )}
           {activeTab === 'notifications' && (
-            <div className="flex flex-col items-center justify-center py-16 text-theme-secondary text-lg">
-              No Notifications Yet
+            <div className="flex flex-col items-center justify-center flex-1 pt-4">
+              <img src={NoNoti} alt="No Notifications" className="w-[120px] h-[102px] mb-4 mt-4" />
+              <div className="flex flex-col items-center mb-2">
+                <span className="text-theme-primary text-lg font-semibold text-center">You’ve caught up with everything</span>
+                <span className="text-theme-secondary text-base font-normal text-center mt-1">No notification at this time</span>
+              </div>
             </div>
           )}
         </div>
