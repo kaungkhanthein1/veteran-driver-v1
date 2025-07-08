@@ -14,9 +14,10 @@ import FeedBackIcon from "icons/ProfileUpdate/FeedBack.svg";
 import VersionIcon from "icons/Version.svg";
 import ShareModal from '../common/ShareModal';
 import { useState } from 'react';
-import Level1Badge from "icons/ProfileUpdate/Level1.png";
 import LocationIcon from "icons/ProfileUpdate/Location.svg";
 import GradientBg from "icons/ProfileUpdate/GradientBg.jpg";
+import FavouriteIcon from "icons/ProfileUpdate/Favourite.svg";
+import LanguageModal from '../common/LanguageModal';
 
 // Import the gradient image (place it in src/assets/gradient-bg.png for example)
 import { useMeQuery } from "../../Pages/services/ProfileApi";
@@ -31,6 +32,7 @@ const ProfileCard: React.FC = () => {
 
   const user = data?.data || {};
   const [isShareModalOpen, setShareModalOpen] = useState(false);
+  const [isLanguageModalOpen, setLanguageModalOpen] = useState(false);
 
   return (
     <div
@@ -111,24 +113,19 @@ const ProfileCard: React.FC = () => {
                   <img src={FemaleIcon} alt="Female" className="w-5 h-5" />
                 )}
               </div>
-              {/* Level badge under nickname */}
-              <div className="flex items-center gap-2 mb-1">
-                <img src={Level1Badge} alt="Level 1" className="h-7 w-auto" />
-              </div>
-            </div>
-          </div>
-          {/* Location and bio below avatar/name/level, aligned left */}
-          <div className="flex flex-col items-start w-full mt-8 mb-6">
-            {(user?.city || user?.country) && (
+              {/* Location row under nickname */}
               <div className="flex items-center text-base text-gray-800 mb-1">
                 <img src={LocationIcon} alt="Location" className="w-5 h-5 mr-2" />
                 <span>
                   {user.city && user.country
                     ? `${user.city}, ${user.country}`
-                    : user.city || user.country}
+                    : (user.city || user.country || 'Unknown Location')}
                 </span>
               </div>
-            )}
+            </div>
+          </div>
+          {/* Location and bio below avatar/name/level, aligned left */}
+          <div className="flex flex-col items-start w-full mt-8 mb-6">
             {user.bio && (
               <div className="text-base text-gray-700 flex items-center gap-1">
                 {user.bio}
@@ -196,9 +193,16 @@ const ProfileCard: React.FC = () => {
         </div>
       )}
 
-      {/* Card 1: Notifications, Language, Application Themes */}
+      {/* Card 1: Favourites, Notifications, Language, Application Themes */}
       <div className="w-full max-w-[480px] mx-auto p-4">
         <div className="bg-white rounded-xl shadow p-0 overflow-hidden">
+          <button className="flex items-center justify-between w-full px-4 py-4" onClick={() => navigate('/favourites')}>
+            <div className="flex items-center gap-3">
+              <img src={FavouriteIcon} alt="Favourites" className="w-6 h-6" />
+              <span className="text-base text-gray-700">Favourites</span>
+            </div>
+            <svg className="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/></svg>
+          </button>
           <button className="flex items-center justify-between w-full px-4 py-4" onClick={() => navigate('/notifications')}>
             <div className="flex items-center gap-3">
               <img src={NotiIcon} alt="Notifications" className="w-6 h-6" />
@@ -206,7 +210,7 @@ const ProfileCard: React.FC = () => {
             </div>
             <svg className="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/></svg>
           </button>
-          <button className="flex items-center justify-between w-full px-4 py-4" onClick={() => navigate('/settings/language')}>
+          <button className="flex items-center justify-between w-full px-4 py-4" onClick={() => setLanguageModalOpen(true)}>
             <div className="flex items-center gap-3">
               <img src={LanguageIcon} alt="Language" className="w-6 h-6" />
               <span className="text-base text-gray-700">Language</span>
@@ -223,16 +227,9 @@ const ProfileCard: React.FC = () => {
         </div>
       </div>
 
-      {/* Card 2: Referral Code, Share Our App, Feedback */}
+      {/* Card 2: Share Our App, Version */}
       <div className="w-full max-w-[480px] mx-auto p-4">
         <div className="bg-white rounded-xl shadow p-0 overflow-hidden">
-          <button className="flex items-center justify-between w-full px-4 py-4" onClick={() => navigate('/referral-code')}>
-            <div className="flex items-center gap-3">
-              <img src={QrIcon} alt="Referral Code" className="w-6 h-6" />
-              <span className="text-base text-gray-700">Referral Code</span>
-            </div>
-            <svg className="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/></svg>
-          </button>
           <button className="flex items-center justify-between w-full px-4 py-4" onClick={() => setShareModalOpen(true)}>
             <div className="flex items-center gap-3">
               <img src={ShareIcon} alt="Share Our App" className="w-6 h-6" />
@@ -240,20 +237,6 @@ const ProfileCard: React.FC = () => {
             </div>
             <svg className="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/></svg>
           </button>
-          <button className="flex items-center justify-between w-full px-4 py-4" onClick={() => navigate('/feedback')}>
-            <div className="flex items-center gap-3">
-              <img src={FeedBackIcon} alt="Feedback" className="w-6 h-6" />
-              <span className="text-base text-gray-700">Feedback</span>
-            </div>
-            <svg className="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/></svg>
-          </button>
-        </div>
-      </div>
-      <ShareModal isOpen={isShareModalOpen} onClose={() => setShareModalOpen(false)} />
-
-      {/* Card 3: Version */}
-      <div className="w-full max-w-[480px] mx-auto p-4">
-        <div className="bg-white rounded-xl shadow p-0 overflow-hidden">
           <div className="flex items-center justify-between w-full px-4 py-4">
             <div className="flex items-center gap-3">
               <img src={VersionIcon} alt="Version" className="w-6 h-6" />
@@ -263,6 +246,21 @@ const ProfileCard: React.FC = () => {
           </div>
         </div>
       </div>
+      <ShareModal isOpen={isShareModalOpen} onClose={() => setShareModalOpen(false)} />
+      <LanguageModal isOpen={isLanguageModalOpen} onClose={() => setLanguageModalOpen(false)} />
+
+      {/* Card 3: Version */}
+      {/* <div className="w-full max-w-[480px] mx-auto p-4">
+        <div className="bg-white rounded-xl shadow p-0 overflow-hidden">
+          <div className="flex items-center justify-between w-full px-4 py-4">
+            <div className="flex items-center gap-3">
+              <img src={VersionIcon} alt="Version" className="w-6 h-6" />
+              <span className="text-base text-gray-700">Version</span>
+            </div>
+            <span className="text-base text-gray-400">V1.0.01</span>
+          </div>
+        </div>
+      </div> */}
     </div>
   );
 };
