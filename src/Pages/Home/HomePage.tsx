@@ -8,23 +8,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   useGetCountriesQuery,
   useGetLanguagesQuery,
-  useGetTabsQuery,
 } from "../services/CountryApi";
 import CountryLanguageModal from "../../components/CitySelectModal";
 import { useMeQuery } from "../../Pages/services/ProfileApi";
 import { useGetLocationNearbyQuery } from "../../features/HomeApi";
 import NearContent from "./NearContent";
-=======
->>>>>>> 1f28383 (fix)
 
 export default function HomePage() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [showCountryLangModal, setShowCountryLangModal] = useState(false);
   const [selectedPlace, setSelectedPlace] = useState(null);
-  const [selectedPlace, setSelectedPlace] = useState(null);
-
-  const tabs = useGetTabsQuery("")
-  console.log("tabs",tabs)
 
   // Fetch countries and languages using RTK Query
   const {
@@ -46,8 +39,6 @@ export default function HomePage() {
     setIsExpanded(true);
   };
   console.log("selectedPlace", selectedPlace);
-=======
->>>>>>> 1f28383 (fix)
 
   return (
     <div className="flex flex-col h-full relative bg-theme-primary">
@@ -91,8 +82,6 @@ export default function HomePage() {
             />
           </BottomSheetModal1>
         )}
-=======
->>>>>>> 1f28383 (fix)
       </div>
       <CountryLanguageModal
         languages={languages}
