@@ -331,14 +331,8 @@ const EditProfileContent: React.FC = () => {
 
       {/* Cards Section */}
       <div className="w-full max-w-[480px] mx-auto p-4 space-y-4">
-        {/* First Card: Veteran ID, User ID, Nickname */}
+        {/* First Card: User ID, Nickname */}
         <div className="bg-white rounded-xl shadow p-0 overflow-hidden">
-          <FieldRow
-            label="Veteran ID"
-            value={profileData.userId || ""}
-            clickable={false}
-            showArrow={false}
-          />
           <FieldRow
             label="User ID"
             value={profileData.username || ""}
