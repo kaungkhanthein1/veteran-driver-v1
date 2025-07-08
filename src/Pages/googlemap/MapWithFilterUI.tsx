@@ -154,29 +154,305 @@ const MapWithFilterUI = ({
     placeMarkersRef.current = [];
   };
 
+  const createCustomMarkerIcon = (imageUrl: string) => {
+    // Canvas setup
+    const scaleFactor = 2;
+    const canvas = document.createElement("canvas");
+    canvas.width = 60 * scaleFactor;
+    canvas.height = 70 * scaleFactor; // Reduced height for shorter pin
+    const context = canvas.getContext("2d");
+
+    if (!context) return null;
+    context.scale(scaleFactor, scaleFactor);
+
+    // Create image element
+    const img = new Image();
+    img.crossOrigin = "Anonymous";
+    img.src = imageUrl;
+
+    return new Promise<google.maps.Icon>((resolve) => {
+      img.onload = () => {
+        // 1. Draw yellow border circle
+        context.beginPath();
+        context.arc(30, 30, 30, 0, 2 * Math.PI);
+        context.fillStyle = "#FFD700";
+        context.fill();
+
+        // 2. Draw white circle for border effect
+        context.beginPath();
+        context.arc(30, 30, 25, 0, 2 * Math.PI);
+        context.fillStyle = "white";
+        context.fill();
+
+        // 3. Clip and draw image
+        context.save();
+        context.beginPath();
+        context.arc(30, 30, 25, 0, 2 * Math.PI);
+        context.closePath();
+        context.clip();
+        context.drawImage(img, 5, 5, 50, 50);
+        context.restore();
+
+        // 4. Draw shorter reverse triangle pin (height reduced to 10px)
+        const pinBottomWidth = 16;
+        const pinBottomHeight = 10; // Reduced height
+
+        context.beginPath();
+        context.moveTo(30 - pinBottomWidth / 2, 60);
+        context.lineTo(30 + pinBottomWidth / 2, 60);
+        context.lineTo(30, 60 + pinBottomHeight);
+        context.closePath();
+        context.fillStyle = "#FFD700";
+        context.fill();
+
+        resolve({
+          url: canvas.toDataURL(),
+          scaledSize: new google.maps.Size(60, 70), // Adjusted height
+          anchor: new google.maps.Point(30, 70), // Adjusted anchor
+        });
+      };
+
+      img.onerror = () => {
+        // Fallback version
+        context.beginPath();
+        context.arc(30, 30, 30, 0, 2 * Math.PI);
+        context.fillStyle = "#FFD700";
+        context.fill();
+
+        context.beginPath();
+        context.arc(30, 30, 25, 0, 2 * Math.PI);
+        context.fillStyle = "white";
+        context.fill();
+
+        // Shorter triangle pin
+        const pinBottomWidth = 16;
+        const pinBottomHeight = 10;
+
+        context.beginPath();
+        context.moveTo(30 - pinBottomWidth / 2, 60);
+        context.lineTo(30 + pinBottomWidth / 2, 60);
+        context.lineTo(30, 60 + pinBottomHeight);
+        context.closePath();
+        context.fillStyle = "#FFD700";
+        context.fill();
+
+        resolve({
+          url: canvas.toDataURL(),
+          scaledSize: new google.maps.Size(60, 70),
+          anchor: new google.maps.Point(30, 70),
+        });
+      };
+    });
+  };
+  // const createCustomMarkerIcon = (imageUrl: string) => {
+  //   // Canvas setup
+  //   const scaleFactor = 2;
+  //   const canvas = document.createElement("canvas");
+  //   canvas.width = 60 * scaleFactor;
+  //   canvas.height = 80 * scaleFactor;
+  //   const context = canvas.getContext("2d");
+
+  //   if (!context) return null;
+  //   context.scale(scaleFactor, scaleFactor);
+
+  //   // Create image element
+  //   const img = new Image();
+  //   img.crossOrigin = "Anonymous";
+  //   img.src = imageUrl;
+
+  //   return new Promise<google.maps.Icon>((resolve) => {
+  //     img.onload = () => {
+  //       // 1. First draw the yellow border circle (outermost)
+  //       context.beginPath();
+  //       context.arc(30, 30, 30, 0, 2 * Math.PI);
+  //       context.fillStyle = "#FFD700";
+  //       context.fill();
+
+  //       // 2. Draw white circle slightly smaller to create border effect
+  //       context.beginPath();
+  //       context.arc(30, 30, 25, 0, 2 * Math.PI); // 5px smaller radius = 10px border
+  //       context.fillStyle = "white";
+  //       context.fill();
+
+  //       // 3. Clip image to circle (slightly smaller than border)
+  //       context.save();
+  //       context.beginPath();
+  //       context.arc(30, 30, 25, 0, 2 * Math.PI); // Same size as white circle
+  //       context.closePath();
+  //       context.clip();
+
+  //       // 4. Draw image filling the clipped area (touching border)
+  //       context.drawImage(img, 5, 5, 50, 50); // Positioned to touch border
+  //       context.restore();
+
+  //       // 5. Draw wider reverse triangle pin (no border)
+  //       const pinBottomWidth = 16;
+  //       const pinBottomHeight = 20;
+
+  //       context.beginPath();
+  //       context.moveTo(30 - pinBottomWidth / 2, 60);
+  //       context.lineTo(30 + pinBottomWidth / 2, 60);
+  //       context.lineTo(30, 60 + pinBottomHeight);
+  //       context.closePath();
+  //       context.fillStyle = "#FFD700";
+  //       context.fill();
+
+  //       resolve({
+  //         url: canvas.toDataURL(),
+  //         scaledSize: new google.maps.Size(60, 80),
+  //         anchor: new google.maps.Point(30, 80),
+  //       });
+  //     };
+
+  //     img.onerror = () => {
+  //       // Fallback - yellow circle with white border and no image
+  //       context.beginPath();
+  //       context.arc(30, 30, 30, 0, 2 * Math.PI);
+  //       context.fillStyle = "#FFD700";
+  //       context.fill();
+
+  //       context.beginPath();
+  //       context.arc(30, 30, 25, 0, 2 * Math.PI);
+  //       context.fillStyle = "white";
+  //       context.fill();
+
+  //       // Draw triangle pin
+  //       const pinBottomWidth = 16;
+  //       const pinBottomHeight = 20;
+
+  //       context.beginPath();
+  //       context.moveTo(30 - pinBottomWidth / 2, 60);
+  //       context.lineTo(30 + pinBottomWidth / 2, 60);
+  //       context.lineTo(30, 60 + pinBottomHeight);
+  //       context.closePath();
+  //       context.fillStyle = "#FFD700";
+  //       context.fill();
+
+  //       resolve({
+  //         url: canvas.toDataURL(),
+  //         scaledSize: new google.maps.Size(60, 80),
+  //         anchor: new google.maps.Point(30, 80),
+  //       });
+  //     };
+  //   });
+  // };
+  // const createCustomMarkerIcon = (imageUrl: string) => {
+  //   // Canvas setup
+  //   const scaleFactor = 2;
+  //   const canvas = document.createElement("canvas");
+  //   canvas.width = 60 * scaleFactor;
+  //   canvas.height = 80 * scaleFactor;
+  //   const context = canvas.getContext("2d");
+
+  //   if (!context) return null;
+  //   context.scale(scaleFactor, scaleFactor);
+
+  //   // Draw circular image with thick border (60x60)
+  //   const imageRadius = 30;
+  //   const borderWidth = 10;
+
+  //   // Yellow border circle
+  //   context.beginPath();
+  //   context.arc(30, 30, imageRadius, 0, 2 * Math.PI);
+  //   context.fillStyle = "#FFD700";
+  //   context.fill();
+
+  //   // White inner circle (creates border effect)
+  //   context.beginPath();
+  //   context.arc(30, 30, imageRadius - borderWidth / 2, 0, 2 * Math.PI);
+  //   context.fillStyle = "white";
+  //   context.fill();
+
+  //   // Create image element
+  //   const img = new Image();
+  //   img.crossOrigin = "Anonymous";
+  //   img.src = imageUrl;
+
+  //   return new Promise<google.maps.Icon>((resolve) => {
+  //     img.onload = () => {
+  //       // Clip and draw image
+  //       context.save();
+  //       context.beginPath();
+  //       context.arc(30, 30, imageRadius - borderWidth, 0, 2 * Math.PI);
+  //       context.closePath();
+  //       context.clip();
+
+  //       context.drawImage(
+  //         img,
+  //         30 - (imageRadius - borderWidth),
+  //         30 - (imageRadius - borderWidth),
+  //         (imageRadius - borderWidth) * 2,
+  //         (imageRadius - borderWidth) * 2
+  //       );
+  //       context.restore();
+
+  //       // Draw wider reverse triangle pin (no border)
+  //       const pinBottomWidth = 16; // Wider triangle
+  //       const pinBottomHeight = 20;
+
+  //       context.beginPath();
+  //       context.moveTo(30 - pinBottomWidth / 2, 60); // Bottom left
+  //       context.lineTo(30 + pinBottomWidth / 2, 60); // Bottom right
+  //       context.lineTo(30, 60 + pinBottomHeight); // Tip point
+  //       context.closePath();
+  //       context.fillStyle = "#FFD700";
+  //       context.fill();
+
+  //       resolve({
+  //         url: canvas.toDataURL(),
+  //         scaledSize: new google.maps.Size(60, 80),
+  //         anchor: new google.maps.Point(30, 80),
+  //       });
+  //     };
+
+  //     img.onerror = () => {
+  //       // Fallback - just show the marker without image
+  //       // Draw wider reverse triangle pin (no border)
+  //       const pinBottomWidth = 16;
+  //       const pinBottomHeight = 20;
+
+  //       context.beginPath();
+  //       context.moveTo(30 - pinBottomWidth / 2, 60);
+  //       context.lineTo(30 + pinBottomWidth / 2, 60);
+  //       context.lineTo(30, 60 + pinBottomHeight);
+  //       context.closePath();
+  //       context.fillStyle = "#FFD700";
+  //       context.fill();
+
+  //       resolve({
+  //         url: canvas.toDataURL(),
+  //         scaledSize: new google.maps.Size(60, 80),
+  //         anchor: new google.maps.Point(30, 80),
+  //       });
+  //     };
+  //   });
+  // };
   // Create markers for nearby places
-  const createPlaceMarkers = () => {
+  const createPlaceMarkers = async () => {
     if (!mapRef.current || !nearbyPlaces.length) return;
 
     clearPlaceMarkers();
 
-    const newMarkers = nearbyPlaces.map((place) => {
+    for (const place of nearbyPlaces) {
       const [lng, lat] = place.location.coordinates;
-      return new google.maps.Marker({
+      const icon = await createCustomMarkerIcon(
+        place.photos?.[0] || getIconForPlaceType(place.tags?.[0]?.key)
+      );
+
+      const marker = new google.maps.Marker({
         position: { lat, lng },
         map: mapRef.current,
         title: place.name,
-        icon: {
-          url: place.photos?.[0] || getIconForPlaceType(place.tags?.[0]?.key),
-          scaledSize: new google.maps.Size(30, 30),
-          anchor: new google.maps.Point(15, 15),
-        },
+        icon: icon,
       });
-    });
 
-    placeMarkersRef.current = newMarkers;
+      marker.addListener("click", () => {
+        onPlaceSelect(place);
+      });
+
+      placeMarkersRef.current.push(marker);
+    }
   };
-
   // Get appropriate icon based on place type
   const getIconForPlaceType = (type?: string) => {
     // You should replace these with your actual icon URLs
@@ -262,33 +538,28 @@ const MapWithFilterUI = ({
   return (
     <div className="absolute inset-0">
       <div className="w-full h-full relative">
-        <LoadScript
-          googleMapsApiKey="AIzaSyA4mTDHRw_8u_fRaYe2ZPCHSxpDxhZpIuc"
-          libraries={["geometry"]}
+        <GoogleMap
+          mapContainerStyle={{ width: "100%", height: "100%" }}
+          center={mapCenter}
+          zoom={15}
+          options={{
+            zoomControl: false,
+            streetViewControl: false,
+            mapTypeControl: false,
+            fullscreenControl: false,
+          }}
+          onLoad={onLoad}
+          onUnmount={onUnmount}
         >
-          <GoogleMap
-            mapContainerStyle={{ width: "100%", height: "100%" }}
-            center={mapCenter}
-            zoom={15}
-            options={{
-              zoomControl: false,
-              streetViewControl: false,
-              mapTypeControl: false,
-              fullscreenControl: false,
-            }}
-            onLoad={onLoad}
-            onUnmount={onUnmount}
-          >
-            {/* Markers are created programmatically for better performance */}
-          </GoogleMap>
+          {/* Markers are created programmatically for better performance */}
+        </GoogleMap>
 
-          {isMapReady && mapRef.current && (
-            <MapSideBar
-              onRecenterClick={handleRecenter}
-              isExpanded={isExpanded}
-            />
-          )}
-        </LoadScript>
+        {isMapReady && mapRef.current && (
+          <MapSideBar
+            onRecenterClick={handleRecenter}
+            isExpanded={isExpanded}
+          />
+        )}
       </div>
     </div>
   );

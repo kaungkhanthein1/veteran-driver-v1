@@ -81,17 +81,4 @@ const NearestPlaceCard = ({ item }: any) => {
   );
 };
 
-// NearestPlaceCard.propTypes = {
-//   item: PropTypes.shape({
-//     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-//     name: PropTypes.string.isRequired,
-//     price: PropTypes.string.isRequired,
-//     rating: PropTypes.number.isRequired,
-//     reviews: PropTypes.number.isRequired,
-//     distance: PropTypes.string.isRequired,
-//     image: PropTypes.string.isRequired,
-//   }).isRequired,
-//   // rank: PropTypes.number.isRequired,
-// };
-
 export default NearestPlaceCard;

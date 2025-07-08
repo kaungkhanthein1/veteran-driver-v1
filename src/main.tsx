@@ -17,6 +17,7 @@ validateEnvironment();
 
 // Initialize axios interceptors
 import { authService } from "./services/authService";
+import GoogleMapsProvider from "./Pages/googlemap/GoogleMapsProvider";
 authService.setupAxiosInterceptors();
 
 const root = ReactDOM.createRoot(
@@ -26,11 +27,13 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
-        <AuthProvider>
-          <TolgeeProvider tolgee={tolgee}>
-            <App />
-          </TolgeeProvider>
-        </AuthProvider>
+        <GoogleMapsProvider>
+          <AuthProvider>
+            <TolgeeProvider tolgee={tolgee}>
+              <App />
+            </TolgeeProvider>
+          </AuthProvider>
+        </GoogleMapsProvider>
       </GoogleOAuthProvider>
     </Provider>
   </React.StrictMode>

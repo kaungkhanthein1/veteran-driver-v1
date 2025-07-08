@@ -36,8 +36,8 @@ export default function BottomSheetModal1({
 
   useEffect(() => {
     const updateHeight = () => {
-      const newHeight = window.innerHeight - 0.5;
-      console.log(newHeight);
+      const newHeight = window.innerHeight - TOP_BAR_HEIGHT;
+
       setSheetHeight(newHeight);
     };
     updateHeight();
@@ -143,7 +143,7 @@ export default function BottomSheetModal1({
         {/* Content is scrollable */}
         <motion.div
           ref={contentRef}
-          className="overflow-y-auto h-screen pb-8"
+          className="overflow-y-auto h-[100dvh] pb-8"
           onScroll={handleContentScroll}
           style={{
             overscrollBehavior: "contain",
