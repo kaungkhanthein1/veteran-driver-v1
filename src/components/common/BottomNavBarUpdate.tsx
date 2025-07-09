@@ -54,7 +54,7 @@ export default function BottomNavBarUpdate() {
                   alt={tab.label}
                   className="w-7 h-7 object-contain mb-1"
                 />
-                <span className="text-xs text-black font-normal">
+                <span className={`text-xs ${isActive ? 'text-[#FE740E]' : 'text-black'} font-normal`}>
                   {tab.label}
                 </span>
               </button>

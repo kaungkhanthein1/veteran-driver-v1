@@ -33,6 +33,7 @@ const ProfileCard: React.FC = () => {
   const user = data?.data || {};
   const [isShareModalOpen, setShareModalOpen] = useState(false);
   const [isLanguageModalOpen, setLanguageModalOpen] = useState(false);
+  const [showThemeToast, setShowThemeToast] = useState(false);
 
   return (
     <div
@@ -44,6 +45,12 @@ const ProfileCard: React.FC = () => {
         backgroundPosition: 'top',
       }}
     >
+      {/* Toast for Application Themes */}
+      {showThemeToast && (
+        <div className="fixed bottom-20 left-1/2 z-50 -translate-x-1/2 bg-[#444444D1] text-white px-6 py-2 rounded-full shadow-lg text-base transition-opacity duration-300" style={{opacity: 0.95}}>
+          This feature is not available at the moment
+        </div>
+      )}
       {/* Top bar: Only settings icon at top right */}
       <div className="flex justify-end items-center px-4 pt-6 mb-4">
         <button
@@ -127,7 +134,7 @@ const ProfileCard: React.FC = () => {
           {/* Location and bio below avatar/name/level, aligned left */}
           <div className="flex flex-col items-start w-full mt-8 mb-6">
             {user.bio && (
-              <div className="text-base text-gray-700 flex items-center gap-1">
+              <div className="montserrat-regular flex items-center gap-1">
                 {user.bio}
               </div>
             )}
@@ -199,28 +206,28 @@ const ProfileCard: React.FC = () => {
           <button className="flex items-center justify-between w-full px-4 py-4" onClick={() => navigate('/favourites')}>
             <div className="flex items-center gap-3">
               <img src={FavouriteIcon} alt="Favourites" className="w-6 h-6" />
-              <span className="text-base text-gray-700">Favourites</span>
+              <span className="montserrat-regular">Favourites</span>
             </div>
             <svg className="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/></svg>
           </button>
           <button className="flex items-center justify-between w-full px-4 py-4" onClick={() => navigate('/notifications')}>
             <div className="flex items-center gap-3">
               <img src={NotiIcon} alt="Notifications" className="w-6 h-6" />
-              <span className="text-base text-gray-700">Notifications</span>
+              <span className="montserrat-regular">Notifications</span>
             </div>
             <svg className="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/></svg>
           </button>
           <button className="flex items-center justify-between w-full px-4 py-4" onClick={() => setLanguageModalOpen(true)}>
             <div className="flex items-center gap-3">
               <img src={LanguageIcon} alt="Language" className="w-6 h-6" />
-              <span className="text-base text-gray-700">Language</span>
+              <span className="montserrat-regular">Language</span>
             </div>
             <svg className="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/></svg>
           </button>
-          <button className="flex items-center justify-between w-full px-4 py-4" onClick={() => navigate('/settings/theme')}>
+          <button className="flex items-center justify-between w-full px-4 py-4" onClick={() => { setShowThemeToast(true); setTimeout(() => setShowThemeToast(false), 2000); }}>
             <div className="flex items-center gap-3">
               <img src={ThemeIcon} alt="Application Themes" className="w-6 h-6" />
-              <span className="text-base text-gray-700">Application Themes</span>
+              <span className="montserrat-regular">Application Themes</span>
             </div>
             <svg className="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/></svg>
           </button>
@@ -233,16 +240,16 @@ const ProfileCard: React.FC = () => {
           <button className="flex items-center justify-between w-full px-4 py-4" onClick={() => setShareModalOpen(true)}>
             <div className="flex items-center gap-3">
               <img src={ShareIcon} alt="Share Our App" className="w-6 h-6" />
-              <span className="text-base text-gray-700">Share Our App</span>
+              <span className="montserrat-regular">Share Our App</span>
             </div>
             <svg className="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/></svg>
           </button>
           <div className="flex items-center justify-between w-full px-4 py-4">
             <div className="flex items-center gap-3">
               <img src={VersionIcon} alt="Version" className="w-6 h-6" />
-              <span className="text-base text-gray-700">Version</span>
+              <span className="montserrat-regular">Version</span>
             </div>
-            <span className="text-base text-gray-400">V1.0.01</span>
+            <span className="montserrat-regular">V 1.0.0.1</span>
           </div>
         </div>
       </div>
@@ -255,7 +262,7 @@ const ProfileCard: React.FC = () => {
           <div className="flex items-center justify-between w-full px-4 py-4">
             <div className="flex items-center gap-3">
               <img src={VersionIcon} alt="Version" className="w-6 h-6" />
-              <span className="text-base text-gray-700">Version</span>
+              <span className="montserrat-regular">Version</span>
             </div>
             <span className="text-base text-gray-400">V1.0.01</span>
           </div>
