@@ -31,7 +31,7 @@ export default function HomePage() {
     lng: 104.9305413,
     limit: 50,
   });
-  const nearByData = (newData as any).data as NearbyForMapResponseDto;
+  const nearByData = (newData as any)?.data as NearbyForMapResponseDto;
   
   // Convert PlaceResponseDto[] to the format expected by MapWithFilterUI
   const convertPlacesForMap = (places: PlaceResponseDto[]) => {
