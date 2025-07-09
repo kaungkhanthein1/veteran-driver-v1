@@ -203,7 +203,7 @@ const ProfileCard: React.FC = () => {
       {/* Card 1: Favourites, Notifications, Language, Application Themes */}
       <div className="w-full max-w-[480px] mx-auto p-4">
         <div className="bg-white rounded-xl shadow p-0 overflow-hidden">
-          <button className="flex items-center justify-between w-full px-4 py-4" onClick={() => navigate('/favourites')}>
+          <button className="flex items-center justify-between w-full px-4 py-4" onClick={() => navigate('/bookmarks')}>
             <div className="flex items-center gap-3">
               <img src={FavouriteIcon} alt="Favourites" className="w-6 h-6" />
               <span className="montserrat-regular">Favourites</span>

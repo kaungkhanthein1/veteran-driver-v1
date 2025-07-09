@@ -494,7 +494,7 @@ export default function BookmarksPage() {
           )}
 
           {activeTab === 'notification' && (
-            <div className="flex flex-col items-center justify-center flex-1 pt-8">
+            <div className="flex flex-col items-center justify-center flex-1 pt-32">
               <img src={NoNoti} alt="No Notifications" className="w-[120px] h-[102px] mb-4" />
               <div className="flex flex-col items-center mb-2">
                 <span className="text-gray-900 text-lg font-semibold text-center">
