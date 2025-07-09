@@ -89,6 +89,7 @@ const CheckMap = () => {
               mapTypeControl: false,
               fullscreenControl: false,
               clickableIcons: false,
+              gestureHandling: "greedy",
             }}
             onLoad={onLoad}
             onUnmount={onUnmount}

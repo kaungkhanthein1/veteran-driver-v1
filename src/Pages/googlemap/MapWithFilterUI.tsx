@@ -547,6 +547,7 @@ const MapWithFilterUI = ({
             streetViewControl: false,
             mapTypeControl: false,
             fullscreenControl: false,
+            gestureHandling: "greedy",
           }}
           onLoad={onLoad}
           onUnmount={onUnmount}
