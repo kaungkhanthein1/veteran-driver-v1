@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { authService } from '../services/authService';
+import { fetchProfile } from '../services/ProfileService';
 
 interface User {
   id: string;
@@ -28,14 +29,41 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       try {
         const token = authService.getToken();
         if (token) {
-          // Here you would typically validate the token with your backend
-          // and get the user data
-          // For now, we'll just check if the token exists
-          setIsLoading(false);
+          try {
+            // Try to fetch real user data from the API
+            const profileData = await fetchProfile();
+            if (profileData && profileData.data) {
+              const userData: User = {
+                id: profileData.data.id || profileData.data.userId || 'current-user',
+                email: profileData.data.email || 'user@example.com',
+                name: profileData.data.name || profileData.data.nickname || profileData.data.username || 'Current User',
+                picture: profileData.data.avatar || profileData.data.picture,
+              };
+              setUser(userData);
+            } else {
+              // If API call succeeds but no data, set minimal user
+              const userData: User = {
+                id: 'current-user',
+                email: 'user@example.com',
+                name: 'Current User',
+              };
+              setUser(userData);
+            }
+          } catch (apiError) {
+            console.warn('Failed to fetch user profile, but token exists:', apiError);
+            // If API call fails but token exists, still consider user authenticated
+            // This handles cases where the API might be temporarily unavailable
+            const userData: User = {
+              id: 'current-user',
+              email: 'user@example.com',
+              name: 'Current User',
+            };
+            setUser(userData);
+          }
         } else {
           setUser(null);
-          setIsLoading(false);
         }
+        setIsLoading(false);
       } catch (error) {
         console.error('Auth check error:', error);
         setUser(null);
@@ -47,7 +75,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   const login = (userData: User, token: string) => {
-    localStorage.setItem('auth_token', token);
+    // Use the same token key that's used throughout the app
+    localStorage.setItem('token', token);
     setUser(userData);
   };
 

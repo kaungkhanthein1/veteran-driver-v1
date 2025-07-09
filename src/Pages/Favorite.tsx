@@ -8,6 +8,9 @@ import ToAdd from "../icons/BookmarksUpdate/ToAdd.svg";
 import Favourite from "../icons/BookmarksUpdate/Favorite.svg";
 import ArrowLeft from "../icons/BookmarksUpdate/ArrowLeft.svg";
 import HotelRoom from "../assets/HarrierRoom.png";
+import NoNoti from "../icons/NoNoti.svg";
+import HighlightBar from "../icons/Highlight.png";
+import { useAuth } from "../context/AuthContext";
 
 interface CreateFolderModalProps {
   isOpen: boolean;
@@ -366,6 +369,7 @@ export default function Favorite() {
 
   const { id } = useParams();
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
 
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -451,6 +455,62 @@ export default function Favorite() {
     },
     ...folders,
   ];
+
+  // Show no logged in state if user is not authenticated
+  if (!isAuthenticated) {
+    return (
+      <div className="dvh-fallback flex justify-center bg-white">
+        <div className="w-full max-w-[480px] flex flex-col h-screen">
+          <div className="flex-1 overflow-y-auto">
+            {/* Header */}
+            <div className="relative flex items-center p-4 border-b border-gray-100">
+              <button
+                onClick={() => navigate(-1)}
+                className="absolute left-4 p-2 -ml-2 hover:bg-gray-100 rounded-full"
+              >
+                <img src={ArrowLeft} alt="Back" className="w-8 h-8" />
+              </button>
+
+              <h1 className="flex-1 text-center text-lg font-medium text-gray-900">
+                Save to list
+              </h1>
+            </div>
+
+            {/* No Logged In State Content */}
+            <div className="flex flex-col items-center justify-center flex-1 px-4 pt-16">
+              <div className="flex flex-col items-center max-w-[320px] w-full text-center">
+                {/* Icon */}
+                <div className="mb-8">
+                  <img src={NoNoti} alt="Save Your Favorite Places" className="w-[166px] h-[141px]" />
+                </div>
+                
+                {/* Title */}
+                <h2 className="text-[24px] font-semibold text-gray-900 mb-4">
+                  Save Your Favorite Places
+                </h2>
+                
+                {/* Subtitle */}
+                <p className="text-gray-500 text-[16px] leading-relaxed mb-12">
+                  Log in to access your saved spots and trips anytime
+                </p>
+                
+                {/* Sign In Button */}
+                <button
+                  onClick={() => navigate('/login')}
+                  className="w-full py-3.5 px-6 text-black text-[16px] font-semibold rounded-full transition-all duration-200 hover:opacity-90"
+                  style={{
+                    background: 'linear-gradient(180deg, #FFC61B 0%, #FF9500 100%)',
+                  }}
+                >
+                  Sign in
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="dvh-fallback flex justify-center bg-white">

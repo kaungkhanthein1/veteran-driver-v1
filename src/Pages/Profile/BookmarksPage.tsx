@@ -12,6 +12,7 @@ import HotelRoom from '../../assets/HarrierRoom.png';
 import RemoveIcon from '../../icons/BookmarksUpdate/Remove.svg';
 import { favoritesService } from '../../services/FavoritesService';
 import PlaceCard from '../../components/cards/PlaceCard';
+import { useAuth } from '../../context/AuthContext';
 
 interface CreateFolderModalProps {
   isOpen: boolean;
@@ -479,6 +480,7 @@ export default function BookmarksPage() {
   } = useBookmarks();
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
   const [activeTab, setActiveTab] = useState('favourites');
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -655,6 +657,84 @@ export default function BookmarksPage() {
   console.log('foldersWithPhotos:', foldersWithPhotos);
   console.log('userFolders (filtered):', userFolders);
   console.log('allFolders (final):', allFolders);
+
+  // Show no logged in state if user is not authenticated
+  if (!isAuthenticated) {
+    return (
+      <div className="dvh-fallback flex justify-center bg-white">
+        <div className="w-full max-w-[480px] flex flex-col h-screen">
+          <div className="flex-1 overflow-y-auto">
+            {/* Tabs */}
+            <div className="flex items-center justify-center pt-6 pb-4 bg-white sticky top-0 z-20">
+              <div className="flex gap-8">
+                <button
+                  className={`flex flex-col items-center text-lg font-medium px-4 pb-0 transition-colors ${
+                    activeTab === 'favourites' 
+                      ? 'text-gray-900 font-bold' 
+                      : 'text-gray-500 font-normal'
+                  }`}
+                  onClick={() => setActiveTab('favourites')}
+                >
+                  <span>Favourites</span>
+                  {activeTab === 'favourites' && (
+                    <div className="mt-1">
+                      <img src={HighlightBar} alt="highlight" className="w-10 h-1" />
+                    </div>
+                  )}
+                </button>
+                <button
+                  className={`flex flex-col items-center text-lg font-medium px-4 pb-0 transition-colors ${
+                    activeTab === 'notification' 
+                      ? 'text-gray-900 font-bold' 
+                      : 'text-gray-500 font-normal'
+                  }`}
+                  onClick={() => setActiveTab('notification')}
+                >
+                  <span>Notification</span>
+                  {activeTab === 'notification' && (
+                    <div className="mt-1">
+                      <img src={HighlightBar} alt="highlight" className="w-10 h-1" />
+                    </div>
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {/* No Logged In State Content */}
+            <div className="flex flex-col items-center justify-center flex-1 px-4 pt-16">
+              <div className="flex flex-col items-center max-w-[320px] w-full text-center">
+                {/* Icon */}
+                <div className="mb-8">
+                  <img src={NoNoti} alt="Save Your Favorite Places" className="w-[166px] h-[141px]" />
+                </div>
+                
+                {/* Title */}
+                <h2 className="text-[24px] font-semibold text-gray-900 mb-4">
+                  Save Your Favorite Places
+                </h2>
+                
+                {/* Subtitle */}
+                <p className="text-gray-500 text-[16px] leading-relaxed mb-12">
+                  Log in to access your saved spots and trips anytime
+                </p>
+                
+                {/* Sign In Button */}
+                <button
+                  onClick={() => navigate('/login')}
+                  className="w-full py-3.5 px-6 text-black text-[16px] font-semibold rounded-full transition-all duration-200 hover:opacity-90"
+                  style={{
+                    background: 'linear-gradient(180deg, #FFC61B 0%, #FF9500 100%)',
+                  }}
+                >
+                  Sign in
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="dvh-fallback flex justify-center bg-white">
