@@ -333,7 +333,7 @@ const NearestPlacHomeCard = ({ item }: any) => {
 
   const mapContainerStyle = {
     width: "100%",
-    height: "120px",
+    height: "200px",
     borderRadius: "12px",
     marginTop: "16px",
   };
@@ -775,7 +775,7 @@ const NearestPlacHomeCard = ({ item }: any) => {
         <div className="mt-2">
           <p className="loc-des">{item?.description}</p>
         </div>
-        <div className="mt-2">
+        <div className="mt-2" id="detail-map-container">
           <GoogleMap
             mapContainerStyle={mapContainerStyle}
             center={destination}

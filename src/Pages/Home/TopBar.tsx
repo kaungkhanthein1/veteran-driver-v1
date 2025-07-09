@@ -4,22 +4,33 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import DropdownArrow from "icons/HomeUpdate/Dropdown.svg";
 import CountryFlag from "icons/HomeUpdate/thai.png";
-import HotelIcon from "icons/HomeUpdate/Hotel.png";
-import BarIcon from "icons/HomeUpdate/Bar.png";
-import LadyIcon from "icons/HomeUpdate/Lady.png";
+
 import axios from "axios";
+import { useGetConfigallQuery } from "../../features/HomeApi";
 
 type TopBarProps = {
   onFlagClick?: () => void;
+  setQuery: any;
+  setActiveChip: any;
+  activeChip: any;
 };
 
-export default function TopBar({ onFlagClick }: TopBarProps) {
+export default function TopBar({
+  onFlagClick,
+  setQuery,
+  setActiveChip,
+  activeChip,
+}: TopBarProps) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
   const { name } = useSelector((state: any) => state.country);
+  const { data: config } = useGetConfigallQuery({});
+  const tabs = config?.data?.data[0].value?.tabs || [];
   const token = localStorage.getItem("token");
+
+  console.log(config);
 
   const [state, setState] = useState("");
 
@@ -32,13 +43,6 @@ export default function TopBar({ onFlagClick }: TopBarProps) {
   }, []);
 
   // Active filter chip state
-  const [activeChip, setActiveChip] = useState<string | null>(null);
-
-  const filterChips = [
-    { key: "hotels", label: "Hotels", icon: HotelIcon },
-    { key: "bar", label: "Bar & Drinks", icon: BarIcon },
-    { key: "lady", label: "Lady", icon: LadyIcon },
-  ];
 
   useEffect(() => {
     async function fetchLocation() {
@@ -140,19 +144,27 @@ export default function TopBar({ onFlagClick }: TopBarProps) {
       </div> */}
       {/* Filter Chips Row */}
       <div className="flex gap-2 px-1 pt-3 pb-1 overflow-x-auto no-scrollbar h-14 items-center whitespace-nowrap">
-        {filterChips.map((chip) => (
+        {tabs.map((chip: any) => (
           <button
-            key={chip.key}
-            onClick={() => setActiveChip(chip.key)}
+            key={chip.id}
+            onClick={() => {
+              if (activeChip === chip.id) {
+                setActiveChip(null);
+                setQuery("");
+              } else {
+                setActiveChip(chip.id);
+                setQuery(chip.id);
+              }
+            }}
             className={`flex items-center gap-1 px-4 py-1 h-11 rounded-full border text-base transition-colors duration-150
               ${
-                activeChip === chip.key
+                activeChip === chip.id
                   ? "bg-gradient-to-r from-yellow-200 to-yellow-100 text-black border-yellow-200 shadow-md"
                   : "bg-theme-primary border-theme-primary text-theme-text"
               }
             `}
           >
-            <img src={chip.icon} alt={chip.label} className="w-5 h-5" />
+            <span>{chip.emoji}</span>
             {chip.label}
           </button>
         ))}

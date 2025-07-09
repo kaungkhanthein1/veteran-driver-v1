@@ -11,13 +11,26 @@ import {
 } from "../services/CountryApi";
 import CountryLanguageModal from "../../components/CitySelectModal";
 import { useMeQuery } from "../../Pages/services/ProfileApi";
-import { useGetLocationNearbyQuery } from "../../features/HomeApi";
+import {
+  useGetLocationNearbyQuery,
+  useGetRecommandQuery,
+} from "../../features/HomeApi";
 import NearContent from "./NearContent";
 
 export default function HomePage() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [showCountryLangModal, setShowCountryLangModal] = useState(false);
   const [selectedPlace, setSelectedPlace] = useState(null);
+  const [query, setQuery] = useState("");
+  const [activeChip, setActiveChip] = useState<string | null>(null);
+
+  const {
+    data: recommand,
+    isLoading,
+    isFetching,
+  } = useGetRecommandQuery({ query });
+  const places = recommand?.data?.places || [];
+  console.log("recommand", recommand);
 
   // Fetch countries and languages using RTK Query
   const {
@@ -38,7 +51,8 @@ export default function HomePage() {
     setSelectedPlace(place);
     setIsExpanded(true);
   };
-  console.log("selectedPlace", selectedPlace);
+
+  const isLoadingRecommand = isLoading || isFetching;
 
   return (
     <div className="flex flex-col h-full relative bg-theme-primary">
@@ -51,14 +65,19 @@ export default function HomePage() {
             exit={{ opacity: 0, y: -50 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
           >
-            <TopBar onFlagClick={() => setShowCountryLangModal(true)} />
+            <TopBar
+              onFlagClick={() => setShowCountryLangModal(true)}
+              setQuery={setQuery}
+              setActiveChip={setActiveChip}
+              activeChip={activeChip}
+            />
           </motion.div>
         )}
       </AnimatePresence>
       <div className="flex-1 relative max-w-[480px] mx-auto w-full">
         <MapWithFilterUI
           isExpanded={isExpanded}
-          nearbyPlaces={nearByData?.places || []}
+          nearbyPlaces={query?.length > 0 ? places : nearByData?.places || []}
           onPlaceSelect={handlePlaceSelect}
         />
 
@@ -67,7 +86,11 @@ export default function HomePage() {
             isExpanded={isExpanded}
             setIsExpanded={setIsExpanded}
           >
-            <MainContent />
+            <MainContent
+              places={places}
+              query={query}
+              isLoadingRecommand={isLoadingRecommand}
+            />
           </BottomSheetModal>
         ) : (
           <BottomSheetModal1

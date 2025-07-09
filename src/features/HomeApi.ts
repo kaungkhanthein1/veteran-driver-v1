@@ -82,16 +82,23 @@ export const HomeApi = createApi({
       async queryFn() {
         return signedBaseQuery({
           url: "/ui-config/all",
-          params: { country: "th", platform: "h5" },
+          params: { country: "kh", platform: "h5" },
         });
       },
     }),
-    // Endpoint using signed requests
-    getNearby: build.query<any, any>({
-      async queryFn() {
+    getRecommand: build.query<any, any>({
+      async queryFn({ query }) {
         return signedBaseQuery({
-          url: "/ui-config/all",
-          params: { country: "th", platform: "h5" },
+          url: "/places/nearby-for-recommendation",
+          params: { lat: "11.5458547", lng: "104.9305413", limit: 23, query },
+        });
+      },
+    }),
+    getPlace: build.query<any, any>({
+      async queryFn({ id }) {
+        return signedBaseQuery({
+          url: `/places/${id}`,
+          params: { lat: "11.5458547", lng: "104.9305413", id },
         });
       },
     }),
@@ -104,5 +111,6 @@ export const {
   useGetCountriesQuery,
   useGetLocationNearbyQuery,
   useGetConfigallQuery,
-  useGetNearbyQuery,
+  useGetRecommandQuery,
+  useGetPlaceQuery,
 } = HomeApi;
