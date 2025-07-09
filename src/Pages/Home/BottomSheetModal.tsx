@@ -130,7 +130,8 @@ export default function BottomSheetModal({
           onScroll={handleContentScroll}
           style={{ 
             overscrollBehavior: "contain",
-            touchAction: isExpanded && isContentScrolled ? "pan-y" : "none"
+            WebkitOverflowScrolling: "touch",
+            touchAction: isExpanded && isContentScrolled ? "pan-y" : undefined
           }}
         >
           {children}
