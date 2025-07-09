@@ -31,10 +31,8 @@ const SUPPORTED_LANGS = ["zh", "zh-hant", "en", "ja", "ko"];
 
 // Helper to get current language, fallback to 'en' if not supported
 function getCurrentLang(): string {
-function getCurrentLang(): string {
   let lang = i18n.language || "en";
   lang = lang.toLowerCase();
-  if (lang === "zh-hant" || lang === "zh-hk" || lang === "zh-tw") return "zh-hant";
   if (lang === "zh-hant" || lang === "zh-hk" || lang === "zh-tw") return "zh-hant";
   if (SUPPORTED_LANGS.includes(lang)) return lang;
   if (lang.startsWith("zh")) return "zh";
@@ -46,12 +44,9 @@ function getCurrentLang(): string {
 
 // Helper to get token (customize as needed)
 function getToken(): string | null {
-function getToken(): string | null {
   return localStorage.getItem("token");
 }
 
-function generateNonce(length = 16): string {
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 function generateNonce(length = 16): string {
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   return Array.from(
@@ -61,11 +56,9 @@ function generateNonce(length = 16): string {
 }
 
 function hex2buf(hex: string): Uint8Array {
-function hex2buf(hex: string): Uint8Array {
   return new Uint8Array(hex.match(/../g)!.map((x) => parseInt(x, 16)));
 }
 
-function b64tobuf(b64: string): Uint8Array {
 function b64tobuf(b64: string): Uint8Array {
   return new Uint8Array(Buffer.from(b64, "base64"));
 }
@@ -119,63 +112,7 @@ function extractAndMergeQueryParams(url: string, params?: any): { path: string; 
     return { path: safePath, query: {} };
   }
 }
-function arrayBufferToString(buffer: ArrayBuffer): string {
-  return new TextDecoder('utf-8').decode(buffer);
-}
 
-// Optimized query parameter extraction and merging
-function extractAndMergeQueryParams(url: string, params?: any): { path: string; query: Record<string, string> } {
-  try {
-    let path: string;
-    let queryString = '';
-    
-    // Handle both full URLs and relative paths
-    if (url.startsWith('http://') || url.startsWith('https://')) {
-      const urlObj = new URL(url);
-      path = urlObj.pathname;
-      queryString = urlObj.search.slice(1); // Remove the '?' prefix
-    } else {
-      // It's a relative path
-      const [pathPart, ...queryParts] = url.split('?');
-      path = pathPart;
-      queryString = queryParts.join('?'); // Handle edge case of multiple '?' in query
-    }
-    
-    // Parse existing query parameters
-    const existingQuery: Record<string, string> = {};
-    if (queryString) {
-      const searchParams = new URLSearchParams(queryString);
-      for (const [key, value] of searchParams) {
-        existingQuery[key] = value;
-      }
-    }
-    
-    // Merge with axios params (params take precedence)
-    const mergedQuery: Record<string, string> = { ...existingQuery };
-    if (params && typeof params === 'object') {
-      for (const [key, value] of Object.entries(params)) {
-        if (value !== null && value !== undefined) {
-          mergedQuery[key] = String(value);
-        }
-      }
-    }
-    
-    return { path, query: mergedQuery };
-  } catch (error) {
-    console.warn('Failed to parse URL for query extraction:', error);
-    // Safe fallback
-    const safePath = url.split('?')[0];
-    return { path: safePath, query: {} };
-  }
-}
-
-function buildSignature({ method, path, query, body, headers }: {
-  method: string;
-  path: string;
-  query: Record<string, string>;
-  body: string;
-  headers: Record<string, string>;
-}): string {
 function buildSignature({ method, path, query, body, headers }: {
   method: string;
   path: string;
@@ -186,14 +123,7 @@ function buildSignature({ method, path, query, body, headers }: {
   const parts = [];
   parts.push(method.toUpperCase());
   parts.push(path); // path is already cleaned by extractAndMergeQueryParams
-  parts.push(path); // path is already cleaned by extractAndMergeQueryParams
 
-  // Build sorted query string for consistent signature
-  const sortedEntries = Object.entries(query).sort(([a], [b]) => a.localeCompare(b));
-  const queryString = sortedEntries.length > 0 
-    ? sortedEntries.map(([k, v]) => `${k}=${v}`).join("&")
-    : "";
-  parts.push(queryString);
   // Build sorted query string for consistent signature
   const sortedEntries = Object.entries(query).sort(([a], [b]) => a.localeCompare(b));
   const queryString = sortedEntries.length > 0 
@@ -224,8 +154,6 @@ function buildSignature({ method, path, query, body, headers }: {
 
 async function decryptResponse(responseData: any, ivHex: string, encHdr: string): Promise<any> {
   if (!ivHex || !encHdr) return responseData;
-async function decryptResponse(responseData: any, ivHex: string, encHdr: string): Promise<any> {
-  if (!ivHex || !encHdr) return responseData;
 
   const fmt = encHdr.split("-").pop();
   const iv = hex2buf(ivHex);
@@ -235,14 +163,9 @@ async function decryptResponse(responseData: any, ivHex: string, encHdr: string)
     rawBuf = responseData instanceof ArrayBuffer 
       ? new Uint8Array(responseData)
       : new Uint8Array(responseData);
-    rawBuf = responseData instanceof ArrayBuffer 
-      ? new Uint8Array(responseData)
-      : new Uint8Array(responseData);
   } else if (fmt === "b64") {
     rawBuf = b64tobuf(typeof responseData === 'string' ? responseData : arrayBufferToString(responseData));
-    rawBuf = b64tobuf(typeof responseData === 'string' ? responseData : arrayBufferToString(responseData));
   } else {
-    rawBuf = hex2buf(typeof responseData === 'string' ? responseData : arrayBufferToString(responseData));
     rawBuf = hex2buf(typeof responseData === 'string' ? responseData : arrayBufferToString(responseData));
   }
 
@@ -271,9 +194,7 @@ async function decryptResponse(responseData: any, ivHex: string, encHdr: string)
     const plaintext = new TextDecoder('utf-8').decode(decryptedBuf);
     try {
       return JSON.parse(plaintext);
-      return JSON.parse(plaintext);
     } catch {
-      return plaintext;
       return plaintext;
     }
   } catch (e: any) {
@@ -296,27 +217,7 @@ function setHeaders(headers: any, headersToSet: Record<string, string>): void {
 function getHeadersObject(headers: any): Record<string, string> {
   if (typeof headers?.entries === "function") {
     return Object.fromEntries(headers.entries());
-    throw new Error(`Decryption failed: ${e.message}`);
   }
-}
-
-function setHeaders(headers: any, headersToSet: Record<string, string>): void {
-  if (typeof headers?.set === "function") {
-    // AxiosHeaders instance
-    Object.entries(headersToSet).forEach(([key, value]) => {
-      headers.set(key, value);
-    });
-  } else {
-    // Plain object
-    Object.assign(headers, headersToSet);
-  }
-}
-
-function getHeadersObject(headers: any): Record<string, string> {
-  if (typeof headers?.entries === "function") {
-    return Object.fromEntries(headers.entries());
-  }
-  return headers || {};
   return headers || {};
 }
 
@@ -331,13 +232,10 @@ const gateway: AxiosInstance = axios.create({
 
 gateway.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   try {
-  try {
     const timestamp = Math.floor(Date.now() / 1000).toString();
     const nonce = generateNonce();
     const token = getToken();
     const lang = getCurrentLang();
-    const token = getToken();
-    const lang = getCurrentLang();
 
     // Prepare headers to set
     const headersToSet: Record<string, string> = {
@@ -356,25 +254,7 @@ gateway.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 
     // Optimized query parameter extraction and merging
     const { path, query } = extractAndMergeQueryParams(config.url || '', config.params);
-    // Prepare headers to set
-    const headersToSet: Record<string, string> = {
-      "x-lang": lang,
-      "x-device-id": getHeadersObject(config.headers)["x-device-id"] || "demo-device-001",
-      [GATEWAY_CONFIG.timestampHeader]: timestamp,
-      [GATEWAY_CONFIG.nonceHeader]: nonce,
-    };
 
-    if (token) {
-      headersToSet["Authorization"] = `Bearer ${token}`;
-    }
-
-    // Set headers using unified function
-    setHeaders(config.headers, headersToSet);
-
-    // Optimized query parameter extraction and merging
-    const { path, query } = extractAndMergeQueryParams(config.url || '', config.params);
-
-    // Prepare body for signature
     // Prepare body for signature
     let body = "";
     if (config.data) {
@@ -388,10 +268,8 @@ gateway.interceptors.request.use((config: InternalAxiosRequestConfig) => {
       // Set Content-Type if not already set and not FormData
       if (
         !getHeadersObject(config.headers)["Content-Type"] &&
-        !getHeadersObject(config.headers)["Content-Type"] &&
         !(typeof FormData !== "undefined" && config.data instanceof FormData)
       ) {
-        setHeaders(config.headers, { "Content-Type": "application/json" });
         setHeaders(config.headers, { "Content-Type": "application/json" });
       }
     }
@@ -470,25 +348,9 @@ gateway.interceptors.response.use(
     } catch (error) {
       console.error("Response decryption error:", error);
       return Promise.reject(error);
-    } catch (error) {
-      console.error("Response decryption error:", error);
-      return Promise.reject(error);
     }
   },
   (error) => {
-    // Enhanced error logging
-    if (error.response) {
-      console.error("Gateway response error:", {
-        status: error.response.status,
-        statusText: error.response.statusText,
-        data: error.response.data,
-        url: error.config?.url,
-      });
-    } else if (error.request) {
-      console.error("Gateway request error:", error.request);
-    } else {
-      console.error("Gateway setup error:", error.message);
-    }
     // Enhanced error logging
     if (error.response) {
       console.error("Gateway response error:", {
