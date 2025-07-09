@@ -27,8 +27,8 @@ export default function HomePage() {
   const { data } = useMeQuery();
 
   const { data: newData } = useGetNearbyPlacesForMapQuery({
-    lat: 0,
-    lng: 0,
+    lat: 11.5458547,
+    lng: 104.9305413,
     limit: 10,
   });
   const nearByData = newData as NearbyForMapResponseDto;
