@@ -6,12 +6,13 @@ import { useProfileEdit } from "../../context/ProfileEditContext";
 import BackButton from "../../components/common/BackButton";
 import DefaultAvatorWhite from "../../icons/DefaultAvatorWhite.svg";
 import EditProfileIcon from "../../icons/ProfileUpdate/EditProfile.svg";
+
 import NextIcon from "../../icons/Next.svg";
 import {
   useGetUploadUrlMutation,
   useConfirmUploadMutation,
 } from "../../Pages/services/ProfileApi";
-import GenderSelectionModal from '../../components/common/GenderSelectionModal';
+import GenderSelectionModal from "../../components/common/GenderSelectionModal";
 
 const FieldRow: React.FC<{
   label: string;
@@ -22,9 +23,9 @@ const FieldRow: React.FC<{
   last?: boolean;
 }> = ({ label, value, onClick, clickable, showArrow, last }) => (
   <div
-    className={`flex items-center justify-between px-4 py-4${
-      ""
-    } ${clickable ? "cursor-pointer hover:bg-gray-50 transition-colors" : ""}`}
+    className={`flex items-center justify-between px-4 py-4${""} ${
+      clickable ? "cursor-pointer hover:bg-gray-50 transition-colors" : ""
+    }`}
     onClick={clickable ? onClick : undefined}
   >
     <span className="text-gray-500 text-base">{label}</span>
@@ -83,8 +84,8 @@ const EditProfileContent: React.FC = () => {
   // Fetch country and city lists (mocked for now)
   useEffect(() => {
     // Replace with real API calls
-    setCountries(['Thailand', 'Cambodia']);
-    setCities(['Phnom Penh', 'Krong']);
+    setCountries(["Thailand", "Cambodia"]);
+    setCities(["Phnom Penh", "Krong"]);
   }, []);
 
   const handleSave = async () => {
@@ -106,17 +107,17 @@ const EditProfileContent: React.FC = () => {
     setGenderLoading(true);
     // Capitalize first letter for API
     const genderMap: Record<string, string> = {
-      male: 'Male',
-      female: 'Female',
-      other: 'Other',
-      Male: 'Male',
-      Female: 'Female',
-      Other: 'Other',
+      male: "Male",
+      female: "Female",
+      other: "Other",
+      Male: "Male",
+      Female: "Female",
+      Other: "Other",
     };
     const payloadGender = genderMap[newGender] || newGender;
     try {
       await updateProfile({ gender: payloadGender });
-      updateField('gender', payloadGender);
+      updateField("gender", payloadGender);
     } catch {
       // Optionally show error
     } finally {
@@ -128,8 +129,8 @@ const EditProfileContent: React.FC = () => {
     setLocationLoading(true);
     try {
       await updateProfile({ country, city });
-      updateField('country', country);
-      updateField('city', city);
+      updateField("country", country);
+      updateField("city", city);
     } catch {
       // Optionally show error
     } finally {
@@ -207,7 +208,9 @@ const EditProfileContent: React.FC = () => {
           source: "upload",
         },
       }).unwrap();
-
+      console.log(key, "key");
+      console.log(accessUrl, "accessUrl");
+      await updateProfile({ avatar: key });
       // 5. Update profile with new avatar URL
       updateField("avatar", accessUrl);
       setSuccess("Avatar updated successfully!");
@@ -238,25 +241,44 @@ const EditProfileContent: React.FC = () => {
     handleAvatarUpload(file);
   };
 
+  // const handleSave = async () => {
+  //     setLoading(true);
+  //     setError(null);
+  //     setSuccess(null);
+  //     try {
+
+  //       updateField('bio', bio.trim());
+  //       setSuccess('Bio updated successfully!');
+  //       setTimeout(() => navigate('/edit-profile'), 1000);
+  //     } catch {
+  //       setError('Failed to update bio');
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
   // Helper for location string
   const locationString = [profileData.country, profileData.city]
     .filter(Boolean)
     .join(" , ");
 
-  if (loading) {
-    return (
-      <div className="text-center py-8">
-        {t("editProfilePage.loading", "Loading...")}
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="text-center py-8">
+  //       {t("editProfilePage.loading", "Loading...")}
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="min-h-screen bg-[#F8F9FB] flex flex-col items-center">
       {/* Header with Back Button and Title */}
       <div className="relative w-full max-w-[480px] flex items-center justify-center py-4 bg-transparent">
         <div className="absolute left-0 top-1/2 -translate-y-1/2 pl-2">
-          <div onClick={() => navigate('/profile', { replace: true })} className="cursor-pointer">
+          <div
+            onClick={() => navigate("/profile", { replace: true })}
+            className="cursor-pointer"
+          >
             <BackButton />
           </div>
         </div>
@@ -267,66 +289,42 @@ const EditProfileContent: React.FC = () => {
 
       {/* Avatar Section */}
       <div className="flex flex-col items-center mt-2 mb-4">
-        {/* <div className="relative">
-          <img
-            src={profileData.avatar || DefaultAvatorWhite}
-            alt="Avatar"
-            className="w-24 h-24 rounded-full object-cover border-4 border-white shadow"
-          />
-          <label className="absolute bottom-0 right-0 bg-white rounded-full p-1 shadow cursor-pointer border border-gray-200">
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (file) {
-                  const reader = new FileReader();
-                  reader.onloadend = () => {
-                    const newAvatar = reader.result as string;
-                    updateField("avatar", newAvatar);
-                  };
-                  reader.readAsDataURL(file);
-                }
-              }}
-              className="hidden"
-            />
+        {loading ? (
+          <div className="h-[100px] pt-10">
+            <div className="spiner"></div>
+          </div>
+        ) : (
+          <div className="relative">
             <img
-              src={EditProfileIcon}
-              alt="Upload"
-              className="w-6 h-6 text-blue-500"
+              src={profileData.avatar || DefaultAvatorWhite}
+              alt="Avatar"
+              className="w-24 h-24 rounded-full object-cover border-4 border-white shadow"
             />
-          </label>
-        </div> */}
-        <div className="relative">
-          <img
-            src={profileData.avatar || DefaultAvatorWhite}
-            alt="Avatar"
-            className="w-24 h-24 rounded-full object-cover border-4 border-white shadow"
-          />
-          <label className="absolute bottom-0 right-0 bg-white rounded-full p-1 shadow cursor-pointer border border-gray-200">
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleAvatarChange}
-              className="hidden"
-              disabled={loading}
-            />
-            <img
-              src={EditProfileIcon}
-              alt="Upload"
-              className="w-6 h-6 text-blue-500"
-            />
-          </label>
-          {uploadProgress > 0 && uploadProgress < 100 && (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-20 h-20 rounded-full bg-black bg-opacity-50 flex items-center justify-center">
-                <span className="text-white text-sm font-bold">
-                  {uploadProgress}%
-                </span>
+            <label className="absolute bottom-0 right-0 bg-white rounded-full p-1 shadow cursor-pointer border border-gray-200">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleAvatarChange}
+                className="hidden"
+                disabled={loading}
+              />
+              <img
+                src={EditProfileIcon}
+                alt="Upload"
+                className="w-6 h-6 text-blue-500"
+              />
+            </label>
+            {uploadProgress > 0 && uploadProgress < 100 && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-20 h-20 rounded-full bg-black bg-opacity-50 flex items-center justify-center">
+                  <span className="text-white text-sm font-bold">
+                    {uploadProgress}%
+                  </span>
+                </div>
               </div>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Cards Section */}
@@ -390,7 +388,9 @@ const EditProfileContent: React.FC = () => {
       />
       {genderLoading && (
         <div className="fixed inset-0 bg-black bg-opacity-20 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg px-6 py-4 shadow text-theme-text">Saving gender...</div>
+          <div className="bg-white rounded-lg px-6 py-4 shadow text-theme-text">
+            Saving gender...
+          </div>
         </div>
       )}
 

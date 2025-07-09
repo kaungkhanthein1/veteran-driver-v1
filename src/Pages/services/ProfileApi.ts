@@ -15,7 +15,10 @@ export const ProfileApi = createApi({
         method: "GET",
       }),
     }),
-    getUploadUrl: builder.mutation<any, { type: string; usage: string; mimeType?: string }>({
+    getUploadUrl: builder.mutation<
+      any,
+      { type: string; usage: string; mimeType?: string }
+    >({
       async queryFn(params) {
         try {
           const response = await sendSignedAndDecrypt({
@@ -24,7 +27,7 @@ export const ProfileApi = createApi({
             query: {
               type: params.type,
               usage: params.usage,
-              // mimeType: params.mimeType,
+              mimeType: params.mimeType,
             },
           });
           return { data: response };
@@ -33,7 +36,17 @@ export const ProfileApi = createApi({
         }
       },
     }),
-    getBatchUploadUrls: builder.mutation<any, { uploads: Array<{ type: string; usage: string; mimeType: string; expiresIn?: number }> }>({
+    getBatchUploadUrls: builder.mutation<
+      any,
+      {
+        uploads: Array<{
+          type: string;
+          usage: string;
+          mimeType: string;
+          expiresIn?: number;
+        }>;
+      }
+    >({
       async queryFn(body) {
         try {
           const response = await sendSignedAndDecrypt({
@@ -47,7 +60,14 @@ export const ProfileApi = createApi({
         }
       },
     }),
-    confirmUpload: builder.mutation<any, { key: string; size: number; meta?: { width?: number; height?: number; source?: string } }>({
+    confirmUpload: builder.mutation<
+      any,
+      {
+        key: string;
+        size: number;
+        meta?: { width?: number; height?: number; source?: string };
+      }
+    >({
       async queryFn(body) {
         try {
           const response = await sendSignedAndDecrypt({
