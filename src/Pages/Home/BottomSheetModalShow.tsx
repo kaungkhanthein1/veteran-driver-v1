@@ -18,7 +18,7 @@ export default function BottomSheetModalShow({
 }: BottomSheetModalProps) {
   const sheetRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const [sheetHeight, setSheetHeight] = useState(380);
+  const [sheetHeight, setSheetHeight] = useState(320);
   const TOP_BAR_HEIGHT = 20;
   const SHEET_MIN = minHeight;
   const [isDragging, setIsDragging] = useState(false);
@@ -33,7 +33,7 @@ export default function BottomSheetModalShow({
 
   useEffect(() => {
     const updateHeight = () => {
-      const newHeight = 380;
+      const newHeight = 320;
       setSheetHeight(newHeight);
     };
     updateHeight();
@@ -103,7 +103,7 @@ export default function BottomSheetModalShow({
     <AnimatePresence>
       <motion.div
         ref={sheetRef}
-        className="fixed left-0 right-0 bottom-0 z-30 bg-theme-secondary rounded-t-2xl shadow-xl max-w-[480px] mx-auto"
+        className="fixed left-0 right-0 bottom-0 z-[1001] bg-theme-secondary rounded-t-2xl shadow-xl max-w-[480px] mx-auto"
         style={{ height: sheetHeight }}
         initial={expendable ? "closed" : "closed"}
         animate={expendable && isExpanded ? "open" : "closed"}
@@ -127,7 +127,7 @@ export default function BottomSheetModalShow({
         {/* Content is scrollable */}
         <motion.div
           ref={contentRef}
-          className="overflow-y-auto h-[calc(100%-32px)] pb-8"
+          className="overflow-y-auto h-[calc(100%-32px)]"
           onScroll={handleContentScroll}
           style={{
             overscrollBehavior: "contain",

@@ -30,7 +30,6 @@ export default function HomePage() {
     isFetching,
   } = useGetRecommandQuery({ query });
   const places = recommand?.data?.places || [];
-  console.log("recommand", recommand);
 
   // Fetch countries and languages using RTK Query
   const {

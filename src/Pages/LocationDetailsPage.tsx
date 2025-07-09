@@ -18,6 +18,8 @@ import bmap from "../assets/bmap.png";
 import rmap from "../assets/rmap.png";
 import "../components/cards/card.css";
 import LocationDescription from "./LocationDescription";
+import ShareModal from "components/common/ShareModal";
+import { getAccessToken } from "./services/tokenUtils";
 
 const LocationDetailsPage = () => {
   const { id } = useParams();
@@ -25,10 +27,11 @@ const LocationDetailsPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [showShare, setshowShare] = useState(false);
   const [showHeaderBg, setShowHeaderBg] = useState(false);
   const { data: detail, isLoading, isFetching } = useGetPlaceQuery({ id });
   const placeData = detail?.data || null;
-  console.log("Place Data:", placeData); // Log the fetched place data
+
   const { t } = useTranslation();
   const { toggleBookmark, isBookmarked } = useBookmarks();
 
@@ -56,6 +59,7 @@ const LocationDetailsPage = () => {
   const [startIcon, setStartIcon] = useState<google.maps.Icon | null>(null);
 
   const mapRef = useRef<google.maps.Map | null>(null);
+  const token = getAccessToken();
 
   const [showMap, setshowMap] = useState(false);
 
@@ -347,7 +351,6 @@ const LocationDetailsPage = () => {
 
   useEffect(() => {
     const loadIcon = async () => {
-      console.log("aa");
       try {
         const icon = await createCustomMarkerIcon(
           locationData?.photos?.[0] || ""
@@ -382,8 +385,8 @@ const LocationDetailsPage = () => {
         }`}
       >
         <div className="flex items-center justify-between p-4">
-          <div onClick={() => navigate(-1)} className="cursor-pointer">
-            <BackButton />
+          <div className="cursor-pointer">
+            <BackButton detail={true} />
           </div>
           <div className="flex items-center flex-grow justify-center">
             <h1
@@ -394,7 +397,7 @@ const LocationDetailsPage = () => {
               {locationData.name}
             </h1>
           </div>
-          <button className="p-2 z-10">
+          <button className="p-2 z-10" onClick={() => setshowShare(true)}>
             <img
               src={ShareIcon}
               alt={t("locationDetails.shareAltText")}
@@ -432,7 +435,15 @@ const LocationDetailsPage = () => {
         </div>
         <button
           className="absolute bottom-4 right-4 p-2 rounded-full bg-black/30"
-          onClick={() => toggleBookmark(locationData)}
+          onClick={() => {
+            if (token) {
+              navigate(`/favorite/${locationData.id}`);
+            } else {
+              navigate("/login", {
+                state: { background: location },
+              });
+            }
+          }}
         >
           <img
             src={BookmarkIcon}
@@ -697,6 +708,7 @@ const LocationDetailsPage = () => {
             </div>
           </div>
         </BottomSheetModalShow>
+        <ShareModal isOpen={showShare} onClose={() => setshowShare(false)} />
       </div>
     </div>
   );

@@ -1,40 +1,22 @@
-import { useTranslation } from "react-i18next";
-import PlaceCard from "../../components/cards/PlaceCard";
-import GoldenGateImage from "../../assets/GoldenGate.png";
-import HarrierImage from "../../assets/Harrier.png";
-import RoomImage from "../../assets/Room.png";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import NearestPlaceHomeCard from "../../components/cards/NearestPlaceHomeCard";
-// import NearestPlaceCard from "components/cards/NearestPlaceCard";
 
-// const RECENTLY_VISITED_KEY = "recentlyVisitedPlaces";
-
-// function getRecentlyVisited(): any[] {
-//   try {
-//     return JSON.parse(localStorage.getItem(RECENTLY_VISITED_KEY) || "[]");
-//   } catch {
-//     return [];
-//   }
-// }
-
-// function addRecentlyVisited(place: any) {
-//   const current = getRecentlyVisited();
-//   // Remove if already exists, then add to front
-//   const filtered = current.filter((p: any) => p.id !== place.id);
-//   const updated = [place, ...filtered].slice(0, 10); // Keep max 10
-//   localStorage.setItem(RECENTLY_VISITED_KEY, JSON.stringify(updated));
-// }
+import { useState } from "react";
+import ShareModal from "../../components/common/ShareModal";
+import { getAccessToken } from "../../Pages/services/tokenUtils";
 
 export default function NearContent({
   selectedPlace,
   setSelectedPlace,
   setIsExpanded,
 }: any) {
-  const { t } = useTranslation();
   const navigate = useNavigate();
+  const [showShare, setshowShare] = useState(false);
+  const token = getAccessToken();
+  const location = useLocation();
 
   return (
-    <div className="w-full max-w-[480px] mx-auto">
+    <div className="w-full max-w-[480px] mx-auto z-[1001]">
       {/* Nearest Recommendation Section */}
       <div className="px-4 py-2 bg-theme-secondary">
         <div className="flex justify-between items-center">
@@ -59,7 +41,12 @@ export default function NearContent({
             </svg>
           </div>
           <div className="gap-3 flex items-center">
-            <div className="rounded-full bg-theme-primary p-2 cursor-pointer hover:bg-theme-secondary transition-colors">
+            <div
+              onClick={() => {
+                setshowShare(true);
+              }}
+              className="rounded-full bg-theme-primary p-2 cursor-pointer hover:bg-theme-secondary transition-colors"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -90,7 +77,21 @@ export default function NearContent({
                 />
               </svg>
             </div>
-            <div className="rounded-full bg-theme-primary p-2 cursor-pointer hover:bg-theme-secondary transition-colors">
+            <div
+              onClick={() => {
+                if (token) {
+                  navigate(`/favorite/${selectedPlace?.id}`);
+                } else {
+                  navigate("/login", {
+                    state: {
+                      background: location,
+                      replace: true, // This is the key change
+                    },
+                  });
+                }
+              }}
+              className="rounded-full bg-theme-primary p-2 cursor-pointer hover:bg-theme-secondary transition-colors"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="22"
@@ -111,6 +112,7 @@ export default function NearContent({
         <div className="flex flex-col gap-2">
           <NearestPlaceHomeCard item={selectedPlace} />
         </div>
+        <ShareModal isOpen={showShare} onClose={() => setshowShare(false)} />
       </div>
     </div>
   );

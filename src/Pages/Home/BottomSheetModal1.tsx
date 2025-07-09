@@ -118,7 +118,7 @@ export default function BottomSheetModal1({
     <AnimatePresence>
       <motion.div
         ref={sheetRef}
-        className="fixed left-0 right-0 bottom-0 z-30 bg-theme-secondary rounded-t-2xl shadow-xl max-w-[480px] mx-auto"
+        className="fixed left-0 right-0 bottom-0 z-[1001] bg-theme-secondary rounded-t-2xl shadow-xl max-w-[480px] mx-auto"
         style={{ height: sheetHeight }}
         initial={expendable ? "closed" : "closed"}
         animate={expendable && isExpanded ? "open" : "closed"}

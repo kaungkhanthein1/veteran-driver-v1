@@ -46,6 +46,7 @@ import HomeTab from "./tabs/HomeTab";
 import BookmarksTab from "./tabs/BookmarksTab";
 import ProfileTab from "./tabs/ProfileTab";
 import FeedbackPage from "./Pages/FeedbackPage";
+import Favorite from "./Pages/Favorite";
 
 function MainTabs() {
   return (
@@ -53,6 +54,7 @@ function MainTabs() {
       <Routes>
         <Route path="/" element={<HomeTab />} />
         <Route path="/bookmarks" element={<BookmarksTab />} />
+        <Route path="/favorite/:id" element={<Favorite />} />
         <Route path="/profile" element={<ProfileTab />} />
       </Routes>
       <BottomNavBarUpdate />
@@ -70,7 +72,10 @@ function AppRoutes() {
       <Routes location={state?.background || location}>
         <Route path="/*" element={<MainTabs />} />
         {/* Other routes remain as-is */}
-        <Route path="/otp-verify" element={<OtpVerifyPage emailorPhone="" userName="" password="" />} />
+        <Route
+          path="/otp-verify"
+          element={<OtpVerifyPage emailorPhone="" userName="" password="" />}
+        />
         <Route path="/location-access" element={<LocationAccessPage />} />
         <Route path="/choose-location" element={<ChooseLocationPage />} />
         <Route path="/explore" element={<ExplorePage />} />
