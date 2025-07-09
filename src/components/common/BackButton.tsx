@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ArrowBackIcon from "icons/arrow_back.webp";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
