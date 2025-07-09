@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import ArrowBackIcon from "icons/arrow_back.webp";
+import ArrowBackIcon from "icons/back.webp";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
@@ -22,7 +22,7 @@ export default function BackButton({ className = "", detail = false }) {
       <img
         src={ArrowBackIcon}
         alt={t("common.backButtonAltText")}
-        className="w-2.5"
+        className="w-7"
       />
     </button>
   );

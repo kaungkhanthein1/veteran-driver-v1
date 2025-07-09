@@ -10,7 +10,7 @@ const NotificationsPage = () => {
   return (
     <div className="dvh-fallback bg-theme-primary text-theme-text">
       {/* Header */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-theme-primary">
+      <div className="fixed top-0 left-0 right-0 z-50 bg-theme-primary max-w-[480px] mx-auto">
         <div className="relative flex items-center p-4">
           <BackButton onClick={() => navigate(-1)} className="absolute left-4" />
           <h1 className="text-lg font-semibold text-center flex-grow">{t('notificationsPage.title')}</h1>

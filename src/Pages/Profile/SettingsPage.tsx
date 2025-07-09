@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import BackButton from '../../components/common/BackButton';
+import { authService } from '../../services/authService';
 
 export default function SettingsPage() {
   const navigate = useNavigate();
@@ -44,7 +45,8 @@ export default function SettingsPage() {
   // Logout handler (implement actual logic as needed)
   const handleLogout = () => {
     // TODO: Add logout logic
-    navigate('/login');
+    authService.logout();
+    navigate('/profile');
   };
 
   return (

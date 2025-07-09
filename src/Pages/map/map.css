@@ -304,6 +304,7 @@
   background: var(--Neutral-Color-N10, #f5f5f5);
   color: #000;
   /* font-family: "Arbeit Pro Trial"; */
+  border-radius: 9px;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
