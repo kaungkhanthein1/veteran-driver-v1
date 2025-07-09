@@ -143,7 +143,7 @@ export default function TopBar({
         </div>
       </div> */}
       {/* Filter Chips Row */}
-      <div className="flex gap-2 px-1 pt-3 pb-1 overflow-x-auto no-scrollbar h-14 items-center whitespace-nowrap">
+      <div className="flex gap-2 px-1 pt-3 pb-1 overflow-x-auto no-scrollbar items-center whitespace-nowrap">
         {tabs.map((chip: any) => (
           <button
             key={chip.id}
