@@ -411,7 +411,7 @@ const LocationDetailsPage = () => {
           showHeaderBg ? "bg-theme-primary" : "bg-transparent"
         }`}
       >
-        <div className="flex items-center justify-between p-4">
+        <div className="flex items-center justify-between p-4 max-w-[480px]">
           <div className="cursor-pointer">
             <BackButton detail={true} />
           </div>

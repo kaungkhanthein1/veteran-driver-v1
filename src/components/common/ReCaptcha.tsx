@@ -21,7 +21,7 @@ export interface ReCaptchaRef {
 }
 
 const ReCaptcha = forwardRef<ReCaptchaRef, ReCaptchaProps>(
-  ({ onVerify, onExpired, onError, className = "" }, ref) => {
+  ({ onVerify, onExpired, onError, className = "mx-auto" }, ref) => {
     const recaptchaRef = useRef<ReCAPTCHA>(null);
     const { t } = useTranslation();
 
@@ -71,7 +71,7 @@ const ReCaptcha = forwardRef<ReCaptchaRef, ReCaptchaProps>(
     }));
 
     return (
-      <div className={className}>
+      <div className="w-[304px] mx-auto">
         <ReCAPTCHA
           ref={recaptchaRef}
           sitekey="6Lc6bXgrAAAAAFL74zic2cjeCqu8flnYpCe1I41q"
