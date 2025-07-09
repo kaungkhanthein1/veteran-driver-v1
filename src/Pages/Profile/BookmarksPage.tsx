@@ -720,7 +720,7 @@ export default function BookmarksPage() {
                 
                 {/* Sign In Button */}
                 <button
-                  onClick={() => navigate('/login')}
+                  onClick={() => navigate('/profile')}
                   className="w-full py-3.5 px-6 text-black text-[16px] font-semibold rounded-full transition-all duration-200 hover:opacity-90"
                   style={{
                     background: 'linear-gradient(180deg, #FFC61B 0%, #FF9500 100%)',
