@@ -19,6 +19,28 @@ export default defineConfig({
       // add more as needed
     },
   },
+  server: {
+    proxy: {
+      // Proxy favorites requests directly to the service (gateway is down)
+      '/api/v1/user-place-favorite': {
+        target: 'http://ec2-52-221-179-216.ap-southeast-1.compute.amazonaws.com:3008',
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api\/v1\/user-place-favorite/, '/user-place-favorite'),
+        configure: (proxy, options) => {
+          proxy.on('error', (err, req, res) => {
+            console.log('Proxy error:', err);
+          });
+          proxy.on('proxyReq', (proxyReq, req, res) => {
+            console.log('Sending Request to the Target:', req.method, req.url);
+          });
+          proxy.on('proxyRes', (proxyRes, req, res) => {
+            console.log('Received Response from the Target:', proxyRes.statusCode, req.url);
+          });
+        }
+      }
+    }
+  },
     build: {
     minify: 'terser',
     terserOptions: {
