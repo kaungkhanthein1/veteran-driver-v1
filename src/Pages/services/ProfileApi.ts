@@ -24,7 +24,7 @@ export const ProfileApi = createApi({
             query: {
               type: params.type,
               usage: params.usage,
-              // mimeType: params.mimeType,
+              mimeType: params.mimeType,
             },
           });
           return { data: response };

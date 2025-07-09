@@ -47,7 +47,7 @@ const ProfileCard: React.FC = () => {
     >
       {/* Toast for Application Themes */}
       {showThemeToast && (
-        <div className="fixed bottom-20 left-1/2 z-50 -translate-x-1/2 bg-[#444444D1] text-white px-6 py-2 rounded-full shadow-lg text-base transition-opacity duration-300" style={{opacity: 0.95}}>
+        <div className="fixed bottom-20 min-w-[370px] left-1/2 z-50 -translate-x-1/2 bg-[#444444D1] text-white px-6 py-2 rounded-full shadow-lg text-base transition-opacity duration-300" style={{opacity: 0.95}}>
           This feature is not available at the moment
         </div>
       )}

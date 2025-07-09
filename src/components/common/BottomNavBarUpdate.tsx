@@ -17,7 +17,7 @@ const tabs = [
   },
   {
     key: "bookmarks",
-    label: "Bookmarks",
+    label: "Favorite",
     icon: NavBookmarksIcon,
     activeIcon: NavBookmarksActiveIcon,
     path: "/bookmarks"
