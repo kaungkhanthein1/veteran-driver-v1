@@ -26,12 +26,11 @@ export default function HomePage() {
   const { data: _languages } = useGetSupportedLanguagesQuery();
   const { data } = useMeQuery();
 
-  const { data: newData } = useGetNearbyPlacesForMapQuery({
+  const { data: nearByData, isLoading, error } = useGetNearbyPlacesForMapQuery({
     lat: 11.5458547,
     lng: 104.9305413,
     limit: 50,
   });
-  const nearByData = (newData as any)?.data as NearbyForMapResponseDto;
   
   // Convert PlaceResponseDto[] to the format expected by MapWithFilterUI
   const convertPlacesForMap = (places: PlaceResponseDto[]) => {
@@ -55,6 +54,17 @@ export default function HomePage() {
     setIsExpanded(true);
   };
   console.log("selectedPlace", selectedPlace);
+
+  // Show loading state if data is still loading
+  if (isLoading) {
+    return (
+      <div className="flex flex-col h-full relative bg-theme-primary">
+        <div className="flex-1 flex items-center justify-center">
+          <div className="text-theme-text">加载中...</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col h-full relative bg-theme-primary">

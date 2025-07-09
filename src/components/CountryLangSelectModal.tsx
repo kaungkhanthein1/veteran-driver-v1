@@ -36,9 +36,25 @@ interface RootState {
 }
 
 const CountryLanguageModal = ({ open, onClose }: CountryLanguageModalProps) => {
-  const { data: countries = [] } = useGetSupportedCountriesQuery();
-  const { data: languages = [] } = useGetSupportedLanguagesQuery();
+  const { data: countriesData = [] } = useGetSupportedCountriesQuery();
+  const { data: languagesData = [] } = useGetSupportedLanguagesQuery();
   const dispatch = useDispatch();
+
+  // Debug: Log the actual data structure
+  console.log("countriesData:", countriesData);
+  console.log("languagesData:", languagesData);
+
+  // Handle different possible data structures
+  const countries = Array.isArray(countriesData) 
+    ? countriesData 
+    : (countriesData as any)?.data || (countriesData as any)?.countries || [];
+  
+  const languages = Array.isArray(languagesData)
+    ? languagesData
+    : (languagesData as any)?.data || (languagesData as any)?.languages || [];
+
+  console.log("processed countries:", countries);
+  console.log("processed languages:", languages);
 
   const globalSelectedCountry = useSelector(
     (state: RootState) => state.country.selectedCountry

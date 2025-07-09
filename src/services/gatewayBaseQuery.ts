@@ -11,6 +11,47 @@ import {
 } from "../Pages/services/tokenUtils";
 import { AuthApi } from "../Pages/services/AuthApi";
 
+// Safely serialize error data to prevent Redux serialization warnings
+const serializeErrorData = (data: any): any => {
+  if (data === null || data === undefined) {
+    return data;
+  }
+
+  if (data instanceof ArrayBuffer) {
+    return { 
+      type: 'ArrayBuffer', 
+      size: data.byteLength,
+      // Convert to base64 for debugging if needed
+      preview: data.byteLength > 0 ? btoa(String.fromCharCode(...new Uint8Array(data.slice(0, Math.min(100, data.byteLength))))) : ''
+    };
+  }
+
+  if (data instanceof Uint8Array || data instanceof Int8Array || 
+      data instanceof Uint16Array || data instanceof Int16Array ||
+      data instanceof Uint32Array || data instanceof Int32Array ||
+      data instanceof Float32Array || data instanceof Float64Array) {
+    return { 
+      type: data.constructor.name, 
+      length: data.length,
+      preview: Array.from(data.slice(0, Math.min(10, data.length)))
+    };
+  }
+
+  if (typeof data === 'object' && data !== null) {
+    if (Array.isArray(data)) {
+      return data.map(serializeErrorData);
+    }
+    
+    const serialized: any = {};
+    for (const [key, value] of Object.entries(data)) {
+      serialized[key] = serializeErrorData(value);
+    }
+    return serialized;
+  }
+
+  return data;
+};
+
 export const gatewayBaseQuery = ({
   baseUrl,
 }: { baseUrl?: string } = {}): BaseQueryFn<
@@ -105,7 +146,7 @@ export const gatewayBaseQuery = ({
             data: {
               message: response.data.error.message || "Business error",
               code: response.data.error.code,
-              details: response.data.error,
+              details: serializeErrorData(response.data.error),
             },
           },
         };
@@ -135,7 +176,7 @@ export const gatewayBaseQuery = ({
                 errorData?.message ||
                 "Server error",
               code: errorData?.error?.code || errorData?.code,
-              details: errorData,
+              details: serializeErrorData(errorData),
             },
           },
         };
