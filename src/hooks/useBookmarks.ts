@@ -217,15 +217,25 @@ export function useBookmarks(): UseBookmarksReturn {
   }, []);
 
   const deleteFolder = useCallback(async (folderId: string): Promise<void> => {
+    console.log('=== useBookmarks deleteFolder ===');
+    console.log('folderId received:', folderId);
     setError(null);
     try {
+      console.log('Calling favoritesService.deleteFolder with id:', folderId);
       await favoritesService.deleteFolder(folderId);
+      console.log('favoritesService.deleteFolder completed successfully');
       setFolders(prev => prev.filter(folder => folder.id !== folderId));
+      console.log('Updated folders state, refreshing bookmarks...');
       // Refresh bookmarks to update items that were in the deleted folder
       await loadBookmarks();
+      console.log('Bookmarks refresh completed');
     } catch (err: any) {
-      setError(err.message || 'Failed to delete folder');
+      console.error('=== useBookmarks deleteFolder ERROR ===');
       console.error('Error deleting folder:', err);
+      console.error('Error message:', err.message);
+      console.error('Error response:', err.response);
+      setError(err.message || 'Failed to delete folder');
+      throw err; // Re-throw to let the calling component handle it
     }
   }, [loadBookmarks]);
 

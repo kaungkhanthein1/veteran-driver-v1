@@ -233,8 +233,8 @@ function FolderItem({ folder, onClick, isSelected, onSelect }: any) {
               y2="21"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FFC61B" />
-              <stop offset="1" stop-color="#FF9500" />
+              <stop stopColor="#FFC61B" />
+              <stop offset="1" stopColor="#FF9500" />
             </linearGradient>
           </defs>
         </svg>
@@ -325,24 +325,26 @@ function DeleteConfirmModal({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg p-6 w-full max-w-sm">
-        <h3 className="text-lg font-medium text-gray-900 mb-2">Delete List</h3>
-        <p className="text-gray-600 mb-6">
-          Are you sure you want to delete &ldquo;{folderName}&rdquo;? This
-          action cannot be undone.
+      <div className="bg-white rounded-2xl p-8 w-full max-w-sm mx-4">
+        <h3 className="text-xl font-semibold text-gray-900 mb-4 text-center">Delete list ?</h3>
+        <p className="text-gray-600 text-center mb-8 leading-relaxed">
+          Are you sure you want to Delete the selected list permanently ? This action cannot be undone.
         </p>
-        <div className="flex space-x-3">
+        <div className="flex gap-4">
           <button
             onClick={onClose}
-            className="flex-1 px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+            className="flex-1 px-6 py-3 text-gray-600 bg-gray-100 rounded-xl font-medium hover:bg-gray-200 transition-colors"
           >
-            Cancel
+            Go back
           </button>
           <button
-            onClick={onConfirm}
-            className="flex-1 px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600 transition-colors"
+            onClick={() => {
+              console.log('Delete button clicked in Favorite.tsx');
+              onConfirm();
+            }}
+            className="flex-1 px-6 py-3 text-white bg-red-500 rounded-xl font-medium hover:bg-red-600 transition-colors"
           >
-            Delete
+            Yes, Delete
           </button>
         </div>
       </div>
@@ -411,11 +413,20 @@ export default function Favorite() {
   };
 
   const handleDeleteFolder = async (folderId: string) => {
+    console.log('handleDeleteFolder called in Favorite.tsx with folderId:', folderId);
+    console.log('selectedFolder:', selectedFolder);
+    
     try {
       await deleteFolder(folderId);
+      console.log('Folder deleted successfully in Favorite.tsx');
       setShowDeleteConfirm(false);
+      setSelectedFolder(null);
+      // Refresh the folders list
+      await refreshBookmarks();
     } catch (error) {
-      console.error("Failed to delete folder:", error);
+      console.error('Failed to delete folder in Favorite.tsx:', error);
+      // Show error to user - you can add a toast or alert here
+      alert('Failed to delete folder. Please try again.');
     }
   };
 

@@ -199,13 +199,21 @@ export const favoritesService = {
    * Delete a favorite folder
    */
   deleteFolder: async (folderId: string): Promise<void> => {
+    console.log('=== favoritesService.deleteFolder ===');
+    console.log('folderId received:', folderId);
+    console.log('API URL will be:', `${gatewayUrl}/user-place-favorite/folders/${folderId}`);
     try {
-      await gatewayRequest({
+      const response = await gatewayRequest({
         url: `${gatewayUrl}/user-place-favorite/folders/${folderId}`,
         method: "DELETE",
       });
-    } catch (error) {
+      console.log('Delete folder API response:', response);
+    } catch (error: any) {
+      console.error('=== favoritesService.deleteFolder ERROR ===');
       console.error("Error deleting folder:", error);
+      console.error("Error response:", error.response);
+      console.error("Error status:", error.response?.status);
+      console.error("Error data:", error.response?.data);
       throw error;
     }
   },

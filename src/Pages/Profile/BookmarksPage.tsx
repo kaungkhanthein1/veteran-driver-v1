@@ -9,6 +9,9 @@ import ThreeDots from '../../icons/BookmarksUpdate/ThreeDots.svg';
 import Favourite from '../../icons/BookmarksUpdate/Favorite.svg';
 import ArrowLeft from '../../icons/BookmarksUpdate/ArrowLeft.svg';
 import HotelRoom from '../../assets/HarrierRoom.png';
+import RemoveIcon from '../../icons/BookmarksUpdate/Remove.svg';
+import { favoritesService } from '../../services/FavoritesService';
+import PlaceCard from '../../components/cards/PlaceCard';
 
 interface CreateFolderModalProps {
   isOpen: boolean;
@@ -97,25 +100,72 @@ interface EditFolderModalProps {
   onClose: () => void;
   onConfirm: (name: string) => void;
   initialName: string;
+  folderId: string;
 }
 
-function EditFolderModal({ isOpen, onClose, onConfirm, initialName }: EditFolderModalProps) {
+function EditFolderModal({ isOpen, onClose, onConfirm, initialName, folderId }: EditFolderModalProps) {
   const [name, setName] = useState(initialName);
+  const [favorites, setFavorites] = useState<any[]>([]);
+  const [isLoadingFavorites, setIsLoadingFavorites] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setName(initialName);
   }, [initialName]);
 
+  useEffect(() => {
+    if (isOpen && folderId) {
+      loadFolderFavorites();
+    }
+  }, [isOpen, folderId]);
+
+  const loadFolderFavorites = async () => {
+    if (!folderId) return;
+
+    setIsLoadingFavorites(true);
+    try {
+      let favoritesData;
+      
+      if (folderId === 'default') {
+        const response = await favoritesService.getAllFavorites(1, 100);
+        favoritesData = response.data || [];
+      } else {
+        const response = await favoritesService.getFavoritesByFolder(folderId, 1, 100);
+        favoritesData = response.data || [];
+      }
+
+      setFavorites(favoritesData);
+    } catch (err: any) {
+      console.error('Error loading folder favorites:', err);
+    } finally {
+      setIsLoadingFavorites(false);
+    }
+  };
+
   const handleSubmit = () => {
     if (name.trim()) {
       onConfirm(name.trim());
       onClose();
-  }
+    }
   };
 
   const handleClose = () => {
     setName(initialName);
     onClose();
+  };
+
+  const handleRemoveFavorite = async (favorite: any) => {
+    try {
+      await favoritesService.removeFavorite(favorite.placeId);
+      setFavorites(prev => prev.filter(f => f.id !== favorite.id));
+    } catch (error) {
+      console.error('Failed to remove favorite:', error);
+    }
+  };
+
+  const handlePlaceClick = (favorite: any) => {
+    const place = favorite.place || favorite;
+    navigate(`/location/${place.id}`, { state: { locationData: place } });
   };
 
   if (!isOpen) return null;
@@ -131,7 +181,7 @@ function EditFolderModal({ isOpen, onClose, onConfirm, initialName }: EditFolder
           <img src={ArrowLeft} alt="Back" className="w-8 h-8" />
         </button>
         
-        <h1 className="flex-1 text-center text-lg font-medium text-gray-900">Edit List</h1>
+        <h1 className="flex-1 text-center text-lg font-medium text-gray-900">Edit the list</h1>
         
         <button
           onClick={handleSubmit}
@@ -153,13 +203,14 @@ function EditFolderModal({ isOpen, onClose, onConfirm, initialName }: EditFolder
             backgroundClip: name.trim() ? 'text' : 'initial',
           }}
         >
-          Update
+          Save
         </button>
       </div>
 
       {/* Content */}
-      <div className="flex-1 p-4">
-        <div className="relative mt-8">
+      <div className="flex-1 overflow-y-auto p-4">
+        {/* List Title Input */}
+        <div className="relative mb-8">
           <input
             type="text"
             value={name}
@@ -172,6 +223,53 @@ function EditFolderModal({ isOpen, onClose, onConfirm, initialName }: EditFolder
           <span className="absolute -top-[10px] left-[18px] px-1 text-sm text-gray-600 bg-white">
             List Title
           </span>
+        </div>
+
+        {/* Added Places Section */}
+        <div>
+          <h3 className="text-lg font-medium text-gray-900 mb-4">Added places</h3>
+          
+          {isLoadingFavorites ? (
+            <div className="flex items-center justify-center py-8">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500"></div>
+            </div>
+          ) : favorites.length === 0 ? (
+            <div className="text-center py-8">
+              <p className="text-gray-500">No places in this list yet</p>
+            </div>
+          ) : (
+            <div className="space-y-2">
+              {favorites.map((favorite) => {
+                const place = favorite.place || favorite;
+                return (
+                  <div key={favorite.id} className="relative">
+                    <PlaceCard
+                      image={place.photos?.[0]?.url || place.photos?.[0] || place.image}
+                      name={place.name}
+                      address={place.address || place.city}
+                      distance={place.distance}
+                      rating={place.rating || 0}
+                      reviews={place.ratingCount || place.reviews || 0}
+                      views={place.viewCount || place.views}
+                      onClick={() => handlePlaceClick(favorite)}
+                      rightSection={
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleRemoveFavorite(favorite);
+                          }}
+                          className="p-2 hover:bg-gray-100 rounded-full"
+                          title="Remove from list"
+                        >
+                          <img src={RemoveIcon} alt="Remove" className="w-5 h-5" />
+                        </button>
+                      }
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -206,15 +304,23 @@ function FolderItem({ folder, onMenuClick, onClick }: FolderItemProps) {
       className="flex items-center py-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100"
       onClick={() => onClick(folder)}
     >
-      <div className="w-[60px] h-[60px] rounded-lg overflow-hidden mr-3 flex items-center justify-center">
+      <div className="w-[60px] h-[60px] rounded-lg overflow-hidden mr-3 flex items-center justify-center bg-gray-100">
         {folder.isDefault ? (
-          <img src={Favourite} alt="Favourite" className="w-7 h-7" />
+          <img src={Favourite} alt="Favourite" className="w-8 h-8" />
         ) : (
-          <img 
-            src={HotelRoom}
-            alt={folder.name}
-            className="w-full h-full object-cover"
-          />
+          folder.latestPhoto ? (
+            <img 
+              src={folder.latestPhoto}
+              alt={folder.name}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <img 
+              src={HotelRoom}
+              alt={folder.name}
+              className="w-full h-full object-cover"
+            />
+          )
         )}
       </div>
       <div className="flex-1 min-w-0">
@@ -267,6 +373,10 @@ function FolderMenu({ folder, isOpen, onClose, onEdit, onDelete }: FolderMenuPro
         {!folder.isDefault && (
           <button
             onClick={() => {
+              console.log('=== FOLDER MENU DELETE CLICK ===');
+              console.log('folder:', folder);
+              console.log('folder.id:', folder.id);
+              console.log('folder.isDefault:', folder.isDefault);
               onDelete();
               onClose();
             }}
@@ -292,23 +402,63 @@ function DeleteConfirmModal({ isOpen, onClose, onConfirm, folderName }: DeleteCo
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg p-6 w-full max-w-sm">
-        <h3 className="text-lg font-medium text-gray-900 mb-2">Delete List</h3>
-        <p className="text-gray-600 mb-6">
-          Are you sure you want to delete &ldquo;{folderName}&rdquo;? This action cannot be undone.
+      <div className="bg-white rounded-2xl p-8 w-full max-w-sm mx-4">
+        <h3 className="text-xl font-semibold text-gray-900 mb-4 text-center">Delete list ?</h3>
+        <p className="text-gray-600 text-center mb-8 leading-relaxed">
+          Are you sure you want to Delete the selected list permanently ? This action cannot be undone.
         </p>
-        <div className="flex space-x-3">
+        <div className="flex gap-4">
           <button
             onClick={onClose}
-            className="flex-1 px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+            className="flex-1 px-6 py-3 text-gray-600 bg-gray-100 rounded-xl font-medium hover:bg-gray-200 transition-colors"
           >
-            Cancel
+            Go back
           </button>
           <button
             onClick={onConfirm}
-            className="flex-1 px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600 transition-colors"
+            className="flex-1 px-6 py-3 text-white bg-red-500 rounded-xl font-medium hover:bg-red-600 transition-colors"
           >
-            Delete
+            Yes, Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+interface DeleteWithContentsModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onConfirm: () => void;
+  folderName: string;
+  itemCount: number;
+}
+
+function DeleteWithContentsModal({ isOpen, onClose, onConfirm, folderName, itemCount }: DeleteWithContentsModalProps) {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-2xl p-8 w-full max-w-sm mx-4">
+        <h3 className="text-xl font-semibold text-gray-900 mb-4 text-center">Delete list and contents ?</h3>
+        <p className="text-gray-600 text-center mb-8 leading-relaxed">
+          This list contains {itemCount} saved place{itemCount !== 1 ? 's' : ''}. Do you want to delete the list &ldquo;{folderName}&rdquo; and all its saved places permanently?
+        </p>
+        <p className="text-red-600 text-center mb-8 text-sm font-medium">
+          This action cannot be undone.
+        </p>
+        <div className="flex gap-4">
+          <button
+            onClick={onClose}
+            className="flex-1 px-6 py-3 text-gray-600 bg-gray-100 rounded-xl font-medium hover:bg-gray-200 transition-colors"
+          >
+            Keep list
+          </button>
+          <button
+            onClick={onConfirm}
+            className="flex-1 px-6 py-3 text-white bg-red-500 rounded-xl font-medium hover:bg-red-600 transition-colors"
+          >
+            Delete all
           </button>
         </div>
       </div>
@@ -333,8 +483,43 @@ export default function BookmarksPage() {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [showDeleteWithContents, setShowDeleteWithContents] = useState(false);
   const [selectedFolder, setSelectedFolder] = useState<any>(null);
   const [showFolderMenu, setShowFolderMenu] = useState(false);
+  const [foldersWithPhotos, setFoldersWithPhotos] = useState<any[]>([]);
+
+  // Fetch latest photos for each folder
+  useEffect(() => {
+    const fetchFolderPhotos = async () => {
+      if (!folders || folders.length === 0) return;
+
+      const enhancedFolders = await Promise.all(
+        folders.map(async (folder) => {
+          try {
+            // Get the latest favorite from this folder
+            const response = await favoritesService.getFavoritesByFolder(folder.id, 1, 1);
+            const latestFavorite = response.data?.[0];
+            const latestPhoto = latestFavorite?.place?.photos?.[0];
+            
+            return {
+              ...folder,
+              latestPhoto: latestPhoto || null
+            };
+          } catch (error) {
+            console.error(`Failed to fetch photo for folder ${folder.id}:`, error);
+            return {
+              ...folder,
+              latestPhoto: null
+            };
+          }
+        })
+      );
+
+      setFoldersWithPhotos(enhancedFolders);
+    };
+
+    fetchFolderPhotos();
+  }, [folders]);
 
   const handleCreateFolder = async (name: string) => {
     try {
@@ -355,11 +540,70 @@ export default function BookmarksPage() {
   };
 
   const handleDeleteFolder = async (folderId: string) => {
-    try {
-      await deleteFolder(folderId);
+    console.log('=== DELETE FOLDER DEBUG ===');
+    console.log('handleDeleteFolder called with folderId:', folderId);
+    console.log('selectedFolder:', selectedFolder);
+    console.log('selectedFolder.id:', selectedFolder?.id);
+    console.log('selectedFolder.isDefault:', selectedFolder?.isDefault);
+    
+    // Prevent deleting default folder
+    if (folderId === 'default' || selectedFolder?.isDefault) {
+      console.log('Attempted to delete default folder - blocking');
+      alert('Cannot delete the default Favourites folder');
       setShowDeleteConfirm(false);
-    } catch (error) {
+      return;
+    }
+    
+    try {
+      console.log('Calling deleteFolder API with id:', folderId);
+      await deleteFolder(folderId);
+      console.log('Folder deleted successfully');
+      setShowDeleteConfirm(false);
+      setSelectedFolder(null);
+      // Refresh the folders list
+      await refreshBookmarks();
+    } catch (error: any) {
       console.error('Failed to delete folder:', error);
+      
+      // Handle specific error: folder contains favorites
+      if (error.code === 9005 || error.message?.includes('contains favorites')) {
+        setShowDeleteConfirm(false);
+        // Show the delete with contents modal
+        setShowDeleteWithContents(true);
+      } else {
+        // Other errors
+        alert(`Failed to delete folder: ${error.message || 'Unknown error'}`);
+      }
+    }
+  };
+
+  const handleDeleteFolderWithContents = async (folderId: string) => {
+    console.log('=== DELETE FOLDER WITH CONTENTS ===');
+    console.log('folderId:', folderId);
+    
+    try {
+      // First, remove all favorites from the folder
+      const response = await favoritesService.getFavoritesByFolder(folderId, 1, 100);
+      const favorites = response.data || [];
+      
+      console.log(`Removing ${favorites.length} favorites from folder before deletion`);
+      
+      // Remove each favorite
+      for (const favorite of favorites) {
+        await favoritesService.removeFavorite(favorite.placeId);
+      }
+      
+      // Now try to delete the empty folder
+      await deleteFolder(folderId);
+      console.log('Folder and contents deleted successfully');
+      setShowDeleteWithContents(false);
+      setSelectedFolder(null);
+      await refreshBookmarks();
+      alert('List and all its contents have been deleted successfully.');
+    } catch (error: any) {
+      console.error('Failed to delete folder contents:', error);
+      setShowDeleteWithContents(false);
+      alert('Failed to delete the list contents. Please try again.');
     }
   };
 
@@ -368,6 +612,11 @@ export default function BookmarksPage() {
   };
 
   const handleMenuClick = (folder: any) => {
+    console.log('=== MENU CLICK DEBUG ===');
+    console.log('Clicked folder:', folder);
+    console.log('Folder id:', folder.id);
+    console.log('Folder isDefault:', folder.isDefault);
+    console.log('Folder name:', folder.name);
     setSelectedFolder(folder);
     setShowFolderMenu(true);
   };
@@ -376,8 +625,15 @@ export default function BookmarksPage() {
     refreshBookmarks();
   };
 
+  // Get the latest photo from bookmarked items for the default folder
+  const getDefaultFolderPhoto = () => {
+    if (!bookmarkedItems || bookmarkedItems.length === 0) return null;
+    const latestBookmark = bookmarkedItems[0]; // Most recent bookmark
+    return latestBookmark?.place?.photos?.[0] || null;
+  };
+
   // Filter folders to remove any unwanted entries and add default favorites folder at the end
-  const userFolders = (folders || []).filter(folder => 
+  const userFolders = (foldersWithPhotos || []).filter(folder => 
     folder.name !== 'My Favorite Places' && 
     folder.name !== 'Favourites' && 
     folder.id !== 'default'
@@ -389,9 +645,16 @@ export default function BookmarksPage() {
       id: 'default',
       name: 'Favourites',
       isDefault: true,
-      itemCount: bookmarkedItems ? bookmarkedItems.length : 0
+      itemCount: bookmarkedItems ? bookmarkedItems.length : 0,
+      latestPhoto: getDefaultFolderPhoto()
     }
   ];
+
+  console.log('=== FOLDERS DEBUG ===');
+  console.log('Original folders from API:', folders);
+  console.log('foldersWithPhotos:', foldersWithPhotos);
+  console.log('userFolders (filtered):', userFolders);
+  console.log('allFolders (final):', allFolders);
 
   return (
     <div className="dvh-fallback flex justify-center bg-white">
@@ -521,6 +784,7 @@ export default function BookmarksPage() {
           onClose={() => setShowEditModal(false)}
           onConfirm={handleEditFolder}
           initialName={selectedFolder?.name || ''}
+          folderId={selectedFolder?.id || ''}
         />
 
         {/* Delete Confirmation Modal */}
@@ -528,8 +792,15 @@ export default function BookmarksPage() {
           isOpen={showDeleteConfirm}
           onClose={() => setShowDeleteConfirm(false)}
           onConfirm={() => {
+            console.log('=== DELETE CONFIRM MODAL ON CONFIRM ===');
+            console.log('selectedFolder in modal onConfirm:', selectedFolder);
             if (selectedFolder) {
+              console.log('=== DELETE CONFIRM MODAL CONFIRM CLICK ===');
+              console.log('folderName:', selectedFolder.name);
+              console.log('About to call handleDeleteFolder with id:', selectedFolder.id);
               handleDeleteFolder(selectedFolder.id);
+            } else {
+              console.log('No selectedFolder to delete');
             }
           }}
           folderName={selectedFolder?.name || ''}
@@ -545,11 +816,39 @@ export default function BookmarksPage() {
             setShowEditModal(true);
           }}
           onDelete={() => {
+            console.log('=== FOLDER MENU ON DELETE ===');
+            console.log('selectedFolder in onDelete:', selectedFolder);
+            console.log('selectedFolder.id:', selectedFolder?.id);
+            console.log('selectedFolder.isDefault:', selectedFolder?.isDefault);
             if (selectedFolder && selectedFolder.id !== 'default') {
+              console.log('Setting showDeleteConfirm to true');
               setShowFolderMenu(false);
               setShowDeleteConfirm(true);
+            } else {
+              console.log('Blocked deletion - folder is default or null');
             }
           }}
+        />
+
+        {/* Delete With Contents Modal */}
+        <DeleteWithContentsModal
+          isOpen={showDeleteWithContents} // Reusing showDeleteConfirm state for this modal
+          onClose={() => setShowDeleteWithContents(false)}
+          onConfirm={() => {
+            console.log('=== DELETE WITH CONTENTS MODAL ON CONFIRM ===');
+            console.log('selectedFolder in modal onConfirm:', selectedFolder);
+            if (selectedFolder) {
+              console.log('=== DELETE WITH CONTENTS MODAL CONFIRM CLICK ===');
+              console.log('folderName:', selectedFolder.name);
+              console.log('itemCount:', selectedFolder.itemCount);
+              console.log('About to call handleDeleteFolderWithContents with id:', selectedFolder.id);
+              handleDeleteFolderWithContents(selectedFolder.id);
+            } else {
+              console.log('No selectedFolder to delete');
+            }
+          }}
+          folderName={selectedFolder?.name || ''}
+          itemCount={selectedFolder?.itemCount || 0}
         />
       </div>
     </div>
