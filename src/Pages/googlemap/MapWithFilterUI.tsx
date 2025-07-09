@@ -145,7 +145,6 @@ const MapWithFilterUI = ({
 
   // Default center coordinates
   const mapCenter = { lat: 11.5458547, lng: 104.9305413 };
-
   // Clear existing place markers
   const clearPlaceMarkers = () => {
     placeMarkersRef.current.forEach((marker) => {
