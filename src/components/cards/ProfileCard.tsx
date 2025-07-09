@@ -35,7 +35,7 @@ const ProfileCard: React.FC = () => {
 
   return (
     <div
-      className="relative w-full max-w-[480px] mx-auto overflow-hidden"
+      className="relative w-full max-w-[480px] h-dvh mx-auto overflow-hidden"
       style={{
         backgroundImage: `url(${GradientBg})`,
         backgroundRepeat: 'no-repeat',

@@ -1,213 +1,266 @@
-import { useState, useEffect, useCallback } from 'react';
-import { 
-  useGetUserFavoritesQuery,
-  useAddFavoriteMutation,
-  useRemoveFavoriteMutation,
-  useIsFavoritedQuery
-} from '../Pages/services/FavouriteApi';
-import { PlaceResponseDto } from '../dto/place/place.dto';
-import { useAuth } from '../context/AuthContext';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { favoritesService, FavoriteItem } from '../services/FavoritesService';
 
-interface BookmarkItem extends PlaceResponseDto {
-  favoriteId?: string;
-  folderId?: string;
-  folderName?: string;
+interface BookmarkItem {
+  id: string | number;
+  name?: string;
+  description?: string;
+  rating?: number;
+  latitude?: number;
+  longitude?: number;
+  city?: string;
+  photos?: Array<{
+    id: string;
+    url: string;
+    width: string;
+    height: string;
+  }>;
+  [key: string]: any;
 }
 
 interface UseBookmarksReturn {
-  bookmarkedItems: BookmarkItem[];
-  toggleBookmark: (item: BookmarkItem, folderId?: string) => Promise<void>;
-  isBookmarked: (itemId: string) => boolean;
-  addBookmark: (item: BookmarkItem, folderId?: string) => Promise<void>;
-  removeBookmark: (itemId: string) => Promise<void>;
-  loading: boolean;
+  bookmarkedItems: FavoriteItem[];
+  folders: any[];
+  isLoading: boolean;
   error: string | null;
-  refetch: () => void;
+  toggleBookmark: (item: BookmarkItem) => Promise<void>;
+  isBookmarked: (itemId: string | number) => boolean;
+  addToFolder: (item: BookmarkItem, folderId?: string) => Promise<void>;
+  removeFromBookmarks: (placeId: string) => Promise<void>;
+  createFolder: (name: string, description?: string) => Promise<void>;
+  updateFolder: (folderId: string, name: string, description?: string) => Promise<void>;
+  deleteFolder: (folderId: string) => Promise<void>;
+  moveToFolder: (placeId: string, targetFolderId?: string) => Promise<void>;
+  refreshBookmarks: () => Promise<void>;
 }
 
 export function useBookmarks(): UseBookmarksReturn {
-  const { isAuthenticated } = useAuth();
-  const [localBookmarks, setLocalBookmarks] = useState<BookmarkItem[]>(() => {
-    const saved = localStorage.getItem('bookmarkedItems');
-    return saved ? JSON.parse(saved) : [];
-  });
+  const [bookmarkedItems, setBookmarkedItems] = useState<FavoriteItem[]>([]);
+  const [folders, setFolders] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [hasInitialized, setHasInitialized] = useState<boolean>(false);
+  const abortControllerRef = useRef<AbortController | null>(null);
 
-  // Get user favorites from API only if authenticated
-  const { 
-    data: favoritesData, 
-    isLoading: favoritesLoading, 
-    error: favoritesError,
-    refetch: refetchFavorites
-  } = useGetUserFavoritesQuery({ 
-    page: 1, 
-    limit: 1000 // Get all favorites
-  }, {
-    skip: !isAuthenticated // Skip API call if not authenticated
-  });
+  // Load bookmarks from API - only called manually or on mount
+  const loadBookmarks = useCallback(async () => {
+    // Prevent multiple simultaneous calls
+    if (isLoading) return;
 
-  const [addFavorite, { isLoading: addLoading }] = useAddFavoriteMutation();
-  const [removeFavorite, { isLoading: removeLoading }] = useRemoveFavoriteMutation();
+    // Cancel any ongoing request
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
 
-  const loading = favoritesLoading || addLoading || removeLoading;
+    // Create new abort controller
+    abortControllerRef.current = new AbortController();
 
-  // Merge API favorites with place data for display, or use localStorage if not authenticated
-  const bookmarkedItems: BookmarkItem[] = isAuthenticated 
-    ? favoritesData?.favorites?.map(fav => ({
-        ...localBookmarks.find(local => local.id === fav.placeId) || { 
-          id: fav.placeId,
-          name: fav.place?.name ? { en: fav.place.name, zh: fav.place.name } : { en: 'Unknown Place' },
-          location: { type: 'Point' as const, coordinates: [0, 0] },
-          country: '',
-          city: '',
-          tags: [],
-          isActive: true
-        },
-        favoriteId: fav.id,
-        folderId: fav.folderId,
-        folderName: fav.folder?.name
-      })) || []
-    : localBookmarks;
+    setIsLoading(true);
+    setError(null);
+    
+    try {
+      // Load favorites and folders in parallel with timeout
+      const [favoritesResponse, foldersData] = await Promise.all([
+        favoritesService.getAllFavorites(1, 100),
+        favoritesService.getFolders(),
+      ]);
+      
+      // Check if request was aborted
+      if (abortControllerRef.current?.signal.aborted) {
+        return;
+      }
+      
+      setBookmarkedItems(favoritesResponse.data || []);
+      setFolders(foldersData || []);
+      setHasInitialized(true);
+    } catch (err: any) {
+      // Don't set error if request was aborted
+      if (err.name === 'AbortError' || abortControllerRef.current?.signal.aborted) {
+        return;
+      }
 
-  // Sync localStorage when API data changes
+      setError(err.message || 'Failed to load bookmarks');
+      console.error('Error loading bookmarks:', err);
+      
+      // Fallback to localStorage if API fails
+      const saved = localStorage.getItem('bookmarkedItems');
+      if (saved) {
+        try {
+          const localBookmarks = JSON.parse(saved);
+          setBookmarkedItems(localBookmarks);
+        } catch (parseError) {
+          console.error('Error parsing local bookmarks:', parseError);
+        }
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  }, [isLoading]); // Only depend on isLoading to prevent infinite loops
+
+  // Initialize on mount only
   useEffect(() => {
-    if (bookmarkedItems.length > 0) {
+    if (!hasInitialized) {
+      loadBookmarks();
+    }
+    
+    // Cleanup on unmount
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+    };
+  }, []); // Empty dependency array - only run on mount
+
+  // Save to localStorage as backup
+  useEffect(() => {
+    if (bookmarkedItems.length > 0 && hasInitialized) {
       localStorage.setItem('bookmarkedItems', JSON.stringify(bookmarkedItems));
     }
+  }, [bookmarkedItems, hasInitialized]);
+
+  const toggleBookmark = useCallback(async (item: BookmarkItem): Promise<void> => {
+    const placeId = String(item.id);
+    const isCurrentlyBookmarked = bookmarkedItems.some(bookmark => bookmark.placeId === placeId);
+    
+    setError(null);
+    try {
+      if (isCurrentlyBookmarked) {
+        await favoritesService.removeFavorite(placeId);
+        setBookmarkedItems(prev => prev.filter(bookmarked => bookmarked.placeId !== placeId));
+      } else {
+        const newFavorite = await favoritesService.addFavorite({ placeId });
+        setBookmarkedItems(prev => [...prev, newFavorite]);
+      }
+    } catch (err: any) {
+      setError(err.message || 'Failed to update bookmark');
+      console.error('Error toggling bookmark:', err);
+      
+      // Fallback to localStorage behavior
+      setBookmarkedItems(prev => {
+        const filtered = prev.filter(bookmarked => bookmarked.placeId !== placeId);
+        if (!isCurrentlyBookmarked) {
+          const favoriteItem: FavoriteItem = {
+            id: Date.now().toString(),
+            placeId,
+            createdAt: new Date().toISOString(),
+            place: {
+              id: placeId,
+              name: item.name || '',
+              description: item.description,
+              rating: item.rating,
+              latitude: item.latitude,
+              longitude: item.longitude,
+              city: item.city,
+              photos: item.photos,
+            }
+          };
+          return [...filtered, favoriteItem];
+        }
+        return filtered;
+      });
+    }
   }, [bookmarkedItems]);
 
-  // Handle API errors
-  useEffect(() => {
-    if (favoritesError) {
-      setError('Failed to load favorites');
-      console.error('Favorites error:', favoritesError);
-    } else {
-      setError(null);
-    }
-  }, [favoritesError]);
-
-  const isBookmarked = useCallback((itemId: string): boolean => {
-    return bookmarkedItems.some(item => item.id === itemId);
+  const isBookmarked = useCallback((itemId: string | number): boolean => {
+    const placeId = String(itemId);
+    return bookmarkedItems.some(item => item.placeId === placeId);
   }, [bookmarkedItems]);
 
-  const addBookmark = useCallback(async (item: BookmarkItem, folderId?: string): Promise<void> => {
+  const addToFolder = useCallback(async (item: BookmarkItem, folderId?: string): Promise<void> => {
+    const placeId = String(item.id);
+    setError(null);
     try {
-      setError(null);
-      
-      // If not authenticated, just use localStorage
-      if (!isAuthenticated) {
-        const newBookmark = { ...item, folderId };
-        setLocalBookmarks(prev => {
-          const updated = [...prev.filter(b => b.id !== item.id), newBookmark];
-          localStorage.setItem('bookmarkedItems', JSON.stringify(updated));
-          return updated;
-        });
-        return;
-      }
-      
-      // Optimistically update local state
-      const newBookmark = { ...item, folderId };
-      setLocalBookmarks(prev => {
-        const updated = [...prev.filter(b => b.id !== item.id), newBookmark];
-        localStorage.setItem('bookmarkedItems', JSON.stringify(updated));
-        return updated;
+      const newFavorite = await favoritesService.addFavorite({ placeId, folderId });
+      setBookmarkedItems(prev => {
+        const filtered = prev.filter(bookmarked => bookmarked.placeId !== placeId);
+        return [...filtered, newFavorite];
       });
-
-      // API call
-      const result = await addFavorite({ 
-        placeId: item.id, 
-        folderId 
-      }).unwrap();
-
-      // Update with API response
-      setLocalBookmarks(prev => {
-        const updated = prev.map(b => 
-          b.id === item.id 
-            ? { ...b, favoriteId: result.id, folderId: result.folderId, folderName: result.folderName }
-            : b
-        );
-        localStorage.setItem('bookmarkedItems', JSON.stringify(updated));
-        return updated;
-      });
-
-      // Refetch to ensure sync
-      refetchFavorites();
     } catch (err: any) {
-      setError(err?.data?.message || 'Failed to add favorite');
-      // Revert optimistic update
-      setLocalBookmarks(prev => {
-        const reverted = prev.filter(b => b.id !== item.id);
-        localStorage.setItem('bookmarkedItems', JSON.stringify(reverted));
-        return reverted;
-      });
-      throw err;
+      setError(err.message || 'Failed to add to folder');
+      console.error('Error adding to folder:', err);
     }
-  }, [addFavorite, refetchFavorites, isAuthenticated]);
+  }, []);
 
-  const removeBookmark = useCallback(async (itemId: string): Promise<void> => {
-    // Find the bookmark to remove
-    const bookmarkToRemove = bookmarkedItems.find(item => item.id === itemId);
-    if (!bookmarkToRemove) return;
-
+  const removeFromBookmarks = useCallback(async (placeId: string): Promise<void> => {
+    setError(null);
     try {
-      setError(null);
-
-      // If not authenticated, just use localStorage
-      if (!isAuthenticated) {
-        setLocalBookmarks(prev => {
-          const updated = prev.filter(b => b.id !== itemId);
-          localStorage.setItem('bookmarkedItems', JSON.stringify(updated));
-          return updated;
-        });
-        return;
-      }
-
-      // Optimistically update local state
-      setLocalBookmarks(prev => {
-        const updated = prev.filter(b => b.id !== itemId);
-        localStorage.setItem('bookmarkedItems', JSON.stringify(updated));
-        return updated;
-      });
-
-      // API call
-      await removeFavorite(itemId).unwrap();
-
-      // Refetch to ensure sync
-      refetchFavorites();
+      await favoritesService.removeFavorite(placeId);
+      setBookmarkedItems(prev => prev.filter(bookmarked => bookmarked.placeId !== placeId));
     } catch (err: any) {
-      setError(err?.data?.message || 'Failed to remove favorite');
-      // Revert optimistic update
-      setLocalBookmarks(prev => {
-        const reverted = [...prev, bookmarkToRemove];
-        localStorage.setItem('bookmarkedItems', JSON.stringify(reverted));
-        return reverted;
-      });
-      throw err;
+      setError(err.message || 'Failed to remove bookmark');
+      console.error('Error removing bookmark:', err);
     }
-  }, [removeFavorite, refetchFavorites, bookmarkedItems, isAuthenticated]);
+  }, []);
 
-  const toggleBookmark = useCallback(async (item: BookmarkItem, folderId?: string): Promise<void> => {
-    if (isBookmarked(item.id)) {
-      await removeBookmark(item.id);
-    } else {
-      await addBookmark(item, folderId);
+  const createFolder = useCallback(async (name: string, description?: string): Promise<void> => {
+    setError(null);
+    try {
+      const newFolder = await favoritesService.createFolder({ name, description });
+      setFolders(prev => [...prev, newFolder]);
+    } catch (err: any) {
+      setError(err.message || 'Failed to create folder');
+      console.error('Error creating folder:', err);
     }
-  }, [isBookmarked, addBookmark, removeBookmark]);
+  }, []);
 
-  const refetch = useCallback(() => {
-    if (isAuthenticated) {
-      refetchFavorites();
+  const updateFolder = useCallback(async (folderId: string, name: string, description?: string): Promise<void> => {
+    setError(null);
+    try {
+      const updatedFolder = await favoritesService.updateFolder(folderId, { name, description });
+      setFolders(prev => prev.map(folder => 
+        folder.id === folderId ? { ...folder, ...updatedFolder } : folder
+      ));
+    } catch (err: any) {
+      setError(err.message || 'Failed to update folder');
+      console.error('Error updating folder:', err);
     }
-  }, [refetchFavorites, isAuthenticated]);
+  }, []);
+
+  const deleteFolder = useCallback(async (folderId: string): Promise<void> => {
+    setError(null);
+    try {
+      await favoritesService.deleteFolder(folderId);
+      setFolders(prev => prev.filter(folder => folder.id !== folderId));
+      // Refresh bookmarks to update items that were in the deleted folder
+      await loadBookmarks();
+    } catch (err: any) {
+      setError(err.message || 'Failed to delete folder');
+      console.error('Error deleting folder:', err);
+    }
+  }, [loadBookmarks]);
+
+  const moveToFolder = useCallback(async (placeId: string, targetFolderId?: string): Promise<void> => {
+    setError(null);
+    try {
+      await favoritesService.moveFavorite({ placeId, targetFolderId });
+      setBookmarkedItems(prev => 
+        prev.map(item => 
+          item.placeId === placeId ? { ...item, folderId: targetFolderId } : item
+        )
+      );
+    } catch (err: any) {
+      setError(err.message || 'Failed to move to folder');
+      console.error('Error moving to folder:', err);
+    }
+  }, []);
+
+  const refreshBookmarks = useCallback(async (): Promise<void> => {
+    await loadBookmarks();
+  }, [loadBookmarks]);
 
   return { 
     bookmarkedItems, 
-    toggleBookmark, 
-    isBookmarked, 
-    addBookmark,
-    removeBookmark,
-    loading, 
+    folders,
+    isLoading,
     error,
-    refetch
+    toggleBookmark, 
+    isBookmarked,
+    addToFolder,
+    removeFromBookmarks,
+    createFolder,
+    updateFolder,
+    deleteFolder,
+    moveToFolder,
+    refreshBookmarks,
   };
 }

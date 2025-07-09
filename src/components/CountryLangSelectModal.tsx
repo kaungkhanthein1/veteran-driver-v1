@@ -243,7 +243,7 @@ const CountryLanguageModal = ({ open, onClose }: CountryLanguageModalProps) => {
               </div>
             )}
             <button
-              className="country_apply_btn w-[90%] flex justify-center items-center py-[16px] fixed bottom-10 left-0 right-0 mx-auto"
+              className="country_apply_btn w-[90%] max-w-[400px] flex justify-center items-center py-[16px] fixed bottom-10 left-0 right-0 mx-auto"
               onClick={handleApply}
             >
               Apply

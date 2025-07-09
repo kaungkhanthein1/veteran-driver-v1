@@ -114,7 +114,7 @@ export default function TopBar({ onFlagClick }: TopBarProps) {
       )}
 
       {/* Search Bar */}
-      <div className="flex items-center">
+      {/* <div className="flex items-center">
         <div className="bg-[#F2F4FA] rounded-full px-3 py-2 flex items-center flex-grow">
           <svg
             className="w-5 h-5 text-theme-secondary mr-2"
@@ -137,14 +137,14 @@ export default function TopBar({ onFlagClick }: TopBarProps) {
             className="bg-transparent text-theme-text w-full outline-none focus:outline-none border-none"
           />
         </div>
-      </div>
+      </div> */}
       {/* Filter Chips Row */}
-      <div className="flex gap-2 px-1 pt-3 pb-1 overflow-x-auto no-scrollbar h-12 items-center whitespace-nowrap">
+      <div className="flex gap-2 px-1 pt-3 pb-1 overflow-x-auto no-scrollbar h-14 items-center whitespace-nowrap">
         {filterChips.map((chip) => (
           <button
             key={chip.key}
             onClick={() => setActiveChip(chip.key)}
-            className={`flex items-center gap-1 px-4 py-1 h-9 rounded-full border text-base transition-colors duration-150
+            className={`flex items-center gap-1 px-4 py-1 h-11 rounded-full border text-base transition-colors duration-150
               ${
                 activeChip === chip.key
                   ? "bg-gradient-to-r from-yellow-200 to-yellow-100 text-black border-yellow-200 shadow-md"

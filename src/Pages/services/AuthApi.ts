@@ -2,6 +2,18 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import { apiBaseUrl } from "../../config/env";
 import { gatewayBaseQuery } from "../../services/gatewayBaseQuery";
 import { storeTokens } from "./tokenUtils";
+import { config } from "process";
+//   // Get the recaptcha token from Redux state
+//   const state = api.getState() as RootState;
+//   const recaptchaToken = state.recaptchaSlice.data;
+
+//   console.log("Recaptcha Token:", recaptchaToken);
+
+//   // Prepare headers with recaptcha token if available
+//   const requestHeaders = {
+//     ...headers,
+//     ...(recaptchaToken ? { "x-recaptcha-token": recaptchaToken } : {}),
+//   };
 import {
   SendVerificationCodeDto,
   SendVerificationCodeResponse,
@@ -27,6 +39,10 @@ import {
 
 export const AuthApi = createApi({
   reducerPath: "AuthApi",
+  baseQuery: gatewayBaseQuery({
+    baseUrl:
+      `https://vtt_dev.movie06.com/api/v1/auth`,
+  }),
   baseQuery: gatewayBaseQuery({ baseUrl: apiBaseUrl }),
   endpoints: (builder) => ({
     // Send Verification Code
