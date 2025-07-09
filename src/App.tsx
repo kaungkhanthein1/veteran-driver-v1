@@ -30,6 +30,7 @@ import UploadedLocationPage from "./Pages/UploadedLocationPage";
 import RecycleBinPage from "./Pages/RecycleBinPage";
 import EditLocationPage from "./Pages/EditLocationPage";
 import BookmarksPage from "./Pages/Profile/BookmarksPage";
+import FolderDetailPage from "./Pages/Profile/FolderDetailPage";
 import RankingPage from "./Pages/RankingPage";
 import LocationDetailsPage from "./Pages/LocationDetailsPage";
 import NotificationsPage from "./Pages/Profile/NotificationsPage";
@@ -97,6 +98,7 @@ function AppRoutes() {
         <Route path="/uploaded-location" element={<UploadedLocationPage />} />
         <Route path="/recycle-bin" element={<RecycleBinPage />} />
         <Route path="/edit-location" element={<EditLocationPage />} />
+        <Route path="/bookmarks/folder/:folderId" element={<FolderDetailPage />} />
         <Route path="/ranking" element={<RankingPage />} />
         <Route path="/search" element={<SearchMain />} />
         <Route path="/location/:id" element={<LocationDetailsPage />} />

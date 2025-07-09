@@ -203,7 +203,7 @@ function FolderItem({ folder, onMenuClick, onClick }: FolderItemProps) {
   return (
     <div 
       ref={itemRef}
-      className="flex items-center px-4 py-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100"
+      className="flex items-center py-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100"
       onClick={() => onClick(folder)}
     >
       <div className="w-[60px] h-[60px] rounded-lg overflow-hidden mr-3 flex items-center justify-center">
@@ -218,7 +218,7 @@ function FolderItem({ folder, onMenuClick, onClick }: FolderItemProps) {
         )}
       </div>
       <div className="flex-1 min-w-0">
-        <h3 className="font-medium text-[17px] text-gray-900 truncate leading-tight">{folder.name}</h3>
+        <h3 className="text-[17px] text-gray-900 truncate leading-tight">{folder.name}</h3>
         <p className="text-[15px] text-gray-500 mt-1">{folder.itemCount || 0} places</p>
       </div>
       <button
@@ -251,7 +251,7 @@ function FolderMenu({ folder, isOpen, onClose, onEdit, onDelete }: FolderMenuPro
         className="absolute bg-white rounded-lg shadow-lg py-2 w-[140px]"
         style={{
           top: folder.menuPosition?.top || '0',
-          right: '16px', // Matches the parent container's padding
+          right: '16px', // Matches the px-4 container padding
         }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -319,6 +319,7 @@ function DeleteConfirmModal({ isOpen, onClose, onConfirm, folderName }: DeleteCo
 export default function BookmarksPage() {
   const { 
     folders, 
+    bookmarkedItems,
     isLoading, 
     error, 
     createFolder, 
@@ -375,15 +376,21 @@ export default function BookmarksPage() {
     refreshBookmarks();
   };
 
-  // Add default favorites folder if not exists
+  // Filter folders to remove any unwanted entries and add default favorites folder at the end
+  const userFolders = (folders || []).filter(folder => 
+    folder.name !== 'My Favorite Places' && 
+    folder.name !== 'Favourites' && 
+    folder.id !== 'default'
+  );
+
   const allFolders = [
+    ...userFolders,
     {
       id: 'default',
       name: 'Favourites',
       isDefault: true,
-      itemCount: folders.reduce((total, folder) => total + (folder.itemCount || 0), 0)
-    },
-    ...folders
+      itemCount: bookmarkedItems ? bookmarkedItems.length : 0
+    }
   ];
 
   return (
@@ -428,13 +435,13 @@ export default function BookmarksPage() {
 
           {activeTab === 'favourites' && (
             <div className="px-4">
-              {/* List collections header */}
-              <h2 className="text-[22px] font-semibold text-gray-900 mb-3">List collections</h2>
+              {/* List collections header - removed font-semibold */}
+              <h2 className="text-[18px] text-gray-900 mb-3">List collections</h2>
               
               {/* Add New List Button */}
               <button
                 onClick={() => setShowCreateModal(true)}
-                className="w-full flex items-center justify-center py-[14px] bg-gray-50 rounded-xl mb-4 hover:bg-gray-100 transition-colors"
+                className="w-full flex items-center justify-center py-[12px] bg-gray-50 rounded-xl mb-4 hover:bg-gray-100 transition-colors"
               >
                 <img src={ToAdd} alt="Add" className="w-5 h-5 mr-2 opacity-80" />
                 <span className="text-[15px] text-gray-900 font-medium">Add New List</span>
@@ -461,9 +468,9 @@ export default function BookmarksPage() {
                   </div>
               )}
 
-              {/* Folders List */}
+              {/* Folders List - removed extra div wrapper for better padding control */}
               {!isLoading && !error && (
-                <div className="divide-y divide-gray-100">
+                <>
                   {allFolders.map((folder) => (
                     <FolderItem
                       key={folder.id}
@@ -472,7 +479,7 @@ export default function BookmarksPage() {
                       onClick={handleFolderClick}
                     />
                   ))}
-                </div>
+                </>
               )}
 
               {/* Empty state */}

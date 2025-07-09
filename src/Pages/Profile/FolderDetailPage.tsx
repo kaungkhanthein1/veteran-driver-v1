@@ -88,26 +88,12 @@ export default function FolderDetailPage() {
       <div className="w-full max-w-[480px] flex flex-col h-screen">
         {/* Header */}
         <div className="flex items-center justify-between p-4 bg-white border-b border-gray-200">
-          <div className="flex items-center">
-            <BackButton />
-            <div className="ml-3 flex items-center">
-              <div className="w-10 h-10 rounded-lg overflow-hidden mr-3 bg-gray-200 flex items-center justify-center">
-                {currentFolder?.isDefault ? (
-                  <img src={Favourite} alt="Favourite" className="w-5 h-5" />
-                ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-orange-400 to-orange-600"></div>
-                )}
-              </div>
-              <div>
-                <h1 className="text-lg font-semibold text-gray-900">
-                  {currentFolder?.name || 'Loading...'}
-                </h1>
-                <p className="text-sm text-gray-500">
-                  {favorites.length} places
-                </p>
-              </div>
-            </div>
-          </div>
+          <BackButton />
+          
+          <h1 className="text-lg font-semibold text-gray-900 flex-1 text-center">
+            {currentFolder?.name || 'Loading...'}
+          </h1>
+          
           {!currentFolder?.isDefault && (
             <button
               onClick={() => setShowMenu(true)}
@@ -116,6 +102,7 @@ export default function FolderDetailPage() {
               <img src={ThreeDots} alt="Menu" className="w-5 h-5" />
             </button>
           )}
+          {currentFolder?.isDefault && <div className="w-9 h-9"></div>}
         </div>
 
         {/* Content */}
@@ -143,31 +130,21 @@ export default function FolderDetailPage() {
               </p>
             </div>
           ) : (
-            <div className="p-4 space-y-3">
+            <div className="p-4 space-y-2">
               {favorites.map((favorite) => {
                 const place = favorite.place || favorite;
                 return (
-                  <div key={favorite.id} className="relative">
-                    <PlaceCard
-                      image={place.photos?.[0]?.url || place.image}
-                      name={place.name}
-                      address={place.address || place.city}
-                      distance={place.distance}
-                      rating={place.rating}
-                      reviews={place.reviews}
-                      views={place.views}
-                      onClick={() => handlePlaceClick(favorite)}
-                    />
-                    <button
-                      onClick={() => handleRemoveFavorite(favorite)}
-                      className="absolute top-2 right-2 p-1 bg-white rounded-full shadow-md hover:bg-gray-50"
-                      title="Remove from favorites"
-                    >
-                      <svg className="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                      </svg>
-                    </button>
-                  </div>
+                  <PlaceCard
+                    key={favorite.id}
+                    image={place.photos?.[0]?.url || place.photos?.[0] || place.image}
+                    name={place.name}
+                    address={place.address || place.city}
+                    distance={place.distance}
+                    rating={place.rating || 0}
+                    reviews={place.ratingCount || place.reviews || 0}
+                    views={place.viewCount || place.views}
+                    onClick={() => handlePlaceClick(favorite)}
+                  />
                 );
               })}
             </div>
