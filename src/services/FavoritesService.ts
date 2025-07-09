@@ -1,7 +1,6 @@
 import { gatewayRequest } from "./gateway";
 
-// Use relative URLs for development proxy support
-const API_BASE = "/api/v1";
+import { gatewayUrl } from "../config/env";
 
 // Type definitions for favorites/bookmarks
 
@@ -94,6 +93,8 @@ export interface CheckFavoriteResponse {
   };
 }
 
+
+
 // Favorites Service
 export const favoritesService = {
   // Folder Management
@@ -104,10 +105,15 @@ export const favoritesService = {
   createFolder: async (folderData: CreateFolderRequest): Promise<FavoriteFolder> => {
     try {
       const { data } = await gatewayRequest({
-        url: `${API_BASE}/user-place-favorite/folders`,
+        url: `${gatewayUrl}/user-place-favorite/folders`,
         method: "POST",
         data: folderData,
       });
+      
+      // Handle different response formats
+      if (data.data) {
+        return data.data;
+      }
       return data;
     } catch (error) {
       console.error("Error creating folder:", error);
@@ -121,13 +127,27 @@ export const favoritesService = {
   getFolders: async (): Promise<FavoriteFolder[]> => {
     try {
       const { data } = await gatewayRequest({
-        url: `${API_BASE}/user-place-favorite/folders`,
+        url: `${gatewayUrl}/user-place-favorite/folders`,
         method: "GET",
       });
-      return data.folders || data;
+      
+      // Handle different response formats
+      if (data.data && Array.isArray(data.data.items)) {
+        return data.data.items;
+      }
+      if (data.data && Array.isArray(data.data)) {
+        return data.data;
+      }
+      if (Array.isArray(data)) {
+        return data;
+      }
+      
+      // If no folders exist, return empty array
+      return [];
     } catch (error) {
       console.error("Error fetching folders:", error);
-      throw error;
+      // Return empty array if API fails - allows user to create first folder
+      return [];
     }
   },
 
@@ -137,9 +157,13 @@ export const favoritesService = {
   getFolderById: async (folderId: string): Promise<FavoriteFolder> => {
     try {
       const { data } = await gatewayRequest({
-        url: `${API_BASE}/user-place-favorite/folders/${folderId}`,
+        url: `${gatewayUrl}/user-place-favorite/folders/${folderId}`,
         method: "GET",
       });
+      
+      if (data.data) {
+        return data.data;
+      }
       return data;
     } catch (error) {
       console.error("Error fetching folder:", error);
@@ -156,10 +180,14 @@ export const favoritesService = {
   ): Promise<FavoriteFolder> => {
     try {
       const { data } = await gatewayRequest({
-        url: `${API_BASE}/user-place-favorite/folders/${folderId}`,
+        url: `${gatewayUrl}/user-place-favorite/folders/${folderId}`,
         method: "PUT",
         data: folderData,
       });
+      
+      if (data.data) {
+        return data.data;
+      }
       return data;
     } catch (error) {
       console.error("Error updating folder:", error);
@@ -173,7 +201,7 @@ export const favoritesService = {
   deleteFolder: async (folderId: string): Promise<void> => {
     try {
       await gatewayRequest({
-        url: `${API_BASE}/user-place-favorite/folders/${folderId}`,
+        url: `${gatewayUrl}/user-place-favorite/folders/${folderId}`,
         method: "DELETE",
       });
     } catch (error) {
@@ -190,10 +218,14 @@ export const favoritesService = {
   addFavorite: async (favoriteData: AddFavoriteRequest): Promise<FavoriteItem> => {
     try {
       const { data } = await gatewayRequest({
-        url: `${API_BASE}/user-place-favorite/favorites`,
+        url: `${gatewayUrl}/user-place-favorite/favorites`,
         method: "POST",
         data: favoriteData,
       });
+      
+      if (data.data) {
+        return data.data;
+      }
       return data;
     } catch (error) {
       console.error("Error adding favorite:", error);
@@ -207,7 +239,7 @@ export const favoritesService = {
   removeFavorite: async (placeId: string): Promise<void> => {
     try {
       await gatewayRequest({
-        url: `${API_BASE}/user-place-favorite/favorites/place/${placeId}`,
+        url: `${gatewayUrl}/user-place-favorite/favorites/place/${placeId}`,
         method: "DELETE",
       });
     } catch (error) {
@@ -225,14 +257,36 @@ export const favoritesService = {
   ): Promise<FavoritesResponse> => {
     try {
       const { data } = await gatewayRequest({
-        url: `${API_BASE}/user-place-favorite/favorites`,
+        url: `${gatewayUrl}/user-place-favorite/favorites`,
         method: "GET",
         params: { page, limit },
       });
-      return data;
+      
+      if (data.data) {
+        return {
+          success: true,
+          data: data.data.favorites || data.data,
+          pagination: {
+            page: data.data.page || page,
+            limit: data.data.limit || limit,
+            total: data.data.total || 0,
+            totalPages: data.data.totalPages || 0
+          }
+        };
+      }
+      
+      return {
+        success: true,
+        data: [],
+        pagination: { page, limit, total: 0, totalPages: 0 }
+      };
     } catch (error) {
       console.error("Error fetching favorites:", error);
-      throw error;
+      return {
+        success: false,
+        data: [],
+        pagination: { page, limit, total: 0, totalPages: 0 }
+      };
     }
   },
 
@@ -246,14 +300,36 @@ export const favoritesService = {
   ): Promise<FavoritesResponse> => {
     try {
       const { data } = await gatewayRequest({
-        url: `${API_BASE}/user-place-favorite/favorites/folder/${folderId}`,
+        url: `${gatewayUrl}/user-place-favorite/favorites/folder/${folderId}`,
         method: "GET",
         params: { page, limit },
       });
-      return data;
+      
+      if (data.data) {
+        return {
+          success: true,
+          data: data.data.favorites || data.data,
+          pagination: {
+            page: data.data.page || page,
+            limit: data.data.limit || limit,
+            total: data.data.total || 0,
+            totalPages: data.data.totalPages || 0
+          }
+        };
+      }
+      
+      return {
+        success: true,
+        data: [],
+        pagination: { page, limit, total: 0, totalPages: 0 }
+      };
     } catch (error) {
       console.error("Error fetching folder favorites:", error);
-      throw error;
+      return {
+        success: false,
+        data: [],
+        pagination: { page, limit, total: 0, totalPages: 0 }
+      };
     }
   },
 
@@ -263,13 +339,20 @@ export const favoritesService = {
   checkFavorite: async (placeId: string): Promise<CheckFavoriteResponse> => {
     try {
       const { data } = await gatewayRequest({
-        url: `${API_BASE}/user-place-favorite/favorites/check/${placeId}`,
+        url: `${gatewayUrl}/user-place-favorite/favorites/check/${placeId}`,
         method: "GET",
       });
-      return data;
+      
+      return {
+        success: true,
+        data: data.data || data
+      };
     } catch (error) {
       console.error("Error checking favorite:", error);
-      throw error;
+      return {
+        success: false,
+        data: { placeId, isFavorited: false }
+      };
     }
   },
 
@@ -279,10 +362,14 @@ export const favoritesService = {
   moveFavorite: async (moveData: MoveFavoriteRequest): Promise<FavoriteItem> => {
     try {
       const { data } = await gatewayRequest({
-        url: `${API_BASE}/user-place-favorite/favorites/move`,
+        url: `${gatewayUrl}/user-place-favorite/favorites/move`,
         method: "POST",
         data: moveData,
       });
+      
+      if (data.data) {
+        return data.data;
+      }
       return data;
     } catch (error) {
       console.error("Error moving favorite:", error);
@@ -298,60 +385,12 @@ export const favoritesService = {
   ): Promise<void> => {
     try {
       await gatewayRequest({
-        url: `${API_BASE}/user-place-favorite/favorites/batch`,
+        url: `${gatewayUrl}/user-place-favorite/favorites/batch`,
         method: "DELETE",
         data: batchData,
       });
     } catch (error) {
       console.error("Error batch removing favorites:", error);
-      throw error;
-    }
-  },
-
-  // Utility functions
-
-  /**
-   * Check if multiple places are favorited
-   */
-  checkMultipleFavorites: async (
-    placeIds: string[]
-  ): Promise<{ [placeId: string]: boolean }> => {
-    try {
-      const results: { [placeId: string]: boolean } = {};
-      
-      // Make individual requests for each place (you can optimize this with a batch endpoint if available)
-      const promises = placeIds.map(async (placeId) => {
-        try {
-          const result = await favoritesService.checkFavorite(placeId);
-          results[placeId] = result.data.isFavorited;
-        } catch (error) {
-          results[placeId] = false;
-        }
-      });
-
-      await Promise.all(promises);
-      return results;
-    } catch (error) {
-      console.error("Error checking multiple favorites:", error);
-      throw error;
-    }
-  },
-
-  /**
-   * Get favorite count by folder
-   */
-  getFavoriteCountsByFolder: async (): Promise<{ [folderId: string]: number }> => {
-    try {
-      const folders = await favoritesService.getFolders();
-      const counts: { [folderId: string]: number } = {};
-      
-      for (const folder of folders) {
-        counts[folder.id] = folder.itemCount || 0;
-      }
-      
-      return counts;
-    } catch (error) {
-      console.error("Error getting favorite counts:", error);
       throw error;
     }
   },
@@ -373,14 +412,36 @@ export const favoritesService = {
       };
       
       const { data } = await gatewayRequest({
-        url: `${API_BASE}/user-place-favorite/favorites/search`,
+        url: `${gatewayUrl}/user-place-favorite/favorites/search`,
         method: "GET",
         params,
       });
-      return data;
+      
+      if (data.data) {
+        return {
+          success: true,
+          data: data.data.favorites || data.data,
+          pagination: {
+            page: data.data.page || page,
+            limit: data.data.limit || limit,
+            total: data.data.total || 0,
+            totalPages: data.data.totalPages || 0
+          }
+        };
+      }
+      
+      return {
+        success: true,
+        data: [],
+        pagination: { page, limit, total: 0, totalPages: 0 }
+      };
     } catch (error) {
       console.error("Error searching favorites:", error);
-      throw error;
+      return {
+        success: false,
+        data: [],
+        pagination: { page, limit, total: 0, totalPages: 0 }
+      };
     }
   },
 };

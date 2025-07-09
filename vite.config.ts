@@ -26,7 +26,7 @@ export default defineConfig({
         target: 'http://ec2-52-221-179-216.ap-southeast-1.compute.amazonaws.com:3008',
         changeOrigin: true,
         secure: false,
-        rewrite: (path) => path.replace(/^\/api\/v1\/user-place-favorite/, '/user-place-favorite'),
+        rewrite: (path) => path.replace(/^\/api\/v1\/user-place-favorite/, '/public/user-place-favorite'),
         configure: (proxy, options) => {
           proxy.on('error', (err, req, res) => {
             console.log('Proxy error:', err);

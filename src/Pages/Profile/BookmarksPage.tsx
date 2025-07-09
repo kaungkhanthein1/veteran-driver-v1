@@ -1,13 +1,14 @@
 import { useBookmarks } from '../../hooks/useBookmarks';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import NoNoti from '../../icons/NoNoti.svg';
 import HighlightBar from '../../icons/Highlight.png';
 import ToAdd from '../../icons/BookmarksUpdate/ToAdd.svg';
 import ThreeDots from '../../icons/BookmarksUpdate/ThreeDots.svg';
-import Favourite from '../../icons/BookmarksUpdate/Favourite.png';
-import ArrowBack from '../../icons/ArrowBack.svg';
+import Favourite from '../../icons/BookmarksUpdate/Favorite.svg';
+import ArrowLeft from '../../icons/BookmarksUpdate/ArrowLeft.svg';
+import HotelRoom from '../../assets/HarrierRoom.png';
 
 interface CreateFolderModalProps {
   isOpen: boolean;
@@ -41,7 +42,7 @@ function CreateFolderModal({ isOpen, onClose, onConfirm }: CreateFolderModalProp
           onClick={handleClose}
           className="absolute left-4 p-2 -ml-2 hover:bg-gray-100 rounded-full"
         >
-          <img src={ArrowBack} alt="Back" className="w-6 h-6" />
+          <img src={ArrowLeft} alt="Back" className="w-8 h-8" />
         </button>
         
         <h1 className="flex-1 text-center text-lg font-medium text-gray-900">Add New List</h1>
@@ -49,12 +50,13 @@ function CreateFolderModal({ isOpen, onClose, onConfirm }: CreateFolderModalProp
         <button
           onClick={handleSubmit}
           disabled={!name.trim()}
-          className={`absolute right-4 px-4 py-2 font-medium transition-colors ${
+          className={`absolute px-4 py-2 font-medium transition-colors ${
             name.trim()
               ? 'cursor-pointer'
               : 'cursor-not-allowed'
           }`}
           style={{
+            right: '0',
             color: name.trim() 
               ? 'transparent'
               : '#B5B5B5',
@@ -90,6 +92,92 @@ function CreateFolderModal({ isOpen, onClose, onConfirm }: CreateFolderModalProp
   );
 }
 
+interface EditFolderModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onConfirm: (name: string) => void;
+  initialName: string;
+}
+
+function EditFolderModal({ isOpen, onClose, onConfirm, initialName }: EditFolderModalProps) {
+  const [name, setName] = useState(initialName);
+
+  useEffect(() => {
+    setName(initialName);
+  }, [initialName]);
+
+  const handleSubmit = () => {
+    if (name.trim()) {
+      onConfirm(name.trim());
+      onClose();
+  }
+  };
+
+  const handleClose = () => {
+    setName(initialName);
+    onClose();
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 bg-white z-50 flex flex-col">
+      {/* Header */}
+      <div className="relative flex items-center p-4 border-b border-gray-100">
+        <button
+          onClick={handleClose}
+          className="absolute left-4 p-2 -ml-2 hover:bg-gray-100 rounded-full"
+        >
+          <img src={ArrowLeft} alt="Back" className="w-8 h-8" />
+        </button>
+        
+        <h1 className="flex-1 text-center text-lg font-medium text-gray-900">Edit List</h1>
+        
+        <button
+          onClick={handleSubmit}
+          disabled={!name.trim()}
+          className={`absolute px-4 py-2 font-medium transition-colors ${
+            name.trim()
+              ? 'cursor-pointer'
+              : 'cursor-not-allowed'
+          }`}
+          style={{
+            right: '0',
+            color: name.trim() 
+              ? 'transparent'
+              : '#B5B5B5',
+            background: name.trim() 
+              ? 'linear-gradient(180deg, #FFC61B 0%, #FF9500 100%)'
+              : 'transparent',
+            WebkitBackgroundClip: name.trim() ? 'text' : 'initial',
+            backgroundClip: name.trim() ? 'text' : 'initial',
+          }}
+        >
+          Update
+        </button>
+      </div>
+
+      {/* Content */}
+      <div className="flex-1 p-4">
+        <div className="relative mt-8">
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Give this list a title"
+            className="w-full bg-transparent border border-gray-300 rounded-lg px-4 h-[56px] text-base focus:outline-none focus:ring-0 focus:border-gray-300 placeholder:text-gray-400"
+            style={{ outline: 'none', boxShadow: 'none' }}
+            autoFocus
+          />
+          <span className="absolute -top-[10px] left-[18px] px-1 text-sm text-gray-600 bg-white">
+            List Title
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 interface FolderItemProps {
   folder: any;
   onMenuClick: (folder: any) => void;
@@ -97,28 +185,45 @@ interface FolderItemProps {
 }
 
 function FolderItem({ folder, onMenuClick, onClick }: FolderItemProps) {
+  const itemRef = useRef<HTMLDivElement>(null);
+
+  const handleMenuClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const rect = itemRef.current?.getBoundingClientRect();
+    if (rect) {
+      onMenuClick({
+        ...folder,
+        menuPosition: {
+          top: rect.top + window.scrollY,
+        }
+      });
+    }
+  };
+
   return (
     <div 
-      className="flex items-center p-4 hover:bg-gray-50 cursor-pointer"
+      ref={itemRef}
+      className="flex items-center px-4 py-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100"
       onClick={() => onClick(folder)}
     >
-      <div className="w-12 h-12 rounded-lg overflow-hidden mr-3 bg-gray-200 flex items-center justify-center">
+      <div className="w-[60px] h-[60px] rounded-lg overflow-hidden mr-3 flex items-center justify-center">
         {folder.isDefault ? (
-          <img src={Favourite} alt="Favourite" className="w-6 h-6" />
+          <img src={Favourite} alt="Favourite" className="w-7 h-7" />
         ) : (
-          <div className="w-full h-full bg-gradient-to-br from-orange-400 to-orange-600"></div>
+          <img 
+            src={HotelRoom}
+            alt={folder.name}
+            className="w-full h-full object-cover"
+          />
         )}
       </div>
-      <div className="flex-1">
-        <h3 className="font-medium text-gray-900">{folder.name}</h3>
-        <p className="text-sm text-gray-500">{folder.itemCount || 0} places</p>
+      <div className="flex-1 min-w-0">
+        <h3 className="font-medium text-[17px] text-gray-900 truncate leading-tight">{folder.name}</h3>
+        <p className="text-[15px] text-gray-500 mt-1">{folder.itemCount || 0} places</p>
       </div>
       <button
-        onClick={(e) => {
-          e.stopPropagation();
-          onMenuClick(folder);
-        }}
-        className="p-2 hover:bg-gray-100 rounded-full"
+        onClick={handleMenuClick}
+        className="p-2 -mr-2 hover:bg-gray-100 rounded-full"
       >
         <img src={ThreeDots} alt="Menu" className="w-5 h-5" />
       </button>
@@ -138,35 +243,72 @@ function FolderMenu({ folder, isOpen, onClose, onEdit, onDelete }: FolderMenuPro
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg p-4 w-full max-w-xs">
-        <h3 className="font-medium text-gray-900 mb-4">{folder.name}</h3>
-        <div className="space-y-2">
+    <div 
+      className="fixed inset-0 z-50"
+      onClick={onClose}
+    >
+      <div 
+        className="absolute bg-white rounded-lg shadow-lg py-2 w-[140px]"
+        style={{
+          top: folder.menuPosition?.top || '0',
+          right: '16px', // Matches the parent container's padding
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          onClick={() => {
+            onEdit();
+            onClose();
+          }}
+          className="w-full text-left px-4 py-3 text-gray-900 text-[15px] hover:bg-gray-50"
+        >
+          Edit list
+        </button>
+        {!folder.isDefault && (
           <button
             onClick={() => {
-              onEdit();
+              onDelete();
               onClose();
             }}
-            className="w-full text-left px-3 py-2 hover:bg-gray-100 rounded-md"
+            className="w-full text-left px-4 py-3 text-red-600 text-[15px] hover:bg-gray-50"
           >
-            Edit List
+            Delete list
           </button>
-          {!folder.isDefault && (
-            <button
-              onClick={() => {
-                onDelete();
-                onClose();
-              }}
-              className="w-full text-left px-3 py-2 hover:bg-gray-100 rounded-md text-red-600"
-            >
-              Delete List
-            </button>
-          )}
+        )}
+      </div>
+    </div>
+  );
+}
+
+interface DeleteConfirmModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onConfirm: () => void;
+  folderName: string;
+}
+
+function DeleteConfirmModal({ isOpen, onClose, onConfirm, folderName }: DeleteConfirmModalProps) {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-lg p-6 w-full max-w-sm">
+        <h3 className="text-lg font-medium text-gray-900 mb-2">Delete List</h3>
+        <p className="text-gray-600 mb-6">
+          Are you sure you want to delete &ldquo;{folderName}&rdquo;? This action cannot be undone.
+        </p>
+        <div className="flex space-x-3">
           <button
             onClick={onClose}
-            className="w-full text-left px-3 py-2 hover:bg-gray-100 rounded-md"
+            className="flex-1 px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
           >
             Cancel
+          </button>
+          <button
+            onClick={onConfirm}
+            className="flex-1 px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600 transition-colors"
+          >
+            Delete
           </button>
         </div>
       </div>
@@ -180,6 +322,7 @@ export default function BookmarksPage() {
     isLoading, 
     error, 
     createFolder, 
+    updateFolder,
     deleteFolder,
     refreshBookmarks 
   } = useBookmarks();
@@ -187,6 +330,8 @@ export default function BookmarksPage() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('favourites');
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [selectedFolder, setSelectedFolder] = useState<any>(null);
   const [showFolderMenu, setShowFolderMenu] = useState(false);
 
@@ -198,9 +343,20 @@ export default function BookmarksPage() {
     }
   };
 
+  const handleEditFolder = async (name: string) => {
+    if (selectedFolder && selectedFolder.id !== 'default') {
+      try {
+        await updateFolder(selectedFolder.id, name);
+      } catch (error) {
+        console.error('Failed to update folder:', error);
+      }
+    }
+  };
+
   const handleDeleteFolder = async (folderId: string) => {
     try {
       await deleteFolder(folderId);
+      setShowDeleteConfirm(false);
     } catch (error) {
       console.error('Failed to delete folder:', error);
     }
@@ -273,15 +429,15 @@ export default function BookmarksPage() {
           {activeTab === 'favourites' && (
             <div className="px-4">
               {/* List collections header */}
-              <h2 className="text-lg font-medium text-gray-700 mb-4">List collections</h2>
+              <h2 className="text-[22px] font-semibold text-gray-900 mb-3">List collections</h2>
               
               {/* Add New List Button */}
               <button
                 onClick={() => setShowCreateModal(true)}
-                className="w-full flex items-center justify-center p-4 bg-gray-100 rounded-lg mb-4 hover:bg-gray-200 transition-colors"
+                className="w-full flex items-center justify-center py-[14px] bg-gray-50 rounded-xl mb-4 hover:bg-gray-100 transition-colors"
               >
-                <img src={ToAdd} alt="Add" className="w-5 h-5 mr-2" />
-                <span className="text-gray-700 font-medium">Add New List</span>
+                <img src={ToAdd} alt="Add" className="w-5 h-5 mr-2 opacity-80" />
+                <span className="text-[15px] text-gray-900 font-medium">Add New List</span>
               </button>
 
               {/* Loading state */}
@@ -289,7 +445,7 @@ export default function BookmarksPage() {
                 <div className="text-center py-8">
                   <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500 mx-auto"></div>
                   <p className="text-gray-500 mt-2">Loading...</p>
-                </div>
+              </div>
               )}
 
               {/* Error state */}
@@ -302,12 +458,12 @@ export default function BookmarksPage() {
                   >
                     Retry
                   </button>
-                </div>
+                  </div>
               )}
 
               {/* Folders List */}
               {!isLoading && !error && (
-                <div className="space-y-1">
+                <div className="divide-y divide-gray-100">
                   {allFolders.map((folder) => (
                     <FolderItem
                       key={folder.id}
@@ -327,7 +483,7 @@ export default function BookmarksPage() {
                   <p className="text-gray-400 text-sm">Create your first list to organize your favorite places</p>
                 </div>
               )}
-            </div>
+              </div>
           )}
 
           {activeTab === 'notification' && (
@@ -352,18 +508,39 @@ export default function BookmarksPage() {
           onConfirm={handleCreateFolder}
         />
 
+        {/* Edit Folder Modal */}
+        <EditFolderModal
+          isOpen={showEditModal}
+          onClose={() => setShowEditModal(false)}
+          onConfirm={handleEditFolder}
+          initialName={selectedFolder?.name || ''}
+        />
+
+        {/* Delete Confirmation Modal */}
+        <DeleteConfirmModal
+          isOpen={showDeleteConfirm}
+          onClose={() => setShowDeleteConfirm(false)}
+          onConfirm={() => {
+            if (selectedFolder) {
+              handleDeleteFolder(selectedFolder.id);
+            }
+          }}
+          folderName={selectedFolder?.name || ''}
+        />
+
         {/* Folder Menu Modal */}
         <FolderMenu
           folder={selectedFolder}
           isOpen={showFolderMenu}
           onClose={() => setShowFolderMenu(false)}
           onEdit={() => {
-            // Handle edit - could open edit modal
-            console.log('Edit folder:', selectedFolder);
+            setShowFolderMenu(false);
+            setShowEditModal(true);
           }}
           onDelete={() => {
             if (selectedFolder && selectedFolder.id !== 'default') {
-              handleDeleteFolder(selectedFolder.id);
+              setShowFolderMenu(false);
+              setShowDeleteConfirm(true);
             }
           }}
         />

@@ -28,6 +28,7 @@ interface UseBookmarksReturn {
   addToFolder: (item: BookmarkItem, folderId?: string) => Promise<void>;
   removeFromBookmarks: (placeId: string) => Promise<void>;
   createFolder: (name: string, description?: string) => Promise<void>;
+  updateFolder: (folderId: string, name: string, description?: string) => Promise<void>;
   deleteFolder: (folderId: string) => Promise<void>;
   moveToFolder: (placeId: string, targetFolderId?: string) => Promise<void>;
   refreshBookmarks: () => Promise<void>;
@@ -202,6 +203,19 @@ export function useBookmarks(): UseBookmarksReturn {
     }
   }, []);
 
+  const updateFolder = useCallback(async (folderId: string, name: string, description?: string): Promise<void> => {
+    setError(null);
+    try {
+      const updatedFolder = await favoritesService.updateFolder(folderId, { name, description });
+      setFolders(prev => prev.map(folder => 
+        folder.id === folderId ? { ...folder, ...updatedFolder } : folder
+      ));
+    } catch (err: any) {
+      setError(err.message || 'Failed to update folder');
+      console.error('Error updating folder:', err);
+    }
+  }, []);
+
   const deleteFolder = useCallback(async (folderId: string): Promise<void> => {
     setError(null);
     try {
@@ -244,6 +258,7 @@ export function useBookmarks(): UseBookmarksReturn {
     addToFolder,
     removeFromBookmarks,
     createFolder,
+    updateFolder,
     deleteFolder,
     moveToFolder,
     refreshBookmarks,
