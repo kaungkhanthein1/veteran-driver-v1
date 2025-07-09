@@ -45,7 +45,7 @@ function CreateFolderModal({ isOpen, onClose, onConfirm }: CreateFolderModalProp
           <img src={ArrowLeft} alt="Back" className="w-8 h-8" />
         </button>
         
-        <h1 className="flex-1 text-center text-lg font-medium text-gray-900">Add New List</h1>
+        <h1 className="flex-1 text-center text-sn font-medium text-gray-900">Add New List</h1>
         
         <button
           onClick={handleSubmit}
@@ -203,10 +203,10 @@ function FolderItem({ folder, onMenuClick, onClick }: FolderItemProps) {
   return (
     <div 
       ref={itemRef}
-      className="flex items-center px-4 py-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100"
+      className="flex items-center px-6 py-4 hover:bg-gray-50 cursor-pointer border-b border-gray-100"
       onClick={() => onClick(folder)}
     >
-      <div className="w-[60px] h-[60px] rounded-lg overflow-hidden mr-3 flex items-center justify-center">
+      <div className="w-[60px] h-[60px] rounded-lg overflow-hidden mr-4 flex items-center justify-center">
         {folder.isDefault ? (
           <img src={Favourite} alt="Favourite" className="w-7 h-7" />
         ) : (
@@ -251,7 +251,7 @@ function FolderMenu({ folder, isOpen, onClose, onEdit, onDelete }: FolderMenuPro
         className="absolute bg-white rounded-lg shadow-lg py-2 w-[140px]"
         style={{
           top: folder.menuPosition?.top || '0',
-          right: '16px', // Matches the parent container's padding
+          right: 'px', // Updated to match px-6 padding (24px)
         }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -292,23 +292,23 @@ function DeleteConfirmModal({ isOpen, onClose, onConfirm, folderName }: DeleteCo
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg p-6 w-full max-w-sm">
-        <h3 className="text-lg font-medium text-gray-900 mb-2">Delete List</h3>
-        <p className="text-gray-600 mb-6">
-          Are you sure you want to delete &ldquo;{folderName}&rdquo;? This action cannot be undone.
+      <div className="bg-white rounded-2xl p-6 w-full max-w-[320px] mx-4">
+        <h3 className="text-xl font-semibold text-gray-900 mb-3 text-center">Delete list ?</h3>
+        <p className="text-gray-500 text-center mb-8 leading-relaxed">
+          Are you sure you want to Delete the selected list permanently ? This action cannot be undone.
         </p>
-        <div className="flex space-x-3">
+        <div className="flex space-x-4">
           <button
             onClick={onClose}
-            className="flex-1 px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+            className="flex-1 px-6 py-3 text-gray-500 font-medium rounded-xl transition-colors hover:bg-gray-50"
           >
-            Cancel
+            Go back
           </button>
           <button
             onClick={onConfirm}
-            className="flex-1 px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600 transition-colors"
+            className="flex-1 px-6 py-3 text-red-500 font-medium rounded-xl transition-colors hover:bg-red-50"
           >
-            Delete
+            Yes, Delete
           </button>
         </div>
       </div>
@@ -363,7 +363,11 @@ export default function BookmarksPage() {
   };
 
   const handleFolderClick = (folder: any) => {
-    navigate(`/bookmarks/folder/${folder.id}`, { state: { folder } });
+    if (folder.isDefault) {
+      navigate('/bookmarks/folder/default', { state: { folder } });
+    } else {
+      navigate(`/bookmarks/folder/${folder.id}`, { state: { folder } });
+    }
   };
 
   const handleMenuClick = (folder: any) => {
@@ -427,14 +431,15 @@ export default function BookmarksPage() {
           </div>
 
           {activeTab === 'favourites' && (
-            <div className="px-4">
+            <div className="px-6">
               {/* List collections header */}
-              <h2 className="text-[22px] font-semibold text-gray-900 mb-3">List collections</h2>
+              <h2 className="text-[18px] text-gray-900 mb-3">List collections</h2>
               
               {/* Add New List Button */}
               <button
                 onClick={() => setShowCreateModal(true)}
-                className="w-full flex items-center justify-center py-[14px] bg-gray-50 rounded-xl mb-4 hover:bg-gray-100 transition-colors"
+                className="w-full flex items-center justify-center py-[12px] rounded-xl mb-4 hover:bg-gray-100 transition-colors"
+                style={{ backgroundColor: '#F2F4FA' }}
               >
                 <img src={ToAdd} alt="Add" className="w-5 h-5 mr-2 opacity-80" />
                 <span className="text-[15px] text-gray-900 font-medium">Add New List</span>
@@ -445,7 +450,7 @@ export default function BookmarksPage() {
                 <div className="text-center py-8">
                   <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500 mx-auto"></div>
                   <p className="text-gray-500 mt-2">Loading...</p>
-              </div>
+                </div>
               )}
 
               {/* Error state */}
@@ -458,7 +463,7 @@ export default function BookmarksPage() {
                   >
                     Retry
                   </button>
-                  </div>
+                </div>
               )}
 
               {/* Folders List */}
@@ -483,7 +488,7 @@ export default function BookmarksPage() {
                   <p className="text-gray-400 text-sm">Create your first list to organize your favorite places</p>
                 </div>
               )}
-              </div>
+            </div>
           )}
 
           {activeTab === 'notification' && (

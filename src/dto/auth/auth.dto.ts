@@ -67,7 +67,9 @@ export interface PasswordLoginDto {
 }
 
 export interface PasswordLoginResponseDto {
-  token: TokenData;
+  data: {
+    token: TokenData;
+  }
 }
 
 // ===== Email OTP Login =====

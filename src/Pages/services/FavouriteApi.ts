@@ -97,9 +97,12 @@ export const FavouriteApi = createApi({
     }),
     getFavoritesByFolder: builder.query<GetFavoritesByFolderResponse, GetFavoritesByFolderRequest>({
       query: ({ folderId, ...params }) => ({
-        url: `/user-place-favorite/favorites/folder/${folderId}`,
+        url: `/user-place-favorite/favorites`,
         method: "GET",
-        params,
+        params: {
+          folderId,
+          ...params
+        },
       }),
     }),
     isFavorited: builder.query<IsFavoritedResponse, string>({

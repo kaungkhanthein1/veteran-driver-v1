@@ -30,6 +30,7 @@ import UploadedLocationPage from "./Pages/UploadedLocationPage";
 import RecycleBinPage from "./Pages/RecycleBinPage";
 import EditLocationPage from "./Pages/EditLocationPage";
 import BookmarksPage from "./Pages/Profile/BookmarksPage";
+import FolderDetailPage from "./Pages/Profile/FolderDetailPage";
 import RankingPage from "./Pages/RankingPage";
 import LocationDetailsPage from "./Pages/LocationDetailsPage";
 import NotificationsPage from "./Pages/Profile/NotificationsPage";
@@ -53,6 +54,7 @@ function MainTabs() {
       <Routes>
         <Route path="/" element={<HomeTab />} />
         <Route path="/bookmarks" element={<BookmarksTab />} />
+        <Route path="/bookmarks/folder/:folderId" element={<FolderDetailPage />} />
         <Route path="/profile" element={<ProfileTab />} />
       </Routes>
       <BottomNavBarUpdate />

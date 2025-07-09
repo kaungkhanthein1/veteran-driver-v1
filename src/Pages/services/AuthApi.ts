@@ -34,15 +34,12 @@ import {
   UpdateEmailDto,
   UpdateEmailResponse,
   UpdatePasswordDto,
-  UpdatePasswordResponse
+  UpdatePasswordResponse,
+  PasswordLoginResponseDto
 } from "../../dto";
 
 export const AuthApi = createApi({
   reducerPath: "AuthApi",
-  baseQuery: gatewayBaseQuery({
-    baseUrl:
-      `https://vtt_dev.movie06.com/api/v1/auth`,
-  }),
   baseQuery: gatewayBaseQuery({ baseUrl: apiBaseUrl }),
   endpoints: (builder) => ({
     // Send Verification Code
@@ -77,8 +74,8 @@ export const AuthApi = createApi({
         body: data,
       }),
       transformResponse: (response: PasswordLoginResponse) => {
-        if (response?.token) {
-          storeTokens(response.token);
+        if (response?.data?.token) {
+          storeTokens(response.data.token);
         }
         return response;
       },

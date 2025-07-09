@@ -125,7 +125,7 @@ const ProfileCard: React.FC = () => {
             </div>
           </div>
           {/* Location and bio below avatar/name/level, aligned left */}
-          <div className="flex flex-col items-start w-full mt-8 mb-6">
+          <div className="flex flex-col items-start w-full mt-5">
             {user.bio && (
               <div className="text-base text-gray-700 flex items-center gap-1">
                 {user.bio}
