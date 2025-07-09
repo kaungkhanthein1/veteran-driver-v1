@@ -274,6 +274,7 @@ const LocationDetailsPage = () => {
     const queryName = encodeURIComponent(name || address || "Destination");
 
     let url = "";
+    let fallbackUrl = "";
 
     switch (vendor) {
       case "amap":
@@ -282,6 +283,7 @@ const LocationDetailsPage = () => {
           : isAndroid
           ? `amapuri://viewMap?sourceApplication=myApp&lat=${lat}&lon=${lng}&poiname=${queryName}`
           : `https://uri.amap.com/marker?position=${lng},${lat}&name=${queryName}`;
+        fallbackUrl = `https://uri.amap.com/marker?position=${lng},${lat}&name=${queryName}`;
         break;
 
       case "baidu":
@@ -289,6 +291,7 @@ const LocationDetailsPage = () => {
           isIOS || isAndroid
             ? `baidumap://map/marker?location=${lat},${lng}&title=${queryName}&content=${queryName}&src=webapp.marker`
             : `https://api.map.baidu.com/marker?location=${lat},${lng}&title=${queryName}&content=${queryName}&output=html`;
+        fallbackUrl = `https://api.map.baidu.com/marker?location=${lat},${lng}&title=${queryName}&content=${queryName}&output=html`;
         break;
 
       case "tencent":
@@ -296,17 +299,26 @@ const LocationDetailsPage = () => {
           isIOS || isAndroid
             ? `qqmap://map/marker?marker=coord:${lat},${lng};title:${queryName}&referer=myApp`
             : `https://apis.map.qq.com/uri/v1/marker?marker=coord:${lat},${lng};title:${queryName}&referer=myApp`;
+        fallbackUrl = `https://apis.map.qq.com/uri/v1/marker?marker=coord:${lat},${lng};title:${queryName}&referer=myApp`;
         break;
 
       case "google":
-        url =
-          isIOS || isAndroid
-            ? `geo:${lat},${lng}?q=${lat},${lng}(${queryName})`
-            : `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+        if (isIOS) {
+          // First try Google Maps app if installed
+          url = `comgooglemaps://?q=${lat},${lng}&center=${lat},${lng}&zoom=15`;
+          fallbackUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+        } else if (isAndroid) {
+          url = `geo:${lat},${lng}?q=${lat},${lng}(${queryName})`;
+          fallbackUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+        } else {
+          url = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+          fallbackUrl = url;
+        }
         break;
 
       case "apple":
         url = `http://maps.apple.com/?q=${queryName}&ll=${lat},${lng}`;
+        fallbackUrl = url;
         break;
 
       default:
@@ -319,15 +331,30 @@ const LocationDetailsPage = () => {
       localStorage.setItem("preferredMapVendor", vendor);
     }
 
-    window.location.href = url;
+    // Special handling for iOS Google Maps
+    if (vendor === "google" && isIOS) {
+      const iframe = document.createElement("iframe");
+      iframe.style.display = "none";
+      iframe.src = url;
+      document.body.appendChild(iframe);
+
+      setTimeout(() => {
+        document.body.removeChild(iframe);
+        // If still here after 500ms, open fallback URL
+        window.location.href = fallbackUrl;
+      }, 500);
+    } else {
+      // For other cases, try to open directly
+      window.location.href = url;
+    }
   };
 
   const handleMapSelect = (vendor: string) => {
     setSelectedVendor(vendor);
   };
 
-  const handleConfirm = () => {
-    if (selectedVendor && selectionType) {
+  const handleConfirm = (type: any) => {
+    if (selectedVendor && type) {
       openMapByVendor({
         lat: destination.lat,
         lng: destination.lng,
@@ -689,7 +716,7 @@ const LocationDetailsPage = () => {
                 className={`once-btn mt-5`}
                 onClick={() => {
                   setSelectionType("once");
-                  handleConfirm();
+                  handleConfirm("once");
                 }}
               >
                 Once
@@ -700,7 +727,7 @@ const LocationDetailsPage = () => {
                 }`}
                 onClick={() => {
                   setSelectionType("always");
-                  handleConfirm();
+                  handleConfirm("always");
                 }}
               >
                 Always
