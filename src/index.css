@@ -46,6 +46,29 @@ body {
   /* font-family: sans-serif; */
 }
 
+.loc-des {
+  line-height: 1.5em;
+  word-break: break-word;
+}
+
+.loc-des.truncated {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: clip;
+  position: relative;
+}
+/* Optional: Add a fade effect at the end */
+.loc-des.truncated::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 22%;
+  height: 1.5em;
+  background: linear-gradient(to right, white, white 100%);
+}
 .spiner {
   width: 30px;
   height: 30px;

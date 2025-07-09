@@ -17,6 +17,7 @@ import amap from "../assets/amap.png";
 import bmap from "../assets/bmap.png";
 import rmap from "../assets/rmap.png";
 import "../components/cards/card.css";
+import LocationDescription from "./LocationDescription";
 
 const LocationDetailsPage = () => {
   const { id } = useParams();
@@ -546,8 +547,8 @@ const LocationDetailsPage = () => {
           </svg>
           <h1 className="loc-text">Location Guide</h1>
         </div>
-        <div className="mt-2 px-4">
-          <p className="loc-des">{locationData?.description}</p>
+        <div className="px-4 mt-2">
+          <LocationDescription description={locationData?.description} />
         </div>
         <div className="mt-2">
           <GoogleMap
