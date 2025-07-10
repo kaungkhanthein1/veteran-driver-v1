@@ -36,7 +36,7 @@ const FormInput = ({
         onChange={onChange}
         {...rest}
       />
-      <span className="absolute -top-[10px] left-[18px] px-1 text-sm text-theme-secondary bg-theme-primary">
+      <span className="absolute -top-[10px] left-[18px] px-1 text-sm text-theme-secondary bg-[#F8F9FB]">
         {label ? t(label) : ''} {required && <span className="text-[#FDC51B]">*</span>}
       </span>
       {rightIcon && (

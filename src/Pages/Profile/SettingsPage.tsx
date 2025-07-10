@@ -16,7 +16,7 @@ export default function SettingsPage() {
         {
           id: 'username',
           title: 'Change User Name',
-          route: '/settings/username',
+          route: '/edit-profile/nickname',
         },
         {
           id: 'mobile',
@@ -41,6 +41,8 @@ export default function SettingsPage() {
       ],
     },
   ];
+
+  // Ensure routes are defined in AppRoutes
 
   // Logout handler (implement actual logic as needed)
   const handleLogout = () => {

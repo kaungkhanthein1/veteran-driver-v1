@@ -35,6 +35,8 @@ import RankingPage from "./Pages/RankingPage";
 import LocationDetailsPage from "./Pages/LocationDetailsPage";
 import NotificationsPage from "./Pages/Profile/NotificationsPage";
 import ChangePasswordPage from "./Pages/Profile/ChangePasswordPage";
+import ChangeEmailPage from "./Pages/Profile/ChangeEmailPage";
+import ChangeMobilePage from "./Pages/Profile/ChangeMobilePage";
 import ReviewPage from "./Pages/ReviewPage";
 import CheckMap from "./Pages/googlemap/CheckMap";
 import AddMap from "./Pages/googlemap/AddMap";
@@ -48,6 +50,7 @@ import BookmarksTab from "./tabs/BookmarksTab";
 import ProfileTab from "./tabs/ProfileTab";
 import FeedbackPage from "./Pages/FeedbackPage";
 import Favorite from "./Pages/Favorite";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 function MainTabs() {
   return (
@@ -104,6 +107,8 @@ function AppRoutes() {
         <Route path="/location/:id" element={<LocationDetailsPage />} />
         <Route path="/notifications" element={<NotificationsPage />} />
         <Route path="/settings/password" element={<ChangePasswordPage />} />
+        <Route path="/settings/email" element={<ChangeEmailPage />} />
+        <Route path="/settings/mobile" element={<ChangeMobilePage />} />
         <Route path="/review" element={<ReviewPage />} />
         <Route path="/CheckMap/:id" element={<CheckMap />} />
         <Route path="/addMap" element={<AddMap />} />
@@ -156,12 +161,16 @@ function AppRoutes() {
 }
 
 function App(): JSX.Element {
+  const queryClient = new QueryClient();
+
   return (
     <div className="max-w-[480px] mx-auto dvh-fallback bg-theme-primary">
       <ThemeProvider>
-        <Router>
-          <AppRoutes />
-        </Router>
+        <QueryClientProvider client={queryClient}>
+          <Router>
+            <AppRoutes />
+          </Router>
+        </QueryClientProvider>
       </ThemeProvider>
     </div>
   );

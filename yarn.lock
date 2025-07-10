@@ -521,6 +521,18 @@
     "@svgr/hast-util-to-babel-ast" "8.0.0"
     svg-parser "^2.0.4"
 
+"@tanstack/query-core@5.82.0":
+  version "5.82.0"
+  resolved "https://registry.npmjs.org/@tanstack/query-core/-/query-core-5.82.0.tgz"
+  integrity sha512-JrjoVuaajBQtnoWSg8iaPHaT4mW73lK2t+exxHNOSMqy0+13eKLqJgTKXKImLejQIfdAHQ6Un0njEhOvUtOd5w==
+
+"@tanstack/react-query@^5.82.0":
+  version "5.82.0"
+  resolved "https://registry.npmjs.org/@tanstack/react-query/-/react-query-5.82.0.tgz"
+  integrity sha512-mnk8/ofKEthFeMdhV1dV8YXRf+9HqvXAcciXkoo755d/ocfWq7N/Y9jGOzS3h7ZW9dDGwSIhs3/HANWUBsyqYg==
+  dependencies:
+    "@tanstack/query-core" "5.82.0"
+
 "@tolgee/core@^6.2.6", "@tolgee/core@6.2.6":
   version "6.2.6"
   resolved "https://registry.npmjs.org/@tolgee/core/-/core-6.2.6.tgz"
@@ -2895,7 +2907,7 @@ react-router@6.30.0:
   dependencies:
     "@remix-run/router" "1.23.0"
 
-react@*, "react@^16.14.0 || ^17.0.1 || ^18.1.0 || ^19", "react@^16.8 || ^17 || ^18 || ^19", "react@^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react@^16.9.0 || ^17.0.0 || ^18 || ^19", "react@^18.0 || ^19", react@^18.0.0, "react@^18.0.0 || ^19.0.0", react@^18.2.0, react@^18.3.1, "react@>= 16.8.0", react@>=16.0.0, react@>=16.4.1, react@>=16.6.0, react@>=16.8, react@>=16.8.0:
+react@*, "react@^16.14.0 || ^17.0.1 || ^18.1.0 || ^19", "react@^16.8 || ^17 || ^18 || ^19", "react@^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react@^16.9.0 || ^17.0.0 || ^18 || ^19", "react@^18 || ^19", "react@^18.0 || ^19", react@^18.0.0, "react@^18.0.0 || ^19.0.0", react@^18.2.0, react@^18.3.1, "react@>= 16.8.0", react@>=16.0.0, react@>=16.4.1, react@>=16.6.0, react@>=16.8, react@>=16.8.0:
   version "18.3.1"
   resolved "https://registry.npmjs.org/react/-/react-18.3.1.tgz"
   integrity sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==

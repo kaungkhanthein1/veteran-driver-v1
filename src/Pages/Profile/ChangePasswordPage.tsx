@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 import BackButton from '../../components/common/BackButton';
 import FormInput from '../../components/common/FormInput';
 import ViewIcon from '../../icons/Views.svg';
-import ViewOffIcon from '../../icons/ViewOff.svg'
-
-
+import ViewOffIcon from '../../icons/ViewOff.svg';
+import { useMutation } from '@tanstack/react-query';
+import { gatewayRequest } from '../../services/gateway';
 
 export default function ChangePasswordPage() {
   const navigate = useNavigate();
@@ -14,142 +14,177 @@ export default function ChangePasswordPage() {
 
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
-  const [confirmNewPassword, setConfirmNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
-  const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // Handle password change logic here
-    console.log({
-      currentPassword,
-      newPassword,
-      confirmNewPassword,
-    });
-    // On success, navigate back or to a confirmation page
-    // navigate('/settings');
+  const updatePasswordMutation = useMutation({
+    mutationFn: async (data: {
+      currentPassword: string;
+      newPassword: string;
+      confirmPassword: string;
+    }) => {
+      const response = await gatewayRequest({
+        url: 'https://vtt_dev.movie06.com/api/v1/auth/update-password',
+        method: 'POST',
+        data,
+      });
+      return response.data;
+    },
+    onSuccess: () => {
+      // Show success message and navigate back
+      alert('Password updated successfully');
+      navigate(-1);
+    },
+    onError: (error: any) => {
+      setError(error?.response?.data?.message || 'Failed to update password');
+    },
+  });
+
+  const validateForm = () => {
+    if (!currentPassword || !newPassword || !confirmPassword) {
+      setError('Please fill in all fields');
+      return false;
+    }
+    if (newPassword !== confirmPassword) {
+      setError('New passwords do not match');
+      return false;
+    }
+    if (newPassword.length < 8 || newPassword.length > 20) {
+      setError('Password must be between 8 and 20 characters');
+      return false;
+    }
+    return true;
   };
 
+  const handleSubmit = () => {
+    setError(null);
+    if (!validateForm()) return;
+
+    updatePasswordMutation.mutate({
+      currentPassword,
+      newPassword,
+      confirmPassword,
+    });
+  };
+
+  const isFormValid = currentPassword && newPassword && confirmPassword;
+
   return (
-    <div className="dvh-fallback bg-theme-primary text-theme-primary flex flex-col px-4">
+    <div className="min-h-screen bg-[#F8F9FB]">
       {/* Header */}
-      <div className="py-4 relative flex items-center">
-        <div className="absolute left-3">
+      <div className="relative flex items-center justify-center h-14 px-4">
+        <div className="absolute left-2">
           <BackButton />
         </div>
-        <h1 className="flex-grow text-center text-xl font-semibold">{t('Password')}</h1>
+        <h1 className="text-lg font-semibold">Change Password</h1>
       </div>
 
-      {/* Warning Text */}
-      <div className="text-theme-secondary text-sm mb-4">
-        <p>{t('Your password must be at least 6 characters and should include a combination of numbers, letters and special characters (!%@$).')}</p>
-      </div>
-
-      <form onSubmit={handleSubmit} className="py-2">
+      <div className="px-4 pt-4">
+        {/* Current Password */}
         <div className="mb-6">
           <FormInput
-            label={t('Current password')}
+            label="Current Password"
             name="currentPassword"
             type={showCurrentPassword ? 'text' : 'password'}
             value={currentPassword}
-            onChange={(e) => setCurrentPassword(e.target.value)}
-            placeholder={t('Enter your current password')}
+            onChange={(e) => {
+              setCurrentPassword(e.target.value);
+              setError(null);
+            }}
+            placeholder="Enter current password"
             rightIcon={
-              <button type="button" onClick={() => setShowCurrentPassword(!showCurrentPassword)}>
-                {showCurrentPassword ? (
-                  <img
-                  src={ViewIcon}
-                  alt={t("changePasswordPage.iconLabels.views")}
-                  className="w-6 h-6 [filter:var(--icon-filter)]"
+              <button
+                type="button"
+                onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                className="focus:outline-none"
+              >
+                <img
+                  src={showCurrentPassword ? ViewIcon : ViewOffIcon}
+                  alt={showCurrentPassword ? 'Hide' : 'Show'}
+                  className="w-6 h-6"
                 />
-                ) : (
-                  <img
-                    src={ViewOffIcon}
-                    alt={t("changePasswordPage.iconLabels.viewOff")}
-                    className="w-6 h-6 [filter:var(--icon-filter)]"
-                  />
-                )}
               </button>
             }
           />
         </div>
 
+        {/* New Password */}
         <div className="mb-6">
           <FormInput
-            label={t('New password')}
+            label="Set New Password"
             name="newPassword"
             type={showNewPassword ? 'text' : 'password'}
             value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            placeholder={t('Enter your new password')}
+            onChange={(e) => {
+              setNewPassword(e.target.value);
+              setError(null);
+            }}
+            placeholder="Enter new password"
             rightIcon={
-              <button type="button" onClick={() => setShowNewPassword(!showNewPassword)}>
-                {showNewPassword ? (
-                  <img
-                  src={ViewIcon}
-                  alt={t("changePasswordPage.iconLabels.views")}
-                  className="w-6 h-6 [filter:var(--icon-filter)]"
+              <button
+                type="button"
+                onClick={() => setShowNewPassword(!showNewPassword)}
+                className="focus:outline-none"
+              >
+                <img
+                  src={showNewPassword ? ViewIcon : ViewOffIcon}
+                  alt={showNewPassword ? 'Hide' : 'Show'}
+                  className="w-6 h-6"
                 />
-                ) : (
-                  <img
-                    src={ViewOffIcon}
-                    alt={t("changePasswordPage.iconLabels.viewOff")}
-                    className="w-6 h-6 [filter:var(--icon-filter)]"
-                  />
-                )}
               </button>
             }
           />
         </div>
 
+        {/* Confirm New Password */}
         <div className="mb-6">
           <FormInput
-            label={t('Retype new password')}
-            name="confirmNewPassword"
-            type={showConfirmNewPassword ? 'text' : 'password'}
-            value={confirmNewPassword}
-            onChange={(e) => setConfirmNewPassword(e.target.value)}
-            placeholder={t('Retype new password')}
+            label="Retype New Password"
+            name="confirmPassword"
+            type={showConfirmPassword ? 'text' : 'password'}
+            value={confirmPassword}
+            onChange={(e) => {
+              setConfirmPassword(e.target.value);
+              setError(null);
+            }}
+            placeholder="Retype new password"
             rightIcon={
-              <button type="button" onClick={() => setShowConfirmNewPassword(!showConfirmNewPassword)}>
-                {showConfirmNewPassword ? (
-                   <img
-                   src={ViewIcon}
-                   alt={t("changePasswordPage.iconLabels.views")}
-                   className="w-6 h-6 [filter:var(--icon-filter)]"
-                 />
-                 ) : (
-                   <img
-                     src={ViewOffIcon}
-                     alt={t("changePasswordPage.iconLabels.viewOff")}
-                     className="w-6 h-6 [filter:var(--icon-filter)]"
-                   />
-                )}
+              <button
+                type="button"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                className="focus:outline-none"
+              >
+                <img
+                  src={showConfirmPassword ? ViewIcon : ViewOffIcon}
+                  alt={showConfirmPassword ? 'Hide' : 'Show'}
+                  className="w-6 h-6"
+                />
               </button>
             }
           />
         </div>
 
-        {/* Forgot Password Link */}
-        <div className="text-right mb-6">
-          <button
-            type="button"
-            onClick={() => navigate('/forget-password')}
-            className="text-[#FDC51B] text-sm font-medium"
-          >
-            {t('Forgot Password?')}
-          </button>
-        </div>
-      </form>
+        {/* Error Message */}
+        {error && (
+          <div className="mb-6 px-4 py-2 text-red-500 text-sm">{error}</div>
+        )}
 
-      {/* Moved Apply button outside the form */}
-      <button
-        type="submit"
-        className="bg-[#FDC51B] text-black py-3 rounded-3xl font-semibold w-full mx-auto mt-auto mb-8"
-      >
-        {t('Apply')}
-      </button>
+        {/* Confirm Button */}
+        <button
+          onClick={handleSubmit}
+          disabled={!isFormValid || updatePasswordMutation.isPending}
+          className={`w-full py-3 rounded-full font-medium transition-colors ${
+            isFormValid && !updatePasswordMutation.isPending
+              ? 'bg-[#FFC61B] text-black'
+              : 'bg-gray-100 text-gray-400'
+          }`}
+        >
+          {updatePasswordMutation.isPending ? 'Updating...' : 'Confirm'}
+        </button>
+      </div>
     </div>
   );
 }

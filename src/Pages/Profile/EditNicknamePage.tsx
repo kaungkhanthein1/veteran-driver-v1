@@ -26,7 +26,8 @@ function EditNicknameContent() {
       await updateProfile({ nickname: nickname.trim() });
       updateField('nickname', nickname.trim());
       setSuccess('Profile name updated successfully!');
-      setTimeout(() => navigate('/edit-profile'), 1000);
+      // Navigate back to previous page
+      setTimeout(() => navigate(-1), 1000);
     } catch {
       setError('Failed to update profile name');
     } finally {
