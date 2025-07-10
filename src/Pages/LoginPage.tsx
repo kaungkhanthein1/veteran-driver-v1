@@ -12,6 +12,7 @@ import { authService } from "../services/authService";
 import { useAuth } from "../context/AuthContext";
 import axios from "axios"; // Added axios import
 import { useLoginMutation } from "./services/AuthApi";
+import { showToast } from "./ErrorSlice";
 
 type LoginPageProps = {
   onShowRegister?: () => void;
@@ -115,8 +116,15 @@ export default function LoginPage({ onShowRegister, onClose }: LoginPageProps) {
       navigate("/");
       alert("Login successful!");
     } catch (error) {
-      alert(error?.data?.message || "Login failed. Please try again.");
+      showToast({
+        message:
+          error?.data?.details?.message || "Login failed. Please try again.",
+        type: "error",
+      });
       console.error("Login failed:", error);
+      if (recaptchaRef) {
+        recaptchaRef.current?.reset();
+      }
     } finally {
       setIsVerifying(false);
     }
@@ -202,6 +210,7 @@ export default function LoginPage({ onShowRegister, onClose }: LoginPageProps) {
 
           {/* Real reCAPTCHA Component */}
           <ReCaptcha
+            recaptchaRef={recaptchaRef}
             onVerify={handleRecaptchaVerify}
             onExpired={handleRecaptchaExpired}
             onError={handleRecaptchaError}

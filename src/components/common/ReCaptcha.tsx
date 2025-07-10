@@ -12,6 +12,7 @@ interface ReCaptchaProps {
   onExpired?: () => void;
   onError?: () => void;
   className?: string;
+  recaptchaRef: any;
 }
 
 export interface ReCaptchaRef {
@@ -21,8 +22,11 @@ export interface ReCaptchaRef {
 }
 
 const ReCaptcha = forwardRef<ReCaptchaRef, ReCaptchaProps>(
-  ({ onVerify, onExpired, onError, className = "mx-auto" }, ref) => {
-    const recaptchaRef = useRef<ReCAPTCHA>(null);
+  (
+    { onVerify, onExpired, onError, className = "mx-auto", recaptchaRef },
+    ref
+  ) => {
+    // const recaptchaRef = useRef<ReCAPTCHA>(null);
     const { t } = useTranslation();
 
     const handleVerify = useCallback(

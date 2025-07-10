@@ -50,7 +50,8 @@ import BookmarksTab from "./tabs/BookmarksTab";
 import ProfileTab from "./tabs/ProfileTab";
 import FeedbackPage from "./Pages/FeedbackPage";
 import Favorite from "./Pages/Favorite";
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import ErrorToast from "./Pages/ErrorToast";
 
 function MainTabs() {
   return (
@@ -101,7 +102,10 @@ function AppRoutes() {
         <Route path="/uploaded-location" element={<UploadedLocationPage />} />
         <Route path="/recycle-bin" element={<RecycleBinPage />} />
         <Route path="/edit-location" element={<EditLocationPage />} />
-        <Route path="/bookmarks/folder/:folderId" element={<FolderDetailPage />} />
+        <Route
+          path="/bookmarks/folder/:folderId"
+          element={<FolderDetailPage />}
+        />
         <Route path="/ranking" element={<RankingPage />} />
         <Route path="/search" element={<SearchMain />} />
         <Route path="/location/:id" element={<LocationDetailsPage />} />
@@ -168,6 +172,7 @@ function App(): JSX.Element {
       <ThemeProvider>
         <QueryClientProvider client={queryClient}>
           <Router>
+            <ErrorToast />
             <AppRoutes />
           </Router>
         </QueryClientProvider>

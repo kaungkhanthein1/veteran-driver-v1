@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import FormInput from "../components/common/FormInput";
@@ -35,6 +35,7 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const recaptchaRef = useRef<any>(null);
 
   const { t } = useTranslation();
   const [triggerVerify] = useSendverifyMutation();
@@ -52,26 +53,6 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
     userName.trim() !== "" &&
     emailOrPhone.trim() !== "" &&
     password.trim() !== "";
-
-  // const handleOpt = async () => {
-  //   if (isFormFilled && isRecaptchaVerified) {
-  //     await triggerVerify({
-  //       data: {
-  //         to: emailOrPhone,
-  //         channel: "email",
-  //         scene: "register",
-  //       },
-  //     }).unwrap();
-  //     setshowOtp(true);
-  //   } else {
-  //     alert(
-  //       t(
-  //         "registerPage.fillAllFields",
-  //         "Please fill all fields and verify reCAPTCHA"
-  //       )
-  //     );
-  //   }
-  // };
 
   if (showOpt) {
     return (
@@ -128,7 +109,12 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
       // navigate("/otp-verify", { state: { background } });
     } catch (err: any) {
       console.log("Registration error:", err);
-      setError(err.response?.data?.message || "Registration failed.");
+      setError(err?.data?.details?.message || "Registration failed.");
+      handleRecaptchaVerify(null);
+      setRecaptchaToken(null);
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -217,6 +203,7 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
 
           {/* Remove old Recaptcha placeholder, keep only real ReCaptcha */}
           <ReCaptcha
+            recaptchaRef={recaptchaRef}
             onVerify={handleRecaptchaVerify}
             onExpired={handleRecaptchaExpired}
             onError={handleRecaptchaError}
