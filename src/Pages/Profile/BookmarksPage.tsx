@@ -1,6 +1,6 @@
 import { useBookmarks } from '../../hooks/useBookmarks';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import NoNoti from '../../icons/NoNoti.svg';
 import HighlightBar from '../../icons/Highlight.png';
@@ -403,21 +403,21 @@ function DeleteConfirmModal({ isOpen, onClose, onConfirm, folderName }: DeleteCo
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl p-8 w-full max-w-sm mx-4">
-        <h3 className="text-xl font-semibold text-gray-900 mb-4 text-center">Delete list ?</h3>
-        <p className="text-gray-600 text-center mb-8 leading-relaxed">
+      <div className="bg-white rounded-2xl p-6 w-full max-w-sm mx-4 shadow-xl">
+        <h3 className="text-lg font-medium text-gray-900 mb-4 text-left">Delete list ?</h3>
+        <p className="text-gray-600 text-left mb-6 leading-relaxed text-sm">
           Are you sure you want to Delete the selected list permanently ? This action cannot be undone.
         </p>
-        <div className="flex gap-4">
+        <div className="flex gap-3 justify-end">
           <button
             onClick={onClose}
-            className="flex-1 px-6 py-3 text-gray-600 bg-gray-100 rounded-xl font-medium hover:bg-gray-200 transition-colors"
+            className="px-4 py-2 text-gray-600 text-sm font-medium hover:bg-gray-50 transition-colors rounded"
           >
             Go back
           </button>
           <button
             onClick={onConfirm}
-            className="flex-1 px-6 py-3 text-white bg-red-500 rounded-xl font-medium hover:bg-red-600 transition-colors"
+            className="px-4 py-2 text-red-600 text-sm font-medium hover:bg-red-50 transition-colors rounded"
           >
             Yes, Delete
           </button>
@@ -480,7 +480,8 @@ export default function BookmarksPage() {
   } = useBookmarks();
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
+  const location = useLocation();
+  const { isAuthenticated, isLoading: authLoading, user } = useAuth();
   const [activeTab, setActiveTab] = useState('favourites');
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -489,6 +490,30 @@ export default function BookmarksPage() {
   const [selectedFolder, setSelectedFolder] = useState<any>(null);
   const [showFolderMenu, setShowFolderMenu] = useState(false);
   const [foldersWithPhotos, setFoldersWithPhotos] = useState<any[]>([]);
+
+  // Check if user is truly authenticated (has both auth state and token)
+  const isReallyAuthenticated = isAuthenticated && user && localStorage.getItem('token');
+
+  // Use ref to track if we've already loaded bookmarks for this auth session
+  const hasLoadedForAuthSession = useRef(false);
+  const lastAuthState = useRef(isReallyAuthenticated);
+
+  // Refresh bookmarks when user logs in (only once per auth change)
+  useEffect(() => {
+    // If auth state changed from false to true
+    if (isReallyAuthenticated && !lastAuthState.current) {
+      console.log('User authenticated, refreshing bookmarks...');
+      refreshBookmarks();
+      hasLoadedForAuthSession.current = true;
+    }
+    // If auth state changed from true to false
+    else if (!isReallyAuthenticated && lastAuthState.current) {
+      hasLoadedForAuthSession.current = false;
+    }
+    
+    // Update the last auth state
+    lastAuthState.current = isReallyAuthenticated;
+  }, [isReallyAuthenticated]); // Only depend on the authentication state
 
   // Fetch latest photos for each folder
   useEffect(() => {
@@ -522,6 +547,16 @@ export default function BookmarksPage() {
 
     fetchFolderPhotos();
   }, [folders]);
+
+  // Effect to open edit modal when navigating from folder detail page
+  useEffect(() => {
+    if (location.state?.openEditModal && location.state?.editFolder) {
+      setSelectedFolder(location.state.editFolder);
+      setShowEditModal(true);
+      // Clear the state to prevent the modal from opening again on re-renders
+      navigate('/bookmarks', { replace: true, state: {} });
+    }
+  }, [location.state, navigate]);
 
   const handleCreateFolder = async (name: string) => {
     try {
@@ -564,6 +599,8 @@ export default function BookmarksPage() {
       setSelectedFolder(null);
       // Refresh the folders list
       await refreshBookmarks();
+      // Show success message
+      alert('List deleted successfully!');
     } catch (error: any) {
       console.error('Failed to delete folder:', error);
       
@@ -573,7 +610,8 @@ export default function BookmarksPage() {
         // Show the delete with contents modal
         setShowDeleteWithContents(true);
       } else {
-        // Other errors
+        // Close the modal and show error
+        setShowDeleteConfirm(false);
         alert(`Failed to delete folder: ${error.message || 'Unknown error'}`);
       }
     }
@@ -592,7 +630,11 @@ export default function BookmarksPage() {
       
       // Remove each favorite
       for (const favorite of favorites) {
-        await favoritesService.removeFavorite(favorite.placeId);
+        try {
+          await favoritesService.removeFavorite(favorite.placeId);
+        } catch (favError) {
+          console.warn(`Failed to remove favorite ${favorite.placeId}:`, favError);
+        }
       }
       
       // Now try to delete the empty folder
@@ -605,7 +647,8 @@ export default function BookmarksPage() {
     } catch (error: any) {
       console.error('Failed to delete folder contents:', error);
       setShowDeleteWithContents(false);
-      alert('Failed to delete the list contents. Please try again.');
+      setSelectedFolder(null);
+      alert(`Failed to delete the list: ${error.message || 'Please try again.'}`);
     }
   };
 
@@ -658,8 +701,21 @@ export default function BookmarksPage() {
   console.log('userFolders (filtered):', userFolders);
   console.log('allFolders (final):', allFolders);
 
-  // Show no logged in state if user is not authenticated
-  if (!isAuthenticated) {
+  // Show loading state while checking authentication
+  if (authLoading) {
+    return (
+      <div className="dvh-fallback flex justify-center bg-white">
+        <div className="w-full max-w-[480px] flex flex-col h-screen">
+          <div className="flex-1 flex items-center justify-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Always show no logged in state if user is not truly authenticated
+  if (!isReallyAuthenticated) {
     return (
       <div className="dvh-fallback flex justify-center bg-white">
         <div className="w-full max-w-[480px] flex flex-col h-screen">
@@ -700,7 +756,7 @@ export default function BookmarksPage() {
               </div>
             </div>
 
-            {/* No Logged In State Content */}
+            {/* Always show no logged in content when not authenticated */}
             <div className="flex flex-col items-center justify-center flex-1 px-4 pt-16">
               <div className="flex flex-col items-center max-w-[320px] w-full text-center">
                 {/* Icon */}
@@ -778,7 +834,7 @@ export default function BookmarksPage() {
 
           {activeTab === 'favourites' && (
             <div className="px-4">
-              {/* List collections header - removed font-semibold */}
+              {/* List collections header */}
               <h2 className="text-[18px] text-gray-900 mb-3">List collections</h2>
               
               {/* Add New List Button */}
@@ -795,7 +851,7 @@ export default function BookmarksPage() {
                 <div className="text-center py-8">
                   <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500 mx-auto"></div>
                   <p className="text-gray-500 mt-2">Loading...</p>
-              </div>
+                </div>
               )}
 
               {/* Error state */}
@@ -808,10 +864,10 @@ export default function BookmarksPage() {
                   >
                     Retry
                   </button>
-                  </div>
+                </div>
               )}
 
-              {/* Folders List - removed extra div wrapper for better padding control */}
+              {/* Folders List */}
               {!isLoading && !error && (
                 <>
                   {allFolders.map((folder) => (
@@ -826,14 +882,14 @@ export default function BookmarksPage() {
               )}
 
               {/* Empty state */}
-              {!isLoading && !error && folders.length === 0 && (
+              {!isLoading && !error && allFolders.length === 0 && (
                 <div className="text-center py-12">
                   <img src={Favourite} alt="No Lists" className="w-16 h-16 mx-auto mb-4 opacity-50" />
                   <p className="text-gray-500 mb-2">No collections yet</p>
                   <p className="text-gray-400 text-sm">Create your first list to organize your favorite places</p>
                 </div>
               )}
-              </div>
+            </div>
           )}
 
           {activeTab === 'notification' && (
@@ -912,7 +968,7 @@ export default function BookmarksPage() {
 
         {/* Delete With Contents Modal */}
         <DeleteWithContentsModal
-          isOpen={showDeleteWithContents} // Reusing showDeleteConfirm state for this modal
+          isOpen={showDeleteWithContents}
           onClose={() => setShowDeleteWithContents(false)}
           onConfirm={() => {
             console.log('=== DELETE WITH CONTENTS MODAL ON CONFIRM ===');

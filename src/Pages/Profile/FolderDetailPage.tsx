@@ -5,7 +5,7 @@ import { useBookmarks } from '../../hooks/useBookmarks';
 import BackButton from '../../components/common/BackButton';
 import PlaceCard from '../../components/cards/PlaceCard';
 import ThreeDots from '../../icons/BookmarksUpdate/ThreeDots.svg';
-import Favourite from '../../icons/BookmarksUpdate/Favourite.png';
+import NoRecent from '../../assets/NoRecent.png';
 import { favoritesService } from '../../services/FavoritesService';
 
 export default function FolderDetailPage() {
@@ -123,10 +123,10 @@ export default function FolderDetailPage() {
             </div>
           ) : favorites.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-64 px-4">
-              <img src={Favourite} alt="No favorites" className="w-16 h-16 mb-4 opacity-50" />
-              <h2 className="text-lg font-medium text-gray-900 mb-2">No places yet</h2>
+              <img src={NoRecent} alt="No places yet" className="w-16 h-16 mb-4 opacity-50" />
+              <h2 className="text-lg font-medium text-gray-900 mb-2">No Favourite Places Yet</h2>
               <p className="text-gray-500 text-center text-sm">
-                Start adding your favorite places to this collection
+                Start adding your favorite places to this list
               </p>
             </div>
           ) : (
@@ -160,7 +160,12 @@ export default function FolderDetailPage() {
                 <button
                   onClick={() => {
                     setShowMenu(false);
-                    // Handle edit functionality
+                    navigate('/bookmarks', { 
+                      state: { 
+                        openEditModal: true, 
+                        editFolder: currentFolder 
+                      } 
+                    });
                   }}
                   className="w-full text-left px-3 py-2 hover:bg-gray-100 rounded-md"
                 >
