@@ -577,6 +577,15 @@ export default function BookmarksPage() {
   const location = useLocation();
   const { isAuthenticated, isLoading: authLoading, user } = useAuth();
   const [activeTab, setActiveTab] = useState('favourites');
+
+  // Set active tab from navigation state
+  useEffect(() => {
+    if (location.state?.activeTab) {
+      setActiveTab(location.state.activeTab);
+      // Clear the state to prevent persistence on refresh
+      navigate('/bookmarks', { replace: true, state: {} });
+    }
+  }, [location.state, navigate]);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
