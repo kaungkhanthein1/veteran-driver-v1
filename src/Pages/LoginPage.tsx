@@ -125,7 +125,7 @@ export default function LoginPage({ onShowRegister, onClose }: LoginPageProps) {
   const isFormFilled = emailOrPhone.trim() !== "" && password.trim() !== "";
 
   return (
-    <div className="dvh-fallback flex flex-col items-center bg-theme-primary px-4">
+    <div className="dvh-fallback flex flex-col items-center bg-[#F8F9FB] px-4">
       <div className="w-full max-w-md mx-auto flex flex-col items-center">
         <div className="w-full flex justify-between items-center mb-6">
           <h1 className="text-xl font-semibold text-theme-primary">
@@ -211,10 +211,10 @@ export default function LoginPage({ onShowRegister, onClose }: LoginPageProps) {
             type="button"
             onClick={handleLogin}
             disabled={!isFormFilled || !recaptchaToken || isVerifying}
-            className={`w-full rounded-full py-3 text-lg font-semibold mt-2 transition-colors duration-200 ${
+            className={`w-full py-3 text-lg font-semibold mt-2 ${
               isFormFilled && recaptchaToken && !isVerifying
-                ? "bg-yellow-gradient text-black"
-                : "bg-theme-secondary text-theme-primary"
+                ? "apply_btn"
+                : "bg-[#4444441F] text-theme-primary rounded-full"
             }`}
           >
             {isVerifying

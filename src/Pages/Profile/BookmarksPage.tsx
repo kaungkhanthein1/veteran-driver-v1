@@ -2,6 +2,7 @@ import { useBookmarks } from '../../hooks/useBookmarks';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
+import LoginIcon from '../../icons/BookmarksUpdate/Login.svg';
 import NoNoti from '../../icons/NoNoti.svg';
 import HighlightBar from '../../icons/Highlight.png';
 import ToAdd from '../../icons/BookmarksUpdate/ToAdd.svg';
@@ -108,6 +109,8 @@ function EditFolderModal({ isOpen, onClose, onConfirm, initialName, folderId }: 
   const [name, setName] = useState(initialName);
   const [favorites, setFavorites] = useState<any[]>([]);
   const [isLoadingFavorites, setIsLoadingFavorites] = useState(false);
+  const [pendingRemovals, setPendingRemovals] = useState<Set<string>>(new Set());
+  const [showDiscardModal, setShowDiscardModal] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -117,6 +120,7 @@ function EditFolderModal({ isOpen, onClose, onConfirm, initialName, folderId }: 
   useEffect(() => {
     if (isOpen && folderId) {
       loadFolderFavorites();
+      setPendingRemovals(new Set()); // Reset pending removals when opening
     }
   }, [isOpen, folderId]);
 
@@ -143,25 +147,71 @@ function EditFolderModal({ isOpen, onClose, onConfirm, initialName, folderId }: 
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (name.trim()) {
-      onConfirm(name.trim());
+      try {
+        // First update the folder name
+        await onConfirm(name.trim());
+        
+        // Then remove all pending removals
+        if (pendingRemovals.size > 0) {
+          for (const placeId of pendingRemovals) {
+            try {
+              await favoritesService.removeFavorite(placeId);
+            } catch (error) {
+              console.error(`Failed to remove favorite ${placeId}:`, error);
+            }
+          }
+        }
+        
+        setPendingRemovals(new Set());
+      onClose();
+      } catch (error) {
+        console.error('Failed to save changes:', error);
+      }
+  }
+  };
+
+  const handleClose = () => {
+    console.log('=== HANDLE CLOSE DEBUG ===');
+    console.log('Current name:', name);
+    console.log('Initial name:', initialName);
+    console.log('Pending removals size:', pendingRemovals.size);
+    console.log('Has name changed:', name !== initialName);
+    console.log('Has pending removals:', pendingRemovals.size > 0);
+    
+    // Check if there are unsaved changes
+    if (name !== initialName || pendingRemovals.size > 0) {
+      console.log('Setting showDiscardModal to true');
+      setShowDiscardModal(true);
+    } else {
+      console.log('No changes, closing directly');
+      setName(initialName);
+      setPendingRemovals(new Set());
       onClose();
     }
   };
 
-  const handleClose = () => {
+  const handleDiscardChanges = () => {
+    console.log('=== DISCARD CHANGES ===');
     setName(initialName);
+    setPendingRemovals(new Set());
+    setShowDiscardModal(false);
     onClose();
   };
 
-  const handleRemoveFavorite = async (favorite: any) => {
-    try {
-      await favoritesService.removeFavorite(favorite.placeId);
-      setFavorites(prev => prev.filter(f => f.id !== favorite.id));
-    } catch (error) {
-      console.error('Failed to remove favorite:', error);
-    }
+  const handleRemoveFavorite = (favorite: any) => {
+    console.log('=== REMOVE FAVORITE ===');
+    console.log('Removing favorite:', favorite.placeId);
+    console.log('Current pending removals before:', Array.from(pendingRemovals));
+    
+    // Only add to pending removals, don't call API yet
+    setPendingRemovals(prev => {
+      const newSet = new Set(prev);
+      newSet.add(favorite.placeId);
+      console.log('New pending removals:', Array.from(newSet));
+      return newSet;
+    });
   };
 
   const handlePlaceClick = (favorite: any) => {
@@ -169,111 +219,155 @@ function EditFolderModal({ isOpen, onClose, onConfirm, initialName, folderId }: 
     navigate(`/location/${place.id}`, { state: { locationData: place } });
   };
 
+  // Filter out favorites that are pending removal
+  const displayedFavorites = favorites.filter(favorite => 
+    !pendingRemovals.has(favorite.placeId)
+  );
+
+  console.log('=== EDIT MODAL RENDER ===');
+  console.log('showDiscardModal:', showDiscardModal);
+  console.log('Current pendingRemovals:', Array.from(pendingRemovals));
+  console.log('Name changed:', name !== initialName);
+
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-white z-50 flex flex-col">
-      {/* Header */}
-      <div className="relative flex items-center p-4 border-b border-gray-100">
-        <button
-          onClick={handleClose}
-          className="absolute left-4 p-2 -ml-2 hover:bg-gray-100 rounded-full"
-        >
-          <img src={ArrowLeft} alt="Back" className="w-8 h-8" />
-        </button>
-        
-        <h1 className="flex-1 text-center text-lg font-medium text-gray-900">Edit the list</h1>
-        
-        <button
-          onClick={handleSubmit}
-          disabled={!name.trim()}
-          className={`absolute px-4 py-2 font-medium transition-colors ${
-            name.trim()
-              ? 'cursor-pointer'
-              : 'cursor-not-allowed'
-          }`}
-          style={{
-            right: '0',
-            color: name.trim() 
-              ? 'transparent'
-              : '#B5B5B5',
-            background: name.trim() 
-              ? 'linear-gradient(180deg, #FFC61B 0%, #FF9500 100%)'
-              : 'transparent',
-            WebkitBackgroundClip: name.trim() ? 'text' : 'initial',
-            backgroundClip: name.trim() ? 'text' : 'initial',
-          }}
-        >
-          Save
-        </button>
-      </div>
-
-      {/* Content */}
-      <div className="flex-1 overflow-y-auto p-4">
-        {/* List Title Input */}
-        <div className="relative mb-8">
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Give this list a title"
-            className="w-full bg-transparent border border-gray-300 rounded-lg px-4 h-[56px] text-base focus:outline-none focus:ring-0 focus:border-gray-300 placeholder:text-gray-400"
-            style={{ outline: 'none', boxShadow: 'none' }}
-            autoFocus
-          />
-          <span className="absolute -top-[10px] left-[18px] px-1 text-sm text-gray-600 bg-white">
-            List Title
-          </span>
-        </div>
-
-        {/* Added Places Section */}
-        <div>
-          <h3 className="text-lg font-medium text-gray-900 mb-4">Added places</h3>
+    <>
+      <div className="fixed inset-0 bg-white z-50 flex flex-col">
+        {/* Header */}
+        <div className="relative flex items-center p-4 border-b border-gray-100">
+          <button
+            onClick={handleClose}
+            className="absolute left-4 p-2 -ml-2 hover:bg-gray-100 rounded-full"
+          >
+            <img src={ArrowLeft} alt="Back" className="w-8 h-8" />
+          </button>
           
-          {isLoadingFavorites ? (
-            <div className="flex items-center justify-center py-8">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500"></div>
-            </div>
-          ) : favorites.length === 0 ? (
-            <div className="text-center py-8">
-              <p className="text-gray-500">No places in this list yet</p>
-            </div>
-          ) : (
-            <div className="space-y-2">
-              {favorites.map((favorite) => {
-                const place = favorite.place || favorite;
-                return (
-                  <div key={favorite.id} className="relative">
-                    <PlaceCard
-                      image={place.photos?.[0]?.url || place.photos?.[0] || place.image}
-                      name={place.name}
-                      address={place.address || place.city}
-                      distance={place.distance}
-                      rating={place.rating || 0}
-                      reviews={place.ratingCount || place.reviews || 0}
-                      views={place.viewCount || place.views}
-                      onClick={() => handlePlaceClick(favorite)}
-                      rightSection={
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleRemoveFavorite(favorite);
-                          }}
-                          className="p-2 hover:bg-gray-100 rounded-full"
-                          title="Remove from list"
-                        >
-                          <img src={RemoveIcon} alt="Remove" className="w-5 h-5" />
-                        </button>
-                      }
-                    />
-                  </div>
-                );
-              })}
-            </div>
-          )}
+          <h1 className="flex-1 text-center text-lg font-medium text-gray-900">Edit the list</h1>
+          
+          <button
+            onClick={handleSubmit}
+            disabled={!name.trim()}
+            className={`absolute px-4 py-2 font-medium transition-colors ${
+              name.trim()
+                ? 'cursor-pointer'
+                : 'cursor-not-allowed'
+            }`}
+            style={{
+              right: '0',
+              color: name.trim() 
+                ? 'transparent'
+                : '#B5B5B5',
+              background: name.trim() 
+                ? 'linear-gradient(180deg, #FFC61B 0%, #FF9500 100%)'
+                : 'transparent',
+              WebkitBackgroundClip: name.trim() ? 'text' : 'initial',
+              backgroundClip: name.trim() ? 'text' : 'initial',
+            }}
+          >
+            Save
+          </button>
+        </div>
+
+        {/* Content */}
+        <div className="flex-1 overflow-y-auto p-4">
+          {/* List Title Input */}
+          <div className="relative mb-8">
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Give this list a title"
+              className="w-full bg-[#F8F9FB] border border-gray-300 rounded-lg px-4 h-[56px] text-base focus:outline-none focus:ring-0 focus:border-gray-300 placeholder:text-gray-400"
+              style={{ outline: 'none', boxShadow: 'none' }}
+              autoFocus
+            />
+            <span className="absolute -top-[10px] left-[18px] px-1 text-sm text-gray-600 bg-[#F8F9FB]">
+              List Title
+            </span>
+          </div>
+
+          {/* Added Places Section */}
+          <div>
+            <h3 className="text-lg font-medium text-gray-900 mb-4">Added places</h3>
+            
+            {isLoadingFavorites ? (
+              <div className="flex items-center justify-center py-8">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500"></div>
+              </div>
+            ) : displayedFavorites.length === 0 ? (
+              <div className="text-center py-8">
+                <p className="text-gray-500">
+                  {favorites.length === 0 ? "No places in this list yet" : "All places have been removed"}
+                </p>
+              </div>
+            ) : (
+              <div className="space-y-2">
+                {displayedFavorites.map((favorite) => {
+                  const place = favorite.place || favorite;
+                  return (
+                    <div key={favorite.id} className="relative">
+                      <PlaceCard
+                        image={place.photos?.[0]?.url || place.photos?.[0] || place.image}
+                        name={place.name}
+                        address={place.address || place.city}
+                        distance={place.distance}
+                        rating={place.rating || 0}
+                        reviews={place.ratingCount || place.reviews || 0}
+                        views={place.viewCount || place.views}
+                        onClick={() => handlePlaceClick(favorite)}
+                        rightSection={
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleRemoveFavorite(favorite);
+                            }}
+                            className="p-2 hover:bg-gray-100 rounded-full"
+                            title="Remove from list"
+                          >
+                            <img src={RemoveIcon} alt="Remove" className="w-5 h-5" />
+                          </button>
+                        }
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+
+      {/* Discard Changes Modal - Always render with conditional display */}
+      <div 
+        className={`fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 ${showDiscardModal ? 'block' : 'hidden'}`}
+        style={{ zIndex: 9999 }}
+      >
+        <div className="bg-white rounded-2xl p-6 w-full max-w-sm mx-4 shadow-xl">
+          <h3 className="text-lg font-medium text-gray-900 mb-4 text-left">Discard changes ?</h3>
+          <p className="text-gray-600 text-left mb-6 leading-relaxed text-sm">
+            Do you want to discard changes you have done to this list ?
+          </p>
+          <div className="flex gap-3 justify-end">
+            <button
+              onClick={() => {
+                console.log('Go back clicked');
+                setShowDiscardModal(false);
+              }}
+              className="px-4 py-2 text-gray-600 text-sm font-medium hover:bg-gray-50 transition-colors rounded"
+            >
+              Go back
+            </button>
+            <button
+              onClick={handleDiscardChanges}
+              className="px-4 py-2 text-orange-600 text-sm font-medium hover:bg-orange-50 transition-colors rounded"
+            >
+              Yes, Discard
+            </button>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 
@@ -315,12 +409,12 @@ function FolderItem({ folder, onMenuClick, onClick }: FolderItemProps) {
               alt={folder.name}
               className="w-full h-full object-cover"
             />
-          ) : (
-            <img 
-              src={HotelRoom}
-              alt={folder.name}
-              className="w-full h-full object-cover"
-            />
+        ) : (
+          <img 
+            src={HotelRoom}
+            alt={folder.name}
+            className="w-full h-full object-cover"
+          />
           )
         )}
       </div>
@@ -761,7 +855,7 @@ export default function BookmarksPage() {
               <div className="flex flex-col items-center max-w-[320px] w-full text-center">
                 {/* Icon */}
                 <div className="mb-8">
-                  <img src={NoNoti} alt="Save Your Favorite Places" className="w-[166px] h-[141px]" />
+                  <img src={LoginIcon} alt="Save Your Favorite Places" className="w-[166px] h-[141px]" />
                 </div>
                 
                 {/* Title */}
@@ -851,7 +945,7 @@ export default function BookmarksPage() {
                 <div className="text-center py-8">
                   <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500 mx-auto"></div>
                   <p className="text-gray-500 mt-2">Loading...</p>
-                </div>
+              </div>
               )}
 
               {/* Error state */}
@@ -864,7 +958,7 @@ export default function BookmarksPage() {
                   >
                     Retry
                   </button>
-                </div>
+                  </div>
               )}
 
               {/* Folders List */}
@@ -889,7 +983,7 @@ export default function BookmarksPage() {
                   <p className="text-gray-400 text-sm">Create your first list to organize your favorite places</p>
                 </div>
               )}
-            </div>
+              </div>
           )}
 
           {activeTab === 'notification' && (

@@ -174,7 +174,7 @@ export default function ChangeContact({
               disabled={!value || !recaptchaToken || isLoading}
               className={`w-full py-3 rounded-full font-medium transition-colors ${
                 value && recaptchaToken && !isLoading
-                  ? 'bg-[#FFC61B] text-black'
+                  ? "apply_btn"
                   : 'bg-gray-100 text-gray-400'
               }`}
             >

@@ -79,7 +79,7 @@ export default function Modal({ title, children, isOpen, onClose, onApply, type 
       >
         <div className="absolute inset-0 bg-black bg-opacity-40 z-0" />
         <animated.div 
-          className="bg-theme-primary rounded-t-xl w-full sm:max-w-md mx-0 p-4 max-h-[80vh] overflow-y-auto overflow-x-auto relative z-10 modal-content min-w-[304px]"
+          className="bg-[#F8F9FB] rounded-t-xl w-full sm:max-w-md mx-0 p-4 max-h-[80vh] overflow-y-auto overflow-x-auto relative z-10 modal-content min-w-[304px]"
           style={{ y, minWidth: 304 }}
           onClick={handleContentClick}
         >

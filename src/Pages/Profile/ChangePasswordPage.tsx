@@ -178,7 +178,7 @@ export default function ChangePasswordPage() {
           disabled={!isFormValid || updatePasswordMutation.isPending}
           className={`w-full py-3 rounded-full font-medium transition-colors ${
             isFormValid && !updatePasswordMutation.isPending
-              ? 'bg-[#FFC61B] text-black'
+              ? "apply_btn"
               : 'bg-gray-100 text-gray-400'
           }`}
         >
