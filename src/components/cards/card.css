@@ -18,6 +18,14 @@
   line-height: normal;
 }
 
+.distance-info {
+  padding: 6px 10px;
+  background: white;
+  border-radius: 4px;
+  font-size: 14px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 .rat-count {
   color: #444;
   leading-trim: both;

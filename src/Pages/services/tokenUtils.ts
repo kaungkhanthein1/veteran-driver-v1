@@ -19,6 +19,7 @@ export const clearTokens = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("refreshToken");
   localStorage.removeItem("tokenExpiry");
+  localStorage.removeItem("preferredMapVendor");
 };
 
 export const getAccessToken = (): string | null => {

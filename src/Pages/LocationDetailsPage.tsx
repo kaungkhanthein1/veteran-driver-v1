@@ -278,47 +278,114 @@ const LocationDetailsPage = () => {
 
     switch (vendor) {
       case "amap":
-        url = isIOS
-          ? `iosamap://viewMap?sourceApplication=myApp&lat=${lat}&lon=${lng}&poiname=${queryName}`
-          : isAndroid
-          ? `amapuri://viewMap?sourceApplication=myApp&lat=${lat}&lon=${lng}&poiname=${queryName}`
-          : `https://uri.amap.com/marker?position=${lng},${lat}&name=${queryName}`;
-        fallbackUrl = `https://uri.amap.com/marker?position=${lng},${lat}&name=${queryName}`;
+        if (isIOS) {
+          url = `iosamap://viewMap?sourceApplication=myApp&lat=${lat}&lon=${lng}&poiname=${queryName}`;
+          fallbackUrl = `https://uri.amap.com/marker?position=${lng},${lat}&name=${queryName}`;
+        } else if (isAndroid) {
+          url = `amapuri://viewMap?sourceApplication=myApp&lat=${lat}&lon=${lng}&poiname=${queryName}`;
+          fallbackUrl = `https://uri.amap.com/marker?position=${lng},${lat}&name=${queryName}`;
+        } else {
+          // Desktop - go directly to web
+          url = `https://uri.amap.com/marker?position=${lng},${lat}&name=${queryName}`;
+          fallbackUrl = url;
+        }
+
+        // Try to open AMap app with fallback to web
+        const iframe = document.createElement("iframe");
+        iframe.style.display = "none";
+        iframe.src = url;
+        document.body.appendChild(iframe);
+
+        setTimeout(() => {
+          document.body.removeChild(iframe);
+          // Only fallback if we're still on the same page
+          if (
+            !window.document.hidden &&
+            window.location.href.indexOf("amap") === -1
+          ) {
+            // Open fallback in new tab/window
+            window.open(fallbackUrl, "_blank");
+          }
+        }, 500);
         break;
 
       case "baidu":
-        url =
-          isIOS || isAndroid
-            ? `baidumap://map/marker?location=${lat},${lng}&title=${queryName}&content=${queryName}&src=webapp.marker`
-            : `https://api.map.baidu.com/marker?location=${lat},${lng}&title=${queryName}&content=${queryName}&output=html`;
-        fallbackUrl = `https://api.map.baidu.com/marker?location=${lat},${lng}&title=${queryName}&content=${queryName}&output=html`;
+        if (isIOS || isAndroid) {
+          url = `baidumap://map/marker?location=${lat},${lng}&title=${queryName}&content=${queryName}&src=webapp.marker`;
+          fallbackUrl = `https://api.map.baidu.com/marker?location=${lat},${lng}&title=${queryName}&content=${queryName}&output=html`;
+        } else {
+          // Desktop - go directly to web
+          url = `https://api.map.baidu.com/marker?location=${lat},${lng}&title=${queryName}&content=${queryName}&output=html`;
+          fallbackUrl = url;
+        }
+
+        // Try to open Baidu Map app with fallback to web
+        const baiduIframe = document.createElement("iframe");
+        baiduIframe.style.display = "none";
+        baiduIframe.src = url;
+        document.body.appendChild(baiduIframe);
+
+        setTimeout(() => {
+          document.body.removeChild(baiduIframe);
+          // Only fallback if we're still on the same page
+          if (
+            !window.document.hidden &&
+            window.location.href.indexOf("baidu") === -1
+          ) {
+            // Open fallback in new tab/window
+            window.open(fallbackUrl, "_blank");
+          }
+        }, 500);
         break;
 
       case "tencent":
-        url =
-          isIOS || isAndroid
-            ? `qqmap://map/marker?marker=coord:${lat},${lng};title:${queryName}&referer=myApp`
-            : `https://apis.map.qq.com/uri/v1/marker?marker=coord:${lat},${lng};title:${queryName}&referer=myApp`;
-        fallbackUrl = `https://apis.map.qq.com/uri/v1/marker?marker=coord:${lat},${lng};title:${queryName}&referer=myApp`;
-        break;
-
-      case "google":
-        if (isIOS) {
-          // First try Google Maps app if installed
-          url = `comgooglemaps://?q=${lat},${lng}&center=${lat},${lng}&zoom=15`;
-          fallbackUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
-        } else if (isAndroid) {
-          url = `geo:${lat},${lng}?q=${lat},${lng}(${queryName})`;
-          fallbackUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+        if (isIOS || isAndroid) {
+          url = `qqmap://map/marker?marker=coord:${lat},${lng};title:${queryName}&referer=myApp`;
+          fallbackUrl = `https://apis.map.qq.com/uri/v1/marker?marker=coord:${lat},${lng};title:${queryName}&referer=myApp`;
         } else {
-          url = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+          // Desktop - go directly to web
+          url = `https://apis.map.qq.com/uri/v1/marker?marker=coord:${lat},${lng};title:${queryName}&referer=myApp`;
           fallbackUrl = url;
         }
+
+        // Try to open Tencent Map app with fallback to web
+        const tencentIframe = document.createElement("iframe");
+        tencentIframe.style.display = "none";
+        tencentIframe.src = url;
+        document.body.appendChild(tencentIframe);
+
+        setTimeout(() => {
+          document.body.removeChild(tencentIframe);
+          // Only fallback if we're still on the same page
+          if (
+            !window.document.hidden &&
+            window.location.href.indexOf("qqmap") === -1
+          ) {
+            // Open fallback in new tab/window
+            window.open(fallbackUrl, "_blank");
+          }
+        }, 500);
+        break;
+      case "google":
+        if (isIOS) {
+          url = `comgooglemaps://?q=${lat},${lng}&center=${lat},${lng}&zoom=15`;
+        } else if (isAndroid) {
+          url = `geo:${lat},${lng}?q=${lat},${lng}(${queryName})`;
+        } else {
+          url = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+        }
+        window.location.href = url;
         break;
 
       case "apple":
-        url = `http://maps.apple.com/?q=${queryName}&ll=${lat},${lng}`;
-        fallbackUrl = url;
+        if (isIOS) {
+          url = `maps://?q=${queryName}&ll=${lat},${lng}`;
+        } else if (isAndroid) {
+          url = `geo:${lat},${lng}?q=${lat},${lng}(${queryName})`;
+        } else {
+          url = `http://maps.apple.com/?q=${queryName}&ll=${lat},${lng}`;
+        }
+        window.location.href = url;
         break;
 
       default:
@@ -329,23 +396,6 @@ const LocationDetailsPage = () => {
     // For "Always" selection, save preference to localStorage
     if (selectionType === "always") {
       localStorage.setItem("preferredMapVendor", vendor);
-    }
-
-    // Special handling for iOS Google Maps
-    if (vendor === "google" && isIOS) {
-      const iframe = document.createElement("iframe");
-      iframe.style.display = "none";
-      iframe.src = url;
-      document.body.appendChild(iframe);
-
-      setTimeout(() => {
-        document.body.removeChild(iframe);
-        // If still here after 500ms, open fallback URL
-        window.location.href = fallbackUrl;
-      }, 500);
-    } else {
-      // For other cases, try to open directly
-      window.location.href = url;
     }
   };
 
@@ -628,6 +678,11 @@ const LocationDetailsPage = () => {
                 }}
               />
             )}
+            <div className="absolute top-2 left-1 bg-white p-1 px-2 rounded shadow-md z-10">
+              <strong className="text-[12px] text-[#555]">
+                Distance: {Math.round(placeData.distance)} km
+              </strong>
+            </div>
           </GoogleMap>
         </div>
 
