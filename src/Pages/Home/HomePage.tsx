@@ -73,7 +73,7 @@ export default function HomePage() {
           </motion.div>
         )}
       </AnimatePresence>
-      <div className="flex-1 relative max-w-[480px] mx-auto w-full">
+      <div className="flex-1 relative max-w-[480px] mx-auto w-full hide-scrollbar">
         <MapWithFilterUI
           isExpanded={isExpanded}
           nearbyPlaces={query?.length > 0 ? places : nearByData?.places || []}

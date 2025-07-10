@@ -39,7 +39,7 @@ export default function MainContent({
     <div className="w-full max-w-[480px] mx-auto">
       {/* Nearest Recommendation Section */}
       <div className="px-4 py-5 bg-theme-secondary">
-        <h2 className="text-lg font-semibold text-theme-text mb-4">
+        <h2 className="sticky top-0 z-10 pb-2 bg-theme-secondary text-xl font-semibold text-theme-text mb-4">
           {query?.length > 0 ? `Nearest ${query}` : "Nearest Recommendation"}
         </h2>
         <div className="flex flex-col gap-2">

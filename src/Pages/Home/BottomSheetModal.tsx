@@ -126,7 +126,7 @@ export default function BottomSheetModal({
         {/* Content is scrollable */}
         <motion.div 
           ref={contentRef}
-          className="overflow-y-auto h-[calc(100%-32px)] pb-8"
+          className={`pb-8 ${isExpanded ? "overflow-y-auto h-[calc(100%-32px)]" : "overflow-hidden"}`}
           onScroll={handleContentScroll}
           style={{ 
             overscrollBehavior: "contain",
