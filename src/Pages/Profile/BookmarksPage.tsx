@@ -577,6 +577,15 @@ export default function BookmarksPage() {
   const location = useLocation();
   const { isAuthenticated, isLoading: authLoading, user } = useAuth();
   const [activeTab, setActiveTab] = useState('favourites');
+
+  // Set active tab from navigation state
+  useEffect(() => {
+    if (location.state?.activeTab) {
+      setActiveTab(location.state.activeTab);
+      // Clear the state to prevent persistence on refresh
+      navigate('/bookmarks', { replace: true, state: {} });
+    }
+  }, [location.state, navigate]);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
@@ -871,7 +880,7 @@ export default function BookmarksPage() {
                 {/* Sign In Button */}
                 <button
                   onClick={() => navigate('/login', { state: { background: location } })}
-                  className="w-full py-3.5 px-6 text-black text-[16px] font-semibold rounded-full transition-all duration-200 hover:opacity-90"
+                  className="w-full py-3.5 px-6 text-white text-[16px] font-semibold rounded-full transition-all duration-200 hover:opacity-90"
                   style={{
                     background: 'linear-gradient(180deg, #FFC61B 0%, #FF9500 100%)',
                   }}

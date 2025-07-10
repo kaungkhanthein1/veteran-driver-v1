@@ -6,6 +6,7 @@ import { useProfileEdit } from "../../context/ProfileEditContext";
 import BackButton from "../../components/common/BackButton";
 import DefaultAvatorWhite from "../../icons/DefaultAvatorWhite.svg";
 import EditProfileIcon from "../../icons/ProfileUpdate/EditProfile.svg";
+import LocationModal from "../../components/common/LocationModal";
 
 import NextIcon from "../../icons/Next.svg";
 import {
@@ -131,6 +132,7 @@ const EditProfileContent: React.FC = () => {
       await updateProfile({ country, city });
       updateField("country", country);
       updateField("city", city);
+      setLocationModalOpen(false);
     } catch {
       // Optionally show error
     } finally {
@@ -373,7 +375,7 @@ const EditProfileContent: React.FC = () => {
             value={locationString}
             clickable={true}
             showArrow={true}
-            onClick={() => navigate("country")}
+            onClick={() => setLocationModalOpen(true)}
             last={true}
           />
         </div>
@@ -395,6 +397,21 @@ const EditProfileContent: React.FC = () => {
       )}
 
       {/* Location Select Modal */}
+      <LocationModal
+        isOpen={locationModalOpen}
+        onClose={() => setLocationModalOpen(false)}
+        onApply={handleLocationApply}
+        currentCountry={profileData.country}
+        currentCity={profileData.city}
+      />
+      {locationLoading && (
+        <div className="fixed inset-0 bg-black bg-opacity-20 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg px-6 py-4 shadow text-theme-text">
+            Saving location...
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };

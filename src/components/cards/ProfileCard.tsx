@@ -210,7 +210,7 @@ const ProfileCard: React.FC = () => {
             </div>
             <svg className="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/></svg>
           </button>
-          <button className="flex items-center justify-between w-full px-4 py-4" onClick={() => navigate('/notifications')}>
+          <button className="flex items-center justify-between w-full px-4 py-4" onClick={() => navigate('/bookmarks', { state: { activeTab: 'notification' } })}>
             <div className="flex items-center gap-3">
               <img src={NotiIcon} alt="Notifications" className="w-6 h-6" />
               <span className="montserrat-regular">Notifications</span>
